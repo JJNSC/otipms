@@ -12,6 +12,18 @@ public class LoginController {
 	@RequestMapping("/")
 	public String login() {
 		log.info("dd");
-		return "login";
+		return "index";
+	}
+	
+	@RequestMapping("/index")
+	public String index() {
+		log.info("dd");
+		return "index";
+	}
+	
+	@RequestMapping("/emailInbox")
+	public String emailInbox() {
+		log.info("dd");
+		return "emailInbox";
 	}
 }
