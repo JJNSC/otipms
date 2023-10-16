@@ -1149,8 +1149,6 @@
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-
     <script src="${pageContext.request.contextPath}/resources/js/chat/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/chat/popper.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/chat/bootstrap.js"></script>
@@ -1160,7 +1158,6 @@
     <script src="${pageContext.request.contextPath}/resources/js/chat/typeahead.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/chat/menu.js"></script>
 
-    <!-- endbuild -->
 
     <!-- Vendors JS -->
     <script src="${pageContext.request.contextPath}/resources/js/mail/katex.js"></script>

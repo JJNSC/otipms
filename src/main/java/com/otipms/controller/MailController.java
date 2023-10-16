@@ -44,6 +44,19 @@ public class MailController {
 		log.info("dd");
 		return "mail";
 	}
+	
+	@RequestMapping("/detailMail")
+	public String detailMail() {
+		log.info("dd");
+		return "detailMail";
+	}
+	
+	@RequestMapping("/writeMail")
+	public String writeMail() {
+		log.info("dd");
+		return "writeMail";
+	}
+	
 	@RequestMapping("/chat")
 	public String chat() {
 		log.info("dd");
