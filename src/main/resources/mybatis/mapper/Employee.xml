@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.otipms.dao.EmployeeDao">
+	<insert id="insertEmployee" parameterType="Employee">	
+		INSERT INTO emp (EmpId, EmpPW, EmpName, EmpRank) VALUES (#{empId}, #{empPw}, #{empName}, #{empRank})
+	</insert>
+	
+	<insert id="insertEmployeeInfo" parameterType="Employee">	
+		INSERT INTO empInfo (empId, RoleNo, TeamNo, empTel, EmpEmail, EmpDisabled) VALUES (#{empId}, #{roleNo}, #{teamNo}, #{empTel}, #{empEmail}, #{empDisabled})
+	</insert>
+	
+	<select id="selectByEmployeeId" parameterType="int" resultType="Employee">
+		select * from emp where empId = #{empId}
+	</select>
+
+</mapper>
