@@ -51,7 +51,7 @@
                                 <div class="email-left-box">
                                 	<a href="email-compose.html" class="btn btn-primary btn-block">쪽지 쓰기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="emailInbox" class="list-group-item border-0 text-primary p-r-0">
+                                    	<a href="emailInbox" class="list-group-item border-0 p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
                                     		<b>수신 쪽지함</b>
                                     		<span class="badge badge-primary badge-sm float-right m-t-5">198</span>
@@ -60,7 +60,7 @@
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>
                                         	보낸 쪽지함
                                         </a>
-                                        <a href="importantMail" class="list-group-item border-0 p-r-0">
+                                        <a href="importantMail" class="list-group-item text-primary border-0 p-r-0">
                                         	<i class="fa fa-star-o font-18 align-middle mr-2"></i>
                                         	중요 쪽지함
                                         	<span class="badge badge-danger badge-sm float-right m-t-5">47</span>
@@ -109,45 +109,6 @@
                                            		<a href="javascript: void(0);" class="dropdown-item">첨부파일</a>
                                             </div>
                                         </div>
-                                        <hr/>
-                                        <div class="d-flex justify-content-between align-items-center">
-				                            <div class="d-flex align-items-center">
-				                            	<div class="form-check me-2">
-				                              		<input class="form-check-input" type="checkbox" id="email-select-all">
-				                                	<label class="form-check-label" for="email-select-all"></label>
-				                              	</div>
-			                              		<i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4"></i>
-			                              		<i class="bx bx-envelope email-list-read cursor-pointer me-3 fs-4"></i>
-				                              	<div class="dropdown">
-					                                <button class="btn p-0" type="button" id="dropdownMenuFolderOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					                                  	<i class="bx bx-folder bx bx-folder fs-4 me-3"></i>
-					                                </button>
-				                              	</div>
-				                              	<div class="dropdown">
-					                                <button class="btn p-0" type="button" id="dropdownLabelOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				                                  		<i class="bx bx-label fs-4 me-3"></i>
-					                                </button>
-				                                	<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLabelOne">
-				                                  		<a class="dropdown-item" href="javascript:void(0)">
-					                                    	<i class="badge badge-dot bg-success me-1"></i>
-					                                    	<span class="align-middle">Workshop</span>
-					                                  	</a>
-					                                  	<a class="dropdown-item" href="javascript:void(0)">
-					                                    	<i class="badge badge-dot bg-primary me-1"></i>
-					                                    	<span class="align-middle">Company</span>
-					                                  	</a>
-					                                  	<a class="dropdown-item" href="javascript:void(0)">
-					                                    	<i class="badge badge-dot bg-warning me-1"></i>
-					                                    	<span class="align-middle">Important</span>
-					                                  	</a>
-					                                  	<a class="dropdown-item" href="javascript:void(0)">
-					                                    	<i class="badge badge-dot bg-danger me-1"></i>
-					                                    	<span class="align-middle">Private</span>
-					                                  	</a>
-				                                	</div>
-				                              	</div>
-				                            </div>
-		                          		</div>
                                     </div>
                                     <div class="email-list m-t-15">
                                         <div class="message">

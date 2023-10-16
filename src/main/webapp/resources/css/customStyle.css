@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.badge-custom {
+	background-image: linear-gradient(230deg, #EF5350 0%, #E53935 100%);
+}
+
+.table-custom thead tr th:nth-child(1) {
+	width: 5%;
+}
+.table-custom thead tr th:nth-child(3) {
+	width: 9%;
+}
+.table-custom thead tr th:nth-child(4) {
+	width: 10%;
+}
+.table-custom thead tr th:nth-child(5) {
+	width: 7%;
+}
+
+.card-custom {
+	box-shadow: 6px 11px 41px -28px #B5C4D6;
+}

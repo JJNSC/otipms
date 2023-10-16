@@ -14,7 +14,6 @@ import com.otipms.dto.Employee;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.EmployeeService.LoginResult;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -72,10 +71,5 @@ public class LoginController {
 		model.addAttribute("loginErrMsg", errorMsg);
 		return "redirect:/";
 	}
-	
-	@RequestMapping("/emailInbox")
-	public String emailInbox() {
-		log.info("dd");
-		return "emailInbox";
-	}
+
 }
