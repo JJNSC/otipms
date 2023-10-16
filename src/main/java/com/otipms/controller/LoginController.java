@@ -20,10 +20,4 @@ public class LoginController {
 		log.info("dd");
 		return "index";
 	}
-	
-	@RequestMapping("/emailInbox")
-	public String emailInbox() {
-		log.info("dd");
-		return "emailInbox";
-	}
 }

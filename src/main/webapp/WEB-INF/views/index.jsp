@@ -291,8 +291,8 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="emailInbox">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
+                            <li><a href="mail">testmail</a></li>
+                            <li><a href="chat">testchat</a></li>
                         </ul>
                     </li>
                     <li>
