@@ -31,15 +31,15 @@ public class LoginController {
 	@RequestMapping("/imsiMakeId")
 	public String imsiMakeId() {
 		Employee employee = new Employee();
-		employee.setEmpId(01020000);
+		employee.setEmpId(1020000);
 		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		employee.setEmpPw(pwEncoder.encode("고객"));
+		employee.setEmpPw(pwEncoder.encode("rhrortk"));
 		employee.setEmpName("오 티아이");
-		employee.setEmpRank("고객");
+		employee.setEmpRank("고객사");
 		employee.setRoleNo(3); // 0: 관리자, 1:개발자,2:PM,3: 고객사 
 		employee.setTeamNo(1); //1팀, 2팀, 3팀 
-		employee.setEmpTel(01022222222);
-		employee.setEmpEmail("rhror1@otipms.com");
+		employee.setEmpTel("010-1234-1234");
+		employee.setEmpEmail("rhrortk@otipms.com");
 		Boolean disabled = false;
 		employee.setEmpDisabled(disabled);
 		log.info("employee : " + employee);

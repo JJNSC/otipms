@@ -13,7 +13,7 @@ public class Employee {
 	private String empRank;
 	private int roleNo;
 	private int teamNo;
-	private int empTel;
+	private String empTel;
 	private String empEmail;
 	private Date empLoginDate;
 	private Boolean empDisabled;
