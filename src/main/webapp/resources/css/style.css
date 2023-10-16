@@ -119,7 +119,8 @@ body {
   line-height: 1.5;
   color: #76838f;
   text-align: left;
-  background-color: #F3F3F9; }
+  /* background-color: #F3F3F9; */ 
+  background-color: #E2E8EF; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -1232,7 +1233,8 @@ pre {
   background-color: rgba(0, 0, 0, 0.05); }
 
 .table-hover tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.075); }
+  background-color: rgba(0, 0, 0, 0.075);
+  cursor: pointer; }
 
 .table-primary,
 .table-primary > th,
@@ -7600,7 +7602,8 @@ sub {
   .nav-header .brand-logo {
     z-index: 999; }
     .nav-header .brand-logo a {
-      padding: 1.607rem 1.8125rem;
+      /* padding: 1.607rem 1.8125rem; */
+      padding: 1.2rem 1.2rem;
       display: block; }
       .nav-header .brand-logo a i {
         font-size: 1.375rem; }
@@ -7637,7 +7640,8 @@ sub {
   .hamburger .toggle-icon {
     font-size: 1.4rem;
     line-height: 2rem;
-    color: #494949; }
+    /* color: #494949; */
+    color: #fff; }
 
 .hamburger:hover {
   cursor: pointer; }
@@ -7772,7 +7776,8 @@ sub {
   display: inline-block; }
   .icons > a i {
     font-size: 1.25rem;
-    color: #abafb3; }
+    /* color: #abafb3; */
+    color: #fff; }
 
 .icons.active .drop-down {
   display: block; }
@@ -8021,7 +8026,8 @@ svg.pulse-svg {
         padding: 0 0.2825rem; } }
     .header-right .icons > a {
       padding: 0 0.3125rem;
-      color: #464a53; }
+      /* color: #464a53; */
+      color: #fff; }
     .header-right .icons .dropdown-profile .badge {
       top: auto;
       bottom: auto;
@@ -8144,7 +8150,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   top: 5rem;
   padding-top: 0;
   z-index: 99;
-  background: #fff;
+  /* background: #fff; */
+  background: #09203D;
   transition: all .2s ease; }
   @media only screen and (min-width: 1200px) and (max-width: 1350px) {
     .nk-sidebar {
@@ -8192,14 +8199,16 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
         display: inline-block;
         vertical-align: middle;
         padding: 0 0.4375rem 0 0;
-        color: #464a53; }
+        /* color: #464a53; */
+        color: #fff; }
     .nk-sidebar .metismenu a {
       position: relative;
       display: block;
       padding: 0.8125rem 1.25rem;
       outline-width: 0;
       transition: all .3s ease-out;
-      color: #464a53; }
+      /* color: #464a53; */
+      color: #fff; }
     .nk-sidebar .metismenu ul a {
       padding: 0.625rem 0.9375rem 0.625rem 2.8125rem; }
     .nk-sidebar .metismenu ul ul a {
@@ -10973,7 +10982,8 @@ table.dataTable thead .sorting::after {
 
 .page-titles {
   padding: 0.9375rem 1.875rem;
-  background: #F3F3F9;
+  /* background: #F3F3F9; */
+  background: #E2E8EF;
   transition: all .2s ease; }
   @media only screen and (max-width: 767px) {
     .page-titles {
@@ -14008,9 +14018,12 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="mini"]:not([data-layout="h
 
 html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout="horizontal"]) .footer {
   padding-right: 15rem; }
-
+/* 
 [data-nav-headerbg="color_1"] .nav-header {
   background-color: #7571f9; }
+ */
+[data-nav-headerbg="color_1"] .nav-header {
+  background-color: #11407a; }
 
 [data-nav-headerbg="color_2"] .nav-header {
   background-color: #27394F !important; }
@@ -14038,9 +14051,12 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 [data-nav-headerbg="color_10"] .nav-header {
   background-color: #558b2f !important; }
-
+/* 
 [data-headerbg="color_1"] .header {
   background-color: #fff; }
+ */
+[data-headerbg="color_1"] .header {
+  background-color: #2F588B; }
 
 [data-headerbg="color_2"] .header, [data-headerbg="color_2"] .header-left input {
   background-color: #27394F !important;
@@ -14120,7 +14136,8 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   color: #fff; }
 
 [data-sibebarbg="color_1"] .nk-sidebar .metismenu {
-  background-color: #fff; }
+  /* background-color: #fff; */
+  background-color: #09203D; }
   [data-sibebarbg="color_1"] .nk-sidebar .metismenu > li {
     color: #27394F; }
     [data-sibebarbg="color_1"] .nk-sidebar .metismenu > li ul a {
