@@ -11,11 +11,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     
     <!-- Custom Stylesheet -->
-    <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/app-email.css" />
+    <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
+	<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/app-email.css" /> --%>
 	
 	<!-- Icons -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/boxicons.css" />
+    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/boxicons.css" />
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/core.css"/>
@@ -32,7 +32,7 @@
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/js/mail/helpers.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/template-customizer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/config.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/mail/config.js"></script> --%>
 </head>
 
 <body>
@@ -109,7 +109,7 @@
 		                          		</div>
                                     </div>
                                     <div class="email-list m-t-15">
-                                    	<ul class="list-unstyled m-0">
+                                    	<!-- <ul class="list-unstyled m-0">
                                     		<li class="email-list-item email-marked-read p-2" data-bs-toggle="sidebar" data-target="#app-email-view">
 		                                        <div class="d-flex align-items-center">
 					                            	<div class="form-check">
@@ -188,24 +188,42 @@
 				                                	</div>
 				                              	</div>
                                     		</li>
-                                    	</ul>
-                                        <!-- <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk2">
-                                                        <label class="toggle" for="chk2"></label>
-                                                    </div>
-                                                    <span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">동아일보 중딩한테 털렸죠? 아무고토 모타쥬?</div>
-                                                    <div class="date">10분 전</div>
-                                                </div>
-                                            </a>
+                                    	</ul> -->
+                                        <div class="message">
+                                        <div class="col-mail col-mail-1">
+                                            <div class="email-checkbox">
+                                                <input type="checkbox" id="chk2">
+                                                <label class="toggle" for="chk2"></label>
+                                            </div>
+                                            <span class="icon-copy ion-ios-star-outline" 
+                                            	style="display: block;
+											    float: left;
+											    font-size: 16px;
+											    margin-left: 4px;"></span>
+                                            <span class="icon-copy ion-ios-star" 
+                                            	style="display: block;
+											    float: left;
+											    font-size: 16px;
+											    margin-left: 8px;
+											    margin-right: 5px;
+											    "></span>
+                                        </div>
+                                        <div class="col-mail col-mail-profile">
+                                        	<div class="profile">
+                                       			<img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
+                                       			<span class="rank">사원</span>
+                                       			<span class="name">김사원</span>
+                                       		</div>
+                                        </div>
+                                        <a href="detailMail">
+                                         	<div class="col-mail col-mail-2">
+                                            	<div class="subject">동아일보 중딩한테 털렸죠? 아무고토 모타쥬?</div>
+                                            	<div class="date">10분 전</div>
+                                        	</div>
+                                    		</a>
                                         </div>
                                         <div class="message unread">
-                                            <a href="email-read.html">
+                                            <a href="detailMail">
                                                 <div class="col-mail col-mail-1">
                                                     <div class="email-checkbox">
                                                         <input type="checkbox" id="chk3">
@@ -219,7 +237,7 @@
                                             </a>
                                         </div>
                                         <div class="message">
-                                            <a href="email-read.html">
+                                            <a href="detailMail">
                                                 <div class="col-mail col-mail-1">
                                                     <div class="email-checkbox">
                                                         <input type="checkbox" id="chk4">
@@ -233,7 +251,7 @@
                                             </a>
                                         </div>
                                         <div class="message">
-                                            <a href="email-read.html">
+                                            <a href="detailMail">
                                                 <div class="col-mail col-mail-1">
                                                     <div class="email-checkbox">
                                                         <input type="checkbox" id="chk5">
@@ -245,7 +263,7 @@
                                                     <div class="date">2022.10.14</div>
                                                 </div>
                                             </a>
-                                        </div> -->
+                                        </div>
                                     </div>
                                     <!-- panel -->
                                     <div class="row mt-3">
@@ -303,7 +321,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/mail/app-email.js"></script>
 
 	<!-- Core JS -->
-    <script src="${pageContext.request.contextPath}/resources/js/chat/jquery.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/resources/js/chat/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/chat/popper.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/chat/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/chat/perfect-scrollbar.js"></script>
@@ -317,7 +335,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/mail/katex.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/quill.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/block-ui.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/mail/block-ui.js"></script> --%>
     
 </body>
 
