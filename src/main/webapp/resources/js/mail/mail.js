@@ -1,3 +1,12 @@
+
+// 드롭다운 항목 클릭 시 호출되는 함수
+function filter(selectedItem) {
+    // 버튼 엘리먼트 선택
+    var dropdownButton = document.querySelector(".btn-custom");
+    // 선택된 항목의 텍스트를 버튼 내용으로 설정
+    dropdownButton.innerHTML = selectedItem.innerHTML;
+}
+
 function checkall(){
 	// HTML에서 "email-select-all" 체크박스 요소를 찾기
 	var selectAllCheckbox = document.getElementById("email-select-all");

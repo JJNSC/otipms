@@ -12,6 +12,7 @@
     
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
     <!-- Scripts -->
     <script src="${pageContext.request.contextPath}/resources/plugins/common/common.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
@@ -61,16 +62,15 @@
                                 <div class="email-right-box">
                                     <div role="toolbar" class="toolbar">
                                         <div class="btn-group">
-                                            <button aria-expanded="false" data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button"> 
-                                            	Filter
-                                            	<span class="caret m-l-5"></span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                           		<a href="javascript: void(0);" class="dropdown-item">발신자</a>
-                                           		<a href="javascript: void(0);" class="dropdown-item">날짜</a>
-                                           		<a href="javascript: void(0);" class="dropdown-item">읽음여부</a>
-                                           		<a href="javascript: void(0);" class="dropdown-item">첨부파일</a>
-                                            </div>
+                                            <div class="dropdown d-inline-block pt-1">
+				                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false">발신자</button>
+				                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+				                                	<a class="dropdown-item" href="#" onclick="filter(this)">발신자 </a> 
+				                                	<a class="dropdown-item" href="#" onclick="filter(this)">수신자  </a> 
+				                                	<a class="dropdown-item" href="#" onclick="filter(this)">제목 </a>
+				                                	<a class="dropdown-item" href="#" onclick="filter(this)">첨부파일 </a>
+				                                </div>
+				                            </div>
 	                                        <div class="header-left" style="margin-left:20px;">
 							                    <div class="input-group icons" style="margin-top:0px;">
 							                        <input type="search" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search Dashboard">
