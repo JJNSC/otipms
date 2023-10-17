@@ -8168,7 +8168,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     padding: 0;
     margin: 0;
     list-style: none;
-    background: #fafafa; }
+    /* background: #fafafa; */
+    background: #F1F4F7; }
   .nk-sidebar .metismenu {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8195,10 +8196,12 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       .nk-sidebar .metismenu > li:hover span, .nk-sidebar .metismenu > li:focus span, .nk-sidebar .metismenu > li.active span {
         color: #464a53; }
       .nk-sidebar .metismenu > li:hover > a {
-        background: #F3F1FA;
+        /* background: #F3F1FA; */
+        background: #DBE2EB;
         color: #7571f9; }
       .nk-sidebar .metismenu > li.active > a {
-        background: #F3F1FA;
+        /* background: #F3F1FA; */
+        background: #DBE2EB;
         color: #464a53; }
       .nk-sidebar .metismenu > li.active ul a {
         color: #464a53; }
@@ -8227,7 +8230,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       transition: all 0.4s ease-in-out; }
       .nk-sidebar .metismenu a:hover, .nk-sidebar .metismenu a:active, .nk-sidebar .metismenu a.active {
         text-decoration: none;
-        background-color: #F3F1FA; }
+        /* background-color: #F3F1FA; */
+        background-color: #DBE2EB; }
     .nk-sidebar .metismenu .has-arrow:after {
       position: absolute;
       content: "";
@@ -14729,3 +14733,8 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
+
+/* 추가 css */
+.badge-custom {
+	background-image: linear-gradient(230deg, #EF5350 0%, #E53935 100%);
+}

@@ -55,7 +55,8 @@
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <!-- <img src="images/logo-text.png" alt=""> -->
+                        <img src="${pageContext.request.contextPath}/resources/images/ic_oti_logo_wh_rb.png" width="70px" alt="">
                     </span>
                 </a>
             </div>
@@ -75,7 +76,7 @@
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
                     </div>
                 </div>
-                <div class="header-left">
+                <!-- <div class="header-left">
                     <div class="input-group icons">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
@@ -87,12 +88,13 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-email-outline"></i>
-                                <span class="badge badge-pill gradient-1">3</span>
+                                <!-- <span class="badge badge-pill gradient-1">3</span> -->
+                                <span class="badge badge-pill badge-custom">3</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
@@ -150,7 +152,8 @@
                         </li>
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
-                                <span class="badge badge-pill gradient-2">3</span>
+                                <!-- <span class="badge badge-pill gradient-2">3</span> -->
+                                <span class="badge badge-pill badge-custom">3</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
@@ -254,7 +257,7 @@
         ***********************************-->
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
+                <!-- <ul class="metismenu" id="menu">
                     <li class="nav-label">Dashboard</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -262,7 +265,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="./index.html">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
+                            <li><a href="./index-2.html">Home 2</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -339,13 +342,13 @@
                             <li><a href="./ui-progressbar.html">Progressbar</a></li>
                             <li><a href="./ui-tab.html">Tab</a></li>
                             <li><a href="./ui-typography.html">Typography</a></li>
-                        <!-- </ul>
+                        </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
-                        <ul aria-expanded="false"> -->
+                        <ul aria-expanded="false">
                             <li><a href="./uc-nestedable.html">Nestedable</a></li>
                             <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
                             <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
@@ -398,6 +401,66 @@
                                     <li><a href="./page-error-503.html">Error 503</a></li>
                                 </ul>
                             </li>
+                        </ul>
+                    </li>
+                </ul> -->
+                <ul class="metismenu in" id="menu">
+                    <li class="">
+                        <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
+                        </a> -->
+                        <a class="" href="schedule" aria-expanded="false">
+                            <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-notebook menu-icon"></i><span class="nav-text">업무 관리</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                            <li><a href="./page-login.html">프로젝트 업무 관리</a></li>
+                            <li><a href="./page-register.html">팀 업무 관리</a></li>
+                            <li><a href="./page-lock.html">개인 업무 관리</a></li>
+                        </ul>
+                    </li>
+                    <li class="mega-menu mega-menu-sm">
+                        <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
+                        </a> -->
+                        <!-- has-arrow 지우긴 했는데 클릭한 이후 선택된 상태로 남는지는 확인해야 함 -->
+                        <a class="" href="searchHuman" aria-expanded="false">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
+                        </a>
+                    </li>
+                    
+                    <li class="">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-note menu-icon"></i><span class="nav-text">게시판</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                            <li><a href="./form-basic.html">공지사항</a></li>
+                            <li><a href="./form-validation.html">질의 게시판</a></li>
+                            <li><a href="./form-step.html">자유 게시판</a></li>
+                            <li><a href="./form-editor.html">팀 게시판</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-grid menu-icon"></i><span class="nav-text">시스템 관리</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                            <li><a href="./ui-accordion.html">프로젝트 관리</a></li>
+                            <li><a href="./ui-alert.html">팀 관리</a></li>
+                            <li><a href="./ui-badge.html">인력 관리</a></li>
+                            <li><a href="./ui-button.html">권한 관리</a></li>
+                            <li><a href="./ui-button-group.html">게시판 관리</a></li>
+                        <!-- </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
+                        </a>
+                        <ul aria-expanded="false"> -->
                         </ul>
                     </li>
                 </ul>
