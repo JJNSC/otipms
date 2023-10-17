@@ -20,3 +20,28 @@
 .card-custom {
 	box-shadow: 6px 11px 41px -28px #B5C4D6;
 }
+
+.center-custom {
+	text-align: center;
+	vertical-align: text-top;
+}
+
+.btn-custom {
+	color: #3E6494;
+	background-color: #fff;
+	border-color: #3E6494;
+	border-radius: 0.05rem;
+}
+
+.form-custom {
+	height: 34px;
+}
+.input-group-custom {
+	display: inline-flex;
+	width: 18%;
+}
+.btn-write {
+	display: inline-block;
+	width: 36%;
+	text-align: right;
+}

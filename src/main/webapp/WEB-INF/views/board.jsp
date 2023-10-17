@@ -479,6 +479,16 @@
                                 <div class="card-title">
                                     <h4>공지사항</h4>
                                 </div>
+                                <!-- <div class="row center-custom mb-3 pr-4">
+				                	<div class="col-10">
+				                	</div>
+									<div class="input-group mb-3 col-2 text-right">
+		                                <input type="text" class="form-control form-custom">
+		                                <div class="input-group-append">
+		                                    <button class="btn btn-primary" type="button">검색</button>
+		                                </div>
+		                            </div>
+				                </div> -->
                                 <div class="table-responsive">
                                     <table class="table table-hover table-custom">
                                         <thead>
@@ -516,10 +526,68 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="bootstrap-pagination">
+                           		<nav>
+			                        <ul class="pagination justify-content-center">
+			                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">이전</a>
+			                            </li>
+			                            <li class="page-item active"><a class="page-link" href="#">1</a>
+			                            </li>
+			                            <li class="page-item"><a class="page-link" href="#">2</a>
+			                            </li>
+			                            <li class="page-item"><a class="page-link" href="#">3</a>
+			                            </li>
+			                            <li class="page-item"><a class="page-link" href="#">4</a>
+			                            </li>
+			                            <li class="page-item"><a class="page-link" href="#">5</a>
+			                            </li>
+			                            <li class="page-item"><a class="page-link" href="#">다음</a>
+			                            </li>
+			                        </ul>
+			                    </nav>
+			                </div>
+			                <div class="mb-3 text-right px-5">
+			                	<div class="dropdown d-inline-block">
+	                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false">게시글 + 댓글  </button>
+	                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+	                                	<a class="dropdown-item" href="#">게시글 + 댓글  </a> 
+	                                	<a class="dropdown-item" href="#">제목만  </a> 
+	                                	<a class="dropdown-item" href="#">작성자  </a>
+	                                	<a class="dropdown-item" href="#">댓글 내용  </a>
+	                                	<a class="dropdown-item" href="#">댓글 작성자  </a>
+	                                </div>
+	                            </div>
+								<div class="input-group mb-3 input-group-custom">
+	                                <input type="text" class="form-control form-custom">
+	                                <div class="input-group-append">
+	                                    <button class="btn btn-primary" type="button">검색</button>
+	                                </div>
+	                            </div>
+	                            <div class="btn-write">
+	                            	<button type="button" class="btn btn-primary">글쓰기</button>
+	                            </div>
+			                </div>
                         </div>
                         <!-- /# card -->
                     </div>
                 </div>
+                
+                <!-- <div class="bootstrap-pagination">
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> -->
             </div>
             <!-- #/ container -->
         </div>
