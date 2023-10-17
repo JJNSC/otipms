@@ -550,11 +550,11 @@
 			                	<div class="dropdown d-inline-block">
 	                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false">게시글 + 댓글  </button>
 	                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-	                                	<a class="dropdown-item" href="#">게시글 + 댓글  </a> 
-	                                	<a class="dropdown-item" href="#">제목만  </a> 
-	                                	<a class="dropdown-item" href="#">작성자  </a>
-	                                	<a class="dropdown-item" href="#">댓글 내용  </a>
-	                                	<a class="dropdown-item" href="#">댓글 작성자  </a>
+	                                	<a class="dropdown-item" href="#" onclick="filter(this)">게시글 + 댓글  </a> 
+	                                	<a class="dropdown-item" href="#" onclick="filter(this)">제목만  </a> 
+	                                	<a class="dropdown-item" href="#" onclick="filter(this)">작성자  </a>
+	                                	<a class="dropdown-item" href="#" onclick="filter(this)">댓글 내용  </a>
+	                                	<a class="dropdown-item" href="#" onclick="filter(this)">댓글 작성자  </a>
 	                                </div>
 	                            </div>
 								<div class="input-group mb-3 input-group-custom">
@@ -620,7 +620,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 </body>
 
 </html>
