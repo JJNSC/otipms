@@ -10,20 +10,20 @@ The smaller device rules always should write below the bigger device rules
 Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Component
 */
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
-@import url(../icons/font-awesome/css/font-awesome.min.css);
-@import url(../icons/simple-line-icons/css/simple-line-icons.css);
-@import url(../icons/weather-icons/css/weather-icons.min.css);
-@import url(../icons/cryptocoins/css/cryptocoins.css);
-@import url(../icons/cryptocoins/css/cryptocoins-colors.css);
-@import url(../icons/linea-icons/linea.css);
-@import url(../icons/ionicons/css/ionicons.css);
-@import url(../icons/themify-icons/themify-icons.css);
-@import url(../icons/flag-icon-css/flag-icon.min.css);
-@import url(../icons/material-design-iconic-font/materialdesignicons.min.css);
-@import url(../icons/pe-icon-set-weather/css/pe-icon-set-weather.min.css);
-@import url(../plugins/animate/animate.min.css);
-@import url(../plugins/metismenu/css/metisMenu.min.css);
-@import url(../plugins/bootstrap-select/dist/css/bootstrap-select.min.css);
+@import url(../../icons/font-awesome/css/font-awesome.min.css);
+@import url(../../icons/simple-line-icons/css/simple-line-icons.css);
+@import url(../../icons/weather-icons/css/weather-icons.min.css);
+@import url(../../icons/cryptocoins/css/cryptocoins.css);
+@import url(../../icons/cryptocoins/css/cryptocoins-colors.css);
+@import url(../../icons/linea-icons/linea.css);
+@import url(../../icons/ionicons/css/ionicons.css);
+@import url(../../icons/themify-icons/themify-icons.css);
+@import url(../../icons/flag-icon-css/flag-icon.min.css);
+@import url(../../icons/material-design-iconic-font/materialdesignicons.min.css);
+@import url(../../icons/pe-icon-set-weather/css/pe-icon-set-weather.min.css);
+@import url(../../plugins/animate/animate.min.css);
+@import url(../../plugins/metismenu/css/metisMenu.min.css);
+@import url(../../plugins/bootstrap-select/dist/css/bootstrap-select.min.css);
 .gradient-1, .dropdown-mega-menu .ext-link.link-1 a, .morris-hover, .datamaps-hoverover {
   background-image: linear-gradient(230deg, #759bff, #843cf6); }
 
@@ -201,7 +201,7 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
   a:hover {
-    color: #2e28f6;
+    color: #11407a;
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
@@ -6677,10 +6677,10 @@ button.bg-dark:focus {
   color: #fff !important; }
 
 .text-primary {
-  color: #7571f9 !important; }
+  color: #11407a !important; }
 
 a.text-primary:hover, a.text-primary:focus {
-  color: #4540f7 !important; }
+  color: #11407a !important; }
 
 .text-secondary {
   color: #9097c4 !important; }
@@ -9379,14 +9379,24 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     height: 50px;
     line-height: 50px;
     cursor: default;
-    transition-duration: 0.3s; }
+    transition-duration: 0.3s; 
+    }
+  .email-list .read {
+  	background-color: rgba(0, 0, 0, 0.075);
+  }
     .email-list .message:hover {
       transition-duration: 0.05s; }
     .email-list .message .col-mail {
       float: left;
       position: relative; }
     .email-list .message .col-mail-1 {
-      width: 95px; }
+      width: 105px; }
+    .email-list .message .received{
+      width: 80px;
+    }
+    .email-list .message .trash{
+      width: 55px;
+    }
       .email-list .message .col-mail-1 .star-toggle {
         display: block;
         float: left;
@@ -9407,6 +9417,22 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
         width: 0;
         line-height: 0;
         font-size: 0; }
+      .email-list .message .col-mail-1 .icon-copy{
+      	cursor: pointer;
+      }
+      .email-list .message .col-mail-1 .star {
+      	display: block;
+	    float: left;
+	    font-size: 16px;
+	    margin-left: 6px;"
+      }
+      .email-list .message .col-mail-1 .mail{
+      	display: block;
+	    float: left;
+	    font-size: 16px;
+	    margin-left: 13px;
+	    margin-right: 5px;"
+      }
     .email-list .message .col-mail-profile{
       }
     .email-list .message .col-mail-profile .profile{
@@ -9419,11 +9445,15 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 	    margin: 0;
 	    padding: 0;
 	    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+	    margin-right : 5px;
+    }
+    .email-list .message .col-mail-profile .profile span{
+    	font-weight: bold;
     }
     .email-list .message .col-mail-2 {
       position: absolute;
       top: 0;
-      left: 230px;
+      left: 240px;
       right: 0;
       bottom: 0; }
       .email-list .message .col-mail-2 .subject {
@@ -9434,12 +9464,21 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap; }
+      .email-list .message .col-mail-2 .clip{
+      	position: absolute;
+        top: 0;
+        width: 20px;
+        right: 70px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
       .email-list .message .col-mail-2 .date {
         position: absolute;
         top: 0;
         right: 0;
-        width: 130px;
-        padding-left: 50px; }
+        padding-left: 50px;
+        padding-right: 5px;
+         }
 
 .email-checkbox {
   cursor: pointer;
@@ -10935,7 +10974,7 @@ table.dataTable thead .sorting::after {
   color: #fff; }
 
 .badge-primary {
-  background-color: #7571f9; }
+  background-color: #11407a; }
 
 .badge-warning {
   background-color: #f29d56; }
