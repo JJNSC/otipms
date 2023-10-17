@@ -51,7 +51,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index">
+                <a href="${pageContext.request.contextPath}/index">
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -449,7 +449,7 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">시스템 관리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="./ui-accordion.html">프로젝트 관리</a></li>
+                            <li><a href="projectManagement/projectList">프로젝트 관리</a></li>
                             <li><a href="./ui-alert.html">팀 관리</a></li>
                             <li><a href="./ui-badge.html">인력 관리</a></li>
                             <li><a href="./ui-button.html">권한 관리</a></li>

@@ -13,6 +13,19 @@
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/projectList.css" rel="stylesheet">
+    
+    <script>
+		$(document).ready(function() {
+			$('.reviewTitle').on('click', function() {
+		    	const close = $('.show');
+		    	if(close != null) {
+		    		close.collapse('toggle');
+		    	}
+		        const target = $(this).data('target');
+		        $(target).collapse('toggle');
+		    });
+		});
+	</script>
 
 </head>
 
@@ -43,7 +56,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="inde">
+                <a href="${pageContext.request.contextPath}/index">
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/resources/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -477,26 +490,35 @@
                         <div class="card card-custom">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4><b>프로젝트 목록</b></h4> <span style="float: right"><button type="button" class="btn mb-1 btn-primary">추가</button></span>
+                                    <h4><b>프로젝트 목록</b></h4> 
+                                    <span style="float: right">
+                                    	<a href="addAndModifyProject">
+                                    		<button type="button" class="btn mb-1 btn-primary">등록</button>
+                                    	</a>
+                                    </span>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-custom">
                                         <thead>
                                             <tr>
-                                                <th>번호</th>
+                                                <th class="text-center">번호</th>
                                                 <th>프로젝트 명</th>
                                                 <th>담당자</th>
                                                 <th>작업 시작일</th>
                                                 <th>작업 종료일</th>
                                                 <th>진척률</th>
-                                                <th></th>
-                                                <th></th>
+                                                <th class="text-center">수정</th>
+                                                <th class="text-center">삭제</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>3</td>
-                                                <td>PMS 제작 프로젝트</td>
+                                                <td class="text-center">3</td>
+                                                <td>
+												   <a class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+												     PMS 제작 프로젝트
+												   </a>
+												</td>
                                                 <td>김종진</td>
                                                 <td>23.10.15</td>
                                                 <td>24.12.25</td>
@@ -507,11 +529,41 @@
 					                                    </div>
 					                                </div>
                                                 </td>
-                                                <td class=""> <button type="button" class="btn mb-1 btn-primary">수정</button></td>
-                                                <td> <button type="button" class="btn mb-1 btn-primary">비활성화</button></td>
+	                                            <td class="text-center"> 
+	                                             	<a href="addAndModifyProject">
+	                                            			<i class="fa fa-pencil color-muted"></i>
+	                                            		</a>
+	                                             </td>
+	                                             <td class="text-center"> 
+	                                             	<i class="fa fa-close color-danger"></i>
+	                                             </td>
                                             </tr>
+                                            <tr id="${review.reviewId }bottom">
+                                            	<td></td>
+									   			<td colspan="5">
+							                      	<div class="collapse" id="collapseExample${review.reviewId }">
+											         	<div class="card card-body mt-3" style="height:380px;">
+											            	<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
+											         	</div>
+											      	</div>
+									   			</td>
+									   			<td>
+									   				<div class="collapse" id="collapseExample${review.reviewId }">
+											         	<div class="card card-body  mt-3">
+											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
+											         	</div>
+											         	<div class="card card-body">
+											   				<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i> <br> ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
+											         	</div>
+											         	<div class="card card-body">
+											   				<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i> <br> ㅁㅁㅁ@ㅁㅁㅁㅁ.ㅁㅁㅁㅁ
+											         	</div>
+											      	</div>
+									   				
+									   			</td>
+											</tr>
                                             <tr>
-                                                <td>2</td>
+                                                <td class="text-center">2</td>
                                                 <td>프로젝트 2번째</td>
                                                 <td>김진성</td>
                                                 <td>23.10.15</td>
@@ -523,12 +575,18 @@
 					                                    </div>
 					                                </div>
                                                 </td>
-                                                <td> <button type="button" class="btn mb-1 btn-primary">수정</button></td>
-                                                <td> <button type="button" class="btn mb-1 btn-primary">비활성화</button></td>
+                                                <td class="text-center"> 
+                                                	<a href="addAndModifyProject">
+                                               			<i class="fa fa-pencil color-muted"></i>
+                                               		</a>
+                                                </td>
+                                                <td class="text-center"> 
+                                                	<i class="fa fa-close color-danger"></i>
+                                                </td>
                                             </tr>
                                             <tr>
                                             
-                                                <td>1</td>
+                                                <td class="text-center">1</td>
                                                 <td>본격 취업 프로젝트</td>
                                                 <td>이은지</td>
                                                 <td>23.10.15</td>
@@ -540,8 +598,14 @@
 					                                    </div>
 					                                </div>
                                                 </td>
-                                                <td> <button type="button" class="btn mb-1 btn-primary">수정</button></td>
-                                                <td> <button type="button" class="btn mb-1 btn-primary">비활성화</button></td>
+                                                <td class="text-center"> 
+                                                	<a href="addAndModifyProject">
+                                               			<i class="fa fa-pencil color-muted"></i>
+                                               		</a>
+                                                </td>
+                                                <td class="text-center"> 
+                                                	<i class="fa fa-close color-danger"></i>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
