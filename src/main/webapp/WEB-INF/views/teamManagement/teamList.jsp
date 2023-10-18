@@ -12,32 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/css/projectList.css" rel="stylesheet">
-    
-    <script>
-		$(document).ready(function() {
-			$('.reviewTitle').on('click', function() {
-		    	const close = $('.show');
-		    	if(close != null) {
-		    		close.collapse('toggle');
-		    	}
-		        const target = $(this).data('target');
-		        $(target).collapse('toggle');
-		    });
-		});
-	</script>
-	
-	<style>
-		.fa-close {
-		  background-color: transparent;
-		}
-		
-		.paddingright{
-			padding-right:5%;
-		}
-		
-		
-	</style>	
+    <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
 </head>
 
@@ -495,204 +470,56 @@
                 </div>
             </div>
             <!-- row -->
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- /# column -->
-                    <div class="col">
-                        <div class="card card-custom">
+           <div class="col-md-12">
+                        <div class="card">
                             <div class="card-body">
-                                <div class="card-title">
-                                    <h4><b>프로젝트 목록</b></h4> 
-                                    <span style="float: right">
-                                    	<a href="addAndModifyProject">
-                                    		<button type="button" class="btn mb-1 btn-primary">등록</button>
-                                    	</a>
-                                    </span>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-custom">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">번호</th>
-                                                <th>프로젝트 명</th>
-                                                <th>담당자</th>
-                                                <th>작업 시작일</th>
-                                                <th>작업 종료일</th>
-                                                <th>진척률</th>
-                                                <th class="text-right ">수정</th>
-                                                <th class="text-center ">삭제</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                <td class="text-center">3</td>
-                                                <td>
-												   PMS 제작 프로젝트
-												</td>
-                                                <td>김종진</td>
-                                                <td>23.10.15</td>
-                                                <td>24.12.25</td>
-                                                <td>
-													<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>
-                                                	<div class="progress" style="height: 9px">
-					                                    <div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>
-					                                    </div>
-					                                </div>
-                                                </td>
-	                                            <td class="text-right" style="padding-right:20px"> 
-	                                             	<a href="addAndModifyProject">
-	                                            			<i class="fa fa-pencil color-muted"></i>
-	                                            		</a>
-	                                             </td>
-	                                             <td class="text-center"> 
-	                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-	                                             </td>
-                                            </tr>
-                                            <tr  style="background-color:#f3f3f3;" id="${review.reviewId }bottom">
-                         						<!-- <td style="padding-top :0px; padding-bottom :0px;"></td> -->
-									   			<td style="padding-top :0px; padding-bottom :0px;"colspan="6">
-							                      	<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body mt-3" style="height:380px;">
-											            	<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
-											         	</div>
-											      	</div>
-									   			</td>
-									   			<td style="padding-top :0px; padding-bottom :0px;" colspan="2">
-									   				<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body  mt-3">
-											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i> <br> ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i> <br> ㅁㅁㅁ@ㅁㅁㅁㅁ.ㅁㅁㅁㅁ
-											         	</div>
-											      	</div>
-									   			</td>
-									   			
-											</tr>
-                                             <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                <td class="text-center">2</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>김진성</td>
-                                                <td>23.10.15</td>
-                                                <td>24.12.25</td>
-                                                <td>
-													<h5 class="mt-3"><i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">40%</span></h5>
-                                                	<div class="progress" style="height: 9px">
-					                                    <div class="progress-bar bg-warning wow  progress-" style="width: 40%;" role="progressbar"><span class="sr-only">60% Complete</span>
-					                                    </div>
-					                                </div>
-                                                </td>
-                                                <td class="text-right" style="padding-right:20px"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<i class="fa fa-close color-danger"></i>
-                                                </td>
-                                            </tr>
-                                             <tr  id="${review.reviewId }bottom">
-									   			<td colspan="5">
-							                      	<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body mt-3" style="height:380px;">
-											            	<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
-											         	</div>
-											      	</div>
-									   			</td>
-									   			<td>
-									   				<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body  mt-3">
-											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i> <br> ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i> <br> ㅁㅁㅁ@ㅁㅁㅁㅁ.ㅁㅁㅁㅁ
-											         	</div>
-											      	</div>
-									   				
-									   			</td>
-											</tr>
-                                             <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                            
-                                                <td class="text-center">1</td>
-                                                <td>본격 취업 프로젝트</td>
-                                                <td>이은지</td>
-                                                <td>23.10.15</td>
-                                                <td>24.12.25</td>
-                                                <td>
-                                                	<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">18%</span></h5>
-                                                	 <div class="progress" style="height: 9px">
-					                                    <div class="progress-bar bg-danger wow  progress-" style="width: 18%;" role="progressbar"><span class="sr-only">60% Complete</span>
-					                                    </div>
-					                                </div>
-                                                </td>
-                                                <td class="text-right" style="padding-right:20px"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<i class="fa fa-close color-danger"></i>
-                                                </td>
-                                            </tr>
-                                             <tr  id="${review.reviewId }bottom">
-                                            	<td></td>
-									   			<td colspan="6">
-							                      	<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body mt-3" style="height:380px;">
-											            	<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
-											         	</div>
-											      	</div>
-									   			</td>
-									   			<td>
-									   				<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body  mt-3">
-											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i> <br> ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i> <br> ㅁㅁㅁ@ㅁㅁㅁㅁ.ㅁㅁㅁㅁ
-											         	</div>
-											      	</div>
-									   				
-									   			</td>
-											</tr>
-                                        </tbody>
-                                    </table>
+                                <h4 class="card-title">Default Tab</h4>
+                                <!-- Nav tabs -->
+                                <div class="default-tab">
+                                    <ul class="nav nav-tabs mb-3" role="tablist">
+                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contact">Contact</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#message">Message</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel">
+                                            <div class="p-t-15">
+                                                <h4>This is home title</h4>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="profile">
+                                            <div class="p-t-15">
+                                                <h4>This is profile title</h4>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="contact">
+                                            <div class="p-t-15">
+                                                <h4>This is contact title</h4>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="message">
+                                            <div class="p-t-15">
+                                                <h4>This is message title</h4>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="modalGrid">
-	                        <div class="modal-dialog" role="document">
-	                            <div class="modal-content">
-	                                <div class="modal-header">
-	                                    <h5 class="modal-title">프로젝트 삭제</h5>
-	                                </div>
-	                                <div class="modal-body">
-	                                    <div class="container-fluid">
-	                                        <div class="row">
-	                                        	해당 프로젝트를 삭제하시겠습니까?
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-primary">삭제</button>
-	                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	                                </div>
-	                            </div>
-	                        </div>
-                		</div>
-                        <!-- /# card -->
                     </div>
-                </div>
-            </div>
             <!-- #/ container -->
         </div>
         <!--**********************************
@@ -724,6 +551,23 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
+    
+    
+    <script src="${pageContext.request.contextPath}/resources/plugins/moment/moment.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    
+    <script src="${pageContext.request.contextPath}/resources/js/plugins-init/form-pickers-init.js"></script>
 
 </body>
 
