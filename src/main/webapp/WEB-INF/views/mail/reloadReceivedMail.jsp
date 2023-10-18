@@ -6,7 +6,7 @@
 				<input type="checkbox" id="chk2">
 				<label class="toggle" for="chk2"></label>
 			</div>
-			<span class="icon-copy star ion-ios-star-outline" onclick="checkimportant(1, event)"></span>
+			<span class="icon-copy star ion-ios-star-outline" onclick="checkimportant(1,event)"></span>
 		</div>
 		<div class="col-mail col-mail-profile">
 			<div class="profile">

@@ -11,28 +11,16 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     
     <!-- Custom Stylesheet -->
-    <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/app-email.css" />
-	
-	<!-- Icons -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/boxicons.css" />
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/core.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/theme-default.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/demo.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/katex.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/editor.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/select2.css" />
+    <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/common/common.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/mail/detailmail.js"></script>
     
-    <!-- Helpers -->
-    <script src="${pageContext.request.contextPath}/resources/js/mail/helpers.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/template-customizer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/config.js"></script>
 </head>
 
 <body>
@@ -48,9 +36,9 @@
                                 <div class="email-left-box">
                                 	<a href="writeMail" class="btn btn-primary btn-block">쪽지 보내기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="emailInbox" class="list-group-item border-0 text-primary p-r-0">
+                                    	<a href="receivedMail" class="list-group-item border-0 p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
-                                    		<b>수신 쪽지함</b>
+                                    		 수신 쪽지함
                                     		<span class="badge badge-primary badge-sm float-right m-t-5">198</span>
                                     	</a>
                                         <a href="sentMail" class="list-group-item border-0 p-r-0">
@@ -69,43 +57,49 @@
                                         <a href="trashMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-trash font-18 align-middle mr-2"></i>
                                         	쪽지 휴지통
+                                        	
                                         </a>
                                     </div>
                                 </div>
                                 <div class="email-right-box">
                                     <div class="toolbar" role="toolbar">
                                         <div class="btn-group m-b-20">
-                                            <button type="button" class="btn btn-light">
-                                            	<i class="fa fa-archive"></i>
+                                            <button type="button" class="btn btn-light" onclick="checkimportant(event)">
+                                            	<i class="icon-copy star ion-ios-star-outline"></i>
                                             </button>
-                                            <button type="button" class="btn btn-light">
-                                            	<i class="fa fa-exclamation-circle"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-light">
+                                            <button type="button"  class="btn" data-toggle="modal" data-target="#modalGrid">
                                             	<i class="fa fa-trash"></i>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="read-content">
                                         <div class="media pt-5">
-                                            <img class="mr-3 rounded-circle" src="/otipms/resources/images/user/2.jpg" style="width:60px; height:60px;">
+                                            <img class="mr-3 rounded-circle" src="/otipms/resources/images/user/1.jpg" style="width:60px; height:60px;">
                                             <div class="media-body">
-                                                <h5 class="m-b-3">Ingredia Nutrisha</h5>
-                                                <p class="m-b-2">20 May 2018</p>
+                                                <span class="m-b-5 font-weight-bold">발신자 : </span>
+                                                <span class="m-b-3">사원 </span>
+                                                <span class="m-b-3">김사원</span>
+                                                <br/>
+                                                <span class="m-b-2 font-weight-bold">발신 날짜 : </span>
+                                                <span class="m-b-2">15:20:55 &nbsp;&nbsp;&nbsp; 2023.10.16</span>
+                                                <br/>
+                                                <span class="m-b-5 font-weight-bold">수신자 : </span>
+                                                <span class="m-b-3">차장 </span>
+                                                <span class="m-b-3">최차장</span>
+                                                <br/>
+                                                <span class="m-b-3 font-weight-bold">참조 : </span>
+                                               	<span>사원 </span>
+                                               	<span>김사원, </span>
+                                               	<span>대리 </span>
+                                               	<span>이대리, </span>
+                                               	<span>과장 </span>
+                                               	<span>박과장</span>
                                             </div>
                                             
                                         </div>
-                                        <div class="media pt-1">
-                                        	<div class="media-body">
-                                                <div>
-	                                                <span class="m-b-3" style="font-weight: bold;">참조 : </span>
-                                                	<span>김김김, 이이이, 박박박</span>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <hr>
                                         <div class="media mb-4 mt-1">
-                                            <div class="media-body"><span class="float-right">07:23 AM</span>
+                                            <div class="media-body">
                                                 <h4 class="m-0 text-primary">A collection of textile samples lay spread</h4>
                                             </div>
                                         </div>
@@ -155,34 +149,26 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="${pageContext.request.contextPath}/resources/plugins/common/common.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/app-email.js"></script>
-
-	<!-- Core JS -->
-    <script src="${pageContext.request.contextPath}/resources/js/chat/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/popper.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/perfect-scrollbar.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/hammer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/i18n.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/typeahead.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/menu.js"></script>
-
-
-    <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/js/mail/katex.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/quill.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/block-ui.js"></script>
-    
+    <div class="modal fade" id="modalGrid">
+    	<div class="modal-dialog" role="document">
+        	<div class="modal-content">
+            	<div class="modal-header">
+                	<h5 class="modal-title">쪽지 삭제</h5>
+                </div>
+                <div class="modal-body">
+                	<div class="container-fluid">
+                    	<div class="row">
+	                       	쪽지를 삭제하시겠습니까?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                	<button type="button" class="btn btn-primary" onclick="checkdelete()">삭제</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+	</div>
 </body>
 
 </html>

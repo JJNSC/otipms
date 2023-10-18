@@ -10,29 +10,23 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     
-    <!-- Custom Stylesheet -->
-    <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/app-email.css" />
-	
-	<!-- Icons -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/boxicons.css" />
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/core.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/theme-default.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/demo.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/katex.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/editor.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mail/select2.css" />
+   <!-- Custom Stylesheet -->
+    <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
+  
+    <!-- Scripts -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/common/common.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
     
-    <!-- Helpers -->
-    <script src="${pageContext.request.contextPath}/resources/js/mail/helpers.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/template-customizer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/config.js"></script>
+    <!-- Editer -->
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	
 </head>
 
 <body>
@@ -48,7 +42,7 @@
                                 <div class="email-left-box">
                                 	<a href="writeMail" class="btn btn-primary btn-block">쪽지 보내기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="emailInbox" class="list-group-item border-0 text-primary p-r-0">
+                                    	<a href="receivedMail" class="list-group-item border-0 text-primary p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
                                     		<b>수신 쪽지함</b>
                                     		<span class="badge badge-primary badge-sm float-right m-t-5">198</span>
@@ -83,7 +77,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="compose-content mt-5">
+                                    <div class="compose-content mt-5 mb-5">
                                         <form action="#">
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent" placeholder=" To">
@@ -92,22 +86,66 @@
                                                 <input type="text" class="form-control bg-transparent" placeholder=" Subject">
                                             </div>
                                             <div class="form-group">
-                                                <textarea class="textarea_editor form-control bg-light" rows="15" placeholder="Enter text ..."></textarea>
+												<textarea id="myEditor" name="myEditor" class="form-control border-radius-0" placeholder="Enter text ..."></textarea>
+                                            	<script>
+													var ckeditor_config = {
+													  resize_enaleb : false,
+													  enterMode : CKEDITOR.ENTER_BR,
+													  shiftEnterMode : CKEDITOR.ENTER_P
+													};
+													CKEDITOR.replace("myEditor", ckeditor_config);
+												</script>
                                             </div>
                                         </form>
-                                        <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일</h5>
-                                        <form action="#" class="dropzone">
-                                            <div class="form-group">
-                                                <div class="fallback">
-                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <div class="pd-20 card-box mb-30">
+											<div class="clearfix mb-20">
+												<div class="pull-left">
+													<h4 class="text-blue h4">첨부파일</h4>
+												</div>
+											</div>
+											<form class="dropzone dz-clickable" action="#" id="my-awesome-dropzone">
+												<div class="dz-default dz-message">
+													<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
+												</div>
+											</form>
+										</div>
+										<script>
+											Dropzone.autoDiscover = false;
+											$(".dropzone").dropzone({
+												addRemoveLinks: true,
+												removedfile: function (file) {
+													var name = file.name;
+													var _ref;
+													return (_ref = file.previewElement) != null
+														? _ref.parentNode.removeChild(file.previewElement)
+														: void 0;
+												},
+											});
+										</script>
                                     </div>
                                     <div class="text-left m-t-15">
                                         <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button"><i class="fa fa-paper-plane m-r-5"></i> Send</button>
                                         <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"><i class="ti-close m-r-5 f-s-12"></i> Discard</button>
                                     </div>
+                                </div>
+                                <div class="bootstrap-wysihtml5-insert-link-modal modal fade bs-example-modal-lg" style="display: none;" aria-hidden="true">
+                                	<div class="modal-dialog modal-lg">
+                                		<div class="modal-content">
+                                			<div class="modal-header">
+                                				<a class="close" data-dismiss="modal"></a>
+                                				<h3>Insert link</h3>
+                                			</div>
+                                			<div class="modal-body">
+                                				<div class="form-group">
+                                					<input value="http://" class="bootstrap-wysihtml5-insert-link-url form-control" type="text">
+                                				</div>
+                                			</div>
+                                			<div class="modal-footer">
+                                				<a href="#" class="btn btn-inverse" data-dismiss="modal">Cancel</a>
+                                				<a href="#" class="btn btn-primary" data-dismiss="modal">Insert link</a>
+                                			</div>
+                                		</div>
+                                	</div>
                                 </div>
                                 <!-- <panel> -->
                                     <div class="row mt-3">
@@ -129,33 +167,6 @@
         Main wrapper end
     ***********************************-->
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="${pageContext.request.contextPath}/resources/plugins/common/common.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/app-email.js"></script>
-
-	<!-- Core JS -->
-    <script src="${pageContext.request.contextPath}/resources/js/chat/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/popper.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/perfect-scrollbar.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/hammer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/i18n.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/typeahead.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/chat/menu.js"></script>
-
-
-    <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/js/mail/katex.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/quill.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/block-ui.js"></script>
-    
 </body>
 
 </html>

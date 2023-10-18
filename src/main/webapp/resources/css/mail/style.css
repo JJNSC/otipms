@@ -10080,7 +10080,7 @@ input[type="checkbox"]:checked:after {
   display: block;
   content: "\f00c";
   font-family: 'FontAwesome';
-  color: #7571f9;
+  color: #3E6494;
   font-weight: 100;
   text-align: center; }
 
@@ -11167,8 +11167,12 @@ table.dataTable thead .sorting::after {
     background: #1a56ff;
     color: #fff;
     border-color: #1a56ff; }
-
-.btn-light:active, .btn-light:focus, .btn-light:hover {
+/* .btn-light:active, .btn-light:focus{
+  background: #919191;
+  color: #fff;
+  border-color: #919191;
+} */
+.btn-light:hover {
   background: #919191;
   color: #fff;
   border-color: #919191; }
