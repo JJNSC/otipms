@@ -26,6 +26,18 @@
 		    });
 		});
 	</script>
+	
+	<style>
+		.fa-close {
+		  background-color: transparent;
+		}
+		
+		.paddingright{
+			padding-right:5%;
+		}
+		
+		
+	</style>	
 
 </head>
 
@@ -507,17 +519,15 @@
                                                 <th>작업 시작일</th>
                                                 <th>작업 종료일</th>
                                                 <th>진척률</th>
-                                                <th class="text-center">수정</th>
-                                                <th class="text-center">삭제</th>
+                                                <th class="text-right ">수정</th>
+                                                <th class="text-center ">삭제</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <td class="text-center">3</td>
                                                 <td>
-												   <a class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
-												     PMS 제작 프로젝트
-												   </a>
+												   PMS 제작 프로젝트
 												</td>
                                                 <td>김종진</td>
                                                 <td>23.10.15</td>
@@ -529,17 +539,62 @@
 					                                    </div>
 					                                </div>
                                                 </td>
-	                                            <td class="text-center"> 
+	                                            <td class="text-right" style="padding-right:20px"> 
 	                                             	<a href="addAndModifyProject">
 	                                            			<i class="fa fa-pencil color-muted"></i>
 	                                            		</a>
 	                                             </td>
 	                                             <td class="text-center"> 
-	                                             	<i class="fa fa-close color-danger"></i>
+	                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
 	                                             </td>
                                             </tr>
-                                            <tr id="${review.reviewId }bottom">
-                                            	<td></td>
+                                            <tr  style="background-color:#f3f3f3;" id="${review.reviewId }bottom">
+                         						<!-- <td style="padding-top :0px; padding-bottom :0px;"></td> -->
+									   			<td style="padding-top :0px; padding-bottom :0px;"colspan="6">
+							                      	<div class="collapse" id="collapseExample${review.reviewId }">
+											         	<div class="card card-body mt-3" style="height:380px;">
+											            	<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
+											         	</div>
+											      	</div>
+									   			</td>
+									   			<td style="padding-top :0px; padding-bottom :0px;" colspan="2">
+									   				<div class="collapse" id="collapseExample${review.reviewId }">
+											         	<div class="card card-body  mt-3">
+											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
+											         	</div>
+											         	<div class="card card-body">
+											   				<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i> <br> ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
+											         	</div>
+											         	<div class="card card-body">
+											   				<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i> <br> ㅁㅁㅁ@ㅁㅁㅁㅁ.ㅁㅁㅁㅁ
+											         	</div>
+											      	</div>
+									   			</td>
+									   			
+											</tr>
+                                             <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <td class="text-center">2</td>
+                                                <td>프로젝트 2번째</td>
+                                                <td>김진성</td>
+                                                <td>23.10.15</td>
+                                                <td>24.12.25</td>
+                                                <td>
+													<h5 class="mt-3"><i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">40%</span></h5>
+                                                	<div class="progress" style="height: 9px">
+					                                    <div class="progress-bar bg-warning wow  progress-" style="width: 40%;" role="progressbar"><span class="sr-only">60% Complete</span>
+					                                    </div>
+					                                </div>
+                                                </td>
+                                                <td class="text-right" style="padding-right:20px"> 
+                                                	<a href="addAndModifyProject">
+                                               			<i class="fa fa-pencil color-muted"></i>
+                                               		</a>
+                                                </td>
+                                                <td class="text-center"> 
+                                                	<i class="fa fa-close color-danger"></i>
+                                                </td>
+                                            </tr>
+                                             <tr  id="${review.reviewId }bottom">
 									   			<td colspan="5">
 							                      	<div class="collapse" id="collapseExample${review.reviewId }">
 											         	<div class="card card-body mt-3" style="height:380px;">
@@ -562,29 +617,7 @@
 									   				
 									   			</td>
 											</tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>김진성</td>
-                                                <td>23.10.15</td>
-                                                <td>24.12.25</td>
-                                                <td>
-													<h5 class="mt-3"><i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">40%</span></h5>
-                                                	<div class="progress" style="height: 9px">
-					                                    <div class="progress-bar bg-warning wow  progress-" style="width: 40%;" role="progressbar"><span class="sr-only">60% Complete</span>
-					                                    </div>
-					                                </div>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<i class="fa fa-close color-danger"></i>
-                                                </td>
-                                            </tr>
-                                            <tr>
+                                             <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
                                             
                                                 <td class="text-center">1</td>
                                                 <td>본격 취업 프로젝트</td>
@@ -598,7 +631,7 @@
 					                                    </div>
 					                                </div>
                                                 </td>
-                                                <td class="text-center"> 
+                                                <td class="text-right" style="padding-right:20px"> 
                                                 	<a href="addAndModifyProject">
                                                			<i class="fa fa-pencil color-muted"></i>
                                                		</a>
@@ -607,11 +640,55 @@
                                                 	<i class="fa fa-close color-danger"></i>
                                                 </td>
                                             </tr>
+                                             <tr  id="${review.reviewId }bottom">
+                                            	<td></td>
+									   			<td colspan="6">
+							                      	<div class="collapse" id="collapseExample${review.reviewId }">
+											         	<div class="card card-body mt-3" style="height:380px;">
+											            	<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
+											         	</div>
+											      	</div>
+									   			</td>
+									   			<td>
+									   				<div class="collapse" id="collapseExample${review.reviewId }">
+											         	<div class="card card-body  mt-3">
+											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
+											         	</div>
+											         	<div class="card card-body">
+											   				<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i> <br> ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
+											         	</div>
+											         	<div class="card card-body">
+											   				<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i> <br> ㅁㅁㅁ@ㅁㅁㅁㅁ.ㅁㅁㅁㅁ
+											         	</div>
+											      	</div>
+									   				
+									   			</td>
+											</tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="modalGrid">
+	                        <div class="modal-dialog" role="document">
+	                            <div class="modal-content">
+	                                <div class="modal-header">
+	                                    <h5 class="modal-title">프로젝트 삭제</h5>
+	                                </div>
+	                                <div class="modal-body">
+	                                    <div class="container-fluid">
+	                                        <div class="row">
+	                                        	해당 프로젝트를 삭제하시겠습니까?
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="modal-footer">
+	                                    <button type="button" class="btn btn-primary">삭제</button>
+	                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	                                </div>
+	                            </div>
+	                        </div>
+                		</div>
                         <!-- /# card -->
                     </div>
                 </div>

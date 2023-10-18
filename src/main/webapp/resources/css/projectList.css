@@ -14,13 +14,19 @@
 	width: 8%;
 }
 .table-custom thead tr th:nth-child(4) {
-	width: 13%;
+	width: 10%;
 }
 .table-custom thead tr th:nth-child(5) {
-	width: 13%;
+	width: 10%;
 }
 .table-custom thead tr th:nth-child(6) {
 	width: 15%;
+}
+.table-custom thead tr th:nth-child(7) {
+	width: 10%;
+}
+.table-custom thead tr th:nth-child(8) {
+	width: 10%;
 }
 
 .card-custom {
