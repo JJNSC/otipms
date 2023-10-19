@@ -17,7 +17,7 @@
 		</div>
 		<a href="detailMail">
 			<div class="col-mail col-mail-2">
-				<div class="subject">동아일보 중딩한테 털렸죠? 아무고토 모타쥬?</div>
+				<div class="subject">오늘 점심을 뭘 먹어야 할까요?</div>
 				<div class="clip">
 					<span class="icon-copy ion-paperclip mr-5"></span>
 				</div>
@@ -42,7 +42,7 @@
 		</div>
 		<a href="detailMail">
 			<div class="col-mail col-mail-2">
-				<div class="subject">어쩔티비 저쩔티비</div>
+				<div class="subject">오늘 점심은 수육국밥이다</div>
 				<div class="clip">
 					<span class="icon-copy ion-paperclip mr-5"></span>
 				</div>
@@ -119,7 +119,7 @@
 		</div>
 		<a href="detailMail">
 			<div class="col-mail col-mail-2">
-				<div class="subject">동아일보 중딩한테 털렸죠? 아무고토 모타쥬?</div>
+				<div class="subject">오늘 점심을 뭘 먹어야 할까요?</div>
 				<div class="clip">
 					<span class="icon-copy ion-paperclip mr-5"></span>
 				</div>
@@ -144,7 +144,7 @@
 		</div>
 		<a href="detailMail">
 			<div class="col-mail col-mail-2">
-				<div class="subject">어쩔티비 저쩔티비</div>
+				<div class="subject">오늘 점심은 수육국밥이다</div>
 				<div class="clip">
 					<span class="icon-copy ion-paperclip mr-5"></span>
 				</div>
@@ -221,7 +221,7 @@
 		</div>
 		<a href="detailMail">
 			<div class="col-mail col-mail-2">
-				<div class="subject">동아일보 중딩한테 털렸죠? 아무고토 모타쥬?</div>
+				<div class="subject">오늘 점심을 뭘 먹어야 할까요?</div>
 				<div class="clip">
 					<span class="icon-copy ion-paperclip mr-5"></span>
 				</div>
@@ -246,7 +246,7 @@
 		</div>
 		<a href="detailMail">
 			<div class="col-mail col-mail-2">
-				<div class="subject">어쩔티비 저쩔티비</div>
+				<div class="subject">오늘 점심은 수육국밥이다</div>
 				<div class="clip">
 					<span class="icon-copy ion-paperclip mr-5"></span>
 				</div>

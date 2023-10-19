@@ -27,6 +27,12 @@
     <!-- Editer -->
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	
+	<!-- selector -->
+	<link href="${pageContext.request.contextPath}/resources/css/mail/prism.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/mail/select2.min.css" rel="stylesheet">
+	<script src="${pageContext.request.contextPath}/resources/js/mail/prism.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/mail/select2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/mail/custom.js"></script>
 </head>
 
 <body>
@@ -67,26 +73,89 @@
                                     </div>
                                 </div>
                                 <div class="email-right-box">
-                                    <div class="toolbar" role="toolbar">
-                                        <div class="btn-group m-b-20">
-                                            <button type="button" class="btn btn-light"><i class="fa fa-archive"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-light"><i class="fa fa-exclamation-circle"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-light"><i class="fa fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
                                     <div class="compose-content mt-5 mb-5">
                                         <form action="#">
+                                            <div>
+										        <label class="text-dark font-weight-medium">수신자</label>
+										        <div class="form-group">
+										        	<select class="js-example-basic-multiple form-control" name="select1[]">
+										            	<option>사원 김사원</option>
+										            	<option>대리 이대리</option>
+										            	<option>과장 박과장</option>
+										            	<option>차장 최차창</option>
+										            	<option>부장 정부장</option>
+										            	<option>이사 김이사</option>
+										            	<option>사원 김사원2</option>
+										            	<option>대리 이대리2</option>
+										            	<option>과장 박과장2</option>
+										            	<option>차장 최차창2</option>
+										            	<option>부장 정부장2</option>
+										            	<option>이사 김이사2</option>
+										            	<option>사원 김사원3</option>
+										            	<option>대리 이대리3</option>
+										            	<option>과장 박과장3</option>
+										            	<option>차장 최차창3</option>
+										            	<option>부장 정부장3</option>
+										            	<option>이사 김이사3</option>
+										        	</select>
+										        </div>
+										    </div>
+										    <div>
+										        <label class="text-dark font-weight-medium">참조</label>
+										        <div class="form-group">
+										        	<select class="js-example-basic-multiple form-control" name="select2[]" multiple="multiple">
+										            	<option>사원 김사원</option>
+										            	<option>대리 이대리</option>
+										            	<option>과장 박과장</option>
+										            	<option>차장 최차창</option>
+										            	<option>부장 정부장</option>
+										            	<option>이사 김이사</option>
+										            	<option>사원 김사원2</option>
+										            	<option>대리 이대리2</option>
+										            	<option>과장 박과장2</option>
+										            	<option>차장 최차창2</option>
+										            	<option>부장 정부장2</option>
+										            	<option>이사 김이사2</option>
+										            	<option>사원 김사원3</option>
+										            	<option>대리 이대리3</option>
+										            	<option>과장 박과장3</option>
+										            	<option>차장 최차창3</option>
+										            	<option>부장 정부장3</option>
+										            	<option>이사 김이사3</option>
+										        	</select>
+										        </div>
+										    </div>
+										    <div>
+										        <label class="text-dark font-weight-medium">비밀 참조</label>
+										        <div class="form-group">
+										        	<select class="js-example-basic-multiple form-control" name="select3[]" multiple="multiple">
+										            	<option>사원 김사원</option>
+										            	<option>대리 이대리</option>
+										            	<option>과장 박과장</option>
+										            	<option>차장 최차창</option>
+										            	<option>부장 정부장</option>
+										            	<option>이사 김이사</option>
+										            	<option>사원 김사원2</option>
+										            	<option>대리 이대리2</option>
+										            	<option>과장 박과장2</option>
+										            	<option>차장 최차창2</option>
+										            	<option>부장 정부장2</option>
+										            	<option>이사 김이사2</option>
+										            	<option>사원 김사원3</option>
+										            	<option>대리 이대리3</option>
+										            	<option>과장 박과장3</option>
+										            	<option>차장 최차창3</option>
+										            	<option>부장 정부장3</option>
+										            	<option>이사 김이사3</option>
+										        	</select>
+										        </div>
+										    </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control bg-transparent" placeholder=" To">
+                                            	<label class="text-dark font-weight-medium">제목</label>
+                                                <input type="text" class="form-control bg-transparent" placeholder=" 제목을 입력하세요">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control bg-transparent" placeholder=" Subject">
-                                            </div>
-                                            <div class="form-group">
-												<textarea id="myEditor" name="myEditor" class="form-control border-radius-0" placeholder="Enter text ..."></textarea>
+												<textarea id="myEditor" name="myEditor" class="form-control border-radius-0" placeholder="내용을 입력하세요"></textarea>
                                             	<script>
 													var ckeditor_config = {
 													  resize_enaleb : false,
@@ -124,8 +193,18 @@
 										</script>
                                     </div>
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button"><i class="fa fa-paper-plane m-r-5"></i> Send</button>
-                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"><i class="ti-close m-r-5 f-s-12"></i> Discard</button>
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button">
+                                        	<i class="fa fa-paper-plane m-r-5"></i>
+                                        	 Send
+                                        </button>
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" data-toggle="modal" data-target="#modalGrid">
+                                        	<i class="fa fa-archive m-r-5"></i>
+                                        	 Temporary Save
+                                        </button>
+                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button">
+                                        	<i class="ti-close m-r-5 f-s-12"></i>
+                                        	Discard
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="bootstrap-wysihtml5-insert-link-modal modal fade bs-example-modal-lg" style="display: none;" aria-hidden="true">
@@ -166,7 +245,26 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
+	<div class="modal fade" id="modalGrid">
+    	<div class="modal-dialog" role="document">
+        	<div class="modal-content">
+            	<div class="modal-header">
+                	<h5 class="modal-title">쪽지 임시 저장</h5>
+                </div>
+                <div class="modal-body">
+                	<div class="container-fluid">
+                    	<div class="row">
+	                       	쪽지를 임시 저장하시겠습니까?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                	<button type="button" class="btn btn-primary" onclick="checksave()">저장</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+	</div>
 </body>
 
 </html>
