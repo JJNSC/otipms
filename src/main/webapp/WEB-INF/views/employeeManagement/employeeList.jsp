@@ -832,7 +832,7 @@
 			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">
-			                <h5 class="modal-title" id="singleRegisterLabel">인력 등록</h5>
+			                <h5 class="modal-title" id="singleRegisterLabel">인력 개별 등록</h5>
 			            </div>
 			            <div class="modal-body">
 			                <form class="form-valide" action="#" method="post">
@@ -921,86 +921,26 @@
 			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">
-			                <h5 class="modal-title" id="multiRegisterLabel">담당자 검색</h5>
+			                <h5 class="modal-title" id="multiRegisterLabel">일괄 등록</h5>
 			            </div>
-			            <div class="modal-body">
-			                <form class="form-valide" action="#" method="post">
-	                            <div class="form-group row">
-	                                <label class="col-lg-3 col-form-label" for="val-username">이름
-	                                </label>
-	                                <div class="col-lg-7">
-	                                    <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
-	                                </div>
+			            <form id="multiRegisterBtn" method="post" class="dropzone" action="${pageContext.request.contextPath}/multiRegister" enctype="multipart/form-data">
+				            <div class="form-group row ml-2 mt-3">
+	                            <label class="col-lg-3 col-form-label" for="val-username">프로젝트 명<br>(엑셀 시트명)
+	                            </label>
+	                            <div class="col-lg-7">
+	                                <input type="text" class="form-control" id="excelSheetName" name="excelSheetName" placeholder="프로젝트 명 입력">
 	                            </div>
-	                            <div class="form-group row">
-	                             <label class="col-lg-3 col-form-label" for="positionSelect">직책</label>
-	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="positionSelect" name="positionSelect">
-	                                     <option value="">직책 선택</option>
-	                                     <option value="html">사원</option>
-	                                     <option value="css">선임</option>
-	                                     <option value="javascript">대리</option>
-	                                     <option value="angular">과장</option>
-	                                     <option value="angular">차장</option>
-	                                     <option value="angular">부장</option>
-	                                     <option value="angular">이사</option>
-	                                     <option value="angular">상무</option>
-	                                     <option value="angular">사장</option>
-	                                     <option value="angular">고객</option>
-	                                 </select>
-	                             </div>
-	                            </div>
-	                            <div class="form-group row">
-	                                <label class="col-lg-3 col-form-label" for="phoneNumber">연락처 
-	                                </label>
-	                                <div class="col-lg-7">
-	                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="010-xxxx-xxxx">
-	                                </div>
-	                            </div>
-	                            <div class="form-group row">
-	                             <label class="col-lg-3 col-form-label" for="projectSelect">프로젝트 </label>
-	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="projectSelect" name="projectSelect">
-	                                     <option value="">프로젝트 선택</option>
-	                                     <option value="html">PMS 제작 프로젝트</option>
-	                                     <option value="css">프로젝트 2번째</option>
-	                                     <option value="javascript">본격 취업 프로젝트</option>
-	                                     <option value="angular">임시 프로젝트</option>
-	                                 </select>
-	                             </div>
-	                            </div>
-	                            <div class="form-group row">
-	                             <label class="col-lg-3 col-form-label" for="teamSelect">팀</label>
-	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="projectSelect" name="projectSelect">
-	                                     <option value="">팀 선택</option>
-	                                     <option value="html">기획 1팀</option>
-	                                     <option value="css">기획 2팀</option>
-	                                     <option value="javascript">개발 1팀</option>
-	                                     <option value="javascript">개발 2팀</option>
-	                                     <option value="javascript">개발 3팀</option>
-	                                     <option value="angular">QA 1팀</option>
-	                                     <option value="angular">QA 2팀</option>
-	                                     <option value="angular">고객</option>
-	                                 </select>
-	                             </div>
-	                            </div>
-	                            <div class="form-group row">
-	                             <label class="col-lg-3 col-form-label" for="authoritySelect">권한</label>
-	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="projectSelect" name="projectSelect">
-	                                     <option value="">권한 선택</option>
-	                                     <option value="html">팀원</option>
-	                                     <option value="css">팀장</option>
-	                                     <option value="javascript">관리자</option>
-	                                     <option value="angular">고객사</option>
-	                                 </select>
-	                             </div>
-	                            </div>
-	                        </form>
-			            </div>
+	                        </div>
+	                        <div class="modal-body">
+		                        <div class="form-group">
+		                            <div class="fallback">
+		                                <input class="l-border-1" name="file" type="file">
+		                            </div>
+		                        </div>
+				            </div>
+			            </form>
 			            <div class="modal-footer">
-			            	<button type="button" class="btn btn-primary">등록</button>
+			            	<button form="multiRegisterBtn" onclick="form.submit()" class="btn btn-primary" data-dismiss="modal">등록</button>
 			                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			            </div>
 			        </div>

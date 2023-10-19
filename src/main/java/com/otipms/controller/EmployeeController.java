@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/employeeManagement")
 public class EmployeeController {
 	
-	@RequestMapping("employeeList")
+	@RequestMapping("/employeeList")
 	public String employeeList() {
 		return "employeeManagement/employeeList";
 	}
 	
-	@RequestMapping("addAndModifyEmployee")
+	@RequestMapping("/addAndModifyEmployee")
 	public String addAndModifyEmployee() {
 		return "employeeManagement/addAndModifyEmployee";
 	}
