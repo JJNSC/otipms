@@ -20,9 +20,7 @@
 		<script src="${pageContext.request.contextPath}/resources/js/chat/layout-settings.js"></script>
 		
 		<!-- selector -->
-		<link href="${pageContext.request.contextPath}/resources/css/mail/prism.css" rel="stylesheet">
-		<script src="${pageContext.request.contextPath}/resources/js/mail/prism.js"></script>
-		<link href="${pageContext.request.contextPath}/resources/css/mail/select2.min.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/resources/css/chat/select2.min.css" rel="stylesheet">
 		<script src="${pageContext.request.contextPath}/resources/js/mail/select2.min.js"></script>
 		
 		
@@ -415,7 +413,7 @@
 	                    	<div>
 						        <label class="text-dark font-weight-medium">초대 인원</label>
 						        <div class="form-group">
-						        	<select class="js-example-basic-multiple form-control" name="select1[]">
+						        	<select class="js-example-basic-multiple form-control" name="select4[]">
 						            	<option>사원 김사원</option>
 						            	<option>대리 이대리</option>
 						            	<option>과장 박과장</option>
@@ -440,7 +438,9 @@
 				        	<script>
 							    $(document).ready(function () {
 							    	  var select2Multiple = $(".js-example-basic-multiple");
-							    	  select2Multiple.select2();
+							    	  select2Multiple.select2({
+								    	  dropdownParent: $('#singleRegister')
+							    	  });
 							    	});
 						    </script>
 					    </form>
