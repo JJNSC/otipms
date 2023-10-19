@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +14,8 @@
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
+    
+	<%-- <link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css"> --%>
 
 </head>
 
@@ -43,7 +46,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="inde">
+                <a href="index.html">
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/resources/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -86,7 +89,7 @@
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-email-outline"></i>
                                 <!-- <span class="badge gradient-1 badge-pill badge-primary">3</span> -->
-                                <span class="badge badge-pill badge-custom">3</span>
+                                <span class="badge gradient-1 badge-pill badge-primary badge-custom">3</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
@@ -143,7 +146,7 @@
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
                                 <!-- <span class="badge badge-pill gradient-2 badge-primary">3</span> -->
-                                <span class="badge badge-pill badge-custom">3</span>
+                                <span class="badge badge-pill gradient-2 badge-primary badge-custom">3</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
@@ -243,153 +246,6 @@
         ***********************************-->
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
-                <!-- <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
-                            <li><a href="./index-2.html">Home 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Blank</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
-                            <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                            <li><a href="./layout-vertical.html">Vertical</a></li>
-                            <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                            <li><a href="./layout-boxed.html">Boxed</a></li>
-                            <li><a href="./layout-wide.html">Wide</a></li>
-                            
-                            
-                            <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Apps</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="./chart-chartist.html">Chartist</a></li>
-                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="./chart-peity.html">Peity</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">UI Components</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-cards.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./uc-nestedable.html">Nestedable</a></li>
-                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                            <li><a href="./uc-toastr.html">Toastr</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="widgets.html" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
-                        </a>
-                    </li>
-                    <li class="nav-label">Forms</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                            <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Table</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Pages</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-lock.html">Lock Screen</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul> -->
                 <ul class="metismenu in" id="menu">
                     <li class="">
                         <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -424,10 +280,14 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">게시판</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="./form-basic.html">공지사항</a></li>
+                            <!-- <li><a href="./form-basic.html">공지사항</a></li>
                             <li><a href="./form-validation.html">질의 게시판</a></li>
                             <li><a href="./form-step.html">자유 게시판</a></li>
-                            <li><a href="./form-editor.html">팀 게시판</a></li>
+                            <li><a href="./form-editor.html">팀 게시판</a></li> -->
+                            <li><a href="${pageContext.request.contextPath}/infoBoard">공지사항</a></li>
+                            <li><a href="${pageContext.request.contextPath}/inquiryBoard">질의 게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/libertyBoard">자유 게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/teamBoard">팀 게시판</a></li>
                         </ul>
                     </li>
                     <li class="">
@@ -470,124 +330,138 @@
                 </div>
             </div>
             <!-- row -->
+
             <div class="container-fluid">
-                <div class="row">
+				<div class="row">
                     <!-- /# column -->
                     <div class="col">
                         <div class="card card-custom">
                             <div class="card-body">
-                                <div class="card-title">
+                            	<div class="card-title mb-1">
                                     <h4>공지사항</h4>
+                                    <%-- <h4>${boardType}</h4> --%>
                                 </div>
-                                <!-- <div class="row center-custom mb-3 pr-4">
-				                	<div class="col-10">
-				                	</div>
-									<div class="input-group mb-3 col-2 text-right">
-		                                <input type="text" class="form-control form-custom">
-		                                <div class="input-group-append">
-		                                    <button class="btn btn-primary" type="button">검색</button>
+                            	<div class="mt-4 pl-3 row" style="margin-bottom: 0.8rem;">
+                                    <h3 style="padding-top: 10px;">이것은 제목입니당</h3>
+                                    <!-- <span class="col-10 text-right">
+			                            <button type="button" class="btn btn-primary">등록</button>
+                                    </span> -->
+                                </div>
+                                <div class="row">
+                                	<div class="col-6">
+                                		<div class="d-flex align-items-center">
+		                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
+		                                    <div class="">
+		                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">김종진 (대리/개발1팀)</h6>
+		                                        <span class="text-muted font-14">  2023.10.18 16:13</span>
+		                                        &nbsp; <span class="text-muted font-14">조회 236</span>
+		                                    </div>
 		                                </div>
-		                            </div>
-				                </div> -->
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-custom">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
-                                                <th>작성일</th>
-                                                <th>조회수</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>공지사항 테스트 3</td>
-                                                <td>김종진</td>
-                                                <td>23.10.15</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>공지사항 테스트 2</td>
-                                                <td>김진성</td>
-                                                <td>23.10.15</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>공지사항 테스트 1</td>
-                                                <td>이은지</td>
-                                                <td>23.10.15</td>
-                                                <td>12345</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                	</div>
+                                	<div class="col-6 text-right">
+		                                <button type="button" class="btn mb-1 btn-light-custom">수정</button>
+	                                    <button type="button" class="btn mb-1 btn-danger">샥제</button>                                                                	
+                                	</div>
                                 </div>
+                                <div class="compose-content mt-3 pt-3" style="border-top: 1px solid #ebecef">
+                                   	내용~~
+                                   	<br/>
+                                   	다섯용~~
+                                   	<br/>
+                                   	내용~~
+                                   	<br/>
+                                   	외용~~
+                                   	<br/>
+                                </div>
+                                <div class="compose-content mt-3 pt-3" style="border-top: 1px solid #ebecef">
+	                                <div class="d-flex align-items-center">
+	                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
+	                                    <div class="">
+	                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">김종진 (대리/개발1팀)</h6>
+	                                        <div>감사합니다~</div>
+	                                    </div>
+	                                </div>
+	                                <div class="text-muted font-14" style="padding-left: 56px; padding-top: 7px;">  2023.10.18 16:13</div>
+                                </div>
+                                <div class="compose-content mt-3 pt-3" style="border-top: 1px solid #ebecef">
+	                                <div class="d-flex align-items-center">
+	                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
+	                                    <div class="">
+	                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">김종진 (대리/개발1팀)</h6>
+	                                        <div>감사합니다~</div>
+	                                    </div>
+	                                </div>
+	                                <div class="text-muted font-14" style="padding-left: 56px; padding-top: 7px;">  2023.10.18 16:13</div>
+                                </div>
+                                <%-- <div class="box-footer" style="">
+                                	<img class="img-responsive img-circle img-sm" src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="Alt Text" width="40px" height="40px">
+									<form action="#" method="post">
+										<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+									</form>
+								</div> --%>
+								<div class="CommentWriter">
+									<div class="comment_inbox">
+										<strong class="comment_inbox_name">이은지 (팀장/개발1팀)</strong>
+										<textarea placeholder="댓글을 남겨보세요" rows="1" class="comment_inbox_text" style="overflow: hidden; overflow-wrap: break-word; height: 17px; border: none; resize: none;"></textarea>
+										<!-- <text placeholder="댓글을 남겨보세요" rows="1" class="comment_inbox_text" style="overflow: hidden; overflow-wrap: break-word; height: 17px; border: none;"></text> -->
+										<!----><!---->
+									</div>
+									<div data-v-afadf0bc="" class="comment_attach">
+										<div data-v-afadf0bc="" class="attach_box">
+											<!-- <form action="#" class="dropzone">
+	                                            <div class="form-group mb-0">
+	                                                <div class="fallback">
+	                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
+	                                                </div>
+	                                            </div>
+	                                        </form> -->
+	                                        <form action="#" class="dropzone">
+											    <div class="form-group mb-0">
+											        <div class="fallback">
+											            <label for="fileInput" class="file-label">
+											                <i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i> <!-- 파일 아이콘 -->
+											            </label>
+											            <!-- <input id="fileInput" class="l-border-1" name="file" type="file" multiple="multiple" style="display: none;"> -->
+											            <input id="fileInput" class="l-border-1" name="file" type="file" multiple="multiple" style="display: none;">
+											        </div>
+											    </div>
+											</form>
+											<!-- <div class="pd-20 card-box mb-30">
+												<div class="clearfix mb-20">
+													<div class="pull-left">
+														<h4 class="text-blue h4">첨부파일</h4>
+													</div>
+												</div>
+												<form class="dropzone dz-clickable" action="#" id="my-awesome-dropzone">
+													<div class="dz-default dz-message">
+														<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
+													</div>
+												</form>
+											</div> -->
+											<script>
+											Dropzone.autoDiscover = false;
+											$(".dropzone").dropzone({
+											addRemoveLinks: true,
+											removedfile: function (file) {
+											var name = file.name;
+											var _ref;
+											return (_ref = file.previewElement) != null
+											? _ref.parentNode.removeChild(file.previewElement)
+											: void 0;
+											},
+											});
+											</script>
+										</div>
+										<div class="register_box">
+											<a href="#" role="button" class="button btn_register">등록</a>
+										</div>
+									</div>
+								</div>
                             </div>
-                            <div class="bootstrap-pagination">
-                           		<nav>
-			                        <ul class="pagination justify-content-center">
-			                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">이전</a>
-			                            </li>
-			                            <li class="page-item active"><a class="page-link" href="#">1</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">2</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">3</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">4</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">5</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">다음</a>
-			                            </li>
-			                        </ul>
-			                    </nav>
-			                </div>
-			                <div class="mb-3 text-right px-5">
-			                	<div class="dropdown d-inline-block">
-	                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false">게시글 + 댓글  </button>
-	                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">게시글 + 댓글  </a> 
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">제목만  </a> 
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">작성자  </a>
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">댓글 내용  </a>
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">댓글 작성자  </a>
-	                                </div>
-	                            </div>
-								<div class="input-group mb-3 input-group-custom">
-	                                <input type="text" class="form-control form-custom">
-	                                <div class="input-group-append">
-	                                    <button class="btn btn-primary" type="button">검색</button>
-	                                </div>
-	                            </div>
-	                            <div class="btn-write">
-	                            	<button type="button" class="btn btn-primary">글쓰기</button>
-	                            </div>
-			                </div>
                         </div>
                         <!-- /# card -->
                     </div>
                 </div>
-                
-                <!-- <div class="bootstrap-pagination">
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> -->
             </div>
             <!-- #/ container -->
         </div>
@@ -620,7 +494,9 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+    
+    <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
 </body>
 
 </html>
