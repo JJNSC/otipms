@@ -159,7 +159,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="${pageContext.request.contextPath}/resources/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -229,7 +229,7 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">게시판</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="./form-basic.html">공지사항</a></li>
+                            <li><a href="infoBoard">공지사항</a></li>
                             <li><a href="./form-validation.html">질의 게시판</a></li>
                             <li><a href="./form-step.html">자유 게시판</a></li>
                             <li><a href="./form-editor.html">팀 게시판</a></li>
