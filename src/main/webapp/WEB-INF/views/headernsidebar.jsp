@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!-- <div id="preloader">
+    <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
             </svg>
         </div>
-    </div> -->
+    </div>
     <div class="nav-header">
         <div class="brand-logo">
             <a href="${pageContext.request.contextPath}/index">
@@ -21,7 +21,6 @@
     </div>
         <div class="header">    
             <div class="header-content clearfix">
-                
                 <div class="nav-control">
                     <div class="hamburger">
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
@@ -168,11 +167,23 @@
                                             <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void()">
-                                                <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                            <a href="mail/receivedMail">
+                                                <i class="icon-envelope-open"></i>
+                                                <span>Inbox</span>
+                                                <div class="badge gradient-3 badge-pill gradient-1">
+                                                	3
+                                                </div>
                                             </a>
                                         </li>
-                                        
+                                        <li>
+                                            <a href="chat/chat">
+                                                <i class="icon-copy fa fa-comments-o"></i>
+                                                <span>Chat</span>
+                                                <div class="badge gradient-3 badge-pill gradient-1">
+                                                	5
+                                                </div>
+                                            </a>
+                                        </li>
                                         <hr class="my-2">
                                         <li>
                                             <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
