@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
             </svg>
         </div>
-    </div>
+    </div> -->
     <div class="nav-header">
         <div class="brand-logo">
             <a href="${pageContext.request.contextPath}/index">
@@ -241,8 +241,8 @@
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a href="projectManagement/projectList">프로젝트 관리</a></li>
-                            <li><a href="./ui-alert.html">팀 관리</a></li>
-                            <li><a href="./ui-badge.html">인력 관리</a></li>
+                            <li><a href="teamManagement/teamList">팀 관리</a></li>
+                            <li><a href="employeeManagement/employeeList">인력 관리</a></li>
                             <li><a href="./ui-button.html">권한 관리</a></li>
                             <li><a href="./ui-button-group.html">게시판 관리</a></li>
                         <!-- </ul>
