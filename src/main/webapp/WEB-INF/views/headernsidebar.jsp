@@ -167,7 +167,7 @@
                                             <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="mail/receivedMail">
+                                            <a href="javascript:void(window.open('mail/receivedMail','_blank','width=550px','height=480px'))">
                                                 <i class="icon-envelope-open"></i>
                                                 <span>Inbox</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
@@ -176,7 +176,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="chat/chat">
+                                            <a href="javascript:void(window.open('chat/chat','_blank','width=400px','height=300px'))">
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>Chat</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">

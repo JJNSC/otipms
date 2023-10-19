@@ -8,8 +8,8 @@
 
 		<!-- CSS -->
 		<link href="${pageContext.request.contextPath}/resources/css/chat/core.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/resources/css/chat/style.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/resources/css/chat/style.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/resources/css/chat/stylechat.css" rel="stylesheet"/>
 		<link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
 		
 		<!-- js -->
@@ -21,11 +21,6 @@
 	</head>
 	<body class="header-white sidebar-dark">
 		<div class="main-container">
-			<span class="pd-ltr-20 xs-pd-20-10">
-		       	<a href="#">
-		       		<button type="button" class="btn mb-1 btn-primary">새 채팅 만들기</button>
-		       	</a>
-	        </span>
 			<div class="pd-ltr-20 xs-pd-20-10">
 				<div class="min-height-200px">
 					<div class="bg-white border-radius-4 box-shadow mb-30">
@@ -35,6 +30,9 @@
 									<div class="chat-search">
 										<span class="icon-copy fa fa-search"></span>
 										<input type="text" placeholder="Search Contact" />
+										<img src="${pageContext.request.contextPath}/resources/images/chatplus.png" 
+											  style="width:35px;height:30px;margin-left:15px;margin-top:13px;cursor:pointer"
+										/>
 									</div>
 									<div
 										class="notification-list chat-notification-list customscroll"
