@@ -14,6 +14,17 @@
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
+	<style>
+		.fa-close {
+		  background-color: transparent;
+		}
+		
+		.paddingright{
+			padding-right:5%;
+		}
+		
+		
+	</style>	
 </head>
 
 <body>
@@ -436,9 +447,9 @@
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a href="${pageContext.request.contextPath}/projectManagement/projectList">프로젝트 관리</a></li>
-                            <li><a href="./ui-alert.html">팀 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/teamManagement/teamList">팀 관리</a></li>
                             <li><a href="./ui-badge.html">인력 관리</a></li>
-                            <li><a href="./ui-button.html">권한 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/authorityManagement/authorityList">권한 관리</a></li>
                             <li><a href="./ui-button-group.html">게시판 관리</a></li>
                         <!-- </ul>
                     </li>
@@ -448,7 +459,7 @@
                         </a>
                         <ul aria-expanded="false"> -->
                         </ul>
-                    </li>
+                     </li>
                 </ul>
             </div>
         </div>
@@ -473,52 +484,305 @@
            <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Default Tab</h4>
+                                <h4 class="card-title">팀 관리</h4>
+                                	<div style="float: right;">
+                                    	<a href="addAndModifyTeam">
+                                    		<button type="button" class="btn btn-primary" style="position:relative; bottom:20px; right:70px;">등록</button>
+                                    	</a>
+                                    </div>
                                 <!-- Nav tabs -->
                                 <div class="default-tab">
                                     <ul class="nav nav-tabs mb-3" role="tablist">
-                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#project1">PMS 제작 프로젝트</a>
                                         </li>
-                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project2">프로젝트 2번째</a>
                                         </li>
-                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contact">Contact</a>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project3">본격 취업 프로젝트</a>
                                         </li>
-                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#message">Message</a>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project4">임시 프로젝트123</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="home" role="tabpanel">
+                                        <div class="tab-pane fade show active" id="project1" role="tabpanel">
                                             <div class="p-t-15">
-                                                <h4>This is home title</h4>
-                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                            	 <div class="table-responsive">
+				                                    <table class="table table-hover table-custom" style="width:96%;">
+				                                        <thead>
+				                                            <tr>
+				                                                <th class="text-center">번호</th>
+				                                                <th>팀 명</th>
+				                                                <th>팀장</th>
+				                                                <th class="text-right ">수정</th>
+				                                                <th class="text-center ">삭제</th>
+				                                            </tr>
+				                                        </thead>
+				                                        <tbody>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">1</td>
+				                                                <td>
+																   개발 1팀
+																</td>
+				                                                <td>김종진</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">2</td>
+				                                                <td>
+																   개발 2팀
+																</td>
+				                                                <td>김진성</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">3</td>
+				                                                <td>
+																   개발 3팀
+																</td>
+				                                                <td>이은지</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                        </tbody>
+				                                    </table>
+				                                </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="profile">
+                                       	 <div class="tab-pane fade show" id="project2" role="tabpanel">
                                             <div class="p-t-15">
-                                                <h4>This is profile title</h4>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                            	 <div class="table-responsive">
+				                                    <table class="table table-hover table-custom" style="width:96%;">
+				                                        <thead>
+				                                            <tr>
+				                                                <th class="text-center">번호</th>
+				                                                <th>팀 명</th>
+				                                                <th>팀장</th>
+				                                                <th class="text-right ">수정</th>
+				                                                <th class="text-center ">삭제</th>
+				                                            </tr>
+				                                        </thead>
+				                                        <tbody>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">1</td>
+				                                                <td>
+																   QA 1팀
+																</td>
+				                                                <td>김종진</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">2</td>
+				                                                <td>
+																   개발 2팀
+																</td>
+				                                                <td>김진성</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">3</td>
+				                                                <td>
+																   기획 3팀
+																</td>
+				                                                <td>이은지</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                        </tbody>
+				                                    </table>
+				                                </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="contact">
+                                         <div class="tab-pane fade show" id="project3" role="tabpanel">
                                             <div class="p-t-15">
-                                                <h4>This is contact title</h4>
-                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                            	 <div class="table-responsive">
+				                                    <table class="table table-hover table-custom" style="width:96%;">
+				                                        <thead>
+				                                            <tr>
+				                                                <th class="text-center">번호</th>
+				                                                <th>팀 명</th>
+				                                                <th>팀장</th>
+				                                                <th class="text-right ">수정</th>
+				                                                <th class="text-center ">삭제</th>
+				                                            </tr>
+				                                        </thead>
+				                                        <tbody>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">1</td>
+				                                                <td>
+																   영업 1팀
+																</td>
+				                                                <td>김종진</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">2</td>
+				                                                <td>
+																   기획 2팀
+																</td>
+				                                                <td>김진성</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">3</td>
+				                                                <td>
+																   개발 3팀
+																</td>
+				                                                <td>이은지</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                        </tbody>
+				                                    </table>
+				                                </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="message">
+                                         <div class="tab-pane fade show" id="project4" role="tabpanel">
                                             <div class="p-t-15">
-                                                <h4>This is message title</h4>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                            	 <div class="table-responsive">
+				                                    <table class="table table-hover table-custom" style="width:96%;">
+				                                        <thead>
+				                                            <tr>
+				                                                <th class="text-center">번호</th>
+				                                                <th>팀 명</th>
+				                                                <th>팀장</th>
+				                                                <th class="text-right ">수정</th>
+				                                                <th class="text-center ">삭제</th>
+				                                            </tr>
+				                                        </thead>
+				                                        <tbody>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">1</td>
+				                                                <td>
+																   개발 4팀
+																</td>
+				                                                <td>김종진</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">2</td>
+				                                                <td>
+																   개발 5팀
+																</td>
+				                                                <td>김진성</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+				                                                <td class="text-center">3</td>
+				                                                <td>
+																   개발 6팀
+																</td>
+				                                                <td>이은지</td>
+					                                            <td class="text-right" style="padding-right:20px"> 
+					                                             	<a href="addAndModifyTeam">
+					                                            			<i class="fa fa-pencil color-muted"></i>
+					                                            		</a>
+					                                             </td>
+					                                             <td class="text-center"> 
+					                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+					                                             </td>
+				                                            </tr>
+				                                        </tbody>
+				                                    </table>
+				                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="modalGrid">
+	                        <div class="modal-dialog" role="document">
+	                            <div class="modal-content">
+	                                <div class="modal-header">
+	                                    <h5 class="modal-title">팀 삭제</h5>
+	                                </div>
+	                                <div class="modal-body">
+	                                    <div class="container-fluid">
+	                                        <div class="row">
+	                                        	해당 팀를 삭제하시겠습니까?
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="modal-footer">
+	                                    <button type="button" class="btn btn-primary">삭제</button>
+	                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	                                </div>
+	                            </div>
+	                        </div>
+                		</div>
                     </div>
             <!-- #/ container -->
         </div>

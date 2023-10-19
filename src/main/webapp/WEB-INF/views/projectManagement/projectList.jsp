@@ -461,9 +461,9 @@
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a href="${pageContext.request.contextPath}/projectManagement/projectList">프로젝트 관리</a></li>
-                            <li><a href="./ui-alert.html">팀 관리</a></li>
-                            <li><a href="./ui-badge.html">인력 관리</a></li>
-                            <li><a href="./ui-button.html">권한 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/teamManagement/teamList">팀 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/employeeManagement/employeeList">인력 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/authorityManagement/authorityList">권한 관리</a></li>
                             <li><a href="./ui-button-group.html">게시판 관리</a></li>
                         <!-- </ul>
                     </li>
@@ -724,6 +724,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
+    
+    
 
 </body>
 
