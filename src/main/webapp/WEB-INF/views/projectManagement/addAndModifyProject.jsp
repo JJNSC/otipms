@@ -473,7 +473,7 @@
             <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">프로젝트 등록</h4>
+                                <h4 class="card-title"><b>프로젝트 등록</b></h4>
                                 <div class="basic-form">
                                     <form>
                                         <div class="form-row">

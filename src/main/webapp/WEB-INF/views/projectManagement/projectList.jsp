@@ -11,7 +11,6 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/projectList.css" rel="stylesheet">
     
     <script>
@@ -36,6 +35,18 @@
 			padding-right:5%;
 		}
 		
+		.noHover{
+			background-color: #fff;
+		}
+		.noHover:hover{
+			background-color: #fff;
+		}
+		.no-left-border {
+		  border-left: none; /* 왼쪽 테두리 제거 */
+		}
+		.no-right-border {
+		  border-right: none; /* 왼쪽 테두리 제거 */
+		}
 		
 	</style>	
 
@@ -510,7 +521,7 @@
                                     </span>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-custom">
+                                    <table class="table table-custom">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">번호</th>
@@ -524,7 +535,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <tr class="reviewTitle table-hover " data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <td class="text-center">3</td>
                                                 <td>
 												   PMS 제작 프로젝트
@@ -548,29 +559,44 @@
 	                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
 	                                             </td>
                                             </tr>
-                                            <tr  style="background-color:#f3f3f3;" id="${review.reviewId }bottom">
-                         						<!-- <td style="padding-top :0px; padding-bottom :0px;"></td> -->
-									   			<td style="padding-top :0px; padding-bottom :0px;"colspan="6">
+                                            <tr style="background-color:#f3f3f3;" id="${review.reviewId }bottom">
+									   			<td style="padding-top :0px; padding-bottom :0px;"colspan="8">
 							                      	<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body mt-3" style="height:380px;">
-											            	<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
+											         	<div class="card card-body mt-3 noHover" style="height:200px;">
+		                                            		<table border="1" class="table-in-table">
+		                                            			<tr>
+		                                            				<td class="no-right-border col-md-9">
+		                                            					<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
+		                                            				</td>
+		                                            				<td class="no-right-border col-md-1">
+		                                            					<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i>
+		                                            				</td>
+		                                            				<td class="no-left-border col-md-2">
+		                                            					ㅁㅁㅁ
+		                                            				</td>
+		                                            			</tr>
+		                                            			<tr>
+		                                            				<td rowspan="2"class="no-right-border">
+		                                            				</td>
+		                                            				<td class="no-right-border">
+		                                            					<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i>
+		                                            				</td>
+		                                            				<td class="no-left-border">
+		                                            					ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
+		                                            				</td>
+		                                            			</tr>
+		                                            			<tr>
+		                                            				<td class="no-right-border">
+		                                            					<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i>
+		                                            				</td>
+		                                            				<td class="no-left-border">
+		                                            					ㅁㅁㅁㅁㅁ@ㅁㅁㅁㅁㅁ.ㅁㅁㅁ
+		                                            				</td>
+		                                            			</tr>
+		                                            		</table>
 											         	</div>
 											      	</div>
 									   			</td>
-									   			<td style="padding-top :0px; padding-bottom :0px;" colspan="2">
-									   				<div class="collapse" id="collapseExample${review.reviewId }">
-											         	<div class="card card-body  mt-3">
-											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i> <br> ㅁㅁㅁ-ㅁㅁㅁㅁ-ㅁㅁㅁㅁ
-											         	</div>
-											         	<div class="card card-body">
-											   				<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i> <br> ㅁㅁㅁ@ㅁㅁㅁㅁ.ㅁㅁㅁㅁ
-											         	</div>
-											      	</div>
-									   			</td>
-									   			
 											</tr>
                                              <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="reviewTitle${review.reviewId }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <td class="text-center">2</td>
@@ -641,7 +667,6 @@
                                                 </td>
                                             </tr>
                                              <tr  id="${review.reviewId }bottom">
-                                            	<td></td>
 									   			<td colspan="6">
 							                      	<div class="collapse" id="collapseExample${review.reviewId }">
 											         	<div class="card card-body mt-3" style="height:380px;">
@@ -650,7 +675,7 @@
 											      	</div>
 									   			</td>
 									   			<td>
-									   				<div class="collapse" id="collapseExample${review.reviewId }">
+									   				<div class="collapse" id="collapseExample${review.reviewId }"> 
 											         	<div class="card card-body  mt-3">
 											            	<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i> <br> ㅁㅁㅁ 
 											         	</div>
@@ -663,6 +688,7 @@
 											      	</div>
 									   				
 									   			</td>
+									   			
 											</tr>
                                         </tbody>
                                     </table>

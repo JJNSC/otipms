@@ -531,42 +531,42 @@
                                     </form>
                                 </div>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">팀장 검색</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label">직급</label>
-                                                            <select id="inputState" class="form-control">
-			                                                    <option selected="selected">직급 선택</option>
-			                                                    <option>상무</option>
-			                                                    <option>이사</option>
-			                                                    <option>부장</option>
-			                                                </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="message-text" class="col-form-label">직원 명</label> <!--직급 선택 x 시 disabled  -->
-                                                            <select id="inputState" class="form-control">
-			                                                    <option selected="selected">직원 명</option> <!-- 직급이 일치하는 사람들만 -->
-			                                                    <option>김종진</option>
-			                                                    <option>김진성</option>
-			                                                    <option>이은지</option>
-			                                                </select>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                    <button type="button" class="btn btn-primary">팀장 등록</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+	                                <div class="modal-dialog" role="document">
+	                                    <div class="modal-content">
+	                                        <div class="modal-header">
+	                                            <h5 class="modal-title" id="exampleModalLabel">팀장 검색</h5>
+	                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+	                                            </button>
+	                                        </div>
+	                                        <div class="modal-body">
+	                                            <form>
+	                                                <div class="form-group">
+	                                                    <label for="recipient-name" class="col-form-label">직급</label>
+	                                                    <select id="inputState" class="form-control">
+	                                               <option selected="selected">직급 선택</option>
+	                                               <option>상무</option>
+	                                               <option>이사</option>
+	                                               <option>부장</option>
+	                                           </select>
+	                                                </div>
+	                                                <div class="form-group">
+	                                                    <label for="message-text" class="col-form-label">직원 명</label> <!--직급 선택 x 시 disabled  -->
+	                                                    <select id="inputState" class="form-control">
+	                                               <option selected="selected">직원 명</option> <!-- 직급이 일치하는 사람들만 -->
+	                                               <option>김종진</option>
+	                                               <option>김진성</option>
+	                                               <option>이은지</option>
+	                                           </select>
+	                                                </div>
+	                                            </form>
+	                                        </div>
+	                                        <div class="modal-footer">
+	                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	                                            <button type="button" class="btn btn-primary">팀장 등록</button>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
                             </div>
                         </div>
                     </div>

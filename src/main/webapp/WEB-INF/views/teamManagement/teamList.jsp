@@ -490,6 +490,9 @@
                                     		<button type="button" class="btn btn-primary" style="position:relative; bottom:20px; right:70px;">등록</button>
                                     	</a>
                                     </div>
+                                    <span style="float: right;">
+	                               		<button type="button" class="btn btn-primary" style="position:relative; right:40px;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">등록-modal</button>
+	                                </span>
                                 <!-- Nav tabs -->
                                 <div class="default-tab">
                                     <ul class="nav nav-tabs mb-3" role="tablist">
@@ -784,6 +787,99 @@
 	                        </div>
                 		</div>
                     </div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					    <div class="modal-dialog" role="document">
+					        <div class="modal-content">
+					            <div class="modal-header">
+					                <h5 class="modal-title" id="exampleModalLabel">담당자 검색</h5>
+					                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+					                </button>
+					            </div>
+					            <div class="modal-body">
+					                <div class="basic-form">
+                                    <form>
+                                        <div class="form-row">
+	                                        <div class="form-group col-md-10">
+	                                            <label>프로젝트 명</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected="selected">프로젝트 선택</option>
+                                                    <option>PMS 제작 프로젝트</option>
+                                                    <option>프로젝트 2번째</option>
+                                                    <option>본격 취업 프로젝트</option>
+                                                </select>
+	                                        </div>
+	                                    </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-10">
+                                                <label>팀 명</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-10">
+                                                <label>팀장 (PL)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                                <label class="sr-only">팀장 검색</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                        	<button type="button" class="btn" style="padding:0px; background-color: #e9ecef;" data-toggle="modal" data-target="#selectPL" data-whatever="@mdo"><i class="icon-copy fa fa-search" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Username">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            
+                                        </div>
+                                        <button type="submit" class="btn btn-dark">등록하기</button>
+                                    </form>
+                                </div>
+                                <div class="modal fade" id="selectPL" tabindex="-1" role="dialog" aria-labelledby="selectPLLabel" aria-hidden="true">
+	                                <div class="modal-dialog" role="document">
+	                                    <div class="modal-content">
+	                                        <div class="modal-header">
+	                                            <h5 class="modal-title" id="selectPLLabel">팀장 검색</h5>
+	                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+	                                            </button>
+	                                        </div>
+	                                        <div class="modal-body">
+	                                            <form>
+	                                                <div class="form-group">
+	                                                    <label for="recipient-name" class="col-form-label">직급</label>
+	                                                    <select id="inputState" class="form-control">
+			                                               <option selected="selected">직급 선택</option>
+			                                               <option>상무</option>
+			                                               <option>이사</option>
+			                                               <option>부장</option>
+			                                           </select>
+	                                                </div>
+	                                                <div class="form-group">
+	                                                    <label for="message-text" class="col-form-label">직원 명</label> <!--직급 선택 x 시 disabled  -->
+	                                                    <select id="inputState" class="form-control">
+			                                               <option selected="selected">직원 명</option> <!-- 직급이 일치하는 사람들만 -->
+			                                               <option>김종진</option>
+			                                               <option>김진성</option>
+			                                               <option>이은지</option>
+			                                           </select>
+	                                                </div>
+	                                            </form>
+	                                        </div>
+	                                        <div class="modal-footer">
+	                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	                                            <button type="button" class="btn btn-primary">팀장 등록</button>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+					            </div>
+					            <div class="modal-footer">
+					            	<button type="button" class="btn btn-primary">등록</button>
+					                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+					            </div>
+					        </div>
+					    </div>
+					</div>
             <!-- #/ container -->
         </div>
         <!--**********************************
