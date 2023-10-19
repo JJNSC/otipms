@@ -13,25 +13,35 @@
 		<link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
 		
 		<!-- js -->
+		<script src="${pageContext.request.contextPath}/resources/js/chat/chat.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/chat/core.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/chat/script.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/chat/process.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/chat/layout-settings.js"></script>
+		
+		<!-- selector -->
+		<link href="${pageContext.request.contextPath}/resources/css/mail/prism.css" rel="stylesheet">
+		<script src="${pageContext.request.contextPath}/resources/js/mail/prism.js"></script>
+		<link href="${pageContext.request.contextPath}/resources/css/mail/select2.min.css" rel="stylesheet">
+		<script src="${pageContext.request.contextPath}/resources/js/mail/select2.min.js"></script>
+		
 		
 	</head>
 	<body class="header-white sidebar-dark">
 		<div class="main-container">
 			<div class="pd-ltr-20 xs-pd-20-10">
 				<div class="min-height-200px">
-					<div class="bg-white border-radius-4 box-shadow mb-30">
-						<div class="row no-gutters">
-							<div class="col-lg-3 col-md-4 col-sm-12">
+					<div class="bg-white border-radius-4 box-shadow mb-30" style="max-height:980px;">
+						<div class="row no-gutters" style="max-height:980px;">
+							<div class="col-lg-3 col-md-4 col-sm-12" style="max-height:980px;">
 								<div class="chat-list bg-light-gray">
 									<div class="chat-search">
 										<span class="icon-copy fa fa-search"></span>
 										<input type="text" placeholder="Search Contact" />
 										<img src="${pageContext.request.contextPath}/resources/images/chatplus.png" 
 											  style="width:35px;height:30px;margin-left:15px;margin-top:13px;cursor:pointer"
+											  type="button"
+											  data-toggle="modal" data-target="#singleRegister" data-whatever="@mdo"
 										/>
 									</div>
 									<div
@@ -159,7 +169,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-9 col-md-8 col-sm-12">
+							<div class="col-lg-9 col-md-8 col-sm-12" style="max-height:980px;">
 								<div class="chat-detail">
 									<div class="chat-profile-header clearfix">
 										<div class="left">
@@ -393,6 +403,54 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="modal fade" id="singleRegister" tabindex="-1" role="dialog" aria-labelledby="singleRegisterLabel" aria-hidden="true">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="singleRegisterLabel">새 채팅방 만들기</h5>
+		            </div>
+		            <div class="modal-body">
+	                    <form action="#">
+	                    	<div>
+						        <label class="text-dark font-weight-medium">초대 인원</label>
+						        <div class="form-group">
+						        	<select class="js-example-basic-multiple form-control" name="select1[]">
+						            	<option>사원 김사원</option>
+						            	<option>대리 이대리</option>
+						            	<option>과장 박과장</option>
+						            	<option>차장 최차창</option>
+						            	<option>부장 정부장</option>
+						            	<option>이사 김이사</option>
+						            	<option>사원 김사원2</option>
+						            	<option>대리 이대리2</option>
+						            	<option>과장 박과장2</option>
+						            	<option>차장 최차창2</option>
+						            	<option>부장 정부장2</option>
+						            	<option>이사 김이사2</option>
+						            	<option>사원 김사원3</option>
+						            	<option>대리 이대리3</option>
+						            	<option>과장 박과장3</option>
+						            	<option>차장 최차창3</option>
+						            	<option>부장 정부장3</option>
+						            	<option>이사 김이사3</option>
+						        	</select>
+						        </div>
+						    </div>
+				        	<script>
+							    $(document).ready(function () {
+							    	  var select2Multiple = $(".js-example-basic-multiple");
+							    	  select2Multiple.select2();
+							    	});
+						    </script>
+					    </form>
+					</div>
+		            <div class="modal-footer">
+		            	<button type="button" class="btn btn-primary">만들기</button>
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		            </div>
+		        </div>
+		    </div>
 		</div>
 	</body>
 </html>

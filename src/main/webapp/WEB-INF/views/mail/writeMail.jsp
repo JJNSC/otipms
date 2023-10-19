@@ -29,8 +29,8 @@
 	
 	<!-- selector -->
 	<link href="${pageContext.request.contextPath}/resources/css/mail/prism.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/mail/select2.min.css" rel="stylesheet">
 	<script src="${pageContext.request.contextPath}/resources/js/mail/prism.js"></script>
+	<link href="${pageContext.request.contextPath}/resources/css/mail/select2.min.css" rel="stylesheet">
 	<script src="${pageContext.request.contextPath}/resources/js/mail/select2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/mail/custom.js"></script>
 </head>

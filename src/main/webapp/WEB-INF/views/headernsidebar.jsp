@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
     <div class="nav-header">
         <div class="brand-logo">
             <a href="${pageContext.request.contextPath}/index">
@@ -167,7 +160,7 @@
                                             <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('mail/receivedMail','_blank','width=550px','height=480px'))">
+                                            <a href="javascript:void(window.open('mail/receivedMail','_blank','width=920, height=680, left=800, top=30'))">
                                                 <i class="icon-envelope-open"></i>
                                                 <span>Inbox</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
@@ -176,7 +169,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('chat/chat','_blank','width=400px','height=300px'))">
+                                            <a href="javascript:void(window.open('chat/chat', '_blank', 'width=684, height=950, left=1000, top=30'))">
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>Chat</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
