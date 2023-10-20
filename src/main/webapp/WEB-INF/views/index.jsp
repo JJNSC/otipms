@@ -25,7 +25,7 @@
 </head>
 
 <body>
-	<div id="main-wrapper" class="show menu-toggle">
+	<div id="main-wrapper" class="show">
 	<%@include file="/WEB-INF/views/headernsidebar.jsp" %>
         <!--**********************************
             Content body start
