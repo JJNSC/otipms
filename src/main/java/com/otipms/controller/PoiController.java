@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.interceptor.Login;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 public class PoiController {
 	
+	@Login
 	@PostMapping("/multiRegister")
 	public String multiRegister(@RequestParam("file") MultipartFile excelFile, @RequestParam("excelSheetName") String excelSheetName) throws IOException { //파일 경로, 파일 명, 시트명 받아와야함.
 		log.info("엑셀 파일 : "+excelFile.getOriginalFilename());
@@ -46,7 +49,7 @@ public class PoiController {
 	    }
 	    
 	    
-	
+	    System.out.println(excelFile.getOriginalFilename());
 	    
 	    //XSSFSheet 
 	

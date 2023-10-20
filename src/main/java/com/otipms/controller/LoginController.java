@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.otipms.dto.Employee;
+import com.otipms.interceptor.Login;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.EmployeeService.LoginResult;
 
@@ -47,6 +48,7 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
+	@Login
 	@RequestMapping("/index")
 	public String index() {
 		log.info("dd");

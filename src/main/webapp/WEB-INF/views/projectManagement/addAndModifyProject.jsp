@@ -503,28 +503,34 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>개요</label>
+                                            <label>프로젝트 개요</label>
                                             <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="5" placeholder="What would you like to see?"></textarea>
                                         </div>
+                                        <div class="form-row">
+	                                        <div class="form-group col-md-4">
+	                                            <label>고객사 명 (Customer)</label>
+	                                            <input type="text" class="form-control" placeholder="고객사 명 입력">
+	                                        </div>
+                                        </div>
                                         <div class="form-group col-md-4" style="padding-left:0px;">
-                                                <label>고객사 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
-                                                <label class="sr-only">고객사 검색</label>
-                                                <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                        	<button type="button" class="btn" style="padding:0px; background-color: #e9ecef;" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo"><i class="icon-copy fa fa-search" aria-hidden="true"></i></button>
-                                                        </div>
+                                            <label>고객 명 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                            <label class="sr-only">고객사 검색</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                    	<button type="button" class="btn" style="padding:0px; background-color: #e9ecef;" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo"><i class="icon-copy fa fa-search" aria-hidden="true"></i></button>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Username">
                                                 </div>
+                                                <input type="text" class="form-control" placeholder="Username">
                                             </div>
+                                        </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
-                                                <label>고객사 연락처</label>
+                                                <label>고객 연락처</label>
                                                 <input type="text" class="form-control">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label>고객사 이메일</label>
+                                                <label>고객 이메일</label>
                                                 <input type="text" class="form-control">
                                             </div>
                                            
