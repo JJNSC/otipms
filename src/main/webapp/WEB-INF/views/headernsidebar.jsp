@@ -157,7 +157,7 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="profile"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void(window.open('mail/receivedMail','_blank','width=920, height=680, left=800, top=30'))">
@@ -204,7 +204,7 @@
                         <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
                         </a> -->
-                        <a class="" href="schedule" aria-expanded="false">
+                        <a class="" href="mySchedule" aria-expanded="false">
                             <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
                         </a>
                     </li>

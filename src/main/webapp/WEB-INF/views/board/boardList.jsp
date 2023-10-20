@@ -45,12 +45,19 @@
                                 </div>
 				                <c:if test="${boardType eq '질의 게시판'}">
 	                                <div class="dropdown d-inline-block my-1">
-		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">시스템 관리 문의  </button>
+		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownCategoryFilter" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">시스템 관리 문의  </button>
 		                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-		                                	<a class="dropdown-item" href="#" onclick="filter(this)">시스템 관리 문의  </a> 
-		                                	<a class="dropdown-item" href="#" onclick="filter(this)">아키텍처 문의  </a> 
-		                                	<a class="dropdown-item" href="#" onclick="filter(this)">DBA 문의  </a>
+		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">시스템 관리 문의  </a> 
+		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">아키텍처 문의  </a> 
+		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">DBA 문의  </a>
 		                                </div>
+		                                <script type="text/javascript">
+		                                function categoryFilter(selectedItem) {
+		                                    /* $(".dropdownCategoryFilter").innerHTML = selectedItem.innerHTML; */
+		                                	var dropdownButton = document.querySelector(".dropdownCategoryFilter");
+		                                    dropdownButton.innerHTML = selectedItem.innerHTML;
+		                                }
+	                                </script>
 		                            </div>
 		                        </c:if>
                                 <div class="table-responsive">
@@ -65,7 +72,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                       		<tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
                                                 <th>3</th>
                                                 <td>
                                                 	게시글 테스트 3 게시글 테스트 3 게시글 테스트 3 게시글 테스트 3
@@ -78,7 +85,7 @@
                                                 <td>23.10.15</td>
                                                 <td>12345</td>
                                             </tr>
-                                            <tr>
+                                            <tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
                                                 <th>2</th>
                                                 <td>
                                                 	게시글 테스트 2 게시글 테스트 2
@@ -89,7 +96,7 @@
                                                 <td>23.10.15</td>
                                                 <td>12345</td>
                                             </tr>
-                                            <tr>
+                                            <tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
                                                 <th>1</th>
                                                 <td>
                                                 	게시글 테스트 1
@@ -128,14 +135,21 @@
 			                </div>
 			                <div class="mb-3 text-right px-5">
 			                	<div class="dropdown d-inline-block">
-	                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false">게시글 + 댓글  </button>
+	                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownSearchFilter" data-toggle="dropdown" aria-expanded="false">게시글 + 댓글  </button>
 	                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">게시글 + 댓글  </a> 
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">제목만  </a> 
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">작성자  </a>
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">댓글 내용  </a>
-	                                	<a class="dropdown-item" href="#" onclick="filter(this)">댓글 작성자  </a>
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">게시글 + 댓글  </a> 
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">제목만  </a> 
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">작성자  </a>
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">댓글 내용  </a>
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">댓글 작성자  </a>
 	                                </div>
+	                                <script type="text/javascript">
+		                                function searchFilter(selectedItem) {
+		                                    /* $(".dropdownSearchFilter").innerHTML = selectedItem.innerHTML; */
+		                                	var dropdownButton = document.querySelector(".dropdownSearchFilter");
+		                                    dropdownButton.innerHTML = selectedItem.innerHTML;
+		                                }
+	                                </script>
 	                            </div>
 								<div class="input-group mb-3 input-group-custom">
 	                                <input type="text" class="form-control form-custom">
@@ -200,7 +214,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/board.js"></script> --%>
 </body>
 
 </html>

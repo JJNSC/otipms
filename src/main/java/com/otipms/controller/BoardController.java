@@ -53,8 +53,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/detailBoard")
-	public String detailBoard() {
+	public String detailBoard(String boardType, Model model) {
 		log.info("상세글");
+		model.addAttribute("boardType", boardType);
 		return "board/detailBoard";
 	}
 	
