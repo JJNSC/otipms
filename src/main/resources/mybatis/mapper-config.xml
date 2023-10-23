@@ -6,7 +6,8 @@
 
 	<typeAliases>
 		<typeAlias alias="Employee" type="com.otipms.dto.Employee"/>
-
+		<typeAlias alias="CC" type="com.otipms.dto.CC"/>
+		<typeAlias alias="Message" type="com.otipms.dto.Message"/>
 	</typeAliases>
 
 </configuration>
