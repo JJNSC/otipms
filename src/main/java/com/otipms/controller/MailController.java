@@ -109,4 +109,12 @@ public class MailController {
 		log.info("dd");
 		return "mail/reloadTrashMail";
 	}
+	
+	//사원 찾기
+	@Login
+	@RequestMapping("/findEmployee")
+	public String findEmployee() {
+		log.info("dd");
+		return "mail/findEmployee";
+	}
 }
