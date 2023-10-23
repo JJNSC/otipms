@@ -36,7 +36,6 @@
         <file-size-threshold>1048576</file-size-threshold>
      </multipart-config>
   </servlet>
-  
   <servlet-mapping>
      <servlet-name>DispatcherServlet</servlet-name>
      <url-pattern>/</url-pattern>

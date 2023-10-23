@@ -28,6 +28,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 			
 			//로그인이 된 상태라면
 			if(employee != null) {
+				session.setAttribute("loginUser", employee);
 				return true;
 			}else {
 				response.sendRedirect(request.getContextPath() + "/views/login");
