@@ -29,6 +29,11 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
 	@RequestMapping("/imsiMakeId")
 	public String imsiMakeId() {
 		Employee employee = new Employee();

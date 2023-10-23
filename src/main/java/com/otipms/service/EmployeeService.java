@@ -11,4 +11,6 @@ public interface EmployeeService {
 	public void AddEmploy(Employee employee);
 	public LoginResult login(Employee employee);
 	public Employee getEmployeeInfo(int empId);
+	public int getTeamNo(String teamName);
+	public int checkEmployeeByTel(String empTel);
 }

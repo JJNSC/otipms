@@ -2,15 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.otipms.dao.EmployeeDao">
 	<insert id="insertEmployee" parameterType="Employee">	
-		INSERT INTO emp (EmpId, EmpPW, EmpName, EmpRank) VALUES (#{empId}, #{empPw}, #{empName}, #{empRank})
+		<selectKey keyProperty="empId" resultType="int" order="BEFORE">
+			select emp_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
+		</selectKey>
+		INSERT INTO emp (EmpId, EmpPW, EmpName, EmpRank) VALUES (TO_CHAR(SYSDATE, 'YY') ||0||0|| #{empId}, #{empPw}, #{empName}, #{empRank})
 	</insert>
 	
 	<insert id="insertEmployeeInfo" parameterType="Employee">	
-		INSERT INTO empInfo (empId, RoleNo, TeamNo, empTel, EmpEmail, EmpDisabled) VALUES (#{empId}, #{roleNo}, #{teamNo}, #{empTel}, #{empEmail}, #{empDisabled})
+		INSERT INTO empInfo (empId, RoleNo, TeamNo, empTel, EmpDisabled) VALUES (#{empId}, #{roleNo}, #{teamNo}, #{empTel}, 0)
 	</insert>
 	
 	<select id="selectByEmployeeId" parameterType="int" resultType="Employee">
 		select * from emp where empId = #{empId}
+	</select>
+	
+	<select id="getTeamNoByTeamName" parameterType="String" resultType="int">
+		select teamNo from team where teamName=#{teamName}
+	</select>
+	
+	<select id="checkEmployeeByTel" parameterType="String" resultType="int">
+		select count(*) from empInfo where empTel=#{empTel}
 	</select>
 
 </mapper>

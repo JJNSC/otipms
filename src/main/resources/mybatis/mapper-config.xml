@@ -6,6 +6,7 @@
 
 	<typeAliases>
 		<typeAlias alias="Employee" type="com.otipms.dto.Employee"/>
+		<typeAlias alias="Project" type="com.otipms.dto.Project"/>
 
 	</typeAliases>
 
