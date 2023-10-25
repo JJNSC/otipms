@@ -2,6 +2,7 @@ package com.otipms.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -60,6 +61,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public int checkEmployeeByTel(String empTel) {
 		return employeeDao.checkEmployeeByTel(empTel);
+	}
+	
+	//인력 찾기(전체 인원 찾기)
+	@Override
+	public List<Employee> getAllEmployee() {
+		return employeeDao.selectAllEmployee();
 	}
 
 }

@@ -112,10 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
             
             const checkbox = row.querySelector("input[type='checkbox']");
-            employeeCheckboxes.push(checkbox); // 배열에 체크박스 추가
+            // 배열에 체크박스 추가
+            employeeCheckboxes.push(checkbox);
 
             checkbox.addEventListener("change", function () {
-                syncSelectAllCheckbox(); // 각 체크박스 상태가 변경될 때 selectAllCheckbox 동기화
+            	// 각 체크박스 상태가 변경될 때 selectAllCheckbox 동기화
+            	syncSelectAllCheckbox();
             });
             
             employeeList.appendChild(row);
@@ -216,28 +218,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
 function sendSelectedEmployees() {
-    const selectedEmployees = []; // 선택한 사원 정보를 저장할 배열
+	// 선택한 사원 정보를 저장할 배열
+    var selectedEmployees = []; 
 
     // 선택한 사원 정보를 수집
-    const checkboxes = document.querySelectorAll("#employee-list input[type='checkbox']:checked");
+    var checkboxes = document.querySelectorAll("#employee-list input[type='checkbox']:checked");
     checkboxes.forEach(function (checkbox) {
-        const row = checkbox.parentElement.parentElement;
-        const position = row.cells[3].textContent;
-        const name = row.cells[4].textContent;
+        var row = checkbox.parentElement.parentElement;
+        var position = row.cells[3].textContent;
+        var name = row.cells[4].textContent;
         selectedEmployees.push({ position, name });
     });
 
     // 선택한 라디오 버튼의 값을 가져오기
-    const recipientTypeInput = document.querySelector("input[name='recipient']:checked");
-    const recipientType = recipientTypeInput ? recipientTypeInput.value : "Recipient"; // 기본값: 수신
-
-    // writeMail.jsp에 선택한 사원 정보 전달
-    const opener = window.opener;
+    var recipientTypeInput = document.querySelector("input[name='recipient']:checked");
+    var recipientType = recipientTypeInput ? recipientTypeInput.value : "Recipient";
+    // 쪽지 쓰기에 선택한 사원 정보 전달
+    var opener = window.opener;
     if (opener) {
         opener.receiveSelectedEmployees(selectedEmployees, recipientType);
-        window.close(); // 창 닫기
+        window.close(); 
     }
 }
 

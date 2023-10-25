@@ -9,5 +9,10 @@
 		 values (#{teamNo},#{projectNo},#{teamName})
 	</insert>
 	
-
+	<select id="selectTeamByProjectNo" parameterType="int" resultType="Team">
+		select *
+		    from team
+		    where projectNo = #{projectNo}
+		    order by teamNo;
+	</select>
 </mapper>

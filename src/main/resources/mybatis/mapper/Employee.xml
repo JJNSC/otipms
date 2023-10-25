@@ -31,8 +31,22 @@
 		select teamNo from team where teamName=#{teamName}
 	</select>
 	
+	<select id="getEmployeeByTeamNo" parameterType="int" resultType="Employee">
+		select *
+			from emp e, empinfo ei
+			where e.empId = ei.empId and teamNo = #{teamNo}
+	</select>
+	
 	<select id="checkEmployeeByTel" parameterType="String" resultType="int">
 		select count(*) from empInfo where empTel=#{empTel}
+	</select>
+	
+	<select id="selectAllEmployee" resultType="Employee">
+		select p.projectName, t.teamName, e.empRank, e.empName
+		    from emp e, empinfo ei, team t, project p
+		    where e.empId = ei.empId
+		        and p.projectNo = t.projectNo
+		        and t.teamNo = ei.teamNo
 	</select>
 
 </mapper>
