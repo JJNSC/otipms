@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.otipms.dao.ProjectDao">
+	
 	<insert id="addProject" parameterType="Project">	
 		<selectKey keyProperty="projectNo" resultType="int" order="BEFORE">
 			select project_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
@@ -9,6 +10,7 @@
 		 values (#{projectNo},#{projectName},#{projectStartDate},#{projectEndDate},#{projectStatus},#{projectCompanyName}, #{projectContent},#{projectDeleted},#{empId})
 	</insert>
 	
+	<!-- 모든 프로젝트 select -->
 	<select id="selectAllProject" resultType="Project">
 		select * from project where projectNo >0 order by projectNo desc
 	</select>
@@ -23,5 +25,6 @@
 	<select id="selectProjectByProjectNo" parameterType="int" resultType="Project">
 		select * from project where projectNo = #{projectNo}
 	</select>
-
+	
+	
 </mapper>

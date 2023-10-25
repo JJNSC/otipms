@@ -41,7 +41,7 @@ public class ProjectController {
 			Employee employee = new Employee();
 			int projectNo = project.getProjectNo();
 			employee.setProjectNo(projectNo);
-			employee.setRoleNo(1);
+			employee.setRole("ROLE_PM");
 			
 			//해당 프로젝트당 PM 이름
 			Employee PMINfo = projectService.getEmployeeInfoByProjectNoAndRoleNo(employee);
@@ -55,7 +55,7 @@ public class ProjectController {
 			
 			
 			//해당 프로젝트당 고객 정보(고객명,연락처,이메일)
-			employee.setRoleNo(4);
+			employee.setRole("ROLE_CLIENT");
 			Employee customerInfo = projectService.getEmployeeInfoByProjectNoAndRoleNo(employee);
 			if( customerInfo==null ||customerInfo.equals(null)) {
 				Employee noInfo =new Employee();

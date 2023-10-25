@@ -1,5 +1,7 @@
 package com.otipms.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.otipms.dto.Employee;
@@ -11,4 +13,6 @@ public interface EmployeeDao {
 	public Employee selectByEmployeeId(int empId);
 	public int getTeamNoByTeamName(String teamName);
 	public int checkEmployeeByTel(String empTel);
+	public Employee getEmployeeByTeamNo(int teamNo);
+	public List<Employee> selectAllEmployee();
 }

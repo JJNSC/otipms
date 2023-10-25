@@ -59,7 +59,7 @@ public class LoginController {
 	}
 
 	
-	@RequestMapping("/imsiMakeId")
+	/*@RequestMapping("/imsiMakeId")
 	public String imsiMakeId() {
 		Employee employee = new Employee();
 		employee.setEmpId(1020000);
@@ -76,7 +76,7 @@ public class LoginController {
 		log.info("employee : " + employee);
 		employeeService.AddEmploy(employee);
 		return "redirect:/";
-	}
+	}*/
 	
 	@Login
 	@RequestMapping("/index")

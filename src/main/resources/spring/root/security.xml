@@ -99,10 +99,9 @@
 		  class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
 		<property name="hierarchy">
 			<value>
-				ADMIN > PM
-				PM > PL
-				PL > PE
-				PE > CLIENT
+				ROLE_ADMIN > ROLE_PM
+				ROLE_PM > ROLE_PE
+				ROLE_PE > ROLE_CLIENT
 			</value>
 		</property>
 	</bean>	

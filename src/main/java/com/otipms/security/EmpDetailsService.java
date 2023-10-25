@@ -36,7 +36,7 @@ public class EmpDetailsService implements UserDetailsService {
 		authorities가 리스트인 거고, add할 때도 여러번 해야 함 !
 		*/
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(employee.getRoleName()));
+		authorities.add(new SimpleGrantedAuthority(employee.getRole()));
 		
 		EmpDetails employeeDetails = new EmpDetails(employee, authorities);
 		return employeeDetails;
