@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>막내온탑 ㅡㅅㅡ</title>
+    <title>otipms</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     <!-- Custom Stylesheet -->
@@ -42,8 +42,13 @@
                                     <h4>개인 일정</h4>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 mt-5">
-                                        <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> Create New</a>
+                                    <div class="col-md-8">
+                                        <div class="card-box m-b-50">
+                                            <div id="calendar"></div>
+                                        </div>
+                                    </div>
+									<div class="col-lg-4 mt-5">
+                                        <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> 일정 추가</a>
                                         <div id="external-events" class="m-t-20">
                                             <p>Drag and drop your event or click in the calendar</p>
                                             <div class="external-event bg-primary text-white" data-class="bg-primary"><i class="fa fa-move"></i>New Theme Release</div>
@@ -54,22 +59,16 @@
                                         <!-- checkbox -->
                                         <div class="checkbox m-t-40">
                                             <input id="drop-remove" type="checkbox">
-                                            <label for="drop-remove">Remove after drop</label>
+                                            <label for="drop-remove">&nbsp; 드롭 후 제거</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="card-box m-b-50">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
-
                                     <!-- end col -->
                                     <!-- BEGIN MODAL -->
                                     <div class="modal fade none-border" id="event-modal">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title"><strong>Add New Event</strong></h4>
+                                                    <h4 class="modal-title"><strong>일정</strong></h4>
                                                 </div>
                                                 <div class="modal-body"></div>
                                                 <div class="modal-footer">
@@ -85,7 +84,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title"><strong>Add a category</strong></h4>
+                                                    <h4 class="modal-title"><strong>일정 추가</strong></h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form>
@@ -161,6 +160,10 @@
     <script src="${pageContext.request.contextPath}/resources/plugins/moment/moment.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/fullcalendar/js/fullcalendar.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/plugins-init/fullcalendar-init.js"></script>
+    
+    <script>
+		document.querySelector('.fc-view.fc-month-view.fc-basic-view').style.overflowY='hidden';
+    </script>
 
 </body>
 

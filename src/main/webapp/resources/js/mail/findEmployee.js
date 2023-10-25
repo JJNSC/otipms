@@ -1,5 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const projectDropdown = document.getElementById("project-dropdown");
+	
+	$.ajax({
+	    url: 'http://localhost:8080/otipms/api/employeeData', // API 엔드포인트 URL
+	    type: 'GET',
+	    dataType: 'json',
+	    success: function (data) {
+	        var employeeData = data.employeeData;
+	        var projectData = data.projectData;
+	        console.log(employeeData);
+	        console.log(projectData);
+	        console.log(data.teamData);
+	    },
+	    error: function (error) {
+	        console.log(error);
+	    }
+	});
+	
+	const projectDropdown = document.getElementById("project-dropdown");
     const teamDropdown = document.getElementById("team-dropdown");
     const positionDropdown = document.getElementById("position-dropdown");
     const employeeList = document.getElementById("employee-list");
@@ -9,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let employeeCheckboxes = [];
     
     const employeeData = [
-    	{ project: "프로젝트 1", team: "팀 1", position: "사원", name: "김사원" },
+    	  { teamName: "팀 1", empRank: "사원", empName: "김사원", projectName: "프로젝트 1" },
     	  { project: "프로젝트 1", team: "팀 2", position: "대리", name: "박대리" },
     	  { project: "프로젝트 1", team: "팀 2", position: "과장", name: "이과장" },
     	  { project: "프로젝트 1", team: "팀 1", position: "차장", name: "최차장" },
@@ -48,14 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     const projectData = [
-        { id: 1, name: "프로젝트 1" },
+        { projectNo: 1, projectName: "프로젝트 1" },
         { id: 2, name: "프로젝트 2" },
         { id: 3, name: "프로젝트 3" },
     ];
-
+    
     const teamData = {
-        1: ["팀 1", "팀 2", "팀 3", "팀 4", "팀 5"],
-        2: ["팀 6", "팀 7", "팀 8", "팀 9"],
+        1: ["개발1팀", "개발2팀", "팀 3", "팀 4", "팀 5"],
+        2: ["개발3팀", "개발4팀", "팀 8", "팀 9"],
         3: ["팀 10", "팀 11", "팀 12"],
     };
 
@@ -105,10 +122,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td class="text-center"><input type="checkbox"></td>
-                <td class="text-center">${employee.project}</td>
-                <td class="text-center">${employee.team}</td>
-                <td class="text-center">${employee.position}</td>
-                <td class="text-left">${employee.name}</td>
+                <td class="text-center">${employee.projectName}</td>
+                <td class="text-center">${employee.teamName}</td>
+                <td class="text-center">${employee.empRank}</td>
+                <td class="text-left">${employee.empName}</td>
             `;
             
             const checkbox = row.querySelector("input[type='checkbox']");
@@ -128,8 +145,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     projectData.forEach((project) => {
         const option = document.createElement("option");
-        option.value = project.id;
-        option.text = project.name;
+        option.value = project.projectNo;
+        option.text = project.projectName;
         projectDropdown.appendChild(option);
     });
 
@@ -172,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
     employeeCheckboxes.forEach(function (checkbox) {
     	checkbox.addEventListener("change", function () {
     		syncSelectAllCheckbox();
-    	});
+    	}); 
     });
     
     teamDropdown.addEventListener("change", function () {
@@ -226,8 +243,8 @@ function sendSelectedEmployees() {
     var checkboxes = document.querySelectorAll("#employee-list input[type='checkbox']:checked");
     checkboxes.forEach(function (checkbox) {
         var row = checkbox.parentElement.parentElement;
-        var position = row.cells[3].textContent;
-        var name = row.cells[4].textContent;
+        var position = row.cells[2].textContent;
+        var name = row.cells[3].textContent;
         selectedEmployees.push({ position, name });
     });
 

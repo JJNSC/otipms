@@ -13,4 +13,10 @@ public class ProfileController {
 		log.info("프로필");
 		return "profile/profile";
 	}
+	
+	@RequestMapping("/indexTest")
+	public String indextTest() {
+		log.info("메인 테스트 페이지");
+		return "indexTest";
+	}
 }

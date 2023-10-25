@@ -10845,22 +10845,23 @@ table.dataTable thead .sorting::after {
 .pignose-calendar {
   width: 100%;
   max-width: unset;
-  border-color: #162336;
+  /* border-color: #162336; */
   box-shadow: none; }
-
+/* 
 .pignose-calendar.pignose-calendar-blue {
   background-color: #27394f; }
-
+ */
 .pignose-calendar.pignose-calendar-blue .pignose-calendar-header .pignose-calendar-week,
 .pignose-calendar.pignose-calendar-blue .pignose-calendar-body .pignose-calendar-row .pignose-calendar-unit a {
-  color: #fff; }
+  /* color: #fff; */ }
 
 .pignose-calendar.pignose-calendar-blue .pignose-calendar-top {
-  border-bottom-color: #27394f;
-  background-color: #7571f9; }
+  /* border-bottom-color: #27394f;
+  background-color: #7571f9; */ }
 
 .pignose-calendar.pignose-calendar-blue .pignose-calendar-body .pignose-calendar-row .pignose-calendar-unit.pignose-calendar-unit-active a {
-  background-color: #7571f9; }
+  /* background-color: #7571f9; */
+  background-color: #3E6494; }
 
 .accordion .card {
   margin-bottom: 7px; }

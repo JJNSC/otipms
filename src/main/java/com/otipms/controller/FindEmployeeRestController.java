@@ -20,7 +20,6 @@ import com.otipms.service.ProjectService;
 import com.otipms.service.TeamService;
 
 @RestController
-@RequestMapping("/api")
 public class FindEmployeeRestController {
     @Autowired
     private EmployeeService employeeService;
@@ -29,7 +28,7 @@ public class FindEmployeeRestController {
     @Autowired
     private TeamService teamService;
 
-    @GetMapping("/employeeData")
+    @GetMapping("/api/employeeData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> getEmployeeData() {
         List<Employee> employees = employeeService.getAllEmployee();
         List<Project> projects = projectService.getAllProjects();

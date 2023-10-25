@@ -200,7 +200,7 @@
     $('#todo_list').slimscroll({
         position: "right",
         size: "5px",
-        height: "250px",
+        height: "337px",
         color: "transparent"
     });
 
