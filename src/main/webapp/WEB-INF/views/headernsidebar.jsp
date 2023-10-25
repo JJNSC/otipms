@@ -136,17 +136,10 @@
                             </div>
                         </li>
                         <li class="icons dropdown d-none d-md-flex">
-                            <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                                <span>English</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" class="log-user" >
+                                <span style="padding:0">${employee.empRank}</span>
+                                <span style="padding:0">${employee.empName}</span> 
                             </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li><a href="javascript:void()">English</a></li>
-                                        <li><a href="javascript:void()">Dutch</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">

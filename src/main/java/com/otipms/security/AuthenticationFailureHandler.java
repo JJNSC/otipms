@@ -35,6 +35,3 @@ public class AuthenticationFailureHandler
 		super.onAuthenticationFailure(request, response, exception);
 	}
 }
-
-
-

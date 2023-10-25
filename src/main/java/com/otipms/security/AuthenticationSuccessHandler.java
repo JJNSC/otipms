@@ -38,4 +38,3 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 	}
 	
 }
-

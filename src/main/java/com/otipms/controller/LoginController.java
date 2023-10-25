@@ -3,17 +3,14 @@ package com.otipms.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.otipms.dto.Employee;
 import com.otipms.interceptor.Login;
+import com.otipms.security.EmpDetails;
 import com.otipms.service.EmployeeService;
-import com.otipms.service.EmployeeService.LoginResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,10 +71,13 @@ public class LoginController {
 	
 	@Login
 	@RequestMapping("/index")
-	public String index() {
-		return "index";
+	public String index(Model model, HttpSession session, Authentication authentication) {
+		// 현재 로그인한 사용자의 정보 가져오기
+	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+	    
+	    // Model에 사용자 정보를 추가하여 JSP로 전달
+	    model.addAttribute("employee", empDetails.getEmployee());
+		
+	    return "index";
 	}
-	
-	
-
 }
