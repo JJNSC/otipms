@@ -24,7 +24,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
     
-    <!-- Editer -->
+    <!-- Editer -->-
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	
 	<!-- selector -->
@@ -37,9 +37,7 @@
 
 <body>
     <div id="main-wrapper">
-        <!-- Content body start -->
         <div class="content-body">
-            <!-- row -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -87,15 +85,19 @@
 										        <label class="text-dark font-weight-medium">수신자</label>
 										        <div class="form-group row">
 													<div class="col-sm-12 col-md-10">
-														<input class="form-control" type="text" id="selectedRecipientTextbox" placeholder="사원 찾기를 통하여 입력하세요.">
-													</div>
+									                    <div class="selected-employees" id="selectedRecipientEmployees">
+									                    </div>
+									                    <input type="text" id="selectedRecipientTextbox" style="display:none;">
+									                </div>
 												</div>
 										    </div>
 										    <div>
 										        <label class="text-dark font-weight-medium">참조</label>
 										        <div class="form-group row">
 													<div class="col-sm-12 col-md-10">
-														<input class="form-control" type="text" id="selectedReferenceTextbox" placeholder="사원 찾기를 통하여 입력하세요.">
+									                    <div class="selected-employees" id="selectedReferenceEmployees">
+									                    </div>
+								                    	<input type="text" id="selectedReferenceTextbox" style="display:none;">
 													</div>
 												</div>
 										    </div>
@@ -103,7 +105,9 @@
 										        <label class="text-dark font-weight-medium">비밀 참조</label>
 										        <div class="form-group row">
 													<div class="col-sm-12 col-md-10">
-														<input class="form-control" type="text" id="selectedBlindCopyTextbox" placeholder="사원 찾기를 통하여 입력하세요.">
+														<div class="selected-employees" id="selectedBlindCopyEmployees">
+									                    </div>
+								                    	<input type="text" id="selectedBlindCopyTextbox" style="display:none;">
 													</div>
 												</div>
 										    </div>
@@ -115,7 +119,7 @@
 												<textarea id="myEditor" name="myEditor" class="form-control border-radius-0" placeholder="내용을 입력하세요"></textarea>
                                             	<script>
 													var ckeditor_config = {
-													  resize_enaleb : false,
+													  resize_enable : false,
 													  enterMode : CKEDITOR.ENTER_BR,
 													  shiftEnterMode : CKEDITOR.ENTER_P
 													};
@@ -183,25 +187,16 @@
                                 		</div>
                                 	</div>
                                 </div>
-                                <!-- <panel> -->
-                                    <div class="row mt-3">
+                                <div class="row mt-3">
                                     
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                	</div>
                 </div>
             </div>
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 	<div class="modal fade" id="modalGrid">
     	<div class="modal-dialog" role="document">
         	<div class="modal-content">
