@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
     employeeCheckboxes.forEach(function (checkbox) {
     	checkbox.addEventListener("change", function () {
     		syncSelectAllCheckbox();
-    	});
+    	}); 
     });
     
     teamDropdown.addEventListener("change", function () {
