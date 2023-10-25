@@ -136,3 +136,134 @@
 .textarea_editor {
     min-height: 220px;
 }
+
+/* 업무관리 */
+.taskEvent-red::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #FE2E2E;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-orange::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #FE9A2E;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-yellow::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #F4FA58;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-lightGreen::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #C8FE2E;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-green::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2EFE2E;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-lightBlue::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #81F7F3;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-blue::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2E2EFE;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-purple::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #9A2EFE;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+.taskEvent-pink::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #FE2E9A;
+    margin-right: 0.9rem;
+    position: relative;
+    top: 2px;
+}
+
+.taskTable td {
+	padding-left: 0px;
+}
+.taskTable td:nth-child(2) {
+	padding-left: 15px;
+}
+
+.btn-detail {
+	color: #464a53;
+    /* color: #f8f9fa; */
+    background-color: transparent;
+    background-image: none;
+    border-color: #f8f9fa;
+}
+
+.btn-detail:active, .btn-detail:hover {
+    background: #919191;
+    color: #fff;
+    border-color: #919191;
+}
+
+.dateSelectable::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+.dateSelectable:focus::before,
+.dateSelectable:valid::before {
+  display: none;
+}

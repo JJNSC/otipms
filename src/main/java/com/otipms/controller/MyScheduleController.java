@@ -16,4 +16,10 @@ public class MyScheduleController {
 		log.info("개인일정");
 		return "mySchedule/mySchedule";
 	}
+	
+	@RequestMapping("/myTask")
+	public String myTask() {
+		log.info("개인업무일정");
+		return "task/myTask";
+	}
 }

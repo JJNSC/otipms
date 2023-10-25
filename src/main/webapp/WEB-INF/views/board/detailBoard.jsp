@@ -53,9 +53,9 @@
                                     </span> -->
                                 </div>
                                 <div class="row">
-                                	<div class="col-6">
+                                	<div class="col-6 mb-3">
                                 		<div class="d-flex align-items-center">
-		                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
+		                                    <div class="mr-3"><img src="/otipms/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
 		                                    <div class="">
 		                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
 		                                        	김종진 <span style="font-weight: 300; font-size: 0.8rem;">대리/개발1팀</span>
@@ -65,13 +65,13 @@
 		                                    </div>
 		                                </div>
                                 	</div>
-                                	<div class="col-6 text-right">
+                                	<div class="col-6 text-right pt=4" style=" padding-top: 30px; padding-right: 29px;">
 		                                <!-- <button type="button" class="btn mb-1 btn-light-custom">수정</button> -->
-	                                    <a href="writeBoard?boardType=${boardType}" type="button" class="btn mb-1 btn-light-custom">수정</a>                                                                	
-	                                    <button type="button" class="btn mb-1 btn-danger">샥제</button>                                                                	
+	                                    <a href="writeBoard?boardType=공지사항" type="button" class="text-secondary" style=" margin-right: 7px;">수정</a>                                                                	
+	                                    <a href="writeBoard?boardType=공지사항" type="button" class="text-danger">샥제</a>                                                                	
                                 	</div>
                                 </div>
-                                <div class="compose-content mt-3 pt-3" style="border-top: 1px solid #ebecef">
+                                <div class="compose-content pt-3" style="border-top: 1px solid #ebecef">
                                    	내용~~
                                    	<br/>
                                    	다섯용~~

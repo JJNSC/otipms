@@ -55,24 +55,40 @@
         var t = new Date,
             n = (t.getDate(), t.getMonth(), t.getFullYear(), new Date(e.now())),
             a = [{
-                title: "Hey!",
+                title: "샘플2",
                 start: new Date(e.now() + 158e6),
+                end: new Date(e.now() + 158e6),
                 className: "bg-dark"
             }, {
-                title: "See John Deo",
+                title: "샘플1",
                 start: n,
                 end: n,
                 className: "bg-danger"
             }, {
-                title: "Buy a Theme",
+                title: "샘플3",
                 start: new Date(e.now() + 338e6),
+                className: "bg-primary"
+            }, {
+                title: "테스트1",
+                start: new Date("2023-10-25T11:25:30"),
+                end: new Date("2023-10-25T12:25:30"),
+                className: "bg-dark"
+            }, {
+                title: "테스트2",
+                start: new Date("2023-10-25T15:25:30"),
+                end: new Date("2023-10-25T20:25:30"),
+                className: "bg-danger"
+            }, {
+                title: "테스트3",
+                start: new Date("2023-10-24T00:00:00"),
+                end: new Date("2023-10-24T24:00:00"),
                 className: "bg-primary"
             }],
             o = this;
         o.$calendarObj = o.$calendar.fullCalendar({
             slotDuration: "00:15:00",
-            minTime: "08:00:00",
-            maxTime: "19:00:00",
+            minTime: "06:00:00",
+            maxTime: "23:00:00",
             defaultView: "month",
             handleWindowResize: !0,
             height: e(window).height() - 200,
