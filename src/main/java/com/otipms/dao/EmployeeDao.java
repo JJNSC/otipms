@@ -11,6 +11,7 @@ public interface EmployeeDao {
 	public int insertEmployee(Employee employee);
 	public void insertEmployeeInfo(Employee employee);
 	public Employee selectByEmployeeId(int empId);
+	public Employee selectInfoByEmployeeId(int empId);
 	public int getTeamNoByTeamName(String teamName);
 	public int checkEmployeeByTel(String empTel);
 	public Employee getEmployeeByTeamNo(int teamNo);

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.otipms.dao.EmployeeDao;
 import com.otipms.dto.Employee;
+import com.otipms.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +26,9 @@ public class EmpDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		int empId = Integer.parseInt(username);
+		System.out.println(empId);
 		Employee employee = employeeDao.selectByEmployeeId(empId);
+		log.info(" employee : "+employee);
 		if(employee == null) {
 			throw new UsernameNotFoundException(username);
 		}

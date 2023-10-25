@@ -33,7 +33,7 @@ public class LoginController {
 		return "login/login";
 	}
 	
-	@PostMapping("/login")
+	/*@PostMapping("/login")
 	public String login(Employee employee, HttpSession session, Model model) {
 		LoginResult result = employeeService.login(employee);
 		String errorMsg = "";
@@ -50,7 +50,7 @@ public class LoginController {
 		//실패시 에러메세지와 함께 로그인 페이지
 		model.addAttribute("loginErrMsg", errorMsg);
 		return "redirect:/";
-	}
+	}*/
 	
 	@RequestMapping("/logout")
 	public String logout() {

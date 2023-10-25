@@ -58,7 +58,8 @@
 						<div class="login-title">
 							<h2 class="text-center text-primary">Login To OTI PMS</h2>
 						</div>
-						<form method="post" action="login">
+						<form method="post" action="${pageContext.request.contextPath}/login">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<div class="input-group custom">
 								<input type="text" id="empId" name="empId" class="form-control form-control-lg" placeholder="UserID">
 								<div class="input-group-append custom">
@@ -79,7 +80,7 @@
 									</div>
 								</div>
 								<div class="col-6">
-									<div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div>
+									<div class="forgot-password">인사과 번호 : 02-1111-1111</div>
 								</div>
 							</div>
 							<div class="row">
@@ -89,7 +90,7 @@
 											use code for form submit
 											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
 										-->
-										<button class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</button>
+										<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
 									</div>
 								</div>
 							</div>

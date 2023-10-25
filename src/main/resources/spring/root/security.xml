@@ -53,11 +53,11 @@
 	<bean id="authenticationSuccessHandler" 
 		  class="com.otipms.security.AuthenticationSuccessHandler">
 		<!-- 로그인 성공후 리다이렉트로 이동할 경로 -->
-		<!-- alwaysUseDefaultTargetUrl: false(기본)-요청 경로로 리다이렉트, true-defaultTargetUrl로 리다이렉트	-->
-		<!-- 
+		<!-- alwaysUseDefaultTargetUrl: false(기본)-요청 경로로 리다이렉트, true-defaultTargetUrl로 리다이렉트	 -->
+		
 		<property name="alwaysUseDefaultTargetUrl" value="true"/>
-		<property name="defaultTargetUrl" value="/"/>
-		-->	  
+		<property name="defaultTargetUrl" value="/index"/>
+			  
 	</bean>
 		  
 	<bean id="authenticationFailureHandler" 

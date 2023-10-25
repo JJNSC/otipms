@@ -21,4 +21,8 @@
 		    from team t
 		    order by teamNo;
 	</select>
+	
+	<select id="getTeamNameByTeamNo" parameterType="int" resultType="String">
+		select teamName from team where teamNo = #{teamNo}
+	</select>
 </mapper>

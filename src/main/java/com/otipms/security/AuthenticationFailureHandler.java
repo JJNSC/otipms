@@ -28,6 +28,7 @@ public class AuthenticationFailureHandler
 		
 		logger.info("실행");
 		
+		log.info(" 로그인 실패 : " +exception.getMessage().toString());
 		//로그인 실패후 리다이렉트로 이동할 경로
 		//setDefaultFailureUrl("/ch17/loginForm");
 		
