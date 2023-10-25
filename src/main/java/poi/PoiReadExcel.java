@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class PoiReadExcel {
-	 public static String filePath = "C:\\FileStore";
+	 	public static String filePath = "C:\\FileStore";
 	    public static String fileNm = "poi_making_file_test.xlsx";
 
 	    public static void main(String[] args) {

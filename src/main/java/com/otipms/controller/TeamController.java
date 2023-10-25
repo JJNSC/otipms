@@ -10,13 +10,13 @@ import com.otipms.interceptor.Login;
 public class TeamController {
 	
 	@Login
-	@RequestMapping("teamList")
+	@RequestMapping("/teamList")
 	public String teamList() {
 		return "teamManagement/teamList";
 	}
 	
 	@Login
-	@RequestMapping("addAndModifyTeam")
+	@RequestMapping("/addAndModifyTeam")
 	public String addAndModifyTeam() {
 		return "teamManagement/addAndModifyTeam";
 	}

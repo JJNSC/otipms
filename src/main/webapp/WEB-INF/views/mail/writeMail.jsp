@@ -24,7 +24,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
     
-    <!-- Editer -->
+    <!-- Editer -->-
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	
 	<!-- selector -->
@@ -37,9 +37,7 @@
 
 <body>
     <div id="main-wrapper">
-        <!-- Content body start -->
         <div class="content-body">
-            <!-- row -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -73,82 +71,45 @@
                                     </div>
                                 </div>
                                 <div class="email-right-box">
+	                                <div class="text-left m-t-15">
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+                                        		type="button" 
+                                        		onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))">
+                                        	<i class="fa fa-paper-plane m-r-5"></i>
+                                        	 사원 찾기
+                                        </button>
+                                    </div>
                                     <div class="compose-content mt-5 mb-5">
                                         <form action="#">
                                             <div>
 										        <label class="text-dark font-weight-medium">수신자</label>
-										        <div class="form-group">
-										        	<select class="js-example-basic-multiple form-control" name="select1[]">
-										            	<option>사원 김사원</option>
-										            	<option>대리 이대리</option>
-										            	<option>과장 박과장</option>
-										            	<option>차장 최차창</option>
-										            	<option>부장 정부장</option>
-										            	<option>이사 김이사</option>
-										            	<option>사원 김사원2</option>
-										            	<option>대리 이대리2</option>
-										            	<option>과장 박과장2</option>
-										            	<option>차장 최차창2</option>
-										            	<option>부장 정부장2</option>
-										            	<option>이사 김이사2</option>
-										            	<option>사원 김사원3</option>
-										            	<option>대리 이대리3</option>
-										            	<option>과장 박과장3</option>
-										            	<option>차장 최차창3</option>
-										            	<option>부장 정부장3</option>
-										            	<option>이사 김이사3</option>
-										        	</select>
-										        </div>
+										        <div class="form-group row">
+													<div class="col-sm-12 col-md-10">
+									                    <div class="selected-employees" id="selectedRecipientEmployees">
+									                    </div>
+									                    <input type="text" id="selectedRecipientTextbox" style="display:none;">
+									                </div>
+												</div>
 										    </div>
 										    <div>
 										        <label class="text-dark font-weight-medium">참조</label>
-										        <div class="form-group">
-										        	<select class="js-example-basic-multiple form-control" name="select2[]" multiple="multiple">
-										            	<option>사원 김사원</option>
-										            	<option>대리 이대리</option>
-										            	<option>과장 박과장</option>
-										            	<option>차장 최차창</option>
-										            	<option>부장 정부장</option>
-										            	<option>이사 김이사</option>
-										            	<option>사원 김사원2</option>
-										            	<option>대리 이대리2</option>
-										            	<option>과장 박과장2</option>
-										            	<option>차장 최차창2</option>
-										            	<option>부장 정부장2</option>
-										            	<option>이사 김이사2</option>
-										            	<option>사원 김사원3</option>
-										            	<option>대리 이대리3</option>
-										            	<option>과장 박과장3</option>
-										            	<option>차장 최차창3</option>
-										            	<option>부장 정부장3</option>
-										            	<option>이사 김이사3</option>
-										        	</select>
-										        </div>
+										        <div class="form-group row">
+													<div class="col-sm-12 col-md-10">
+									                    <div class="selected-employees" id="selectedReferenceEmployees">
+									                    </div>
+								                    	<input type="text" id="selectedReferenceTextbox" style="display:none;">
+													</div>
+												</div>
 										    </div>
 										    <div>
 										        <label class="text-dark font-weight-medium">비밀 참조</label>
-										        <div class="form-group">
-										        	<select class="js-example-basic-multiple form-control" name="select3[]" multiple="multiple">
-										            	<option>사원 김사원</option>
-										            	<option>대리 이대리</option>
-										            	<option>과장 박과장</option>
-										            	<option>차장 최차창</option>
-										            	<option>부장 정부장</option>
-										            	<option>이사 김이사</option>
-										            	<option>사원 김사원2</option>
-										            	<option>대리 이대리2</option>
-										            	<option>과장 박과장2</option>
-										            	<option>차장 최차창2</option>
-										            	<option>부장 정부장2</option>
-										            	<option>이사 김이사2</option>
-										            	<option>사원 김사원3</option>
-										            	<option>대리 이대리3</option>
-										            	<option>과장 박과장3</option>
-										            	<option>차장 최차창3</option>
-										            	<option>부장 정부장3</option>
-										            	<option>이사 김이사3</option>
-										        	</select>
-										        </div>
+										        <div class="form-group row">
+													<div class="col-sm-12 col-md-10">
+														<div class="selected-employees" id="selectedBlindCopyEmployees">
+									                    </div>
+								                    	<input type="text" id="selectedBlindCopyTextbox" style="display:none;">
+													</div>
+												</div>
 										    </div>
                                             <div class="form-group">
                                             	<label class="text-dark font-weight-medium">제목</label>
@@ -158,7 +119,7 @@
 												<textarea id="myEditor" name="myEditor" class="form-control border-radius-0" placeholder="내용을 입력하세요"></textarea>
                                             	<script>
 													var ckeditor_config = {
-													  resize_enaleb : false,
+													  resize_enable : false,
 													  enterMode : CKEDITOR.ENTER_BR,
 													  shiftEnterMode : CKEDITOR.ENTER_P
 													};
@@ -226,25 +187,16 @@
                                 		</div>
                                 	</div>
                                 </div>
-                                <!-- <panel> -->
-                                    <div class="row mt-3">
+                                <div class="row mt-3">
                                     
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                	</div>
                 </div>
             </div>
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 	<div class="modal fade" id="modalGrid">
     	<div class="modal-dialog" role="document">
         	<div class="modal-content">

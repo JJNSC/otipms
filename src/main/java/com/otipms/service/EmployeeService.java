@@ -1,5 +1,7 @@
 package com.otipms.service;
 
+import java.util.List;
+
 import com.otipms.dto.Employee;
 
 public interface EmployeeService {
@@ -11,4 +13,8 @@ public interface EmployeeService {
 	public void AddEmploy(Employee employee);
 	public LoginResult login(Employee employee);
 	public Employee getEmployeeInfo(int empId);
+	public Employee getEmployeeAllInfo(int empId);
+	public int getTeamNo(String teamName);
+	public int checkEmployeeByTel(String empTel);
+	public List<Employee> getAllEmployee();
 }

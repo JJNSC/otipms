@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.dto.Employee;
 import com.otipms.interceptor.Login;
 
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +69,11 @@ public class PoiController {
 	
 	        // 각각의 행에 존재하는 모든 열(cell)을 순회한다.
 	        Iterator<Cell> cellIterator = row.cellIterator();
+	        for (int i = 0; i < 1; i++) { // 첫 번째 행은 건너뜀
+                rowIterator.next();
+            }
+	        Employee employee = new Employee();
+	        int i =0;
 	
 	        while (cellIterator.hasNext()) {
 	            Cell cell = cellIterator.next();
@@ -79,6 +85,21 @@ public class PoiController {
 	                    break;
 	                case STRING:
 	                    System.out.print(cell.getStringCellValue() + "\t");
+	                    if(i==0) {
+	                    	employee.setEmpId(parseInt(cell.getStringCellValue()));
+	                    }else if(i==1) {
+	                    	employee.setEmpName(cell.getStringCellValue());
+	                    }else if(i==2) {
+	                    	employee.setEmpRank(cell.getStringCellValue());
+	                    }else if(i==3) {
+	                    	employee.setEmpTel(cell.getStringCellValue());
+	                    }else if(i==4) {
+	                    	/*employee.set(cell.getStringCellValue());*/
+	                    }else if(i==5) {
+	                    	employee.setEmpName(cell.getStringCellValue());
+	                    }else if(i==6) {
+	                    	employee.setEmpName(cell.getStringCellValue());
+	                    }
 	                    break;
 	            }
 	        }
@@ -88,5 +109,10 @@ public class PoiController {
 		      
 	    return "redirect:/employeeManagement/employeeList";
     }
+
+	private int parseInt(String stringCellValue) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 

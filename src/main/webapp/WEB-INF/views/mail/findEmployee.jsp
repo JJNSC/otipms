@@ -12,7 +12,7 @@
     
    <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/mail/customStyle.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
   
     <!-- Scripts -->
@@ -38,89 +38,62 @@
 
 <body>
     <div id="main-wrapper">
-        <!-- Content body start -->
         <div class="content-body">
-            <!-- row -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                    <div class="compose-content mt-5 mb-5">
-                                        <form action="#">
-                                            <div>
-										        <label class="text-dark font-weight-medium">부서</label>
-										        <div class="dropdown" id="dropdown1">
-												    <select>
-												      <option value="" disabled selected>Select an option</option>
-												      <option value="option1">Option 1</option>
-												      <option value="option2">Option 2</option>
-												      <option value="option3">Option 3</option>
-												    </select>
-											  	</div>
-										    </div>
-                                        </form>
-                                        <div class="message read message-1">
-											<div class="col-mail col-mail-1">
-												<div class="email-checkbox">
-													<input type="checkbox" id="chk2">
-													<label class="toggle" for="chk2"></label>
-												</div>
-												<span class="icon-copy star ion-ios-star-outline" onclick="checkimportant(1, event)"></span>
-												<span class="icon-copy mail ion-android-mail" onclick="checkread(1, event)"></span>
-											</div>
-											<div class="col-mail col-mail-profile">
-												<div class="profile">
-													<img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
-													<span class="rank">사원</span>
-													<span class="name">김사원</span>
-												</div>
-											</div>
-											<a href="detailMail">
-												<div class="col-mail col-mail-2">
-													<div class="subject">동아일보 중딩한테 털렸죠? 아무고토 모타쥬?</div>
-													<div class="clip">
-														<span class="icon-copy ion-paperclip mr-5"></span>
-													</div>
-													<div class="date">10분 전</div>
-												</div>
-											</a>
-										</div>
-                                    </div>
+                                <div class="compose-content mt-5 mb-5">
+                                   	<div>
+								        <select id="project-dropdown">
+								            <option value="">프로젝트 선택</option>
+								        </select>
+								        <select id="team-dropdown">
+								            <option value="">팀 선택</option>
+								        </select>
+								        <select id="position-dropdown">
+								            <option value="">직급 선택</option>
+								        </select>
+								    </div>
+								    <div id="radio-buttons" class="mt-3">
+									    <label><input type="radio" name="recipient" value="Recipient">수신</label>
+									    <label><input type="radio" name="recipient" value="Reference">참조</label>
+									    <label><input type="radio" name="recipient" value="BlindCopy">비밀참조</label>
+									</div>
+                                    <hr>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="project1" role="tabpanel">
+                                            <div class="p-t-15">
+                                            	 <div class="table-responsive">
+				                                    <table class="table table-hover table-custom" style="width:96%;">
+				                                        <thead>
+				                                            <tr>
+				                                                <th class="text-center"><input type="checkbox" id="selectAllCheckbox"></th>
+				                                                <th class="text-center">프로젝트 명</th>
+				                                                <th class="text-center">팀 명</th>
+				                                                <th class="text-center">직급</th>
+				                                                <th class="text-left ">이름</th>
+				                                            </tr>
+				                                        </thead>
+				                                        <tbody id="employee-list">
+				                                        	
+				                                        </tbody>
+				                                    </table>
+		                                		</div>
+                                       		</div>
+                                   		</div>
+                                   	</div>
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button">
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="sendSelectedEmployees()">
                                         	<i class="fa fa-paper-plane m-r-5"></i>
-                                        	 Send
+                                        	 OK
                                         </button>
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" data-toggle="modal" data-target="#modalGrid">
-                                        	<i class="fa fa-archive m-r-5"></i>
-                                        	 Temporary Save
-                                        </button>
-                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button">
-                                        	<i class="ti-close m-r-5 f-s-12"></i>
-                                        	Discard
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="closeWindow()">
+                                        	<i class="ti-close m-r-5"></i>
+                                        	 cancel
                                         </button>
                                     </div>
-                                <div class="bootstrap-wysihtml5-insert-link-modal modal fade bs-example-modal-lg" style="display: none;" aria-hidden="true">
-                                	<div class="modal-dialog modal-lg">
-                                		<div class="modal-content">
-                                			<div class="modal-header">
-                                				<a class="close" data-dismiss="modal"></a>
-                                				<h3>Insert link</h3>
-                                			</div>
-                                			<div class="modal-body">
-                                				<div class="form-group">
-                                					<input value="http://" class="bootstrap-wysihtml5-insert-link-url form-control" type="text">
-                                				</div>
-                                			</div>
-                                			<div class="modal-footer">
-                                				<a href="#" class="btn btn-inverse" data-dismiss="modal">Cancel</a>
-                                				<a href="#" class="btn btn-primary" data-dismiss="modal">Insert link</a>
-                                			</div>
-                                		</div>
-                                	</div>
-                                </div>
-                                <!-- <panel> -->
                                     <div class="row mt-3">
                                     
                                     </div>
@@ -130,35 +103,8 @@
                     </div>
                 </div>
             </div>
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-	<div class="modal fade" id="modalGrid">
-    	<div class="modal-dialog" role="document">
-        	<div class="modal-content">
-            	<div class="modal-header">
-                	<h5 class="modal-title">쪽지 임시 저장</h5>
-                </div>
-                <div class="modal-body">
-                	<div class="container-fluid">
-                    	<div class="row">
-	                       	쪽지를 임시 저장하시겠습니까?
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                	<button type="button" class="btn btn-primary" onclick="checksave()">저장</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                </div>
-            </div>
-        </div>
-	</div>
 </body>
 
 </html>
