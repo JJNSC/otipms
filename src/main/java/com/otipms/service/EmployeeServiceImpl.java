@@ -68,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setEmpTel(empInfo.getEmpTel());
 		employee.setEmpEmail(empInfo.getEmpEmail());
 		employee.setEmpLoginDate(empInfo.getEmpLoginDate());
-		employee.setEmpDisabled(empInfo.getEmpDisabled());
+		employee.setEmpEnabled(empInfo.getEmpEnabled());
 		return employee;
 	}
 

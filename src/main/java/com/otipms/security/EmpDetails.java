@@ -16,7 +16,7 @@ public class EmpDetails extends User  {
 	//첫번째 파라미터에는 id, 두번째 파라미터에는 password
 	public EmpDetails(Employee employee, List<GrantedAuthority> authorities) {	
 		//아이디, 패스워드, 사용여부?, 만료여부, 머드라, 잠금여부, 권한
-		super(String.valueOf(employee.getEmpId()), employee.getEmpPw(), employee.getEmpDisabled(), 
+		super(String.valueOf(employee.getEmpId()), employee.getEmpPw(), employee.getEmpEnabled(), 
 				true, true, true, authorities);
 		this.employee = employee;
 	}
