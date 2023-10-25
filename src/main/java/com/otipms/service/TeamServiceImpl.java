@@ -1,5 +1,7 @@
 package com.otipms.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public class TeamServiceImpl implements TeamService {
 	private TeamDao teamDao;
 
 	@Override
-	public Team getTeamByProjectNo(int projectNo) {
+	public List<Team> getTeamByProjectNo(int projectNo) {
 		return teamDao.selectTeamByProjectNo(projectNo);
 	}
 

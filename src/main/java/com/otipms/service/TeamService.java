@@ -1,7 +1,9 @@
 package com.otipms.service;
 
+import java.util.List;
+
 import com.otipms.dto.Team;
 
 public interface TeamService {
-	public Team getTeamByProjectNo(int projectNo);
+	public List<Team> getTeamByProjectNo(int projectNo);
 }
