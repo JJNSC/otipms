@@ -9,5 +9,6 @@ import com.otipms.dto.Team;
 @Mapper
 public interface TeamDao {
 	public void addTeam(Team team);
-	public List<Team> selectTeamByProjectNo(int projectNo);
+	public List<Team> selectTeamByProjectName(String projectName);
+	public List<Team> selectAllTeam();
 }

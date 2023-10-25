@@ -15,8 +15,13 @@ public class TeamServiceImpl implements TeamService {
 	private TeamDao teamDao;
 
 	@Override
-	public List<Team> getTeamByProjectNo(int projectNo) {
-		return teamDao.selectTeamByProjectNo(projectNo);
+	public List<Team> getTeamByProjectName(String projectName) {
+		return teamDao.selectTeamByProjectName(projectName);
+	}
+
+	@Override
+	public List<Team> getAllTeam() {
+		return teamDao.selectAllTeam();
 	}
 
 

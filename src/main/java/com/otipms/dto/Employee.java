@@ -11,7 +11,7 @@ public class Employee {
 	private int empStatus;
 	private String empName;
 	private String empRank;
-	private int roleNo;
+	private String role;
 	private int teamNo;
 	private String empTel;
 	private String empEmail; //이거 필요한가? 필요하다. 고객사 이메일 때문에

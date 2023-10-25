@@ -1,17 +1,37 @@
 package com.otipms.controller;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.otipms.dto.Employee;
+import com.otipms.dto.Project;
+import com.otipms.dto.Team;
 import com.otipms.interceptor.Login;
+import com.otipms.service.EmployeeService;
+import com.otipms.service.ProjectService;
+import com.otipms.service.TeamService;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/mail")
 public class MailController {
+	
+	@Resource
+	private TeamService teamService;
+	
+	@Resource
+	private EmployeeService employeeService;
+	
+	@Resource
+	private ProjectService projectService;
+	
 	@Login
 	@RequestMapping("/receivedMail")
 	public String receivedMail() {
@@ -46,29 +66,6 @@ public class MailController {
 		log.info("dd");
 		return "mail/trashMail";
 	}
-	
-	@Login
-	@RequestMapping("/mail")
-	public String mail() {
-		log.info("dd");
-		return "mail/mail";
-	}
-	
-	@Login
-	@RequestMapping("/detailMail")
-	public String detailMail() {
-		log.info("dd");
-		return "mail/detailMail";
-	}
-	
-	@Login
-	@RequestMapping("/writeMail")
-	public String writeMail() {
-		log.info("dd");
-		return "mail/writeMail";
-	}
-	
-	
 	//메일함 내용들
 	//수신 쪽지함
 	@Login
@@ -109,12 +106,48 @@ public class MailController {
 		log.info("dd");
 		return "mail/reloadTrashMail";
 	}
+
+	@Login
+	@RequestMapping("/mail")
+	public String mail() {
+		log.info("dd");
+		return "mail/mail";
+	}
 	
-	//사원 찾기
+	@Login
+	@RequestMapping("/detailMail")
+	public String detailMail() {
+		log.info("dd");
+		return "mail/detailMail";
+	}
+	
+	@Login
+	@RequestMapping("/writeMail")
+	public String writeMail(Model model) {
+	    List<Employee> employees = employeeService.getAllEmployee();
+	    model.addAttribute("employees", employees);
+
+	    List<Project> projects = projectService.getAllProjects();
+	    model.addAttribute("projects", projects);
+	    
+	    List<Team> teams = teamService.getAllTeam();
+	    model.addAttribute("teams", teams);
+	    
+	    return "mail/writeMail";
+	}
+		
 	@Login
 	@RequestMapping("/findEmployee")
-	public String findEmployee() {
-		log.info("dd");
-		return "mail/findEmployee";
+	public String findEmployee(Model model) {
+		List<Employee> employees = employeeService.getAllEmployee();
+	    model.addAttribute("employees", employees);
+		
+		List<Project> projects = projectService.getAllProjects();
+	    model.addAttribute("projects", projects);
+	    
+	    List<Team> teams = teamService.getAllTeam();
+	    model.addAttribute("teams", teams);
+	    
+	    return "mail/findEmployee";
 	}
 }
