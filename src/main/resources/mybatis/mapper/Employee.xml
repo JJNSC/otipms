@@ -5,26 +5,26 @@
 		<selectKey keyProperty="empId" resultType="int" order="BEFORE">
 			select emp_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
 		</selectKey>
-		INSERT INTO emp (EmpId, EmpPW, EmpName, EmpRank) VALUES (TO_CHAR(SYSDATE, 'YY') ||0||0|| #{empId}, #{empPw}, #{empName}, #{empRank})
+		INSERT INTO emp (EmpId, EmpPW, EmpName, EmpRank, Role,, EmpEnabled) VALUES (TO_CHAR(SYSDATE, 'YY') ||0||0|| #{empId}, #{empPw}, #{empName}, #{empRank}, #{role},1)
 	</insert>
 	
-	<!-- <insert id="insertEmployeeInfo" parameterType="Employee">	
-		INSERT INTO empInfo (empId, RoleNo, TeamNo, empTel, EmpDisabled) VALUES (#{empId}, #{roleNo}, #{teamNo}, #{empTel}, 0)
-	</insert> -->
-	
 	<insert id="insertEmployeeInfo" parameterType="Employee">	
-		INSERT INTO empInfo (empId, RoleNo, TeamNo, empTel, EmpDisabled) VALUES
+		INSERT INTO empInfo (empId,TeamNo, empTel) VALUES
 		<if test="teamNo ==0">
-			 (#{empId}, #{roleNo}, null, #{empTel}, 0)
+			 (#{empId}, null, #{empTel})
 		</if>
 		<if test="teamNo !=0">
-			(#{empId}, #{roleNo}, #{teamNo}, #{empTel}, 0)
+			(#{empId}, #{teamNo}, #{empTel})
 		</if>
 		
 	</insert>
 	
 	<select id="selectByEmployeeId" parameterType="int" resultType="Employee">
 		select * from emp where empId = #{empId}
+	</select>
+	
+	<select id="selectInfoByEmployeeId" parameterType="int" resultType="Employee">
+		select * from empInfo where empId = #{empId}
 	</select>
 	
 	<select id="getTeamNoByTeamName" parameterType="String" resultType="int">

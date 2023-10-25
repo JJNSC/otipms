@@ -75,18 +75,7 @@ public class EmployeeController {
 			}else {
 				employee.setTeamNo(employeeService.getTeamNo(teamName));
 			}
-			
-			if(authorityName.equals("teamwon")) {
-				employee.setRoleNo(3);
-			}else if(authorityName.equals("teamjang")){
-				employee.setRoleNo(2);
-			}else if(authorityName.equals("pm")){
-				employee.setRoleNo(1);
-			}else if(authorityName.equals("admin")){
-				employee.setRoleNo(0);
-			}else if(authorityName.equals("gogaeksa")){
-				employee.setRoleNo(4);
-			}
+			employee.setRole(authorityName);
 			employeeService.AddEmploy(employee);
 		}
 		

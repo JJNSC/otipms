@@ -75,28 +75,14 @@
                                                         	<button type="button" class="btn" style="padding:0px; background-color: #e9ecef;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="icon-copy fa fa-search" aria-hidden="true"></i></button>
                                                         </div>
                                                     </div>
-                                                    <c:if test="${project.projectNo !=0 }">
-		                                	 			<input type="hidden" class="form-control" name="ProjectManagerId" value="${pmInfo.empId }">
-                                                    	<input type="text" class="form-control" placeholder="${pmInfo.empName} ">
-					                                </c:if>
-					                            	<c:if test="${project.projectNo ==0 }">
 					                                	<input type="hidden" class="form-control" name="ProjectManagerId" >
                                                     	<input type="text" class="form-control" placeholder="프로젝트 매니저">
-					                                </c:if>
-                                                    
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>프로젝트 개요</label>
-                                            <c:if test="${project.projectNo !=0 }">
-                                	 			<textarea class="form-control" id="projectOutLines" name="projectOutLines" rows="5" value="${project.projectContent }"></textarea>
-                                	 			"?"
-			                                </c:if>
-			                            	<c:if test="${project.projectNo ==0 }">
-			                                	<textarea class="form-control" id="projectOutLines" name="projectOutLines" rows="5" placeholder="프로젝트 개요를 입력해 주세요."></textarea>
-			                                </c:if>
-                                            
+                                			<textarea class="form-control" id="projectOutLines" name="projectOutLines" rows="5" placeholder="프로젝트 개요를 입력해 주세요."></textarea>
                                         </div>
                                         <div class="form-row">
 	                                        <div class="form-group col-md-4">

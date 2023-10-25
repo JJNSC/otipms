@@ -568,11 +568,10 @@
 	                             <div class="col-lg-7">
 	                                 <select class="form-control" id="registerAuthority" name="registerAuthority">
 	                                     <option value="">권한 선택</option>
-	                                     <option value="teamwon">팀원</option>
-	                                     <option value="teamjang">팀장</option>
-	                                     <option value="pm">PM</option>
-	                                     <option value="admin">관리자</option>
-	                                     <option value="gogaeksa">고객사</option>
+	                                     <option value="ROLE_PE">팀원</option>
+	                                     <option value="ROLE_PM">PM</option>
+	                                     <option value="ROLE_ADMIN">관리자</option>
+	                                     <option value="ROLE_CLIENT">고객사</option>
 	                                 </select>
 	                             </div>
 	                            </div>

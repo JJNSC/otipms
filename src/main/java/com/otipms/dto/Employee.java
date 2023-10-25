@@ -16,7 +16,7 @@ public class Employee {
 	private String empTel;
 	private String empEmail; //이거 필요한가? 필요하다. 고객사 이메일 때문에
 	private Date empLoginDate;
-	private Boolean empDisabled;
+	private Boolean empEnabled;
 	
 	//쿼리문을 위해 생성
 	private int projectNo;

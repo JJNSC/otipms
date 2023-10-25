@@ -25,42 +25,15 @@ public class LoginController {
 	
 	@RequestMapping("/")
 	public String login() {
-		log.info("dd");
-		return "login";
+		return "login/login";
 	}
 	
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
+	@RequestMapping("/loginForm")
+	public String loginForm() {
+		return "login/login";
 	}
 	
-	@RequestMapping("/imsiMakeId")
-	public String imsiMakeId() {
-		Employee employee = new Employee();
-		employee.setEmpId(1020000);
-		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		employee.setEmpPw(pwEncoder.encode("rhrortk"));
-		employee.setEmpName("오 티아이");
-		employee.setEmpRank("고객사");
-		employee.setRoleNo(3); // 0: 관리자, 1:개발자,2:PM,3: 고객사 
-		employee.setTeamNo(1); //1팀, 2팀, 3팀 
-		employee.setEmpTel("010-1234-1234");
-		employee.setEmpEmail("rhrortk@otipms.com");
-		Boolean disabled = false;
-		employee.setEmpDisabled(disabled);
-		log.info("employee : " + employee);
-		employeeService.AddEmploy(employee);
-		return "redirect:/";
-	}
-	
-	@Login
-	@RequestMapping("/index")
-	public String index() {
-		log.info("dd");
-		return "index";
-	}
-	
-	@PostMapping("/login")
+	/*@PostMapping("/login")
 	public String login(Employee employee, HttpSession session, Model model) {
 		LoginResult result = employeeService.login(employee);
 		String errorMsg = "";
@@ -77,6 +50,40 @@ public class LoginController {
 		//실패시 에러메세지와 함께 로그인 페이지
 		model.addAttribute("loginErrMsg", errorMsg);
 		return "redirect:/";
+	}*/
+	
+	@RequestMapping("/logout")
+	public String logout() {
+		
+		return null;
 	}
+
+	
+	/*@RequestMapping("/imsiMakeId")
+	public String imsiMakeId() {
+		Employee employee = new Employee();
+		employee.setEmpId(1020000);
+		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		employee.setEmpPw(pwEncoder.encode("rhrortk"));
+		employee.setEmpName("오 티아이");
+		employee.setEmpRank("고객사");
+		employee.setRoleNo(3); // 0: 관리자, 1:개발자,2:PM,3: 고객사 
+		employee.setTeamNo(1); //1팀, 2팀, 3팀 
+		employee.setEmpTel("010-1234-1234");
+		employee.setEmpEmail("rhrortk@otipms.com");
+		Boolean disabled = false;
+		employee.setEmpDisabled(disabled);
+		log.info("employee : " + employee);
+		employeeService.AddEmploy(employee);
+		return "redirect:/";
+	}*/
+	
+	@Login
+	@RequestMapping("/index")
+	public String index() {
+		return "index";
+	}
+	
+	
 
 }

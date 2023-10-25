@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.otipms.dao.EmployeeDao;
+import com.otipms.dao.TeamDao;
 import com.otipms.dto.Employee;
 
 @Service
@@ -18,6 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private EmployeeDao employeeDao;
+	private TeamDao teamDao;
 
 	@Transactional
 	@Override
@@ -48,9 +50,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 	}
 
+	//emp table 정보만 가져오기
 	@Override
 	public Employee getEmployeeInfo(int empId) {
 		return employeeDao.selectByEmployeeId(empId);
+	}
+	
+	//emp, empInfo table 정보 둘다 가져오기
+	@Override
+	public Employee getEmployeeAllInfo(int empId) {
+		Employee employee = employeeDao.selectByEmployeeId(empId);
+		Employee empInfo = employeeDao.selectInfoByEmployeeId(empId);
+		employee.setRole(empInfo.getRole());
+		int teamNo = empInfo.getTeamNo();
+		String teamName = teamDao.getTeamNameByTeamNo(teamNo);
+		employee.setTeamName(teamName);
+		employee.setEmpTel(empInfo.getEmpTel());
+		employee.setEmpEmail(empInfo.getEmpEmail());
+		employee.setEmpLoginDate(empInfo.getEmpLoginDate());
+		employee.setEmpEnabled(empInfo.getEmpEnabled());
+		return employee;
 	}
 
 	@Override
@@ -68,5 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> getAllEmployee() {
 		return employeeDao.selectAllEmployee();
 	}
+
+	
 
 }
