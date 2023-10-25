@@ -55,7 +55,7 @@
 		                                        <tbody>
 		                                            <tr>
 		                                                <td><div class="taskEvent-red mb-1" style="position: relative;"><i class="fa fa-move"></i>ㅇㅇㅇ 프로젝트</div></td>
-		                                                <td class="text-success">진행중</td>
+		                                                <td class="text-success">진행중 </td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
