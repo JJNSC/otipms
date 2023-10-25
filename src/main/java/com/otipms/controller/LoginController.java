@@ -25,14 +25,39 @@ public class LoginController {
 	
 	@RequestMapping("/")
 	public String login() {
-		log.info("dd");
-		return "login";
+		return "login/login";
 	}
 	
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
+	@RequestMapping("/loginForm")
+	public String loginForm() {
+		return "login/login";
 	}
+	
+	@PostMapping("/login")
+	public String login(Employee employee, HttpSession session, Model model) {
+		LoginResult result = employeeService.login(employee);
+		String errorMsg = "";
+		if(result == LoginResult.FAIL_ID_WRONG) {
+			errorMsg = "잘못된 아이디 입니다.";
+		}else if(result == LoginResult.FAIL_PASSWORD_WRONG) {
+			errorMsg = "잘못된 비밀번호 입니다.";
+		}else {
+			Employee dbEmployee = employeeService.getEmployeeInfo(employee.getEmpId());
+			session.setAttribute("login", dbEmployee);
+			//성공시 메인페이지
+			return "redirect:/index";
+		}
+		//실패시 에러메세지와 함께 로그인 페이지
+		model.addAttribute("loginErrMsg", errorMsg);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout() {
+		
+		return null;
+	}
+
 	
 	@RequestMapping("/imsiMakeId")
 	public String imsiMakeId() {
@@ -56,27 +81,9 @@ public class LoginController {
 	@Login
 	@RequestMapping("/index")
 	public String index() {
-		log.info("dd");
 		return "index";
 	}
 	
-	@PostMapping("/login")
-	public String login(Employee employee, HttpSession session, Model model) {
-		LoginResult result = employeeService.login(employee);
-		String errorMsg = "";
-		if(result == LoginResult.FAIL_ID_WRONG) {
-			errorMsg = "잘못된 아이디 입니다.";
-		}else if(result == LoginResult.FAIL_PASSWORD_WRONG) {
-			errorMsg = "잘못된 비밀번호 입니다.";
-		}else {
-			Employee dbEmployee = employeeService.getEmployeeInfo(employee.getEmpId());
-			session.setAttribute("login", dbEmployee);
-			//성공시 메인페이지
-			return "redirect:/index";
-		}
-		//실패시 에러메세지와 함께 로그인 페이지
-		model.addAttribute("loginErrMsg", errorMsg);
-		return "redirect:/";
-	}
+	
 
 }

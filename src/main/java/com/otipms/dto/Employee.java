@@ -20,4 +20,5 @@ public class Employee {
 	
 	//쿼리문을 위해 생성
 	private int projectNo;
+	private String roleName;
 }
