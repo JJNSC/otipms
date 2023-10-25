@@ -124,14 +124,6 @@ public class MailController {
 	@Login
 	@RequestMapping("/writeMail")
 	public String writeMail(Model model) {
-	    List<Employee> employees = employeeService.getAllEmployee();
-	    model.addAttribute("employees", employees);
-
-	    List<Project> projects = projectService.getAllProjects();
-	    model.addAttribute("projects", projects);
-	    
-	    List<Team> teams = teamService.getAllTeam();
-	    model.addAttribute("teams", teams);
 	    
 	    return "mail/writeMail";
 	}
@@ -139,14 +131,6 @@ public class MailController {
 	@Login
 	@RequestMapping("/findEmployee")
 	public String findEmployee(Model model) {
-		List<Employee> employees = employeeService.getAllEmployee();
-	    model.addAttribute("employees", employees);
-		
-		List<Project> projects = projectService.getAllProjects();
-	    model.addAttribute("projects", projects);
-	    
-	    List<Team> teams = teamService.getAllTeam();
-	    model.addAttribute("teams", teams);
 	    
 	    return "mail/findEmployee";
 	}

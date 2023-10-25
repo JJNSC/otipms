@@ -13,12 +13,12 @@
 		select t.*, p.projectName
 		    from team t, project p
 		    where t.projectNo = p.projectNo and projectName = #{projectName}
-		    order by teamNo;
+		    order by teamNo
 	</select>
 	
 	<select id="selectAllTeam" resultType="Team">
 		select t.*
 		    from team t
-		    order by teamNo;
+		    order by teamNo
 	</select>
 </mapper>
