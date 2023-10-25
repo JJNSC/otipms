@@ -14,6 +14,9 @@ import com.otipms.dto.Employee;
 import com.otipms.interceptor.Login;
 import com.otipms.service.EmployeeService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/employeeManagement")
 public class EmployeeController {
@@ -54,6 +57,8 @@ public class EmployeeController {
 								  @RequestParam("registerTeam") String teamName,
 								  @RequestParam("registerAuthority") String authorityName,
 								  Model model) {
+		log.info("teamName : "+ teamName);
+		
 		//중복 인력 제외(전화번호로 확인)
 		if(employeeService.checkEmployeeByTel(empTel)==1) {
 			model.addAttribute("errMsg", "이미 등록 된 인력입니다.");
@@ -66,6 +71,7 @@ public class EmployeeController {
 			employee.setEmpRank(empRank);
 			employee.setEmpTel(empTel);
 			if(teamName.equals("")||teamName.equals(null)) {
+				
 			}else {
 				employee.setTeamNo(employeeService.getTeamNo(teamName));
 			}

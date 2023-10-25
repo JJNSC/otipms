@@ -523,13 +523,13 @@
 	                             <div class="col-lg-7">
 	                                 <select class="form-control" id="registerPosition" name="registerPosition">
 	                                     <option value="">직책 선택</option>
-	                                     <option value="sawon">사원</option>
-	                                     <option value="daeri">대리</option>
-	                                     <option value="guajang">과장</option>
-	                                     <option value="chajang">차장</option>
-	                                     <option value="bujang">부장</option>
-	                                     <option value="esa">이사</option>
-	                                     <option value="gogaek">고객</option>
+	                                     <option value="사원">사원</option>
+	                                     <option value="대리">대리</option>
+	                                     <option value="과장">과장</option>
+	                                     <option value="차장">차장</option>
+	                                     <option value="부장">부장</option>
+	                                     <option value="이사">이사</option>
+	                                     <option value="고객">고객</option>
 	                                 </select>
 	                             </div>
 	                            </div>

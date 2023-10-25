@@ -82,21 +82,26 @@ public class ProjectController {
 	
 	@Login
 	@RequestMapping("/addAndModifyProject")
-	public String addAndModifyProject(@RequestParam(name="projectNo", required=false) int projectNo,
-									  @RequestParam(name="pmId", required=false) int pmId,
-									  @RequestParam(name="customerId", required=false) int customerId,
+	public String addAndModifyProject(@RequestParam(name="projectNo", defaultValue="0") int projectNo,
+									  @RequestParam(name="pmId", defaultValue="0") int pmId,
+									  @RequestParam(name="customerId", defaultValue="0") int customerId,
 									  Model model) {
+		if(projectNo==0) {
+			
+		}else {
+			Project project = projectService.selectProjectByProjectNo(projectNo);
+			Employee pm = projectService.selectByEmployeeId(pmId);
+			Employee customer = projectService.selectByEmployeeId(customerId);
+			
+			model.addAttribute("projectInfo", project);
+			model.addAttribute("pmInfo", pm);
+			model.addAttribute("customerInfo", customer);
+		}
 		
-		Project project = projectService.selectProjectByProjectNo(projectNo);
-		Employee pm = projectService.selectByEmployeeId(pmId);
-		Employee customer = projectService.selectByEmployeeId(customerId);
-		
-		model.addAttribute("projectInfo", project);
-		model.addAttribute("pmInfo", pm);
-		model.addAttribute("customerInfo", customer);
 		
 		
-		return "projectManagement/addAndModifyProject";
+		
+		return "projectManagement/addProject";
 	}
 	
 	@RequestMapping("/addProject")

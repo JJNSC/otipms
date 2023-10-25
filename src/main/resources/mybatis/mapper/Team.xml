@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.otipms.dao.TeamDao">
+	<insert id="addTeam" parameterType="Team">	
+		<selectKey keyProperty="teamNo" resultType="int" order="BEFORE">
+			select team_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
+		</selectKey>
+		INSERT INTO team (teamNo, projectNo, teamName)
+		 values (#{teamNo},#{projectNo},#{teamName})
+	</insert>
+	
+
+</mapper>

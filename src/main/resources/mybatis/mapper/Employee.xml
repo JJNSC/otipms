@@ -8,8 +8,19 @@
 		INSERT INTO emp (EmpId, EmpPW, EmpName, EmpRank) VALUES (TO_CHAR(SYSDATE, 'YY') ||0||0|| #{empId}, #{empPw}, #{empName}, #{empRank})
 	</insert>
 	
-	<insert id="insertEmployeeInfo" parameterType="Employee">	
+	<!-- <insert id="insertEmployeeInfo" parameterType="Employee">	
 		INSERT INTO empInfo (empId, RoleNo, TeamNo, empTel, EmpDisabled) VALUES (#{empId}, #{roleNo}, #{teamNo}, #{empTel}, 0)
+	</insert> -->
+	
+	<insert id="insertEmployeeInfo" parameterType="Employee">	
+		INSERT INTO empInfo (empId, RoleNo, TeamNo, empTel, EmpDisabled) VALUES
+		<if test="teamNo ==0">
+			 (#{empId}, #{roleNo}, null, #{empTel}, 0)
+		</if>
+		<if test="teamNo !=0">
+			(#{empId}, #{roleNo}, #{teamNo}, #{empTel}, 0)
+		</if>
+		
 	</insert>
 	
 	<select id="selectByEmployeeId" parameterType="int" resultType="Employee">
