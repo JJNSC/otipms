@@ -52,12 +52,6 @@ public class LoginController {
 		return "redirect:/";
 	}*/
 	
-	@RequestMapping("/logout")
-	public String logout() {
-		
-		return null;
-	}
-
 	
 	/*@RequestMapping("/imsiMakeId")
 	public String imsiMakeId() {
