@@ -1,17 +1,10 @@
 package com.otipms.controller;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.otipms.dto.Employee;
-import com.otipms.dto.Project;
-import com.otipms.dto.Team;
 import com.otipms.interceptor.Login;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.ProjectService;
