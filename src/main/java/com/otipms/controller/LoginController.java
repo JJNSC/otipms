@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.otipms.dto.Employee;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
 import com.otipms.service.EmployeeService;
@@ -19,6 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 	@Autowired
 	private EmployeeService employeeService;
+	
+	public static Employee loginEmployee;
 	
 	@RequestMapping("/")
 	public String login() {
@@ -75,6 +78,8 @@ public class LoginController {
 		// 현재 로그인한 사용자의 정보 가져오기
 	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    model.addAttribute("employee", empDetails.getEmployee());
+	    
+	    loginEmployee = empDetails.getEmployee();
 		
 	    return "index";
 	}

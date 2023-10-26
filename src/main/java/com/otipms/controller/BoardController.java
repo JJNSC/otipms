@@ -23,6 +23,9 @@ public class BoardController {
 	@RequestMapping("/infoBoard")
 	public String infoBoard(String boardType, Model model) {
 		log.info("공지사항게시판");
+		
+		model.addAttribute("employee", LoginController.loginEmployee);
+		
 		model.addAttribute("boardType", "공지사항");
 		return "board/boardList";
 	}
