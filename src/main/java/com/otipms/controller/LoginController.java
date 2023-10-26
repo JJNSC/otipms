@@ -74,8 +74,6 @@ public class LoginController {
 	public String index(Model model, HttpSession session, Authentication authentication) {
 		// 현재 로그인한 사용자의 정보 가져오기
 	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-	    
-	    // Model에 사용자 정보를 추가하여 JSP로 전달
 	    model.addAttribute("employee", empDetails.getEmployee());
 		
 	    return "index";

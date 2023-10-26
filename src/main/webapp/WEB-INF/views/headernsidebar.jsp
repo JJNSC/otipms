@@ -137,8 +137,8 @@
                         </li>
                         <li class="icons dropdown d-none d-md-flex">
                             <a href="javascript:void(0)" class="log-user" >
-                                <span style="padding:0">${employee.empRank}</span>
                                 <span style="padding:0">${employee.empName}</span> 
+                                <span style="padding:0">${employee.empRank}</span>
                             </a>
                         </li>
                         <li class="icons dropdown">
