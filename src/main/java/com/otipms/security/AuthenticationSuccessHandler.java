@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
+import com.otipms.controller.LoginController;
+
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -33,6 +35,10 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 		//false(기본)-요청 경로로 리다이렉트, true-defaultTargetUrl로 리다이렉트
 		/*setAlwaysUseDefaultTargetUrl(true);
 		setDefaultTargetUrl("/");*/
+		
+		// 현재 로그인한 사용자의 정보 가져오기
+	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginController.loginEmployee = empDetails.getEmployee();
 		
 		super.onAuthenticationSuccess(request, response, authentication);
 	}

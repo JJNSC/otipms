@@ -208,7 +208,7 @@
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a href="./page-login.html">프로젝트 업무 관리</a></li>
                             <li><a href="./page-register.html">팀 업무 관리</a></li>
-                            <li><a href="./page-lock.html">개인 업무 관리</a></li>
+                            <li><a href="myTask">개인 업무 관리</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">

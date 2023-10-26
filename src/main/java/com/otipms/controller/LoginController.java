@@ -79,8 +79,6 @@ public class LoginController {
 	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    model.addAttribute("employee", empDetails.getEmployee());
 	    
-	    loginEmployee = empDetails.getEmployee();
-		
 	    return "index";
 	}
 }
