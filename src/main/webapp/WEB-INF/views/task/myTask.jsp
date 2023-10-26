@@ -51,47 +51,73 @@
 									<div class="col-lg-4 mt-5">
                                         <div id="external-events" class="m-t-20 mt-5">
                                             <!-- <div class="external-event ui-draggable ui-draggable-handle" data-class="bg-primary" style="position: relative;"><i class="fa fa-move"></i>New Theme Release</div> -->
+                                            <div class="basic-form">
+			                                    <form>
+			                                        <div class="form-group">
+			                                            <div class="form-check form-check-inline mr-4">
+			                                                <label class="form-check-label">
+			                                                <input type="checkbox" class="form-check-input" value="">모두 선택</label>
+			                                            </div>
+			                                            <div class="form-check form-check-inline">
+			                                                <label class="form-check-label">
+			                                                <input type="checkbox" class="form-check-input" value="">진행전</label>
+			                                            </div>
+			                                            <div class="form-check form-check-inline">
+			                                                <label class="form-check-label">
+			                                                <input type="checkbox" class="form-check-input" value="">진행중</label>
+			                                            </div>
+			                                            <div class="form-check form-check-inline disabled">
+			                                                <label class="form-check-label">
+			                                                <input type="checkbox" class="form-check-input" value="">진행 완료</label>
+			                                            </div>
+			                                        </div>
+			                                    </form>
+			                                </div>
                                             <table class="table table-hover taskTable">
 		                                        <tbody>
 		                                            <tr>
 		                                                <td><div class="taskEvent-red mb-1" style="position: relative;"><i class="fa fa-move"></i>ㅇㅇㅇ 프로젝트</div></td>
-		                                                <td class="text-success">진행중 </td>
+		                                                <td class="text-success">진행중</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-orange mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무1</div></td>
-		                                                <td><span class="label label-pill label-danger">진행 완료</span></td>
+		                                                <td class="text-light">진행전</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-yellow mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td><span class="label label-pill label-success">진행중</span></td>
+		                                                <td class="text-danger">진행 완료</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-lightGreen mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td><span class="badge badge-pill badge-danger">완료</span></td>
+		                                                <td class="text-danger">진행 완료</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-green mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">완료</td>
+		                                                <td class="text-danger">진행 완료</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-lightBlue mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
+		                                                <td class="text-danger">진행 완료</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-blue mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
+		                                                <td class="text-danger">진행 완료</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-purple mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
+		                                                <td class="text-danger">진행 완료</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                            <tr>
 		                                                <td><div class="taskEvent-pink mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
+		                                                <td class="text-danger">진행 완료</td>
 		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
 		                                            </tr>
 		                                        </tbody>

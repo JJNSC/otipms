@@ -241,8 +241,8 @@
 .taskTable td {
 	padding-left: 0px;
 }
-.taskTable td:nth-child(2) {
-	padding-left: 15px;
+.taskTable td:nth-child(3) {
+	padding-left: 30px;
 }
 
 .btn-detail {
