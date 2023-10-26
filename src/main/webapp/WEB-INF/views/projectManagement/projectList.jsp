@@ -29,7 +29,7 @@
 	</script>
 	
 	<style>
-		.fa-close {
+		.fa-trash-o {
 		  background-color: transparent;
 		}
 		
@@ -149,7 +149,7 @@
 						                                            		</a>
 						                                             </td>
 						                                             <td class="text-center"> 
-						                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+						                                              	<button type="button"  class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
 						                                             </td>
 					                                            </tr>
 					                                            <tr style="background-color:#f3f3f3;" id="${project.projectNo }bottom">

@@ -16,4 +16,18 @@ public class TaskController {
 		model.addAttribute("employee", LoginController.loginEmployee);
 		return "task/myTask";
 	}
+	
+	@RequestMapping("/projectTask")
+	public String projectTask(Model model) {
+		log.info("프로젝트업무일정");
+		model.addAttribute("employee", LoginController.loginEmployee);
+		return "task/projectTask";
+	}
+	
+	@RequestMapping("/projectTaskDT")
+	public String projectTaskDT(Model model) {
+		log.info("프로젝트업무일정");
+		model.addAttribute("employee", LoginController.loginEmployee);
+		return "task/projectTaskDataTable";
+	}
 }
