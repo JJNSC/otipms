@@ -4,19 +4,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.otipms.interceptor.Login;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-public class MyScheduleController {
-
-	@RequestMapping("/mySchedule")
-	public String mySchedule(Model model) {
-		log.info("개인일정");
-		model.addAttribute("employee", LoginController.loginEmployee);
-		return "mySchedule/mySchedule";
-	}
+public class TaskController {
 	
+	@RequestMapping("/myTask")
+	public String myTask(Model model) {
+		log.info("개인업무일정");
+		model.addAttribute("employee", LoginController.loginEmployee);
+		return "task/myTask";
+	}
 }

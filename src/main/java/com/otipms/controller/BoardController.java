@@ -12,14 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BoardController {
 	
-	@Login
 	@RequestMapping("/blank")
 	public String blank() {
 		log.info("빈페이지");
 		return "blank";
 	}
 	
-	@Login
 	@RequestMapping("/infoBoard")
 	public String infoBoard(String boardType, Model model) {
 		log.info("공지사항게시판");
@@ -30,51 +28,51 @@ public class BoardController {
 		return "board/boardList";
 	}
 	
-	@Login
 	@RequestMapping("/inquiryBoard")
 	public String inquiryBoard(String boardType, Model model) {
 		log.info("질의 게시판");
 		model.addAttribute("boardType", "질의 게시판");
+		
+		model.addAttribute("employee", LoginController.loginEmployee);
+		
 		return "board/boardList";
 	}
 	
-	@Login
 	@RequestMapping("/libertyBoard")
 	public String libertyBoard(String boardType, Model model) {
 		log.info("자유 게시판");
 		model.addAttribute("boardType", "자유 게시판");
+		
+		model.addAttribute("employee", LoginController.loginEmployee);
+		
 		return "board/boardList";
 	}
 	
-	@Login
 	@RequestMapping("/teamBoard")
 	public String teamBoard(String boardType, Model model) {
 		log.info("팀 게시판");
 		model.addAttribute("boardType", "팀 게시판");
+		
+		model.addAttribute("employee", LoginController.loginEmployee);
+		
 		return "board/boardList";
 	}
 	
-	@Login
 	@RequestMapping("/writeBoard")
 	public String writeBoard(String boardType, Model model) {
+		log.info("글쓰기");
 		log.info("글쓰기 게시판 타입: " + boardType);
 		model.addAttribute("boardType", boardType);
-		log.info("글쓰기");
+		model.addAttribute("employee", LoginController.loginEmployee);
 		return "board/writeBoard";
 	}
 	
-	@Login
 	@RequestMapping("/detailBoard")
 	public String detailBoard(String boardType, Model model) {
 		log.info("상세글");
 		model.addAttribute("boardType", boardType);
+		model.addAttribute("employee", LoginController.loginEmployee);
 		return "board/detailBoard";
 	}
-	
-	@Login
-	@RequestMapping("/writeBoardRef")
-	public String writeBoardRef() {
-		log.info("글쓰기");
-		return "board/writeBoard_R";
-	}
+
 }
