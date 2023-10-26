@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -124,11 +125,69 @@
 				                                	<label class="form-check-label" for="email-select-all"></label>
 				                              	</div>
 			                              		<i class="fa fa-trash font-18 align-middle ml-2" style="cursor: pointer;" onclick="deletemail()"></i>
-			                              		<i id="refresh-button" class="fa icon-copy ion-loop font-18 align-middle ml-3" style="cursor: pointer;" onclick="refreshReceivedEmailList()"></i>
 				                            </div>
 		                          		</div>
                                     </div>
-                                   	<%@ include file="/WEB-INF/views/mail/reloadReceivedMail.jsp" %>
+                                    <div id="email-list-container" class="email-list m-t-15">
+									    <c:forEach items="${messages}" var="message" varStatus="loop">
+									        <div class="message message-${loop.index+1}">
+									            <div class="col-mail col-mail-1 received">
+									                <div class="email-checkbox">
+									                    <input type="checkbox" id="chk${message.messageNo}">
+									                    <label class="toggle" for="chk${message.messageNo}"></label>
+									                </div>
+									                <span class="icon-copy ${message.messageImportant == 1 ? 'ion-ios-star star' : 'star ion-ios-star-outline'}" onclick="checkimportant(${message.messageNo}, ${loop.index+1}, event)"></span>
+									            	<span class="icon-copy ${message.messageChecked == 1 ? 'ion-android-mail' : 'ion-android-drafts'} mail" onclick="checkread(${loop.index+1}, event)"></span>
+									            </div>
+									            <div class="col-mail col-mail-profile">
+									                <div class="profile">
+									                    <img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
+									                    <span class="rank">${message.empRank}</span>
+									                    <span class="name">${message.empName}</span>
+									                </div>
+									            </div>
+									            <a href="detailMail">
+									                <div class="col-mail col-mail-2">
+									                    <div class="subject">${message.messageTitle}</div>
+									                    <div class="clip">
+									                        <c:if test="${message.mediaFileNo != null}">
+									                            <span class="icon-copy ion-paperclip mr-5"></span>
+									                        </c:if>
+									                    </div>
+									                    <div class="date">10분전</div>
+									                    <%-- <div class="date">${fn:formatDate(message.messageReservedDate, 'MM월 dd일 HH:mm')}</div> --%>
+									                </div>
+									            </a>
+									        </div>
+									    </c:forEach>
+									</div>
+                                   	<!-- <div id="email-list-container" class="email-list m-t-15">
+										<div class="message read message-1">
+											<div class="col-mail col-mail-1 received">
+												<div class="email-checkbox">
+													<input type="checkbox" id="chk2">
+													<label class="toggle" for="chk2"></label>
+												</div>
+												<span class="icon-copy star ion-ios-star-outline" onclick="checkimportant(1,event)"></span>
+											</div>
+											<div class="col-mail col-mail-profile">
+												<div class="profile">
+													<img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
+													<span class="rank">사원</span>
+													<span class="name">김사원</span>
+												</div>
+											</div>
+											<a href="detailMail">
+												<div class="col-mail col-mail-2">
+													<div class="subject">오늘 점심을 뭘 먹어야 할까요?</div>
+													<div class="clip">
+														<span class="icon-copy ion-paperclip mr-5"></span>
+													</div>
+													<div class="date">10분 전</div>
+												</div>
+											</a>
+										</div>
+									</div> -->
                                     <!-- panel -->
                                     <div class="row mt-3 justify-content-center">
 	                                    <div class="bootstrap-pagination">

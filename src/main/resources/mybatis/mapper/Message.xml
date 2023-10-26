@@ -1,7 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.otipms.dao.MessageDao">
+	
+	<!-- 쪽지 수신함 조회 -->
 	<select id="selectMyReceivedMessage" parameterType="int" resultType="Message">
-		
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+			FROM emp e
+			JOIN message m ON e.empId = m.empId
+			JOIN CC c ON m.messageNo = c.messageNo
+			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
+			WHERE c.empId = ${empId} and c.messageStatus = 1 and c.ccType = 1
 	</select>
+	
+	<!-- 쪽지 발신함 조회 -->
+	<select id="selectMySentMessage" parameterType="int" resultType="Message">
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+			FROM emp e
+			JOIN message m ON e.empId = m.empId
+			JOIN CC c ON m.messageNo = c.messageNo
+			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
+			WHERE c.empId = ${empId} and c.messageStatus = 1 and c.ccType= 2
+	</select>
+	
+	<!-- 중요 쪽지함 조회 -->
+	<select id="selectMyImportantMessage" parameterType="int" resultType="Message">
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+			FROM emp e
+			JOIN message m ON e.empId = m.empId
+			JOIN CC c ON m.messageNo = c.messageNo
+			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
+			WHERE c.empId = ${empId} and c.messageStatus = 1 and c.messageImportant = 1
+	</select>
+	
+	<!-- 임시 쪽지함 조회 -->
+	<select id="selectMyTemporaryMessage" parameterType="int" resultType="Message">
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+			FROM emp e
+			JOIN message m ON e.empId = m.empId
+			JOIN CC c ON m.messageNo = c.messageNo
+			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
+			WHERE c.empId = ${empId} and c.messageStatus = 3 and c.ccType= 2
+	</select>
+	
+	<!-- 쪽지 휴지통 조회 -->
+	<select id="selectMyTrashMessage" parameterType="int" resultType="Message">
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+			FROM emp e
+			JOIN message m ON e.empId = m.empId
+			JOIN CC c ON m.messageNo = c.messageNo
+			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
+			WHERE c.empId = ${empId} and c.messageStatus = 2 
+	</select>
+	
+	<!-- 쪽지 번호로 쪽지 찾기 -->
+	<select id="selectMessagebyMessageNo" parameterType="int" resultType="Message">
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo
+			FROM emp e
+			JOIN message m ON e.empId = m.empId
+			JOIN CC c ON m.messageNo = c.messageNo
+			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
+			WHERE c.messageNo = ${messageNo}
+	</select>
+	
+	<!-- 중요 표시 토글(중요 메일함에 넣기) -->
+	<update id="updateImportantMessage" parameterType="Message">
+		UPDATE CC
+			SET messageImportant = CASE
+		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageImportant = '0' THEN '1'
+		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageImportant = '1' THEN '0'
+		        ELSE messageImportant
+		    END
+	</update>
+	
+	<!-- 쪽지 휴지통에 버리기 -->
+	<update id="updateTrashMessage" parameterType="Message">
+		UPDATE CC
+			SET messageStatus = CASE
+		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = '1' THEN '2'
+		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = '2' THEN '1'
+		        ELSE messageStatus
+		    END
+	</update>
 </mapper>

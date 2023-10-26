@@ -9392,7 +9392,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     .email-list .message .col-mail-1 {
       width: 105px; }
     .email-list .message .received{
-      width: 80px;
+      width: 105px;
     }
     .email-list .message .trash{
       width: 55px;
@@ -9453,14 +9453,14 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     .email-list .message .col-mail-2 {
       position: absolute;
       top: 0;
-      left: 240px;
+      left: 250px;
       right: 0;
       bottom: 0; }
       .email-list .message .col-mail-2 .subject {
         position: absolute;
         top: 0;
         left: 0;
-        right: 200px;
+        right: 140px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap; }

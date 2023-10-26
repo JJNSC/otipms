@@ -14,4 +14,8 @@ public class Message {
 	private String messageTitle;
 	private Date messageReservedDate;
 	private int messageStatus;
+	private int messageImportant;
+	private int messageChecked;
+	private int mediaFileNo;
+	private int ccType;
 }

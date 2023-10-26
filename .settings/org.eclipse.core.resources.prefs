@@ -1,4 +1,3 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/chat/chat.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/mail/receivedMail.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mail/reloadReceivedMail.jsp=UTF-8

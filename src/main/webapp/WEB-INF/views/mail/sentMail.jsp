@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,7 +97,40 @@
 				                            </div>
 		                          		</div>
                                     </div>
-                                   	<%@ include file="/WEB-INF/views/mail/reloadSentMail.jsp" %>
+                                   	<div id="email-list-container" class="email-list m-t-15">
+									    <c:forEach items="${messages}" var="message" varStatus="loop">
+									        <div class="message message-${loop.index+1}">
+									            <div class="col-mail col-mail-1 received">
+									                <div class="email-checkbox">
+									                    <input type="checkbox" id="chk${message.messageNo}">
+									                    <label class="toggle" for="chk${message.messageNo}"></label>
+									                </div>
+									                <span class="icon-copy ${message.messageImportant == 1 ? 'ion-ios-star star' : 'star ion-ios-star-outline'}" onclick="checkimportant(${message.messageNo}, ${loop.index+1}, event)"></span>
+									            	<span class="icon-copy ${message.messageChecked == 1 ? 'ion-android-mail' : 'ion-android-drafts'} mail" onclick="checkread(${loop.index+1}, event)"></span>
+									            </div>
+									            <div class="col-mail col-mail-profile">
+									                <div class="profile">
+									                    <img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
+									                    <span class="rank">${message.empRank}</span>
+									                    <span class="name">${message.empName}</span>
+									                </div>
+									            </div>
+									            <a href="detailMail">
+									                <div class="col-mail col-mail-2">
+									                    <div class="subject">${message.messageTitle}</div>
+									                    <div class="clip">
+									                        <c:if test="${message.mediaFileNo != null}">
+									                            <span class="icon-copy ion-paperclip mr-5"></span>
+									                        </c:if>
+									                    </div>
+									                    <div class="date">10분전</div>
+									                    <%-- <div class="date">${fn:formatDate(message.messageReservedDate, 'MM월 dd일 HH:mm')}</div> --%>
+									                </div>
+									            </a>
+									        </div>
+									    </c:forEach>
+									</div>
+
                                     <!-- panel -->
                                     <div class="row mt-3 justify-content-center">
 	                                    <div class="bootstrap-pagination">

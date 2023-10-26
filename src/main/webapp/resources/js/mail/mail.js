@@ -1,4 +1,3 @@
-
 // 드롭다운 항목 클릭 시 호출되는 함수
 function filter(selectedItem) {
     // 버튼 엘리먼트 선택
@@ -15,7 +14,7 @@ function checkall(){
 	// "email-select-all" 체크박스가 변경될 때 실행할 함수를 정의
 	selectAllCheckbox.addEventListener("change", function () {
 		var isChecked = this.checked; // "email-select-all" 체크박스의 상태를 가져오기.
-		// 모든 이메일 체크박스를 선택 또는 해제합니다.
+		// 모든 이메일 체크박스를 선택 또는 해제.
 		emailCheckboxes.forEach(function (checkbox) {
 			checkbox.checked = isChecked;
 		});
@@ -34,134 +33,60 @@ function deletemail(){
         }
     });
     
-    //선택된 메일 삭제하기(jsp 상에서만 삭제되게 해놨음)
-    // -중요- : 나중에 꼭 백엔드 작성 할 때, 삭제 시 상태를 휴지통으로 보내고 html은 지워주기!!
     selectedMessageIndices.forEach(function (index) {
         var emailMessage = document.querySelector(".message.message-" + (index + 1)); // 인덱스는 0부터 시작하므로 +1을 해줍니다.
         if (emailMessage) {
-            emailMessage.remove(); // 선택된 메일을 삭제
+        	var messageNo = emailMessage.getAttribute("data-messageNo"); // 메일의 messageNo 가져오기
+            // 서버로 messageNo를 전송하여 메일을 휴지통으로 보냅니다.
+            sendToTrash(messageNo, index);
         }
     });
 }
 
-function refreshReceivedEmailList() {
-    // 새로고침할 HTML 페이지의 URL로 변경
-    var url = "reloadReceivedMail";
-
-    // email-list-container div를 선택.
-    var emailListContainer = document.getElementById("email-list-container");
-
-    // fetch를 사용하여 해당 URL에서 데이터 가져오기.
-    fetch(url)
-        .then(function (response) {
-            return response.text();
-        })
-        .then(function (html) {
-            // 새로운 HTML로 email-list-container를 업데이트.
-            emailListContainer.innerHTML = html;
-        })
-        .catch(function (error) {
-            console.error("새로고침 중 오류 발생: " + error);
-        });
+function sendToTrash(messageNo, index) {
+    // 서버로 메일을 휴지통으로 보내는 요청을 보냅니다.
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/otipms/mail/updateMessageTrash", // 서버로 메일을 휴지통으로 보내는 URL
+        data: { messageNo: messageNo },
+        success: function (data) {
+            if (data === "success") {
+                // 서버에서 성공적으로 메일을 휴지통으로 보냈을 경우
+                var emailMessage = document.querySelector(".message.message-" + (index + 1));
+                if (emailMessage) {
+                    emailMessage.remove();
+                }
+            } else {
+                alert("서버 오류: 메일을 휴지통으로 보내지 못했습니다.");
+            }
+        },
+        error: function () {
+            alert("서버 오류: 메일을 휴지통으로 보내지 못했습니다.");
+        }
+    });
 }
 
-function refreshSentEmailList() {
-    // 새로고침할 HTML 페이지의 URL로 변경
-    var url = "reloadSentMail";
-
-    // email-list-container div를 선택.
-    var emailListContainer = document.getElementById("email-list-container");
-
-    // fetch를 사용하여 해당 URL에서 데이터 가져오기.
-    fetch(url)
-        .then(function (response) {
-            return response.text();
-        })
-        .then(function (html) {
-            // 새로운 HTML로 email-list-container를 업데이트.
-            emailListContainer.innerHTML = html;
-        })
-        .catch(function (error) {
-            console.error("새로고침 중 오류 발생: " + error);
-        });
-}
-
-
-function refreshImportantEmailList() {
-    // 새로고침할 HTML 페이지의 URL로 변경
-    var url = "reloadImportantMail";
-
-    // email-list-container div를 선택.
-    var emailListContainer = document.getElementById("email-list-container");
-
-    // fetch를 사용하여 해당 URL에서 데이터 가져오기.
-    fetch(url)
-        .then(function (response) {
-            return response.text();
-        })
-        .then(function (html) {
-            // 새로운 HTML로 email-list-container를 업데이트.
-            emailListContainer.innerHTML = html;
-        })
-        .catch(function (error) {
-            console.error("새로고침 중 오류 발생: " + error);
-        });
-}
-
-function refreshTemporaryEmailList() {
-    // 새로고침할 HTML 페이지의 URL로 변경
-    var url = "reloadTemporaryMail";
-
-    // email-list-container div를 선택.
-    var emailListContainer = document.getElementById("email-list-container");
-
-    // fetch를 사용하여 해당 URL에서 데이터 가져오기.
-    fetch(url)
-        .then(function (response) {
-            return response.text();
-        })
-        .then(function (html) {
-            // 새로운 HTML로 email-list-container를 업데이트.
-            emailListContainer.innerHTML = html;
-        })
-        .catch(function (error) {
-            console.error("새로고침 중 오류 발생: " + error);
-        });
-}
-
-function refreshTrashEmailList() {
-    // 새로고침할 HTML 페이지의 URL로 변경
-    var url = "reloadTrashMail";
-
-    // email-list-container div를 선택.
-    var emailListContainer = document.getElementById("email-list-container");
-
-    // fetch를 사용하여 해당 URL에서 데이터 가져오기.
-    fetch(url)
-        .then(function (response) {
-            return response.text();
-        })
-        .then(function (html) {
-            // 새로운 HTML로 email-list-container를 업데이트.
-            emailListContainer.innerHTML = html;
-        })
-        .catch(function (error) {
-            console.error("새로고침 중 오류 발생: " + error);
-        });
-}
-// 이 버튼을 클릭하면 email-list-container 부분을 새로고침함.
-document.querySelector(".refresh-button").addEventListener("click", refreshEmailList);
-
-function checkimportant(index, event) {
-    event.stopPropagation();
-    
-    var $icon = $(".message-" + index + " .icon-copy.star");
-    
-    if ($icon.hasClass("ion-ios-star-outline")) {
-        $icon.removeClass("ion-ios-star-outline").addClass("ion-ios-star");
-    } else if ($icon.hasClass("ion-ios-star")) {
-        $icon.removeClass("ion-ios-star").addClass("ion-ios-star-outline");
-    }
+function checkimportant(messageNo ,index, event) {
+	event.stopPropagation();
+	
+	$.ajax({
+        type: "POST",
+        url: "http://localhost:8080/otipms/mail/updateMessageImportant", // 서버 업데이트를 처리할 URL
+        data: { messageNo: messageNo },
+        success: function(data) {
+            
+            var $icon = $(".message-" + index + " .icon-copy.star");
+            
+            if ($icon.hasClass("ion-ios-star-outline")) {
+                $icon.removeClass("ion-ios-star-outline").addClass("ion-ios-star");
+            } else if ($icon.hasClass("ion-ios-star")) {
+                $icon.removeClass("ion-ios-star").addClass("ion-ios-star-outline");
+            }
+        },
+        error: function() {
+            // 오류 처리
+        }
+    });
 }
 
 function checkread(index, event) {
