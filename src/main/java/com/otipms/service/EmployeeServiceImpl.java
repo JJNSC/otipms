@@ -19,6 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private EmployeeDao employeeDao;
+	@Autowired
 	private TeamDao teamDao;
 
 	@Transactional

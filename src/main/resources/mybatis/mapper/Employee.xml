@@ -48,5 +48,9 @@
 		        and p.projectNo = t.projectNo
 		        and t.teamNo = ei.teamNo
 	</select>
+	
+	<update id="updateTeamNo" parameterType="Employee">
+		update empInfo set teamNo = #{teamNo} where empId = #{empId}
+	</update>
 
 </mapper>

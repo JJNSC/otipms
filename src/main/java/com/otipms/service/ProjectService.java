@@ -6,7 +6,7 @@ import com.otipms.dto.Employee;
 import com.otipms.dto.Project;
 
 public interface ProjectService {
-	public int addProject(Project project);
+	public int addProject(Project project, int pmId, int clientId);
 	public List<Project> getAllProjects();
 	public Employee getEmployeeInfoByProjectNoAndRoleNo(Employee employee);
 	public Project selectProjectByProjectNo(int projectNo);

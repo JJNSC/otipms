@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -104,6 +105,7 @@ public class ProjectController {
 		return "projectManagement/addProject";
 	}
 	
+	@Transactional
 	@RequestMapping("/addProject")
 	public String addProject(@RequestParam("projectName") String projectName,
 							 @RequestParam("projectDate") String projectDate,
@@ -142,13 +144,17 @@ public class ProjectController {
         project.setProjectContent(projectContent);
         project.setProjectDeleted(false);
         //임시 empId
+        PMId="230024";
         int imsiempId=1020000; //-----------------------------임시! 나중에 삭제 받아올수있을때 삭제!
         project.setEmpId(imsiempId); //고객의 id 
         
-		int projectNo = projectService.addProject(project);
+        int pmId =Integer.parseInt(PMId);
+        //int clientId = Integer.parseInt(empId);
+        
+		projectService.addProject(project,pmId,imsiempId);
 		//해당 PM에게 프로젝트 번호 등록!
 		System.out.println(" 후보 1번 : "+project.getProjectNo()); //둘다 잘됨 후보 1번 사용하자.
-		System.out.println(" 후보 2번 : "+projectNo);
+		//System.out.println(" 후보 2번 : "+projectNo);
 		
 		
 		

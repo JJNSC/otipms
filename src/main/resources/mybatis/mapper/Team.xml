@@ -3,7 +3,7 @@
 <mapper namespace="com.otipms.dao.TeamDao">
 	<insert id="addTeam" parameterType="Team">	
 		<selectKey keyProperty="teamNo" resultType="int" order="BEFORE">
-			select team_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
+			select team_seq.nextval from dual
 		</selectKey>
 		INSERT INTO team (teamNo, projectNo, teamName)
 		 values (#{teamNo},#{projectNo},#{teamName})

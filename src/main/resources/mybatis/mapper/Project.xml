@@ -16,10 +16,11 @@
 	</select>
 	
 	<select id="getEmployeeInfoByProjectNoAndRoleNo" parameterType="Employee" resultType="Employee">
-		select e.empId, e.empName, e.empRank, eif.roleNo, eif.teamno,eif.empTel, eif.empEmail from emp e inner Join 
-		(select empId, roleNo, teamNo, empTel,empEmail from empInfo where roleNo=#{roleNo} and teamNo in 
-			(select teamNo from team where projectNo =#{projectNo})) eif 
-		on e.empId = eif.empid
+		select e.empId, e.empName, e.empRank, e.role, eif.teamno,eif.empTel, eif.empEmail from emp e 
+		inner Join
+		(select empId, teamNo, empTel,empEmail from empInfo where teamNo in 
+					(select teamNo from team where projectNo =#{projectNo})) eif 
+		            on e.empId = eif.empId where e.role=#{role}
 	</select>
 	
 	<select id="selectProjectByProjectNo" parameterType="int" resultType="Project">
