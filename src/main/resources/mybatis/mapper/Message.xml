@@ -76,8 +76,8 @@
 	<update id="updateTrashMessage" parameterType="Message">
 		UPDATE CC
 			SET messageStatus = CASE
-		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = '1' THEN '2'
-		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = '2' THEN '1'
+		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = 1 THEN 2
+		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = 2 THEN 1
 		        ELSE messageStatus
 		    END
 	</update>

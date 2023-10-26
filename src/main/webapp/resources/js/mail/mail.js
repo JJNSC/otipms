@@ -27,6 +27,7 @@ function deletemail(){
     // 선택된 체크박스를 저장할 배열을 만들기.
     var selectedMessageIndices = [];
     // 체크된 체크박스를 확인하고 인덱스를 저장.
+    
     emailCheckboxes.forEach(function (checkbox, index) {
         if (checkbox.checked) {
             selectedMessageIndices.push(index);
@@ -34,12 +35,9 @@ function deletemail(){
     });
     
     selectedMessageIndices.forEach(function (index) {
-        var emailMessage = document.querySelector(".message.message-" + (index + 1)); // 인덱스는 0부터 시작하므로 +1을 해줍니다.
-        if (emailMessage) {
-        	var messageNo = emailMessage.getAttribute("data-messageNo"); // 메일의 messageNo 가져오기
-            // 서버로 messageNo를 전송하여 메일을 휴지통으로 보냅니다.
-            sendToTrash(messageNo, index);
-        }
+    	var emailCheckbox = emailCheckboxes[index];
+        var messageNo = emailCheckbox.value;
+        sendToTrash(messageNo, index);
     });
 }
 

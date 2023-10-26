@@ -93,7 +93,6 @@
 				                                	<label class="form-check-label" for="email-select-all"></label>
 				                              	</div>
 			                              		<i class="fa fa-trash font-18 align-middle ml-2" style="cursor: pointer;" onclick="deletemail()"></i>
-			                              		<i id="refresh-button" class="fa icon-copy ion-loop font-18 align-middle ml-3" style="cursor: pointer;" onclick="refreshTrashEmailList()"></i>
 				                            </div>
 		                          		</div>
                                     </div>
@@ -102,7 +101,7 @@
 									        <div class="message message-${loop.index+1}">
 									            <div class="col-mail col-mail-1 received">
 									                <div class="email-checkbox">
-									                    <input type="checkbox" id="chk${message.messageNo}">
+									                    <input type="checkbox" id="chk${message.messageNo}" value="${message.messageNo}">
 									                    <label class="toggle" for="chk${message.messageNo}"></label>
 									                </div>
 									            </div>

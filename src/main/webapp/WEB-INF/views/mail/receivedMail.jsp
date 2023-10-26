@@ -133,8 +133,8 @@
 									        <div class="message message-${loop.index+1}">
 									            <div class="col-mail col-mail-1 received">
 									                <div class="email-checkbox">
-									                    <input type="checkbox" id="chk${message.messageNo}">
-									                    <label class="toggle" for="chk${message.messageNo}"></label>
+									                    <input type="checkbox" id="chk${loop.index+1}" value="${message.messageNo}">
+									                    <label class="toggle" for="chk${loop.index+1}"></label>
 									                </div>
 									                <span class="icon-copy ${message.messageImportant == 1 ? 'ion-ios-star star' : 'star ion-ios-star-outline'}" onclick="checkimportant(${message.messageNo}, ${loop.index+1}, event)"></span>
 									            	<span class="icon-copy ${message.messageChecked == 1 ? 'ion-android-mail' : 'ion-android-drafts'} mail" onclick="checkread(${loop.index+1}, event)"></span>
@@ -161,33 +161,6 @@
 									        </div>
 									    </c:forEach>
 									</div>
-                                   	<!-- <div id="email-list-container" class="email-list m-t-15">
-										<div class="message read message-1">
-											<div class="col-mail col-mail-1 received">
-												<div class="email-checkbox">
-													<input type="checkbox" id="chk2">
-													<label class="toggle" for="chk2"></label>
-												</div>
-												<span class="icon-copy star ion-ios-star-outline" onclick="checkimportant(1,event)"></span>
-											</div>
-											<div class="col-mail col-mail-profile">
-												<div class="profile">
-													<img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
-													<span class="rank">사원</span>
-													<span class="name">김사원</span>
-												</div>
-											</div>
-											<a href="detailMail">
-												<div class="col-mail col-mail-2">
-													<div class="subject">오늘 점심을 뭘 먹어야 할까요?</div>
-													<div class="clip">
-														<span class="icon-copy ion-paperclip mr-5"></span>
-													</div>
-													<div class="date">10분 전</div>
-												</div>
-											</a>
-										</div>
-									</div> -->
                                     <!-- panel -->
                                     <div class="row mt-3 justify-content-center">
 	                                    <div class="bootstrap-pagination">
