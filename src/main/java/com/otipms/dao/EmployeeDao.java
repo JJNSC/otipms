@@ -17,4 +17,5 @@ public interface EmployeeDao {
 	public Employee getEmployeeByTeamNo(int teamNo);
 	public List<Employee> selectAllEmployee();
 	public void updateTeamNo(Employee employee);
+	public List<Employee> selectEmployeeByRole(String role);
 }

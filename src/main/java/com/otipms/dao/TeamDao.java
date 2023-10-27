@@ -11,5 +11,6 @@ public interface TeamDao {
 	public int addTeam(Team team);
 	public String getTeamNameByTeamNo(int teamNo);
 	public List<Team> selectTeamByProjectName(String projectName);
+	public List<Team> selectTeamListByProjectNo(int projectNo);
 	public List<Team> selectAllTeam();
 }

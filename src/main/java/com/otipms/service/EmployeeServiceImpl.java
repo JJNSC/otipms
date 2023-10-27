@@ -60,9 +60,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	//emp, empInfo table 정보 둘다 가져오기
 	@Override
 	public Employee getEmployeeAllInfo(int empId) {
+		if(empId ==0) {
+			Employee employee = null;
+			return employee;
+		}
+		System.out.println("empId : "+ empId);
 		Employee employee = employeeDao.selectByEmployeeId(empId);
 		Employee empInfo = employeeDao.selectInfoByEmployeeId(empId);
-		employee.setRole(empInfo.getRole());
+		System.out.println("employee : "+ employee);
+		System.out.println("empInfo : "+ empInfo);
+		employee.setRole(employee.getRole());
 		int teamNo = empInfo.getTeamNo();
 		String teamName = teamDao.getTeamNameByTeamNo(teamNo);
 		employee.setTeamName(teamName);
@@ -87,6 +94,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> getAllEmployee() {
 		return employeeDao.selectAllEmployee();
+	}
+	
+	//인력찾기(권한 명으로)
+	@Override
+	public List<Employee> selectEmployeeByRole(String role) {
+		return  employeeDao.selectEmployeeByRole(role);
 	}
 
 	

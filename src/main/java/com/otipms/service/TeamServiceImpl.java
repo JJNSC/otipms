@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.otipms.dao.TeamDao;
 import com.otipms.dto.Team;
+import com.otipms.dto.TeamList;
 
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -22,6 +23,14 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public List<Team> getAllTeam() {
 		return teamDao.selectAllTeam();
+	}
+
+	@Override
+	public TeamList getTeamListByProjectNo(int projectNo) {
+		TeamList teamList = new TeamList();
+		List<Team> teams = teamDao.selectTeamListByProjectNo(projectNo);
+		teamList.setTeamList(teams);
+		return teamList;
 	}
 
 
