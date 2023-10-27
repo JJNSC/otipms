@@ -42,7 +42,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4>개인 일정</h4>
+                                    <h4><b>업무 일정</b></h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
@@ -144,25 +144,25 @@
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">업무 이름</label>
-                                                                <input class="form-control form-white" placeholder="ㅇㅅㅇ 업무" type="text" name="category-name" disabled>
+                                                                <input class="form-control form-white" value="ㅇㅅㅇ 업무" type="text" name="category-name" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">업무 개요</label>
-                                                                <input class="form-control form-white" placeholder="대충 이거 저거 하세욧" type="text" name="category-name" disabled>
+                                                                <input class="form-control form-white" value="대충 이거 저거 하세욧" type="text" name="category-name" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">담당자</label>
-                                                                <input class="form-control form-white" placeholder="프로젝트는 pm이지만 개인은 당신이다" type="text" name="category-name" disabled>
+                                                                <input class="form-control form-white" value="프로젝트는 pm이지만 개인은 당신이다" type="text" name="category-name" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label for="example-datetime-local-input" class="control-label">시작일</label>
-                                                                <input class="form-control form-white" value="2023-10-25" type="date" name="category-name" disabled>
+                                                                <input class="form-control form-white" value="2023-10-25" type="date" name="category-name" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
@@ -174,7 +174,7 @@
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label for="example-datetime-local-input" class="control-label">고객명</label>
-                                                                <input class="form-control form-white" placeholder="고객은 왕이다" type="text" name="category-name" disabled>
+                                                                <input class="form-control form-white" value="고객은 왕이다" type="text" name="category-name" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
