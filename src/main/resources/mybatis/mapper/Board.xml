@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.otipms.dao.BoardDao">
+	<insert id="insertBoard" parameterType="Board">
+		<!-- <selectKey keyProperty="board" resultType="hashmap" order="BEFORE">
+			SELECT BOARDNO_SEQ.nextval as a
+			     , BOARDTYPENO as b
+			from BOARDTYPE
+			where BOARDTYPENAME = #{boardTypeName}
+		</selectKey> -->
+		
+		<selectKey keyProperty="boardTypeNo" resultType="int" order="BEFORE">
+			SELECT BOARDTYPENO
+			from BOARDTYPE
+			where BOARDTYPENAME = #{boardTypeName}
+		</selectKey>
+		
+	<![CDATA[
+		INSERT INTO BOARD 
+		(
+		BOARDNO
+		, EMPID
+		, BOARDTYPENO
+		, BOARDTITLE
+		, BOARDCONTENT
+		, BOARDWRITEDATE
+		, BOARDHITCOUNT
+		)
+		VALUES (
+		BOARDNO_SEQ.nextval
+		, #{empId}
+		, #{boardTypeNo}
+		, #{boardTitle}
+		, #{boardContent}
+		, sysdate
+		, 0
+		)
+	]]>
+	</insert>
+</mapper>
