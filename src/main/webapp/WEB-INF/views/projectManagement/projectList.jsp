@@ -105,7 +105,7 @@
                                         		<c:forEach var="pm" items="${PMList}" varStatus="b">
                                         			<c:if test="${a.index==b.index}">
                                         				<c:forEach var="customerInfo" items="${customerInfoList}" varStatus="c">
-                                        					<c:if test="${a.index==c.index}">
+                                        					<c:if test="${b.index==c.index}">
 					                                            <tr class="reviewTitle table-hover " data-toggle="collapse" data-review-id="${project.projectNo }" id="projectNo${project.projectNo }" href="#collapseExample${project.projectNo }" role="button" aria-expanded="false" aria-controls="collapseExample">
 					                                                <td class="text-center">${project.projectNo }</td>
 					                                                <td>
@@ -158,10 +158,10 @@
 																         	<div class="card card-body mt-3 noHover" style="height:200px;">
 							                                            		<table border="1" class="table-in-table">
 							                                            			<tr>
-							                                            				<td class="no-right-border col-md-9">
+							                                            				<td class="no-right-border col-md-8">
 							                                            					<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
 							                                            				</td>
-							                                            				<td class="no-right-border col-md-1">
+							                                            				<td class="no-right-border col-md-2">
 							                                            					<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i>
 							                                            				</td>
 							                                            				<td class="no-left-border col-md-2">

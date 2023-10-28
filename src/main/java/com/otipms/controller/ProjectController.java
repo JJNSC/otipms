@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Project;
 import com.otipms.interceptor.Login;
+import com.otipms.service.EmployeeService;
 import com.otipms.service.ProjectService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,8 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private EmployeeService employeeService;
 	
 	@Login
 	@RequestMapping("/projectList")
@@ -57,7 +60,10 @@ public class ProjectController {
 			
 			//해당 프로젝트당 고객 정보(고객명,연락처,이메일)
 			employee.setRole("ROLE_CLIENT");
-			Employee customerInfo = projectService.getEmployeeInfoByProjectNoAndRoleNo(employee);
+			System.out.println("project : "+ project);
+			System.out.println("project.getEmpId() : "+ project.getEmpId());
+			Employee customerInfo = employeeService.getEmployeeAllInfo(project.getEmpId());
+			log.info("고객사 정보 : "+customerInfo);
 			if( customerInfo==null ||customerInfo.equals(null)) {
 				Employee noInfo =new Employee();
 				noInfo.setEmpName("고객 명이 없습니다.");
@@ -67,6 +73,8 @@ public class ProjectController {
 			}else {
 				customerInfoList.add(customerInfo);
 			}
+			
+			log.info("DB에 들어가는 정보 : " +customerInfoList);
 			
 		}
 		log.info("PMNameList: "+PMList);
@@ -156,11 +164,20 @@ public class ProjectController {
 		System.out.println(" 후보 1번 : "+project.getProjectNo()); //둘다 잘됨 후보 1번 사용하자.
 		//System.out.println(" 후보 2번 : "+projectNo);
 		
-		
-		
-		
-		
 		return "redirect:/projectManagement/projectList";
+	}
+	
+	@Login
+	@RequestMapping("/findPM")
+	public String findPM(Model model) {
+	    
+	    return "projectManagement/findPM";
+	}
+	@Login
+	@RequestMapping("/findClient")
+	public String findClient(Model model) {
+		
+		return "projectManagement/findClient";
 	}
 	
 }

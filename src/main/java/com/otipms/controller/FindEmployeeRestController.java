@@ -74,4 +74,54 @@ public class FindEmployeeRestController {
 
         return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
+    
+    @GetMapping("/api/RolePMData")
+    public ResponseEntity<Map<String, List<Map<String, String>>>> RolePMData() {
+    	List<Employee> employees = employeeService.selectEmployeeByRole("ROLE_PM");
+    	
+    	// JSON 데이터 생성
+    	Map<String, List<Map<String, String>>> jsonData = new HashMap<>();
+    	List<Map<String, String>> employeeData = new ArrayList<>();
+    	
+    	// Employee 데이터를 JSON 형식으로 변환
+    	for (Employee employee : employees) {
+    		Map<String, String> employeeMap = new HashMap<>();
+    		employeeMap.put("empRank", employee.getEmpRank());
+    		employeeMap.put("empName", employee.getEmpName());
+    		employeeMap.put("role", employee.getRole());
+    		employeeMap.put("empId", String.valueOf(employee.getEmpId()));
+    		employeeData.add(employeeMap);
+    	}
+    	
+    	jsonData.put("employeeData", employeeData);
+    	
+    	return new ResponseEntity<>(jsonData, HttpStatus.OK);
+    }
+    
+    @GetMapping("/api/RoleClientData")
+    public ResponseEntity<Map<String, List<Map<String, String>>>> RoleClientData() {
+    	List<Employee> employees = employeeService.selectEmployeeByRole("ROLE_CLIENT");
+    	
+    	// JSON 데이터 생성
+    	Map<String, List<Map<String, String>>> jsonData = new HashMap<>();
+    	List<Map<String, String>> employeeData = new ArrayList<>();
+    	
+    	// Employee 데이터를 JSON 형식으로 변환
+    	for (Employee employee : employees) {
+    		Map<String, String> employeeMap = new HashMap<>();
+    		employeeMap.put("empId", String.valueOf(employee.getEmpId()));
+    		employeeMap.put("empName", employee.getEmpName());
+    		employeeMap.put("empRank", employee.getEmpRank());
+    		employeeMap.put("role", employee.getRole());
+    		employeeMap.put("empTel", employee.getEmpTel());
+    		employeeMap.put("empEmail", employee.getEmpEmail());
+    		employeeData.add(employeeMap);
+    		System.out.println("employeeMap : " + employeeMap);
+    		System.out.println("employeeData : " + employeeData);
+    	}
+    	
+    	jsonData.put("employeeData", employeeData);
+    	
+    	return new ResponseEntity<>(jsonData, HttpStatus.OK);
+    }
 }

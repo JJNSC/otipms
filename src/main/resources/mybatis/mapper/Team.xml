@@ -25,4 +25,8 @@
 	<select id="getTeamNameByTeamNo" parameterType="int" resultType="String">
 		select teamName from team where teamNo = #{teamNo}
 	</select>
+	
+	<select id="selectTeamListByProjectNo" parameterType="int" resultType="Team">
+		select * from team where projectNo = #{projectNo}
+	</select> 
 </mapper>

@@ -55,5 +55,11 @@
 	<update id="updateTeamNo" parameterType="Employee">
 		update empInfo set teamNo = #{teamNo} where empId = #{empId}
 	</update>
+	
+	<select id="selectEmployeeByRole" parameterType="String" resultType="Employee">
+		select e.*, eif.emptel, eif.empemail from emp e inner join (select  empid ,emptel, empemail from empinfo ) eif
+		on e.empid = eif.empid 
+		where role=#{role}
+	</select>
 
 </mapper>

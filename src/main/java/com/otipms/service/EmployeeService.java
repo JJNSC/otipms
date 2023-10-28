@@ -17,4 +17,6 @@ public interface EmployeeService {
 	public int getTeamNo(String teamName);
 	public int checkEmployeeByTel(String empTel);
 	public List<Employee> getAllEmployee();
+	//project 등록 시 
+	public List<Employee> selectEmployeeByRole(String role);
 }
