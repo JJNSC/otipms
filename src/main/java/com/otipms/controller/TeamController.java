@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.otipms.dto.Project;
 import com.otipms.dto.Team;
@@ -15,6 +17,9 @@ import com.otipms.interceptor.Login;
 import com.otipms.service.ProjectService;
 import com.otipms.service.TeamService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/teamManagement")
 public class TeamController {
@@ -42,6 +47,17 @@ public class TeamController {
 		model.addAttribute("allTeam", allTeam);
 		
 		return "teamManagement/teamList";
+	}
+	
+	@PostMapping("/addTeam")
+	public String addTeam(@RequestParam("selectedProject") int projectNo, @RequestParam("teamName") String teamName) {
+		log.info("projectNo : "+ projectNo);
+		log.info("teamName : "+ teamName);
+		Team team = new Team();
+		team.setProjectNo(projectNo);
+		team.setTeamName(teamName);
+		teamService.addTeam(team);
+		return "redirect:/teamManagement/teamList";
 	}
 	
 	@Login

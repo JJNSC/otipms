@@ -33,5 +33,11 @@ public class TeamServiceImpl implements TeamService {
 		return teamList;
 	}
 
+	@Override
+	public void addTeam(Team team) {
+		teamDao.addTeam(team);
+		
+	}
+
 
 }

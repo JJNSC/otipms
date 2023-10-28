@@ -8,4 +8,6 @@ public class Team {
 	private int projectNo;
 	private String teamName;
 	private String projectName;
+	private int empNo;
+	private String empName;
 }
