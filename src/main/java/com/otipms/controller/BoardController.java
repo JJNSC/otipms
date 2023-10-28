@@ -85,7 +85,7 @@ public class BoardController {
 		board.setBoardTitle(boardTitle);
 		board.setBoardContent(myEditor);
 		board.setBoardTypeName(boardType);
-		
+		 
 		boardService.writeBoard(board);
 		return "board/boardList";
 	}
