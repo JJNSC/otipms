@@ -53,7 +53,7 @@
                                     <!-- <h4>공지사항</h4> -->
                                     <h4>${boardType}</h4>
                                 </div>
-                                <form action="submitBoard" id="submitBoardForm">
+                                <form action="submitBoard" method="post" id="submitBoardForm">
 	                            	<div class="mt-4 pl-1 row" style="margin-bottom: 0.8rem;">
 	                                    <h5 class="col-2" style="padding-top: 10px;">글쓰기</h5>
 	                                    <span class="col-10 text-right">
@@ -62,13 +62,21 @@
 	                                    </span>
 	                                </div>
 	                                <c:if test="${boardType eq '질의 게시판'}">
-		                                <div class="dropdown d-inline-block" style="margin-bottom: 1rem;">
-			                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">시스템 관리 문의  </button>
+		                                <!-- <div class="dropdown d-inline-block" style="margin-bottom: 1rem;">
+			                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">전체  </button>
 			                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+			                                	<a class="dropdown-item" href="#" onclick="filter(this)">전체  </a> 
 			                                	<a class="dropdown-item" href="#" onclick="filter(this)">시스템 관리 문의  </a> 
 			                                	<a class="dropdown-item" href="#" onclick="filter(this)">아키텍처 문의  </a> 
 			                                	<a class="dropdown-item" href="#" onclick="filter(this)">DBA 문의  </a>
 			                                </div>
+			                            </div> -->
+			                            <div class="d-inline-block" style="margin-bottom: 1rem;">
+											<select class="p-1" name="inquiryType" id="inquiryType" style="border: 1px solid #ced4da;">
+												<option value="시스템 관리">시스템 관리 문의</option>
+												<option value="아키텍처">아키텍처 문의</option>
+												<option value="DBA">DBA 문의</option>
+											</select>
 			                            </div>
 			                        </c:if>
 	                                <div class="compose-content">
