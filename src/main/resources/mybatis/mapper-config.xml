@@ -10,6 +10,7 @@
 		<typeAlias alias="Team" type="com.otipms.dto.Team"/>
 		<typeAlias alias="CC" type="com.otipms.dto.CC"/>
 		<typeAlias alias="Message" type="com.otipms.dto.Message"/>
+		<typeAlias alias="Alarm" type="com.otipms.dto.Alarm"/>
 	</typeAliases>
 
 </configuration>
