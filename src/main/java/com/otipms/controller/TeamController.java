@@ -65,4 +65,17 @@ public class TeamController {
 	public String addAndModifyTeam() {
 		return "teamManagement/addAndModifyTeam";
 	}
+	
+	@RequestMapping("/findProjectLeader")
+	public String findProjectLeader(@RequestParam("projectNo") int projectNo,
+									@RequestParam("teamNo") int teamNo,
+									Model model) {
+		log.info("projectNo : "+ projectNo);
+		log.info("teamNo : "+ teamNo);
+		Project project = projectService.selectProjectByProjectNo(projectNo);
+		Team team =teamService.getTeamByTeamNo(teamNo);
+		model.addAttribute("project", project);
+		model.addAttribute("team", team);
+		return "teamManagement/findProjectLeader";
+	}
 }

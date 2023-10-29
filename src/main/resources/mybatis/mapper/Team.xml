@@ -28,9 +28,24 @@
 		 where teamNo = #{teamNo}
 	</select>
 	
+	<select id="selectTeamByTeamNo" parameterType="int" resultType="Team">
+		select *
+		  from team 
+		 where teamNo = #{teamNo}
+	</select>
+	
 	<select id="selectTeamListByProjectNo" parameterType="int" resultType="Team">
 		select * 
 		  from team 
-		 where projectNo = #{projectNo}
+		 where projectNo = #{projectNo} 
+      order by teamNo desc
 	</select> 
+	
+	
+	<select id="updateTeamLeader" parameterType="Team">
+		UPDATE team 
+		   SET empId = #{empId} 
+		 WHERE 1=1 
+		   AND teamNo =#{teamNo}
+	</select>
 </mapper>

@@ -102,6 +102,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return  employeeDao.selectEmployeeByRole(role);
 	}
 
+	//팀번호로 팀원들 검색(이름, 직급(rank,position) 필수
+	@Override
+	public List<Employee> selectEmployeeByTeamNo(int teamNo) {
+		return employeeDao.selectEmployeeByTeamNo(teamNo);
+	}
+
 	
 
 }

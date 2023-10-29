@@ -61,5 +61,20 @@
 		on e.empid = eif.empid 
 		where role=#{role}
 	</select>
+	
+	<select id="selectEmployeeByTeamNo" parameterType="int" resultType="Employee">
+		SELECT e.empId
+			 , e.empName
+			 , e.empRank
+			 , e.role
+		  FROM emp e 
+    INNER JOIN (
+    			SELECT * 
+     			  FROM empInfo
+     		   ) eif 
+     	    ON e.empId = eif.empId 
+     	 WHERE 1=1
+     	   AND teamNo=#{teamNo} 
+	</select>
 
 </mapper>

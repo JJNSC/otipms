@@ -19,4 +19,6 @@ public interface EmployeeService {
 	public List<Employee> getAllEmployee();
 	//project 등록 시 
 	public List<Employee> selectEmployeeByRole(String role);
+	public List<Employee> selectEmployeeByTeamNo(int teamNo);
+	
 }
