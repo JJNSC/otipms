@@ -45,7 +45,7 @@
 	</select>
 	
 	<select id="selectAllEmployee" resultType="Employee">
-		select p.projectName, t.teamName, e.empRank, e.empName
+		select p.projectName, t.teamName, e.empRank, e.empName, e.empId
 		    from emp e, empinfo ei, team t, project p
 		    where e.empId = ei.empId
 		        and p.projectNo = t.projectNo

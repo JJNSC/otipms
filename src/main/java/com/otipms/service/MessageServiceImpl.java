@@ -3,10 +3,13 @@ package com.otipms.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.otipms.dao.MessageDao;
+import com.otipms.dto.CC;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 
 @Service
@@ -14,6 +17,9 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Autowired
 	private MessageDao messageDao;
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	@Override
 	public List<Message> getMyReceivedMessage(int empId) {
@@ -67,7 +73,8 @@ public class MessageServiceImpl implements MessageService {
 		
 		return messageDao.detailMessageEmployee(messageNo);
 	}
-
+	
+	// (상세쪽지에서 중요버튼 누르는거 해야함)
 	@Override
 	public int detailMessageImportant(Map<String, Object> paramMap) {
 		return 0;
@@ -81,6 +88,23 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> detailMessageMediaFile(int messageNo) {
 		return messageDao.detailMessageMediaFile(messageNo);
+	}
+
+	@Override
+	public int writeMessage(Message message) {
+		return sqlSession.insert("writeMessage", message);
+	}
+
+	@Override
+	public void writeCC(List<CC> ccList) {
+		for (CC cc : ccList) {
+            messageDao.writeCC(cc);
+        }
+	}
+
+	@Override
+	public int writeMailMedia(List<MediaFile> mailMediaList) {
+		return sqlSession.insert("writeMailMedia", mailMediaList);
 	}
 
 }

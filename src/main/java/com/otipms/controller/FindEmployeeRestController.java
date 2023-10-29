@@ -9,14 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.otipms.dto.CC;
 import com.otipms.dto.Employee;
+import com.otipms.dto.Message;
 import com.otipms.dto.Project;
 import com.otipms.dto.Team;
 import com.otipms.service.EmployeeService;
+import com.otipms.service.MessageService;
 import com.otipms.service.ProjectService;
 import com.otipms.service.TeamService;
 
@@ -31,6 +34,8 @@ public class FindEmployeeRestController {
     private ProjectService projectService;
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/api/employeeData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> getEmployeeData() {
@@ -51,6 +56,7 @@ public class FindEmployeeRestController {
             employeeMap.put("teamName", employee.getTeamName());
             employeeMap.put("empRank", employee.getEmpRank());
             employeeMap.put("empName", employee.getEmpName());
+            employeeMap.put("empId", String.valueOf(employee.getEmpId()));
             employeeData.add(employeeMap);
         }
 

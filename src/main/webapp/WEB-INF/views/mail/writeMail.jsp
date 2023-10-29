@@ -113,7 +113,7 @@
 										    </div>
                                             <div class="form-group">
                                             	<label class="text-dark font-weight-medium">제목</label>
-                                                <input type="text" class="form-control bg-transparent" placeholder=" 제목을 입력하세요">
+                                                <input id="mailTitleInput" type="text" class="form-control bg-transparent" placeholder=" 제목을 입력하세요">
                                             </div>
                                             <div class="form-group">
 												<textarea id="myEditor" name="myEditor" class="form-control border-radius-0" placeholder="내용을 입력하세요"></textarea>
@@ -150,11 +150,14 @@
 														? _ref.parentNode.removeChild(file.previewElement)
 														: void 0;
 												},
+												init: function () {
+										            myDropzone = this; // 이 부분에서 myDropzone 변수를 초기화
+										        }
 											});
 										</script>
                                     </div>
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button">
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="sendMail()">
                                         	<i class="fa fa-paper-plane m-r-5"></i>
                                         	 Send
                                         </button>

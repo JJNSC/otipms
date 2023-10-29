@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.otipms.dto.CC;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 
 @Mapper
@@ -28,4 +30,10 @@ public interface MessageDao {
 	public Message detailMessageContent(int messageNo);
 	//쪽지 상세 보기(쪽지 첨부파일)
 	public List<Message> detailMessageMediaFile(int messageNo);
+	
+	
+	//쪽지 쓰기
+	public int writeMessage(Message message);
+	public void writeCC(CC cc);
+	public int writeMailMedia(List<MediaFile> mailMediaList);
 }

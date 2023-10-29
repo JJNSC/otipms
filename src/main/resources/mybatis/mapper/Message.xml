@@ -138,4 +138,42 @@
 		 WHERE m.messageNo = mf.messageNo
 		   AND mf.messageNo = #{messageNo}
 	</select>
+	
+	<!-- 쪽지 쓰기 -->
+	<insert id="writeMessage" parameterType="Message">
+		<selectKey keyProperty="messageNo" resultType="int" order="BEFORE">
+			select messageno_seq.nextval from dual
+		</selectKey>
+		INSERT INTO MESSAGE (messageNo, empId, messageContent, messageTitle, messageReservedDate, messageStatus)
+			VALUES (#{messageNo}, #{empId}, #{messageContent}, #{messageTitle}, #{messageReservedDate}, #{messageStatus})
+	</insert>
+	
+	<!-- 자기 CC -->
+	<insert id="writeCC" parameterType="com.otipms.dto.CC">
+    <selectKey keyProperty="ccNo" resultType="int" order="BEFORE">
+        select ccNo_seq.nextval from dual
+    </selectKey>
+	    INSERT INTO CC (ccNo, messageNo, empId, messageChecked, messageImportant, ccType, ccCheckedDate)
+	    VALUES (
+	        #{ccNo},
+	        #{messageNo},
+	        #{empId},
+	        1,
+	        0,
+	        #{ccType},
+	        #{ccCheckedDate, jdbcType=NULL}
+	    )
+	</insert>
+	
+	<!-- 첨부파일 추가 -->
+	<insert id="writeMailMedia" parameterType="java.util.List">
+		<selectKey keyProperty="mediaFileNo" resultType="int" order="BEFORE">
+			select mediaFileNo_seq.nextval from dual
+		</selectKey>
+		INSERT INTO mediaFile (mediaFileNo, messengerNo, empId, boardNo, messageNo, mediaFileName, mediaFileType, mediaFileData)
+		VALUES
+			<foreach collection="list" item="mailMedia" separator=",">
+		        (mediaFileNo_seq.nextval,#{mailMedia.mediaFileNo}, #{mailMedia.messengerNo}, #{mailMedia.empId}, #{mailMedia.boardId}, #{mailMedia.messageNo}, #{mailMedia.mediaFileName}, #{mailMedia.mediaFileType}, #{mailMedia.mediaFileData})
+		    </foreach>
+	</insert>
 </mapper>

@@ -1,6 +1,7 @@
 package com.otipms.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -25,4 +26,7 @@ public class Message {
 	//추가
 	private int ccNo;
 	private Date ccCheckedDate;
+	private List<CC> ccList;
+	private List<MediaFile> MediaFile;
+	
 }

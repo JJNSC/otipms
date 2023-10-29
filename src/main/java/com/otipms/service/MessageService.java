@@ -3,6 +3,8 @@ package com.otipms.service;
 import java.util.List;
 import java.util.Map;
 
+import com.otipms.dto.CC;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 
 public interface MessageService {
@@ -24,4 +26,8 @@ public interface MessageService {
 	public Message detailMessageContent(int messageNo);
 	//쪽지 상세 보기(쪽지 첨부파일)
 	public List<Message> detailMessageMediaFile(int messageNo);
+	
+	public int writeMessage(Message message);
+	public void writeCC(List<CC> ccList);
+	public int writeMailMedia(List<MediaFile> mailMediaList);
 }

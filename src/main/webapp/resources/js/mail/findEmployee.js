@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td class="text-center">${employee.teamName}</td>
                         <td class="text-center">${employee.empRank}</td>
                         <td class="text-left">${employee.empName}</td>
+                        <td class="text-left d-none">${employee.empId}</td>
                     `;
                     
                     const checkbox = row.querySelector("input[type='checkbox']");
@@ -177,7 +178,8 @@ function sendSelectedEmployees() {
         var row = checkbox.parentElement.parentElement;
         var position = row.cells[3].textContent;
         var name = row.cells[4].textContent;
-        selectedEmployees.push({ position, name });
+        var id = row.cells[5].textContent;
+        selectedEmployees.push({ position, name, employeeId: id});
     });
 
     // 선택한 라디오 버튼의 값을 가져오기
