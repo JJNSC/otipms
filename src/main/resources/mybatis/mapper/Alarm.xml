@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.otipms.dao.AlarmDao">
+	
+	<select id="selectAlarmByEmpId" parameterType="int" resultType="Alarm">
+		  SELECT a.AlarmNo
+		  	   , a.EmpId
+		  	   , a.AlarmContentCode
+		  	   , a.AlarmContent
+		  	   , a.AlarmDate
+		  	   , a.AlarmChk
+		    FROM Alarm a
+		   INNER JOIN emp e
+		      ON a.EmpId = e.EmpId
+		   WHERE a.EmpId = #{EmpId}
+	</select>
+	
+	<select id="selectAlarmCountByEmpId" parameterType="int" resultType="int">
+		  SELECT a.AlarmNo
+		  	   , a.EmpId
+		  	   , a.AlarmContentCode
+		  	   , a.AlarmContent
+		  	   , a.AlarmDate
+		  	   , a.AlarmChk
+		    FROM Alarm a
+		   INNER JOIN emp e
+		      ON a.EmpId = e.EmpId
+		   WHERE a.EmpId = #{EmpId}
+	</select>
+</mapper>
