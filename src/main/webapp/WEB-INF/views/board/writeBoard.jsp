@@ -14,7 +14,12 @@
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
+
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/board/writeBoard.js"></script> --%>
     
+	<!-- Editer -->-
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	<!-- Dropzone -->
 	<link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -48,31 +53,47 @@
                                     <!-- <h4>공지사항</h4> -->
                                     <h4>${boardType}</h4>
                                 </div>
-                            	<div class="mt-4 pl-1 row" style="margin-bottom: 0.8rem;">
-                                    <h5 class="col-2" style="padding-top: 10px;">글쓰기</h5>
-                                    <span class="col-10 text-right">
-			                            <button type="button" class="btn btn-primary">등록</button>
-                                    </span>
-                                </div>
-                                <c:if test="${boardType eq '질의 게시판'}">
-	                                <div class="dropdown d-inline-block" style="margin-bottom: 1rem;">
-		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">시스템 관리 문의  </button>
-		                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-		                                	<a class="dropdown-item" href="#" onclick="filter(this)">시스템 관리 문의  </a> 
-		                                	<a class="dropdown-item" href="#" onclick="filter(this)">아키텍처 문의  </a> 
-		                                	<a class="dropdown-item" href="#" onclick="filter(this)">DBA 문의  </a>
-		                                </div>
-		                            </div>
-		                        </c:if>
-                                <div class="compose-content">
-                                    <form action="#">
+                                <form action="submitBoard" method="post" id="submitBoardForm">
+	                            	<div class="mt-4 pl-1 row" style="margin-bottom: 0.8rem;">
+	                                    <h5 class="col-2" style="padding-top: 10px;">글쓰기</h5>
+	                                    <span class="col-10 text-right">
+				                            <!-- <button type="button" class="btn btn-primary" id="submitBtn">등록</button> -->
+				                            <button type="submit" class="btn btn-primary" id="submitBtn">등록</button>
+	                                    </span>
+	                                </div>
+	                                <c:if test="${boardType eq '질의 게시판'}">
+		                                <!-- <div class="dropdown d-inline-block" style="margin-bottom: 1rem;">
+			                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">전체  </button>
+			                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+			                                	<a class="dropdown-item" href="#" onclick="filter(this)">전체  </a> 
+			                                	<a class="dropdown-item" href="#" onclick="filter(this)">시스템 관리 문의  </a> 
+			                                	<a class="dropdown-item" href="#" onclick="filter(this)">아키텍처 문의  </a> 
+			                                	<a class="dropdown-item" href="#" onclick="filter(this)">DBA 문의  </a>
+			                                </div>
+			                            </div> -->
+			                            <div class="d-inline-block" style="margin-bottom: 1rem;">
+											<select class="p-1" name="inquiryType" id="inquiryType" style="border: 1px solid #ced4da;">
+												<option value="시스템 관리">시스템 관리 문의</option>
+												<option value="아키텍처">아키텍처 문의</option>
+												<option value="DBA">DBA 문의</option>
+											</select>
+			                            </div>
+			                        </c:if>
+	                                <div class="compose-content">
                                         <div class="form-group" style="margin-bottom: 1rem;">
-                                            <input type="text" class="form-control bg-transparent" placeholder="제목을 입력해주세요.">
+                                            <input type="text" class="form-control bg-transparent" name="boardTitle" id="boardTitle" placeholder="제목을 입력해주세요.">
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="textarea_editor form-control bg-light" rows="15" placeholder="내용을 입력해주세요."></textarea>
+                                            <textarea id="myEditor" name="myEditor" class="form-control border-radius-0" placeholder="내용을 입력하세요"></textarea>
+                                           	<script>
+												var ckeditor_config = {
+												  resize_enable : false,
+												  enterMode : CKEDITOR.ENTER_BR,
+												  shiftEnterMode : CKEDITOR.ENTER_P
+												};
+												CKEDITOR.replace("myEditor", ckeditor_config);
+											</script>
                                         </div>
-                                    </form>
                                     <!-- <h5 class="m-b-20"><i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i> 첨부파일</h5>
                                     <form action="#" class="dropzone">
                                         <div class="form-group">
@@ -81,32 +102,33 @@
                                             </div>
                                         </div>
                                     </form> -->
-                                    <div class="pd-20 card-box mb-30">
-										<div class="clearfix mb-20">
-											<div class="pull-left">
-												<h5 class="m-b-20"><i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i> 첨부파일</h5>
+	                                    <div class="pd-20 card-box mb-30">
+											<div class="clearfix mb-20">
+												<div class="pull-left">
+													<h5 class="m-b-20"><i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i> 첨부파일</h5>
+												</div>
+											</div>
+											<div class="dropzone dz-clickable" action="#" name="dropzone" id="my-awesome-dropzone" style="min-height: 150px; border: 1px dashed #1a73e8;">
+												<div class="dz-default dz-message" style="margin: 3em 0;">
+													<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
+												</div>
 											</div>
 										</div>
-										<form class="dropzone dz-clickable" action="#" id="my-awesome-dropzone" style="min-height: 150px; border: 1px dashed #1a73e8;">
-											<div class="dz-default dz-message" style="margin: 3em 0;">
-												<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
-											</div>
-										</form>
-									</div>
-									<script>
-										Dropzone.autoDiscover = false;
-										$(".dropzone").dropzone({
-										addRemoveLinks: true,
-										removedfile: function (file) {
-										var name = file.name;
-										var _ref;
-										return (_ref = file.previewElement) != null
-										? _ref.parentNode.removeChild(file.previewElement)
-										: void 0;
-										},
-										});
-									</script>
-                                </div>
+										<script>
+											Dropzone.autoDiscover = false;
+											$(".dropzone").dropzone({
+											addRemoveLinks: true,
+											removedfile: function (file) {
+											var name = file.name;
+											var _ref;
+											return (_ref = file.previewElement) != null
+											? _ref.parentNode.removeChild(file.previewElement)
+											: void 0;
+											},
+											});
+										</script>
+	                                </div>
+    	                        </form>
                             </div>
                         </div>
                         <!-- /# card -->
@@ -145,6 +167,11 @@
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+    
+    <!-- Editer -->-
+	<%-- <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script> --%>
+    
+    <script src="${pageContext.request.contextPath}/resources/js/board/writeBoard.js"></script>
     
     <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
 </body>

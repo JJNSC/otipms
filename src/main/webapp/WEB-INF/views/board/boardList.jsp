@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +49,9 @@
                                 </div>
 				                <c:if test="${boardType eq '질의 게시판'}">
 	                                <div class="dropdown d-inline-block my-1">
-		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownCategoryFilter" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">시스템 관리 문의  </button>
+		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownCategoryFilter" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">전체  </button>
 		                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">전체  </a> 
 		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">시스템 관리 문의  </a> 
 		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">아키텍처 문의  </a> 
 		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">DBA 문의  </a>
@@ -65,65 +68,86 @@
                                 <div class="table-responsive">
                                     <table class="table table-hover table-custom">
                                         <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
-                                                <th>작성일</th>
-                                                <th>조회수</th>
-                                            </tr>
+                                            <c:if test="${boardType ne '질의 게시판'}">
+	                                            <tr>
+	                                                <th></th>
+	                                                <th>제목</th>
+	                                                <th>작성자</th>
+	                                                <th>작성일</th>
+	                                                <th>조회수</th>
+	                                            </tr>
+	                                        </c:if>
+                                            <c:if test="${boardType eq '질의 게시판'}">
+	                                            <tr>
+	                                                <th></th>
+		                                            <th style="width: 10%;">문의 유형</th>
+	                                                <th style="width: 58%;">제목</th>
+	                                                <th style="width: 9%;">작성자</th>
+	                                                <th style="width: 10%;">작성일</th>
+	                                                <th style="width: 7%;">조회수</th>
+	                                            </tr>
+                                            </c:if>
                                         </thead>
                                         <tbody>
-                                       		<tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
-                                                <th>3</th>
-                                                <td>
-                                                	게시글 테스트 3 게시글 테스트 3 게시글 테스트 3 게시글 테스트 3
-                                                	&nbsp;
-                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
-                                                	&nbsp;
-                                                	<span class="text-red">[2]</span>
-                                                </td>
-                                                <td>김종진</td>
-                                                <td>23.10.15</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
-                                                <th>2</th>
-                                                <td>
-                                                	게시글 테스트 2 게시글 테스트 2
-                                                	&nbsp;
-                                                	<span class="text-red">[1]</span>
-                                                </td>
-                                                <td>김진성</td>
-                                                <td>23.10.15</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
-                                                <th>1</th>
-                                                <td>
-                                                	게시글 테스트 1
-                                                	&nbsp;
-                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
-                                                	&nbsp;
-                                                	<span class="text-red">[286]</span>
-                                                </td>
-                                                <td>이은지</td>
-                                                <td>23.10.15</td>
-                                                <td>12345</td>
-                                            </tr>
+                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
+	                                       		<tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
+	                                                <th>${board.boardNo}</th>
+	                                                <c:if test="${boardType eq '질의 게시판'}">
+		                                                <td>${board.inquiryBoardType}</td>
+	                                                </c:if>
+	                                                <td>
+	                                                	${board.boardTitle}
+	                                                	<c:if test="${board.mediaFileName != null}">
+		                                                	&nbsp;
+		                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
+	                                                	</c:if>
+	                                                	<c:if test="${board.commentCount != 0}">
+		                                                	&nbsp;
+		                                                	<span class="text-red">[${board.commentCount}]</span>
+	                                                	</c:if>
+	                                                </td>
+	                                                <td>${board.empName}</td>
+	                                                <!-- 오늘 날짜면 시간만 보이도록 -->
+	                                                <c:set var="now" value="<%= new java.util.Date() %>" />
+	                                                <c:choose>
+													    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
+													        <td>
+													            <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/>
+													        </td>
+													    </c:when>
+													    <c:otherwise>
+													        <td>
+													            <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/>
+													        </td>
+													    </c:otherwise>
+													</c:choose>
+	                                                <td>${board.boardHitcount}</td>
+	                                            </tr>
+                                        	</c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="bootstrap-pagination">
                            		<nav>
+                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
 			                        <ul class="pagination justify-content-center">
-			                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">이전</a>
-			                            </li>
-			                            <li class="page-item active"><a class="page-link" href="#">1</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">2</a>
-			                            </li>
+			                        	<c:if test="${pager.groupNo>1}">
+			                            	<li class="page-item"><a class="page-link" href="pageBoardList?pageNo=${pager.startPageNo-1}" tabindex="-1">이전</a></li>
+			                            </c:if>
+			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+											<c:if test="${pager.pageNo == i}">
+												<li class="page-item active"><a class="page-link" href="pageBoardList?pageNo=${i}">${i}</a></li>
+											</c:if>
+											<c:if test="${pager.pageNo != i}">
+												<li class="page-item"><a class="page-link" href="pageBoardList?pageNo=${i}">${i}</a></li>
+											</c:if>
+										</c:forEach>
+										<c:if test="${pager.groupNo<pager.totalGroupNo}">
+											<li class="page-item"><a class="page-link" href="pageBoardList?pageNo=${pager.endPageNo+1}">다음</a></li>
+			                            </c:if>
+			                            <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
+			                            <li class="page-item"><a class="page-link" href="#">2</a></li>
 			                            <li class="page-item"><a class="page-link" href="#">3</a>
 			                            </li>
 			                            <li class="page-item"><a class="page-link" href="#">4</a>
@@ -131,7 +155,24 @@
 			                            <li class="page-item"><a class="page-link" href="#">5</a>
 			                            </li>
 			                            <li class="page-item"><a class="page-link" href="#">다음</a>
-			                            </li>
+			                            </li> -->
+			                            
+			                            <%-- <c:if test="${boardPagerMap.boardPager.groupNo>1}">
+											<a class="btn btn-outline-info btn-sm" href="getBoardList?pageNo=${pager.startPageNo-1}">이전</a>
+										</c:if>
+										
+										<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+											<c:if test="${pager.pageNo != i}">
+												<a class="btn btn-outline-success btn-sm" href="getBoardList?pageNo=${i}">${i}</a>
+											</c:if>
+											<c:if test="${pager.pageNo == i}">
+												<a class="btn btn-danger btn-sm" href="getBoardList?pageNo=${i}">${i}</a>
+											</c:if>
+										</c:forEach>
+										
+										<c:if test="${pager.groupNo<pager.totalGroupNo}">
+											<a class="btn btn-outline-info btn-sm" href="getBoardList?pageNo=${pager.endPageNo+1}">다음</a>
+										</c:if> --%>
 			                        </ul>
 			                    </nav>
 			                </div>

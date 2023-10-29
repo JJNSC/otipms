@@ -183,10 +183,10 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">게시판</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="infoBoard">공지사항</a></li>
-                            <li><a href="inquiryBoard">질의 게시판</a></li>
-                            <li><a href="libertyBoard">자유 게시판</a></li>
-                            <li><a href="teamBoard">팀 게시판</a></li>
+                            <li><a href="board?boardType=공지사항">공지사항</a></li>
+                            <li><a href="board?boardType=질의 게시판">질의 게시판</a></li>
+                            <li><a href="board?boardType=자유 게시판">자유 게시판</a></li>
+                            <li><a href="board?boardType=팀 게시판">팀 게시판</a></li>
                         </ul>
                     </li>
                     <li class="">

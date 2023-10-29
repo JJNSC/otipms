@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.otipms.dao.BoardDao">
+	<insert id="insertBoard" parameterType="Board">
+		
+		<selectKey keyProperty="boardTypeNo" resultType="int" order="BEFORE">
+			SELECT BOARDTYPENO
+			  FROM BOARDTYPE
+			 WHERE 1=1
+			   AND BOARDTYPENAME = #{boardTypeName}
+			 <if test="boardTypeName.equals('질의 게시판') and inquiryBoardType != null">
+			   AND INQUIRYBOARDTYPE = #{inquiryBoardType}
+			 </if>
+		</selectKey>
+		
+		INSERT INTO BOARD 
+		(
+		BOARDNO
+		, EMPID
+		, BOARDTYPENO
+		, BOARDTITLE
+		, BOARDCONTENT
+		, BOARDWRITEDATE
+		, BOARDHITCOUNT
+		)
+		VALUES (
+		BOARDNO_SEQ.nextval
+		, #{empId}
+		, #{boardTypeNo}
+		, #{boardTitle}
+		, #{boardContent}
+		, sysdate
+		, 0
+		)
+	</insert>
+	
+	<select id="countBoard" parameterType="hashMap" resultType="int">
+		SELECT count(*) 
+		  FROM BOARD
+		 WHERE BOARDTYPENO in (
+							  SELECT BOARDTYPENO
+							    FROM BOARDTYPE
+							   WHERE 1=1
+							     AND BOARDTYPENAME = #{boardType}
+						      <if test='boardTypeName == "질의 게시판" and inquiryBoardType != null'>
+								 AND INQUIRYBOARDTYPE = #{inquiryBoardType}
+							  </if>
+							  )
+	</select>
+	
+	<select id="selectBoardByPage" parameterType="hashMap" resultType="Board">
+			SELECT rnum
+			     , boardNo
+			     , boardTitle
+			     , boardContent
+			     , boardWriteDate
+			     , boardUpdateDate
+			     , boardHitcount
+			     , boardDeleted
+			     , inquiryBoardType
+			     , empName
+			     , mediaFileName
+			  FROM (
+				   SELECT rownum as rnum
+				   		, boardNo
+				   		, boardTitle
+				   		, boardContent
+				   		, boardWriteDate
+				   		, boardUpdateDate
+				   		, boardHitcount
+				   		, boardDeleted
+				   		, inquiryBoardType
+				   		, empName
+				   		, mediaFileName
+				     FROM (
+					      SELECT b.boardNo
+					      	   , b.boardTitle
+					      	   , b.boardContent
+					      	   , b.boardWriteDate
+					      	   , b.boardUpdateDate
+					      	   , b.boardHitcount
+					      	   , b.boardDeleted
+					      	   , bt.inquiryBoardType
+					      	   , e.empName
+					      	   , m.mediaFileName
+					        FROM BOARD b
+					       INNER JOIN BOARDTYPE bt
+					       	  ON b.BOARDTYPENO = bt.BOARDTYPENO
+					       INNER JOIN EMP e
+					       	  ON b.EMPID = e.EMPID
+					        LEFT OUTER JOIN MEDIAFILE m
+					          ON b.BOARDNO = m.BOARDNO
+					       WHERE 1=1
+					         AND BOARDTYPENAME = #{boardType}
+				          <if test="boardTypeName == '질의 게시판' and inquiryBoardType != null">
+						     AND INQUIRYBOARDTYPE = #{inquiryBoardType}
+					         AND BOARDDELETED = 0
+					      </if>
+					    ORDER BY boardWriteDate DESC
+				          )
+		<![CDATA[
+				    WHERE rownum <= #{boardPager.endRowNo}
+			       )
+			 WHERE rnum >= #{boardPager.startRowNo}
+		]]>
+	</select>
+	
+	<select id="countBoardComment" parameterType="int" resultType="int">
+		SELECT count(*) 
+		  FROM BOARDCOMMENT
+		 WHERE BOARDNO = #{boardNo}
+	</select>
+</mapper>

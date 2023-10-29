@@ -27,6 +27,28 @@
 		
 		
 	</style>	
+	
+	<script>
+	    // JavaScript를 사용하여 탭을 제어하는 함수
+	    function showProjectTab(index) {
+	        // 모든 탭 컨텐츠를 숨깁니다.
+	        var tabContents = document.getElementsByClassName("tab-pane");
+	        for (var i = 0; i < tabContents.length; i++) {
+	            tabContents[i].classList.remove("show", "active");
+	        }
+	        
+	        // 선택한 프로젝트 탭을 활성화합니다.
+	        var selectedTab = document.getElementById("project" + index);
+	        if (selectedTab) {
+	            selectedTab.classList.add("show", "active");
+	        }
+	    }
+	
+	    // 페이지가 로드될 때 첫 번째 탭을 활성화
+	    window.addEventListener("load", function () {
+	        showProjectTab(0); // 0은 첫 번째 탭의 인덱스입니다.
+	    });
+	</script>
 </head>
 
 <body>
@@ -57,26 +79,31 @@
                                 
 		                                <div class="default-tab">
 		                                    <ul class="nav nav-tabs mb-3" role="tablist">
-		                                    	<c:forEach var="projectTab" items="${projectList}" varStatus="c">
-		                                    		<c:if test="${c.index==0 }">
-				                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#project${c.index }">${projectTab.projectName}</a>
-				                                        </li>
-			                                        </c:if>
-			                                        <c:if test="${c.index!=0 }">
-				                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project${c.index }">${projectTab.projectName}</a>
-				                                        </li>
-			                                        </c:if>
-		                                        </c:forEach>
-		                                        <!-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project3">본격 취업 프로젝트</a>
-		                                        </li>
-		                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#project4">임시 프로젝트123</a>
-		                                        </li> -->
-		                                    </ul>
+											    <c:forEach var="projectTab" items="${projectList}" varStatus="c">
+											        <c:choose>
+											            <c:when test="${c.index==0 }">
+											                <li class="nav-item">
+											                    <a class="nav-link active" data-toggle="tab" href="#project${c.index }" onclick="showProjectTab(${c.index})">${projectTab.projectName}</a>
+											                </li>
+											            </c:when>
+											            <c:otherwise>
+											                <li class="nav-item">
+											                    <a class="nav-link" data-toggle="tab" href="#project${c.index }" onclick="showProjectTab(${c.index})">${projectTab.projectName}</a>
+											                </li>
+											            </c:otherwise>
+											        </c:choose>
+											    </c:forEach>
+											</ul>
 		                                    <c:forEach var="project" items="${projectList}" varStatus="a">
 				                                <c:forEach var="teamList" items="${allTeam}" varStatus="b">
 				                                	<c:if test="${a.index==b.index }">
 					                                    <div class="tab-content">
-					                                        <div class="tab-pane fade show active" id="project${a.index }" role="tabpanel">
+					                                    	<c:if test="${b.index==c.index }">
+					                                        	<div class="tab-pane fade show active" id="project${b.index }" role="tabpanel">
+					                                        </c:if>	
+					                                       <c:if test="${b.index!=c.index  }">
+					                                        	<div class="tab-pane fade show" id="project${b.index }" role="tabpanel">
+					                                        </c:if>	
 					                                            <div class="p-t-15">
 					                                            	 <div class="table-responsive">
 									                                    <table class="table table-hover table-custom" style="width:96%;">
@@ -152,27 +179,27 @@
 					            </div>
 					            <div class="modal-body">
 					                <div class="basic-form">
-                                    <form>
+                                    <form id="addTeamForProject" action="addTeam" method="post">
                                         <div class="form-row">
 	                                        <div class="form-group col-md-10">
 	                                            <label>프로젝트 명</label>
-                                                <select id="inputState" class="form-control">
+                                                <select id="inputState" class="form-control" name="selectedProject">
                                                     <option selected="selected">프로젝트 선택</option>
-                                                    <option>PMS 제작 프로젝트</option>
-                                                    <option>프로젝트 2번째</option>
-                                                    <option>본격 취업 프로젝트</option>
+                                                    <c:forEach var="project" items="${projectList}" varStatus="e">
+                                                    	<option value="${project.projectNo }">${project.projectName }</option>
+                                                    </c:forEach>	
                                                 </select>
 	                                        </div>
 	                                    </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-10">
                                                 <label>팀 명</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" name="teamName" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="form-row">
+                                        <!-- <div class="form-row">
                                             <div class="form-group col-md-10">
-                                                <label>팀장 (PL)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                                <label>팀장 (PL)</label> 추후 과장 이상만 나오게끔 필터링해보자
                                                 <label class="sr-only">팀장 검색</label>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
@@ -183,14 +210,14 @@
                                                     <input type="text" class="form-control" placeholder="Username">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
+                                        </div> -->
+                                       <!--  <div class="form-group">
                                             
                                         </div>
-                                        <button type="submit" class="btn btn-dark">등록하기</button>
+                                        <button type="submit" class="btn btn-dark">등록하기</button> -->
                                     </form>
                                 </div>
-                                <div class="modal fade" id="selectPL" tabindex="-1" role="dialog" aria-labelledby="selectPLLabel" aria-hidden="true">
+                                <%-- <div class="modal fade" id="selectPL" tabindex="-1" role="dialog" aria-labelledby="selectPLLabel" aria-hidden="true">
 	                                <div class="modal-dialog" role="document">
 	                                    <div class="modal-content">
 	                                        <div class="modal-header">
@@ -227,9 +254,9 @@
 	                                    </div>
 	                                </div>
 	                            </div>
-					            </div>
+					            </div> --%>
 					            <div class="modal-footer">
-					            	<button type="button" class="btn btn-primary">등록</button>
+					            	<button type="submit" form="addTeamForProject" class="btn btn-primary">등록</button>
 					                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 					            </div>
 					        </div>
