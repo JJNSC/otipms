@@ -1,6 +1,7 @@
 package com.otipms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,32 @@ public class MessageServiceImpl implements MessageService {
 		messageDao.updateTrashMessage(message);
 	}
 
+	//쪽지 읽음 표시
+	@Override
+	public void updateMessageChecked(Message message) {
+		messageDao.updateMessageChecked(message);
+	}
 
+	//상세보기
+	@Override
+	public List<Message> detailMessageEmployee(int messageNo) {
+		
+		return messageDao.detailMessageEmployee(messageNo);
+	}
 
+	@Override
+	public int detailMessageImportant(Map<String, Object> paramMap) {
+		return 0;
+	}
+
+	@Override
+	public Message detailMessageContent(int messageNo) {
+		return messageDao.detailMessageContent(messageNo);
+	}
+
+	@Override
+	public List<Message> detailMessageMediaFile(int messageNo) {
+		return messageDao.detailMessageMediaFile(messageNo);
+	}
 
 }

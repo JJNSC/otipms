@@ -196,7 +196,7 @@
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a href="${pageContext.request.contextPath}/projectManagement/projectList">프로젝트 관리</a></li>
                             <li><a href="${pageContext.request.contextPath}/teamManagement/teamList">팀 관리</a></li>
-                            <li><a href="${pageContext.request.contextPath}/employeeManagement/employeeList">인력 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/employeeManagement/employeeList">인력 관리</a></li> 
                             <!-- <li><a href="./ui-button.html">권한 관리</a></li>
                             <li><a href="./ui-button-group.html">게시판 관리</a></li> -->
                         <!-- </ul>

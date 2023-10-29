@@ -55,8 +55,8 @@ public class MailController {
     @ResponseBody
     public String updateMessageImportant(@RequestParam("messageNo") int messageNo, Authentication authentication) {
 		try {
-			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			
+			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			int empId = empDetails.getEmployee().getEmpId();
 			
 			Message message = new Message();
@@ -78,7 +78,6 @@ public class MailController {
     public String updateMessageTrash(@RequestParam("messageNo") int messageNo, Authentication authentication) {
 		try {
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-			
 			int empId = empDetails.getEmployee().getEmpId();
 			
 			Message message = new Message();
@@ -86,6 +85,27 @@ public class MailController {
 	        message.setEmpId(empId);
 	        
 	        messageService.updateMessageTrash(message);
+        
+        // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
+        return "success";
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	return "error";
+        }
+    }
+	
+	@PostMapping("/updateCheckedDate")
+    @ResponseBody
+    public String updateCheckedDate(@RequestParam("ccNo") int ccNo, Authentication authentication) {
+		try {
+			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+			int empId = empDetails.getEmployee().getEmpId();
+			
+			Message message = new Message();
+	        message.setCcNo(ccNo);
+	        message.setEmpId(empId);
+	        
+	        messageService.updateMessageChecked(message);
         
         // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
         return "success";
@@ -150,8 +170,19 @@ public class MailController {
 	//쪽지 상세 내용
 	@Login
 	@RequestMapping("/detailMail")
-	public String detailMail() {
-		log.info("dd");
+	public String detailMail(@RequestParam("messageNo") int messageNo, Model model,Authentication authentication) {
+		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		int empId = empDetails.getEmployee().getEmpId();
+		
+		List<Message> messageEmployee = messageService.detailMessageEmployee(messageNo);
+		Message messageContent = messageService.detailMessageContent(messageNo);
+		List<Message> messageMedia = messageService.detailMessageMediaFile(messageNo);
+		
+		model.addAttribute("messageEmployee", messageEmployee);
+		model.addAttribute("messageContent", messageContent);
+		model.addAttribute("messageMedia", messageMedia);
+		
 		return "mail/detailMail";
 	}
 	

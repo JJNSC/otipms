@@ -4,17 +4,19 @@
 	
 	<!-- 쪽지 수신함 조회 -->
 	<select id="selectMyReceivedMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
 			FROM emp e
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
 			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-			WHERE c.empId = ${empId} and c.messageStatus = 1 and c.ccType = 1
+			WHERE c.empId = ${empId}
+			 AND c.messageStatus = 1 
+			 AND (c.ccType IN (1,3,4))
 	</select>
 	
 	<!-- 쪽지 발신함 조회 -->
 	<select id="selectMySentMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
 			FROM emp e
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
@@ -24,7 +26,7 @@
 	
 	<!-- 중요 쪽지함 조회 -->
 	<select id="selectMyImportantMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
 			FROM emp e
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
@@ -34,7 +36,7 @@
 	
 	<!-- 임시 쪽지함 조회 -->
 	<select id="selectMyTemporaryMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
 			FROM emp e
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
@@ -44,7 +46,7 @@
 	
 	<!-- 쪽지 휴지통 조회 -->
 	<select id="selectMyTrashMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType
+		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
 			FROM emp e
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
@@ -81,4 +83,59 @@
 		        ELSE messageStatus
 		    END
 	</update>
+	
+	<!-- 쪽지 클릭 시, 쪽지 읽음 표시 -->
+	<update id="updateMessageChecked" parameterType="Message">
+		UPDATE CC
+    	   SET messageChecked = 0
+    	     , ccCheckedDate = CURRENT_TIMESTAMP
+    	 WHERE ccNo = #{ccNo}
+           AND messageChecked = 1
+	</update>
+	
+	<!-- 쪽지 상세 사원 정보(발신,수신,참조,비밀참조) -->
+	<select id="detailMessageEmployee" parameterType="int" resultType="Message">
+		SELECT e.empRank
+			 , e.empName
+			 , m.messageNo
+			 , c.ccType
+			 , c.empId
+		  FROM message m
+		     , CC c
+		     , emp e
+		 WHERE m.messageNo = c.messageNo
+		   AND e.empId = c.empId
+		   AND c.messageNo = #{messageNo}
+	</select>
+	
+	<!-- 쪽지 상세 정보(중요 여부) -->
+	<select id="detailMessageImportant" parameterType="map" resultType="int">
+		SELECT c.messageImportant
+		  FROM message m
+		     , CC c
+		     , emp e
+		 WHERE m.messageNo = c.messageNo
+		   AND e.empId = c.empId
+		   AND c.empId = #{empId}
+		   AND c.messageNo = #{messageNo}
+	</select>
+	
+	<!-- 쪽지 상세 정보(쪽지 제목, 내용, 시간) -->
+	<select id="detailMessageContent" parameterType="int" resultType="Message">
+		SELECT m.messageNo
+			 , m.messageTitle
+			 , m.messageContent
+			 , m.messageReservedDate
+		  FROM message m
+		 WHERE m.messageNo = #{messageNo}
+	</select>
+	
+	<!-- 쪽지 첨부 파일 -->
+	<select id="detailMessageMediaFile" parameterType="int" resultType="Message">
+		SELECT mf.*
+		  FROM message m
+		  	 , mediaFile mf
+		 WHERE m.messageNo = mf.messageNo
+		   AND mf.messageNo = #{messageNo}
+	</select>
 </mapper>

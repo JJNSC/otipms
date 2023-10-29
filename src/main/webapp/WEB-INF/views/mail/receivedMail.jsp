@@ -110,7 +110,7 @@
 									                    <label class="toggle" for="chk${loop.index+1}"></label>
 									                </div>
 									                <span class="icon-copy ${message.messageImportant == 1 ? 'ion-ios-star star' : 'star ion-ios-star-outline'}" onclick="checkimportant(${message.messageNo}, ${loop.index+1}, event)"></span>
-									            	<span class="icon-copy ${message.messageChecked == 1 ? 'ion-android-mail' : 'ion-android-drafts'} mail" onclick="checkread(${loop.index+1}, event)"></span>
+									            	<span class="icon-copy ${message.messageChecked == 1 ? 'ion-android-mail' : 'ion-android-drafts'} mail"></span>
 									            </div>
 									            <div class="col-mail col-mail-profile">
 									                <div class="profile">
@@ -119,7 +119,7 @@
 									                    <span class="name">${message.empName}</span>
 									                </div>
 									            </div>
-									            <a href="detailMail">
+									            <a href="detailMail?messageNo=${message.messageNo}" onclick="updateMessageChecked(${message.ccNo})">
 									                <div class="col-mail col-mail-2">
 									                    <div class="subject">${message.messageTitle}</div>
 									                    <div class="clip">
