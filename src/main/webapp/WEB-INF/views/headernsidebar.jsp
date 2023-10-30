@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <div class="nav-header">
         <div class="brand-logo">
             <a href="${pageContext.request.contextPath}/index">
@@ -23,7 +26,8 @@
                     <ul class="clearfix">
                         <li class="icons dropdown">
                         	<a class="nav-link nav-icons" href="javascript:void(0);" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-fw fa-bell"></i>
+								<i class="mdi mdi-email-outline"></i>
+								<span class="badge badge-pill badge-custom">${alarmCnt}</span>
 								<input type="hidden" value="${employee.empId}" id="memIdSpan">
 								<span class="indicator" id="alarmIcon" style="display:none;"></span>
 							</a>
@@ -33,6 +37,18 @@
                                 </div>
                                 <div class="dropdown-content-body">
                                     <ul>
+                                    	<c:forEach items="${alarm}" var="alarms" varStatus="loop">
+                                    		<li>
+	                                            <a href="javascript:void(window.open('mail/detailMail?messageNo=${alarms.messageNo}','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedAlarm(${alarms.alarmNo})">
+	                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
+	                                                <div class="notification-content">
+	                                                    <h6 class="notification-heading">${alarms.alarmContentCode}</h6>
+	                                                    <p class="notification-text">${alarms.alarmContent}</p>
+	                                                    <span class="notification-heading"><fmt:formatDate value="${alarms.alarmDate}" type="date" pattern="yy.MM.dd hh.mm.ss"/></span>
+	                                                </div>
+	                                            </a>
+	                                        </li>
+                                    	</c:forEach>
                                     </ul>
                                 </div>
                             </div>

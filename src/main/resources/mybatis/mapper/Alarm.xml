@@ -4,27 +4,45 @@
 	
 	<select id="selectAlarmByEmpId" parameterType="int" resultType="Alarm">
 		  SELECT a.AlarmNo
-		  	   , a.EmpId
+		  	   , a.empId
 		  	   , a.AlarmContentCode
 		  	   , a.AlarmContent
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
+		  	   , a.MessageNo
 		    FROM Alarm a
 		   INNER JOIN emp e
-		      ON a.EmpId = e.EmpId
-		   WHERE a.EmpId = #{EmpId}
+		      ON a.empId = e.empId
+		   WHERE a.empId = #{empId}
 	</select>
 	
-	<select id="selectAlarmCountByEmpId" parameterType="int" resultType="int">
+	<select id="selectAlarmCountByEmpId" parameterType="int" resultType="Alarm">
 		  SELECT a.AlarmNo
 		  	   , a.EmpId
 		  	   , a.AlarmContentCode
 		  	   , a.AlarmContent
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
+		  	   , a.MessageNo
 		    FROM Alarm a
 		   INNER JOIN emp e
 		      ON a.EmpId = e.EmpId
 		   WHERE a.EmpId = #{EmpId}
+   AND TO_NUMBER(a.AlarmChk) = 0
 	</select>
+	
+	<insert id="insertAlarm" parameterType="Alarm">
+		<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
+			select alarmNo_seq.nextval from dual
+		</selectKey>
+		INSERT INTO ALARM (alarmNo, empId, alarmContentCode, alarmContent, alarmDate, alarmChk, MessageNo)
+			 VALUES (#{alarmNo}, #{empId}, #{alarmContentCode}, #{alarmContent}, SYSDATE, 0, #{MessageNo})
+	</insert>
+	
+	<update id="checkedAlarm" parameterType="Alarm">
+		UPDATE ALARM
+    	   SET alarmChk = 1
+    	 WHERE alarmNo = #{alarmNo}
+           AND alarmChk = 0
+	</update>
 </mapper>

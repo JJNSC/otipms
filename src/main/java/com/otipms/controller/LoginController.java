@@ -1,17 +1,26 @@
 package com.otipms.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.otipms.dto.Alarm;
 import com.otipms.dto.Employee;
+import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
+import com.otipms.service.AlarmService;
 import com.otipms.service.EmployeeService;
+import com.otipms.service.MessageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +30,14 @@ public class LoginController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@Autowired
+	private MessageService messageService;
+	
+	@Autowired
+	private AlarmService alarmService;
+	
 	public static Employee loginEmployee;
+	
 	
 	@RequestMapping("/")
 	public String login() {
@@ -77,8 +93,36 @@ public class LoginController {
 	public String index(Model model, HttpSession session, Authentication authentication) {
 		// 현재 로그인한 사용자의 정보 가져오기
 	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+	    int empId = empDetails.getEmployee().getEmpId();
+	    
+	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
+	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
+	    
 	    model.addAttribute("employee", empDetails.getEmployee());
+	    model.addAttribute("alarm", alarm);
+	    model.addAttribute("alarmCnt", alarmCnt);
 	    
 	    return "index";
 	}
+	
+	@PostMapping("/updateCheckedAlarm")
+    @ResponseBody
+    public String updateCheckedDate(@RequestParam("alarmNo") int alarmNo, Authentication authentication) {
+		try {
+			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+			int empId = empDetails.getEmployee().getEmpId();
+			
+			Alarm alarm = new Alarm();
+	        alarm.setAlarmNo(alarmNo);
+	        alarm.setEmpId(empId);
+	        
+	        alarmService.updateAlarmChecked(alarm);
+        
+        // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
+        return "success";
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	return "error";
+        }
+    }
 }

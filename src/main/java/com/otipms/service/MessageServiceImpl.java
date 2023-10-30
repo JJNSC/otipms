@@ -1,5 +1,6 @@
 package com.otipms.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.otipms.dao.AlarmDao;
 import com.otipms.dao.MessageDao;
+import com.otipms.dto.Alarm;
 import com.otipms.dto.CC;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
@@ -21,6 +24,9 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	private SqlSession sqlSession;
 
+	@Autowired
+	private AlarmDao alarmDao;
+	
 	@Override
 	public List<Message> getMyReceivedMessage(int empId) {
 		return messageDao.selectMyReceivedMessage(empId);
@@ -99,6 +105,15 @@ public class MessageServiceImpl implements MessageService {
 	public void writeCC(List<CC> ccList) {
 		for (CC cc : ccList) {
             messageDao.writeCC(cc);
+            Alarm alarm = new Alarm();
+            alarm.setEmpId(cc.getEmpId());
+            alarm.setAlarmContentCode("쪽지가 알림");
+            alarm.setAlarmContent("쪽지가 도착했습니다.");
+            Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+            alarm.setAlarmDate(currentTimestamp);
+            alarm.setAlarmChk(0);
+            alarm.setMessageNo(cc.getMessageNo());
+            alarmDao.insertAlarm(alarm);
         }
 	}
 
