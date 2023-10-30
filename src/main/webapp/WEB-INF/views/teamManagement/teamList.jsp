@@ -119,7 +119,7 @@
 									                                        </thead>
 									                                        <tbody>
 									                                        	<c:forEach var="team" items="${teamList.teamList }" varStatus="d">
-										                                            <tr class="reviewTitle" data-toggle="collapse" data-review-id="${review.reviewId }" id="project${a.index }" href="#collapseExample${review.reviewId }" role="button" aria-expanded="false" aria-controls="collapseExample">
+										                                            <tr  id="project${a.index }"  >
 										                                                <td class="text-center">${team.teamNo}</td>
 										                                                <td>
 																						  ${team.teamName} 
@@ -132,7 +132,7 @@
 										                                                </c:if>
 																						<c:if test="${team.empName!=null}">	
 										                                                	<td>
-										                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}" onclick="javascript:void(window.open('findProjectLeader','_blank','width=600, height=600, left=600, top=30'))">
+										                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}">
 										                                                		${team.empRank} ${team.empName }</span>
 										                                                	</td>
 										                                                </c:if>

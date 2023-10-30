@@ -53,7 +53,15 @@
 	</select>
 	
 	<update id="updateTeamNo" parameterType="Employee">
-		update empInfo set teamNo = #{teamNo} where empId = #{empId}
+		UPDATE empInfo 
+		   SET
+			   <if test="teamNo==0">
+			      teamNo = null
+			   </if>
+			   <if test="teamNo!=0">
+				  teamNo = #{teamNo}
+			   </if>
+		 WHERE empId = #{empId}
 	</update>
 	
 	<select id="selectEmployeeByRole" parameterType="String" resultType="Employee">

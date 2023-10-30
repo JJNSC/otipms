@@ -100,13 +100,13 @@
                                             <div class="input-group mb-2">
                                                 <div class="input-group mb-2">
                                                     <div class="text-left m-t-15">
-			                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
-			                                        		type="button" 
-			                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
-			                                        	<i class="fa fa-paper-plane m-r-5"></i>
-			                                        	 사원 찾기
-			                                        </button>
-			                                    </div>
+				                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+				                                        		type="button" 
+				                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
+				                                        	<i class="fa fa-paper-plane m-r-5"></i>
+				                                        	 사원 찾기
+				                                        </button>
+			                                    	</div>
 				                                	<input type="text" class="form-control d-none" id="ClientId" name="customerId" readonly="readonly">
                                                    	<input type="text" class="form-control" style="background-color:transparent; border:0px;" id="ClientINFO" readonly="readonly">
                                                 </div>

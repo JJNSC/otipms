@@ -40,24 +40,32 @@ public class ProjectServiceImpl implements ProjectService {
 		log.info(" 프로젝트 번호 : "+project.getProjectNo());
 		PMTeam.setProjectNo(project.getProjectNo());
 		log.info(" 프로젝트  : "+PMTeam);
-		int teamNo = this.teamDao.addTeam(PMTeam);
-		System.out.println("teamNo : "+ teamNo);
+		int PMTeamNo = this.teamDao.addTeam(PMTeam);
+		System.out.println("PMTeamNo : "+ PMTeamNo);
 		//PM 팀 설정
 		Employee PM = new Employee();
 		PM.setEmpId(pmId);
 		PM.setTeamNo(PMTeam.getTeamNo());
 		employeeDao.updateTeamNo(PM);
+		//PM팀의 팀장 등록
+		PMTeam.setTeamNo(PMTeamNo);
+		PMTeam.setEmpId(pmId);
+		teamDao.updateTeamLeader(PMTeam);
 		
 		//고객사 전용 팀 만들기
 		Team cilentTeam = new Team();
 		cilentTeam.setTeamName("고객");
 		cilentTeam.setProjectNo(project.getProjectNo());
-		teamDao.addTeam(cilentTeam);
+		int clientTeamNo =teamDao.addTeam(cilentTeam);
 		//고객 팀 설정
 		Employee client = new Employee();
 		client.setEmpId(clientId);
 		client.setTeamNo(cilentTeam.getTeamNo());
 		employeeDao.updateTeamNo(client);
+		//client팀의 팀장 등록
+		cilentTeam.setTeamNo(clientTeamNo);
+		cilentTeam.setEmpId(clientId);
+		teamDao.updateTeamLeader(cilentTeam);
 
 		
 		return project.getProjectNo();
@@ -82,6 +90,57 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Employee selectByEmployeeId(int empId) {
 		return employeeDao.selectByEmployeeId(empId);
+	}
+	
+	//아래의 정보 수정
+	//프로젝트 : 프로젝트명, 시작일,종료일 , 고객아이디(empId), 개요, 회사명
+	//팀 : 해당 프로젝트의 PM팀, 고객사팀 의 empId  
+	//개인 : 소속 팀 수정
+	@Override
+	public void modifyProject(Project project, int pmId, int clientId, int beforePmId, int beforeClientId) {
+		projectDao.updateProject(project);
+		//PM팀
+		Team PMTeam = new Team();
+		PMTeam.setProjectNo(project.getProjectNo());
+		PMTeam.setTeamName("PM");
+		PMTeam.setEmpId(pmId);
+		teamDao.updateTeamEmpId(PMTeam);
+		
+		//과거 PM
+		Employee oldPM = new Employee();
+		oldPM.setEmpId(beforePmId);
+		oldPM.setTeamNo(0);
+		employeeDao.updateTeamNo(oldPM);
+		//새로운 PM
+		Employee newPM = new Employee();
+		newPM.setEmpId(pmId);
+		newPM.setTeamNo(PMTeam.getTeamNo());
+		employeeDao.updateTeamNo(newPM);
+		
+		//Client팀
+		Team clientTeam = new Team();
+		clientTeam.setProjectNo(project.getProjectNo());
+		clientTeam.setTeamName("고객");
+		clientTeam.setEmpId(clientId);
+		teamDao.updateTeamEmpId(clientTeam);
+		
+		//과거 PM
+		Employee oldClient = new Employee();
+		oldClient.setEmpId(beforeClientId);
+		oldClient.setTeamNo(0);
+		employeeDao.updateTeamNo(oldClient);
+		//새로운 PM
+		Employee newClient = new Employee();
+		newClient.setEmpId(clientId);
+		newClient.setTeamNo(clientTeam.getTeamNo());
+		employeeDao.updateTeamNo(newClient);
+		
+	}
+
+	@Override
+	public void updateProjectDeletedStatus(Project project) {
+		projectDao.updateProjectDeletedStatus(project);
+		
 	}
 	
 	

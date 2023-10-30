@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otipms.dto.Employee;
 import com.otipms.dto.Project;
@@ -90,26 +92,52 @@ public class ProjectController {
 	}
 	
 	@Login
-	@RequestMapping("/addAndModifyProject")
-	public String addAndModifyProject(@RequestParam(name="projectNo", defaultValue="0") int projectNo,
+	@RequestMapping("/modifyProjectForm")
+	public String modifyProjectForm(@RequestParam(name="projectNo", defaultValue="0") int projectNo,
 									  @RequestParam(name="pmId", defaultValue="0") int pmId,
 									  @RequestParam(name="customerId", defaultValue="0") int customerId,
 									  Model model) {
 		if(projectNo==0) {
 			
 		}else {
+			log.info(" projectNo :"+projectNo);
+			log.info(" pmId :"+pmId);
+			log.info(" customerId :"+customerId);
 			Project project = projectService.selectProjectByProjectNo(projectNo);
 			Employee pm = projectService.selectByEmployeeId(pmId);
-			Employee customer = projectService.selectByEmployeeId(customerId);
+			Employee customer = employeeService.getEmployeeAllInfo(customerId);
+			
+			SimpleDateFormat inputFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.US);
+			SimpleDateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+			String formattedStartDate;
+			String formattedEndDate;
+			try {
+			    Date startDate = inputFormat.parse(project.getProjectStartDate().toString());
+			    Date endDate = inputFormat.parse(project.getProjectEndDate().toString());
+
+			    formattedStartDate = outputFormat.format(startDate);
+			    formattedEndDate = outputFormat.format(endDate);
+
+			    model.addAttribute("startDate", formattedStartDate);
+			    model.addAttribute("endDate", formattedEndDate);
+			} catch (ParseException e) {
+			    log.error("날짜 변환 중 에러 발생: " + e.getMessage());
+			}
+			
+			log.info(" project :"+project);
+			log.info(" pm :"+pm);
+			log.info(" customer :"+customer);
 			
 			model.addAttribute("projectInfo", project);
 			model.addAttribute("pmInfo", pm);
 			model.addAttribute("customerInfo", customer);
+			
 		}
-		
-		
-		
-		
+		return "projectManagement/modifyProject";
+	}
+	
+	@RequestMapping("/addProjectForm")
+	public String addProjectForm() {
 		return "projectManagement/addProject";
 	}
 	
@@ -151,15 +179,69 @@ public class ProjectController {
         project.setProjectCompanyName(projectCompanyName);
         project.setProjectContent(projectContent);
         project.setProjectDeleted(false);
-        //임시 empId
-        PMId="230024";
-        int imsiempId=1020000; //-----------------------------임시! 나중에 삭제 받아올수있을때 삭제!
-        project.setEmpId(imsiempId); //고객의 id 
+        project.setEmpId(Integer.parseInt(empId)); //고객의 id 
         
         int pmId =Integer.parseInt(PMId);
         //int clientId = Integer.parseInt(empId);
         
-		projectService.addProject(project,pmId,imsiempId);
+		projectService.addProject(project,pmId,Integer.parseInt(empId));
+		//해당 PM에게 프로젝트 번호 등록!
+		System.out.println(" 후보 1번 : "+project.getProjectNo()); //둘다 잘됨 후보 1번 사용하자.
+		//System.out.println(" 후보 2번 : "+projectNo);
+		
+		return "redirect:/projectManagement/projectList";
+	}
+	
+	@Transactional
+	@RequestMapping("/modifyProject")
+	public String modifyProject(@RequestParam("projectNo") String projectNo,
+								@RequestParam("projectName") String projectName,
+							 	@RequestParam("projectDate") String projectDate,
+							 	@RequestParam("ProjectManagerId") String PMId,
+							 	@RequestParam("beforeProjectManagerId") String beforePMId,
+							 	@RequestParam("projectOutLines")String projectContent,
+							 	@RequestParam("customerCompany") String projectCompanyName,
+							 	@RequestParam("customerId") String empId,
+								@RequestParam("beforeCustomerId") String beforeEmpId){
+		System.out.println("projectNo :" + projectNo );
+		System.out.println("projectName :" + projectName );
+		System.out.println("projectDate :" + projectDate );
+		System.out.println("PMId :" + PMId );
+		System.out.println("projectContent :" + projectContent );
+		System.out.println("projectCompanyName :" + projectCompanyName );
+		System.out.println("empId :" + empId );
+		
+		//프로젝트 등록
+		Project project = new Project();
+		project.setProjectNo(Integer.parseInt(projectNo));
+		project.setProjectName(projectName);
+		// 공백을 기준으로 문자열을 분할
+        String[] dateStrings = projectDate.split(" - ");
+        // 날짜 형식 지정
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            // 첫 번째 날짜를 Date 형식으로 변환
+            Date startDate = dateFormat.parse(dateStrings[0]);
+            project.setProjectStartDate(startDate);
+            
+            // 두 번째 날짜를 Date 형식으로 변환
+            Date endDate = dateFormat.parse(dateStrings[1]);
+            project.setProjectEndDate(endDate);
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        project.setProjectStatus("작업전");
+        project.setProjectCompanyName(projectCompanyName);
+        project.setProjectContent(projectContent);
+        project.setProjectDeleted(false);
+        //임시 empId
+        project.setEmpId(Integer.parseInt(empId)); //고객의 id 
+        
+        int pmId =Integer.parseInt(PMId);
+        //int clientId = Integer.parseInt(empId);
+        
+		projectService.modifyProject(project,pmId,Integer.parseInt(empId),Integer.parseInt(beforePMId),Integer.parseInt(beforeEmpId));
 		//해당 PM에게 프로젝트 번호 등록!
 		System.out.println(" 후보 1번 : "+project.getProjectNo()); //둘다 잘됨 후보 1번 사용하자.
 		//System.out.println(" 후보 2번 : "+projectNo);
@@ -178,6 +260,16 @@ public class ProjectController {
 	public String findClient(Model model) {
 		
 		return "projectManagement/findClient";
+	}
+	
+	@RequestMapping("/disableProject")
+	public String disableProject(@RequestParam(name="disableProjectNo") String projectNo) {
+		System.out.println("disableProject projectNo: "+ projectNo);
+		Project project = new Project();
+		project.setProjectNo(Integer.parseInt(projectNo));
+		project.setProjectDeleted(true);
+		projectService.updateProjectDeletedStatus(project);
+		return "redirect:/projectManagement/projectList";
 	}
 	
 }

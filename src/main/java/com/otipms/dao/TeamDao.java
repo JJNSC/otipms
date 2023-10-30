@@ -15,4 +15,5 @@ public interface TeamDao {
 	public Team selectTeamByTeamNo(int teamNo);
 	public List<Team> selectAllTeam();
 	public void updateTeamLeader(Team team);
+	public int updateTeamEmpId(Team team);
 }

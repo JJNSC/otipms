@@ -13,4 +13,6 @@ public interface ProjectDao {
 	public List<Project> selectAllProject();
 	public Employee getEmployeeInfoByProjectNoAndRoleNo(Employee employee);
 	public Project selectProjectByProjectNo(int projectNo);
+	public void updateProject(Project project);
+	public void updateProjectDeletedStatus(Project project);
 }

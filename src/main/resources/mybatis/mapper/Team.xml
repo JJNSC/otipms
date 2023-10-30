@@ -41,11 +41,25 @@
       order by teamNo desc
 	</select> 
 	
-	
-	<select id="updateTeamLeader" parameterType="Team">
+	<update id="updateTeamLeader" parameterType="Team">
 		UPDATE team 
 		   SET empId = #{empId} 
 		 WHERE 1=1 
 		   AND teamNo =#{teamNo}
-	</select>
+	</update>
+	
+	<update id="updateTeamEmpId">
+		<selectKey keyProperty="teamNo" resultType="int" order="BEFORE">
+			SELECT teamNo
+			  FROM team
+			 WHERE 1=1 
+			   AND projectNo=#{projectNo}
+		  	   AND teamName=#{teamName}
+		</selectKey>
+		UPDATE team 
+		   SET empId =#{empId}
+		 WHERE 1=1 
+		   AND projectNo=#{projectNo}
+		   AND teamName=#{teamName}
+	</update>
 </mapper>

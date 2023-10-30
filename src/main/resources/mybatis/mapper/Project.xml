@@ -27,5 +27,24 @@
 		select * from project where projectNo = #{projectNo}
 	</select>
 	
+	<update id="updateProject" parameterType="Project">
+		UPDATE PROJECT 
+		   SET projectName = #{projectName}
+		     , projectStartDate =#{projectStartDate}
+		     , projectEndDate = #{projectEndDate}
+		     , empId=#{empId}
+		     , projectContent=#{projectContent}
+		     , projectCompanyName=#{projectCompanyName}
+		 WHERE 1=1
+		   AND projectNo = #{projectNo}
+	</update>
+	
+	<update id="updateProjectDeletedStatus" parameterType="Project">
+		UPDATE project
+		   SET projectDeleted = #{projectDeleted}
+		 WHERE 1=1
+		   AND projectNo = #{projectNo}
+	</update>
+	
 	
 </mapper>

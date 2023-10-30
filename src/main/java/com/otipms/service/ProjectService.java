@@ -11,4 +11,6 @@ public interface ProjectService {
 	public Employee getEmployeeInfoByProjectNoAndRoleNo(Employee employee);
 	public Project selectProjectByProjectNo(int projectNo);
 	public Employee selectByEmployeeId(int empId);
+	public void modifyProject(Project project, int pmId, int clientId, int beforePmId, int beforeClientId);
+	public void updateProjectDeletedStatus(Project project);
 }

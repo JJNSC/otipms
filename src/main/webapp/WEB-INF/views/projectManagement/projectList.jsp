@@ -26,6 +26,33 @@
 		        $(target).collapse('toggle');
 		    });
 		});
+		
+		function prepareDelete(projectNo) {
+		    // 모달 내의 숨겨진 입력 필드에 projectNo를 설정
+		    document.getElementById('projectNoInput').value = projectNo;
+		}
+		
+		function deleteProject() {
+		    // 모달 내의 숨겨진 입력 필드에서 projectNo를 가져옴
+		    var projectNo = document.getElementById('projectNoInput').value;
+
+		    // 컨트롤러로 데이터를 전송하는 AJAX 요청
+		    $.ajax({
+		        type: 'POST', // 또는 GET, 컨트롤러의 요청 메서드에 맞게 선택
+		        url: '/disableProject', // 컨트롤러의 URL로 대체해야 함
+		        data: { disableProjectNo: projectNo },
+		        success: function() {
+		            // 성공 시 수행할 작업
+		            console.log('프로젝트 삭제 성공');
+		            // 모달을 닫음
+		            $('#modalGrid').modal('hide');
+		        },
+		        error: function(error) {
+		            // 실패 시 수행할 작업
+		            console.error('프로젝트 삭제 실패');
+		        }
+		    });
+		}
 	</script>
 	
 	<style>
@@ -81,7 +108,7 @@
                                 <div class="card-title">
                                     <h4><b>프로젝트 목록</b></h4> 
                                     <span style="float: right">
-                                    	<a href="addAndModifyProject">
+                                    	<a href="addProjectForm">
                                     		<button type="button" class="btn mb-1 btn-primary">등록</button>
                                     	</a>
                                     </span>
@@ -144,12 +171,13 @@
 										                                </div>
 					                                                </td>
 						                                            <td class="text-right" style="padding-right:20px"> 
-						                                             	<a href="addAndModifyProject?projectNo=${project.projectNo}&pmId=${pm.empId}&customerId=${customerInfo.empId}">
+						                                             	<a href="modifyProjectForm?projectNo=${project.projectNo}&pmId=${pm.empId}&customerId=${customerInfo.empId}">
 						                                            			<i class="fa fa-pencil color-muted"></i>
 						                                            		</a>
 						                                             </td>
 						                                             <td class="text-center"> 
-						                                              	<button type="button"  class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+						                                              	<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" 
+						                                              	data-target="#modalGrid" data-projectno="${project.projectNo }" onclick="prepareDelete(${project.projectNo})"></button>
 						                                             </td>
 					                                            </tr>
 					                                            <tr style="background-color:#f3f3f3;" id="${project.projectNo }bottom">
@@ -208,17 +236,20 @@
 	                                <div class="modal-header">
 	                                    <h5 class="modal-title">프로젝트 삭제</h5>
 	                                </div>
+	                                <form action="disableProject" method="Post">
 	                                <div class="modal-body">
 	                                    <div class="container-fluid">
 	                                        <div class="row">
+	                                        	<input type="hidden" id="projectNoInput" name="disableProjectNo">
 	                                        	해당 프로젝트를 삭제하시겠습니까?
 	                                        </div>
 	                                    </div>
 	                                </div>
 	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-primary">삭제</button>
+	                                    <button class="btn btn-primary" onclick="deleteProject()">삭제</button>
 	                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	                                </div>
+	                                </form>
 	                            </div>
 	                        </div>
                 		</div>

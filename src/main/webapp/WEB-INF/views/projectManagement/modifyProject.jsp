@@ -16,7 +16,8 @@
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+	<script src="${pageContext.request.contextPath}/resources/js/project/selectPM.js"></script>
+ 	<script src="${pageContext.request.contextPath}/resources/js/project/selectClient.js"></script>
 </head>
 
 <body>
@@ -40,29 +41,20 @@
             <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                	<h4 class="card-title"><b>프로젝트 등록</b></h4>
+                                	<h4 class="card-title"><b>프로젝트 수정</b></h4>
                                 <div class="basic-form">
-                                    <form action="${pageContext.request.contextPath}/projectManagement/addProject" method="post">
+                                    <form action="${pageContext.request.contextPath}/projectManagement/modifyProject" method="post">
+                                    	<input class="d-none" name="projectNo" value="${projectInfo.projectNo }" ></input>
                                         <div class="form-row">
 	                                        <div class="form-group col-md-6">
 	                                            <label>프로젝트 명</label>
-                                	 			<input type="text" class="form-control" name="projectName" placeholder="프로젝트 명 입력">
+                                	 			<input type="text" class="form-control" name="projectName" value="${projectInfo.projectName}" placeholder="${projectInfo.projectName}" >
 	                                        </div>
                                             <div class="form-group col-md-6">
                                                  <div class="col-md-6">
 			                                        <div class="example">
 			                                            <label>프로젝트 기간</label>
-					                                	  <%
-													        // Java 코드를 사용하여 내일 날짜를 가져옴
-													        java.time.LocalDate today = java.time.LocalDate.now();
-													        java.time.LocalDate tomorrow = today.plusDays(1);
-													        
-													        // 원하는 형식으로 날짜를 포맷팅 (예: "yyyy-MM-dd")
-													        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy");
-													        String formattedDate = today.format(formatter);
-													        String formattedTomorrow = tomorrow.format(formatter);
-													    %>
-		                                            	<input class="form-control input-daterange-datepicker" type="text" name="projectDate" value="${formattedDate}-${formattedTomorrow}">	
+		                                            	<input class="form-control input-daterange-datepicker" type="text" name="projectDate" value="${startDate} - ${endDate}">	
 			                                        </div>
 			                                    </div>
                                             </div>
@@ -70,61 +62,56 @@
                                                 <label>담당자 (PM)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
                                                 <label class="sr-only">담당자 검색</label>
                                                 <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                        	<button type="button" class="btn" style="padding:0px; background-color: #e9ecef;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="icon-copy fa fa-search" aria-hidden="true"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    <c:if test="${project.projectNo !=0 }">
-		                                	 			<input type="hidden" class="form-control" name="ProjectManagerId" value="${pmInfo.empId }">
-                                                    	<input type="text" class="form-control" placeholder="${pmInfo.empName} ">
-					                                </c:if>
-					                            	<c:if test="${project.projectNo ==0 }">
-					                                	<input type="hidden" class="form-control" name="ProjectManagerId" >
-                                                    	<input type="text" class="form-control" placeholder="프로젝트 매니저">
-					                                </c:if>
-                                                    
+                                                    <div class="text-left m-t-15">
+			                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+			                                        		type="button" 
+			                                        		onclick="javascript:void(window.open('findPM','_blank','width=600, height=600, left=600, top=30'))">
+			                                        	<i class="fa fa-paper-plane m-r-5"></i>
+			                                        	 사원 찾기
+			                                        </button>
+			                                        </div>
+		                                	 			<input type="hidden" class="form-control" name="beforeProjectManagerId" value="${pmInfo.empId }">
+		                                	 			<input type="hidden" class="form-control" id="PMid" name="ProjectManagerId" value="${pmInfo.empId }">
+                                                    	<input type="text" class="form-control"style="background-color:transparent; border:0px;" id="PMINFO"placeholder="${pmInfo.empRank } ${pmInfo.empName} ">
+                                                	</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>프로젝트 개요</label>
-                                            <c:if test="${project.projectNo !=0 }">
-                                	 			<textarea class="form-control" id="projectOutLines" name="projectOutLines" rows="5" value="${project.projectContent }"></textarea>
-                                	 			"?"
-			                                </c:if>
-			                            	<c:if test="${project.projectNo ==0 }">
-			                                	<textarea class="form-control" id="projectOutLines" name="projectOutLines" rows="5" placeholder="프로젝트 개요를 입력해 주세요."></textarea>
-			                                </c:if>
-                                            
+                               	 			<textarea class="form-control" id="projectOutLines" name="projectOutLines" rows="5" >${projectInfo.projectContent }</textarea>
                                         </div>
                                         <div class="form-row">
 	                                        <div class="form-group col-md-4">
 	                                            <label>고객사 명 (company)</label>
-	                                            <input type="text" class="form-control" name="customerCompany" placeholder="고객사 명 입력">
+	                                            <input type="text" class="form-control" name="customerCompany" value="${projectInfo.projectCompanyName }" placeholder="${projectInfo.projectCompanyName }">
 	                                        </div>
                                         </div>
                                         <div class="form-group col-md-4" style="padding-left:0px;">
                                             <label>고객 명 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
                                             <label class="sr-only">고객사 검색</label>
                                             <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                    	<button type="button" class="btn" style="padding:0px; background-color: #e9ecef;" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo"><i class="icon-copy fa fa-search" aria-hidden="true"></i></button>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" class="form-control" name="customerId" >
-                                                <input type="text" class="form-control"  placeholder="고객 명">
+                                                <div class="text-left m-t-15">
+			                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+			                                        		type="button" 
+			                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
+			                                        	<i class="fa fa-paper-plane m-r-5"></i>
+			                                        	 사원 찾기
+			                                        </button>
+		                                    	</div>
+                                                <input type="hidden" class="form-control"  name="beforeCustomerId" value="${customerInfo.empId }">
+                                                <input type="hidden" class="form-control" id="ClientId" name="customerId" value="${customerInfo.empId }">
+                                                <input type="text" class="form-control"  style="background-color:transparent; border:0px;" id="ClientINFO" placeholder="${customerInfo.empName }">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
                                                 <label>고객 연락처</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" value="${customerInfo.empTel }" readonly="readonly">
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label>고객 이메일</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" value="${customerInfo.empEmail }" readonly="readonly">
                                             </div>
                                            
                                         </div>
