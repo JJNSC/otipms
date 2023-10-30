@@ -12,6 +12,7 @@
 			WHERE c.empId = ${empId}
 			 AND c.messageStatus = 1 
 			 AND (c.ccType IN (1,3,4))
+		ORDER BY m.messageNo desc
 	</select>
 	
 	<!-- 쪽지 발신함 조회 -->
@@ -21,7 +22,8 @@
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
 			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-			WHERE c.empId = ${empId} and c.messageStatus = 1 and c.ccType= 2
+		   WHERE c.empId = ${empId} and c.messageStatus = 1 and c.ccType= 2
+		ORDER BY m.messageNo desc
 	</select>
 	
 	<!-- 중요 쪽지함 조회 -->
@@ -30,8 +32,9 @@
 			FROM emp e
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
-			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-			WHERE c.empId = ${empId} and c.messageStatus = 1 and c.messageImportant = 1
+	   LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
+		   WHERE c.empId = ${empId} and c.messageStatus = 1 and c.messageImportant = 1
+	    ORDER BY m.messageNo desc
 	</select>
 	
 	<!-- 임시 쪽지함 조회 -->
@@ -41,7 +44,8 @@
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
 			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-			WHERE c.empId = ${empId} and c.messageStatus = 3 and c.ccType= 2
+		   WHERE c.empId = ${empId} and c.messageStatus = 3 and c.ccType= 2
+		ORDER BY m.messageNo desc
 	</select>
 	
 	<!-- 쪽지 휴지통 조회 -->
@@ -51,7 +55,8 @@
 			JOIN message m ON e.empId = m.empId
 			JOIN CC c ON m.messageNo = c.messageNo
 			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-			WHERE c.empId = ${empId} and c.messageStatus = 2 
+		   WHERE c.empId = ${empId} and c.messageStatus = 2
+	    ORDER BY m.messageNo desc
 	</select>
 	
 	<!-- 쪽지 번호로 쪽지 찾기 -->
@@ -148,17 +153,17 @@
 			VALUES (#{messageNo}, #{empId}, #{messageContent}, #{messageTitle}, #{messageReservedDate}, #{messageStatus})
 	</insert>
 	
-	<!-- 자기 CC -->
+	<!-- CC 추가 -->
 	<insert id="writeCC" parameterType="com.otipms.dto.CC">
     <selectKey keyProperty="ccNo" resultType="int" order="BEFORE">
         select ccNo_seq.nextval from dual
     </selectKey>
-	    INSERT INTO CC (ccNo, messageNo, empId, messageChecked, messageImportant, ccType, ccCheckedDate)
+	    INSERT INTO CC (ccNo, messageNo, empId, messageStatus, messageImportant, ccType, ccCheckedDate)
 	    VALUES (
 	        #{ccNo},
 	        #{messageNo},
 	        #{empId},
-	        1,
+	        #{messageStatus},
 	        0,
 	        #{ccType},
 	        #{ccCheckedDate, jdbcType=NULL}

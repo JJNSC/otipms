@@ -31,4 +31,11 @@ public interface BoardService {
 	 * @return
 	 */
 	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType);
+
+	/**
+	 * 게시글 조회
+	 * @param boardNo
+	 * @return
+	 */
+	public Board detailBoard(String boardNo);
 }

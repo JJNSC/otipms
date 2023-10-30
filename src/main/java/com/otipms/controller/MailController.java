@@ -180,7 +180,7 @@ public class MailController {
 	public String detailMail(@RequestParam("messageNo") int messageNo, Model model,Authentication authentication) {
 		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		int empId = empDetails.getEmployee().getEmpId();
+	    model.addAttribute("employee", empDetails.getEmployee());
 		
 		List<Message> messageEmployee = messageService.detailMessageEmployee(messageNo);
 		Message messageContent = messageService.detailMessageContent(messageNo);
@@ -213,12 +213,6 @@ public class MailController {
 		    List<Map<String, Object>> references = (List<Map<String, Object>>) request.get("references");
 		    List<Map<String, Object>> blindCopies = (List<Map<String, Object>>) request.get("blindCopies");
 
-			log.info(title);
-			log.info(content);
-			log.info(recipients.toString());
-			log.info(references.toString());
-			log.info(blindCopies.toString());
-			
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			int mempId = empDetails.getEmployee().getEmpId();
 			
@@ -302,15 +296,12 @@ public class MailController {
 	                // 파일 데이터를 바이트 배열로 변환하여 저장
 	                mediaFile.setMediaFileData(attachmentFile.getBytes());
 	            } catch (IOException e) {
-	                // 파일 데이터를 읽는 동안 오류가 발생한 경우 처리
+	                
 	                e.printStackTrace();
-	                // 필요에 따라 예외 처리를 진행할 수 있습니다.
 	            }
-
 	            mailMediaList.add(mediaFile);
 	        }
 	    }
-	    
 	    return mailMediaList;
 	}*/
 	

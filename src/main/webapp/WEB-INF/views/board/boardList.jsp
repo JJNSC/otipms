@@ -57,11 +57,42 @@
 		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">DBA 문의  </a>
 		                                </div>
 		                                <script type="text/javascript">
-		                                function categoryFilter(selectedItem) {
-		                                    /* $(".dropdownCategoryFilter").innerHTML = selectedItem.innerHTML; */
-		                                	var dropdownButton = document.querySelector(".dropdownCategoryFilter");
-		                                    dropdownButton.innerHTML = selectedItem.innerHTML;
-		                                }
+			                                function categoryFilter(selectedItem) {
+			                                    /* $(".dropdownCategoryFilter").innerHTML = selectedItem.innerHTML; */
+			                                	var dropdownButton = document.querySelector(".dropdownCategoryFilter");
+			                                    var option = selectedItem.innerHTML;
+			                                    dropdownButton.innerHTML = option;
+			                                    
+			                                    console.log("어라...option은? " + option);
+			                                    
+			                                    chooseInquiryType(option, 1);
+			                                    
+			                                    /* $.ajax({
+			                                		url: "/otipms/asncBoard",
+			                                		method: "GET",
+			                                		data: {
+			                                			inquiryType:option
+			                                		},
+			                                		success: function(data) {
+			                                			console.log(data);
+			                                			console.log(data.boardPager);
+			                                			console.log(data.boardList);
+			                                			
+			                                			var html = '';
+			                                			
+			                                			console.log("아니 여기서는 잘 나왔었잖아 ㅠㅅㅠ" + data.boardList);
+			                                			console.log("아니 여기서는 잘 나왔었잖아 ㅠㅅㅠ ??????" + data.boardList.toString());
+			                                			
+			                                			$.each(data.boardList, function(index, item) {
+			                                				console.log("item도 잘 나온다고 해주라 제발 ㅠㅅㅠ 이렇게 써야 하는거니???" + item.toString());
+			                                				console.log("item도 잘 나온다고 해주라 제발 ㅠㅅㅠ" + item);
+			                                			} 
+			                                		},
+			                                		error: function(error) {
+			                                			console.log(error);
+			                                		}
+			                                	}); */
+			                                }
 	                                </script>
 		                            </div>
 		                        </c:if>
@@ -90,8 +121,8 @@
                                         </thead>
                                         <tbody>
                                         	<c:forEach var="board" items="${boardPagerMap.boardList}">
-	                                       		<tr onclick="window.location.href='detailBoard?boardType=${boardType}';">
-	                                                <th>${board.boardNo}</th>
+	                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
+	                                                <td>${board.boardNo}</td>
 	                                                <c:if test="${boardType eq '질의 게시판'}">
 		                                                <td>${board.inquiryBoardType}</td>
 	                                                </c:if>
@@ -129,23 +160,63 @@
                                 </div>
                             </div>
                             <div class="bootstrap-pagination">
-                           		<nav>
-                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
-			                        <ul class="pagination justify-content-center">
+                           		<!-- <nav> -->
+                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
+                           			<c:if test="${boardType eq '질의 게시판'}">
+	                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
+				                        <!-- <ul class="pagination justify-content-center"> -->
+				                        
 			                        	<c:if test="${pager.groupNo>1}">
-			                            	<li class="page-item"><a class="page-link" href="pageBoardList?pageNo=${pager.startPageNo-1}" tabindex="-1">이전</a></li>
+			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePageInquiry(this)">이전</input>
 			                            </c:if>
 			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 											<c:if test="${pager.pageNo == i}">
-												<li class="page-item active"><a class="page-link" href="pageBoardList?pageNo=${i}">${i}</a></li>
+												<input type="button" class="page-link selected" value="${i}" onclick="movePageInquiry(this)">
 											</c:if>
 											<c:if test="${pager.pageNo != i}">
-												<li class="page-item"><a class="page-link" href="pageBoardList?pageNo=${i}">${i}</a></li>
+												<input type="button" class="page-link" value="${i}" onclick="movePageInquiry(this)">
 											</c:if>
 										</c:forEach>
 										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<li class="page-item"><a class="page-link" href="pageBoardList?pageNo=${pager.endPageNo+1}">다음</a></li>
+											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePageInquiry(this)">다음</input>
 			                            </c:if>
+				                   </c:if>
+				                   <c:if test="${boardType ne '질의 게시판'}">
+	                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
+				                        <!-- <ul class="pagination justify-content-center"> -->
+				                        
+			                        	<c:if test="${pager.groupNo>1}">
+			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
+			                            </c:if>
+			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+											<c:if test="${pager.pageNo == i}">
+												<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
+											</c:if>
+											<c:if test="${pager.pageNo != i}">
+												<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
+											</c:if>
+										</c:forEach>
+										<c:if test="${pager.groupNo<pager.totalGroupNo}">
+											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
+			                            </c:if>
+				                   </c:if>
+			                            
+			                            <!-- 동기식 -->
+			                        	<%-- <c:if test="${pager.groupNo>1}">
+			                            	<li class="page-item"><a class="page-link" href="board?pageNo=${pager.startPageNo-1}" tabindex="-1">이전</a></li>
+			                            </c:if>
+			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+											<c:if test="${pager.pageNo == i}">
+												<li class="page-item active"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
+											</c:if>
+											<c:if test="${pager.pageNo != i}">
+												<li class="page-item"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
+											</c:if>
+										</c:forEach>
+										<c:if test="${pager.groupNo<pager.totalGroupNo}">
+											<li class="page-item"><a class="page-link" href="board?pageNo=${pager.endPageNo+1}">다음</a></li>
+			                            </c:if> --%>
+			                            
 			                            <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
 			                            <li class="page-item"><a class="page-link" href="#">2</a></li>
 			                            <li class="page-item"><a class="page-link" href="#">3</a>
@@ -156,25 +227,24 @@
 			                            </li>
 			                            <li class="page-item"><a class="page-link" href="#">다음</a>
 			                            </li> -->
-			                            
-			                            <%-- <c:if test="${boardPagerMap.boardPager.groupNo>1}">
-											<a class="btn btn-outline-info btn-sm" href="getBoardList?pageNo=${pager.startPageNo-1}">이전</a>
-										</c:if>
-										
-										<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-											<c:if test="${pager.pageNo != i}">
-												<a class="btn btn-outline-success btn-sm" href="getBoardList?pageNo=${i}">${i}</a>
-											</c:if>
-											<c:if test="${pager.pageNo == i}">
-												<a class="btn btn-danger btn-sm" href="getBoardList?pageNo=${i}">${i}</a>
-											</c:if>
-										</c:forEach>
-										
-										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<a class="btn btn-outline-info btn-sm" href="getBoardList?pageNo=${pager.endPageNo+1}">다음</a>
-										</c:if> --%>
-			                        </ul>
+			                        <!-- </ul> -->
 			                    </nav>
+	                    		<script type="text/javascript">
+	                                function movePageInquiry(clickedInput) {
+	                                    /* $(".dropdownCategoryFilter").innerHTML = selectedItem.innerHTML; */
+	                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + clickedInput.value);
+	                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + $(clickedInput).val())
+	                                    
+	                                    var pageNo = clickedInput.value;
+	                                    
+	                                    chooseInquiryType(null, pageNo);
+	                                }
+	                                function movePage(clickedInput) {
+	                                    var pageNo = clickedInput.value;
+	                                    
+	                                    movePageNormal(pageNo);
+	                                }
+                               	</script>
 			                </div>
 			                <div class="mb-3 text-right px-5">
 			                	<div class="dropdown d-inline-block">
@@ -257,7 +327,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-	<%-- <script src="${pageContext.request.contextPath}/resources/js/board.js"></script> --%>
+	<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 </body>
 
 </html>

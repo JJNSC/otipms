@@ -31,5 +31,8 @@ public class Board {
 	private String boardTypeName;		//공지사항, 질의 등
 	private String inquiryBoardType;	//질의 게시판의 카테고리 (시스템 관리, 아키텍처, DBA)
 	private String empName;				//작성자
-	private int commentCount;		//댓글수
+	private String empRank;				//직급
+	private Integer teamNo;				//팀번호
+	private String teamName;			//팀명
+	private int commentCount;			//댓글수
 }

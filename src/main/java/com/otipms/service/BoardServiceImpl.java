@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.otipms.dao.BoardDao;
 import com.otipms.dto.Board;
@@ -31,6 +32,7 @@ public class BoardServiceImpl implements BoardService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardType", boardType);
 		map.put("inquiryBoardType", inquiryType);
+		log.info("아니 대체 DAO에서 inquiryBoardType이 뭐길래 전체로만 떠서 걸러지는 거야 뭐야" + inquiryType);
 		int totalBoardNum = boardDao.countBoard(map);
 		return totalBoardNum;
 	}
@@ -47,6 +49,18 @@ public class BoardServiceImpl implements BoardService {
 			board.setCommentCount(boardDao.countBoardComment(board.getBoardNo()));
 		}
 		return boardList;
+	}
+
+	//게시글 조회
+	@Transactional
+	@Override
+	public Board detailBoard(String boardNo) {
+		Board board = boardDao.selectBoard(Integer.parseInt(boardNo));
+		if(board != null) {
+			boardDao.updateBoardHitcount(Integer.parseInt(boardNo));
+			return board;
+		}
+		return null;
 	}
 	
 }

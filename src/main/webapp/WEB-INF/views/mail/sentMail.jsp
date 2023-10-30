@@ -93,7 +93,6 @@
 				                                	<label class="form-check-label" for="email-select-all"></label>
 				                              	</div>
 			                              		<i class="fa fa-trash font-18 align-middle ml-2" style="cursor: pointer;" onclick="deletemail()"></i>
-			                              		<i id="refresh-button" class="fa icon-copy ion-loop font-18 align-middle ml-3" style="cursor: pointer;" onclick="refreshSentEmailList()"></i>
 				                            </div>
 		                          		</div>
                                     </div>
@@ -102,8 +101,8 @@
 									        <div class="message message-${loop.index+1}">
 									            <div class="col-mail col-mail-1 received">
 									                <div class="email-checkbox">
-									                    <input type="checkbox" id="chk${message.messageNo}">
-									                    <label class="toggle" for="chk${message.messageNo}"></label>
+									                    <input type="checkbox" id="chk${loop.index+1}" value="${message.messageNo}">
+									                    <label class="toggle" for="chk${loop.index+1}"></label>
 									                </div>
 									                <span class="icon-copy ${message.messageImportant == 1 ? 'ion-ios-star star' : 'star ion-ios-star-outline'}" onclick="checkimportant(${message.messageNo}, ${loop.index+1}, event)"></span>
 									            	<span class="icon-copy ${message.messageChecked == 1 ? 'ion-android-mail' : 'ion-android-drafts'} mail" onclick="checkread(${loop.index+1}, event)"></span>
@@ -115,7 +114,7 @@
 									                    <span class="name">${message.empName}</span>
 									                </div>
 									            </div>
-									            <a href="detailMail">
+									            <a href="detailMail?messageNo=${message.messageNo}" onclick="updateMessageChecked(${message.ccNo})">
 									                <div class="col-mail col-mail-2">
 									                    <div class="subject">${message.messageTitle}</div>
 									                    <div class="clip">
@@ -123,8 +122,20 @@
 									                            <span class="icon-copy ion-paperclip mr-5"></span>
 									                        </c:if>
 									                    </div>
-									                    <div class="date">10분전</div>
-									                    <%-- <div class="date">${fn:formatDate(message.messageReservedDate, 'MM월 dd일 HH:mm')}</div> --%>
+									                    <div class="date">
+									                    	<%-- <fmt:formatDate value="${message.messageReservedDate}" type="date" dateStyle="full" /> --%>
+									                    	<c:set var="currentDate" value="<%= new java.util.Date() %>" />
+												            <c:set var="oneDay" value="86400000" /> <!-- 24 hours in milliseconds -->
+												            <c:set var="timeDifference" value="${currentDate.time - message.messageReservedDate.time}" />
+									                    	<c:choose>
+												                <c:when test="${timeDifference lt oneDay}">
+												                    <fmt:formatDate value="${message.messageReservedDate}" type="date" pattern="a hh:mm"/>
+												                </c:when>
+												                <c:otherwise>
+												                    <fmt:formatDate value="${message.messageReservedDate}" type="date" pattern="yy.MM.dd"/>
+												                </c:otherwise>
+												            </c:choose>
+									                    </div>
 									                </div>
 									            </a>
 									        </div>

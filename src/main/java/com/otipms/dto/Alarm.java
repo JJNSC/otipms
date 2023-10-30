@@ -12,4 +12,5 @@ public class Alarm {
 	private String alarmContent;
 	private Date alarmDate;
 	private int alarmChk;
+	private int messageNo;
 }

@@ -118,7 +118,7 @@
 	                                               	<c:choose>
 	                                               		<c:when test="${empty messageEmployee}">
                                                 		</c:when>
-		                                               	<c:when test="${messageEmpBli.ccType == 4}">
+		                                               	<c:when test="${messageEmpBli.ccType == 4 && employee.empId == messageEmpBli.empId}">
 			                                                <span class="m-b-3 font-weight-bold">비밀참조 : </span>
 			                                                <span class="m-b-3">${messageEmpBli.empRank}</span>
 			                                                <span class="m-b-3">${messageEmpBli.empName}</span>
@@ -129,7 +129,7 @@
                                         </div>
                                         <br/>
                                         <div>
-                                        	<span>제목 : </span>
+                                        	<b>제목 : </b>
                                         	<span>${messageContent.messageTitle}</span>
                                         </div>
                                         <hr>
