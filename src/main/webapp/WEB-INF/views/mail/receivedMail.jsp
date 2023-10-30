@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page isELIgnored="false" %>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -127,8 +127,20 @@
 									                            <span class="icon-copy ion-paperclip mr-5"></span>
 									                        </c:if>
 									                    </div>
-									                    <div class="date">10분전</div>
-									                    <%-- <div class="date">${fn:formatDate(message.messageReservedDate, 'MM월 dd일 HH:mm')}</div> --%>
+									                    <div class="date">
+									                    	<%-- <fmt:formatDate value="${message.messageReservedDate}" type="date" dateStyle="full" /> --%>
+									                    	<c:set var="currentDate" value="<%= new java.util.Date() %>" />
+												            <c:set var="oneDay" value="86400000" /> <!-- 24 hours in milliseconds -->
+												            <c:set var="timeDifference" value="${currentDate.time - message.messageReservedDate.time}" />
+									                    	<c:choose>
+												                <c:when test="${timeDifference lt oneDay}">
+												                    <fmt:formatDate value="${message.messageReservedDate}" type="date" pattern="a hh:mm"/>
+												                </c:when>
+												                <c:otherwise>
+												                    <fmt:formatDate value="${message.messageReservedDate}" type="date" pattern="yy.MM.dd"/>
+												                </c:otherwise>
+												            </c:choose>
+									                    </div>
 									                </div>
 									            </a>
 									        </div>
