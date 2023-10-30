@@ -42,9 +42,15 @@
 							    FROM BOARDTYPE
 							   WHERE 1=1
 							     AND BOARDTYPENAME = #{boardType}
-						      <if test='boardTypeName == "질의 게시판" and inquiryBoardType != null'>
-								 AND INQUIRYBOARDTYPE = #{inquiryBoardType}
-							  </if>
+						      <if test="boardType == '질의 게시판'">
+							     <if test="inquiryBoardType != null and inquiryBoardType != '전체'">
+							     AND INQUIRYBOARDTYPE = #{inquiryBoardType}
+							     </if>
+						      </if>
+						         AND (
+					         	     BOARDDELETED is null 
+					         	     OR BOARDDELETED = 0
+					         	     )
 							  )
 	</select>
 	
@@ -52,7 +58,6 @@
 			SELECT rnum
 			     , boardNo
 			     , boardTitle
-			     , boardContent
 			     , boardWriteDate
 			     , boardUpdateDate
 			     , boardHitcount
@@ -64,7 +69,6 @@
 				   SELECT rownum as rnum
 				   		, boardNo
 				   		, boardTitle
-				   		, boardContent
 				   		, boardWriteDate
 				   		, boardUpdateDate
 				   		, boardHitcount
@@ -75,7 +79,6 @@
 				     FROM (
 					      SELECT b.boardNo
 					      	   , b.boardTitle
-					      	   , b.boardContent
 					      	   , b.boardWriteDate
 					      	   , b.boardUpdateDate
 					      	   , b.boardHitcount
@@ -92,17 +95,20 @@
 					          ON b.BOARDNO = m.BOARDNO
 					       WHERE 1=1
 					         AND BOARDTYPENAME = #{boardType}
-				          <if test="boardTypeName == '질의 게시판' and inquiryBoardType != null">
+				          <if test="boardType == '질의 게시판'">
+						     <if test="inquiryBoardType != null and inquiryBoardType != '전체'">
 						     AND INQUIRYBOARDTYPE = #{inquiryBoardType}
-					         AND BOARDDELETED = 0
+						     </if>
 					      </if>
+					         AND (
+					         	 BOARDDELETED is null 
+					         	 OR BOARDDELETED = 0
+					         	 )
 					    ORDER BY boardWriteDate DESC
 				          )
-		<![CDATA[
-				    WHERE rownum <= #{boardPager.endRowNo}
+				    WHERE rownum <![CDATA[<=]]> #{boardPager.endRowNo}
 			       )
-			 WHERE rnum >= #{boardPager.startRowNo}
-		]]>
+			 WHERE rnum <![CDATA[>=]]> #{boardPager.startRowNo}
 	</select>
 	
 	<select id="countBoardComment" parameterType="int" resultType="int">

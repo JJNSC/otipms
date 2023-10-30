@@ -267,3 +267,11 @@
 .dateSelectable:valid::before {
   display: none;
 }
+
+/*pagination*/
+.page-link.selected {
+	/* z-index: 1; */
+    color: #fff;
+    background-color: #2F588B;
+    border-color: #2F588B;
+}

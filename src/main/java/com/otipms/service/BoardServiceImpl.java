@@ -31,6 +31,7 @@ public class BoardServiceImpl implements BoardService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardType", boardType);
 		map.put("inquiryBoardType", inquiryType);
+		log.info("아니 대체 DAO에서 inquiryBoardType이 뭐길래 전체로만 떠서 걸러지는 거야 뭐야" + inquiryType);
 		int totalBoardNum = boardDao.countBoard(map);
 		return totalBoardNum;
 	}

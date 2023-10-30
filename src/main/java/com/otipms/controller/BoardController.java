@@ -3,14 +3,18 @@ package com.otipms.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.Pager;
@@ -26,7 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class BoardController {
-	public String boardType;
+	private String boardType;
+	
+	private String inquiryType;
 
 	@Autowired
 	public BoardService boardService;
@@ -38,11 +44,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board")
-	public String board(@RequestParam(value="boardType", required=false) String boardType
+	public String board(@RequestParam(value="pageNo", required=false, defaultValue="1") String pageNo
+						, @RequestParam(value="boardType", required=false) String boardType
 						, Model model
 						, HttpSession session) {
+		inquiryType = null;
 		log.info("게시판 컨트롤러 통합");
-		if(boardType == null) {
+		if(boardType == null || boardType.equals("")) {
 			if(this.boardType == null) {
 				this.boardType = "공지사항";
 			}
@@ -53,24 +61,52 @@ public class BoardController {
 		model.addAttribute("boardType", this.boardType);
 		model.addAttribute("employee", LoginController.loginEmployee);
 		
-		//게시글 목록 페이징
-		//HashMap<String, Object> pageBoard(int rowNo, int pageNo, String inquiryType, HttpSession session)
-		Map<String, Object> boardPagerMap = pageBoard(5, 1, null, session);
-		model.addAttribute("boardPagerMap", boardPagerMap);
-		return "board/boardList";
-	}
-	
-	//후에 ajax나 검색을 위한 page 이동 전용 메소드
-	@RequestMapping("/pageBoardList")
-	public String pageBoardList(String pageNo, Model model, HttpSession session) {
-		model.addAttribute("boardType", this.boardType);
-		model.addAttribute("employee", LoginController.loginEmployee);
+		log.info("pageNo가 뭐길래..." + pageNo);
 		
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoard(int rowNo, int pageNo, String inquiryType, HttpSession session)
 		Map<String, Object> boardPagerMap = pageBoard(5, Integer.parseInt(pageNo), null, session);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		return "board/boardList";
+	}
+	
+	@RequestMapping("/asncBoard")
+	@ResponseBody
+	public Map<String, Object> pageBoardList(@RequestParam(value="pageNo", required=false, defaultValue="1") String pageNo
+											 , @RequestParam(value="inquiryType", required=false) String inquiryType
+											 , HttpSession session) {
+		
+		log.info("자 3번째 과연 pageNo와 inquiryType은 어떻게 왔을 것인가?");
+		log.info("pageNo: " + pageNo + "inquiryType: " + inquiryType);
+		
+		if(inquiryType == null || inquiryType.equals("")) {
+			if(this.inquiryType == null) {
+				this.inquiryType = "전체";
+			}
+		} else {
+			this.inquiryType = inquiryType;
+		
+			// 정규식 패턴
+	        String pattern = "전체|시스템 관리|아키텍처|DBA";
+	        
+	        // 정규식 검색
+	        Pattern inquiryTypePattern = Pattern.compile(pattern);
+	        Matcher matcher = inquiryTypePattern.matcher(inquiryType);
+	        
+	        if (matcher.find()) {
+	        	this.inquiryType = matcher.group(); // 매칭된 부분 추출
+	            log.info(inquiryType);
+	        } else {
+	        	//일치한 걸 찾지 못했을 경우
+	        	this.inquiryType = null;
+	        }
+		}
+		
+		//게시글 목록 페이징
+		//HashMap<String, Object> pageBoard(int rowNo, int pageNo, String inquiryType, HttpSession session)
+		Map<String, Object> map = pageBoard(5, Integer.parseInt(pageNo), this.inquiryType, session);
+		log.info("map이당 " + map);
+		return map;
 	}
 	
 	/**
