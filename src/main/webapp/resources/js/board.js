@@ -33,7 +33,7 @@ function chooseInquiryType(option, pageNo) {
 				data.boardList.forEach(function(board, index) {
 				/*$.each(data.boardList, function(index, board) {*/
 					/*htmlBoard += '<tr>';*/
-					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardType=질의 게시판'" + ';">';
+					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardNo=" + board.boardNo + "'" + ';">';
 					htmlBoard += '<td>' + board.boardNo + '</td>';
 					htmlBoard += '<td>' + board.inquiryBoardType + '</td>';
 					htmlBoard += '<td>';
@@ -142,7 +142,7 @@ function movePageNormal(pageNo) {
 				data.boardList.forEach(function(board, index) {
 				/*$.each(data.boardList, function(index, board) {*/
 					/*htmlBoard += '<tr>';*/
-					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardType=" + board.boardNo + "'" + ';">';
+					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardNo=" + board.boardNo + "'" + ';">';
 					htmlBoard += '<td>' + board.boardNo + '</td>';
 					htmlBoard += '<td>';
 					htmlBoard += '	' + board.boardTitle;

@@ -238,10 +238,15 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping("/detailBoard")
-	public String detailBoard(Model model) {
+	public String detailBoard(String boardNo, Model model) {
 		log.info("상세글");
 		model.addAttribute("boardType", boardType);
 		model.addAttribute("employee", LoginController.loginEmployee);
+		
+		log.info("boardNo: " + boardNo);
+		
+		Board board = boardService.detailBoard(boardNo);
+		model.addAttribute("board", board);
 		return "board/detailBoard";
 	}
 

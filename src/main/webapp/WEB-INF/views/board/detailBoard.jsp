@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,10 +48,11 @@
                             <div class="card-body">
                             	<div class="card-title mb-1">
                                     <!-- <h4>공지사항</h4> -->
-                                    <h4>${boardType}</h4>
+                                    <%-- <h4>${boardType}</h4> --%>
+                                    <h4>${board.boardTypeName}</h4>
                                 </div>
                             	<div class="mt-4 pl-3 row" style="margin-bottom: 0.8rem;">
-                                    <h3 style="padding-top: 10px;">이것은 제목입니당</h3>
+                                    <h3 style="padding-top: 10px;">${board.boardTitle}</h3>
                                     <!-- <span class="col-10 text-right">
 			                            <button type="button" class="btn btn-primary">등록</button>
                                     </span> -->
@@ -60,30 +63,40 @@
 		                                    <div class="mr-3"><img src="/otipms/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
 		                                    <div class="">
 		                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
-		                                        	김종진 <span style="font-weight: 300; font-size: 0.8rem;">대리/개발1팀</span>
+		                                        	<c:if test="${board.teamName == null}">
+		                                        		${board.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;"> ${board.empRank}</span>
+		                                        	</c:if>
+		                                        	<c:if test="${board.teamName != null}">
+		                                        		${board.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;"> ${board.empRank} | ${board.teamName}</span>
+		                                        	</c:if>
 		                                        </h6>
-		                                        <span class="text-muted font-14">  2023.10.18 16:13</span>
-		                                        &nbsp; <span class="text-muted font-14">조회 236</span>
+		                                        <c:set var="now" value="<%= new java.util.Date() %>" />
+			                                    <c:choose>
+												    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
+												        <span class="text-muted font-14">  <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/></span>
+												    </c:when>
+												    <c:otherwise>
+												        <span class="text-muted font-14">  <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/></span>
+												    </c:otherwise>
+												</c:choose>
+		                                        <!-- <span class="text-muted font-14">  2023.10.18 16:13</span> -->
+		                                        &nbsp; <span class="text-muted font-14">조회 ${board.boardHitcount}</span>
 		                                    </div>
 		                                </div>
                                 	</div>
                                 	<div class="col-6 text-right pt=4" style=" padding-top: 30px; padding-right: 29px;">
 		                                <!-- <button type="button" class="btn mb-1 btn-light-custom">수정</button> -->
-	                                    <a href="writeBoard?boardType=공지사항" type="button" class="text-secondary" style=" margin-right: 7px;">수정</a>                                                                	
-	                                    <a href="writeBoard?boardType=공지사항" type="button" class="text-danger">샥제</a>                                                                	
+		                                <c:if test="${board.empId == employee.empId}">
+		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-secondary" style=" margin-right: 7px;">수정</a>                                                                	
+		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-danger">샥제</a>                                       	
+		                                </c:if>
                                 	</div>
                                 </div>
-                                <div class="compose-content pt-3" style="border-top: 1px solid #ebecef">
-                                   	내용~~
-                                   	<br/>
-                                   	다섯용~~
-                                   	<br/>
-                                   	내용~~
-                                   	<br/>
-                                   	외용~~
-                                   	<br/>
+                                <div class="compose-content pt-3" style="min-height: 86px; border-top: 1px solid #ebecef; padding-left: 1.5rem !important; padding-top: 3.2rem !important; padding-bottom: 3.2rem !important;">
+                                   	${board.boardContent}
                                 </div>
-                                <div class="compose-content mt-3 pt-3" style="border-top: 1px solid #ebecef">
+                                <!-- 댓글 -->
+                                <div class="compose-content" style="border-top: 1px solid #ebecef; padding-top: 1.5rem; padding-bottom: 1.5rem;">
 	                                <div class="d-flex align-items-center">
 	                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
 	                                    <div class="">
@@ -105,7 +118,7 @@
 	                                </div>
 	                                <div class="text-muted font-14" style="padding-left: 56px; padding-top: 7px;">  2023.10.18 16:13</div>
                                 </div>
-                                <div class="compose-content mt-3 pt-3" style="border-top: 1px solid #ebecef">
+                                <div class="compose-content" style="border-top: 1px solid #ebecef; padding-top: 1.5rem; padding-bottom: 1.5rem;">
 	                                <div class="d-flex align-items-center">
 	                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
 	                                    <div class="">

@@ -35,4 +35,17 @@ public interface BoardDao {
 	 * @return
 	 */
 	public int countBoardComment(int boardNo);
+
+	/**
+	 * 게시글 조회
+	 * @param boardNo
+	 * @return
+	 */
+	public Board selectBoard(int boardNo);
+
+	/**
+	 * 조회수 갱신
+	 * @param boardNo
+	 */
+	public int updateBoardHitcount(int boardNo);
 }
