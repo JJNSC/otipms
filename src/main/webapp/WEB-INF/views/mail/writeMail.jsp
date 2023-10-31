@@ -14,6 +14,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
+	<!-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> -->
   
     <!-- Scripts -->
     <script src="${pageContext.request.contextPath}/resources/plugins/common/common.min.js"></script>
@@ -21,7 +22,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script> --%>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
     
     <!-- Editer -->-
@@ -133,28 +135,65 @@
 													<h4 class="text-blue h4">첨부파일</h4>
 												</div>
 											</div>
-											<form class="dropzone dz-clickable" action="#" id="my-awesome-dropzone">
+											<form class="dropzone dz-clickable" id="my-awesome-dropzone">
 												<div class="dz-default dz-message">
 													<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
 												</div>
 											</form>
+											<script>
+												Dropzone.autoDiscover = false; // deprecated 된 옵션. false로 해놓는걸 공식문서에서 명시
+												const dropzone = new Dropzone('form#my-awesome-dropzone', {
+													url: 'http://localhost:8080/otipms/mail/upload',
+													method: 'post',
+													autoProcessQueue: true,
+													createImageThumbnails: true,
+													clickable: true,
+													autoQueue: false,
+													thumbnailHeight: 120, 
+												    thumbnailWidth: 120,
+												    uploadMultiple: false,
+												    addRemoveLinks: true, 
+												    dictRemoveFile: '삭제'
+												});
+												
+												const uploadedFiles = [];
+												// 업로드 시작 이벤트 리스너
+											    dropzone.on("addedfile", function(file) {
+											        // 파일이 추가될 때 업로드 대기열을 처리
+											        console.log("파일이 추가되었습니다.", file);
+											        console.log(file.name);
+											        console.log(file.type);
+											        
+											        const reader = new FileReader();
+											        reader.onload = function () {
+											            // 파일 데이터 (base64 내용)이 여기에서 사용 가능합니다.
+											            const base64Data = reader.result;
+											            console.log("파일 데이터 (Base64):", base64Data);
+											            // 필요한 경우 추가 처리를 수행하거나 데이터를 저장할 수 있습니다.
+											            
+											            const fileInfo = {
+											                    name: file.name,
+											                    type: file.type,
+											                    data: base64Data,
+											                };
+											        	uploadedFiles.push(fileInfo);
+											        };
+											        
+											        // 파일을 base64 문자열로 읽기
+											        reader.readAsDataURL(file);
+											        dropzone.processQueue();
+											    });
+												
+											    dropzone.on("removedfile", function(file) {
+											        const fileName = file.name;
+											        const fileIndex = uploadedFiles.findIndex((info) => info.name === fileName);
+											        if (fileIndex !== -1) {
+											            uploadedFiles.splice(fileIndex, 1);
+											        }
+											    });
+
+											</script>
 										</div>
-										<script>
-											Dropzone.autoDiscover = false;
-											$(".dropzone").dropzone({
-												addRemoveLinks: true,
-												removedfile: function (file) {
-													var name = file.name;
-													var _ref;
-													return (_ref = file.previewElement) != null
-														? _ref.parentNode.removeChild(file.previewElement)
-														: void 0;
-												},
-												init: function () {
-										            myDropzone = this; // 이 부분에서 myDropzone 변수를 초기화
-										        }
-											});
-										</script>
                                     </div>
                                     <div class="text-left m-t-15">
                                         <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="sendMail()">

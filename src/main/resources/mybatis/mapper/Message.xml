@@ -158,12 +158,13 @@
     <selectKey keyProperty="ccNo" resultType="int" order="BEFORE">
         select ccNo_seq.nextval from dual
     </selectKey>
-	    INSERT INTO CC (ccNo, messageNo, empId, messageStatus, messageImportant, ccType, ccCheckedDate)
+	    INSERT INTO CC (ccNo, messageNo, empId, messageStatus, messageChecked, messageImportant, ccType, ccCheckedDate)
 	    VALUES (
 	        #{ccNo},
 	        #{messageNo},
 	        #{empId},
 	        #{messageStatus},
+	        #{messageChecked},
 	        0,
 	        #{ccType},
 	        #{ccCheckedDate, jdbcType=NULL}
@@ -171,14 +172,44 @@
 	</insert>
 	
 	<!-- 첨부파일 추가 -->
-	<insert id="writeMailMedia" parameterType="java.util.List">
+	<insert id="writeMailMedia" parameterType="com.otipms.dto.MediaFile">
 		<selectKey keyProperty="mediaFileNo" resultType="int" order="BEFORE">
 			select mediaFileNo_seq.nextval from dual
 		</selectKey>
 		INSERT INTO mediaFile (mediaFileNo, messengerNo, empId, boardNo, messageNo, mediaFileName, mediaFileType, mediaFileData)
 		VALUES
-			<foreach collection="list" item="mailMedia" separator=",">
-		        (mediaFileNo_seq.nextval,#{mailMedia.mediaFileNo}, #{mailMedia.messengerNo}, #{mailMedia.empId}, #{mailMedia.boardId}, #{mailMedia.messageNo}, #{mailMedia.mediaFileName}, #{mailMedia.mediaFileType}, #{mailMedia.mediaFileData})
-		    </foreach>
+			(
+	        #{mediaFileNo},
+	        <if test="messengerNo==0">
+	        null,
+	        </if>
+	        <if test="messengerNo!=0">
+	        #{messengerNo},
+	        </if>
+	        #{empId},
+	        <if test="boardNo==0">
+	        null,
+	        </if>
+	        <if test="boardNo!=0">
+	        #{boardNo},
+	        </if>
+	        <if test="messageNo==0">
+	        null,
+	        </if>
+	        <if test="messageNo!=0">
+	        #{messageNo},
+	        </if>
+	        #{mediaFileName},
+	        #{mediaFileType},
+	        #{mediaFileData}
+	    )
 	</insert>
+	
+	<!-- 첨부파일 완전 추가 -->
+	<update id="updateMailMedia" parameterType="com.otipms.dto.MediaFile">
+		UPDATE MEDIAFILE
+    	   SET empId = #{empId}
+    	     , messageNo = #{messageNo}
+    	 WHERE mediaFileNo = #{mediaFileNo}
+	</update>
 </mapper>

@@ -158,7 +158,7 @@
                                                		</c:when>
                                                		<c:otherwise>
 			                                            <div class="col-auto">
-			                                            	<a href="#" class="text-muted">${messageMedia.mediaFileName}.${messageMedia.mediaFileType}</a>
+			                                            	<a href="#" class="text-muted">${messageMedia.mediaFileName}</a>
 			                                            </div>
                                                		</c:otherwise>
                                                	</c:choose>

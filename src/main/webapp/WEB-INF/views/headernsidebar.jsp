@@ -127,7 +127,7 @@
                                                 <i class="icon-envelope-open"></i>
                                                 <span>Inbox</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
-                                                	<span id="alarmCnt"></span>
+                                                	<span id="alarmCnt2">0</span>
                                                 </div>
                                             </a>
                                         </li>

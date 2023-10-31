@@ -49,6 +49,7 @@ window.onload = function(){
 	    $.get("http://localhost:8080/otipms/alarmCnt?empId=" + empId, function (data) {
 	      var alarmCount = data;
 	      $("#alarmCnt").text(alarmCount);
+	      $("#alarmCnt2").text(alarmCount);
 	    });
 	  };
 	
@@ -67,9 +68,7 @@ window.onload = function(){
 	      } else {
 	        alarmItem.className = "pl-2";
 	      }
-	      console.log(alarm.alarmDate);
 	      var alarmDateFormatted = formatAlarmDate(alarm.alarmDate);
-	      console.log(alarmDateFormatted);
 	      
 	      var alarmContent = `
 	        <a href="javascript:void(window.open('mail/detailMail?messageNo=${alarm.messageNo}','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedAlarm(${alarm.alarmNo})">
@@ -141,11 +140,11 @@ function formatAlarmDate(alarmDate) {
 function parseTO_DATE(toDateStr) {
     const parts = toDateStr.match(/(\d+)/g);
     if (parts.length !== 6) {
-        return null; // 유효하지 않은 형식의 문자열
+        return null;
     }
 
     const year = parseInt(parts[0]);
-    const month = parseInt(parts[1]) - 1; // 월은 0부터 시작하므로 1을 뺍니다
+    const month = parseInt(parts[1]) - 1;
     const day = parseInt(parts[2]);
     const hours = parseInt(parts[3]);
     const minutes = parseInt(parts[4]);

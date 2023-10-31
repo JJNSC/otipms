@@ -70,23 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Callback 내에서 updateSelectedEmployeesUI 함수가 정의되도록 변경
     });
     
-    
 });
 
-/*function getAttachments() {
-	var attachments = [];
-	var uploadedFiles = myDropzone.getQueuedFiles(); // Dropzone에서 업로드된 파일 목록 가져오기
-	
-	for (var i = 0; i < uploadedFiles.length; i++) {
-		var file = uploadedFiles[i];
-		attachments.push({
-			mediaFileName: file.name, // 파일 이름
-			mediaFileType: file.type, // 파일 형식 (MIME 타입)
-			mediaFileData: null, //BLOB 데이터 아직 안넣음
-		});
-	}
-	return attachments;
-}*/
 
 //선택한 직원 목록을 가져오는 함수
 function getSelectedEmployees(employeeId, ccType) {
@@ -126,10 +111,20 @@ function sendMail() {
 	console.log(recipients);
 	console.log(references);
 	console.log(blindCopies);
+	console.log(uploadedFiles);
 	
-	// 첨부 파일 현재는 X
-	//var attachments = getAttachments();
-	
+	var modifiedUploadedFiles = [];
+    for (var i = 0; i < uploadedFiles.length; i++) {
+        var file = uploadedFiles[i];
+        var base64Data = file.data;
+        var dataWithoutPrefix = base64Data.replace(/^data:image\/\w+;base64,/, ''); // Base64 데이터 추출
+        modifiedUploadedFiles.push({
+            name: file.name,
+            type: file.type,
+            data: dataWithoutPrefix // 수정된 데이터로 교체
+        });
+    }
+    
 	// AJAX를 사용하여 서버로 데이터 전송
 	$.ajax({
 		url: 'http://localhost:8080/otipms/mail/sendMail',
@@ -139,15 +134,21 @@ function sendMail() {
 			content: content,
 			recipients: recipients,
 			references: references,
-			blindCopies: blindCopies
+			blindCopies: blindCopies,
+			uploadedFiles: modifiedUploadedFiles
 		}),
 		contentType: 'application/json',
 		success: function (data) {
-			//성공 시, db에 추가 후 뒤로가기
+			// 성공 시, 메시지 ID를 받아옴
+            var messageId = data.messageId;
+            // 파일 업로드를 수행하고 메시지와 연결
+            alert("쪽지가 성공적으로 전송되었습니다.");
 			window.history.back();
 		},
 		error: function (error) {
 			console.log("오류 발생: " + error.responseText);
+			alert("파일 업로드 중 오류가 발생했습니다.");
 		}
 	});
 }
+

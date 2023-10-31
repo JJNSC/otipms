@@ -29,5 +29,6 @@ public interface MessageService {
 	
 	public int writeMessage(Message message);
 	public void writeCC(List<CC> ccList);
-	public int writeMailMedia(List<MediaFile> mailMediaList);
+	public void uploadAndSave(List<MediaFile> mediaFile);
+	public void updateFile(int messageNo, int empId);
 }
