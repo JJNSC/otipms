@@ -66,6 +66,10 @@
     vertical-align: bottom;
 }
 
+.fa-trash-o {
+  background-color: transparent;
+}
+
 .CommentWriter {
     margin: 15px 0 29px;
     padding: 16px 10px 10px 18px;

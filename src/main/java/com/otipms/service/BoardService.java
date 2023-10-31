@@ -52,4 +52,16 @@ public interface BoardService {
 	 * @return
 	 */
 	public List<BoardComment> boardCommentList(String boardNo);
+
+	/**
+	 * 게시글 삭제
+	 * @param boardNo
+	 */
+	public void deleteBoard(String boardNo);
+
+	/**
+	 * 댓글 삭제
+	 * @param commentNo
+	 */
+	public void deleteBoardComment(String commentNo);
 }

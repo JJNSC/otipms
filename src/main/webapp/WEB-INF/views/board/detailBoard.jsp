@@ -89,7 +89,7 @@
 		                                <!-- <button type="button" class="btn mb-1 btn-light-custom">수정</button> -->
 		                                <c:if test="${board.empId == employee.empId}">
 		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-secondary" style=" margin-right: 7px;">수정</a>                                                                	
-		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-danger">샥제</a>                                       	
+		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-danger" data-toggle="modal" data-target="#deleteBoard">샥제</a>
 		                                </c:if>
                                 	</div>
                                 </div>
@@ -134,7 +134,7 @@
 	                                		</div>
 	                                		<c:if test="${comment.empId == employee.empId}">
 		                                		<div class="col-6 text-right">
-		                                			<div class="dropdown custom-dropdown" style="flex: 1; text-align: right;">
+		                                			<!-- <div class="dropdown custom-dropdown" style="flex: 1; text-align: right;">
 				                                        <div data-toggle="dropdown" aria-expanded="false" class="px-3">
 				                                        	<i class="fa fa-ellipsis-v"></i>
 				                                        </div>
@@ -142,7 +142,13 @@
 				                                        	<a class="dropdown-item" href="#">수정</a>
 				                                        	<a class="dropdown-item" href="#">삭제</a>
 				                                        </div>
-				                                    </div>             		
+				                                    </div> -->
+				                                    <button type="button" class="btn fa fa-trash-o text-danger" data-toggle="modal" data-target="#deleteComment" onclick="transferCommentNo(${comment.commentNo})"></button>
+				                                    <script type="text/javascript">
+				                                    	function transferCommentNo(commentNo) {
+				                                    		$("#commentNoInput").val(commentNo);
+				                                    	}
+				                                    </script>             		
 		                                		</div>
                                         	</c:if>
 	                                	</div>
@@ -153,28 +159,73 @@
 	                                </div>
                                 </c:forEach>
                                 
-                                <div class="compose-content" style="border-top: 1px solid #ebecef; padding-top: 1.5rem; padding-bottom: 1.5rem;">
-	                                <div class="d-flex align-items-center">
-	                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
-	                                    <div class="">
-	                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
-	                                        	김종진 <span style="font-weight: 300; font-size: 0.8rem;">대리/개발1팀</span>
-	                                        	<span class="badge badge-pill badge-writer-custom">작성자</span>
-	                                        </h6>
-	                                        <div>감사합니다~</div>
-	                                    </div>
-	                                    <div class="dropdown custom-dropdown" style="flex: 1; text-align: right;">
-	                                        <div data-toggle="dropdown" aria-expanded="false" class="px-3">
-	                                        	<i class="fa fa-ellipsis-v"></i>
-	                                        </div>
-	                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-81px, 21px, 0px);">
-	                                        	<a class="dropdown-item" href="#">수정</a>
-	                                        	<a class="dropdown-item" href="#">삭제</a>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="text-muted font-14" style="padding-left: 56px; padding-top: 7px;">  2023.10.18 16:13</div>
-                                </div>
+                                <div class="modal fade" id="deleteBoard">
+			                        <div class="modal-dialog" role="document">
+			                            <div class="modal-content">
+			                                <div class="modal-header">
+			                                    <h5 class="modal-title">게시글 삭제</h5>
+			                                </div>
+			                                <div class="modal-body">
+			                                    <div class="container-fluid">
+			                                        <div class="row">
+			                                        	해당 게시글을 삭제하시겠습니까?
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                                <div class="modal-footer">
+			                                    <!-- <button type="button" class="btn btn-primary">삭제</button> -->
+			                                    <a href="deleteBoard?boardNo=${board.boardNo}" role="button" class="btn btn-primary">삭제</a>
+			                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			                                </div>
+			                            </div>
+			                        </div>
+		                		</div>
+                                
+                                <!-- <div class="modal fade" id="deleteComment">
+			                        <div class="modal-dialog" role="document">
+			                            <div class="modal-content">
+			                                <div class="modal-header">
+			                                    <h5 class="modal-title">댓글 삭제</h5>
+			                                </div>
+			                                <div class="modal-body">
+			                                    <div class="container-fluid">
+			                                        <div class="row">
+			                                        	댓글을 정말 삭제하시겠습니까?
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                                <div class="modal-footer">
+			                                    <button type="button" class="btn btn-primary">삭제</button>
+			                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			                                </div>
+			                            </div>
+			                        </div>
+		                		</div> -->
+		                		
+		                		<div class="modal fade" id="deleteComment">
+			                        <div class="modal-dialog" role="document">
+			                            <div class="modal-content">
+			                                <div class="modal-header">
+			                                    <h5 class="modal-title">댓글 삭제</h5>
+			                                </div>
+			                                <form action="deleteComment" method="post">
+				                                <div class="modal-body">
+				                                    <div class="container-fluid">
+				                                        <div class="row">
+				                                        	댓글을 정말 삭제하시겠습니까?
+				                                        	<input type="hidden" id="boardNo" name="boardNo" value="${board.boardNo}">
+				                                        	<input type="hidden" id="commentNoInput" name="commentNo">
+				                                        </div>
+				                                    </div>
+				                                </div>
+				                                <div class="modal-footer">
+				                                    <button type="submit" class="btn btn-primary">삭제</button>
+				                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				                                </div>
+				                            </form>
+			                            </div>
+			                        </div>
+		                		</div>
                                 
                                 <!-- 댓글 작성 -->
                                 <%-- <div class="box-footer" style="">

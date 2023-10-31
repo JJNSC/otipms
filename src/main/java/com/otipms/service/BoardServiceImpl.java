@@ -76,5 +76,17 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardComment> boardCommentList(String boardNo) {
 		return boardDao.selectBoardComment(Integer.parseInt(boardNo));
 	}
+
+	//게시글 삭제
+	@Override
+	public void deleteBoard(String boardNo) {
+		boardDao.updateBoardDeleted(Integer.parseInt(boardNo));
+	}
+
+	//댓글 삭제
+	@Override
+	public void deleteBoardComment(String commentNo) {
+		boardDao.updateBoardCommentDeleted(Integer.parseInt(commentNo));
+	}
 	
 }

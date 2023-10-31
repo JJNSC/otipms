@@ -63,4 +63,16 @@ public interface BoardDao {
 	 * @return
 	 */
 	public List<BoardComment> selectBoardComment(int boardNo);
+
+	/**
+	 * 게시글 삭제로 갱신
+	 * @param boardNo
+	 */
+	public void updateBoardDeleted(int boardNo);
+
+	/**
+	 * 댓글 삭제로 갱신
+	 * @param commentNo
+	 */
+	public void updateBoardCommentDeleted(int commentNo);
 }

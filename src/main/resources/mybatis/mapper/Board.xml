@@ -151,6 +151,10 @@
 		    ON ei.EMPID = m.EMPID
 		 WHERE 1=1
 		   AND b.BOARDNO = #{boardNo}
+		   AND (
+		   	   b.BOARDDELETED = 0
+		   	   OR b.BOARDDELETED is null
+		   	   )
 	</select>
 	
 	<!-- 조회수 갱신 -->
@@ -220,4 +224,20 @@
 		   	   )
 		 ORDER BY COMMENTWRITEDATE ASC
 	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="updateBoardDeleted" parameterType="int">
+		UPDATE BOARD
+		   SET BOARDDELETED = 1
+		 WHERE 1=1
+		   AND BOARDNO = #{boardNo}
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="updateBoardCommentDeleted" parameterType="int">
+		UPDATE BOARDCOMMENT
+		   SET COMMENTDELETED = 1
+		 WHERE 1=1
+		   AND COMMENTNO = #{commentNo}
+	</delete>
 </mapper>

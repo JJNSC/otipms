@@ -259,6 +259,13 @@ public class BoardController {
 		return "board/detailBoard";
 	}
 	
+	/**
+	 * 댓글 작성
+	 * @param boardNo
+	 * @param comment
+	 * @param newComment
+	 * @return
+	 */
 	@RequestMapping("/writeComment")
 	//@ResponseBody
 	public String writeComment(String boardNo, String comment, String newComment) {
@@ -273,6 +280,29 @@ public class BoardController {
 		boardService.writeComment(boardComment);
 		
 		//리다이렉트하면 조회수가 늘어나네.....
+		return "redirect:/detailBoard?boardNo=" + boardNo;
+	}
+	
+	/**
+	 * 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	@RequestMapping("/deleteBoard")
+	public String deleteBoard(String boardNo) {
+		boardService.deleteBoard(boardNo);
+		return "redirect:/board";
+	}
+	
+	/**
+	 * 댓글 삭제
+	 * @param boardNo
+	 * @param commentNo
+	 * @return
+	 */
+	@RequestMapping("/deleteComment")
+	public String deleteComment(String boardNo, String commentNo) {
+		boardService.deleteBoardComment(commentNo);
 		return "redirect:/detailBoard?boardNo=" + boardNo;
 	}
 
