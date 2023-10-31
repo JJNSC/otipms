@@ -97,66 +97,85 @@
                                    	${board.boardContent}
                                 </div>
                                 <!-- 댓글 -->
+                                <c:forEach var="comment" items="${commentList}">
+                                	<div class="compose-content" style="border-top: 1px solid #ebecef; padding-top: 1.5rem; padding-bottom: 1.1rem;">
+	                                	<div class="row">
+	                                		<div class="col-6">
+	                                			<div class="d-flex align-items-center">
+	                                				<div style="margin-right: 0.8rem !important;"><img src="data:${comment.mediaFileData};base64, ${comment.base64Img}" class="rounded-circle" width="40" height="40"></div>
+				                                    <div class="">
+				                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
+				                                        	<c:if test="${comment.teamName == null}">
+					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${board.empRank}</span>
+				                                        	</c:if>
+				                                        	<c:if test="${comment.teamName != null}">
+					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${board.empRank} | ${board.teamName}</span>
+				                                        	</c:if>
+				                                        	
+				                                        	<c:if test="${board.empId == comment.empId}">
+					                                        	<span class="badge badge-pill badge-writer-custom">작성자</span>
+				                                        	</c:if>
+				                                        </h6>
+				                                        <c:set var="now" value="<%= new java.util.Date() %>" />
+		                                                <c:choose>
+														    <c:when test="${fn:substring(comment.commentWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
+														        <td>
+														            <span class="text-muted font-14">  <fmt:formatDate value="${comment.commentWriteDate}" pattern="HH:mm"/></span>
+														        </td>
+														    </c:when>
+														    <c:otherwise>
+														        <td>
+														        	<span class="text-muted font-14">  <fmt:formatDate value="${comment.commentWriteDate}" pattern="yyyy.MM.dd"/></span>
+														        </td>
+														    </c:otherwise>
+														</c:choose>
+				                                    </div>
+				                                </div>
+	                                		</div>
+	                                		<c:if test="${comment.empId == employee.empId}">
+		                                		<div class="col-6 text-right">
+		                                			<div class="dropdown custom-dropdown" style="flex: 1; text-align: right;">
+				                                        <div data-toggle="dropdown" aria-expanded="false" class="px-3">
+				                                        	<i class="fa fa-ellipsis-v"></i>
+				                                        </div>
+				                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-81px, 21px, 0px);">
+				                                        	<a class="dropdown-item" href="#">수정</a>
+				                                        	<a class="dropdown-item" href="#">삭제</a>
+				                                        </div>
+				                                    </div>             		
+		                                		</div>
+                                        	</c:if>
+	                                	</div>
+	                                	<div class="row pt-3 pl-5 ml-1" style="color: #222222;">
+	                                		<%-- <pre>${comment.commentContent}</pre> --%>
+	                                		${comment.commentContent}
+	                                	</div>
+	                                </div>
+                                </c:forEach>
+                                
                                 <div class="compose-content" style="border-top: 1px solid #ebecef; padding-top: 1.5rem; padding-bottom: 1.5rem;">
-                                	<div class="row">
-                                		<div class="col-6">
-                                			<div class="d-flex align-items-center">
-			                                    <div style="margin-right: 0.8rem !important;"><img src="/otipms/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
-			                                    <div class="">
-			                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
-			                                        	김종진 <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">대리 | 개발1팀</span>
-			                                        	<span class="badge badge-pill badge-writer-custom">작성자</span>
-			                                        </h6>
-			                                        <span class="text-muted font-14">  2023.10.18 16:13</span>
-			                                    </div>
-			                                </div>
-                                		</div>
-                                		<div class="col-6 text-right">
-                                			<div class="dropdown custom-dropdown" style="flex: 1; text-align: right;">
-		                                        <div data-toggle="dropdown" aria-expanded="false" class="px-3">
-		                                        	<i class="fa fa-ellipsis-v"></i>
-		                                        </div>
-		                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-81px, 21px, 0px);">
-		                                        	<a class="dropdown-item" href="#">수정</a>
-		                                        	<a class="dropdown-item" href="#">삭제</a>
-		                                        </div>
-		                                    </div>             		
-                                		</div>
-                                	</div>
-                                	<div class="row pt-3 pl-5 ml-1">
-                                		감사합니다~
-                                	</div>
+	                                <div class="d-flex align-items-center">
+	                                    <div class="mr-3"><img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
+	                                    <div class="">
+	                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
+	                                        	김종진 <span style="font-weight: 300; font-size: 0.8rem;">대리/개발1팀</span>
+	                                        	<span class="badge badge-pill badge-writer-custom">작성자</span>
+	                                        </h6>
+	                                        <div>감사합니다~</div>
+	                                    </div>
+	                                    <div class="dropdown custom-dropdown" style="flex: 1; text-align: right;">
+	                                        <div data-toggle="dropdown" aria-expanded="false" class="px-3">
+	                                        	<i class="fa fa-ellipsis-v"></i>
+	                                        </div>
+	                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-81px, 21px, 0px);">
+	                                        	<a class="dropdown-item" href="#">수정</a>
+	                                        	<a class="dropdown-item" href="#">삭제</a>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="text-muted font-14" style="padding-left: 56px; padding-top: 7px;">  2023.10.18 16:13</div>
                                 </div>
-                                <div class="compose-content" style="border-top: 1px solid #ebecef; padding-top: 1.5rem; padding-bottom: 1.5rem;">
-                                	<div class="row">
-                                		<div class="col-6">
-                                			<div class="d-flex align-items-center">
-			                                    <div style="margin-right: 0.8rem !important;"><img src="/otipms/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div>
-			                                    <div class="">
-			                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
-			                                        	김종진 <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">대리 | 개발1팀</span>
-			                                        	<span class="badge badge-pill badge-writer-custom">작성자</span>
-			                                        </h6>
-			                                        <span class="text-muted font-14">  2023.10.18 16:13</span>
-			                                    </div>
-			                                </div>
-                                		</div>
-                                		<div class="col-6 text-right">
-                                			<div class="dropdown custom-dropdown" style="flex: 1; text-align: right;">
-		                                        <div data-toggle="dropdown" aria-expanded="false" class="px-3">
-		                                        	<i class="fa fa-ellipsis-v"></i>
-		                                        </div>
-		                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-81px, 21px, 0px);">
-		                                        	<a class="dropdown-item" href="#">수정</a>
-		                                        	<a class="dropdown-item" href="#">삭제</a>
-		                                        </div>
-		                                    </div>             		
-                                		</div>
-                                	</div>
-                                	<div class="row pt-3 pl-5 ml-1">
-                                		감사합니다~
-                                	</div>
-                                </div>
+                                
                                 <!-- 댓글 작성 -->
                                 <%-- <div class="box-footer" style="">
                                 	<img class="img-responsive img-circle img-sm" src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="Alt Text" width="40px" height="40px">
@@ -177,7 +196,12 @@
 											<%-- <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${employee.empRank} | ${employee.teamName}</span></span> --%>
                                        	</span>
                                        	<input type="hidden" id="boardNumber" value="${board.boardNo}">
-										<textarea placeholder="댓글을 남겨보세요" id="commentText" rows="15" class="comment_inbox_text" style="width: 100%; overflow: hidden; overflow-wrap: break-word; height: 20px; border: none; resize: none;"></textarea>
+										<textarea placeholder="댓글을 남겨보세요" 
+												  id="commentText" 
+												  rows="15" 
+												  class="comment_inbox_text" 
+												  onkeyup="setCommentInboaxStyle(this)"
+												  ></textarea>
 										<!-- <text placeholder="댓글을 남겨보세요" rows="1" class="comment_inbox_text" style="overflow: hidden; overflow-wrap: break-word; height: 17px; border: none;"></text> -->
 										<!----><!---->
 									</div>
@@ -228,11 +252,20 @@
 											</script>
 										</div>
 										<div class="register_box">
-											<a href="#" role="button" class="button btn_register" onclick="register()">등록</a>
+											<!-- <a href="#" role="button" class="button btn_register" onclick="register()">등록</a> -->
+											<button href="#" role="button" class="button btn_register" onclick="register(this)">등록</button>
 											<!-- <button class="button btn_register">등록</button> -->
 											<script type="text/javascript">
-												function register() {
-													registerComment();
+												function register(button) {
+													var comment = $("#commentText").val();
+													
+													if(comment == null || comment == "") {
+														/* alert("댓글을 입력해주세요."); */
+														$(button).attr("disabled", true);
+													} else {
+														$(button).attr("disabled", false);
+														registerComment();
+													}
 												}
 											</script>
 										</div>

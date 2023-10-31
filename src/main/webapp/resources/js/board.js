@@ -236,25 +236,62 @@ function registerComment() {
 	var boardNo = $("#boardNumber").val();
 	var comment = $("#commentText").val();
 	
-	if(comment == null || comment == "") {
-		alert("댓글을 입력해주세요.");
-	} else {
-		console.log(comment);
-		$.ajax({
-			url: "/otipms/writeComment",
-			method: "POST",
-			data: {
-				boardNo:boardNo,
-				comment:comment
-			},
-			success: function(data) {
-				console.log("받아야 할 data는 댓글 내용!이랑 글 내용...? 이럴거면 redirect를 하는 게...." + data);
-				$("#commentText").val('');
-			},
-			error: function(error) {
-				console.log(error);
-			}
-		});
-	}
+	var newComment = comment.replaceAll("\n", "<br/>");
+	
+	console.log(comment);
+	$.ajax({
+		url: "/otipms/writeComment",
+		method: "POST",
+		data: {
+			boardNo:boardNo,
+			comment:newComment
+		},
+		success: function(data) {
+			console.log("받아야 할 data는 댓글 내용!이랑 글 내용...? 이럴거면 redirect를 하는 게...." + data);
+			$("body").html(data);
+			$("#commentText").val('');
+		},
+		error: function(error) {
+			//console.log(error);
+		}
+	});
+}
+
+function setCommentInboaxStyle(text) {
+	
+	// textarea 입력된 글자수 길이 확인
+    var inputLength = $(text).val().length; 
+
+    // textarea 에 작성된 전체 데이터 확인
+    var totalText = $(text).val();
+
+    // textarea 에 현재 입력된 데이터 확인 
+    var nowText = totalText.substring(inputLength-1, inputLength);
+    
+    console.log("");
+    console.log("[checkTextAreaByte] : [inputLength] : " + inputLength);
+    console.log("[checkTextAreaByte] : [totalText] : " + totalText);
+    console.log("[checkTextAreaByte] : [nowText] : " + nowText);
+
+    console.log($("#commentText").css("height"));
+
+    var newHeight = 1.4;
+    for(let i=1; i < totalText.split("\n").length; i++) {
+    	newHeight += 1.4;
+    }
+    
+    console.log(newHeight);
+    
+    $("#commentText").height(newHeight + "em");
+    $("#commentText").attr("style", "height: " + newHeight + "em !important");
+    console.log($("#commentText").css("height"));
+    
+    if(inputLength >= 1) {
+    	$(".CommentWriter .register_box .button").css("color", "#3574c3");
+    	$(".CommentWriter .register_box .button").css("borderColor", "#3574c3");
+    } else {
+    	$(".CommentWriter .register_box .button").css("color", "#b7b7b7");
+    	$(".CommentWriter .register_box .button").css("borderColor", "#b7b7b7");
+    }
 	
 }

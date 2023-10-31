@@ -241,21 +241,29 @@ public class BoardController {
 	 */
 	@RequestMapping("/detailBoard")
 	public String detailBoard(String boardNo, Model model) {
-		log.info("상세글");
-		model.addAttribute("boardType", boardType);
+		
+		//로그인 정보
 		model.addAttribute("employee", LoginController.loginEmployee);
 		
-		log.info("boardNo: " + boardNo);
-		
+		//게시글 조회
 		Board board = boardService.detailBoard(boardNo);
 		board.setBase64Img(Base64.getEncoder().encodeToString(board.getMediaFileData()));
 		model.addAttribute("board", board);
+		
+		//댓글 조회
+		List<BoardComment> boardCommentList = boardService.boardCommentList(boardNo);
+		for(BoardComment comment : boardCommentList) {
+			comment.setBase64Img(Base64.getEncoder().encodeToString(comment.getMediaFileData()));
+		}
+		model.addAttribute("commentList", boardCommentList);
 		return "board/detailBoard";
 	}
 	
 	@RequestMapping("/writeComment")
-	@ResponseBody
-	public String writeComment(String boardNo, String comment) {
+	//@ResponseBody
+	public String writeComment(String boardNo, String comment, String newComment) {
+		log.info(comment);
+		log.info(newComment);
 		
 		BoardComment boardComment = new BoardComment();
 		boardComment.setBoardNo(Integer.parseInt(boardNo));

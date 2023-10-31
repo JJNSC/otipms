@@ -161,6 +161,13 @@
 		   AND BOARDNO = #{boardNo}
 	</update>
 	
+	<update id="minusBoardHitcount" parameterType="int">
+		UPDATE BOARD
+		   SET BOARDHITCOUNT = BOARDHITCOUNT - 1
+		 WHERE 1=1
+		   AND BOARDNO = #{boardNo}
+	</update>
+	
 	<!-- 새 댓글 삽입 -->
 	<insert id="insertBoardComment" parameterType="BoardComment">
 		INSERT INTO BOARDCOMMENT
@@ -181,4 +188,36 @@
 		, 0
 		)
 	</insert>
+	
+	<!-- 댓글 조회 -->
+	<select id="selectBoardComment" parameterType="int" resultType="BoardComment">
+		SELECT c.commentNo
+			 , e.empId
+			 , c.boardNo
+			 , c.commentContent
+			 , c.commentWriteDate
+			 , c.commentUpdateDate
+			 , c.commentDeleted
+			 , e.empName
+			 , e.empRank
+			 , t.teamNo
+		     , t.teamName
+		     , m.mediaFileData
+		  FROM BOARDCOMMENT c
+		 INNER JOIN EMP e
+		    ON c.EMPID = e.EMPID
+		 INNER JOIN EMPINFO ei
+		    ON e.EMPID = ei.EMPID
+		  LEFT OUTER JOIN TEAM t
+		    ON ei.TEAMNO = t.TEAMNO
+		  LEFT OUTER JOIN MEDIAFILE m
+		    ON ei.EMPID = m.EMPID
+		 WHERE 1=1
+		   AND c.BOARDNO = #{boardNo}
+		   AND (
+		   	   COMMENTDELETED = 0 
+		   	   OR COMMENTDELETED is null
+		   	   )
+		 ORDER BY COMMENTWRITEDATE ASC
+	</select>
 </mapper>

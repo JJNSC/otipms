@@ -68,6 +68,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void writeComment(BoardComment boardComment) {
 		boardDao.insertBoardComment(boardComment);
+		boardDao.minusBoardHitcount(boardComment.getBoardNo());
+	}
+
+	//댓글 조회
+	@Override
+	public List<BoardComment> boardCommentList(String boardNo) {
+		return boardDao.selectBoardComment(Integer.parseInt(boardNo));
 	}
 	
 }

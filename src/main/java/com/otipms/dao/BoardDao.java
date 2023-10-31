@@ -49,10 +49,18 @@ public interface BoardDao {
 	 * @param boardNo
 	 */
 	public int updateBoardHitcount(int boardNo);
+	public int minusBoardHitcount(int boardNo);
 
 	/**
 	 * 새 댓글 삽입
 	 * @param boardComment
 	 */
 	public void insertBoardComment(BoardComment boardComment);
+
+	/**
+	 * 댓글 조회
+	 * @param boardNo
+	 * @return
+	 */
+	public List<BoardComment> selectBoardComment(int boardNo);
 }

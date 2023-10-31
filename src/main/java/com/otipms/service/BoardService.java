@@ -45,4 +45,11 @@ public interface BoardService {
 	 * @param boardComment
 	 */
 	public void writeComment(BoardComment boardComment);
+
+	/**
+	 * 댓글 조회
+	 * @param boardNo
+	 * @return
+	 */
+	public List<BoardComment> boardCommentList(String boardNo);
 }
