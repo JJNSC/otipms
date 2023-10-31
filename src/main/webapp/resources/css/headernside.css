@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.alertMail {
+	position: absolute;
+    width: 250px;
+    top: 80px;
+    right: -220px;
+    background: #598123;
+	padding: 0;
+    margin: 0;
+    border-top: 1px solid #cccccc;
+    z-index : 1;
+}
+
+.alertMail .thumbnail {
+  margin-left: 5px;
+  margin-bottom: 10px;
+  display: inline-block;
+  background: #e0e0e0;
+  width: 50px;
+  color: var(--white);
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.alertMail .content {
+	display: inline-block;
+  margin-left: 6px;
+  vertical-align: top;
+  line-height: 1;
+}
+
+.alertMail .content h3{
+	display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  color: #808080;
+}
+
+.alertMail .content .preview {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 5px;
+  color: #333333;
+  font-size: 12px;
+}
+
+#totalAlarm{
+	width: 318px;
+    background: white;
+    position: fixed;
+    top: 320px;
+}

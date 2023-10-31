@@ -107,7 +107,7 @@ public class MessageServiceImpl implements MessageService {
             messageDao.writeCC(cc);
             Alarm alarm = new Alarm();
             alarm.setEmpId(cc.getEmpId());
-            alarm.setAlarmContentCode("쪽지가 알림");
+            alarm.setAlarmContentCode("쪽지 알림");
             alarm.setAlarmContent("쪽지가 도착했습니다.");
             Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
             alarm.setAlarmDate(currentTimestamp);

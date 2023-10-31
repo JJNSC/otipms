@@ -13,4 +13,5 @@ public class Alarm {
 	private Date alarmDate;
 	private int alarmChk;
 	private int messageNo;
+	private int sendempId;
 }

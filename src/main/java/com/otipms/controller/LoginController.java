@@ -97,10 +97,12 @@ public class LoginController {
 	    
 	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
 	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
+	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
 	    
 	    model.addAttribute("employee", empDetails.getEmployee());
 	    model.addAttribute("alarm", alarm);
 	    model.addAttribute("alarmCnt", alarmCnt);
+	    model.addAttribute("totalAlarmCnt", totalAlarmCnt);
 	    
 	    return "index";
 	}

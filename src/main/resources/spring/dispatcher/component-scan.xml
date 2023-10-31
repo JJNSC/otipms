@@ -25,7 +25,8 @@
 	
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 	
-	<bean id="alarmHandler" class="com.otipms.websocket.WebSocketMailHandler"></bean>
+	<bean id="alarmHandler" class="com.otipms.websocket.WebSocketMailHandler">
+	</bean>
 	<websocket:handlers allowed-origins="*">
 	  <websocket:mapping handler="alarmHandler" path="/ws-alarm" />
 	  <websocket:handshake-interceptors>

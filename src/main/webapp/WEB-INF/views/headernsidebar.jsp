@@ -27,29 +27,26 @@
                         <li class="icons dropdown">
                         	<a class="nav-link nav-icons" href="javascript:void(0);" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="mdi mdi-email-outline"></i>
-								<span class="badge badge-pill badge-custom">${alarmCnt}</span>
+								<span id="alarmCnt" class="badge badge-pill badge-custom"></span>
 								<input type="hidden" value="${employee.empId}" id="memIdSpan">
-								<span class="indicator" id="alarmIcon" style="display:none;"></span>
+								<div class="alertMail" id="alarmIcon">
+						            <a class="thumbnail" href="#">Msg</a>
+						            <div class="content">
+						            	<h3>${employee.empName}님</h3>
+						            	<span class="preview">새로운 쪽지가 도착했습니다.</span>
+						          	</div>
+						        </div>
 							</a>
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
                                     <span class="">New Messages</span>  
                                 </div>
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                    	<c:forEach items="${alarm}" var="alarms" varStatus="loop">
-                                    		<li>
-	                                            <a href="javascript:void(window.open('mail/detailMail?messageNo=${alarms.messageNo}','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedAlarm(${alarms.alarmNo})">
-	                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-	                                                <div class="notification-content">
-	                                                    <h6 class="notification-heading">${alarms.alarmContentCode}</h6>
-	                                                    <p class="notification-text">${alarms.alarmContent}</p>
-	                                                    <span class="notification-heading"><fmt:formatDate value="${alarms.alarmDate}" type="date" pattern="yy.MM.dd hh.mm.ss"/></span>
-	                                                </div>
-	                                            </a>
-	                                        </li>
-                                    	</c:forEach>
+                                <div id="alarmListContainer" class="dropdown-content-body" style="max-height: 300px; overflow-y:scroll;">
+                                    <ul id="alarmList" style="padding:0px">
                                     </ul>
+                                    <div id="totalAlarm"style="text-align:center;">
+									  	총 알림 갯수 (<span id="totalAlarmCount">0</span>개)
+									</div>
                                 </div>
                             </div>
                         </li>
@@ -130,7 +127,7 @@
                                                 <i class="icon-envelope-open"></i>
                                                 <span>Inbox</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
-                                                	3
+                                                	<span id="alarmCnt"></span>
                                                 </div>
                                             </a>
                                         </li>
@@ -154,6 +151,7 @@
                         </li>
                     </ul>
                 </div>
+                
             </div>
         </div>
         <!--**********************************
@@ -228,6 +226,7 @@
             </div>
         </div>
         <script src="${pageContext.request.contextPath}/resources/js/headernside.js"></script>
+        <link href="${pageContext.request.contextPath}/resources/css/headernside.css" rel="stylesheet">
         <!--**********************************
             Sidebar end
         ***********************************-->
