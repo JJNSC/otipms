@@ -100,6 +100,11 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
+	public MediaFile getMediaFile(int mediaFileNo) {
+		return messageDao.selectMediaFileByMediaFileNo(mediaFileNo);
+	}
+	
+	@Override
 	public int writeMessage(Message message) {
 		return sqlSession.insert("writeMessage", message);
 	}

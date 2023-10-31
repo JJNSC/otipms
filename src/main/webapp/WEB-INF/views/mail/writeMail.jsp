@@ -151,6 +151,7 @@
 													autoQueue: false,
 													thumbnailHeight: 120, 
 												    thumbnailWidth: 120,
+												    maxFilesize: 30,
 												    uploadMultiple: false,
 												    addRemoveLinks: true, 
 												    dictRemoveFile: '삭제'

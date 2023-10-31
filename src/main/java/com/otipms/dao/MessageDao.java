@@ -36,6 +36,6 @@ public interface MessageDao {
 	public int writeMessage(Message message);
 	public void writeCC(CC cc);
 	public void writeMailMedia(MediaFile mediaFile);
-	
+	public MediaFile selectMediaFileByMediaFileNo(int mediaFileNo);
 	public void updateMailMedia(MediaFile mediaFile);
 }

@@ -4,89 +4,192 @@
 	
 	<!-- 쪽지 수신함 조회 -->
 	<select id="selectMyReceivedMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
-			FROM emp e
-			JOIN message m ON e.empId = m.empId
-			JOIN CC c ON m.messageNo = c.messageNo
-			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-			WHERE c.empId = ${empId}
-			 AND c.messageStatus = 1 
-			 AND (c.ccType IN (1,3,4))
-		ORDER BY m.messageNo desc
+		SELECT c.messageNo
+		     , c.empId
+		     , e.empName
+		     , e.empRank
+		     , m.messageTitle
+		     , m.messageReservedDate
+		     , c.messageStatus
+		     , c.messageChecked
+		     , c.messageImportant
+		     , me.mediaFileNo
+		     , c.ccType
+		     , c.ccNo
+		  FROM emp e
+		  JOIN message m 
+		    ON e.empId = m.empId
+		  JOIN CC c 
+		    ON m.messageNo = c.messageNo
+	 LEFT JOIN mediaFile me 
+	        ON m.messageNo = me.messageNo
+		 WHERE c.empId = ${empId}
+		   AND c.messageStatus = 1 
+		   AND (c.ccType IN (1,3,4))
+		   AND e.empEnabled = 1
+	  ORDER BY m.messageNo DESC
 	</select>
 	
 	<!-- 쪽지 발신함 조회 -->
 	<select id="selectMySentMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
-			FROM emp e
-			JOIN message m ON e.empId = m.empId
-			JOIN CC c ON m.messageNo = c.messageNo
-			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-		   WHERE c.empId = ${empId} and c.messageStatus = 1 and c.ccType= 2
-		ORDER BY m.messageNo desc
+		SELECT c.messageNo
+		     , c.empId
+		     , e.empName
+		     , e.empRank
+		     , m.messageTitle
+		     , m.messageReservedDate
+		     , c.messageStatus
+		     , c.messageChecked
+		     , c.messageImportant
+		     , me.mediaFileNo
+		     , c.ccType
+		     , c.ccNo
+		  FROM emp e
+		  JOIN message m 
+		    ON e.empId = m.empId
+		  JOIN CC c 
+		    ON m.messageNo = c.messageNo
+	 LEFT JOIN mediaFile me 
+	        ON m.messageNo = me.messageNo
+		 WHERE c.empId = ${empId} 
+		   AND c.messageStatus = 1 
+		   AND c.ccType= 2
+		   AND e.empEnabled = 1
+	  ORDER BY m.messageNo DESC
 	</select>
 	
 	<!-- 중요 쪽지함 조회 -->
 	<select id="selectMyImportantMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
-			FROM emp e
-			JOIN message m ON e.empId = m.empId
-			JOIN CC c ON m.messageNo = c.messageNo
-	   LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-		   WHERE c.empId = ${empId} and c.messageStatus = 1 and c.messageImportant = 1
-	    ORDER BY m.messageNo desc
+		SELECT c.messageNo
+		     , c.empId
+		     , e.empName
+		     , e.empRank
+		     , m.messageTitle
+		     , m.messageReservedDate
+		     , c.messageStatus
+		     , c.messageChecked
+		     , c.messageImportant
+		     , me.mediaFileNo
+		     , c.ccType
+		     , c.ccNo
+		  FROM emp e
+		  JOIN message m 
+		    ON e.empId = m.empId
+		  JOIN CC c 
+		    ON m.messageNo = c.messageNo
+	 LEFT JOIN mediaFile me 
+	        ON m.messageNo = me.messageNo
+		 WHERE c.empId = ${empId} 
+		   AND c.messageStatus = 1 
+		   AND c.messageImportant = 1
+		   AND e.empEnabled = 1
+	  ORDER BY m.messageNo DESC
 	</select>
 	
 	<!-- 임시 쪽지함 조회 -->
 	<select id="selectMyTemporaryMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
-			FROM emp e
-			JOIN message m ON e.empId = m.empId
-			JOIN CC c ON m.messageNo = c.messageNo
-			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-		   WHERE c.empId = ${empId} and c.messageStatus = 3 and c.ccType= 2
-		ORDER BY m.messageNo desc
+		SELECT c.messageNo
+		     , c.empId
+		     , e.empName
+		     , e.empRank
+		     , m.messageTitle
+		     , m.messageReservedDate
+		     , c.messageStatus
+		     , c.messageChecked
+		     , c.messageImportant
+		     , me.mediaFileNo
+		     , c.ccType
+		     , c.ccNo
+		  FROM emp e
+		  JOIN message m 
+		    ON e.empId = m.empId
+		  JOIN CC c 
+		    ON m.messageNo = c.messageNo
+	 LEFT JOIN mediaFile me 
+	        ON m.messageNo = me.messageNo
+		 WHERE c.empId = ${empId} 
+		   AND c.messageStatus = 3 
+		   AND c.ccType= 2
+		   AND e.empEnabled = 1
+	  ORDER BY m.messageNo DESC
 	</select>
 	
 	<!-- 쪽지 휴지통 조회 -->
 	<select id="selectMyTrashMessage" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo, c.ccType, c.ccNo
-			FROM emp e
-			JOIN message m ON e.empId = m.empId
-			JOIN CC c ON m.messageNo = c.messageNo
-			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-		   WHERE c.empId = ${empId} and c.messageStatus = 2
-	    ORDER BY m.messageNo desc
+		SELECT c.messageNo
+		     , c.empId
+		     , e.empName
+		     , e.empRank
+		     , m.messageTitle
+		     , m.messageReservedDate
+		     , c.messageStatus
+		     , c.messageChecked
+		     , c.messageImportant
+		     , me.mediaFileNo
+		     , c.ccType
+		     , c.ccNo
+		  FROM emp e
+		  JOIN message m 
+		    ON e.empId = m.empId
+		  JOIN CC c 
+		    ON m.messageNo = c.messageNo
+	 LEFT JOIN mediaFile me 
+	        ON m.messageNo = me.messageNo
+		 WHERE c.empId = ${empId} 
+		   AND c.messageStatus = 2
+		   AND e.empEnabled = 1
+	  ORDER BY m.messageNo DESC
 	</select>
 	
 	<!-- 쪽지 번호로 쪽지 찾기 -->
 	<select id="selectMessagebyMessageNo" parameterType="int" resultType="Message">
-		SELECT c.messageNo, c.empId, e.empName, e.empRank, m.messageTitle, m.messageReservedDate, c.messageStatus, c.messageChecked, c.messageImportant, me.mediaFileNo
-			FROM emp e
-			JOIN message m ON e.empId = m.empId
-			JOIN CC c ON m.messageNo = c.messageNo
-			LEFT JOIN mediaFile me ON m.messageNo = me.messageNo
-			WHERE c.messageNo = ${messageNo}
+		SELECT c.messageNo
+		     , c.empId
+		     , e.empName
+		     , e.empRank
+		     , m.messageTitle
+		     , m.messageReservedDate
+		     , c.messageStatus
+		     , c.messageChecked
+		     , c.messageImportant
+		     , me.mediaFileNo
+	      FROM emp e
+		  JOIN message m 
+		    ON e.empId = m.empId
+		  JOIN CC c 
+		    ON m.messageNo = c.messageNo
+	 LEFT JOIN mediaFile me 
+	        ON m.messageNo = me.messageNo
+		 WHERE c.messageNo = ${messageNo}
+		   AND e.empEnabled = 1
 	</select>
 	
 	<!-- 중요 표시 토글(중요 메일함에 넣기) -->
 	<update id="updateImportantMessage" parameterType="Message">
 		UPDATE CC
-			SET messageImportant = CASE
-		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageImportant = '0' THEN '1'
-		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageImportant = '1' THEN '0'
-		        ELSE messageImportant
-		    END
+		   SET messageImportant = CASE
+		  WHEN messageNo = #{messageNo} 
+		   AND empId = #{empId} 
+		   AND messageImportant = '0' THEN '1'
+		  WHEN messageNo = #{messageNo} 
+		   AND empId = #{empId} 
+		   AND messageImportant = '1' THEN '0'
+		  ELSE messageImportant
+		   END
 	</update>
 	
 	<!-- 쪽지 휴지통에 버리기 -->
 	<update id="updateTrashMessage" parameterType="Message">
 		UPDATE CC
-			SET messageStatus = CASE
-		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = 1 THEN 2
-		        WHEN messageNo = #{messageNo} AND empId = #{empId} AND messageStatus = 2 THEN 1
-		        ELSE messageStatus
-		    END
+		   SET messageStatus = CASE
+		  WHEN messageNo = #{messageNo} 
+		   AND empId = #{empId} 
+		   AND messageStatus = 1 THEN 2
+		  WHEN messageNo = #{messageNo} 
+		   AND empId = #{empId} 
+		   AND messageStatus = 2 THEN 1
+		  ELSE messageStatus
+		   END
 	</update>
 	
 	<!-- 쪽지 클릭 시, 쪽지 읽음 표시 -->
@@ -111,6 +214,7 @@
 		 WHERE m.messageNo = c.messageNo
 		   AND e.empId = c.empId
 		   AND c.messageNo = #{messageNo}
+		   AND e.empEnabled = 1
 	</select>
 	
 	<!-- 쪽지 상세 정보(중요 여부) -->
@@ -123,6 +227,7 @@
 		   AND e.empId = c.empId
 		   AND c.empId = #{empId}
 		   AND c.messageNo = #{messageNo}
+		   AND e.empEnabled = 1
 	</select>
 	
 	<!-- 쪽지 상세 정보(쪽지 제목, 내용, 시간) -->
@@ -144,65 +249,109 @@
 		   AND mf.messageNo = #{messageNo}
 	</select>
 	
+	<!-- 미디어 파일 다운로드를 위한 select문 -->
+	<select id="selectMediaFileByMediaFileNo" parameterType="int" resultType="com.otipms.dto.MediaFile">
+		SELECT *
+		  FROM mediaFile
+		 WHERE mediaFileNo = #{mediaFileNo}
+	</select>
 	<!-- 쪽지 쓰기 -->
 	<insert id="writeMessage" parameterType="Message">
 		<selectKey keyProperty="messageNo" resultType="int" order="BEFORE">
-			select messageno_seq.nextval from dual
+			SELECT messageno_seq.nextval 
+			  FROM DUAL
 		</selectKey>
-		INSERT INTO MESSAGE (messageNo, empId, messageContent, messageTitle, messageReservedDate, messageStatus)
-			VALUES (#{messageNo}, #{empId}, #{messageContent}, #{messageTitle}, #{messageReservedDate}, #{messageStatus})
+		INSERT INTO MESSAGE 
+		          ( 
+		            messageNo
+		          , empId
+		          , messageContent
+		          , messageTitle
+		          , messageReservedDate
+		          , messageStatus
+		          )
+		  VALUES (
+		            #{messageNo}
+		          , #{empId}
+		          , #{messageContent}
+		          , #{messageTitle}
+		          , #{messageReservedDate}
+		          , #{messageStatus}
+		         )
 	</insert>
 	
 	<!-- CC 추가 -->
 	<insert id="writeCC" parameterType="com.otipms.dto.CC">
     <selectKey keyProperty="ccNo" resultType="int" order="BEFORE">
-        select ccNo_seq.nextval from dual
+        	 SELECT ccNo_seq.nextval 
+        	   FROM DUAL
     </selectKey>
-	    INSERT INTO CC (ccNo, messageNo, empId, messageStatus, messageChecked, messageImportant, ccType, ccCheckedDate)
-	    VALUES (
-	        #{ccNo},
-	        #{messageNo},
-	        #{empId},
-	        #{messageStatus},
-	        #{messageChecked},
-	        0,
-	        #{ccType},
-	        #{ccCheckedDate, jdbcType=NULL}
-	    )
+	    INSERT INTO CC 
+	              (
+	                ccNo
+	              , messageNo
+	              , empId
+	              , messageStatus
+	              , messageChecked
+	              , messageImportant
+	              , ccType
+	              , ccCheckedDate
+	              )
+	       VALUES (
+	        	    #{ccNo}
+	        	  , #{messageNo}
+	        	  , #{empId}
+	        	  , #{messageStatus}
+	        	  , #{messageChecked}
+	        	  , 0
+	        	  , #{ccType}
+	        	  , #{ccCheckedDate, jdbcType=NULL}
+	    		  )
 	</insert>
 	
 	<!-- 첨부파일 추가 -->
 	<insert id="writeMailMedia" parameterType="com.otipms.dto.MediaFile">
 		<selectKey keyProperty="mediaFileNo" resultType="int" order="BEFORE">
-			select mediaFileNo_seq.nextval from dual
+			 SELECT mediaFileNo_seq.nextval 
+			   FROM DUAL
 		</selectKey>
-		INSERT INTO mediaFile (mediaFileNo, messengerNo, empId, boardNo, messageNo, mediaFileName, mediaFileType, mediaFileData)
-		VALUES
-			(
-	        #{mediaFileNo},
-	        <if test="messengerNo==0">
-	        null,
-	        </if>
-	        <if test="messengerNo!=0">
-	        #{messengerNo},
-	        </if>
-	        #{empId},
-	        <if test="boardNo==0">
-	        null,
-	        </if>
-	        <if test="boardNo!=0">
-	        #{boardNo},
-	        </if>
-	        <if test="messageNo==0">
-	        null,
-	        </if>
-	        <if test="messageNo!=0">
-	        #{messageNo},
-	        </if>
-	        #{mediaFileName},
-	        #{mediaFileType},
-	        #{mediaFileData}
-	    )
+		INSERT INTO mediaFile 
+				  (
+				    mediaFileNo
+				  , messengerNo
+				  , empId
+				  , boardNo
+				  , messageNo
+				  , mediaFileName
+				  , mediaFileType
+				  , mediaFileData
+				  )
+			 VALUES
+				  (
+	        		#{mediaFileNo},
+	        		<if test="messengerNo==0">
+	        		null,
+	        		</if>
+	        		<if test="messengerNo!=0">
+			        #{messengerNo},
+			        </if>
+			        #{empId},
+			        <if test="boardNo==0">
+			        null,
+			        </if>
+			        <if test="boardNo!=0">
+			        #{boardNo},
+			        </if>
+			        <if test="messageNo==0">
+			        null,
+			        </if>
+			        <if test="messageNo!=0">
+			        #{messageNo},
+			        </if>
+			        #{mediaFileName},
+			        #{mediaFileType},
+			        #{mediaFileData}
+	    		   )
 	</insert>
 	
 	<!-- 첨부파일 완전 추가 -->

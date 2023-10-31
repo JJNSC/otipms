@@ -105,24 +105,20 @@ function sendMail() {
 	var references = getSelectedEmployees("selectedReferenceEmployees", ccTypeToNumber["Reference"]);
 	var blindCopies = getSelectedEmployees("selectedBlindCopyEmployees", ccTypeToNumber["BlindCopy"]);
 	
-	//다행히 잘 나옴
-	console.log(title);
-	console.log(content);
-	console.log(recipients);
-	console.log(references);
-	console.log(blindCopies);
-	console.log(uploadedFiles);
 	
 	var modifiedUploadedFiles = [];
     for (var i = 0; i < uploadedFiles.length; i++) {
         var file = uploadedFiles[i];
         var base64Data = file.data;
-        var dataWithoutPrefix = base64Data.replace(/^data:image\/\w+;base64,/, ''); // Base64 데이터 추출
-        modifiedUploadedFiles.push({
-            name: file.name,
-            type: file.type,
-            data: dataWithoutPrefix // 수정된 데이터로 교체
-        });
+        var indexOfComma = base64Data.indexOf(',');
+        if (indexOfComma !== -1) {
+            var dataWithoutPrefix = base64Data.substr(indexOfComma + 1); // `,` 이후의 데이터 추출
+            modifiedUploadedFiles.push({
+                name: file.name,
+                type: file.type,
+                data: dataWithoutPrefix
+            });
+        }
     }
     
 	// AJAX를 사용하여 서버로 데이터 전송

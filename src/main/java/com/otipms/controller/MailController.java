@@ -8,11 +8,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -197,6 +203,18 @@ public class MailController {
 		return "mail/detailMail";
 	}
 	
+	@GetMapping("/download/{fileId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable int fileId) {
+        // fileId에 해당하는 BLOB 데이터를 데이터베이스에서 가져옵니다.
+        MediaFile mediaFile = messageService.getMediaFile(fileId);
+
+        ByteArrayResource resource = new ByteArrayResource(mediaFile.getMediaFileData());
+        // 클라이언트에게 BLOB 데이터를 응답으로 전달합니다.
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + mediaFile.getMediaFileName())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+    }
 	//쪽지 쓰기
 	@Login
 	@RequestMapping("/writeMail")
@@ -280,7 +298,6 @@ public class MailController {
                 
                 // Base64로 인코딩된 데이터를 디코딩하여 바이트 배열로 변환
                 String base64Data = (String) fileData.get("data");
-                log.info(base64Data);
                 byte[] mediaFileData = Base64.getDecoder().decode(base64Data);
                 mediaFile.setMediaFileData(mediaFileData);
                 mediaFiles.add(mediaFile);
