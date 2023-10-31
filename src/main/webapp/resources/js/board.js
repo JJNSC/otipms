@@ -248,7 +248,9 @@ function registerComment() {
 		},
 		success: function(data) {
 			console.log("받아야 할 data는 댓글 내용!이랑 글 내용...? 이럴거면 redirect를 하는 게...." + data);
-			$("body").html(data);
+			//일단 알림창이 떠 있는 채로 있어서 끄긴 이동하도록은 했는데......흠냐뤼...
+			//$("body").html(data);
+			location.href = "detailBoard?boardNo=" + encodeURIComponent(boardNo);
 			$("#commentText").val('');
 		},
 		error: function(error) {

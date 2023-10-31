@@ -64,4 +64,10 @@ public interface BoardService {
 	 * @param commentNo
 	 */
 	public void deleteBoardComment(String commentNo);
+
+	/**
+	 * 게시글 수정
+	 * @param board
+	 */
+	public void modifyBoard(Board board);
 }

@@ -75,4 +75,10 @@ public interface BoardDao {
 	 * @param commentNo
 	 */
 	public void updateBoardCommentDeleted(int commentNo);
+
+	/**
+	 * 기존 게시글 갱신
+	 * @param board
+	 */
+	public void updateBoard(Board board);
 }

@@ -194,9 +194,17 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping("/writeBoard")
-	public String writeBoard(Model model) {
+	public String writeBoard(@RequestParam(value="boardNo", required=false) String boardNo
+							, Model model) {
 		log.info("글쓰기");
-		model.addAttribute("boardType", boardType);
+		
+		if(boardNo == null || boardNo.equals("")) {
+			model.addAttribute("boardType", boardType);
+		} else {
+			Board board = boardService.detailBoard(boardNo);
+			model.addAttribute("board", board);
+		}
+		
 		model.addAttribute("employee", LoginController.loginEmployee);
 		return "board/writeBoard";
 	}
@@ -209,19 +217,35 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping("/submitBoard") 
-	public String submitBoard(String inquiryType, String boardTitle, String myEditor, Model model) {
+	public String submitBoard(@RequestParam(value="boardNo", required=false) String boardNo
+							 , String inquiryType
+							 , String boardTitle
+							 , String myEditor
+							 , Model model) {
 		log.info("에디터 제목: " + boardTitle);
 		log.info("에디터 내용: " + myEditor);
 		
-		//board 삽입
-		Board board = new Board();
-		board.setEmpId(LoginController.loginEmployee.getEmpId());
-		board.setBoardTitle(boardTitle);
-		board.setBoardContent(myEditor);
-		board.setBoardTypeName(boardType);
-		board.setInquiryBoardType(inquiryType);
+		if(boardNo == null || boardNo.equals("")) {
+			//board 삽입
+			Board board = new Board();
+			board.setEmpId(LoginController.loginEmployee.getEmpId());
+			board.setBoardTitle(boardTitle);
+			board.setBoardContent(myEditor);
+			board.setBoardTypeName(boardType);
+			board.setInquiryBoardType(inquiryType);
+			
+			boardService.writeBoard(board);
+		} else {
+			//board 수정
+			Board board = new Board();
+			board.setBoardNo(Integer.parseInt(boardNo));
+			board.setBoardTitle(boardTitle);
+			board.setBoardContent(myEditor);
+			board.setInquiryBoardType(inquiryType);
+			
+			boardService.modifyBoard(board);
+		}
 		
-		boardService.writeBoard(board);
 		
 		return "redirect:/board";
 	}
@@ -305,5 +329,5 @@ public class BoardController {
 		boardService.deleteBoardComment(commentNo);
 		return "redirect:/detailBoard?boardNo=" + boardNo;
 	}
-
+	
 }

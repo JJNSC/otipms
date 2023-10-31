@@ -226,18 +226,31 @@
 	</select>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="updateBoardDeleted" parameterType="int">
+	<update id="updateBoardDeleted" parameterType="int">
 		UPDATE BOARD
 		   SET BOARDDELETED = 1
 		 WHERE 1=1
 		   AND BOARDNO = #{boardNo}
-	</delete>
+	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="updateBoardCommentDeleted" parameterType="int">
+	<update id="updateBoardCommentDeleted" parameterType="int">
 		UPDATE BOARDCOMMENT
 		   SET COMMENTDELETED = 1
 		 WHERE 1=1
 		   AND COMMENTNO = #{commentNo}
-	</delete>
+	</update>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE BOARD
+		   SET BOARDTITLE = #{boardTitle}
+		   	 , BOARDCONTENT = #{boardContent}
+		   	 , BOARDUPDATEDATE = sysdate
+		 WHERE 1=1
+		   AND BOARDNO = #{boardNo}
+		   AND (
+		   	   BOARDDELETED = 0
+		   	   OR BOARDDELETED is null
+		   	   )
+	</update>
 </mapper>

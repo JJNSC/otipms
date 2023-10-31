@@ -49,7 +49,7 @@
                             	<div class="card-title mb-1">
                                     <!-- <h4>공지사항</h4> -->
                                     <%-- <h4>${boardType}</h4> --%>
-                                    <h4>${board.boardTypeName}</h4>
+                                    <h4 class="d-inline-block">${board.boardTypeName}</h4><c:if test="${board.boardTypeName eq '질의 게시판'}"> <h5 class="d-inline-block">&nbsp;/&nbsp;  ${board.inquiryBoardType}</h5></c:if>
                                 </div>
                             	<div class="mt-4 pl-3 row" style="margin-bottom: 0.8rem;">
                                     <h3 style="padding-top: 10px;">${board.boardTitle}</h3>
@@ -89,7 +89,7 @@
 		                                <!-- <button type="button" class="btn mb-1 btn-light-custom">수정</button> -->
 		                                <c:if test="${board.empId == employee.empId}">
 		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-secondary" style=" margin-right: 7px;">수정</a>                                                                	
-		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-danger" data-toggle="modal" data-target="#deleteBoard">샥제</a>
+		                                    <a href="#" type="button" class="text-danger" data-toggle="modal" data-target="#deleteBoard">샥제</a>
 		                                </c:if>
                                 	</div>
                                 </div>

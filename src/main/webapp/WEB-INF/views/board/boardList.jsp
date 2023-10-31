@@ -271,7 +271,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="btn-write">
-	                            	<a href="${pageContext.request.contextPath}/writeBoard?boardType=${boardType}" type="button" class="btn btn-primary text-white">글쓰기</a>
+	                            	<a href="${pageContext.request.contextPath}/writeBoard" type="button" class="btn btn-primary text-white">글쓰기</a>
 	                            </div>
 			                </div>
                         </div>
