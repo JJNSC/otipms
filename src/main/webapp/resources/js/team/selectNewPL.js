@@ -1,39 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
     // 객체로 선택한 사원 정보를 관리
-    const selectedPM = [];
+    const selectedPL = [];
     
-    window.receiveSelectedEmployees = function (selectedEmployee) {
-    	selectedPM.push(selectedEmployee);
+    window.receiveSelectedPL = function (selectedEmployee) {
+    	selectedPL.push(selectedEmployee);
         
-        console.log(selectedPM);
+        console.log(selectedPL);
         
         updateSelectedEmployeesUI(selectedEmployee);
     };
 
     function updateSelectedEmployeesUI(selectedEmployee) {
-    	const selectedTextbox = document.querySelector(`#PMINFO`);
+    	const selectedTextbox = document.querySelector(`#ClientINFO`);
     	const textbox = document.getElementById("PMINFO");
-        const selectedEmployeesContainer = document.querySelector(`#PMid`);
+        const selectedEmployeesContainer = document.querySelector(`#ClientId`);
         
         
         console.log(selectedEmployee);
         
-        if (selectedTextbox && selectedEmployeesContainer) {
+        /*if (selectedTextbox && selectedEmployeesContainer) {*/
             // 선택된 사원 정보를 텍스트 상자에 채우기
-        	const selectedPMInfo = []; 
-        	const selectedPMempId = []; 
+        	const selectedPLInfo = []; 
+        	const selectedPLempId = []; 
             for (const employee of selectedEmployee) {
-            	selectedPMInfo.push(`${employee.position} ${employee.name}`);
-            	selectedPMempId.push(`${employee.empId}`)
-            }
+            	selectedPLInfo.push(`${employee.position} ${employee.name}`);
+            	selectedPLempId.push(`${employee.empId}`)
+            /*}*/
             console.log(selectedEmployee);
-            console.log(selectedPMInfo);
+            console.log(selectedPLInfo);
             
             // 선택된 사원들을 화면에 추가
             selectedTextbox.innerHTML = ""; // 기존 내용을 지우고 새로 업데이트
-            selectedTextbox.value = selectedPMInfo.join(', ');
+            selectedTextbox.value = selectedPLInfo.join(', ');
             selectedEmployeesContainer.innerHTML = ""; // 기존 내용을 지우고 새로 업데이트
-            selectedEmployeesContainer.value = selectedPMempId.join(', ');
+            selectedEmployeesContainer.value = selectedPLempId.join(', ');
            /* selectedEmployee.forEach(employee => {
                 const div = document.createElement("div");
                 div.classList.add("selected-employee");

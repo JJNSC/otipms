@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+	var teamNoElement  = document.getElementById("thisTeamNo");
+	
+	var teamNo = teamNoElement.textContent;
 	
 	$.ajax({
-	    url: 'http://localhost:8080/otipms/api/projectPeData', // URL ??
+	    url: 'http://localhost:8080/otipms/api/projectPeData?teamNo=' + teamNo, // URL ??
 	    type: 'GET',
 	    dataType: 'json',
 	    success: function (data) {
@@ -35,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
-function sendSelectedEmployees() {
+function sendSelectedPL() {
 	// 선택한 사원 정보를 저장할 배열
     var selectedEmployees = []; 
 
@@ -53,7 +56,7 @@ function sendSelectedEmployees() {
     // 쪽지 쓰기에 선택한 사원 정보 전달
     var opener = window.opener;
     if (opener) {
-        opener.receiveSelectedEmployees(selectedEmployees);
+        opener.receiveSelectedPL(selectedEmployees);
         window.close(); 
     }
 }

@@ -63,6 +63,7 @@ function sendSelectedEmployees() {
         opener.receiveSelectedClient(selectedEmployees);
         window.close(); 
     }
+    window.close();
 }
 
 function closeWindow() {

@@ -100,8 +100,9 @@ public class TeamController {
 	}
 	
 	@RequestMapping("/findPL")
-	public String findPL(Model model) {
-		
+	public String findPL(@RequestParam("teamNo") int teamNo,Model model) {
+		log.info("팀장 찾기위해서 팀 번호:"+teamNo);
+		model.addAttribute("teamNo", teamNo);
 		return "teamManagement/findPL";
 	}
 	

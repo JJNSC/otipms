@@ -16,6 +16,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	<script src="${pageContext.request.contextPath}/resources/js/team/selectPL.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/team/findPL.js"></script>
 	
 	<style>
 		.fa-close {
@@ -126,7 +127,8 @@
 																						</td>
 																						<c:if test="${team.empName==null}">	
 										                                                	<td>
-										                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}" onclick="javascript:void(window.open('findProjectLeader?projectNo=${project.projectNo}&teamNo=${team.teamNo}','_blank','width=600, height=600, left=600, top=30'))">
+										                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}" 
+										                                                		onclick="javascript:void(window.open('findProjectLeader?projectNo=${project.projectNo}&teamNo=${team.teamNo}','_blank','width=600, height=600, left=600, top=30'))">
 										                                                		팀장 선택</span>
 										                                                	</td>
 										                                                </c:if>

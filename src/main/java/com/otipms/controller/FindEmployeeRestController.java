@@ -87,6 +87,9 @@ public class FindEmployeeRestController {
     
     @GetMapping("/api/RolePMData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> RolePMData() {
+    	
+    	log.info("이게 실행되면 안된다.");
+    	
     	List<Employee> employees = employeeService.selectEmployeeByRole("ROLE_PM");
     	
     	// JSON 데이터 생성
@@ -136,8 +139,12 @@ public class FindEmployeeRestController {
     }
     
     @GetMapping("/api/projectPeData")
-    public ResponseEntity<Map<String, List<Map<String, String>>>> projectPeData() {
-    	List<Employee> employees = employeeService.selectEmployeeByRole("ROLE_PE");
+    public ResponseEntity<Map<String, List<Map<String, String>>>> projectPeData(
+												@RequestParam("teamNo")int teamNo) {
+    	
+    	log.info("PE 데이터 팀 번호 : "+teamNo);
+    	
+    	List<Employee> employees = employeeService.selectEmployeeByTeamNoAndRole(teamNo,"ROLE_PE");
     	
     	// JSON 데이터 생성
     	Map<String, List<Map<String, String>>> jsonData = new HashMap<>();

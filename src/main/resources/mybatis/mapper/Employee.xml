@@ -84,5 +84,14 @@
      	 WHERE 1=1
      	   AND teamNo=#{teamNo} 
 	</select>
+	
+	<select id="selectEmployeeByTeamNoAndRole" parameterType="Employee" resultType="Employee">
+	 	SELECT *
+	 	  FROM emp 
+	INNER JOIN empinfo 
+	        ON emp.empid = empinfo.empid 
+	     WHERE teamNo=#{teamNo} 
+	       AND role=#{role}
+	</select>
 
 </mapper>

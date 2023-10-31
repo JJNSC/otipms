@@ -108,6 +108,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.selectEmployeeByTeamNo(teamNo);
 	}
 
+	@Override
+	public List<Employee> selectEmployeeByTeamNoAndRole(int teamNo, String role) {
+		Employee emp = new Employee();
+		emp.setTeamNo(teamNo);
+		emp.setRole(role);
+		return employeeDao.selectEmployeeByTeamNoAndRole(emp);
+	}
+
 	
 
 }

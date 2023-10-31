@@ -16,6 +16,8 @@
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/resources/js/project/selectClient.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/team/selectNewPL.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/team/findNewPL.js"></script>
 
 </head>
 
@@ -87,11 +89,21 @@
 				                                        </c:if>
                                                     	<c:if test="${!oldTeam.teamName.equals('고객')}">
 					                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
-					                                        		type="button" 
-					                                        		onclick="javascript:void(window.open('findPL','_blank','width=600, height=600, left=600, top=30'))">
-					                                        	<i class="fa fa-paper-plane m-r-5"></i>
-					                                        	 팀장 찾기
-					                                        </button>
+															    type="button" 
+															    onclick="openFindPL(${oldTeam.teamNo })">
+															    <i class="fa fa-paper-plane m-r-5"></i>
+															    팀장 찾기
+															</button>
+															
+															<script>
+															function openFindPL(teamNo) {
+															    // URL을 동적으로 생성하여 teamNo를 query parameter로 전달
+															    var url = 'findPL?teamNo=' + teamNo;
+															    
+															    // 팝업 창 열기
+															    window.open(url, '_blank', 'width=600, height=600, left=600, top=30');
+															}
+															</script>
 				                                        </c:if>
 			                                    	</div>
                                                 </div>
