@@ -229,3 +229,32 @@ function dateFormat(date, type) {
 
     return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute;
 }
+
+//=====================detailBoard()
+
+function registerComment() {
+	var boardNo = $("#boardNumber").val();
+	var comment = $("#commentText").val();
+	
+	if(comment == null || comment == "") {
+		alert("댓글을 입력해주세요.");
+	} else {
+		console.log(comment);
+		$.ajax({
+			url: "/otipms/writeComment",
+			method: "POST",
+			data: {
+				boardNo:boardNo,
+				comment:comment
+			},
+			success: function(data) {
+				console.log("받아야 할 data는 댓글 내용!이랑 글 내용...? 이럴거면 redirect를 하는 게...." + data);
+				$("#commentText").val('');
+			},
+			error: function(error) {
+				console.log(error);
+			}
+		});
+	}
+	
+}

@@ -1,5 +1,6 @@
 package com.otipms.controller;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otipms.dto.Board;
+import com.otipms.dto.BoardComment;
 import com.otipms.dto.Pager;
 import com.otipms.service.BoardService;
 
@@ -246,8 +248,24 @@ public class BoardController {
 		log.info("boardNo: " + boardNo);
 		
 		Board board = boardService.detailBoard(boardNo);
+		board.setBase64Img(Base64.getEncoder().encodeToString(board.getMediaFileData()));
 		model.addAttribute("board", board);
 		return "board/detailBoard";
+	}
+	
+	@RequestMapping("/writeComment")
+	@ResponseBody
+	public String writeComment(String boardNo, String comment) {
+		
+		BoardComment boardComment = new BoardComment();
+		boardComment.setBoardNo(Integer.parseInt(boardNo));
+		boardComment.setEmpId(LoginController.loginEmployee.getEmpId());
+		boardComment.setCommentContent(comment);
+		
+		boardService.writeComment(boardComment);
+		
+		//리다이렉트하면 조회수가 늘어나네.....
+		return "redirect:/detailBoard?boardNo=" + boardNo;
 	}
 
 }

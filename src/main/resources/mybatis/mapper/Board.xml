@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.otipms.dao.BoardDao">
+	<!-- 새 게시글 삽입 -->
 	<insert id="insertBoard" parameterType="Board">
 		
 		<selectKey keyProperty="boardTypeNo" resultType="int" order="BEFORE">
@@ -34,6 +35,7 @@
 		)
 	</insert>
 	
+	<!-- 게시판 별 게시글 총 개수 조회 -->
 	<select id="countBoard" parameterType="hashMap" resultType="int">
 		SELECT count(*) 
 		  FROM BOARD
@@ -54,6 +56,7 @@
 							  )
 	</select>
 	
+	<!-- 페이저로 게시글 목록 조회 -->
 	<select id="selectBoardByPage" parameterType="hashMap" resultType="Board">
 			SELECT rnum
 			     , boardNo
@@ -111,12 +114,14 @@
 			 WHERE rnum <![CDATA[>=]]> #{boardPager.startRowNo}
 	</select>
 	
+	<!-- 게시글 댓글 수 조회 -->
 	<select id="countBoardComment" parameterType="int" resultType="int">
 		SELECT count(*) 
 		  FROM BOARDCOMMENT
 		 WHERE BOARDNO = #{boardNo}
 	</select>
 	
+	<!-- 게시글 조회 -->
 	<select id="selectBoard" parameterType="int" resultType="Board">
 		SELECT b.boardNo
 		     , e.empId
@@ -132,6 +137,7 @@
 		     , e.empRank
 		     , t.teamNo
 		     , t.teamName
+             , m.mediaFileData
 		  FROM BOARD b
 		 INNER JOIN BOARDTYPE bt
 		    ON b.BOARDTYPENO = bt.BOARDTYPENO
@@ -141,14 +147,38 @@
 		    ON e.EMPID = ei.EMPID
 		 LEFT OUTER JOIN TEAM t
 		    ON ei.TEAMNO = t.TEAMNO
+         LEFT OUTER JOIN MEDIAFILE m
+		    ON ei.EMPID = m.EMPID
 		 WHERE 1=1
-		   AND BOARDNO = #{boardNo}
+		   AND b.BOARDNO = #{boardNo}
 	</select>
 	
+	<!-- 조회수 갱신 -->
 	<update id="updateBoardHitcount" parameterType="int">
 		UPDATE BOARD
 		   SET BOARDHITCOUNT = BOARDHITCOUNT + 1
 		 WHERE 1=1
 		   AND BOARDNO = #{boardNo}
 	</update>
+	
+	<!-- 새 댓글 삽입 -->
+	<insert id="insertBoardComment" parameterType="BoardComment">
+		INSERT INTO BOARDCOMMENT
+		(
+		COMMENTNO
+		, EMPID
+		, BOARDNO
+		, COMMENTCONTENT
+		, COMMENTWRITEDATE
+		, COMMENTDELETED
+		)
+		VALUES (
+		COMMENTNO_SEQ.nextval
+		, #{empId}
+		, #{boardNo}
+		, #{commentContent}
+		, sysdate
+		, 0
+		)
+	</insert>
 </mapper>

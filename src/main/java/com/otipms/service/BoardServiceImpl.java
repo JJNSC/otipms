@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.otipms.dao.BoardDao;
 import com.otipms.dto.Board;
+import com.otipms.dto.BoardComment;
 import com.otipms.dto.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +62,12 @@ public class BoardServiceImpl implements BoardService {
 			return board;
 		}
 		return null;
+	}
+
+	//댓글 작성
+	@Override
+	public void writeComment(BoardComment boardComment) {
+		boardDao.insertBoardComment(boardComment);
 	}
 	
 }

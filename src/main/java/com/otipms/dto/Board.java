@@ -27,6 +27,7 @@ public class Board {
 	private String mediaFileName;
 	private String mediaFileType;
 	private byte[] mediaFileData;
+	private String base64Img;
 
 	private String boardTypeName;		//공지사항, 질의 등
 	private String inquiryBoardType;	//질의 게시판의 카테고리 (시스템 관리, 아키텍처, DBA)

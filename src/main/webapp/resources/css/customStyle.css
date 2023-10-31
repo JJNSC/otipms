@@ -89,15 +89,13 @@
 .CommentWriter .comment_inbox_name {
     display: block;
     margin-bottom: 10px;
-    font-weight: 700;
-    font-size: 13px;
 }
 .CommentWriter .comment_attach {
     position: relative;
 }
 .CommentWriter .attach_box {
     float: left;
-    padding-top: 10px;
+    padding-top: 5px;
 }
 .CommentWriter .register_box {
     float: right;

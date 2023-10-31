@@ -12,6 +12,7 @@
 		<typeAlias alias="Message" type="com.otipms.dto.Message"/>
 		<typeAlias alias="Board" type="com.otipms.dto.Board"/>
 		<typeAlias alias="Alarm" type="com.otipms.dto.Alarm"/>
+		<typeAlias alias="BoardComment" type="com.otipms.dto.BoardComment"/>
 	</typeAliases>
 
 </configuration>

@@ -3,6 +3,7 @@ package com.otipms.service;
 import java.util.List;
 
 import com.otipms.dto.Board;
+import com.otipms.dto.BoardComment;
 import com.otipms.dto.Pager;
 
 /**
@@ -38,4 +39,10 @@ public interface BoardService {
 	 * @return
 	 */
 	public Board detailBoard(String boardNo);
+
+	/**
+	 * 댓글 작성
+	 * @param boardComment
+	 */
+	public void writeComment(BoardComment boardComment);
 }

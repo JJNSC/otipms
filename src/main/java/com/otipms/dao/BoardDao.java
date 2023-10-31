@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.otipms.dto.Board;
+import com.otipms.dto.BoardComment;
 
 @Mapper
 public interface BoardDao {
@@ -48,4 +49,10 @@ public interface BoardDao {
 	 * @param boardNo
 	 */
 	public int updateBoardHitcount(int boardNo);
+
+	/**
+	 * 새 댓글 삽입
+	 * @param boardComment
+	 */
+	public void insertBoardComment(BoardComment boardComment);
 }
