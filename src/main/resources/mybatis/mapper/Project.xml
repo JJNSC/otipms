@@ -12,7 +12,12 @@
 	
 	<!-- 모든 프로젝트 select -->
 	<select id="selectAllProject" resultType="Project">
-		select * from project where projectNo >0 order by projectNo desc
+		SELECT * 
+		  FROM project 
+		 WHERE 1=1
+		   AND projectNo >0 
+           AND projectDeleted = 0
+ 	  ORDER BY projectNo DESC
 	</select>
 	
 	<select id="getEmployeeInfoByProjectNoAndRoleNo" parameterType="Employee" resultType="Employee">

@@ -137,9 +137,18 @@
 										                                                	</td>
 										                                                </c:if>
 											                                            <td class="text-right" style="padding-right:20px"> 
-											                                             	<a href="addAndModifyTeam">
-											                                            			<i class="fa fa-pencil color-muted"></i>
-											                                            		</a>
+											                                             	<form action="modifyTeamForm" method="post">
+											                                             		<input type="hidden" name="projectNo" value="${project.projectNo}">
+											                                             		<input type="hidden" name="projectName" value="${project.projectName}">
+											                                             		<input type="hidden" name="teamNo" value="${team.teamNo}">
+											                                             		<input type="hidden" name="teamName" value="${team.teamName}">
+											                                             		<input type="hidden" name="TLId" value="${team.empId}">
+											                                             		<input type="hidden" name="TLRank" value="${team.empRank}">
+											                                             		<input type="hidden" name="TLName" value="${team.empName}">
+											                                             		<button style="border:0px; background-color: transparent;">
+										                                            				<i class="fa fa-pencil color-muted"></i>
+										                                            			</button>
+									                                            			</form>
 											                                             </td>
 											                                             <td class="text-center"> 
 											                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>

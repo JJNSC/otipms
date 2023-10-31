@@ -12,4 +12,5 @@ public interface TeamService {
 	public List<Team> getAllTeam();
 	public void addTeam(Team team);
 	public void updateTeamLeader(Team team);
+	public void updateTeam(Team team);
 }

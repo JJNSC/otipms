@@ -135,6 +135,29 @@ public class FindEmployeeRestController {
     	return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     
+    @GetMapping("/api/projectPeData")
+    public ResponseEntity<Map<String, List<Map<String, String>>>> projectPeData() {
+    	List<Employee> employees = employeeService.selectEmployeeByRole("ROLE_PE");
+    	
+    	// JSON 데이터 생성
+    	Map<String, List<Map<String, String>>> jsonData = new HashMap<>();
+    	List<Map<String, String>> employeeData = new ArrayList<>();
+    	
+    	// Employee 데이터를 JSON 형식으로 변환
+    	for (Employee employee : employees) {
+    		Map<String, String> employeeMap = new HashMap<>();
+    		employeeMap.put("empRank", employee.getEmpRank());
+    		employeeMap.put("empName", employee.getEmpName());
+    		employeeMap.put("role", employee.getRole());
+    		employeeMap.put("empId", String.valueOf(employee.getEmpId()));
+    		employeeData.add(employeeMap);
+    	}
+    	
+    	jsonData.put("employeeData", employeeData);
+    	
+    	return new ResponseEntity<>(jsonData, HttpStatus.OK);
+    }
+    
     
     @GetMapping("/api/employeeData2")
     public ResponseEntity<Map<String, List<Map<String, String>>>> getEmployeeData2(
