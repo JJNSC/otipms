@@ -1,6 +1,7 @@
 package com.otipms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,8 @@ public class AlarmServiceImpl implements AlarmService {
 	}
 	
 	@Override
-	public Alarm setAlarm(int messageNo) {
-		return alarmDao.selectAlarmByMessageNo(messageNo);
+	public Alarm setAlarm(Map<String,Object> param) {
+		return alarmDao.selectAlarmByMessageNo(param);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.otipms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.otipms.dto.Alarm;
 
@@ -12,5 +13,5 @@ public interface AlarmService {
 	
 	public Alarm getAlarm(int alarmNo);
 	
-	public Alarm setAlarm(int messageNo);
+	public Alarm setAlarm(Map<String,Object> param);
 }

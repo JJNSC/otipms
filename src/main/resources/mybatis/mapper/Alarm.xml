@@ -94,9 +94,10 @@
 	</select>
 	
 	<!-- 메시지번호로 알림 찾기2 -->
-	<select id="selectAlarmByMessageNo" parameterType="int" resultType="Alarm">
+	<select id="selectAlarmByMessageNo" parameterType="java.util.Map" resultType="Alarm">
 		SELECT *
 		  FROM ALARM
 		 WHERE messageNo = #{messageNo}
+		   AND empId = #{empId}
 	</select>
 </mapper>

@@ -74,9 +74,8 @@
 				                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle" data-toggle="dropdown" aria-expanded="false">발신자</button>
 				                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
 				                                	<a class="dropdown-item" href="#" onclick="filter(this)">발신자 </a> 
-				                                	<a class="dropdown-item" href="#" onclick="filter(this)">수신자  </a> 
-				                                	<a class="dropdown-item" href="#" onclick="filter(this)">제목 </a>
-				                                	<a class="dropdown-item" href="#" onclick="filter(this)">첨부파일 </a>
+				                                	<a class="dropdown-item" href="#" onclick="filter(this)">제목 </a> 
+				                                	<a class="dropdown-item" href="#" onclick="filter(this)">읽음여부 </a>
 				                                </div>
 				                            </div>
 	                                        <div class="header-left" style="margin-left:20px;">

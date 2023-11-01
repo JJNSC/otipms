@@ -1,6 +1,7 @@
 package com.otipms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,5 +18,5 @@ public interface AlarmDao {
 	//알람 -> 읽음쪽지
 	public Alarm selectAlarm(int alarmNo);
 	//메세지번호 -> 알람
-	public Alarm selectAlarmByMessageNo(int messageNo);
+	public Alarm selectAlarmByMessageNo(Map<String, Object> param);
 }

@@ -13,7 +13,6 @@
 		     , c.messageStatus
 		     , c.messageChecked
 		     , c.messageImportant
-		     , me.mediaFileNo
 		     , c.ccType
 		     , c.ccNo
 		  FROM emp e
@@ -21,8 +20,6 @@
 		    ON e.empId = m.empId
 		  JOIN CC c 
 		    ON m.messageNo = c.messageNo
-	 LEFT JOIN mediaFile me 
-	        ON m.messageNo = me.messageNo
 		 WHERE c.empId = ${empId}
 		   AND c.messageStatus = 1 
 		   AND (c.ccType IN (1,3,4))
@@ -41,7 +38,6 @@
 		     , c.messageStatus
 		     , c.messageChecked
 		     , c.messageImportant
-		     , me.mediaFileNo
 		     , c.ccType
 		     , c.ccNo
 		  FROM emp e
@@ -49,8 +45,6 @@
 		    ON e.empId = m.empId
 		  JOIN CC c 
 		    ON m.messageNo = c.messageNo
-	 LEFT JOIN mediaFile me 
-	        ON m.messageNo = me.messageNo
 		 WHERE c.empId = ${empId} 
 		   AND c.messageStatus = 1 
 		   AND c.ccType= 2
@@ -69,7 +63,6 @@
 		     , c.messageStatus
 		     , c.messageChecked
 		     , c.messageImportant
-		     , me.mediaFileNo
 		     , c.ccType
 		     , c.ccNo
 		  FROM emp e
@@ -77,8 +70,6 @@
 		    ON e.empId = m.empId
 		  JOIN CC c 
 		    ON m.messageNo = c.messageNo
-	 LEFT JOIN mediaFile me 
-	        ON m.messageNo = me.messageNo
 		 WHERE c.empId = ${empId} 
 		   AND c.messageStatus = 1 
 		   AND c.messageImportant = 1
@@ -97,7 +88,6 @@
 		     , c.messageStatus
 		     , c.messageChecked
 		     , c.messageImportant
-		     , me.mediaFileNo
 		     , c.ccType
 		     , c.ccNo
 		  FROM emp e
@@ -105,8 +95,6 @@
 		    ON e.empId = m.empId
 		  JOIN CC c 
 		    ON m.messageNo = c.messageNo
-	 LEFT JOIN mediaFile me 
-	        ON m.messageNo = me.messageNo
 		 WHERE c.empId = ${empId} 
 		   AND c.messageStatus = 3 
 		   AND c.ccType= 2
@@ -125,7 +113,6 @@
 		     , c.messageStatus
 		     , c.messageChecked
 		     , c.messageImportant
-		     , me.mediaFileNo
 		     , c.ccType
 		     , c.ccNo
 		  FROM emp e
@@ -133,8 +120,6 @@
 		    ON e.empId = m.empId
 		  JOIN CC c 
 		    ON m.messageNo = c.messageNo
-	 LEFT JOIN mediaFile me 
-	        ON m.messageNo = me.messageNo
 		 WHERE c.empId = ${empId} 
 		   AND c.messageStatus = 2
 		   AND e.empEnabled = 1
@@ -152,7 +137,6 @@
 		     , c.messageStatus
 		     , c.messageChecked
 		     , c.messageImportant
-		     , me.mediaFileNo
 	      FROM emp e
 		  JOIN message m 
 		    ON e.empId = m.empId

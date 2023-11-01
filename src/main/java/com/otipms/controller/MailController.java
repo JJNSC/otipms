@@ -137,11 +137,16 @@ public class MailController {
 	        
 	        Message messageCC = messageService.getMessageNoByCCNo(parameters);
 	        
+	        log.info("messageCC" + messageCC);
+	        
 	        int messageNo = messageCC.getMessageNo();
 	        
-	        Alarm alarm = alarmService.setAlarm(messageNo);
+	        /*Map<String, Object> param = new HashMap<>();
+	        param.put("messageNo", messageNo);
+	        param.put("empId", empId);
+	        Alarm alarm = alarmService.setAlarm(param);
 	        
-	        alarmService.updateAlarmChecked(alarm);
+	        alarmService.updateAlarmChecked(alarm);*/
 	        
         
         // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
@@ -303,9 +308,11 @@ public class MailController {
             newCC.setEmpId(mempId);
             newCC.setCcType(2);
             newCC.setMessageStatus(1);
-            newCC.setMessageChecked(1);
+            newCC.setMessageChecked(0);
             newCC.setCcCheckedDate(null);
             ccList.add(newCC);
+            
+            log.info("ccList : " + ccList);
             
             messageService.writeCC(ccList);
             

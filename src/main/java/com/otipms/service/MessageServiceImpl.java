@@ -111,17 +111,14 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public int writeMessage(Message message) {
-		return sqlSession.insert("writeMessage", message);
+		return messageDao.writeMessage(message);
 	}
 
 	@Override
 	public void writeCC(List<CC> ccList) {
 		for (CC cc : ccList) {
-			if(cc.getCcType() == 2) {
-				cc.setMessageChecked(0);
-				messageDao.writeCC(cc);
-			}
-            if(cc.getCcType() != 2) {
+			messageDao.writeCC(cc);
+			if (cc.getCcType() != 2){
             	Alarm alarm = new Alarm();
             	alarm.setEmpId(cc.getEmpId());
             	alarm.setAlarmContentCode("쪽지 알림");
@@ -131,7 +128,6 @@ public class MessageServiceImpl implements MessageService {
             	alarm.setAlarmChk(0);
             	alarm.setMessageNo(cc.getMessageNo());
             	alarmDao.insertAlarm(alarm);
-            	messageDao.writeCC(cc);
             }
         }
 	}
