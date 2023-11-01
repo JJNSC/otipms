@@ -89,7 +89,10 @@ public class BoardController {
 				this.inquiryType = "전체";
 			}
 		} else {
-			pageNo = "1";
+			if(!inquiryType.equals(this.inquiryType)) {
+				pageNo = "1";
+			}
+			//pageNo = "1"; 이거였는데 내가 위로 바꿨다가 다시 돌렸단 말이지? 왜더
 			this.inquiryType = inquiryType;
 		
 			// 정규식 패턴
@@ -114,29 +117,6 @@ public class BoardController {
 		log.info("map이당 " + map);
 		return map;
 	}
-	
-	/**
-	 * 후에 ajax로 이동할 때 정석과 다른지 참고하기
-	 * 게시글 페이저
-	 * @param pageNo
-	 * @param session
-	 * @return
-	 */
-	/*@GetMapping("/moveBoardPage")
-	@ResponseBody
-	public HashMap<String, Object> moveInquiryPage(String pageNo, HttpSession session) {
-		int bno = Integer.parseInt(session.getAttribute("BoardNo").toString());
-		int totalProductInquiryNum = detailViewService.getTotalProductInquiryNum(bno);
-		
-		Pager productInquiryPager = new Pager(5, 5, totalProductInquiryNum, Integer.parseInt(pageNo));
-		List<ProductInquiry> productInquiryList = detailViewService.getProductInquiryList(productInquiryPager, bno);
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("productInquiryPager", productInquiryPager);
-		map.put("productInquiryList", productInquiryList);
-		
-		return map;
-	}*/
 	
 	private HashMap<String, Object> pageBoard(int rowNo, String pageNo, String inquiryType, HttpSession session) {
 		//브라우저에서 pageNo가 넘어오지 않았을 경우
@@ -189,14 +169,18 @@ public class BoardController {
 		return boardPagerMap;
 	}
 	
-	/*@RequestMapping("/writeBoard")
-	public String writeBoard(String boardType, Model model) {
-		log.info("글쓰기");
-		log.info("글쓰기 게시판 타입: " + boardType);
-		this.boardType = boardType;
-		model.addAttribute("boardType", boardType);
-		model.addAttribute("employee", LoginController.loginEmployee);
-		return "board/writeBoard";
+	//검색 === 미완
+	/*@RequestMapping("/searchBoard")
+	public String searchBoard(@RequestParam(value="filter", required=false, defaultValue="게시글 + 댓글  ") String filter
+							 , String keyword
+							 , Model model
+							 , HttpSession session) {
+		session.setAttribute("pageNo", "1");
+		//게시글 목록 페이징
+		//HashMap<String, Object> pageBoard(int rowNo, String pageNo, String inquiryType, HttpSession session)
+		Map<String, Object> boardPagerMap = pageBoard(5, "1", inquiryType, session);
+		model.addAttribute("boardPagerMap", boardPagerMap);
+		return "board/boardList";
 	}*/
 	
 	/**

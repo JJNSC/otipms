@@ -159,93 +159,95 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="bootstrap-pagination">
-                           		<!-- <nav> -->
-                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
-                           			<c:if test="${boardType eq '질의 게시판'}">
-	                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
-				                        <!-- <ul class="pagination justify-content-center"> -->
-				                        
-			                        	<c:if test="${pager.groupNo>1}">
-			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePageInquiry(this)">이전</input>
-			                            </c:if>
-			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-											<c:if test="${pager.pageNo == i}">
-												<input type="button" class="page-link selected" value="${i}" onclick="movePageInquiry(this)">
-											</c:if>
-											<c:if test="${pager.pageNo != i}">
-												<input type="button" class="page-link" value="${i}" onclick="movePageInquiry(this)">
-											</c:if>
-										</c:forEach>
-										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePageInquiry(this)">다음</input>
-			                            </c:if>
-				                   </c:if>
-				                   <c:if test="${boardType ne '질의 게시판'}">
-	                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
-				                        <!-- <ul class="pagination justify-content-center"> -->
-				                        
-			                        	<c:if test="${pager.groupNo>1}">
-			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
-			                            </c:if>
-			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-											<c:if test="${pager.pageNo == i}">
-												<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
-											</c:if>
-											<c:if test="${pager.pageNo != i}">
-												<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
-											</c:if>
-										</c:forEach>
-										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
-			                            </c:if>
-				                   </c:if>
-			                            
-			                            <!-- 동기식 -->
-			                        	<%-- <c:if test="${pager.groupNo>1}">
-			                            	<li class="page-item"><a class="page-link" href="board?pageNo=${pager.startPageNo-1}" tabindex="-1">이전</a></li>
-			                            </c:if>
-			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-											<c:if test="${pager.pageNo == i}">
-												<li class="page-item active"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
-											</c:if>
-											<c:if test="${pager.pageNo != i}">
-												<li class="page-item"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
-											</c:if>
-										</c:forEach>
-										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<li class="page-item"><a class="page-link" href="board?pageNo=${pager.endPageNo+1}">다음</a></li>
-			                            </c:if> --%>
-			                            
-			                            <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
-			                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-			                            <li class="page-item"><a class="page-link" href="#">3</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">4</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">5</a>
-			                            </li>
-			                            <li class="page-item"><a class="page-link" href="#">다음</a>
-			                            </li> -->
-			                        <!-- </ul> -->
-			                    </nav>
-	                    		<script type="text/javascript">
-	                                function movePageInquiry(clickedInput) {
-	                                    /* $(".dropdownCategoryFilter").innerHTML = selectedItem.innerHTML; */
-	                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + clickedInput.value);
-	                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + $(clickedInput).val())
-	                                    
-	                                    var pageNo = clickedInput.value;
-	                                    
-	                                    chooseInquiryType(null, pageNo);
-	                                }
-	                                function movePage(clickedInput) {
-	                                    var pageNo = clickedInput.value;
-	                                    
-	                                    movePageNormal(pageNo);
-	                                }
-                               	</script>
-			                </div>
+                            <c:if test="${fn:length(boardPagerMap.boardList) != 0}">
+                            	<div class="bootstrap-pagination">
+	                           		<!-- <nav> -->
+	                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
+	                           			<c:if test="${boardType eq '질의 게시판'}">
+		                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
+					                        <!-- <ul class="pagination justify-content-center"> -->
+					                        
+				                        	<c:if test="${pager.groupNo>1}">
+				                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePageInquiry(this)">이전</input>
+				                            </c:if>
+				                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+												<c:if test="${pager.pageNo == i}">
+													<input type="button" class="page-link selected" value="${i}" onclick="movePageInquiry(this)">
+												</c:if>
+												<c:if test="${pager.pageNo != i}">
+													<input type="button" class="page-link" value="${i}" onclick="movePageInquiry(this)">
+												</c:if>
+											</c:forEach>
+											<c:if test="${pager.groupNo<pager.totalGroupNo}">
+												<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePageInquiry(this)">다음</input>
+				                            </c:if>
+					                   </c:if>
+					                   <c:if test="${boardType ne '질의 게시판'}">
+		                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
+					                        <!-- <ul class="pagination justify-content-center"> -->
+					                        
+				                        	<c:if test="${pager.groupNo>1}">
+				                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
+				                            </c:if>
+				                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+												<c:if test="${pager.pageNo == i}">
+													<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
+												</c:if>
+												<c:if test="${pager.pageNo != i}">
+													<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
+												</c:if>
+											</c:forEach>
+											<c:if test="${pager.groupNo<pager.totalGroupNo}">
+												<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
+				                            </c:if>
+					                   </c:if>
+				                            
+				                            <!-- 동기식 -->
+				                        	<%-- <c:if test="${pager.groupNo>1}">
+				                            	<li class="page-item"><a class="page-link" href="board?pageNo=${pager.startPageNo-1}" tabindex="-1">이전</a></li>
+				                            </c:if>
+				                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+												<c:if test="${pager.pageNo == i}">
+													<li class="page-item active"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
+												</c:if>
+												<c:if test="${pager.pageNo != i}">
+													<li class="page-item"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
+												</c:if>
+											</c:forEach>
+											<c:if test="${pager.groupNo<pager.totalGroupNo}">
+												<li class="page-item"><a class="page-link" href="board?pageNo=${pager.endPageNo+1}">다음</a></li>
+				                            </c:if> --%>
+				                            
+				                            <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
+				                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+				                            <li class="page-item"><a class="page-link" href="#">3</a>
+				                            </li>
+				                            <li class="page-item"><a class="page-link" href="#">4</a>
+				                            </li>
+				                            <li class="page-item"><a class="page-link" href="#">5</a>
+				                            </li>
+				                            <li class="page-item"><a class="page-link" href="#">다음</a>
+				                            </li> -->
+				                        <!-- </ul> -->
+				                    </nav>
+		                    		<script type="text/javascript">
+		                                function movePageInquiry(clickedInput) {
+		                                    /* $(".dropdownCategoryFilter").innerHTML = selectedItem.innerHTML; */
+		                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + clickedInput.value);
+		                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + $(clickedInput).val())
+		                                    
+		                                    var pageNo = clickedInput.value;
+		                                    
+		                                    chooseInquiryType(null, pageNo);
+		                                }
+		                                function movePage(clickedInput) {
+		                                    var pageNo = clickedInput.value;
+		                                    
+		                                    movePageNormal(pageNo);
+		                                }
+	                               	</script>
+				                </div>
+                            </c:if>
 			                <div class="mb-3 text-right px-5">
 			                	<div class="dropdown d-inline-block">
 	                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownSearchFilter" data-toggle="dropdown" aria-expanded="false">게시글 + 댓글  </button>
@@ -260,15 +262,20 @@
 		                                function searchFilter(selectedItem) {
 		                                    /* $(".dropdownSearchFilter").innerHTML = selectedItem.innerHTML; */
 		                                	var dropdownButton = document.querySelector(".dropdownSearchFilter");
-		                                    dropdownButton.innerHTML = selectedItem.innerHTML;
+		                                    var filterKeyword = selectedItem.innerHTML;
+		                                    dropdownButton.innerHTML = filterKeyword;
+		                                    $("#filter").val(filterkeyword);
 		                                }
 	                                </script>
 	                            </div>
 								<div class="input-group mb-3 input-group-custom">
-	                                <input type="text" class="form-control form-custom">
-	                                <div class="input-group-append">
-	                                    <button class="btn btn-primary" type="button">검색</button>
-	                                </div>
+									<form action="searchBoard" method="post" class="d-flex">
+										<input type="hidden" id="filter" name="filter">
+										<input type="text" class="form-control form-custom" name="keyword">
+		                                <div class="input-group-append">
+		                                    <button class="btn btn-primary" type="submit">검색</button>
+		                                </div>
+									</form>
 	                            </div>
 	                            <div class="btn-write">
 	                            	<a href="${pageContext.request.contextPath}/writeBoard" type="button" class="btn btn-primary text-white">글쓰기</a>
