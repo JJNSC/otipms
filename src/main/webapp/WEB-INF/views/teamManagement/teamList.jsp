@@ -45,11 +45,37 @@
 	            selectedTab.classList.add("show", "active");
 	        }
 	    }
-	
 	    // 페이지가 로드될 때 첫 번째 탭을 활성화
 	    window.addEventListener("load", function () {
 	        showProjectTab(0); // 0은 첫 번째 탭의 인덱스입니다.
 	    });
+	</script>
+	<script>
+	    function prepareDelete(teamNo) {
+		    // 모달 내의 숨겨진 입력 필드에 projectNo를 설정
+		    document.getElementById('teamNoInput').value = teamNo;
+		}
+	    
+	    function deleteTeam() {
+		    // 모달 내의 숨겨진 입력 필드에서 projectNo를 가져옴
+		    var teamNo = document.getElementById('teamNoInput').value;
+
+		    // 컨트롤러로 데이터를 전송하는 AJAX 요청
+		    $.ajax({
+		        type: 'POST', // 또는 GET, 컨트롤러의 요청 메서드에 맞게 선택
+		        url: '/disableTeam', // 컨트롤러의 URL로 대체해야 함
+		        data: { disableTeamNo: teamNo },
+		        success: function() {
+		            // 성공 시 수행할 작업
+		            console.log('팀 삭제 성공');
+		            // 모달을 닫음
+		            $('#modalGrid').modal('hide');
+		        },
+		        error: function(error) {
+		            // 실패 시 수행할 작업
+		            console.error('팀 삭제 실패');
+		        }
+		}
 	</script>
 </head>
 
@@ -120,42 +146,58 @@
 									                                        </thead>
 									                                        <tbody>
 									                                        	<c:forEach var="team" items="${teamList.teamList }" varStatus="d">
-										                                            <tr  id="project${a.index }"  >
-										                                                <td class="text-center">${team.teamNo}</td>
-										                                                <td>
-																						  ${team.teamName} 
-																						</td>
-																						<c:if test="${team.empName==null}">	
-										                                                	<td>
-										                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}" 
-										                                                		onclick="javascript:void(window.open('findProjectLeader?projectNo=${project.projectNo}&teamNo=${team.teamNo}','_blank','width=600, height=600, left=600, top=30'))">
-										                                                		팀장 선택</span>
-										                                                	</td>
-										                                                </c:if>
-																						<c:if test="${team.empName!=null}">	
-										                                                	<td>
-										                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}">
-										                                                		${team.empRank} ${team.empName }</span>
-										                                                	</td>
-										                                                </c:if>
-											                                            <td class="text-right" style="padding-right:20px"> 
-											                                             	<form action="modifyTeamForm" method="post">
-											                                             		<input type="hidden" name="projectNo" value="${project.projectNo}">
-											                                             		<input type="hidden" name="projectName" value="${project.projectName}">
-											                                             		<input type="hidden" name="teamNo" value="${team.teamNo}">
-											                                             		<input type="hidden" name="teamName" value="${team.teamName}">
-											                                             		<input type="hidden" name="TLId" value="${team.empId}">
-											                                             		<input type="hidden" name="TLRank" value="${team.empRank}">
-											                                             		<input type="hidden" name="TLName" value="${team.empName}">
-											                                             		<button style="border:0px; background-color: transparent;">
-										                                            				<i class="fa fa-pencil color-muted"></i>
-										                                            			</button>
-									                                            			</form>
-											                                             </td>
-											                                             <td class="text-center"> 
-											                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-											                                             </td>
-										                                            </tr>
+									                                        		<c:if test="${ !team.teamName.equals('미배정')}">
+											                                            <tr  id="project${a.index }"  >
+											                                                <td class="text-center">${team.teamNo}</td>
+											                                                <td>
+																							  ${team.teamName} 
+																							</td>
+																							<c:if test="${team.empName==null}">	
+											                                                	<td>
+											                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}" 
+											                                                		onclick="javascript:void(window.open('findProjectLeader?projectNo=${project.projectNo}&teamNo=${team.teamNo}','_blank','width=600, height=600, left=600, top=30'))">
+											                                                		팀장 선택</span>
+											                                                	</td>
+											                                                </c:if>
+																							<c:if test="${team.empName!=null}">	
+											                                                	<td>
+											                                                		<span class="btn teamLeaderName${project.projectNo}_${team.teamNo}">
+											                                                		${team.empRank} ${team.empName }</span>
+											                                                	</td>
+											                                                </c:if>
+											                                                
+												                                            <td class="text-right" style="padding-right:20px"> 
+												                                            	<c:if test="${!team.teamName.equals('PM')}">
+													                                             	<form action="modifyTeamForm" method="post">
+													                                             		<input type="hidden" name="projectNo" value="${project.projectNo}">
+													                                             		<input type="hidden" name="projectName" value="${project.projectName}">
+													                                             		<input type="hidden" name="teamNo" value="${team.teamNo}">
+													                                             		<input type="hidden" name="teamName" value="${team.teamName}">
+													                                             		<input type="hidden" name="TLId" value="${team.empId}">
+													                                             		<input type="hidden" name="TLRank" value="${team.empRank}">
+													                                             		<input type="hidden" name="TLName" value="${team.empName}">
+													                                             		<button style="border:0px; background-color: transparent;">
+												                                            				<i class="fa fa-pencil color-muted"></i>
+												                                            			</button>
+											                                            			</form>
+										                                            			</c:if>
+										                                            			<c:if test="${team.teamName.equals('PM')}">
+										                                            				<button style="border:0px; background-color: transparent;">
+											                                            				<i class="fa fa-pencil" style="color:lightgray;"></i>
+											                                            			</button>
+										                                            			</c:if>
+												                                             </td>
+												                                             <td class="text-center"> 
+												                                             	<c:if test="${!team.teamName.equals('PM') && !team.teamName.equals('고객')}">
+												                                              		<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"
+												                                              		 data-teamno="${team.teamNo }" onclick="prepareDelete(${team.teamNo})" ></button>
+												                                              	</c:if>
+												                                             	<c:if test="${team.teamName.equals('PM') || team.teamName.equals('고객') }">
+												                                              		<button type="button"  class="btn fa fa-close" style="color:lightgray;"></button>
+												                                              	</c:if>
+												                                             </td>
+											                                            </tr>
+											                                    	</c:if>
 									                                            </c:forEach>
 									                                        </tbody>
 									                                    </table>
@@ -175,6 +217,7 @@
 	                        <div class="modal-dialog" role="document">
 	                            <div class="modal-content">
 	                                <div class="modal-header">
+	                                	<input type="hidden" id="teamNoInput" name="disableTeamNo">
 	                                    <h5 class="modal-title">팀 삭제</h5>
 	                                </div>
 	                                <div class="modal-body">
@@ -185,7 +228,7 @@
 	                                    </div>
 	                                </div>
 	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-primary">삭제</button>
+	                                    <button type="button" class="btn btn-primary"  onclick="deleteTeam()">삭제</button>
 	                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	                                </div>
 	                            </div>

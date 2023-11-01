@@ -13,4 +13,5 @@ public interface TeamService {
 	public void addTeam(Team team);
 	public void updateTeamLeader(Team team);
 	public void updateTeam(Team team);
+	public void removeTeam(int teamNo);
 }

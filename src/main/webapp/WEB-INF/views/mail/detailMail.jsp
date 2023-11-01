@@ -158,11 +158,16 @@
                                                		</c:when>
                                                		<c:otherwise>
 			                                            <div class="col-auto">
-			                                            	<a href="#" class="text-muted">${messageMedia.mediaFileName}.${messageMedia.mediaFileType}</a>
+			                                            	<a href="download/${messageMedia.mediaFileNo}" class="text-muted" download="${mediaFile.mediaFileName}">
+			                                            		${messageMedia.mediaFileName}
+			                                            	</a>
 			                                            </div>
                                                		</c:otherwise>
                                                	</c:choose>
                                             </c:forEach>
+                                        </div>
+                                        <div>
+                                        	<input class="mt-3" type="button" value="일괄 다운로드" id="downloadAll"/>
                                         </div>
                                     </div>
                                 </div>

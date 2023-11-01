@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.otipms.dao.EmployeeDao;
+import com.otipms.dao.ProjectDao;
 import com.otipms.dao.TeamDao;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Team;
@@ -66,6 +67,20 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void updateTeam(Team team) {
 		teamDao.updateTeam(team);
+		
+	}
+
+	@Override
+	public void removeTeam(int teamNo) {
+		Team thisTeam = teamDao.selectTeamByTeamNo(teamNo);
+		Team update = new Team();
+		//해당 팀의 팀원들을 작업중인 프로젝트의 미배정팀으로 이동
+		update.setProjectNo(thisTeam.getProjectNo());
+		update.setTeamNo(teamNo);
+		employeeDao.updateToNoTeam(update);
+		
+		//해당 teamNo 를 가지고 있는 팀 삭제 
+		teamDao.removeTeam(teamNo);
 		
 	}
 	

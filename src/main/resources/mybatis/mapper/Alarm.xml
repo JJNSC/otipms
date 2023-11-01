@@ -14,6 +14,7 @@
       INNER JOIN emp e
 		      ON a.empId = e.empId
 		   WHERE a.empId = #{empId}
+		     AND e.empEnabled = 1
 		ORDER BY a.AlarmDate desc
 	</select>
 	<select id="selectAlarmCountByEmpId" parameterType="int" resultType="Alarm">
@@ -30,6 +31,7 @@
 	  INNER JOIN message m
 	  		  ON m.messageNo = a.messageNo
 		   WHERE a.EmpId = #{empId}
+		     AND e.empEnabled = 1
    AND TO_NUMBER(a.AlarmChk) = 0
 	</select>
 	
@@ -47,15 +49,34 @@
 	  INNER JOIN message m
 	  		  ON m.messageNo = a.messageNo
 		   WHERE a.EmpId = #{empId}
+		     AND e.empEnabled = 1
    AND TO_NUMBER(a.AlarmChk) = 0
 	</select>
 	
 	<insert id="insertAlarm" parameterType="Alarm">
 		<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
-			select alarmNo_seq.nextval from dual
+			 SELECT alarmNo_seq.nextval 
+			   FROM DUAL
 		</selectKey>
-		INSERT INTO ALARM (alarmNo, empId, alarmContentCode, alarmContent, alarmDate, alarmChk, messageNo)
-			 VALUES (#{alarmNo}, #{empId}, #{alarmContentCode}, #{alarmContent}, SYSDATE, 0, #{messageNo})
+		INSERT INTO ALARM 
+		          (
+		            alarmNo
+		          , empId
+		          , alarmContentCode
+		          , alarmContent
+		          , alarmDate
+		          , alarmChk
+		          , messageNo
+		          )
+			 VALUES 
+			      ( #{alarmNo}
+			      , #{empId}
+			      , #{alarmContentCode}
+			      , #{alarmContent}
+			      , SYSDATE
+			      , 0
+			      , #{messageNo}
+			      )
 	</insert>
 	
 	<update id="checkedAlarm" parameterType="Alarm">

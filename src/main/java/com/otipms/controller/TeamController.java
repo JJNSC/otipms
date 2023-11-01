@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otipms.dao.TeamDao;
 import com.otipms.dto.Project;
@@ -115,6 +116,12 @@ public class TeamController {
 		newTeam.setTeamName(teamName);
 		newTeam.setEmpId(empId);
 		teamService.updateTeam(newTeam);
+		return "redirect:/teamManagement/teamList";
+	}
+	
+	@RequestMapping("/disableTeam")
+	public String disableTeam(@RequestParam("disableTeamNo") int teamNo) {
+		teamService.removeTeam(teamNo);
 		return "redirect:/teamManagement/teamList";
 	}
 	

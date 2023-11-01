@@ -2,6 +2,7 @@ package com.otipms.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.otipms.dao.EmployeeDao;
+import com.otipms.dao.ProjectDao;
 import com.otipms.dao.TeamDao;
 import com.otipms.dto.Employee;
+import com.otipms.dto.Project;
+import com.otipms.dto.ProjectTeams;
+import com.otipms.dto.Team;
 
+import jdk.internal.org.jline.utils.Log;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 	
@@ -21,10 +30,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private TeamDao teamDao;
+	@Autowired
+	private ProjectDao projectDao;
 
 	@Transactional
 	@Override
-	public void AddEmploy(Employee employee) {
+	public int addEmployee(Employee employee) {
+		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		employee.setEmpPw(pwEncoder.encode("0000"));
 		employeeDao.insertEmployee(employee);
 		System.out.println("employeeId : "+employee.getEmpId());
 		//2300XX 형식으로 만들어줍니다.
@@ -35,6 +48,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         
 		employee.setEmpId(Integer.parseInt(currentYear));
 		employeeDao.insertEmployeeInfo(employee);
+		
+		return employee.getEmpId();
 	}
 
 	@Override
@@ -81,8 +96,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public int getTeamNo(String teamName) {
-		return employeeDao.getTeamNoByTeamName(teamName);
+	public int getTeamNo(String projectName ,String teamName) {
+		Team team = new Team();
+		team.setProjectNo(projectDao.selectProjectNoByProjectName(projectName));
+		team.setTeamName(teamName);
+		return teamDao.getTeamNoByProjectNoAndTeamName(team);
 	}
 
 	@Override
@@ -114,6 +132,50 @@ public class EmployeeServiceImpl implements EmployeeService {
 		emp.setTeamNo(teamNo);
 		emp.setRole(role);
 		return employeeDao.selectEmployeeByTeamNoAndRole(emp);
+	}
+
+	//일괄 등록 
+	//프로젝트 명과 팀명을 통해 해당 팀에 배정해야한다.
+	//팀명 을 통해서 추가적으로 등록해야한다. PM : 해당프로젝트의 PM팀의 팀장, 고객 : 해당 프로젝트의 고객팀의 팀장
+	//팀명이 고객인 사람은 추가적으로 project에 empId(고객 아이디), projectCompanyName(회사명)을 등록해야한다.
+	@Override
+	public void addMultiEmployee(Employee employee) {
+		//사원 등록
+		//팀 번호 세팅
+		employee.setTeamNo(getTeamNo(employee.getProjectName(),employee.getTeamName()));
+		int empId = addEmployee(employee);
+		
+		//팀명을 통해서 추가적으로 팀장 등록 
+		Team team = new Team();
+		if(employee.getTeamName().equals("PM")||employee.getTeamName().equals("고객")) {
+			team.setEmpId(employee.getEmpId());
+			team.setProjectNo(projectDao.selectProjectNoByProjectName(employee.getProjectName()));
+			team.setTeamName(employee.getTeamName());
+			teamDao.updateTeamEmpId(team);
+		}
+		//고객일 경우  project에  empId(고객 아이디), projectCompanyName(회사명)을 등록
+		if(employee.getTeamName().equals("고객")) {
+			Project project = projectDao.selectProjectByProjectNo(projectDao.selectProjectNoByProjectName(employee.getProjectName()));
+			project.setEmpId(empId);
+			project.setProjectCompanyName(employee.getProjectCompanyName());
+			log.info(" 들어가는 프로젝트 내용 : "+ project);
+			projectDao.updateProject(project);
+		}
+	}
+
+	@Override
+	public List<ProjectTeams> getTeamsPerProjects() {
+		List<ProjectTeams> projectTeams = new ArrayList<ProjectTeams>();
+		
+		List<Project> projects = projectDao.selectAllProject();
+		for(Project project : projects) {
+			ProjectTeams oneProjectTeams =new ProjectTeams();
+			oneProjectTeams.setProject(project);
+			List<Team> teams = teamDao.selectTeamListByProjectNo(project.getProjectNo());
+			oneProjectTeams.setTeamList(teams);
+			projectTeams.add(oneProjectTeams);
+		}
+		return projectTeams;
 	}
 
 	

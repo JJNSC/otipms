@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,12 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dto.Employee;
 import com.otipms.interceptor.Login;
+import com.otipms.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 public class PoiController {
+	
+	@Autowired
+	private EmployeeService employeeService;
 	
 	@Login
 	@PostMapping("/multiRegister")
@@ -61,21 +66,24 @@ public class PoiController {
 	    //      XSSFSheet sheet = workbook.getSheetAt(i);
 	    // }
 	    // 아니면 Iterator<Sheet> s = workbook.iterator() 를 사용해서 조회해도 좋다.
-	
+	    int i=0;
 	    // 모든 행(row)들을 조회한다.
 	    Iterator<Row> rowIterator = sheet.iterator();
 	    while (rowIterator.hasNext()) {
 	        Row row = rowIterator.next();
+	        
+	        if(i==0) { // 첫 번째 행은 건너뜀
+	        	row = rowIterator.next();
+	        	i++;
+	        }
 	
 	        // 각각의 행에 존재하는 모든 열(cell)을 순회한다.
 	        Iterator<Cell> cellIterator = row.cellIterator();
-	        for (int i = 0; i < 1; i++) { // 첫 번째 행은 건너뜀
-                rowIterator.next();
-            }
+	      
 	        Employee employee = new Employee();
-	        int i =0;
-	
+	        int j=0;
 	        while (cellIterator.hasNext()) {
+	        	j++;
 	            Cell cell = cellIterator.next();
 	
 	            // cell의 타입을 하고, 값을 가져온다.
@@ -85,24 +93,30 @@ public class PoiController {
 	                    break;
 	                case STRING:
 	                    System.out.print(cell.getStringCellValue() + "\t");
-	                    if(i==0) {
-	                    	employee.setEmpId(parseInt(cell.getStringCellValue()));
-	                    }else if(i==1) {
+	                    if(j==1) {
 	                    	employee.setEmpName(cell.getStringCellValue());
-	                    }else if(i==2) {
+	                    }else if(j==2) {
 	                    	employee.setEmpRank(cell.getStringCellValue());
-	                    }else if(i==3) {
+	                    }else if(j==3) {
 	                    	employee.setEmpTel(cell.getStringCellValue());
-	                    }else if(i==4) {
-	                    	/*employee.set(cell.getStringCellValue());*/
-	                    }else if(i==5) {
-	                    	employee.setEmpName(cell.getStringCellValue());
-	                    }else if(i==6) {
-	                    	employee.setEmpName(cell.getStringCellValue());
+	                    }else if(j==4) {
+	                    	employee.setProjectName(cell.getStringCellValue());
+	                    }else if(j==5) {
+	                    	employee.setTeamName(cell.getStringCellValue());
+	                    }else if(j==6) {
+	                    	employee.setRole(cell.getStringCellValue());
+	                    }else if(j==7) {
+	                    	employee.setProjectCompanyName(cell.getStringCellValue());
+	                    }else if(j==8) {
+	                    	employee.setEmpEmail(cell.getStringCellValue());
+	                    	
 	                    }
 	                    break;
 	            }
+	           
 	        }
+	        log.info("employee: "+employee);
+	        employeeService.addMultiEmployee(employee);
 	        System.out.println();
 	    }
 	    file.close();

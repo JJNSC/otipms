@@ -1,23 +1,33 @@
 package com.otipms.controller;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dto.CC;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
@@ -193,6 +203,18 @@ public class MailController {
 		return "mail/detailMail";
 	}
 	
+	@GetMapping("/download/{fileId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable int fileId) {
+        // fileId에 해당하는 BLOB 데이터를 데이터베이스에서 가져옵니다.
+        MediaFile mediaFile = messageService.getMediaFile(fileId);
+
+        ByteArrayResource resource = new ByteArrayResource(mediaFile.getMediaFileData());
+        // 클라이언트에게 BLOB 데이터를 응답으로 전달합니다.
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + mediaFile.getMediaFileName())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+    }
 	//쪽지 쓰기
 	@Login
 	@RequestMapping("/writeMail")
@@ -204,19 +226,30 @@ public class MailController {
 	    return "mail/writeMail";
 	}
 	
+	@PostMapping("/upload")
+    public ResponseEntity<String> handleUploadAndSave(@RequestParam("files") List<MultipartFile> files) {
+		try {
+			log.info("업로드 : " + files.toString());
+            return new ResponseEntity<>("File upload successful", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("File upload failed", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+	
 	@PostMapping("/sendMail")
 	@ResponseBody
-    public ResponseEntity<String> sendMail(@RequestBody Map<String, Object> request, Authentication authentication) {
+    public ResponseEntity<Map<String, Object>> sendMail(@RequestBody Map<String, Object> request, Authentication authentication) {
 		 	String title = (String) request.get("title");
 		    String content = (String) request.get("content");
 		    List<Map<String, Object>> recipients = (List<Map<String, Object>>) request.get("recipients");
 		    List<Map<String, Object>> references = (List<Map<String, Object>>) request.get("references");
 		    List<Map<String, Object>> blindCopies = (List<Map<String, Object>>) request.get("blindCopies");
-
+		    List<Map<String, Object>> uploadedFiles = (List<Map<String, Object>>) request.get("uploadedFiles");
+		    
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			int mempId = empDetails.getEmployee().getEmpId();
 			
-		try {
 			Date currentDate = new Date();
             // 쪽지 데이터 작성 및 저장
             Message message = new Message();
@@ -226,8 +259,18 @@ public class MailController {
             message.setMessageStatus(1); // Send 버튼 클릭 시 1로 설정
             message.setMessageReservedDate(currentDate);
 
-            int messageId = messageService.writeMessage(message);
-
+            messageService.writeMessage(message);
+            
+            int messageId = message.getMessageNo();
+            
+            log.info("messageId: " + messageId);
+            
+            List<Map<String, Object>> attachments = (List<Map<String, Object>>) request.get("attachments");
+            if (attachments != null) {
+                for (Map<String, Object> attachment : attachments) {
+                    messageService.updateFile(messageId, mempId);
+                }
+            }
             // CC 데이터 작성 및 저장
             List<CC> ccList = new ArrayList<>();
             ccList.addAll(buildCCList(recipients, message.getMessageNo(), 1));
@@ -239,20 +282,33 @@ public class MailController {
             newCC.setEmpId(mempId);
             newCC.setCcType(2);
             newCC.setMessageStatus(1);
+            newCC.setMessageChecked(1);
             newCC.setCcCheckedDate(null);
             ccList.add(newCC);
             
             messageService.writeCC(ccList);
-
-            // 첨부 파일 데이터 작성 및 저장
-            /*List<MediaFile> mailMediaList = buildMailMediaList(attachmentFiles, messageId);
-            messageService.writeMailMedia(mailMediaList);*/
-
-            return new ResponseEntity<>("Mail sent successfully", HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("Error sending mail", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            
+            List<MediaFile> mediaFiles = new ArrayList<>();
+            for (Map<String, Object> fileData : uploadedFiles) {
+                MediaFile mediaFile = new MediaFile();
+                mediaFile.setEmpId(mempId);
+                mediaFile.setMessageNo(messageId);
+                mediaFile.setMediaFileName((String) fileData.get("name"));
+                mediaFile.setMediaFileType((String) fileData.get("type"));
+                
+                // Base64로 인코딩된 데이터를 디코딩하여 바이트 배열로 변환
+                String base64Data = (String) fileData.get("data");
+                byte[] mediaFileData = Base64.getDecoder().decode(base64Data);
+                mediaFile.setMediaFileData(mediaFileData);
+                mediaFiles.add(mediaFile);
+            }
+            
+            messageService.uploadAndSave(mediaFiles);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("messageId", messageId);
+            	
+            return new ResponseEntity<>(response, HttpStatus.OK);
     }
 	
 	private List<CC> buildCCList(List<Map<String, Object>> recipients, int messageNo, int ccType) {
@@ -269,6 +325,7 @@ public class MailController {
 	                cc.setEmpId(employeeId);
 	                cc.setCcType(ccType);
 	                cc.setMessageStatus(1);
+	                cc.setMessageChecked(1);
 	                cc.setCcCheckedDate(null);
 
 	                ccList.add(cc);

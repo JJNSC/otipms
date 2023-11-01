@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +17,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<script src="${pageContext.request.contextPath}/resources/js/employee/dataTable.js"></script>
 	
 	<style>
 		.fa-close {
@@ -64,21 +68,23 @@
 								<div class="col-lg-3" style="display:inline-block; margin-left:15px;">
 								    <select class="form-control" id="projectSelect" name="projectSelect">
 								        <option value="">프로젝트 선택</option>
-								        <option value="html">PMS 제작 프로젝트</option>
-								        <option value="css">프로젝트 2번째</option>
-								        <option value="javascript">본격 취업 프로젝트</option>
+							        	<c:forEach var="oneProjectTeams" items="${projectTeams }" varStatus="pts_project">
+						        			<option value="html">${oneProjectTeams.project.projectName }</option>
+								         </c:forEach>
 								    </select>
 								</div>
 								<div class="col-lg-2"  style="display:inline-block;">
-	                                 <select class="form-control" id="projectSelect" name="projectSelect">
-	                                     <option value="">팀 선택</option>
-	                                     <option value="html">개발1팀</option>
-	                                     <option value="html">개발2팀</option>
-	                                     <option value="html">개발3팀</option>
-	                                 </select>
-	                             </div>
+						 			<c:forEach var="oneProjectTeams" items="${projectTeams }" varStatus="pts_team">
+		                                <select class="form-control" id="projectSelect" name="projectSelect">
+		                                    <option value="">팀 선택</option>
+		                                    <c:forEach var="oneProjectTeam" items="${oneProjectTeams.teamList }" varStatus="pt_team">
+		                                    	<option value="html">${oneProjectTeam.teamName}</option>
+		                                    </c:forEach>
+		                                </select>
+	                                </c:forEach>
+	                            </div>
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered zero-configuration">
+                                    <table class="table table-striped datatables-products table-bordered zero-configuration">
                                         <thead>
                                             <tr>
                                                 <th>사원번호</th>
@@ -92,7 +98,7 @@
                                                 <th class="text-center">삭제</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <!-- <tbody>
                                             <tr>
                                                 <td>2010001</td>
                                                 <td>김진성</td>
@@ -110,295 +116,7 @@
                                                 	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>3010000</td>
-                                                <td>이은지</td>
-                                                <td>이사</td>
-                                                <td>010-0000-0000</td>
-                                                <td>본격 취업 프로젝트</td>
-                                                <td>개발3팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyEmployee">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button" class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1010002</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>010-9999-9999</td>
-                                                <td>PMS 제작 프로젝트</td>
-                                                <td>개발1팀</td>
-                                                <td>팀원</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2010001</td>
-                                                <td>김진성</td>
-                                                <td>부장</td>
-                                                <td>010-1234-1234</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>개발2팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3010000</td>
-                                                <td>이은지</td>
-                                                <td>이사</td>
-                                                <td>010-0000-0000</td>
-                                                <td>본격 취업 프로젝트</td>
-                                                <td>개발3팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1010002</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>010-9999-9999</td>
-                                                <td>PMS 제작 프로젝트</td>
-                                                <td>개발1팀</td>
-                                                <td>팀원</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2010001</td>
-                                                <td>김진성</td>
-                                                <td>부장</td>
-                                                <td>010-1234-1234</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>개발2팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2010000</td>
-                                                <td>이은지</td>
-                                                <td>이사</td>
-                                                <td>010-0000-0000</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>개발3팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2010002</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>010-9999-9999</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>개발1팀</td>
-                                                <td>팀원</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2010001</td>
-                                                <td>김진성</td>
-                                                <td>부장</td>
-                                                <td>010-1234-1234</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>개발2팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center" > 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3010000</td>
-                                                <td>이은지</td>
-                                                <td>이사</td>
-                                                <td>010-0000-0000</td>
-                                                <td>본격 취업 프로젝트</td>
-                                                <td>개발3팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3010002</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>010-9999-9999</td>
-                                                <td>본격 취업 프로젝트</td>
-                                                <td>개발1팀</td>
-                                                <td>팀원</td>
-                                                <td class="text-center" > 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3010001</td>
-                                                <td>김진성</td>
-                                                <td>부장</td>
-                                                <td>010-1234-1234</td>
-                                                <td>본격 취업 프로젝트</td>
-                                                <td>개발2팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3010000</td>
-                                                <td>이은지</td>
-                                                <td>이사</td>
-                                                <td>010-0000-0000</td>
-                                                <td>본격 취업 프로젝트</td>
-                                                <td>개발3팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1010002</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>010-9999-9999</td>
-                                                <td>PMS 제작 프로젝트</td>
-                                                <td>개발1팀</td>
-                                                <td>팀원</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1010001</td>
-                                                <td>김진성</td>
-                                                <td>부장</td>
-                                                <td>010-1234-1234</td>
-                                                <td>PMS 제작 프로젝트</td>
-                                                <td>개발2팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center" > 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1010000</td>
-                                                <td>이은지</td>
-                                                <td>이사</td>
-                                                <td>010-0000-0000</td>
-                                                <td>PMS 제작 프로젝트</td>
-                                                <td>개발3팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1010002</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>010-9999-9999</td>
-                                                <td>PMS 제작 프로젝트</td>
-                                                <td>개발1팀</td>
-                                                <td>팀원</td>
-                                                <td class="text-center" > 
-                                                	<a href="addAndModifyProject">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
+                                    	</tbody> -->
                                     </table>
                                 </div>
                             </div>

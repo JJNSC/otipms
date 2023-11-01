@@ -1,5 +1,7 @@
 package com.otipms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,8 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otipms.dto.Employee;
+import com.otipms.dto.Project;
+import com.otipms.dto.ProjectTeams;
 import com.otipms.interceptor.Login;
 import com.otipms.service.EmployeeService;
 
@@ -33,7 +40,25 @@ public class EmployeeController {
 			model.addAttribute("errMsg", errMsg);
 		}
 		System.out.println("사원 리스트");
+		List<ProjectTeams> projectTeamsList = employeeService.getTeamsPerProjects();
+		model.addAttribute("projectTeams", projectTeamsList);
 		return "employeeManagement/employeeList";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/employeeListJson")
+	public String employeeListJson() throws JsonProcessingException {
+		
+		List<Employee> data = employeeService.getAllEmployee();
+		log.info("그냥 데이터:" + data);
+		  
+		//data를 json데이터로 바꾸기
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = objectMapper.writeValueAsString(data);
+		log.info("json데이터로 바꿔줌 :" + jsonData);
+		    
+		return jsonData;
+
 	}
 	
 	@RequestMapping("/employeeListTest")
@@ -65,25 +90,16 @@ public class EmployeeController {
 		}else {
 			Employee employee = new Employee();
 			employee.setEmpName(empName);
-			
-			PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-			employee.setEmpPw(pwEncoder.encode("0000"));
 			employee.setEmpRank(empRank);
 			employee.setEmpTel(empTel);
 			if(teamName.equals("")||teamName.equals(null)) {
 				
 			}else {
-				employee.setTeamNo(employeeService.getTeamNo(teamName));
+				employee.setTeamNo(employeeService.getTeamNo(projectName,teamName));
 			}
 			employee.setRole(authorityName);
-			employeeService.AddEmploy(employee);
+			employeeService.addEmployee(employee);
 		}
-		
-		
-		
-		
-		
-		
 		return "redirect:/employeeManagement/employeeList";
 	}
 }

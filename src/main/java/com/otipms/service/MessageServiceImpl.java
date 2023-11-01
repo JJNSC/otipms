@@ -15,6 +15,9 @@ import com.otipms.dto.CC;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class MessageServiceImpl implements MessageService {
 	
@@ -97,6 +100,11 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
+	public MediaFile getMediaFile(int mediaFileNo) {
+		return messageDao.selectMediaFileByMediaFileNo(mediaFileNo);
+	}
+	
+	@Override
 	public int writeMessage(Message message) {
 		return sqlSession.insert("writeMessage", message);
 	}
@@ -105,21 +113,33 @@ public class MessageServiceImpl implements MessageService {
 	public void writeCC(List<CC> ccList) {
 		for (CC cc : ccList) {
             messageDao.writeCC(cc);
-            Alarm alarm = new Alarm();
-            alarm.setEmpId(cc.getEmpId());
-            alarm.setAlarmContentCode("쪽지 알림");
-            alarm.setAlarmContent("쪽지가 도착했습니다.");
-            Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-            alarm.setAlarmDate(currentTimestamp);
-            alarm.setAlarmChk(0);
-            alarm.setMessageNo(cc.getMessageNo());
-            alarmDao.insertAlarm(alarm);
+            if(cc.getCcType() != 2) {
+            	Alarm alarm = new Alarm();
+            	alarm.setEmpId(cc.getEmpId());
+            	alarm.setAlarmContentCode("쪽지 알림");
+            	alarm.setAlarmContent("쪽지가 도착했습니다.");
+            	Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+            	alarm.setAlarmDate(currentTimestamp);
+            	alarm.setAlarmChk(0);
+            	alarm.setMessageNo(cc.getMessageNo());
+            	alarmDao.insertAlarm(alarm);
+            }
         }
 	}
 
 	@Override
-	public int writeMailMedia(List<MediaFile> mailMediaList) {
-		return sqlSession.insert("writeMailMedia", mailMediaList);
+    public void uploadAndSave(List<MediaFile> mediaFile) {
+        for (MediaFile file : mediaFile) {
+        	messageDao.writeMailMedia(file);
+        }
+    }
+	
+	@Override
+	public void updateFile(int messageNo, int empId) {
+	    MediaFile mediaFile = new MediaFile();
+	    mediaFile.setMessageNo(messageNo);
+	    mediaFile.setEmpId(empId);
+	    messageDao.updateMailMedia(mediaFile);
 	}
 
 }

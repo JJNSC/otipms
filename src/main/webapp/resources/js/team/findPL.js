@@ -35,13 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	                    const row = document.createElement("tr");
 	                    row.innerHTML = `
 	                        <td class="text-center"><input type="radio" name="PLRadio" value="${index}"></td>
-	                    	<td class="text-center">${projectName}</td>
+	                    	<td class="d-none">${projectName}</td>
 	                    	<td class="text-center">${teamName}</td>
 	                        <td class="text-center">${employee.empId}</td>
 	                        <td class="text-center">${employee.empRank}</td>
 	                        <td class="text-left">${employee.empName}</td>
-	                    	<td class="text-center">${projectNo}</td>
-	                    	<td class="text-center">${teamNo}</td>
+	                    	<td class="d-none">${projectNo}</td>
+	                    	<td class="d-none">${teamNo}</td>
 	                    `;
 	                    
 	                    const checkbox = row.querySelector("input[type='radio'][name='PLRadio']");
