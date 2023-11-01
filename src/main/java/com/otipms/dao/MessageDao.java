@@ -22,6 +22,7 @@ public interface MessageDao {
 	
 	//쪽지 읽음 표시
 	public void updateMessageChecked(Message message);
+	public void updateMessageCheckedRec(Message message);
 	//쪽지 상세 보기(발신,수신,참조,비밀참조 인원)
 	public List<Message> detailMessageEmployee(int messageNo);
 	//쪽지 상세 보기(쪽지 중요 여부)
@@ -38,4 +39,9 @@ public interface MessageDao {
 	public void writeMailMedia(MediaFile mediaFile);
 	public MediaFile selectMediaFileByMediaFileNo(int mediaFileNo);
 	public void updateMailMedia(MediaFile mediaFile);
+	
+	//알림으로 읽은쪽지 읽음표시
+	public Message selectMyCCByMessageNo(Map<String, Object> paramMap);
+	//쪽지함에서 읽은걸로 알람정보 제거하기
+	public Message selectMessageNoByCC(Map<String, Object> paramMap);
 }

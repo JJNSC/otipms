@@ -1,6 +1,8 @@
 package com.otipms.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -119,6 +121,20 @@ public class LoginController {
 	        alarm.setEmpId(empId);
 	        
 	        alarmService.updateAlarmChecked(alarm);
+	        
+	        Alarm falarm = alarmService.getAlarm(alarmNo);
+	        
+	        int messageNo = falarm.getMessageNo();
+	        
+	        Map<String, Object> parameters = new HashMap<>();
+	        parameters.put("messageNo", messageNo);
+	        parameters.put("empId", empId);
+	        
+	        Message message = new Message();
+	        message = messageService.getCCbyAlarm(parameters);
+	        log.info(message.toString());
+	        
+	        messageService.updateMessageCheckedRec(message);
         
         // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
         return "success";

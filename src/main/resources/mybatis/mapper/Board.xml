@@ -119,6 +119,10 @@
 		SELECT count(*) 
 		  FROM BOARDCOMMENT
 		 WHERE BOARDNO = #{boardNo}
+		   AND (
+         	   COMMENTDELETED is null 
+         	   OR COMMENTDELETED = 0
+         	   )
 	</select>
 	
 	<!-- 게시글 조회 -->

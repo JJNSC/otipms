@@ -1,3 +1,13 @@
+window.onload = function(){
+	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
+	var empId = document.getElementById("memIdSpan").value;
+	
+	webSocket.onopen = () => {
+		console.log("소켓 오픈");
+		
+		webSocket.send(empId);
+	}
+}
 // 드롭다운 항목 클릭 시 호출되는 함수
 function filter(selectedItem) {
     // 버튼 엘리먼트 선택
@@ -94,7 +104,7 @@ function updateMessageChecked(ccNo) {
         url: "http://localhost:8080/otipms/mail/updateCheckedDate", // 서버 URL로 대체
         data: { ccNo: ccNo }, // 업데이트에 필요한 데이터를 전달
         success: function (data) {
-           
+        	webSocket.send(empId);
         },
         error: function () {
             alert("서버 오류: 업데이트를 완료할 수 없습니다.");

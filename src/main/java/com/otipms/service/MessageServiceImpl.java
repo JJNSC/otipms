@@ -75,7 +75,12 @@ public class MessageServiceImpl implements MessageService {
 	public void updateMessageChecked(Message message) {
 		messageDao.updateMessageChecked(message);
 	}
-
+	
+	@Override
+	public void updateMessageCheckedRec(Message message) {
+		messageDao.updateMessageCheckedRec(message);
+	}
+	
 	//상세보기
 	@Override
 	public List<Message> detailMessageEmployee(int messageNo) {
@@ -106,14 +111,14 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public int writeMessage(Message message) {
-		return sqlSession.insert("writeMessage", message);
+		return messageDao.writeMessage(message);
 	}
 
 	@Override
 	public void writeCC(List<CC> ccList) {
 		for (CC cc : ccList) {
-            messageDao.writeCC(cc);
-            if(cc.getCcType() != 2) {
+			messageDao.writeCC(cc);
+			if (cc.getCcType() != 2){
             	Alarm alarm = new Alarm();
             	alarm.setEmpId(cc.getEmpId());
             	alarm.setAlarmContentCode("쪽지 알림");
@@ -141,5 +146,14 @@ public class MessageServiceImpl implements MessageService {
 	    mediaFile.setEmpId(empId);
 	    messageDao.updateMailMedia(mediaFile);
 	}
-
+	
+	@Override
+	public Message getCCbyAlarm(Map<String, Object> paramMap) {
+		
+		return messageDao.selectMyCCByMessageNo(paramMap);
+	}
+	@Override
+	public Message getMessageNoByCCNo(Map<String,Object> paramMap) {
+		return messageDao.selectMessageNoByCC(paramMap);
+	}
 }

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    function checksave() {
+	function checksave() {
         window.history.back();
     }
 
@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
     		    };
     	var ccType = recipientTypeToNumber[recipientType];
     	
+
     	selectedEmployees[recipientType].push(selectedEmployee);
-        
         updateSelectedEmployeesUI(selectedEmployee, recipientType);
     };
 
@@ -88,9 +88,11 @@ function getSelectedEmployees(employeeId, ccType) {
 	});
 	return employees;
 }
+var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 
 function sendMail() {
 	// 사용자가 입력한 제목과 내용을 가져옴
+		
 	var title = $("#mailTitleInput").val();
 	var content = CKEDITOR.instances.myEditor.getData(); // CKEditor 내용을 가져옴
 	
@@ -121,6 +123,7 @@ function sendMail() {
         }
     }
     
+    var empId = document.getElementById("memIdSpan").value;
 	// AJAX를 사용하여 서버로 데이터 전송
 	$.ajax({
 		url: 'http://localhost:8080/otipms/mail/sendMail',
@@ -138,7 +141,7 @@ function sendMail() {
 			// 성공 시, 메시지 ID를 받아옴
             var messageId = data.messageId;
             // 파일 업로드를 수행하고 메시지와 연결
-            alert("쪽지가 성공적으로 전송되었습니다.");
+            webSocket.send(empId);
 			window.history.back();
 		},
 		error: function (error) {

@@ -14,33 +14,30 @@ window.onload = function(){
 		$.get("http://localhost:8080/otipms/alarms?empId=" + empId, function (alarmData) {
 	        updateAlarmList(alarmData);
 		});
-		
-		wsSend();
 	}
 	
 	webSocket.onmessage = (e) => {
+		console.log("새로운 메시지 도착:", e.data);
 		var alarmData = JSON.parse(e.data);
 		const alarmCount = alarmData.count;
-	    const alarms = alarmData.alarms;
+		previousAlarmCount = alarmCount; // 이전 알림 개수 업데이트
+		updateAlarmCount();
+		updateTotalAlarmCount();
+		$.get("http://localhost:8080/otipms/alarms?empId=" + empId, function (alarmData) {
+			updateAlarmList(alarmData);
+		});
+		const alarms = alarmData.alarms;
 	    
-	    if (alarmCount !== previousAlarmCount) {
-	        previousAlarmCount = alarmCount; // 이전 알림 개수 업데이트
-	        updateAlarmCount();
-	        updateTotalAlarmCount();
-	        $.get("http://localhost:8080/otipms/alarms?empId=" + empId, function (alarmData) {
-	            updateAlarmList(alarmData);
-	        });
-	        showAlarmIcon(v_alarmIcon);
+	    if (alarmCount > previousAlarmCount) {
+	    	showAlarmIcon(v_alarmIcon);
 	    }
-	    
 	}
 	
-	var wsSend=()=>{
+	/*var wsSend=()=>{
 		setInterval(function() {
 			webSocket.send(empId);
 		}, 3000);
-	}
-	
+	}*/
 	
 	
 	//안읽은 알람 수
@@ -80,12 +77,12 @@ window.onload = function(){
 	          </div>
 	        </a>
 	      `;
-
+		   
 	      alarmItem.innerHTML = alarmContent;
 	      alarmList.appendChild(alarmItem);
 	    });
 	  }
-	
+		
 	//총 알람 갯수
 	var updateTotalAlarmCount = function () {
 	  $.get("http://localhost:8080/otipms/alarmTotalCnt?empId=" + empId, function (data) {
@@ -101,6 +98,8 @@ window.onload = function(){
 	
 }
 
+var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
+var empId = document.getElementById("memIdSpan").value;
 
 function updateCheckedAlarm(alarmNo) {
 	$.ajax({
@@ -108,7 +107,7 @@ function updateCheckedAlarm(alarmNo) {
         url: "http://localhost:8080/otipms/updateCheckedAlarm", 
         data: { alarmNo: alarmNo },
         success: function (data) {
-           
+        	webSocket.send(empId);
         },
         error: function () {
             alert("서버 오류: 업데이트를 완료할 수 없습니다.");

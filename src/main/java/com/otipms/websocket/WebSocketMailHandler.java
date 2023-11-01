@@ -42,8 +42,10 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String memId = message.getPayload();
-	    List<Alarm> alarms = alarmService.selectAlarmCountByEmpIdI(memId);
-
+	    log.info("메세지 도착: {} : " + memId);
+	    //Thread.sleep(400);
+		List<Alarm> alarms = alarmService.selectAlarmCountByEmpIdI(memId);
+		
 	    // 세션에 알림 개수와 알림 내용을 전달
 	    Map<String, Object> notificationData = new HashMap<>();
 	    notificationData.put("count", alarms.size());
@@ -53,6 +55,7 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 
 	    // 모든 연결된 세션에 알림을 보냅니다.
 	    for (WebSocketSession single : sessions) {
+	    	log.info("알람 전송 : " + sendMsg);
 	        single.sendMessage(sendMsg);
 	    }
 	}

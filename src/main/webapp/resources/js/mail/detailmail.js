@@ -3,7 +3,9 @@ function checkdelete(){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // "일괄 다운로드" 버튼 클릭 이벤트 리스너
+	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
+
+	// "일괄 다운로드" 버튼 클릭 이벤트 리스너
     document.getElementById("bulkDownloadButton").addEventListener("click", function () {
         var downloadLinks = document.querySelectorAll("a[data-download-url]");
 
