@@ -60,7 +60,9 @@
                                 <div class="row">
                                 	<div class="col-6 mb-3">
                                 		<div class="d-flex align-items-center">
-		                                    <div style="margin-right: 0.8rem !important;"><img src="data:${board.mediaFileData};base64, ${board.base64Img}" class="rounded-circle" width="40" height="40"></div>
+                                			<c:if test="${board.mediaFileData != null}">
+			                                    <div style="margin-right: 0.8rem !important;"><img src="data:${board.mediaFileData};base64, ${board.base64Img}" class="rounded-circle" width="40" height="40"></div>
+                               				</c:if>
 		                                   <!--  <div class="mr-3"><img src="/otipms/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div> -->
 		                                    <div class="">
 		                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
@@ -102,14 +104,16 @@
 	                                	<div class="row">
 	                                		<div class="col-6">
 	                                			<div class="d-flex align-items-center">
-	                                				<div style="margin-right: 0.8rem !important;"><img src="data:${comment.mediaFileData};base64, ${comment.base64Img}" class="rounded-circle" width="40" height="40"></div>
+	                                				<c:if test="${comment.mediaFileData != null}">
+	                                					<div style="margin-right: 0.8rem !important;"><img src="data:${comment.mediaFileData};base64, ${comment.base64Img}" class="rounded-circle" width="40" height="40"></div>
+	                                				</c:if>
 				                                    <div class="">
 				                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
 				                                        	<c:if test="${comment.teamName == null}">
-					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${board.empRank}</span>
+					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${comment.empRank}</span>
 				                                        	</c:if>
 				                                        	<c:if test="${comment.teamName != null}">
-					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${board.empRank} | ${board.teamName}</span>
+					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${comment.empRank} | ${comment.teamName}</span>
 				                                        	</c:if>
 				                                        	
 				                                        	<c:if test="${board.empId == comment.empId}">
