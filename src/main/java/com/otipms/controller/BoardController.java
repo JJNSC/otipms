@@ -67,7 +67,7 @@ public class BoardController {
 		model.addAttribute("employee", LoginController.loginEmployee);
 		
 		log.info("pageNo가 뭐길래..." + pageNo);
-		
+		 
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoard(int rowNo, String pageNo, String inquiryType, HttpSession session)
 		Map<String, Object> boardPagerMap = pageBoard(5, null, null, session);
