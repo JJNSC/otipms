@@ -5,18 +5,46 @@
 		<selectKey keyProperty="empId" resultType="int" order="BEFORE">
 			select emp_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
 		</selectKey>
-		INSERT INTO emp (EmpId, EmpPW, EmpName, EmpRank, Role,, EmpEnabled) VALUES (TO_CHAR(SYSDATE, 'YY') ||0||0|| #{empId}, #{empPw}, #{empName}, #{empRank}, #{role},1)
+		INSERT 
+		  INTO emp (
+		       EmpId
+		     , EmpPW
+		     , EmpName
+		     , EmpRank
+		     , Role
+		     , EmpEnabled)
+	    VALUES (
+	    	   TO_CHAR(SYSDATE, 'YY') ||0||0|| #{empId}
+	    	 , #{empPw}
+	    	 , #{empName}
+	    	 , #{empRank}
+	    	 , #{role}
+	    	 , 1)
 	</insert>
 	
 	<insert id="insertEmployeeInfo" parameterType="Employee">	
-		INSERT INTO empInfo (empId,TeamNo, empTel) VALUES
-		<if test="teamNo ==0">
-			 (#{empId}, null, #{empTel})
-		</if>
-		<if test="teamNo !=0">
-			(#{empId}, #{teamNo}, #{empTel})
-		</if>
-		
+		INSERT 
+		  INTO empInfo (
+		       empId
+		     , TeamNo
+		     , empTel
+		     , empEmail) 
+	    VALUES <if test="teamNo ==0">
+					<if test="empEmail==null">
+					 	(#{empId}, null, #{empTel}, null)
+					</if>
+					<if test="empEmail!=null">
+					 	(#{empId}, null, #{empTel}, #{empEmail})
+					</if>
+			   </if>
+			   <if test="teamNo !=0">
+					<if test="empEmail==null">
+					 	(#{empId}, #{teamNo}, #{empTel}, null)
+					</if>
+					<if test="empEmail!=null">
+					 	(#{empId}, #{teamNo}, #{empTel}, #{empEmail})
+			    	</if>
+			   </if>
 	</insert>
 	
 	<select id="selectByEmployeeId" parameterType="int" resultType="Employee">
@@ -45,11 +73,20 @@
 	</select>
 	
 	<select id="selectAllEmployee" resultType="Employee">
-		select p.projectName, t.teamName, e.empRank, e.empName, e.empId
-		    from emp e, empinfo ei, team t, project p
-		    where e.empId = ei.empId
-		        and p.projectNo = t.projectNo
-		        and t.teamNo = ei.teamNo
+		SELECT p.projectName
+		     , t.teamName
+		     , e.empRank
+		     , e.empName
+		     , e.empId
+		     , ei.empTel
+		     , e.role
+		  FROM emp e
+		     , empinfo ei
+		     , team t
+		     , project p
+		 WHERE e.empId = ei.empId
+		   AND p.projectNo = t.projectNo
+		   AND t.teamNo = ei.teamNo
 	</select>
 	
 	<update id="updateTeamNo" parameterType="Employee">
@@ -88,10 +125,29 @@
 	<select id="selectEmployeeByTeamNoAndRole" parameterType="Employee" resultType="Employee">
 	 	SELECT *
 	 	  FROM emp 
-	INNER JOIN empinfo 
-	        ON emp.empid = empinfo.empid 
+	INNER JOIN empInfo 
+	        ON emp.empId = empinfo.empId 
 	     WHERE teamNo=#{teamNo} 
 	       AND role=#{role}
 	</select>
+	
+	<update id="updateToNoTeam" parameterType="Team">
+		UPDATE empInfo
+		   SET teamNo 
+		       = ( 
+		       SELECT teamNo 
+		         FROM team 
+		        WHERE projectNo = #{projectNo} 
+		          AND teamName ='미배정'
+		       )
+		 WHERE teamNo = #{teamNo}
+	</update>
+	
+	<update id="updateToDisabled" parameterType="int">
+		UPDATE emp
+		   SET empEnabled = 0
+		 WHERE 1=1 
+		   AND empId=#{empId}
+	</update>
 
 </mapper>

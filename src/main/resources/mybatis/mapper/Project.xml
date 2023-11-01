@@ -6,8 +6,32 @@
 		<selectKey keyProperty="projectNo" resultType="int" order="BEFORE">
 			select project_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
 		</selectKey>
-		INSERT INTO project (projectNo, projectName, projectStartDate, projectEndDate, projectStatus, projectCompanyName, projectContent, projectDeleted, empId)
-		 values (#{projectNo},#{projectName},#{projectStartDate},#{projectEndDate},#{projectStatus},#{projectCompanyName}, #{projectContent},#{projectDeleted},#{empId})
+		INSERT 
+		  INTO project (
+		       projectNo
+		     , projectName
+		     , projectStartDate
+		     , projectEndDate
+		     , projectStatus
+		     , projectCompanyName
+		     , projectContent
+		     , projectDeleted
+		     , empId)
+		VALUES (
+		       #{projectNo}
+		     , #{projectName}
+		     , #{projectStartDate}
+		     , #{projectEndDate}
+		     , #{projectStatus}
+		     , #{projectCompanyName}
+		     , #{projectContent}
+		     , #{projectDeleted}
+		     , <if test="empId==0">
+			     	null)	
+		       </if>
+		       <if test="empId!=0">
+			       #{empId})
+		       </if>
 	</insert>
 	
 	<!-- 모든 프로젝트 select -->
@@ -50,6 +74,13 @@
 		 WHERE 1=1
 		   AND projectNo = #{projectNo}
 	</update>
+	
+	<select id="selectProjectNoByProjectName" parameterType="String" resultType="int">
+		SELECT projectNo
+		  FROM project
+		 WHERE 1=1
+		   AND projectName=#{projectName}
+	</select>
 	
 	
 </mapper>

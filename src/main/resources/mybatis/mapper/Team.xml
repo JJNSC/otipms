@@ -48,7 +48,7 @@
 		   AND teamNo = #{teamNo}
 	</update>
 	
-	<update id="updateTeamEmpId">
+	<update id="updateTeamEmpId" parameterType="Team">
 		<selectKey keyProperty="teamNo" resultType="int" order="BEFORE">
 			SELECT teamNo
 			  FROM team
@@ -69,4 +69,19 @@
 			 , empId = #{empId}
 	     WHERE teamNo = #{teamNo}
 	</update>
+	
+	<delete id="removeTeam" parameterType="int">
+		DELETE 
+		  FROM team 
+		 WHERE teamNo=#{teamNo}
+	</delete>
+	
+	<select id="getTeamNoByProjectNoAndTeamName" parameterType="Team" resultType="int">
+		SELECT teamNo
+		  FROM team
+		 WHERE 1=1 
+		   AND teamName=#{teamName}
+		   AND projectNo=#{projectNo}
+	</select>
+	
 </mapper>

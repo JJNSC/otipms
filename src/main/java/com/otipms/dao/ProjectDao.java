@@ -15,4 +15,5 @@ public interface ProjectDao {
 	public Project selectProjectByProjectNo(int projectNo);
 	public void updateProject(Project project);
 	public void updateProjectDeletedStatus(Project project);
+	public int selectProjectNoByProjectName(String projectName);
 }

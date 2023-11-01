@@ -42,30 +42,46 @@ public class ProjectServiceImpl implements ProjectService {
 		log.info(" 프로젝트  : "+PMTeam);
 		int PMTeamNo = this.teamDao.addTeam(PMTeam);
 		System.out.println("PMTeamNo : "+ PMTeamNo);
-		//PM 팀 설정
-		Employee PM = new Employee();
-		PM.setEmpId(pmId);
-		PM.setTeamNo(PMTeam.getTeamNo());
-		employeeDao.updateTeamNo(PM);
-		//PM팀의 팀장 등록
-		PMTeam.setTeamNo(PMTeamNo);
-		PMTeam.setEmpId(pmId);
-		teamDao.updateTeamLeader(PMTeam);
+		
+		if(pmId==0) {
+			
+		}else {
+			//PM 팀 설정
+			Employee PM = new Employee();
+			PM.setEmpId(pmId);
+			PM.setTeamNo(PMTeam.getTeamNo());
+			employeeDao.updateTeamNo(PM);
+			//PM팀의 팀장 등록
+			PMTeam.setTeamNo(PMTeamNo);
+			PMTeam.setEmpId(pmId);
+			teamDao.updateTeamLeader(PMTeam);
+		}
 		
 		//고객사 전용 팀 만들기
 		Team cilentTeam = new Team();
 		cilentTeam.setTeamName("고객");
 		cilentTeam.setProjectNo(project.getProjectNo());
 		int clientTeamNo =teamDao.addTeam(cilentTeam);
-		//고객 팀 설정
-		Employee client = new Employee();
-		client.setEmpId(clientId);
-		client.setTeamNo(cilentTeam.getTeamNo());
-		employeeDao.updateTeamNo(client);
-		//client팀의 팀장 등록
-		cilentTeam.setTeamNo(clientTeamNo);
-		cilentTeam.setEmpId(clientId);
-		teamDao.updateTeamLeader(cilentTeam);
+		
+		if(clientId==0) {
+			
+		}else {
+			//고객 팀 설정
+			Employee client = new Employee();
+			client.setEmpId(clientId);
+			client.setTeamNo(cilentTeam.getTeamNo());
+			employeeDao.updateTeamNo(client);
+			//client팀의 팀장 등록
+			cilentTeam.setTeamNo(clientTeamNo);
+			cilentTeam.setEmpId(clientId);
+			teamDao.updateTeamLeader(cilentTeam);
+		}
+		
+		//미배정 팀 만들기
+		Team noTeam = new Team();
+		noTeam.setTeamName("미배정");
+		noTeam.setProjectNo(project.getProjectNo());
+		teamDao.addTeam(noTeam);
 
 		
 		return project.getProjectNo();
@@ -139,7 +155,16 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void updateProjectDeletedStatus(Project project) {
+		//프로젝트 비활성화
 		projectDao.updateProjectDeletedStatus(project);
+		//프로젝트에 속한 인원들 비활성화
+		List<Team> teamList = teamDao.selectTeamListByProjectNo(project.getProjectNo());
+		for(Team team : teamList) {
+			List<Employee> empList = employeeDao.selectEmployeeByTeamNo(team.getTeamNo());
+			for(Employee emp : empList ) {
+				employeeDao.updateToDisabled(emp.getEmpId());
+			}
+		}
 		
 	}
 	

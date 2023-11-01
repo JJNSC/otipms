@@ -143,10 +143,10 @@ public class ProjectController {
 	
 	@Transactional
 	@RequestMapping("/addProject")
-	public String addProject(@RequestParam("projectName") String projectName,
+	public String addProject(@RequestParam(name="projectName", defaultValue="프로젝트 명") String projectName,
 							 @RequestParam("projectDate") String projectDate,
 							 @RequestParam("ProjectManagerId") String PMId,
-							 @RequestParam("projectOutLines")String projectContent,
+							 @RequestParam(name="projectOutLines", defaultValue="프로젝트 개요")String projectContent,
 							 @RequestParam("customerCompany") String projectCompanyName,
 							 @RequestParam("customerId") String empId) {
 		System.out.println("projectName :" + projectName );
@@ -179,12 +179,22 @@ public class ProjectController {
         project.setProjectCompanyName(projectCompanyName);
         project.setProjectContent(projectContent);
         project.setProjectDeleted(false);
-        project.setEmpId(Integer.parseInt(empId)); //고객의 id 
         
-        int pmId =Integer.parseInt(PMId);
+        int clientId=0;
+        if(empId.equals(null) || empId.equals("")) {
+        }else {
+        	clientId = Integer.parseInt(empId);
+        }
+        project.setEmpId(clientId); //고객의 id 
+        
+        int pmId=0;
+        if(PMId.equals(null) || PMId.equals("")) {
+        }else {
+        	pmId = Integer.parseInt(PMId);
+        }
         //int clientId = Integer.parseInt(empId);
         
-		projectService.addProject(project,pmId,Integer.parseInt(empId));
+		projectService.addProject(project,pmId,clientId);
 		//해당 PM에게 프로젝트 번호 등록!
 		System.out.println(" 후보 1번 : "+project.getProjectNo()); //둘다 잘됨 후보 1번 사용하자.
 		//System.out.println(" 후보 2번 : "+projectNo);

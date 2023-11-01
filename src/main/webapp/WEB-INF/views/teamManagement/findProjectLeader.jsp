@@ -75,6 +75,7 @@
 				                                        <thead>
 				                                            <tr>
 				                                                <th class="text-center"></th>
+				                                                <th class="text-center">팀 명</th>
 				                                                <th class="text-center">사원번호</th>
 				                                                <th class="text-center">직급</th>
 				                                                <th class="text-left ">이름</th>
