@@ -127,7 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
         	targets: 7,
         	render: function (data, type, full, meta) {
         		var $thisEmpId = full['empId']; //date 필드에서 날짜 정보를 가져옴
-        		return '<a href="modifySingleEmployee?empId=' + $thisEmpId +'"><i style="margin:auto;" class="fa fa-pencil color-muted"></i></a>';
+//        		return '<a href="modifySingleEmployee?empId=' + $thisEmpId +'"><i style="margin:auto;" class="fa fa-pencil color-muted"></i></a>';
+        		return '<a data-toggle="modal" data-target="#modifyInfo" data-whatever="@mdo" data-employeeId="'+ $thisEmpId 
+        		+'" onclick="prepareModify('+$thisEmpId+')"><i style="margin:auto;" class="fa fa-pencil color-muted"></i></a>';
         	}
         },
         {
@@ -166,8 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       ],
-      /*// For responsive popup
-      responsive: {
+      // For responsive popup
+      /*responsive: {
         details: {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
@@ -208,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var select = $(
               '<select id="ProductStatus" class="form-select text-capitalize"><option value="">Status</option></select>'
             )
-              .appendTo('.product_status')
+              .appendTo('.product_names')
               .on('change', function () {
                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
                 column.search(val ? '^' + val + '$' : '', true, false).draw();

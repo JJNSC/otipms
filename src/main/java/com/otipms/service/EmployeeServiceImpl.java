@@ -84,14 +84,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee empInfo = employeeDao.selectInfoByEmployeeId(empId);
 		System.out.println("employee : "+ employee);
 		System.out.println("empInfo : "+ empInfo);
-		employee.setRole(employee.getRole());
 		int teamNo = empInfo.getTeamNo();
+		log.info("팀번호는? : "+ teamNo);
 		String teamName = teamDao.getTeamNameByTeamNo(teamNo);
+		employee.setTeamNo(teamNo);
 		employee.setTeamName(teamName);
 		employee.setEmpTel(empInfo.getEmpTel());
 		employee.setEmpEmail(empInfo.getEmpEmail());
 		employee.setEmpLoginDate(empInfo.getEmpLoginDate());
 		employee.setEmpEnabled(empInfo.getEmpEnabled());
+		Project project = projectDao.selectProjectByProjectNo(teamDao.selectTeamByTeamNo(teamNo).getProjectNo());
+		employee.setProjectNo(project.getProjectNo());
+		employee.setProjectName(project.getProjectName());
+		employee.setProjectCompanyName(project.getProjectCompanyName());
 		return employee;
 	}
 
@@ -176,6 +181,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 			projectTeams.add(oneProjectTeams);
 		}
 		return projectTeams;
+	}
+
+	@Override
+	public void resetEmployeePassword(int empId) {
+		Employee employee = new Employee();
+		employee.setEmpId(empId);
+		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		employee.setEmpPw(pwEncoder.encode("0000"));
+		employeeDao.resetEmployeePassword(employee);
+		
 	}
 
 	

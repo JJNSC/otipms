@@ -24,4 +24,5 @@ public interface EmployeeService {
 	public List<Employee> selectEmployeeByTeamNoAndRole(int teamNo,String role);
 	public void addMultiEmployee(Employee employee);
 	public List<ProjectTeams> getTeamsPerProjects();
+	public void resetEmployeePassword(int empId);
 }

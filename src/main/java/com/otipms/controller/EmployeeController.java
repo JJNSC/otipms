@@ -102,4 +102,20 @@ public class EmployeeController {
 		}
 		return "redirect:/employeeManagement/employeeList";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/employeeInfoJson")
+	public Employee employeeInfoJson(@RequestParam("empId") String empId) {
+		log.info("empId : " + empId);
+		Employee modifyEmpInfo = employeeService.getEmployeeAllInfo(Integer.parseInt(empId));
+		log.info("모달 열때 들어있는 사용자 정보들 : "+modifyEmpInfo);
+		return modifyEmpInfo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/resetEmpPassword")
+	public void resetEmpPassword(@RequestParam("empId") String empId) {
+		log.info("비밀번호 초기화할 empId : " + empId);
+		employeeService.resetEmployeePassword(Integer.parseInt(empId));
+	}
 }

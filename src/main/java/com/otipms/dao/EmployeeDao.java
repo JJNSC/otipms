@@ -22,4 +22,5 @@ public interface EmployeeDao {
 	public List<Employee> selectEmployeeByTeamNoAndRole(Employee employee);
 	public void updateToNoTeam(Team team);
 	public void updateToDisabled(int empId);
+	public void resetEmployeePassword(Employee employee);
 }

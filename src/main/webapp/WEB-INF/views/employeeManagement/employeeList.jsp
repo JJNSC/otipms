@@ -18,6 +18,7 @@
     <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<script src="${pageContext.request.contextPath}/resources/js/employee/dataTable.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/employee/employeeFilter.js"></script>
 	
 	<style>
 		.fa-close {
@@ -27,9 +28,62 @@
 		.paddingright{
 			padding-right:5%;
 		}
-		
-		
 	</style>	
+	<script>
+	    function prepareModify(empId) {
+	    	$.ajax({
+	            url: 'http://localhost:8080/otipms/employeeManagement/employeeInfoJson', // 해당 URL은 실제로 사용하는 URL로 변경해야 합니다.
+	            type: 'GET',
+	            data: { empId: empId },
+	            success: function (data) {
+	                // 요청이 성공하면 모달 내용을 업데이트
+	                updateModalContent(data);
+	            },
+	            error: function () {
+	                // 요청 실패 시 예외 처리
+	                alert('사원 정보를 불러오는 중 문제가 발생했습니다.');
+	            }
+	        });
+		}
+	    function updateModalContent(employeeData) {
+	        // employeeData를 사용하여 모달 내용 업데이트
+	        $('#modifyInfo .modal-title').text('인력 정보 수정');
+	        $('#nowEmpId').val(employeeData.empId);
+	        $('#nowEmpName').val(employeeData.empName);
+	        $('#nowEmpTel').val(employeeData.empTel);
+	        $('#nowEmpRank').val(employeeData.empRank);
+	        $('#nowEmpRank').text(employeeData.empRank);
+	        $('#nowProject').val(employeeData.projectNo);
+	        $('#nowProject').text(employeeData.projectName);
+	        $('#nowTeam').val(employeeData.teamNo);
+	        $('#nowTeam').text(employeeData.teamName);
+	        $('#nowRole').val(employeeData.role);
+	        $('#nowRole').text(employeeData.role);
+
+	        // 모달 열기
+	        $('#modifyInfo').modal('show');
+	    }
+	</script>
+	<script>
+		function alertBeforePwReset(){
+			var empId = document.getElementById("nowEmpId").value;
+			console.log(" 여기서 콘솔로 나오는 EMPID: "+ empId);
+			var reset = confirm("비밀번호를 초기화 하시겠습니까?");
+			if(reset){
+				$.ajax({
+					url:'http://localhost:8080/otipms/employeeManagement/resetEmpPassword',
+					type:'POST',
+					data:{empId: empId},
+					success:function(){
+						alert("비밀번호가 초기화 되었습니다.");
+					},
+					error: function(){
+						alert("비밀번호 초기화 실패");
+					}
+				})
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -66,22 +120,31 @@
                                		<button type="button" class="btn btn-primary" style="margin-right:10px; position:relative; right:40px;" data-toggle="modal" data-target="#multiRegister" data-whatever="@mdo">일괄 등록</button>
                                 </span>
 								<div class="col-lg-3" style="display:inline-block; margin-left:15px;">
-								    <select class="form-control" id="projectSelect" name="projectSelect">
+								    <%-- <select class="form-control" id="projectSelect" name="projectSelect">
 								        <option value="">프로젝트 선택</option>
 							        	<c:forEach var="oneProjectTeams" items="${projectTeams }" varStatus="pts_project">
 						        			<option value="html">${oneProjectTeams.project.projectName }</option>
 								         </c:forEach>
-								    </select>
+								    </select> --%>
+								    <select id="project-dropdown">
+							            <option value="">프로젝트 선택</option>
+							        </select>
+							        <div class="product_names">
+							        
+							        </div>
 								</div>
 								<div class="col-lg-2"  style="display:inline-block;">
-						 			<c:forEach var="oneProjectTeams" items="${projectTeams }" varStatus="pts_team">
+						 			<%-- <c:forEach var="oneProjectTeams" items="${projectTeams }" varStatus="pts_team">
 		                                <select class="form-control" id="projectSelect" name="projectSelect">
 		                                    <option value="">팀 선택</option>
 		                                    <c:forEach var="oneProjectTeam" items="${oneProjectTeams.teamList }" varStatus="pt_team">
 		                                    	<option value="html">${oneProjectTeam.teamName}</option>
 		                                    </c:forEach>
 		                                </select>
-	                                </c:forEach>
+	                                </c:forEach> --%>
+	                                <select id="team-dropdown">
+							            <option value="">팀 선택</option>
+							        </select>
 	                            </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped datatables-products table-bordered zero-configuration">
@@ -131,29 +194,27 @@
 			                <h5 class="modal-title" id="singleRegisterLabel">인력 정보 수정</h5>
 			            </div>
 			            <div class="modal-body">
-			                <form class="form-valide" action="#" method="post">
+			                <form class="form-valide" action="#" method="post" id="modifySingleEmployeeInfo">
+			                	<input type="hidden" id="nowEmpId" name="empId"></input>
 	                            <div class="form-group row">
 	                                <label class="col-lg-4 col-form-label" for="val-username">이름
 	                                </label>
 	                                <div class="col-lg-7">
-	                                    <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
+	                                    <input type="text" class="form-control" id="nowEmpName" name="nowEmpName" placeholder="Enter a username..">
 	                                </div>
 	                            </div>
 	                            <div class="form-group row">
 	                             <label class="col-lg-4 col-form-label" for="positionSelect">직책</label>
 	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="positionSelect" name="positionSelect">
-	                                     <option value="">직책 선택</option>
-	                                     <option value="html">사원</option>
-	                                     <option value="css">선임</option>
-	                                     <option value="javascript">대리</option>
-	                                     <option value="angular">과장</option>
-	                                     <option value="angular">차장</option>
-	                                     <option value="angular">부장</option>
-	                                     <option value="angular">이사</option>
-	                                     <option value="angular">상무</option>
-	                                     <option value="angular">사장</option>
-	                                     <option value="angular">고객</option>
+	                                 <select class="form-control" id="positionSelect" name="nowEmpRank">
+	                                     <option value="" id="nowEmpRank"></option>
+	                                     <option value="사원">사원</option>
+	                                     <option value="대리">대리</option>
+	                                     <option value="과장">과장</option>
+	                                     <option value="차장">차장</option>
+	                                     <option value="부장">부장</option>
+	                                     <option value="이사">이사</option>
+	                                     <option value="고객">고객</option>
 	                                 </select>
 	                             </div>
 	                            </div>
@@ -161,47 +222,34 @@
 	                                <label class="col-lg-4 col-form-label" for="phoneNumber">연락처 
 	                                </label>
 	                                <div class="col-lg-7">
-	                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="010-xxxx-xxxx">
+	                                    <input type="text" class="form-control" id="nowEmpTel" name="nowEmpTel" placeholder="010-xxxx-xxxx">
 	                                </div>
 	                            </div>
 	                            <div class="form-group row">
 	                             <label class="col-lg-4 col-form-label" for="projectSelect">프로젝트 </label>
 	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="projectSelect" name="projectSelect">
-	                                     <option value="">프로젝트 선택</option>
-	                                     <option value="html">PMS 제작 프로젝트</option>
-	                                     <option value="css">프로젝트 2번째</option>
-	                                     <option value="javascript">본격 취업 프로젝트</option>
-	                                     <option value="angular">임시 프로젝트</option>
-	                                 </select>
+	                                 <select class="form-control" id="project-dropdown-modal" name="nowProject">
+							            <option value="" id="nowProject"></option>
+							        </select>
 	                             </div>
 	                            </div>
 	                            <div class="form-group row">
 	                             <label class="col-lg-4 col-form-label" for="teamSelect">팀</label>
 	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="projectSelect" name="projectSelect">
-	                                     <option value="">팀 선택</option>
-	                                     <option value="html">기획 1팀</option>
-	                                     <option value="css">기획 2팀</option>
-	                                     <option value="javascript">개발 1팀</option>
-	                                     <option value="javascript">개발 2팀</option>
-	                                     <option value="javascript">개발 3팀</option>
-	                                     <option value="angular">QA 1팀</option>
-	                                     <option value="angular">QA 2팀</option>
-	                                     <option value="angular">고객</option>
-	                                 </select>
+	                                 <select class="form-control" id="team-dropdown-modal" name="nowTeam">
+							            <option value="" id="nowTeam">팀 선택</option>
+							        </select>
 	                             </div>
 	                            </div>
 	                            <div class="form-group row">
 	                             <label class="col-lg-4 col-form-label" for="authoritySelect">권한</label>
 	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="projectSelect" name="projectSelect">
-	                                     <option value="">권한 선택</option>
-	                                     <option value="html">팀원</option>
-	                                     <option value="css">팀장</option>
-	                                     <option value="css">PM</option>
-	                                     <option value="javascript">관리자</option>
-	                                     <option value="angular">고객사</option>
+	                                 <select class="form-control" id="projectSelect" name="nowRole">
+	                                     <option value="" id="nowRole"></option>
+	                                     <option value="ROLE_PE">ROLE_PE</option>
+	                                     <option value="ROLE_PM">ROLE_PM</option>
+	                                     <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+	                                     <option value="ROLE_CLIENT">ROLE_CLIENT</option>
 	                                 </select>
 	                             </div>
 	                            </div>
@@ -209,13 +257,13 @@
 	                                <label class="col-lg-4 col-form-label" for="phoneNumber"> 비밀번호 초기화
 	                                </label>
 	                                <div class="col-lg-7">
-	                                	<button type="button" class="btn btn-primary">초기화 하기</button>
+	                                	<button type="button" class="btn btn-primary" onclick="alertBeforePwReset()">초기화 하기</button>
 	                                </div>
 	                            </div>
 	                        </form>
 			            </div>
 			            <div class="modal-footer">
-			            	<button type="button" class="btn btn-primary">수정</button>
+			            	<button type="button" class="btn btn-primary" form="modifySingleEmployeeInfo">수정</button>
 			                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			            </div>
 			        </div>

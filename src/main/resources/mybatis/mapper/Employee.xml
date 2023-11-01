@@ -149,5 +149,12 @@
 		 WHERE 1=1 
 		   AND empId=#{empId}
 	</update>
+	
+	<update id="resetEmployeePassword" parameterType="Employee">
+		UPDATE emp
+		   SET empPw=#{empPw}
+		 WHERE 1=1 
+		   AND empId=#{empId}
+	</update>
 
 </mapper>
