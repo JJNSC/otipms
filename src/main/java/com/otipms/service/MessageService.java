@@ -17,6 +17,7 @@ public interface MessageService {
 	public void toggleMessageImportance(Message message);
 	public void updateMessageTrash(Message message);
 	public void updateMessageChecked(Message message);
+	public void updateMessageCheckedRec(Message message);
 	
 	//쪽지 상세 보기(발신,수신,참조,비밀참조 인원)
 	public List<Message> detailMessageEmployee(int messageNo);
@@ -32,4 +33,10 @@ public interface MessageService {
 	public void uploadAndSave(List<MediaFile> mediaFile);
 	public MediaFile getMediaFile(int mediaFileNo);
 	public void updateFile(int messageNo, int empId);
+	
+	
+	//알람번호로 정확히 원하는 CC 쪽지 찾기
+	public Message getCCbyAlarm(Map<String, Object> paramMap);
+	//CCNo로 정확히 원하는 메세지 번호 찾기
+	public Message getMessageNoByCCNo(Map<String,Object> paramMap);
 }

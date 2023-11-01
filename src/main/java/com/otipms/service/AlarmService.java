@@ -9,4 +9,8 @@ public interface AlarmService {
 	public List<Alarm> selectAlarmCountByEmpIdI(String empId);
 	public List<Alarm> selectAlarmCountByEmpId(int empId);
 	public void updateAlarmChecked(Alarm alarm);
+	
+	public Alarm getAlarm(int alarmNo);
+	
+	public Alarm setAlarm(int messageNo);
 }

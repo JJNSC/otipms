@@ -85,4 +85,18 @@
     	 WHERE alarmNo = #{alarmNo}
            AND alarmChk = 0
 	</update>
+	
+	<!-- 알람번호로 쪽지 찾기1 -->
+	<select id="selectAlarm" parameterType="int" resultType="Alarm">
+		SELECT *
+		  FROM ALARM
+		 WHERE alarmNo = #{alarmNo}
+	</select>
+	
+	<!-- 메시지번호로 알림 찾기2 -->
+	<select id="selectAlarmByMessageNo" parameterType="int" resultType="Alarm">
+		SELECT *
+		  FROM ALARM
+		 WHERE messageNo = #{messageNo}
+	</select>
 </mapper>

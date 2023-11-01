@@ -119,6 +119,7 @@
 									                    <span class="name">${message.empName}</span>
 									                </div>
 									            </div>
+									            <input id="memIdSpan" type="hidden" value="${employee.empId}"/>
 									            <a href="detailMail?messageNo=${message.messageNo}" onclick="updateMessageChecked(${message.ccNo})">
 									                <div class="col-mail col-mail-2">
 									                    <div class="subject">${message.messageTitle}</div>

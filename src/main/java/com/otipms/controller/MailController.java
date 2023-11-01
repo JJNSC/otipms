@@ -26,11 +26,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.dto.Alarm;
 import com.otipms.dto.CC;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
+import com.otipms.service.AlarmService;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
 import com.otipms.service.ProjectService;
@@ -54,6 +56,10 @@ public class MailController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private AlarmService alarmService;
+	
 	//쪽지 수신함
 	@Login
 	@RequestMapping("/receivedMail")
@@ -64,6 +70,7 @@ public class MailController {
 		
 		List<Message> messages = messageService.getMyReceivedMessage(empId);
 	    model.addAttribute("messages", messages);
+	    model.addAttribute("employee", empDetails.getEmployee());
 		
 		return "mail/receivedMail";
 	}
@@ -123,6 +130,19 @@ public class MailController {
 	        message.setEmpId(empId);
 	        
 	        messageService.updateMessageChecked(message);
+	        
+	        Map<String, Object> parameters = new HashMap<>();
+	        parameters.put("ccNo", ccNo);
+	        parameters.put("empId", empId);
+	        
+	        Message messageCC = messageService.getMessageNoByCCNo(parameters);
+	        
+	        int messageNo = messageCC.getMessageNo();
+	        
+	        Alarm alarm = alarmService.setAlarm(messageNo);
+	        
+	        alarmService.updateAlarmChecked(alarm);
+	        
         
         // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
         return "success";
@@ -223,6 +243,7 @@ public class MailController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		int empId = empDetails.getEmployee().getEmpId();
 		
+		model.addAttribute("employee", empDetails.getEmployee());
 	    return "mail/writeMail";
 	}
 	

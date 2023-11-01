@@ -13,4 +13,9 @@ public interface AlarmDao {
 	public List<Alarm> selectAlarmCountByEmpIdI(Integer empId);
 	public void insertAlarm(Alarm alarm);
 	public void checkedAlarm(Alarm alarm);
+	
+	//알람 -> 읽음쪽지
+	public Alarm selectAlarm(int alarmNo);
+	//메세지번호 -> 알람
+	public Alarm selectAlarmByMessageNo(int messageNo);
 }

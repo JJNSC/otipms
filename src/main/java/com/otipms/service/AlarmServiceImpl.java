@@ -36,5 +36,15 @@ public class AlarmServiceImpl implements AlarmService {
 	public void updateAlarmChecked(Alarm alarm) {
 		alarmDao.checkedAlarm(alarm);
 	}
+
+	@Override
+	public Alarm getAlarm(int alarmNo) {
+		return alarmDao.selectAlarm(alarmNo);
+	}
+	
+	@Override
+	public Alarm setAlarm(int messageNo) {
+		return alarmDao.selectAlarmByMessageNo(messageNo);
+	}
 	
 }
