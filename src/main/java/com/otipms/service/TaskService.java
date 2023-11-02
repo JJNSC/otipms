@@ -69,5 +69,12 @@ public interface TaskService {
 	 * @return
 	 */
 	public List<Task> deleteTask(String taskNo);
+	
+	/**
+	 * 진척도 계산
+	 * @param empId
+	 * @return
+	 */
+	public double calculateProgressRate(int empId);
 
 }

@@ -66,5 +66,12 @@ public interface TaskDao {
 	 * @return
 	 */
 	public int updateDeleteTask(Task task);
+	
+	/**
+	 * 진척도를 위한 태스크 리스트 개수
+	 * @param map
+	 * @return
+	 */
+	public int countTaskList(Map<String, Object> map);
 
 }

@@ -146,104 +146,6 @@
                                                 <th style="width: 25.5%;">진척률</th>
                                             </tr>
                                         </thead>
-                                        <%-- <tbody>
-                                        	<c:forEach var="project" items="${projectList}" varStatus="a">
-                                        		<c:forEach var="pm" items="${PMList}" varStatus="b">
-                                        			<c:if test="${a.index==b.index}">
-                                        				<c:forEach var="customerInfo" items="${customerInfoList}" varStatus="c">
-                                        					<c:if test="${a.index==c.index}">
-					                                            <tr class="reviewTitle table-hover " data-toggle="collapse" data-review-id="${project.projectNo }" id="projectNo${project.projectNo }" href="#collapseExample${project.projectNo }" role="button" aria-expanded="false" aria-controls="collapseExample">
-					                                                <td class="text-center">${project.projectNo }</td>
-					                                                <td>
-																	   ${project.projectName }
-																	</td>
-					                                                <td>${pm.empName }</td>
-					                                                <td>
-					                                                	<c:set var="startDate" value="${project.projectStartDate}" />
-																		<c:choose>
-																		    <c:when test="${not empty startDate}">
-																		        <fmt:formatDate value="${startDate}" pattern="yyyy.MM.dd" var="formattedStartDate" />
-																		    </c:when>
-																		    <c:otherwise>
-																		        <c:set var="formattedStartDate" value="" />
-																		    </c:otherwise>
-																		</c:choose>
-																		${formattedStartDate}
-					                                                </td>
-					                                                <td>
-					                                                	<c:set var="endDate" value="${project.projectEndDate}" />
-																		<c:choose>
-																		    <c:when test="${not empty endDate}">
-																		        <fmt:formatDate value="${endDate}" pattern="yyyy.MM.dd" var="formattedEndDate" />
-																		    </c:when>
-																		    <c:otherwise>
-																		        <c:set var="formattedEndDate" value="" />
-																		    </c:otherwise>
-																		</c:choose>
-																		${formattedEndDate}
-					                                                </td>
-					                                                <td>
-																		<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>
-					                                                	<div class="progress" style="height: 9px">
-										                                    <div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>
-										                                    </div>
-										                                </div>
-					                                                </td>
-						                                            <td class="text-right" style="padding-right:20px"> 
-						                                             	<a href="addAndModifyProject?projectNo=${project.projectNo}&pmId=${pm.empId}&customerId=${customerInfo.empId}">
-						                                            			<i class="fa fa-pencil color-muted"></i>
-						                                            		</a>
-						                                             </td>
-						                                             <td class="text-center"> 
-						                                              	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-						                                             </td>
-					                                            </tr>
-					                                            <tr style="background-color:#f3f3f3;" id="${project.projectNo }bottom">
-														   			<td style="padding-top :0px; padding-bottom :0px;"colspan="8">
-												                      	<div class="collapse" id="collapseExample${project.projectNo }">
-																         	<div class="card card-body mt-3 noHover" style="height:200px;">
-							                                            		<table border="1" class="table-in-table">
-							                                            			<tr>
-							                                            				<td class="no-right-border col-md-9">
-							                                            					<i class="icon-copy fa fa-book" aria-hidden="true"> 프로젝트 개요</i>
-							                                            				</td>
-							                                            				<td class="no-right-border col-md-1">
-							                                            					<i class="icon-copy fa fa-user" aria-hidden="true"> 고객 명</i>
-							                                            				</td>
-							                                            				<td class="no-left-border col-md-2">
-							                                            					${customerInfo.empName }
-							                                            				</td>
-							                                            			</tr>
-							                                            			<tr>
-							                                            				<td rowspan="2"class="no-right-border">
-							                                            					${project.projectContent }
-							                                            				</td>
-							                                            				<td class="no-right-border">
-							                                            					<i class="icon-copy fa fa-drivers-license-o" aria-hidden="true"> 고객 연락처</i>
-							                                            				</td>
-							                                            				<td class="no-left-border">
-							                                            					${customerInfo.empTel }
-							                                            				</td>
-							                                            			</tr>
-							                                            			<tr>
-							                                            				<td class="no-right-border">
-							                                            					<i class="icon-copy fa fa-envelope" aria-hidden="true"> 고객 이메일</i>
-							                                            				</td>
-							                                            				<td class="no-left-border">
-							                                            					${customerInfo.empEmail }
-							                                            				</td>
-							                                            			</tr>
-							                                            		</table>
-																         	</div>
-																      	</div>
-														   			</td>
-																</tr>
-															</c:if>
-														</c:forEach>
-													</c:if>
-												</c:forEach>
-											</c:forEach>
-                                        </tbody> --%>
                                         <tbody id="detailTaskList">
                                         <c:if test="${fn:length(taskEmployeeList) != 0}">
                                         	<c:forEach var="taskEmployee" items="${taskEmployeeList}">
@@ -253,12 +155,26 @@
 	                                                <td>${taskEmployee.teamName}</td>
 	                                                <td>${taskEmployee.empName}</td>
 	                                                <td>${taskEmployee.empRank}</td>
-	                                                <td>
-														<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>
-	                                                	<div class="progress" style="height: 9px">
-						                                    <div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>
-						                                    </div>
-						                                </div>
+	                                                
+                                                	<td class="progressTd">
+		                                                <c:if test="${taskEmployee.progressRate < 20}">
+															<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">${taskEmployee.progressRate}%</span></h5>
+		                                                	<div class="progress" style="height: 9px">
+							                                    <div class="progress-bar bg-danger wow  progress-" style="width: ${taskEmployee.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+							                                </div>
+		                                                </c:if>
+		                                                <c:if test="${20 <= taskEmployee.progressRate and taskEmployee.progressRate < 80}">
+															<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">${taskEmployee.progressRate}%</span></h5>
+		                                                	<div class="progress" style="height: 9px">
+							                                    <div class="progress-bar bg-info wow  progress-" style="width: ${taskEmployee.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+							                                </div>
+		                                                </c:if>
+		                                                <c:if test="${80 <= taskEmployee.progressRate}">
+															<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">${taskEmployee.progressRate}%</span></h5>
+		                                                	<div class="progress" style="height: 9px">
+							                                    <div class="progress-bar bg-success wow  progress-" style="width: ${taskEmployee.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+							                                </div>
+		                                                </c:if>
 	                                                </td>
 	                                            </tr>
 	                                            <tr style="background-color:#f3f3f3;" id="16bottom">
@@ -349,7 +265,7 @@
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
-	                                            <label class="control-label">업무 이름</label>
+	                                            <label class="control-label">업무 이름</label><span id="taskNameInval" class="text-danger d-none"> *</span>
 	                                            <input class="form-control form-white" type="text" id="taskName" name="taskName">
 	                                        </div>
 	                                    </div>
@@ -368,13 +284,13 @@
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
-	                                            <label class="control-label">담당자</label>
+	                                            <label class="control-label">담당자</label><span id="empIdInval" class="text-danger d-none"> *</span>
 	                                            <input class="form-control form-white" type="text" id="employeeName" name="employeeName">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
-	                                            <label for="example-datetime-local-input" class="control-label">시작일</label>
+	                                            <label for="example-datetime-local-input" class="control-label">시작일</label><span id="startDateInval" class="text-danger d-none"> *</span>
 	                                            <input class="form-control form-white" type="date" id="startDate" name="startDate">
 	                                        </div>
 	                                    </div>
@@ -478,6 +394,9 @@
      		var taskNo = $(deleteTaskBtn).attr("name");
     		
     		$("#deleteCheckBtn").attr("name", taskNo);
+    		$("#deleteTaskNo").val(taskNo);
+    		
+    		console.log("자 일단 Tr을 찾아보자? ")
      		
     		console.log(taskNo.substring(4, taskNo.length));
     	}

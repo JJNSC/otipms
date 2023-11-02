@@ -150,4 +150,16 @@
 		   	   AND TASKNO = #{taskNo}
 		</selectKey>
 	</update>
+	
+	<!-- 진척도를 위한 사원별 총 리스트 수 -->
+	<select id="countTaskList" parameterType="hashMap" resultType="int">
+		SELECT count(*)
+		  FROM TASK
+		 WHERE 1=1
+		   AND EMPID = #{empId}
+		   <if test="scope == '진행완료'">
+		   AND TASKSTATUS = '진행완료'
+	       </if>
+		   AND TASKDELETED = 0
+	</select>
 </mapper>

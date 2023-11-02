@@ -1,5 +1,6 @@
 package com.otipms.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,12 @@ public class TaskServiceImpl implements TaskService {
 	//태스크 사람 조회
 	@Override
 	public List<TaskEmployee> getTaskEmployeeList(Map<String, Object> map) {
-		return taskDao.selectTaskEmployeeList(map);
+		List<TaskEmployee> taskEmployeeList = taskDao.selectTaskEmployeeList(map);
+		for(TaskEmployee taskEmployee : taskEmployeeList) {
+			double progressRate = calculateProgressRate(taskEmployee.getEmpId());
+			taskEmployee.setProgressRate(progressRate);
+		}
+		return taskEmployeeList;
 	}
 
 	//태스크 추가
@@ -72,6 +78,29 @@ public class TaskServiceImpl implements TaskService {
 		taskDao.updateDeleteTask(task);
 		log.info("empId가 잘 왔을까..? ㅎㅎ" + task.getEmpId());
 		return taskDao.selectTaskList(task.getEmpId());
+	}
+
+	//진척률 계산
+	@Override
+	public double calculateProgressRate(int empId) {
+		double progressRate = 0;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("empId", empId);
+		map.put("scope", "전체");
+		int totalTaskCount = taskDao.countTaskList(map);
+		
+		map.replace("scope", "진행완료");
+		int doneTaskCount = taskDao.countTaskList(map);
+		
+		if(totalTaskCount != 0 && doneTaskCount != 0) {
+			progressRate = Math.round( ((double) doneTaskCount / (double) totalTaskCount) * 100 );
+			log.info("done? " + (double) doneTaskCount);
+			log.info("total? " + (double) totalTaskCount);
+			log.info("계산? " + progressRate);
+		}
+		
+		return progressRate;
 	}
 
 }

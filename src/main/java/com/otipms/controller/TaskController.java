@@ -128,7 +128,7 @@ public class TaskController {
 	 */
 	@RequestMapping("/registerTask")
 	@ResponseBody
-	public List<Task> registerTask(String taskName
+	public Map<String, Object> registerTask(String taskName
 								  , String taskComment
 								  , String empId
 								  , String startDate
@@ -147,7 +147,13 @@ public class TaskController {
 		
 		List<Task> taskList = taskService.addTask(task);
 		
-		return taskList;
+		double progressRate = taskService.calculateProgressRate(Integer.parseInt(empId));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("taskList", taskList);
+		map.put("progressRate", progressRate);
+		
+		return map;
 	}
 	
 	/**
@@ -173,27 +179,16 @@ public class TaskController {
 		return taskService.getTask(taskNo);
 	}
 	
-	/**
-	 * 태스크 수정
-	 * @param taskNo
-	 * @param taskName
-	 * @param taskComment
-	 * @param empId
-	 * @param startDate
-	 * @param endDate
-	 * @param status
-	 * @return
-	 * @throws Exception
-	 */
+	//태스크 수정
 	@RequestMapping("/modifyTask")
 	@ResponseBody
-	public List<Task> modifyTask(String taskNo
-								, String taskName
-							    , String taskComment
-							    , String empId
-							    , String startDate
-							    , String endDate
-							    , String status) throws Exception {
+	public Map<String, Object> modifyTask(String taskNo
+			, String taskName
+			, String taskComment
+			, String empId
+			, String startDate
+			, String endDate
+			, String status) throws Exception {
 		Task task = new Task();
 		task.setTaskNo(Integer.parseInt(taskNo));
 		task.setTaskName(taskName);
@@ -202,21 +197,46 @@ public class TaskController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		task.setTaskStartDate(sdf.parse(startDate));
 		if(!endDate.equals("")) {
-		task.setTaskEndDate(sdf.parse(endDate));
+			task.setTaskEndDate(sdf.parse(endDate));
 		}
 		task.setTaskStatus(status);
 		
 		List<Task> taskList = taskService.modifyTask(task);
 		
-		return taskList;
+		double progressRate = taskService.calculateProgressRate(Integer.parseInt(empId));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("taskList", taskList);
+		map.put("progressRate", progressRate);
+		
+		return map;
 	}
 	
-	@RequestMapping("/deleteTask")
+	/**
+	 * 태스크 삭제
+	 * @param taskNo
+	 * @return
+	 */
+	/*@RequestMapping("/deleteTask")
 	@ResponseBody
 	public List<Task> deleteTask(String taskNo) {
 		List<Task> taskList = taskService.deleteTask(taskNo);
 		
 		return taskList;
+	}*/
+	
+	@RequestMapping("/deleteTask")
+	@ResponseBody
+	public Map<String, Object> deleteTask(String taskNo, String empId) {
+		List<Task> taskList = taskService.deleteTask(taskNo);
+		
+		double progressRate = taskService.calculateProgressRate(Integer.parseInt(empId));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("taskList", taskList);
+		map.put("progressRate", progressRate);
+		
+		return map;
 	}
 	
 	@RequestMapping("/projectTaskDT")

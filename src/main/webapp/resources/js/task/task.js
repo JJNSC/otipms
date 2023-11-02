@@ -41,12 +41,28 @@ function selectProject() {
 					taskehtml += '<td>' + taskEmployee.teamName + '</td>';
 					taskehtml += '<td>' + taskEmployee.empName + '</td>';
 					taskehtml += '<td>' + taskEmployee.empRank + '</td>';
-					taskehtml += '<td>';
-					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>';
+					taskehtml += '<td class="progressTd">';
+					if(taskEmployee.progressRate < 20) {
+						taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
+						taskehtml += '<div class="progress" style="height: 9px">';
+						taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+						taskehtml += '</div>';
+					} else if(20 <= taskEmployee.progressRate && taskEmployee.progressRate < 80) {
+						taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
+						taskehtml += '<div class="progress" style="height: 9px">';
+						taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+						taskehtml += '</div>';
+					} else if(80 <= taskEmployee.progressRate) {
+						taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
+						taskehtml += '<div class="progress" style="height: 9px">';
+						taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+						taskehtml += '</div>';
+					}
+					/*taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>';
 					taskehtml += '<div class="progress" style="height: 9px">';
 					taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>';
 					taskehtml += '</div>';
-					taskehtml += '</div>';
+					taskehtml += '</div>';*/
 					taskehtml += '</td>';
 					taskehtml += '</tr>';
 					taskehtml += '<tr style="background-color:#f3f3f3;" id="16bottom">';
@@ -121,12 +137,28 @@ var team = $("#teamSelect").val()
 						taskehtml += '<td>' + taskEmployee.teamName + '</td>';
 						taskehtml += '<td>' + taskEmployee.empName + '</td>';
 						taskehtml += '<td>' + taskEmployee.empRank + '</td>';
-						taskehtml += '<td>';
-						taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>';
+						taskehtml += '<td class="progressTd">';
+						if(taskEmployee.progressRate < 20) {
+							taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
+							taskehtml += '<div class="progress" style="height: 9px">';
+							taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+							taskehtml += '</div>';
+						} else if(20 <= taskEmployee.progressRate && taskEmployee.progressRate < 80) {
+							taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
+							taskehtml += '<div class="progress" style="height: 9px">';
+							taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+							taskehtml += '</div>';
+						} else if(80 <= taskEmployee.progressRate) {
+							taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
+							taskehtml += '<div class="progress" style="height: 9px">';
+							taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+							taskehtml += '</div>';
+						}
+						/*taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>';
 						taskehtml += '<div class="progress" style="height: 9px">';
 						taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>';
 						taskehtml += '</div>';
-						taskehtml += '</div>';
+						taskehtml += '</div>';*/
 						taskehtml += '</td>';
 						taskehtml += '</tr>';
 						taskehtml += '<tr style="background-color:#f3f3f3;" id="16bottom">';
@@ -195,66 +227,97 @@ function registerTask() {
 	console.log("status: " + status);
 	
 	console.log($("#employeeId" + empId).attr("aria-expanded"));
-	$.ajax({
-		url: "/otipms/registerTask",
-		method: "POST",
-		data: {
-			taskName:taskName,
-			taskComment:taskComment,
-			empId:empId,
-			startDate:startDate,
-			endDate:endDate,
-			status:status
-		},
-		success: function(data) {
-			console.log(data);
-			
-			if(data != null && data.length != 0) {
-				var taskEmployeeTr = $("#employeeId" + empId);
-				if(taskEmployeeTr.attr("aria-expanded") == "true") {
-					console.log("왜 안될까 ㅠ");
-					taskhtml = '';
+	
+	//유효성
+	var result = checkInvalidation();
+	
+	if(result == true) {
+	
+		$.ajax({
+			url: "/otipms/registerTask",
+			method: "POST",
+			data: {
+				taskName:taskName,
+				taskComment:taskComment,
+				empId:empId,
+				startDate:startDate,
+				endDate:endDate,
+				status:status
+			},
+			success: function(data) {
+				console.log(data);
+				
+				if(data.taskList != null && data.taskList.length != 0) {
+					var taskEmployeeTr = $("#employeeId" + empId);
+					if(taskEmployeeTr.attr("aria-expanded") == "true") {
+						console.log("왜 안될까 ㅠ");
+						taskhtml = '';
+						
+						$.each(data.taskList, function(index, task) {
+							taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
+							taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
+							taskhtml += '<td>' + task.taskName + '</td>';
+							taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
+							if(task.taskEndDate != null) {
+								taskhtml += '<td class="text-center">' + dateFormat(new Date(task.taskEndDate), 1) + '</td>';
+							} else {
+								taskhtml += '<td class="text-center"> - </td>';
+							}
+							if(task.taskStatus == "진행전") {
+								taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+							} else if(task.taskStatus == "진행중") {
+								taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+							} else if(task.taskStatus == "진행완료") {
+								taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+							}
+							taskhtml += '<td class="text-center">';
+							taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+							taskhtml += '</td>';
+							taskhtml += '</tr>';
+						});
+						
+						taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
+					}
 					
-					$.each(data, function(index, task) {
-						taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
-						taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
-						taskhtml += '<td>' + task.taskName + '</td>';
-						taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
-						if(task.taskEndDate != null) {
-							taskhtml += '<td class="text-center">' + dateFormat(new Date(task.taskEndDate), 1) + '</td>';
-						} else {
-							taskhtml += '<td class="text-center"> - </td>';
-						}
-						if(task.taskStatus == "진행전") {
-							taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
-						} else if(task.taskStatus == "진행중") {
-							taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
-						} else if(task.taskStatus == "진행완료") {
-							taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
-						}
-						taskhtml += '<td class="text-center">';
-						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
-						taskhtml += '</td>';
-						taskhtml += '</tr>';
-					});
-					
-					taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
+					$("#taskNoInput").val('');
+					$("#taskName").val('');
+					$("#taskComment").val('');
+					$("#empIdInput").val('');
+					$("#employeeName").val('');
+					$("#startDate").val(dateFormat(new Date(), 1));
+					$("#endDate").val('');
+					$("#defaultStatus").prop("selected", "selected");
 				}
 				
-				$("#taskNoInput").val('');
-				$("#taskName").val('');
-				$("#taskComment").val('');
-				$("#empIdInput").val('');
-				$("#employeeName").val('');
-				$("#startDate").val(dateFormat(new Date(), 1));
-				$("#endDate").val('');
-				$("#defaultStatus").prop("selected", "selected");
+				console.log(data.progressRate);
+				taskehtml = "";
+				if(data.progressRate < 20) {
+					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+					taskehtml += '<div class="progress" style="height: 9px">';
+					taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '</div>';
+				} else if(20 <= data.progressRate && data.progressRate < 80) {
+					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+					taskehtml += '<div class="progress" style="height: 9px">';
+					taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '</div>';
+				} else if(80 <= data.progressRate) {
+					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+					taskehtml += '<div class="progress" style="height: 9px">';
+					taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '</div>';
+				}
+				console.log(taskehtml);
+				
+				var taskEmployeeTr = $("#employeeId" + empId);
+				taskEmployeeTr.find(".progressTd").html(taskehtml);
+				
+			},
+			error: function(error) {
+				//console.log(error);
 			}
-		},
-		error: function(error) {
-			//console.log(error);
-		}
-	});
+		});
+	}
 }
 
 //태스크 리스트 가져오기
@@ -366,85 +429,116 @@ function updateTask() {
 	console.log("endDate: " + endDate);
 	console.log("status: " + status);
 	
-	$.ajax({
-		url: "/otipms/modifyTask",
-		method: "POST",
-		data: {
-			taskNo:taskNo,
-			taskName:taskName,
-			taskComment:taskComment,
-			empId:empId,
-			startDate:startDate,
-			endDate:endDate,
-			status:status
-		},
-		success: function(data) {
-			console.log(data);
-			if(data != null && data.length != 0) {
+	//유효성
+	var result = checkInvalidation();
+	
+	if(result == true) {
+	
+		$.ajax({
+			url: "/otipms/modifyTask",
+			method: "POST",
+			data: {
+				taskNo:taskNo,
+				taskName:taskName,
+				taskComment:taskComment,
+				empId:empId,
+				startDate:startDate,
+				endDate:endDate,
+				status:status
+			},
+			success: function(data) {
+				console.log(data);
+				if(data.taskList != null && data.taskList.length != 0) {
+					var taskEmployeeTr = $("#employeeId" + empId);
+					taskhtml = '';
+					
+					$.each(data.taskList, function(index, task) {
+						taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
+						taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
+						taskhtml += '<td>' + task.taskName + '</td>';
+						taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
+						if(task.taskEndDate != null) {
+							taskhtml += '<td class="text-center">' + dateFormat(new Date(task.taskEndDate), 1) + '</td>';
+						} else {
+							taskhtml += '<td class="text-center"> - </td>';
+						}
+						if(task.taskStatus == "진행전") {
+							taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+						} else if(task.taskStatus == "진행중") {
+							taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+						} else if(task.taskStatus == "진행완료") {
+							taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+						}
+						taskhtml += '<td class="text-center">';
+						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+						taskhtml += '</td>';
+						taskhtml += '</tr>';
+					});
+					
+					taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
+					
+					$("#taskNoInput").val('');
+					$("#taskName").val('');
+					$("#taskComment").val('');
+					$("#empIdInput").val('');
+					$("#employeeName").val('');
+					$("#startDate").val(dateFormat(new Date(), 1));
+					$("#endDate").val('');
+					$("#defaultStatus").prop("selected", "selected");
+				}
+				
+				console.log(data.progressRate);
+				taskehtml = "";
+				if(data.progressRate < 20) {
+					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+					taskehtml += '<div class="progress" style="height: 9px">';
+					taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '</div>';
+				} else if(20 <= data.progressRate && data.progressRate < 80) {
+					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+					taskehtml += '<div class="progress" style="height: 9px">';
+					taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '</div>';
+				} else if(80 <= data.progressRate) {
+					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+					taskehtml += '<div class="progress" style="height: 9px">';
+					taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '</div>';
+				}
+				console.log(taskehtml);
+				
 				var taskEmployeeTr = $("#employeeId" + empId);
-				taskhtml = '';
-				
-				$.each(data, function(index, task) {
-					taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
-					taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
-					taskhtml += '<td>' + task.taskName + '</td>';
-					taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
-					if(task.taskEndDate != null) {
-						taskhtml += '<td class="text-center">' + dateFormat(new Date(task.taskEndDate), 1) + '</td>';
-					} else {
-						taskhtml += '<td class="text-center"> - </td>';
-					}
-					if(task.taskStatus == "진행전") {
-						taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
-					} else if(task.taskStatus == "진행중") {
-						taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
-					} else if(task.taskStatus == "진행완료") {
-						taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
-					}
-					taskhtml += '<td class="text-center">';
-					taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
-					taskhtml += '</td>';
-					taskhtml += '</tr>';
-				});
-				
-				taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
-				
-				$("#taskNoInput").val('');
-				$("#taskName").val('');
-				$("#taskComment").val('');
-				$("#empIdInput").val('');
-				$("#employeeName").val('');
-				$("#startDate").val(dateFormat(new Date(), 1));
-				$("#endDate").val('');
-				$("#defaultStatus").prop("selected", "selected");
+				taskEmployeeTr.find(".progressTd").html(taskehtml);
+	
+			},
+			error: function(error) {
+				//console.log(error);
 			}
-
-		},
-		error: function(error) {
-			//console.log(error);
-		}
-	});
+		});
+	}
 }
 
 //태스크 삭제
 function deleteTask() {
 	console.log("삭제할 taskNo " + $("#deleteCheckBtn").attr("name"));
 	var taskNo = $("#deleteCheckBtn").attr("name");
+	var empId = $("#empIdInput").val();
 	
 	$.ajax({
 		url: "/otipms/deleteTask",
 		method: "POST",
 		data: {
-			taskNo:taskNo
+			taskNo:taskNo,
+			empId:empId
 		},
 		success: function(data) {
 			console.log(data);
-			if(data != null && data.length != 0) {
-				//var taskEmployeeTr = $("#employeeId" + empId);
-				var taskEmployeeTr = $("#employeeId" + data[0].empId);
-				taskhtml = '';
+			var taskhtml = '';
+			if(data.taskList != null && data.taskList.length != 0) {
+				var taskEmployeeTr = $("#employeeId" + empId);
+				//var taskEmployeeTr = $("#employeeId" + data.taskList[0].empId);
 				
-				$.each(data, function(index, task) {
+				$.each(data.taskList, function(index, task) {
 					taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
 					taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
 					taskhtml += '<td>' + task.taskName + '</td>';
@@ -466,18 +560,42 @@ function deleteTask() {
 					taskhtml += '</td>';
 					taskhtml += '</tr>';
 				});
-				
-				taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
-				
-				$("#taskNoInput").val('');
-				$("#taskName").val('');
-				$("#taskComment").val('');
-				$("#empIdInput").val('');
-				$("#employeeName").val('');
-				$("#startDate").val(dateFormat(new Date(), 1));
-				$("#endDate").val('');
-				$("#defaultStatus").prop("selected", "selected");
 			}
+
+			taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
+			
+			$("#taskNoInput").val('');
+			$("#taskName").val('');
+			$("#taskComment").val('');
+			$("#empIdInput").val('');
+			$("#employeeName").val('');
+			$("#startDate").val(dateFormat(new Date(), 1));
+			$("#endDate").val('');
+			$("#defaultStatus").prop("selected", "selected");
+			
+
+			console.log(data.progressRate);
+			taskehtml = "";
+			if(data.progressRate < 20) {
+				taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+				taskehtml += '<div class="progress" style="height: 9px">';
+				taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+				taskehtml += '</div>';
+			} else if(20 <= data.progressRate && data.progressRate < 80) {
+				taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+				taskehtml += '<div class="progress" style="height: 9px">';
+				taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+				taskehtml += '</div>';
+			} else if(80 <= data.progressRate) {
+				taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
+				taskehtml += '<div class="progress" style="height: 9px">';
+				taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+				taskehtml += '</div>';
+			}
+			console.log(taskehtml);
+			
+			var taskEmployeeTr = $("#employeeId" + empId);
+			taskEmployeeTr.find(".progressTd").html(taskehtml);
 
 		},
 		error: function(error) {
@@ -507,6 +625,56 @@ function resetForm() {
 	$("#startDate").val('');
 	$("#endDate").val('');
 	$("#defaultStatus").prop("selected", "selected");
+}
+
+//등록 또는 수정 시 유효성 검사
+function checkInvalidation() {
+	var result = false;
+	
+	//업무 이름
+	var taskNameInval = false;
+	if($("#taskName").val() == "" || $("#taskName").val() == null) {
+		$("#taskNameInval").removeClass("d-none");
+		taskNameInval = false;
+	} else {
+		$("#taskNameInval").addClass("d-none");
+		taskNameInval = true;
+	}
+	
+	//사원번호
+	/*if($("#empIdInput").val() == "" || $("#empIdInput").val() == null) {
+		$("#empIdInval").removeClass("d-none");
+		result = false;
+	} else {
+		$("#empIdInval").addClass("d-none");
+		result = true;
+	}*/
+	
+	//담당자 이름
+	var empNameInval = false;
+	if($("#employeeName").val() == "" || $("#employeeName").val() == null) {
+		$("#empIdInval").removeClass("d-none");
+		empNameInval = false;
+	} else {
+		$("#empIdInval").addClass("d-none");
+		empNameInval = true;
+	}
+
+	//시작일
+	var startDateInval = false;
+	if($("#startDate").val() == "" || $("#startDate").val() == null) {
+		$("#startDateInval").removeClass("d-none");
+		startDateInval = false;
+	} else {
+		$("#startDateInval").addClass("d-none");
+		startDateInval = true;
+	}
+	
+	if(taskNameInval && empNameInval && startDateInval) {
+		result = true;
+	}
+	
+	return result;
 }
 
 //날짜 포맷 함수
