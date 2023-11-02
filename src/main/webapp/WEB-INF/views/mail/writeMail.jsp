@@ -14,7 +14,6 @@
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
-	<!-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> -->
   
     <!-- Scripts -->
     <script src="${pageContext.request.contextPath}/resources/plugins/common/common.min.js"></script>
@@ -25,6 +24,7 @@
     <%-- <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script> --%>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/headernside.js"></script>
     
     <!-- Editer -->-
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>

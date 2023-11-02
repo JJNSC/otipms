@@ -2,6 +2,9 @@ window.onload = function(){
 	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 	var empId = document.getElementById("memIdSpan").value;
 	var v_alarmIcon = document.querySelector("#alarmIcon");
+	if(v_alarmIcon){
+		v_alarmIcon.style.display = 'none';
+	}
 	var previousAlarmCount = 0;
 	
 	webSocket.onopen = () => {
@@ -156,55 +159,57 @@ window.onload = function(){
 //실시간 쪽지 알림을 위한 체킹
 function updateCheckedAlarm(alarmNo) {
 	$.ajax({
-        type: "POST", 
-        url: "http://localhost:8080/otipms/updateCheckedAlarm", 
-        data: { alarmNo: alarmNo },
-        success: function (data) {
-        	webSocket.send(empId);
-        },
-        error: function () {
-            alert("서버 오류: 업데이트를 완료할 수 없습니다.");
-        }
-    });
+		type: "POST", 
+		url: "http://localhost:8080/otipms/updateCheckedAlarm", 
+		data: { alarmNo: alarmNo },
+		success: function (data) {
+			webSocket.send(empId);
+		},
+		error: function () {
+			alert("서버 오류: 업데이트를 완료할 수 없습니다.");
+		}
+	});
 }
 
 //알람 보여주는 함수
 function showAlarmIcon(v_alarmIcon) {
-	v_alarmIcon.style.display = 'inline';
-    v_alarmIcon.style.transition = "opacity 2s";
-    v_alarmIcon.style.opacity = 1;
-
-    setTimeout(() => {
-        v_alarmIcon.style.opacity = 0;
-        
-        setTimeout(() => {
-            v_alarmIcon.style.display = 'none';
-        }, 2000);
-    }, 5000);
+	if(v_alarmIcon){
+		v_alarmIcon.style.display = 'inline';
+		v_alarmIcon.style.transition = "opacity 2s";
+		v_alarmIcon.style.opacity = 1;
+		
+		setTimeout(() => {
+			v_alarmIcon.style.opacity = 0;
+			
+			setTimeout(() => {
+				v_alarmIcon.style.display = 'none';
+			}, 2000);
+		}, 5000);
+	}
 }
 
 //파싱한 날짜 원하는 값만 뽑아서 보기
 function formatAlarmDate(alarmDate) {
-    const options = { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-    var formattedDate = new Date(alarmDate).toLocaleString('en-US', options);
-    return formattedDate;
+	const options = { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+	var formattedDate = new Date(alarmDate).toLocaleString('en-US', options);
+	return formattedDate;
 }
 
 //Date값 형태의 날짜 파싱
 function parseTO_DATE(toDateStr) {
-    const parts = toDateStr.match(/(\d+)/g);
-    if (parts.length !== 6) {
-        return null;
-    }
-
-    const year = parseInt(parts[0]);
-    const month = parseInt(parts[1]) - 1;
-    const day = parseInt(parts[2]);
-    const hours = parseInt(parts[3]);
-    const minutes = parseInt(parts[4]);
-    const seconds = parseInt(parts[5]);
-
-    return new Date(year, month, day, hours, minutes, seconds);
+	const parts = toDateStr.match(/(\d+)/g);
+	if (parts.length !== 6) {
+		return null;
+	}
+	
+	const year = parseInt(parts[0]);
+	const month = parseInt(parts[1]) - 1;
+	const day = parseInt(parts[2]);
+	const hours = parseInt(parts[3]);
+	const minutes = parseInt(parts[4]);
+	const seconds = parseInt(parts[5]);
+	
+	return new Date(year, month, day, hours, minutes, seconds);
 }
 
 function parseMessageDate(messageDate){

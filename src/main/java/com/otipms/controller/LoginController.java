@@ -132,7 +132,7 @@ public class LoginController {
 	        
 	        Message message = new Message();
 	        message = messageService.getCCbyAlarm(parameters);
-	        log.info(message.toString());
+	        
 	        
 	        messageService.updateMessageCheckedRec(message);
         

@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
             
             console.log(selectedTextbox.value);
             // 선택된 사원들을 화면에 추가
-            selectedEmployeesContainer.innerHTML = ""; // 기존 내용을 지우고 새로 업데이트
             selectedEmployee.forEach(employee => {
                 const div = document.createElement("div");
                 div.classList.add("selected-employee");
@@ -88,7 +87,6 @@ function getSelectedEmployees(employeeId, ccType) {
 	});
 	return employees;
 }
-var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 
 function sendMail() {
 	// 사용자가 입력한 제목과 내용을 가져옴

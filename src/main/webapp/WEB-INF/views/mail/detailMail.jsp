@@ -23,7 +23,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/detailmail.js"></script>
-    
+    <script src="${pageContext.request.contextPath}/resources/js/headernside.js"></script>
 </head>
 
 <body>
@@ -64,6 +64,7 @@
                                         </a>
                                     </div>
                                 </div>
+                                <input id="memIdSpan" type="hidden" value="${employee.empId}"/>
                                 <div class="email-right-box">
                                     <div class="toolbar" role="toolbar">
                                         <div class="btn-group m-b-20">

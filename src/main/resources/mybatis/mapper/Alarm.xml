@@ -88,7 +88,13 @@
 	
 	<!-- 알람번호로 쪽지 찾기1 -->
 	<select id="selectAlarm" parameterType="int" resultType="Alarm">
-		SELECT *
+		SELECT AlarmNo
+		  	 , empId AS alarmEmpId
+		  	 , AlarmContentCode
+		  	 , AlarmContent
+		  	 , AlarmDate
+		  	 , AlarmChk
+		  	 , messageNo AS alarmMessageNo
 		  FROM ALARM
 		 WHERE alarmNo = #{alarmNo}
 	</select>

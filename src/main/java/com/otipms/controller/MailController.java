@@ -46,19 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MailController {
 	
 	@Autowired
-	private TeamService teamService;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
-	private ProjectService projectService;
-	
-	@Autowired
 	private MessageService messageService;
-	
-	@Autowired
-	private AlarmService alarmService;
 	
 	//쪽지 수신함
 	@Login
