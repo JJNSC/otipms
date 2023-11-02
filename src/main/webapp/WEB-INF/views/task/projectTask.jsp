@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html lang="en">
+<html id="htmlTest" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -15,8 +16,12 @@
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/projectList.css" rel="stylesheet">
     
+    <script src="${pageContext.request.contextPath}/resources/js/task/task.js"></script>
+    
     <script>
 		$(document).ready(function() {
+			conosole.log("되니?");
+			
 			$('.projectNo').on('click', function() {
 		    	const close = $('.show');
 		    	if(close != null) {
@@ -94,26 +99,30 @@
                                 <div class="card-title">
                                     <h4><b>프로젝트 업무 관리</b></h4> 
                                     <span style="float: right">
-                                    	<a href="addAndModifyProject">
-                                    		<button type="button" class="btn mt-3 mb-1 btn-primary">추가</button>
-                                    	</a>
+                                    	<button type="button" class="btn mt-3 mb-1 btn-primary" onclick="addTask()">추가</button>
                                     </span>
                                 </div>
                                 <div class="row my-3">
-                                	<div class="col-lg-3" style="display:inline-block;">
-									    <select class="form-control" id="projectSelect" name="projectSelect">
-									        <option value="">프로젝트 선택</option>
-									        <option value="html">PMS 제작 프로젝트</option>
-									        <option value="css">프로젝트 2번째</option>
-									        <option value="javascript">본격 취업 프로젝트</option>
-									    </select>
-									</div>
-									<div class="col-lg-2"  style="display:inline-block;">
-		                                 <select class="form-control" id="projectSelect" name="projectSelect">
+                                	<c:if test="${employee.role eq 'ROLE_ADMIN'}">
+                                		<div class="col-lg-4" style="display:inline-block;">
+										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
+										    	<option>프로젝트 선택</option>
+										    	<c:forEach var="project" items="${projectList}">
+										    		<option value="${project.projectNo}">${project.projectName}</option>
+										    	</c:forEach>
+										        <!-- <option>프로젝트 선택</option>
+										        <option value="html">PMS 제작 프로젝트</option>
+										        <option value="css">프로젝트 2번째</option>
+										        <option value="javascript">본격 취업 프로젝트</option> -->
+										    </select>
+										</div>
+                                	</c:if>
+									<div class="col-lg-3"  style="display:inline-block;">
+		                                 <select class="form-control" id="teamSelect" name="teamSelect" onchange="selectTeam()">
 		                                     <option value="">팀 선택</option>
-		                                     <option value="html">개발1팀</option>
+		                                     <!-- <option value="html">개발1팀</option>
 		                                     <option value="html">개발2팀</option>
-		                                     <option value="html">개발3팀</option>
+		                                     <option value="html">개발3팀</option> -->
 		                                 </select>
 		                            </div>                                
                                 </div>
@@ -227,8 +236,85 @@
 												</c:forEach>
 											</c:forEach>
                                         </tbody> --%>
-                                        <tbody>
-                                            <tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="16" id="projectNo16" href="#collapseExample16" role="button" aria-expanded="true" aria-controls="collapseExample">
+                                        <tbody id="detailTaskList">
+                                        <c:if test="${fn:length(taskEmployeeList) != 0}">
+                                        	<c:forEach var="taskEmployee" items="${taskEmployeeList}">
+	                                            <tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="${taskEmployee.empId}" id="${'employeeId'}${taskEmployee.empId}" href="${'#task'}${taskEmployee.empId}" role="button" aria-expanded="true" aria-controls="collapseExample">
+	                                                <td>${taskEmployee.empId}</td>
+	                                                <td>${taskEmployee.projectName}</td>
+	                                                <td>${taskEmployee.teamName}</td>
+	                                                <td>${taskEmployee.empName}</td>
+	                                                <td>${taskEmployee.empRank}</td>
+	                                                <td>
+														<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>
+	                                                	<div class="progress" style="height: 9px">
+						                                    <div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>
+						                                    </div>
+						                                </div>
+	                                                </td>
+	                                            </tr>
+	                                            <tr style="background-color:#f3f3f3;" id="16bottom">
+										   			<td style="padding-top :0px; padding-bottom :0px;" colspan="6">
+								                      	<div class="collapse" id="${'task'}${taskEmployee.empId}" style="">
+												         	<div class="card card-body mt-3 noHover">
+												         		<div class="card-title">
+								                                    <h6>업무 목록</h6>
+								                                </div>
+							                                    <table>
+							                                        <thead>
+							                                            <tr>
+							                                                <th scope="col" style="width: 10%;">번호</th>
+							                                                <th scope="col" style="width: 30%;">업무이름</th>
+							                                                <!-- <th scope="col" style="width: 30%;">업무내용</th> -->
+							                                                <th scope="col" style="width: 20%;">업무 시작일</th>
+							                                                <th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>
+							                                                <th scope="col" style="width: 20%; text-align: center;">진행 상태</th>
+							                                                <th class="text-center">삭제</th>
+							                                            </tr>
+							                                        </thead>
+							                                        <tbody class="detailTaskBody">
+							                                            <tr class="table-hover">
+							                                                <td style="padding-left: 20px;">1</td>
+							                                                <td>김종진 개인업무1</td>
+							                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
+							                                                <td>2023.10.14</td>
+							                                                <td class="text-center"> - </td>
+							                                                <td class="text-center text-success">진행중</td>
+							                                                <td class="text-center"> 
+							                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+							                                            	</td>
+							                                            </tr>
+							                                            <tr class="table-hover">
+							                                                <td style="padding-left: 20px;">2</td>
+							                                                <td>김종진 개인업무2</td>
+							                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
+							                                                <td>2023.10.14</td>
+							                                                <td class="text-center"> 2023.10.14 </td>
+							                                                <td class="text-center text-danger">진행완료</td>
+							                                                <td class="text-center"> 
+							                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+							                                            	</td>
+							                                            </tr>
+							                                            <tr class="table-hover">
+							                                                <td style="padding-left: 20px;">3</td>
+							                                                <td>김종진 개인업무3</td>
+							                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
+							                                                <td>2023.10.14</td>
+							                                                <td class="text-center"> 2653.13.34 </td>
+							                                                <td class="text-center text-danger">진행완료</td>
+							                                                <td class="text-center"> 
+							                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+							                                            	</td>
+							                                            </tr>
+							                                        </tbody>
+							                                    </table>
+												         	</div>
+												      	</div>
+										   			</td>
+												</tr>
+                                            </c:forEach>
+                                        </c:if>
+											<tr class="reviewTitle table-hover" data-toggle="collapse" href="#taskExample6" role="button" aria-expanded="true">
                                                 <td>16</td>
                                                 <td>ㅇㅅㅇ 프로젝트</td>
                                                 <td>개발1팀</td>
@@ -242,80 +328,7 @@
 					                                </div>
                                                 </td>
                                             </tr>
-                                            <tr style="background-color:#f3f3f3;" id="16bottom">
-									   			<td style="padding-top :0px; padding-bottom :0px;" colspan="6">
-							                      	<div class="collapse" id="collapseExample16" style="">
-											         	<div class="card card-body mt-3 noHover">
-											         		<div class="card-title">
-							                                    <h6>업무 일정</h6>
-							                                </div>
-						                                    <table>
-						                                        <thead>
-						                                            <tr>
-						                                                <th scope="col" style="width: 10%;">번호</th>
-						                                                <th scope="col" style="width: 30%;">업무이름</th>
-						                                                <!-- <th scope="col" style="width: 30%;">업무내용</th> -->
-						                                                <th scope="col" style="width: 20%;">업무 시작일</th>
-						                                                <th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>
-						                                                <th scope="col" style="width: 20%; text-align: center;">진행 상태</th>
-						                                                <th class="text-center">삭제</th>
-						                                            </tr>
-						                                        </thead>
-						                                        <tbody>
-						                                            <tr class="table-hover">
-						                                                <td style="padding-left: 20px;">1</td>
-						                                                <td>김종진 개인업무1</td>
-						                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-						                                                <td>2023.10.14</td>
-						                                                <td class="text-center"> - </td>
-						                                                <td class="text-center text-success">진행중</td>
-						                                                <td class="text-center"> 
-						                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-						                                            	</td>
-						                                            </tr>
-						                                            <tr class="table-hover">
-						                                                <td style="padding-left: 20px;">2</td>
-						                                                <td>김종진 개인업무2</td>
-						                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-						                                                <td>2023.10.14</td>
-						                                                <td class="text-center"> 2023.10.14 </td>
-						                                                <td class="text-center text-danger">진행완료</td>
-						                                                <td class="text-center"> 
-						                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-						                                            	</td>
-						                                            </tr>
-						                                            <tr class="table-hover">
-						                                                <td style="padding-left: 20px;">3</td>
-						                                                <td>김종진 개인업무3</td>
-						                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-						                                                <td>2023.10.14</td>
-						                                                <td class="text-center"> 2653.13.34 </td>
-						                                                <td class="text-center text-danger">진행완료</td>
-						                                                <td class="text-center"> 
-						                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-						                                            	</td>
-						                                            </tr>
-						                                        </tbody>
-						                                    </table>
-											         	</div>
-											      	</div>
-									   			</td>
-											</tr>
-											<tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="16" id="projectNo16" href="#taskExample6" role="button" aria-expanded="true" aria-controls="collapseExample">
-                                                <td>16</td>
-                                                <td>ㅇㅅㅇ 프로젝트</td>
-                                                <td>개발1팀</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>
-													<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>
-                                                	<div class="progress" style="height: 9px">
-					                                    <div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>
-					                                    </div>
-					                                </div>
-                                                </td>
-                                            </tr>
-                                            <tr style="background-color:#f3f3f3;" id="16bottom">
+                                            <tr style="background-color:#f3f3f3;">
 									   			<td style="padding-top :0px; padding-bottom :0px;" colspan="6">
 							                      	<div class="collapse" id="taskExample6" style="">
 											         	<div class="card card-body mt-3 noHover">
@@ -418,37 +431,62 @@
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label class="control-label">업무 이름</label>
-	                                            <input class="form-control form-white" value="ㅇㅅㅇ 업무" type="text" name="category-name">
+	                                            <input class="form-control form-white" value="ㅇㅅㅇ 업무" type="text" id="taskName" name="taskName">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label class="control-label">업무 개요</label>
 	                                            <!-- <input class="form-control form-white" value="대충 이거 저거 하세욧" type="text" name="category-name" readonly> -->
-	                                            <textarea class="textarea_editor form-control bg-light" rows="5" placeholder="내용을 입력해주세요."></textarea>
+	                                            <textarea class="textarea_editor form-control bg-light" rows="5" placeholder="내용을 입력해주세요." id="taskComment" name="taskComment"></textarea>
+	                                        </div>
+	                                    </div>
+	                                    <div class="row mb-3">
+	                                        <div class="col-md-12">
+	                                            <label class="control-label">사원번호 hidden 처리할 예정</label>
+	                                            <input class="form-control form-white" type="text" id="empIdInput" name="empIdInput">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label class="control-label">담당자</label>
-	                                            <input class="form-control form-white" value="김종진" type="text" name="category-name">
+	                                            <input class="form-control form-white" value="김종진" type="text" id="employeeName" name="employeeName">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label for="example-datetime-local-input" class="control-label">시작일</label>
-	                                            <input class="form-control form-white" value="2023-10-25" type="date" name="category-name">
+	                                            <input class="form-control form-white" value="2023-10-25" type="date" id="startDate" name="startDate">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label for="example-datetime-local-input" class="control-label">종료일</label>
-	                                            <input class="form-control form-white dateSelectable" data-placeholder="날짜 선택하세욧!" required aria-required="true" type="date" name="category-name">
+	                                            <input class="form-control form-white dateSelectable" data-placeholder="날짜 선택하세욧!" required aria-required="true" type="date" id="endDate" name="endDate">
+	                                        </div>
+	                                    </div>
+	                                    <div class="row mb-3">
+	                                    	<!-- <div class="col-lg-3" style="display:inline-block;">
+											    <select class="form-control" id="projectSelect" name="projectSelect">
+											        <option value="">프로젝트 선택</option>
+											        <option value="html">PMS 제작 프로젝트</option>
+											        <option value="css">프로젝트 2번째</option>
+											        <option value="javascript">본격 취업 프로젝트</option>
+											    </select>
+											</div> -->
+	                                        <div class="col-md-12">
+	                                            <label class="control-label">진행상태</label>
+	                                            <!-- <input class="form-control form-white" value="김종진" type="text" name="category-name"> -->
+	                                            <select class="form-control" id="status" name="status">
+											        <option value="진행전">진행전</option>
+											        <option value="진행중">진행중</option>
+											        <option value="진행완료">진행완료</option>
+											    </select>
 	                                        </div>
 	                                    </div>
 		                                <div class="form-footer text-right">
 	                                        <button type="button" class="btn btn-default waves-effect">초기화</button>
-	                                        <button type="button" class="btn btn-danger waves-effect waves-light save-category">등록</button>
+	                                        <button type="button" id="registerTaskBtn" class="btn btn-danger waves-effect waves-light save-category" onclick="registerTask()">등록</button>
 	                                    </div>
 	                                </form>
                                 </div>
@@ -490,6 +528,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
     
+    <script src="${pageContext.request.contextPath}/resources/js/task/task.js"></script>
     
 
 </body>

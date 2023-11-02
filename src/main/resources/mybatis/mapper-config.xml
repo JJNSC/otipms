@@ -14,6 +14,8 @@
 		<typeAlias alias="Alarm" type="com.otipms.dto.Alarm"/>
 		<typeAlias alias="BoardComment" type="com.otipms.dto.BoardComment"/>
 		<typeAlias alias="ProjectTeams" type="com.otipms.dto.ProjectTeams"/>
+		<typeAlias alias="TASK" type="com.otipms.dto.Task"/>
+		<typeAlias alias="TaskEmployee" type="com.otipms.dto.TaskEmployee"/>
 	</typeAliases>
 
 </configuration>

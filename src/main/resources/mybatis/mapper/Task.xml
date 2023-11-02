@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.otipms.dao.TaskDao">
+	<!-- 프로젝트 리스트 조회 -->
+	<select id="selectProjectList" resultType="Project">
+		SELECT projectNo
+			 , projectName
+			 , projectDeleted
+		  FROM PROJECT
+		 WHERE 1=1
+		   AND PROJECTDELETED = 0
+	</select>
+
+	<!-- 프로젝트 리스트 조회 -->
+	<select id="selectTeamList" parameterType="int" resultType="Team">
+		SELECT teamNo
+			 , projectNo
+			 , teamName
+		  FROM TEAM
+		 WHERE 1=1
+		   AND PROJECTNO = #{projectNo}
+		   AND TEAMNAME not in ('고객', '미배정')
+	</select>
+	
+	<!-- 태스크 사람 조회 -->
+	<select id="selectTaskEmployeeList" parameterType="hashMap" resultType="TaskEmployee">
+		SELECT e.empId
+			 , p.projectName
+			 , t.teamName
+			 , e.empName
+			 , e.empRank
+		  FROM EMP e
+		 INNER JOIN EMPINFO ei
+			ON e.EMPID = ei.EMPID
+		 INNER JOIN TEAM t
+			ON ei.TEAMNO = t.TEAMNO
+		 INNER JOIN PROJECT p
+			ON t.PROJECTNO = p.PROJECTNO
+		 WHERE 1=1
+		   AND e.EMPENABLED = 1
+		   AND p.PROJECTDELETED = 0
+		   AND t.TEAMNAME not in ('고객', '미배정')
+		   <if test="scope == 'project'">
+		   AND p.PROJECTNO = #{projectNo}
+		   </if>
+		   <if test="scope == 'team'">
+		   AND t.TEAMNO = #{teamNo}
+		   </if>
+		   <if test="scope == 'personal'">
+		   AND e.EMPID
+		   </if>
+	</select>
+	
+	<!-- 새 태스크 삽입 -->
+	<insert id="insertTask" parameterType="Task">
+		INSERT INTO TASK
+		(
+		TASKNO
+		, EMPID
+		, TASKNAME
+		, TASKCOMMENT
+		, TASKSTARTDATE
+		, TASKENDDATE
+		, TASKSTATUS
+		, TASKCOLOR
+		, TASKDELETED
+		)
+		VALUES 
+		( TASKNO_SEQ.nextval
+		, #{empId}
+		, #{taskName}
+		, #{taskComment}
+		, #{taskStartDate}
+		, #{taskEndDate}
+		, #{taskStatus}
+		, 'red'
+		, 0
+		)
+	</insert>
+
+	<!-- 태스크 리스트 조회 -->
+	<select id="selectTaskList" parameterType="int" resultType="Task">
+		SELECT taskNo
+			 , empId
+			 , taskName
+			 , taskStartDate
+			 , taskEndDate
+			 , taskStatus
+			 , taskDeleted
+		  FROM TASK t
+		 WHERE 1=1
+		   AND EMPID = #{empId}
+		   AND TASKDELETED = 0
+	</select>
+</mapper>

@@ -159,6 +159,7 @@
 		   	   b.BOARDDELETED = 0
 		   	   OR b.BOARDDELETED is null
 		   	   )
+		   AND m.MEDIAFILENAME like 'profile%'
 	</select>
 	
 	<!-- 조회수 갱신 -->
@@ -226,6 +227,7 @@
 		   	   COMMENTDELETED = 0 
 		   	   OR COMMENTDELETED is null
 		   	   )
+		   AND m.MEDIAFILENAME like 'profile%'
 		 ORDER BY COMMENTWRITEDATE ASC
 	</select>
 	
