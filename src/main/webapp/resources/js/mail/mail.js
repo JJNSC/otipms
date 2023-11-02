@@ -86,7 +86,7 @@ function checkimportant(messageNo ,index, event) {
         }
     });
 }
-var empId = document.getElementById("memIdSpan").value;
+
 function updateMessageChecked(ccNo) {
     console.log("ccNo: ", ccNo);
 	$.ajax({

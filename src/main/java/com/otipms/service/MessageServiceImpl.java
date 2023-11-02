@@ -124,10 +124,11 @@ public class MessageServiceImpl implements MessageService {
 		for (CC cc : ccList) {
 			messageDao.writeCC(cc);
 			if (cc.getCcType() != 2){
+				Message message = messageDao.selectMessagebyMessageNo(cc.getMessageNo());
             	Alarm alarm = new Alarm();
             	alarm.setAlarmEmpId(cc.getEmpId());
-            	alarm.setAlarmContentCode("쪽지 알림");
-            	alarm.setAlarmContent("쪽지가 도착했습니다.");
+            	alarm.setAlarmContentCode(message.getEmpRank()+" "+message.getEmpName()+"님으로부터 쪽지가 도착했습니다.");
+            	alarm.setAlarmContent(message.getMessageTitle());
             	Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
             	alarm.setAlarmDate(currentTimestamp);
             	alarm.setAlarmChk(0);

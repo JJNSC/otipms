@@ -57,7 +57,10 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMyReceivedMessage(empId);
-	    model.addAttribute("messages", messages);
+	    int cnt = messageService.getMyReceivedMessage(empId).size();
+	    
+		model.addAttribute("messages", messages);
+		model.addAttribute("cnt", cnt);
 	    model.addAttribute("employee", empDetails.getEmployee());
 		
 		return "mail/receivedMail";

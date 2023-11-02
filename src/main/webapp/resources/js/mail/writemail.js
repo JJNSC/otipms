@@ -105,6 +105,10 @@ function sendMail() {
 	var references = getSelectedEmployees("selectedReferenceEmployees", ccTypeToNumber["Reference"]);
 	var blindCopies = getSelectedEmployees("selectedBlindCopyEmployees", ccTypeToNumber["BlindCopy"]);
 	
+	if (recipients.length === 0) {
+        alert("수신자를 선택해주세요.");
+        return;
+    }
 	
 	var modifiedUploadedFiles = [];
     for (var i = 0; i < uploadedFiles.length; i++) {
@@ -120,7 +124,7 @@ function sendMail() {
             });
         }
     }
-    
+    var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
     var empId = document.getElementById("memIdSpan").value;
 	// AJAX를 사용하여 서버로 데이터 전송
 	$.ajax({

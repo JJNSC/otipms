@@ -153,23 +153,16 @@
 	
 	<!-- 쪽지 번호로 쪽지 찾기 -->
 	<select id="selectMessagebyMessageNo" parameterType="int" resultType="Message">
-		SELECT c.messageNo
-		     , c.empId
+		SELECT m.messageNo
+		     , m.empId
 		     , e.empName
 		     , e.empRank
 		     , m.messageTitle
 		     , m.messageReservedDate
-		     , c.messageStatus
-		     , c.messageChecked
-		     , c.messageImportant
 	      FROM emp e
 		  JOIN message m 
 		    ON e.empId = m.empId
-		  JOIN CC c 
-		    ON m.messageNo = c.messageNo
-	 LEFT JOIN mediaFile me 
-	        ON m.messageNo = me.messageNo
-		 WHERE c.messageNo = ${messageNo}
+		 WHERE m.messageNo = ${messageNo}
 		   AND e.empEnabled = 1
 	</select>
 	

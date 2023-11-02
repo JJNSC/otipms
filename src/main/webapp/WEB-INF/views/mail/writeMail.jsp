@@ -24,7 +24,6 @@
     <%-- <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script> --%>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/headernside.js"></script>
     
     <!-- Editer -->-
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>

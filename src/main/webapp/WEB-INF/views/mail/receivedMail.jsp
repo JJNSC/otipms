@@ -81,6 +81,8 @@
 				                            </div>
 	                                        <div class="header-left" style="margin-left:20px;">
 							                    <div class="input-group icons" style="margin-top:0px;">
+							                    	<input type="hidden" value="${employee.empId}" id="memIdSpan">
+							                    	<input type="hidden" value="${cnt}" id="cntSpan">
 							                        <input type="search" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search Dashboard">
 							                        <div class="input-group-prepend">
 							                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1">
@@ -101,80 +103,11 @@
 				                            </div>
 		                          		</div>
                                     </div>
-                                    <input type="hidden" value="${employee.empId}" id="memIdSpan">
                                     <div id="email-list-container" class="email-list m-t-15">
-									    <%-- <c:forEach items="${messages}" var="message" varStatus="loop">
-									        <div class="message message-${loop.index+1}">
-									            <div class="col-mail col-mail-1 received">
-									                <div class="email-checkbox">
-									                    <input type="checkbox" id="chk${loop.index+1}" value="${message.messageNo}">
-									                    <label class="toggle" for="chk${loop.index+1}"></label>
-									                </div>
-									                <span class="icon-copy ${message.messageImportant == 1 ? 'ion-ios-star star' : 'star ion-ios-star-outline'}" onclick="checkimportant(${message.messageNo}, ${loop.index+1}, event)"></span>
-									            	<span class="icon-copy ${message.messageChecked == 1 ? 'ion-android-mail' : 'ion-android-drafts'} mail"></span>
-									            </div>
-									            <div class="col-mail col-mail-profile">
-									                <div class="profile">
-									                    <img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
-									                    <span class="rank">${message.empRank}</span>
-									                    <span class="name">${message.empName}</span>
-									                </div>
-									            </div>
-									            <input id="memIdSpan" type="hidden" value="${employee.empId}"/>
-									            <a href="detailMail?messageNo=${message.messageNo}" onclick="updateMessageChecked(${message.ccNo})">
-									                <div class="col-mail col-mail-2">
-									                    <div class="subject">${message.messageTitle}</div>
-									                    <div class="clip">
-									                        <c:if test="${message.mediaFileNo != null}">
-									                            <span class="icon-copy ion-paperclip mr-5"></span>
-									                        </c:if>
-									                    </div>
-									                    <div class="date">
-									                    	<fmt:formatDate value="${message.messageReservedDate}" type="date" dateStyle="full" />
-									                    	<c:set var="currentDate" value="<%= new java.util.Date() %>" />
-												            <c:set var="oneDay" value="86400000" /> <!-- 24 hours in milliseconds -->
-												            <c:set var="timeDifference" value="${currentDate.time - message.messageReservedDate.time}" />
-									                    	<c:choose>
-												                <c:when test="${timeDifference lt oneDay}">
-												                    <fmt:formatDate value="${message.messageReservedDate}" type="date" pattern="a hh:mm"/>
-												                </c:when>
-												                <c:otherwise>
-												                    <fmt:formatDate value="${message.messageReservedDate}" type="date" pattern="yy.MM.dd"/>
-												                </c:otherwise>
-												            </c:choose>
-									                    </div>
-									                </div>
-									            </a>
-									        </div>
-									    </c:forEach> --%>
 									</div>
                                     <!-- panel -->
                                     <div class="row mt-3 justify-content-center">
-	                                    <div class="bootstrap-pagination">
-		                                    <nav>
-		                                        <ul class="pagination">
-		                                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">이전</a>
-		                                            </li>
-		                                            <li class="page-item active">
-		                                            	<a class="page-link" href="#">1</a>
-		                                            </li>
-		                                            <li class="page-item">
-		                                            	<a class="page-link" href="#">2</a>
-		                                            </li>
-		                                            <li class="page-item">
-		                                            	<a class="page-link" href="#">3</a>
-		                                            </li>
-		                                            <li class="page-item">
-		                                            	<a class="page-link" href="#">4</a>
-		                                            </li>
-		                                            <li class="page-item">
-		                                            	<a class="page-link" href="#">5</a>
-		                                            </li>
-		                                            <li class="page-item">
-		                                            	<a class="page-link" href="#">다음</a>
-		                                            </li>
-		                                        </ul>
-		                                    </nav>
+	                                    <div id="pagingContainer" class="bootstrap-pagination">
 		                                </div>
                                     </div>
                                 </div>
