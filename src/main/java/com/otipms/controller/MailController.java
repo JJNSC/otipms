@@ -157,6 +157,10 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMySentMessage(empId);
+		int cnt = messageService.getMySentMessage(empId).size();
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("employee", empDetails.getEmployee());
 	    model.addAttribute("messages", messages);
 		return "mail/sentMail";
 	}
@@ -170,6 +174,10 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMyImportantMessage(empId);
+		int cnt = messageService.getMyImportantMessage(empId).size();
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("employee", empDetails.getEmployee());
 	    model.addAttribute("messages", messages);
 		return "mail/importantMail";
 	}
@@ -183,7 +191,11 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMyTemporaryMessage(empId);
-	    model.addAttribute("messages", messages);
+		int cnt = messageService.getMyTemporaryMessage(empId).size();
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("employee", empDetails.getEmployee());
+		model.addAttribute("messages", messages);
 		return "mail/temporaryMail";
 	}
 	
@@ -196,7 +208,11 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMyTrashMessage(empId);
-	    model.addAttribute("messages", messages);
+		int cnt = messageService.getMyTrashMessage(empId).size();
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("employee", empDetails.getEmployee());
+		model.addAttribute("messages", messages);
 		return "mail/trashMail";
 	}
 	
