@@ -19,7 +19,7 @@ public interface EmployeeService {
 	public int checkEmployeeByTel(String empTel);
 	public List<Employee> getAllEmployee();
 	//project 등록 시 
-	public List<Employee> selectEmployeeByRole(String role);
+	public List<Employee> selectNoTeamEmployeeByRole(String role);
 	public List<Employee> selectEmployeeByTeamNo(int teamNo);
 	public List<Employee> selectEmployeeByTeamNoAndRole(int teamNo,String role);
 	public void addMultiEmployee(Employee employee);

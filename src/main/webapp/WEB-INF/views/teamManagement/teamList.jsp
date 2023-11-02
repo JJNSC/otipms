@@ -55,7 +55,8 @@
 		    // 모달 내의 숨겨진 입력 필드에 projectNo를 설정
 		    document.getElementById('teamNoInput').value = teamNo;
 		}
-	    
+	</script>
+	<script>
 	    function deleteTeam() {
 		    // 모달 내의 숨겨진 입력 필드에서 projectNo를 가져옴
 		    var teamNo = document.getElementById('teamNoInput').value;
@@ -63,7 +64,7 @@
 		    // 컨트롤러로 데이터를 전송하는 AJAX 요청
 		    $.ajax({
 		        type: 'POST', // 또는 GET, 컨트롤러의 요청 메서드에 맞게 선택
-		        url: '/disableTeam', // 컨트롤러의 URL로 대체해야 함
+		        url: '/otipms/teamManagement/disableTeam', // 컨트롤러의 URL로 대체해야 함
 		        data: { disableTeamNo: teamNo },
 		        success: function() {
 		            // 성공 시 수행할 작업
@@ -75,7 +76,8 @@
 		            // 실패 시 수행할 작업
 		            console.error('팀 삭제 실패');
 		        }
-		}
+				});
+	    }
 	</script>
 </head>
 

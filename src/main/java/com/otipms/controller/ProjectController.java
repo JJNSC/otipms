@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,16 +48,16 @@ public class ProjectController {
 			Employee employee = new Employee();
 			int projectNo = project.getProjectNo();
 			employee.setProjectNo(projectNo);
-			employee.setRole("ROLE_PM");
+			employee.setTeamName("PM");
 			
 			//해당 프로젝트당 PM 이름
-			Employee PMINfo = projectService.getEmployeeInfoByProjectNoAndRoleNo(employee);
-			if(PMINfo==null || PMINfo.equals(null)) {
+			Employee PMInfo = projectService.getEmployeeInfoByProjectNoAndTeamName(employee);
+			if(PMInfo==null || PMInfo.equals(null)) {
 				Employee noInfo =new Employee();
 				noInfo.setEmpName("PM이 없습니다.");
 				PMList.add(noInfo);
 			}else {
-				PMList.add(PMINfo);
+				PMList.add(PMInfo);
 			}
 			
 			
@@ -208,11 +209,11 @@ public class ProjectController {
 								@RequestParam("projectName") String projectName,
 							 	@RequestParam("projectDate") String projectDate,
 							 	@RequestParam("ProjectManagerId") String PMId,
-							 	@RequestParam("beforeProjectManagerId") String beforePMId,
+							 	@RequestParam(name="beforeProjectManagerId", required=false, defaultValue="0" ) String beforePMId,
 							 	@RequestParam("projectOutLines")String projectContent,
 							 	@RequestParam("customerCompany") String projectCompanyName,
 							 	@RequestParam("customerId") String empId,
-								@RequestParam("beforeCustomerId") String beforeEmpId){
+								@RequestParam(name="beforeCustomerId", required=false, defaultValue="0") String beforeEmpId){
 		System.out.println("projectNo :" + projectNo );
 		System.out.println("projectName :" + projectName );
 		System.out.println("projectDate :" + projectDate );

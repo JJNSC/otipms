@@ -67,7 +67,7 @@
 			                                        		type="button" 
 			                                        		onclick="javascript:void(window.open('findPM','_blank','width=600, height=600, left=600, top=30'))">
 			                                        	<i class="fa fa-paper-plane m-r-5"></i>
-			                                        	 사원 찾기
+			                                        	 담당자 검색
 			                                        </button>
 			                                        </div>
 		                                	 			<input type="hidden" class="form-control" name="beforeProjectManagerId" value="${pmInfo.empId }">
@@ -96,7 +96,7 @@
 			                                        		type="button" 
 			                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
 			                                        	<i class="fa fa-paper-plane m-r-5"></i>
-			                                        	 사원 찾기
+			                                        	고객 검색
 			                                        </button>
 		                                    	</div>
                                                 <input type="hidden" class="form-control"  name="beforeCustomerId" value="${customerInfo.empId }">
@@ -121,74 +121,10 @@
                                         <button type="submit" class="btn btn-dark">등록하기</button>
                                     </form>
                                 </div>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">담당자 검색</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label">직급</label>
-                                                            <select id="inputState" class="form-control">
-			                                                    <option selected="selected">Choose...</option>
-			                                                    <option>Option 1</option>
-			                                                    <option>Option 2</option>
-			                                                    <option>Option 3</option>
-			                                                </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="message-text" class="col-form-label">직원 명</label>
-                                                            <select id="inputState" class="form-control">
-			                                                    <option selected="selected">Choose...</option>
-			                                                    <option>Option 1</option>
-			                                                    <option>Option 2</option>
-			                                                    <option>Option 3</option>
-			                                                </select>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                    <button type="button" class="btn btn-primary">담당자 등록</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">고객사 검색</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="message-text" class="col-form-label">고객사 명</label>
-                                                            <select id="inputState" class="form-control">
-			                                                    <option selected="selected">Choose...</option>
-			                                                    <option>Option 1</option>
-			                                                    <option>Option 2</option>
-			                                                    <option>Option 3</option>
-			                                                </select>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                    <button type="button" class="btn btn-primary">고객사 등록</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                             </div>
                         </div>
                     </div>
+                    
             <!-- #/ container -->
         </div>
         <!--**********************************

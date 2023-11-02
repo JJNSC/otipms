@@ -90,7 +90,7 @@ public class FindEmployeeRestController {
     	
     	log.info("이게 실행되면 안된다.");
     	
-    	List<Employee> employees = employeeService.selectEmployeeByRole("ROLE_PM");
+    	List<Employee> employees = employeeService.selectNoTeamEmployeeByRole("ROLE_PM");
     	
     	// JSON 데이터 생성
     	Map<String, List<Map<String, String>>> jsonData = new HashMap<>();
@@ -113,7 +113,7 @@ public class FindEmployeeRestController {
     
     @GetMapping("/api/RoleClientData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> RoleClientData() {
-    	List<Employee> employees = employeeService.selectEmployeeByRole("ROLE_CLIENT");
+    	List<Employee> employees = employeeService.selectNoTeamEmployeeByRole("ROLE_CLIENT");
     	
     	// JSON 데이터 생성
     	Map<String, List<Map<String, String>>> jsonData = new HashMap<>();

@@ -120,7 +120,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	//인력찾기(권한 명으로)
 	@Override
-	public List<Employee> selectEmployeeByRole(String role) {
+	public List<Employee> selectNoTeamEmployeeByRole(String role) {
 		return  employeeDao.selectEmployeeByRole(role);
 	}
 

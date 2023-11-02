@@ -94,8 +94,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public Employee getEmployeeInfoByProjectNoAndRoleNo(Employee employee) {
-		return projectDao.getEmployeeInfoByProjectNoAndRoleNo(employee);
+	public Employee getEmployeeInfoByProjectNoAndTeamName(Employee employee) {
+		return projectDao.getEmployeeInfoByProjectNoAndTeamName(employee);
 	}
 
 	@Override
@@ -114,6 +114,12 @@ public class ProjectServiceImpl implements ProjectService {
 	//개인 : 소속 팀 수정
 	@Override
 	public void modifyProject(Project project, int pmId, int clientId, int beforePmId, int beforeClientId) {
+		Team noTeam = new Team();
+		noTeam.setProjectNo(project.getProjectNo());
+		noTeam.setTeamName("미배정");
+		//해당 프로젝트의 '미배정 팀의 번호를  불러오자'
+		int noTeamNumber = teamDao.getTeamNoByProjectNoAndTeamName(noTeam);
+		
 		projectDao.updateProject(project);
 		//PM팀
 		Team PMTeam = new Team();
@@ -123,10 +129,12 @@ public class ProjectServiceImpl implements ProjectService {
 		teamDao.updateTeamEmpId(PMTeam);
 		
 		//과거 PM
-		Employee oldPM = new Employee();
-		oldPM.setEmpId(beforePmId);
-		oldPM.setTeamNo(0);
-		employeeDao.updateTeamNo(oldPM);
+		if(beforePmId != 0) {
+			Employee oldPM = new Employee();
+			oldPM.setEmpId(beforePmId);
+			oldPM.setTeamNo(noTeamNumber);
+			employeeDao.updateTeamNo(oldPM);
+		}
 		//새로운 PM
 		Employee newPM = new Employee();
 		newPM.setEmpId(pmId);
@@ -140,12 +148,14 @@ public class ProjectServiceImpl implements ProjectService {
 		clientTeam.setEmpId(clientId);
 		teamDao.updateTeamEmpId(clientTeam);
 		
-		//과거 PM
-		Employee oldClient = new Employee();
-		oldClient.setEmpId(beforeClientId);
-		oldClient.setTeamNo(0);
-		employeeDao.updateTeamNo(oldClient);
-		//새로운 PM
+		//과거 고객
+		if(beforeClientId != 0) {
+			Employee oldClient = new Employee();
+			oldClient.setEmpId(beforeClientId);
+			oldClient.setTeamNo(noTeamNumber);
+			employeeDao.updateTeamNo(oldClient);
+		}
+		//새로운 고객
 		Employee newClient = new Employee();
 		newClient.setEmpId(clientId);
 		newClient.setTeamNo(clientTeam.getTeamNo());

@@ -45,22 +45,6 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="compose-content mt-5 mb-5">
-                                   	<!-- <div>
-								        <select id="project-dropdown">
-								            <option value="">프로젝트 선택</option>
-								        </select>
-								        <select id="team-dropdown">
-								            <option value="">팀 선택</option>
-								        </select>
-								        <select id="position-dropdown">
-								            <option value="">직급 선택</option>
-								        </select>
-								    </div> -->
-								    <!-- <div id="radio-buttons" class="mt-3">
-									    <label><input type="radio" name="recipient" value="Recipient">수신</label>
-									    <label><input type="radio" name="recipient" value="Reference">참조</label>
-									    <label><input type="radio" name="recipient" value="BlindCopy">비밀참조</label>
-									</div> -->
                                     <hr>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="project1" role="tabpanel">

@@ -356,6 +356,100 @@
 			</div>
 			<div class="modal fade" id="multiRegister" tabindex="-1" role="dialog" aria-labelledby="multiRegisterLabel" aria-hidden="true">
 			    <div class="modal-dialog" role="document">
+			        <div class="modal-content" style="width:1000px;">
+			            <div class="modal-header">
+			                <h5 class="modal-title" id="multiRegisterLabel">일괄 등록</h5>
+			            </div>
+			           <%--  <form id="multiRegisterBtn" method="post" class="dropzone" action="${pageContext.request.contextPath}/multiRegister" enctype="multipart/form-data"> --%>
+			            <form id="multiRegisterBtn" method="post" class="dropzone" action="#" enctype="multipart/form-data">
+				            <div class="form-group row ml-2 mt-3">
+	                            <label class="col-lg-3 col-form-label" for="val-username">프로젝트 명<br>(엑셀 시트명)
+	                            </label>
+	                            <div class="col-lg-7">
+	                                <input type="text" class="form-control" id="excelSheetName" name="excelSheetName" placeholder="프로젝트 명 입력">
+	                            </div>
+	                        </div>
+	                        <div class="modal-body">
+		                        <div class="form-group">
+		                            <div class="fallback">
+		                                <input class="l-border-1" name="file" type="file">
+		                            </div>
+		                        </div>
+				            </div>
+			            </form>
+			            <table class="table">
+			            	<thead>
+			            		<tr>
+			            			<td>no.</td>
+			            			<td>사원 명</td>
+			            			<td>직급</td>
+			            			<td>전화번호</td>
+			            			<td>프로젝트 명</td>
+			            			<td>팀 명</td>
+			            			<td>권한</td>
+			            			<td>회사 명</td>
+			            			<td>이메일</td>
+			            		</tr>
+			            	</thead>
+			            	<tbody id="checkMultiRegister">
+			            	
+			            	</tbody>
+			            </table>
+			            <div class="modal-footer">
+			            	<button onclick="multiRestRegister()" class="btn btn-primary">등록</button>
+<!-- 			            	<button onclick="multiRestRegister()" class="btn btn-primary" data-dismiss="modal">등록</button> -->
+			                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			            </div>
+			            <script>
+				            function multiRestRegister() {
+				                // FormData 객체 생성
+				                var formData = new FormData($('#multiRegisterBtn')[0]);
+	
+				                $.ajax({
+				                    url: '/otipms/restMultiRegister',
+				                    type: 'POST',
+				                    data: formData,
+				                    processData: false, // 데이터 처리 방식을 false로 설정
+				                    contentType: false, // 컨텐츠 타입을 false로 설정
+				                    success: function(data) {
+				                        // 성공 처리
+				                        console.log(data);
+				                        updateTable(data);
+				                    },
+				                    error: function() {
+				                        // 실패 처리
+				                        console.log('파일 업로드 실패');
+				                    }
+				                });
+				            }
+				            
+				            function updateTable(data) {
+				                var table = $('#checkMultiRegister');
+				                table.empty(); // 현재 테이블 내용을 비웁니다.
+
+				                // data를 파싱하고 테이블에 삽입합니다.
+				                data.forEach(function(item, index) {
+				                    var row = '<tr>' +
+				                        '<td>' + (index+1) + '</td>' +
+				                        '<td>' + item["0"] + '</td>' +
+				                        '<td>' + item["1"] + '</td>' +
+				                        '<td>' + item["2"] + '</td>' +
+				                        '<td>' + item["3"] + '</td>' +
+				                        '<td>' + item["4"] + '</td>' +
+				                        '<td>' + item["5"] + '</td>' +
+				                        '<td>' + item["6"] + '</td>' +
+				                        '<td>' + item["7"] + '</td>' +
+				                        '</tr>';
+
+				                    table.append(row);
+				                });
+				            }
+			            </script>
+			        </div>
+			    </div>
+			</div>
+<%-- 			<div class="modal fade" id="multiRegister" tabindex="-1" role="dialog" aria-labelledby="multiRegisterLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">
 			                <h5 class="modal-title" id="multiRegisterLabel">일괄 등록</h5>
@@ -382,7 +476,7 @@
 			            </div>
 			        </div>
 			    </div>
-			</div>
+			</div> --%>
             <!-- #/ container -->
         </div>
         <!--**********************************

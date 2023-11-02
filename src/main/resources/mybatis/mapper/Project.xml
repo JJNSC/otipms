@@ -44,12 +44,29 @@
  	  ORDER BY projectNo DESC
 	</select>
 	
-	<select id="getEmployeeInfoByProjectNoAndRoleNo" parameterType="Employee" resultType="Employee">
-		select e.empId, e.empName, e.empRank, e.role, eif.teamno,eif.empTel, eif.empEmail from emp e 
-		inner Join
-		(select empId, teamNo, empTel,empEmail from empInfo where teamNo in 
-					(select teamNo from team where projectNo =#{projectNo})) eif 
-		            on e.empId = eif.empId where e.role=#{role}
+	<select id="getEmployeeInfoByProjectNoAndTeamName" parameterType="Employee" resultType="Employee">
+		SELECT e.empId
+		     , e.empName
+		     , e.empRank
+		     , e.role
+		     , eif.teamno
+		     , eif.empTel
+		     , eif.empEmail
+		  FROM emp e 
+		 INNER JOIN (
+		       SELECT empId
+		            , teamNo
+		            , empTel
+		            , empEmail
+		         FROM empInfo 
+		              ) eif 
+		    ON e.empId = eif.empId 
+		 WHERE eif.teamno IN (
+		                SELECT teamNo 
+		                  FROM team 
+		                 WHERE projectNo = #{projectNo}
+		                   AND teamName=#{teamName}
+		                     )
 	</select>
 	
 	<select id="selectProjectByProjectNo" parameterType="int" resultType="Project">

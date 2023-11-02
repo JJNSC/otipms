@@ -76,7 +76,7 @@
 			                                        		type="button" 
 			                                        		onclick="javascript:void(window.open('findPM','_blank','width=600, height=600, left=600, top=30'))">
 			                                        	<i class="fa fa-paper-plane m-r-5"></i>
-			                                        	 사원 찾기
+			                                        	 담당자 검색
 			                                        </button>
 			                                    </div>
 				                                	<input type="text" class="form-control d-none" id="PMid" name="ProjectManagerId" readonly="readonly">
@@ -104,7 +104,7 @@
 				                                        		type="button" 
 				                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
 				                                        	<i class="fa fa-paper-plane m-r-5"></i>
-				                                        	 사원 찾기
+				                                        	 고객 검색
 				                                        </button>
 			                                    	</div>
 				                                	<input type="text" class="form-control d-none" id="ClientId" name="customerId" readonly="readonly">

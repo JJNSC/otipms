@@ -111,10 +111,26 @@
 	</update>
 	
 	<select id="selectEmployeeByRole" parameterType="String" resultType="Employee">
-		select e.*, eif.emptel, eif.empemail from emp e inner join (select  empid ,emptel, empemail from empinfo ) eif
-		    on e.empid = eif.empid 
-		 where role=#{role}
-		   AND e.empEnabled = 1 
+		SELECT e.*
+		     , eif.empTel
+		     , eif.empEmail
+		     , eif.teamNo 
+		  FROM emp e 
+    	 INNER JOIN (
+			  		SELECT empId
+		                 , empTel
+		                 , empEmail
+		                 , teamNo 
+          			  FROM empInfo
+                    ) eif
+            ON e.empId = eif.empId 
+         WHERE role= #{role}
+           AND e.empEnabled = 1 
+           AND eif.teamNo IN (
+                       		 SELECT t.teamNo 
+                   			   FROM team t 
+               				  WHERE teamName = '미배정'
+               				 )
 	</select>
 	
 	<select id="selectEmployeeByTeamNo" parameterType="int" resultType="Employee">

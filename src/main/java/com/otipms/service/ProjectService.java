@@ -8,7 +8,7 @@ import com.otipms.dto.Project;
 public interface ProjectService {
 	public int addProject(Project project, int pmId, int clientId);
 	public List<Project> getAllProjects();
-	public Employee getEmployeeInfoByProjectNoAndRoleNo(Employee employee);
+	public Employee getEmployeeInfoByProjectNoAndTeamName(Employee employee);
 	public Project selectProjectByProjectNo(int projectNo);
 	public Employee selectByEmployeeId(int empId);
 	public void modifyProject(Project project, int pmId, int clientId, int beforePmId, int beforeClientId);

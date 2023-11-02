@@ -11,7 +11,7 @@ import com.otipms.dto.Project;
 public interface ProjectDao {
 	public int addProject(Project project);
 	public List<Project> selectAllProject();
-	public Employee getEmployeeInfoByProjectNoAndRoleNo(Employee employee);
+	public Employee getEmployeeInfoByProjectNoAndTeamName(Employee employee);
 	public Project selectProjectByProjectNo(int projectNo);
 	public void updateProject(Project project);
 	public void updateProjectDeletedStatus(Project project);
