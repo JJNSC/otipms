@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>사원 찾기</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     
@@ -61,6 +62,9 @@
 									    <label><input type="radio" name="recipient" value="Reference">참조</label>
 									    <label><input type="radio" name="recipient" value="BlindCopy">비밀참조</label>
 									</div>
+                                    <div style="display:inline-block; position: absolute; right: 30px; top: 105px;">
+	                                    <input class="form-control" id="hzInput" type="text" placeholder="사원 찾기" style="width:150px;"/>
+                                    </div>
                                     <hr>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="project1" role="tabpanel">

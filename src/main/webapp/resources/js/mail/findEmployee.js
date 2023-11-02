@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-	
+	  
 	$.ajax({
 	    url: 'http://localhost:8080/otipms/api/employeeData', // URL ??
 	    type: 'GET',
@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	        var employeeData = data.employeeData;
 	        var projectData = data.projectData;
 	        var teamData = data.teamData;
-	        
-	        
+	      	        
             //CheckAll 기능
             function syncSelectAllCheckbox() {
             	const allChecked = [...employeeCheckboxes].every(function (cb) {
@@ -159,6 +158,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 }
             }
+            
+            $("#hzInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#employee-list tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            
 	    },
 	    error: function (error) {
 	        console.log(error);
