@@ -42,9 +42,29 @@ public interface TaskDao {
 
 	/**
 	 * 태스크 리스트 조회
-	 * @param task
+	 * @param empId
 	 * @return
 	 */
 	public List<Task> selectTaskList(int empId);
+
+	/**
+	 * 태스크 조회
+	 * @param taskNo
+	 * @return
+	 */
+	public Task selectTask(int taskNo);
+
+	/**
+	 * 태스크 수정
+	 * @param task
+	 */
+	public void updateTask(Task task);
+
+	/**
+	 * 태스크 삭제
+	 * @param task
+	 * @return
+	 */
+	public int updateDeleteTask(Task task);
 
 }

@@ -42,4 +42,32 @@ public interface TaskService {
 	 */
 	public List<Task> addTask(Task task);
 
+	/**
+	 * 태스크 리스트 조회
+	 * @param empId
+	 * @return
+	 */
+	public List<Task> getTaskList(String empId);
+
+	/**
+	 * 태스크 조회
+	 * @param taskNo
+	 * @return
+	 */
+	public Task getTask(String taskNo);
+
+	/**
+	 * 태스크 수정
+	 * @param task
+	 * @return
+	 */
+	public List<Task> modifyTask(Task task);
+
+	/**
+	 * 태스크 삭제
+	 * @param taskNo
+	 * @return
+	 */
+	public List<Task> deleteTask(String taskNo);
+
 }

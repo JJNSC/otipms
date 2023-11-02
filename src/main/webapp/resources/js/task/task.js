@@ -1,3 +1,12 @@
+window.onload = function() {
+			today = new Date();
+			console.log("today.toISOString() >>>" + today.toISOString());
+			today = today.toISOString().slice(0, 10);
+			console.log("today >>>> " + today);
+			bir = document.getElementById("startDate");
+			bir.value = today;
+		}
+
 //프로젝트 선택
 function selectProject() {
 	var project = $("#projectSelect").val();
@@ -26,7 +35,7 @@ function selectProject() {
 			
 			if(data.taskEmployeeList.length != 0) {
 				$.each(data.taskEmployeeList, function(index, taskEmployee) {
-					taskehtml += '<tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="' + taskEmployee.empId + '" id="employeeId' + taskEmployee.empId + '" href="#task' + taskEmployee.empId + '" role="button" aria-expanded="true" aria-controls="collapseExample">';
+					taskehtml += '<tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="' + taskEmployee.empId + '" id="employeeId' + taskEmployee.empId + '" href="#task' + taskEmployee.empId + '" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="taskEmployeeTr(this)">';
 					taskehtml += '<td>' + taskEmployee.empId + '</td>';
 					taskehtml += '<td>' + taskEmployee.projectName + '</td>';
 					taskehtml += '<td>' + taskEmployee.teamName + '</td>';
@@ -59,16 +68,16 @@ function selectProject() {
 					taskehtml += '</tr>';
 					taskehtml += '</thead>';
 					taskehtml += '<tbody class="detailTaskBody">';
-					taskehtml += '<tr class="table-hover">';
-					taskehtml += '<td style="padding-left: 20px;">1</td>';
-					taskehtml += '<td>김종진 개인업무1</td>';
-					taskehtml += '<td>2023.10.14</td>';
-					taskehtml += '<td class="text-center"> - </td>';
-					taskehtml += '<td class="text-center text-success">진행중</td>';
-					taskehtml += '<td class="text-center">';
-					taskehtml += '<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>';
-					taskehtml += '</td>';
-					taskehtml += '</tr>';
+						/*taskehtml += '<tr class="table-hover">';
+						taskehtml += '<td style="padding-left: 20px;">1</td>';
+						taskehtml += '<td>김종진 개인업무1</td>';
+						taskehtml += '<td>2023.10.14</td>';
+						taskehtml += '<td class="text-center"> - </td>';
+						taskehtml += '<td class="text-center text-success">진행중</td>';
+						taskehtml += '<td class="text-center">';
+						taskehtml += '<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>';
+						taskehtml += '</td>';
+						taskehtml += '</tr>';*/
 					taskehtml += '</tbody>';
 					taskehtml += '</table>';
 					taskehtml += '</div>';
@@ -106,7 +115,7 @@ var team = $("#teamSelect").val()
 				
 				if(data.taskEmployeeList.length != 0) {
 					$.each(data.taskEmployeeList, function(index, taskEmployee) {
-						taskehtml += '<tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="' + taskEmployee.empId + '" id="employeeId' + taskEmployee.empId + '" href="#task' + taskEmployee.empId + '" role="button" aria-expanded="true" aria-controls="collapseExample">';
+						taskehtml += '<tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="' + taskEmployee.empId + '" id="employeeId' + taskEmployee.empId + '" href="#task' + taskEmployee.empId + '" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="taskEmployeeTr(this)">';
 						taskehtml += '<td>' + taskEmployee.empId + '</td>';
 						taskehtml += '<td>' + taskEmployee.projectName + '</td>';
 						taskehtml += '<td>' + taskEmployee.teamName + '</td>';
@@ -139,7 +148,7 @@ var team = $("#teamSelect").val()
 						taskehtml += '</tr>';
 						taskehtml += '</thead>';
 						taskehtml += '<tbody class="detailTaskBody">';
-						taskehtml += '<tr class="table-hover">';
+						/*taskehtml += '<tr class="table-hover">';
 						taskehtml += '<td style="padding-left: 20px;">1</td>';
 						taskehtml += '<td>김종진 개인업무1</td>';
 						taskehtml += '<td>2023.10.14</td>';
@@ -148,7 +157,7 @@ var team = $("#teamSelect").val()
 						taskehtml += '<td class="text-center">';
 						taskehtml += '<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>';
 						taskehtml += '</td>';
-						taskehtml += '</tr>';
+						taskehtml += '</tr>';*/
 						taskehtml += '</tbody>';
 						taskehtml += '</table>';
 						taskehtml += '</div>';
@@ -165,11 +174,6 @@ var team = $("#teamSelect").val()
 			}
 		});
 	}
-}
-
-//업무 추가
-function addTask() {
-	console.log("추가 클릭")
 }
 
 //등록
@@ -212,8 +216,8 @@ function registerTask() {
 					taskhtml = '';
 					
 					$.each(data, function(index, task) {
-						taskhtml += '<tr class="table-hover">';
-						taskhtml += '<td style="padding-left: 20px;">' + index + '</td>';
+						taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
+						taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
 						taskhtml += '<td>' + task.taskName + '</td>';
 						taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
 						if(task.taskEndDate != null) {
@@ -221,24 +225,288 @@ function registerTask() {
 						} else {
 							taskhtml += '<td class="text-center"> - </td>';
 						}
-						taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+						if(task.taskStatus == "진행전") {
+							taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+						} else if(task.taskStatus == "진행중") {
+							taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+						} else if(task.taskStatus == "진행완료") {
+							taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+						}
 						taskhtml += '<td class="text-center">';
-						taskhtml += '<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>';
+						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
 						taskhtml += '</td>';
 						taskhtml += '</tr>';
 					});
 					
-					console.log("taskhtml: " + taskhtml);
-					console.log("내가 찾은 body가 아니었던 건가..?" + taskEmployeeTr.find(".detailTaskBody").html())
-					
 					taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
 				}
+				
+				$("#taskNoInput").val('');
+				$("#taskName").val('');
+				$("#taskComment").val('');
+				$("#empIdInput").val('');
+				$("#employeeName").val('');
+				$("#startDate").val(dateFormat(new Date(), 1));
+				$("#endDate").val('');
+				$("#defaultStatus").prop("selected", "selected");
 			}
 		},
 		error: function(error) {
 			//console.log(error);
 		}
 	});
+}
+
+//태스크 리스트 가져오기
+function getTaskList(empId) {
+	var empId = empId;
+	console.log(empId);
+	
+	$.ajax({
+		url: "/otipms/getTaskList",
+		method: "POST",
+		data: {
+			empId:empId
+		},
+		success: function(data) {
+			console.log(data);
+			
+			if(data != null && data.length != 0) {
+				var taskEmployeeTr = $("#employeeId" + empId);
+				taskhtml = '';
+				
+				$.each(data, function(index, task) {
+					taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
+					taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
+					taskhtml += '<td>' + task.taskName + '</td>';
+					taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
+					if(task.taskEndDate != null) {
+						taskhtml += '<td class="text-center">' + dateFormat(new Date(task.taskEndDate), 1) + '</td>';
+					} else {
+						taskhtml += '<td class="text-center"> - </td>';
+					}
+					if(task.taskStatus == "진행전") {
+						taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == "진행중") {
+						taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == "진행완료") {
+						taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+					}
+					taskhtml += '<td class="text-center">';
+					taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+					taskhtml += '</td>';
+					taskhtml += '</tr>';
+				});
+				
+				taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
+			}
+		},
+		error: function(error) {
+			//console.log(error);
+		}
+	});
+}
+
+//태스크 상세 조회
+function getTaskDetail(taskNo) {
+	console.log(taskNo);
+	var taskNo = taskNo.substring(4, taskNo.length);
+	
+	$.ajax({
+		url: "/otipms/getTask",
+		method: "POST",
+		data: {
+			taskNo:taskNo
+		},
+		success: function(data) {
+			console.log(data);
+			$("#taskNoInput").val(data.taskNo)
+			$("#taskName").val(data.taskName)
+			$("#taskComment").val(data.taskComment)
+			$("#empIdInput").val(data.empId)
+			$("#employeeName").val(data.empName)
+			$("#startDate").val(dateFormat(new Date(data.taskStartDate), 1));
+			if(data.taskEndDate != null) {
+				$("#endDate").val(dateFormat(new Date(data.taskEndDate), 1));
+			}
+			if(data.taskStatus == "진행전") {
+				$("#defaultStatus").prop("selected", "selected");
+			} else if(data.taskStatus == "진행중") {
+				$("#ongoingStatus").prop("selected", "selected");
+			} else if(data.taskStatus == "진행완료") {
+				$("#doneStatus").prop("selected", "selected");
+			}
+			
+			$("#registerTaskBtn").addClass("d-none");
+			$("#updateTaskBtn").removeClass("d-none");
+
+		},
+		error: function(error) {
+			//console.log(error);
+		}
+	});
+}
+
+//태스크 수정
+function updateTask() {
+	var taskNo = $("#taskNoInput").val();
+	var taskName = $("#taskName").val();
+	var taskComment = $("#taskComment").val();
+	var empId = $("#empIdInput").val();
+	var employeeName = $("#employeeName").val();
+	var startDate = $("#startDate").val();
+	var endDate = $("#endDate").val();
+	var status = $("#status").val();
+	
+	console.log("taskName: " + taskName);
+	console.log("taskComment: " + taskComment);
+	console.log("empId: " + empId);
+	console.log("employeeName: " + employeeName);
+	console.log("startDate: " + startDate);
+	console.log("endDate: " + endDate);
+	console.log("status: " + status);
+	
+	$.ajax({
+		url: "/otipms/modifyTask",
+		method: "POST",
+		data: {
+			taskNo:taskNo,
+			taskName:taskName,
+			taskComment:taskComment,
+			empId:empId,
+			startDate:startDate,
+			endDate:endDate,
+			status:status
+		},
+		success: function(data) {
+			console.log(data);
+			if(data != null && data.length != 0) {
+				var taskEmployeeTr = $("#employeeId" + empId);
+				taskhtml = '';
+				
+				$.each(data, function(index, task) {
+					taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
+					taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
+					taskhtml += '<td>' + task.taskName + '</td>';
+					taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
+					if(task.taskEndDate != null) {
+						taskhtml += '<td class="text-center">' + dateFormat(new Date(task.taskEndDate), 1) + '</td>';
+					} else {
+						taskhtml += '<td class="text-center"> - </td>';
+					}
+					if(task.taskStatus == "진행전") {
+						taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == "진행중") {
+						taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == "진행완료") {
+						taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+					}
+					taskhtml += '<td class="text-center">';
+					taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+					taskhtml += '</td>';
+					taskhtml += '</tr>';
+				});
+				
+				taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
+				
+				$("#taskNoInput").val('');
+				$("#taskName").val('');
+				$("#taskComment").val('');
+				$("#empIdInput").val('');
+				$("#employeeName").val('');
+				$("#startDate").val(dateFormat(new Date(), 1));
+				$("#endDate").val('');
+				$("#defaultStatus").prop("selected", "selected");
+			}
+
+		},
+		error: function(error) {
+			//console.log(error);
+		}
+	});
+}
+
+//태스크 삭제
+function deleteTask() {
+	console.log("삭제할 taskNo " + $("#deleteCheckBtn").attr("name"));
+	var taskNo = $("#deleteCheckBtn").attr("name");
+	
+	$.ajax({
+		url: "/otipms/deleteTask",
+		method: "POST",
+		data: {
+			taskNo:taskNo
+		},
+		success: function(data) {
+			console.log(data);
+			if(data != null && data.length != 0) {
+				//var taskEmployeeTr = $("#employeeId" + empId);
+				var taskEmployeeTr = $("#employeeId" + data[0].empId);
+				taskhtml = '';
+				
+				$.each(data, function(index, task) {
+					taskhtml += '<tr class="table-hover" id="task' + task.taskNo + '" onclick="taskTr(this)">';
+					taskhtml += '<td style="padding-left: 20px;">' + (index + 1) + '</td>';
+					taskhtml += '<td>' + task.taskName + '</td>';
+					taskhtml += '<td>' + dateFormat(new Date(task.taskStartDate), 1) + '</td>';
+					if(task.taskEndDate != null) {
+						taskhtml += '<td class="text-center">' + dateFormat(new Date(task.taskEndDate), 1) + '</td>';
+					} else {
+						taskhtml += '<td class="text-center"> - </td>';
+					}
+					if(task.taskStatus == "진행전") {
+						taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == "진행중") {
+						taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == "진행완료") {
+						taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+					}
+					taskhtml += '<td class="text-center">';
+					taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+					taskhtml += '</td>';
+					taskhtml += '</tr>';
+				});
+				
+				taskEmployeeTr.next().find(".detailTaskBody").html(taskhtml);
+				
+				$("#taskNoInput").val('');
+				$("#taskName").val('');
+				$("#taskComment").val('');
+				$("#empIdInput").val('');
+				$("#employeeName").val('');
+				$("#startDate").val(dateFormat(new Date(), 1));
+				$("#endDate").val('');
+				$("#defaultStatus").prop("selected", "selected");
+			}
+
+		},
+		error: function(error) {
+			//console.log(error);
+		}
+	});
+}
+
+//새로 추가
+function addTask() {
+	console.log("추가 클릭")
+	
+	$("#registerTaskBtn").removeClass("d-none");
+	$("#updateTaskBtn").addClass("d-none");
+	
+	resetForm();
+	$("#startDate").val(dateFormat(new Date(), 1));
+}
+
+//초기화
+function resetForm() {
+	$("#taskNoInput").val('');
+	$("#taskName").val('');
+	$("#taskComment").val('');
+	$("#empIdInput").val('');
+	$("#employeeName").val('');
+	$("#startDate").val('');
+	$("#endDate").val('');
+	$("#defaultStatus").prop("selected", "selected");
 }
 
 //날짜 포맷 함수

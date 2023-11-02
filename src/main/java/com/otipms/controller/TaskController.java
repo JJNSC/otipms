@@ -115,6 +115,17 @@ public class TaskController {
 		return ajaxMap;
 	}
 	
+	/**
+	 * 태스크 추가
+	 * @param taskName
+	 * @param taskComment
+	 * @param empId
+	 * @param startDate
+	 * @param endDate
+	 * @param status
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/registerTask")
 	@ResponseBody
 	public List<Task> registerTask(String taskName
@@ -129,10 +140,81 @@ public class TaskController {
 		task.setEmpId(Integer.parseInt(empId));
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		task.setTaskStartDate(sdf.parse(startDate));
-		task.setTaskEndDate(sdf.parse(endDate));
+		if(!endDate.equals("")) {
+			task.setTaskEndDate(sdf.parse(endDate));
+		}
 		task.setTaskStatus(status);
 		
 		List<Task> taskList = taskService.addTask(task);
+		
+		return taskList;
+	}
+	
+	/**
+	 * 태스크 리스트 조회
+	 * @param empId
+	 * @return
+	 */
+	@RequestMapping("/getTaskList")
+	@ResponseBody
+	public List<Task> getTaskList(String empId) {
+		return taskService.getTaskList(empId);
+	}
+	
+	/**
+	 * 태스크 조회
+	 * @param taskNo
+	 * @return
+	 */
+	@RequestMapping("/getTask")
+	@ResponseBody
+	public Task getTask(String taskNo) {
+		log.info("taskNo: " + taskNo);
+		return taskService.getTask(taskNo);
+	}
+	
+	/**
+	 * 태스크 수정
+	 * @param taskNo
+	 * @param taskName
+	 * @param taskComment
+	 * @param empId
+	 * @param startDate
+	 * @param endDate
+	 * @param status
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/modifyTask")
+	@ResponseBody
+	public List<Task> modifyTask(String taskNo
+								, String taskName
+							    , String taskComment
+							    , String empId
+							    , String startDate
+							    , String endDate
+							    , String status) throws Exception {
+		Task task = new Task();
+		task.setTaskNo(Integer.parseInt(taskNo));
+		task.setTaskName(taskName);
+		task.setTaskComment(taskComment);
+		task.setEmpId(Integer.parseInt(empId));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		task.setTaskStartDate(sdf.parse(startDate));
+		if(!endDate.equals("")) {
+		task.setTaskEndDate(sdf.parse(endDate));
+		}
+		task.setTaskStatus(status);
+		
+		List<Task> taskList = taskService.modifyTask(task);
+		
+		return taskList;
+	}
+	
+	@RequestMapping("/deleteTask")
+	@ResponseBody
+	public List<Task> deleteTask(String taskNo) {
+		List<Task> taskList = taskService.deleteTask(taskNo);
 		
 		return taskList;
 	}

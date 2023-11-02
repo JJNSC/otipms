@@ -45,4 +45,33 @@ public class TaskServiceImpl implements TaskService {
 		return taskDao.selectTaskList(task.getEmpId());
 	}
 
+	//태스크 리스트 조회
+	@Override
+	public List<Task> getTaskList(String empId) {
+		return taskDao.selectTaskList(Integer.parseInt(empId));
+	}
+
+	//태스크 조회
+	@Override
+	public Task getTask(String taskNo) {
+		return taskDao.selectTask(Integer.parseInt(taskNo));
+	}
+
+	//태스크 수정
+	@Override
+	public List<Task> modifyTask(Task task) {
+		taskDao.updateTask(task);
+		return taskDao.selectTaskList(task.getEmpId());
+	}
+
+	//태스크 삭제
+	@Override
+	public List<Task> deleteTask(String taskNo) {
+		Task task = new Task();
+		task.setTaskNo(Integer.parseInt(taskNo));
+		taskDao.updateDeleteTask(task);
+		log.info("empId가 잘 왔을까..? ㅎㅎ" + task.getEmpId());
+		return taskDao.selectTaskList(task.getEmpId());
+	}
+
 }

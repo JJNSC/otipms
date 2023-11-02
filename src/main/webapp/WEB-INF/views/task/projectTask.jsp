@@ -19,7 +19,15 @@
     <script src="${pageContext.request.contextPath}/resources/js/task/task.js"></script>
     
     <script>
-		$(document).ready(function() {
+	    	window.onload = function() {
+			today = new Date();
+			console.log("today.toISOString() >>>" + today.toISOString());
+			today = today.toISOString().slice(0, 10);
+			console.log("today >>>> " + today);
+			bir = document.getElementById("startDate");
+			bir.value = today;
+		}
+		/* $(document).ready(function() {
 			conosole.log("되니?");
 			
 			$('.projectNo').on('click', function() {
@@ -30,7 +38,7 @@
 		        const target = $(this).data('target');
 		        $(target).collapse('toggle');
 		    });
-		});
+		}); */
 	</script>
 	
 	<style>
@@ -239,7 +247,7 @@
                                         <tbody id="detailTaskList">
                                         <c:if test="${fn:length(taskEmployeeList) != 0}">
                                         	<c:forEach var="taskEmployee" items="${taskEmployeeList}">
-	                                            <tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="${taskEmployee.empId}" id="${'employeeId'}${taskEmployee.empId}" href="${'#task'}${taskEmployee.empId}" role="button" aria-expanded="true" aria-controls="collapseExample">
+	                                            <tr class="reviewTitle table-hover" data-toggle="collapse" data-review-id="${taskEmployee.empId}" id="${'employeeId'}${taskEmployee.empId}" href="${'#task'}${taskEmployee.empId}" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="taskEmployeeTr(this)">
 	                                                <td>${taskEmployee.empId}</td>
 	                                                <td>${taskEmployee.projectName}</td>
 	                                                <td>${taskEmployee.teamName}</td>
@@ -273,39 +281,17 @@
 							                                            </tr>
 							                                        </thead>
 							                                        <tbody class="detailTaskBody">
-							                                            <tr class="table-hover">
+							                                            <!-- <tr class="table-hover" id="taskNo" onclick="taskTr(this)">
 							                                                <td style="padding-left: 20px;">1</td>
 							                                                <td>김종진 개인업무1</td>
-							                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
+							                                                <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td>
 							                                                <td>2023.10.14</td>
 							                                                <td class="text-center"> - </td>
 							                                                <td class="text-center text-success">진행중</td>
 							                                                <td class="text-center"> 
-							                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
+							                                              		<button type="button" id="deleteTaskBtn" name="taskNo" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>
 							                                            	</td>
-							                                            </tr>
-							                                            <tr class="table-hover">
-							                                                <td style="padding-left: 20px;">2</td>
-							                                                <td>김종진 개인업무2</td>
-							                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-							                                                <td>2023.10.14</td>
-							                                                <td class="text-center"> 2023.10.14 </td>
-							                                                <td class="text-center text-danger">진행완료</td>
-							                                                <td class="text-center"> 
-							                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-							                                            	</td>
-							                                            </tr>
-							                                            <tr class="table-hover">
-							                                                <td style="padding-left: 20px;">3</td>
-							                                                <td>김종진 개인업무3</td>
-							                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-							                                                <td>2023.10.14</td>
-							                                                <td class="text-center"> 2653.13.34 </td>
-							                                                <td class="text-center text-danger">진행완료</td>
-							                                                <td class="text-center"> 
-							                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-							                                            	</td>
-							                                            </tr>
+							                                            </tr> -->
 							                                        </tbody>
 							                                    </table>
 												         	</div>
@@ -314,79 +300,6 @@
 												</tr>
                                             </c:forEach>
                                         </c:if>
-											<tr class="reviewTitle table-hover" data-toggle="collapse" href="#taskExample6" role="button" aria-expanded="true">
-                                                <td>16</td>
-                                                <td>ㅇㅅㅇ 프로젝트</td>
-                                                <td>개발1팀</td>
-                                                <td>김종진</td>
-                                                <td>대리</td>
-                                                <td>
-													<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>
-                                                	<div class="progress" style="height: 9px">
-					                                    <div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>
-					                                    </div>
-					                                </div>
-                                                </td>
-                                            </tr>
-                                            <tr style="background-color:#f3f3f3;">
-									   			<td style="padding-top :0px; padding-bottom :0px;" colspan="6">
-							                      	<div class="collapse" id="taskExample6" style="">
-											         	<div class="card card-body mt-3 noHover">
-											         		<div class="card-title">
-							                                    <h6>업무 일정</h6>
-							                                </div>
-						                                    <table>
-						                                        <thead>
-						                                            <tr>
-						                                                <th scope="col" style="width: 10%;">번호</th>
-						                                                <th scope="col" style="width: 30%;">업무이름</th>
-						                                                <!-- <th scope="col" style="width: 30%;">업무내용</th> -->
-						                                                <th scope="col" style="width: 20%;">업무 시작일</th>
-						                                                <th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>
-						                                                <th scope="col" style="width: 20%; text-align: center;">진행 상태</th>
-						                                                <th class="text-center">삭제</th>
-						                                            </tr>
-						                                        </thead>
-						                                        <tbody>
-						                                            <tr class="table-hover">
-						                                                <td style="padding-left: 20px;">1</td>
-						                                                <td>김종진 개인업무1</td>
-						                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-						                                                <td>2023.10.14</td>
-						                                                <td class="text-center"> - </td>
-						                                                <td class="text-center text-success">진행중</td>
-						                                                <td class="text-center"> 
-						                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-						                                            	</td>
-						                                            </tr>
-						                                            <tr class="table-hover">
-						                                                <td style="padding-left: 20px;">2</td>
-						                                                <td>김종진 개인업무2</td>
-						                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-						                                                <td>2023.10.14</td>
-						                                                <td class="text-center"> 2023.10.14 </td>
-						                                                <td class="text-center text-danger">진행완료</td>
-						                                                <td class="text-center"> 
-						                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-						                                            	</td>
-						                                            </tr>
-						                                            <tr class="table-hover">
-						                                                <td style="padding-left: 20px;">3</td>
-						                                                <td>김종진 개인업무3</td>
-						                                                <!-- <td>이러쿵 저러쿵 하는 겁니다 기한은 10일 드리죠 ㅡㅅㅡ</td> -->
-						                                                <td>2023.10.14</td>
-						                                                <td class="text-center"> 2653.13.34 </td>
-						                                                <td class="text-center text-danger">진행완료</td>
-						                                                <td class="text-center"> 
-						                                              		<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-						                                            	</td>
-						                                            </tr>
-						                                        </tbody>
-						                                    </table>
-											         	</div>
-											      	</div>
-									   			</td>
-											</tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -406,7 +319,7 @@
 	                                    </div>
 	                                </div>
 	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-primary">삭제</button>
+	                                    <button type="button" class="btn btn-primary" id="deleteCheckBtn" onclick="deleteTask()" data-dismiss="modal">삭제</button>
 	                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	                                </div>
 	                            </div>
@@ -430,8 +343,14 @@
                                     <form>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
+	                                            <label class="control-label">태크스 번호 hidden 처리할 예정</label>
+	                                            <input class="form-control form-white" type="text" id="taskNoInput" name="taskNoInput">
+	                                        </div>
+	                                    </div>
+	                                    <div class="row mb-3">
+	                                        <div class="col-md-12">
 	                                            <label class="control-label">업무 이름</label>
-	                                            <input class="form-control form-white" value="ㅇㅅㅇ 업무" type="text" id="taskName" name="taskName">
+	                                            <input class="form-control form-white" type="text" id="taskName" name="taskName">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
@@ -450,13 +369,13 @@
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label class="control-label">담당자</label>
-	                                            <input class="form-control form-white" value="김종진" type="text" id="employeeName" name="employeeName">
+	                                            <input class="form-control form-white" type="text" id="employeeName" name="employeeName">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label for="example-datetime-local-input" class="control-label">시작일</label>
-	                                            <input class="form-control form-white" value="2023-10-25" type="date" id="startDate" name="startDate">
+	                                            <input class="form-control form-white" type="date" id="startDate" name="startDate">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
@@ -478,15 +397,16 @@
 	                                            <label class="control-label">진행상태</label>
 	                                            <!-- <input class="form-control form-white" value="김종진" type="text" name="category-name"> -->
 	                                            <select class="form-control" id="status" name="status">
-											        <option value="진행전">진행전</option>
-											        <option value="진행중">진행중</option>
-											        <option value="진행완료">진행완료</option>
+											        <option id="defaultStatus" value="진행전">진행전</option>
+											        <option id="ongoingStatus" value="진행중">진행중</option>
+											        <option id="doneStatus" value="진행완료">진행완료</option>
 											    </select>
 	                                        </div>
 	                                    </div>
 		                                <div class="form-footer text-right">
-	                                        <button type="button" class="btn btn-default waves-effect">초기화</button>
+	                                        <button type="button" class="btn btn-default waves-effect" onclick="resetForm()">초기화</button>
 	                                        <button type="button" id="registerTaskBtn" class="btn btn-danger waves-effect waves-light save-category" onclick="registerTask()">등록</button>
+	                                        <button type="button" id="updateTaskBtn" class="btn btn-danger waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
 	                                    </div>
 	                                </form>
                                 </div>
@@ -529,6 +449,39 @@
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
     
     <script src="${pageContext.request.contextPath}/resources/js/task/task.js"></script>
+    
+    <script>
+    	function taskEmployeeTr(taskEmployeeTr) {
+    		console.log("이게 되나??");
+    		console.log($(taskEmployeeTr));
+    		console.log($(taskEmployeeTr).attr("aria-expanded"))
+    		if ($(taskEmployeeTr).attr("aria-expanded") == "false") {
+     		console.log($(taskEmployeeTr).attr("data-review-id"));
+     		var empId = $(taskEmployeeTr).attr("data-review-id");
+     		
+     		getTaskList(empId);
+    		}
+    	}
+    	
+    	function taskTr(taskTr) {
+    		console.log("이게 되나??");
+    		console.log($(taskTr));
+    		console.log($(taskTr).attr("id"))
+     		var taskNo = $(taskTr).attr("id");
+     		
+     		getTaskDetail(taskNo);
+    	}
+    	
+    	function deleteTaskBtn(deleteTaskBtn) {
+    		console.log($(deleteTaskBtn));
+    		console.log($(deleteTaskBtn).attr("name"))
+     		var taskNo = $(deleteTaskBtn).attr("name");
+    		
+    		$("#deleteCheckBtn").attr("name", taskNo);
+     		
+    		console.log(taskNo.substring(4, taskNo.length));
+    	}
+    </script>
     
 
 </body>

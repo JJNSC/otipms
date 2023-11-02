@@ -71,7 +71,12 @@
 		, #{taskName}
 		, #{taskComment}
 		, #{taskStartDate}
+		<if test="taskEndDate == null">
+		, null
+		</if>
+		<if test="taskEndDate != null">
 		, #{taskEndDate}
+		</if>
 		, #{taskStatus}
 		, 'red'
 		, 0
@@ -92,4 +97,57 @@
 		   AND EMPID = #{empId}
 		   AND TASKDELETED = 0
 	</select>
+	
+	<!-- 태스크 조회 -->
+	<select id="selectTask" parameterType="int" resultType="Task">
+		SELECT taskNo
+			 , e.empId
+			 , e.empName
+			 , taskName
+			 , taskComment
+			 , taskStartDate
+			 , taskEndDate
+			 , taskStatus
+			 , taskDeleted
+		  FROM TASK t
+		 INNER JOIN EMP e
+		    ON t.EMPID = e.EMPID
+		 WHERE 1=1
+		   AND TASKNO = #{taskNo}
+		   AND TASKDELETED = 0
+	</select>
+	
+	<!-- 태스크 수정 -->
+	<update id="updateTask" parameterType="Task">
+		UPDATE TASK
+		   SET TASKNAME = #{taskName}
+		     , TASKCOMMENT = #{taskComment}
+		     , TASKSTARTDATE = #{taskStartDate}
+		     <if test="taskEndDate == null">
+		     , TASKENDDATE = null
+			 </if>
+			 <if test="taskEndDate != null">
+		     , TASKENDDATE = #{taskEndDate}
+			 </if>
+		     , TASKSTATUS = #{taskStatus}
+		 WHERE 1=1
+		   AND TASKNO = #{taskNo}
+		   AND TASKDELETED = 0
+	</update>
+	
+	<!-- 태스크 삭제 -->
+	<update id="updateDeleteTask">
+		UPDATE TASK
+		   SET TASKDELETED = 1
+		 WHERE 1=1
+		   AND TASKNO = #{taskNo}
+		   AND TASKDELETED = 0
+		
+		<selectKey keyProperty="empId" resultType="int" order="AFTER">
+			SELECT empId
+		  	  FROM TASK
+		 	 WHERE 1=1
+		   	   AND TASKNO = #{taskNo}
+		</selectKey>
+	</update>
 </mapper>
