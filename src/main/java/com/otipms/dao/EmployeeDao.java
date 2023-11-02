@@ -23,4 +23,7 @@ public interface EmployeeDao {
 	public void updateToNoTeam(Team team);
 	public void updateToDisabled(int empId);
 	public void resetEmployeePassword(Employee employee);
+	public void updateEmployee(Employee employee);
+	public void updateEmployeeInfo(Employee employee);
+	public void disableEmployee(int empId);
 }

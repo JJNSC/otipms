@@ -4,7 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-<html lang="en">
+<html id="startPage" lang="en">
+<!DOCTYPE html>
+<html id="startPage" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -51,6 +53,7 @@
 	        $('#nowEmpId').val(employeeData.empId);
 	        $('#nowEmpName').val(employeeData.empName);
 	        $('#nowEmpTel').val(employeeData.empTel);
+	        $('#nowEmpEmail').val(employeeData.empEmail);
 	        $('#nowEmpRank').val(employeeData.empRank);
 	        $('#nowEmpRank').text(employeeData.empRank);
 	        $('#nowProject').val(employeeData.projectNo);
@@ -79,6 +82,26 @@
 					},
 					error: function(){
 						alert("비밀번호 초기화 실패");
+					}
+				})
+			}
+		}
+	</script>
+	<script>
+		function alertBeforeDisableEmp(empId){
+			var disable = confirm("해당 사용자를 삭제하시겠습니까?");
+			if(disable){
+				$.ajax({
+					url : "/otipms/employeeManagement/disableEmployee",
+					type: "POST",
+					data: {empId:empId},
+					success: function(data){
+						alert("사용자가 삭제 되었습니다.");
+						console.log(data);
+						location.href=data;
+					},
+					error:function(){
+						alert("삭제 실패.");
 					}
 				})
 			}
@@ -161,25 +184,6 @@
                                                 <th class="text-center">삭제</th>
                                             </tr>
                                         </thead>
-                                        <!-- <tbody>
-                                            <tr>
-                                                <td>2010001</td>
-                                                <td>김진성</td>
-                                                <td>부장</td>
-                                                <td>010-1234-1234</td>
-                                                <td>프로젝트 2번째</td>
-                                                <td>개발2팀</td>
-                                                <td>팀장</td>
-                                                <td class="text-center"> 
-                                                	<a data-toggle="modal" data-target="#modifyInfo" data-whatever="@mdo">
-                                               			<i class="fa fa-pencil color-muted"></i>
-                                               		</a>
-                                                </td>
-                                                <td class="text-center"> 
-                                                	<button type="button"  class="btn fa fa-close color-danger" data-toggle="modal" data-target="#modalGrid"></button>
-                                                </td>
-                                            </tr>
-                                    	</tbody> -->
                                     </table>
                                 </div>
                             </div>
@@ -194,7 +198,7 @@
 			                <h5 class="modal-title" id="singleRegisterLabel">인력 정보 수정</h5>
 			            </div>
 			            <div class="modal-body">
-			                <form class="form-valide" action="#" method="post" id="modifySingleEmployeeInfo">
+			                <form class="form-valide" action="modifySingleEmployeeInfo" method="post" id="modifySingleEmployeeInfo">
 			                	<input type="hidden" id="nowEmpId" name="empId"></input>
 	                            <div class="form-group row">
 	                                <label class="col-lg-4 col-form-label" for="val-username">이름
@@ -223,6 +227,13 @@
 	                                </label>
 	                                <div class="col-lg-7">
 	                                    <input type="text" class="form-control" id="nowEmpTel" name="nowEmpTel" placeholder="010-xxxx-xxxx">
+	                                </div>
+	                            </div>
+	                            <div class="form-group row">
+	                                <label class="col-lg-4 col-form-label" for="emailAddress">이메일 
+	                                </label>
+	                                <div class="col-lg-7">
+	                                    <input type="text" class="form-control" id="nowEmpEmail" name="nowEmpEmail" placeholder="aaa@AAA.com">
 	                                </div>
 	                            </div>
 	                            <div class="form-group row">
@@ -263,7 +274,7 @@
 	                        </form>
 			            </div>
 			            <div class="modal-footer">
-			            	<button type="button" class="btn btn-primary" form="modifySingleEmployeeInfo">수정</button>
+			            	<button type="submit" class="btn btn-primary" form="modifySingleEmployeeInfo">수정</button>
 			                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			            </div>
 			        </div>
@@ -309,23 +320,16 @@
 	                            <div class="form-group row">
 	                             <label class="col-lg-3 col-form-label" for="registerProject">프로젝트 </label>
 	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="registerProject" name="registerProject">
+	                                 <select class="form-control" id="project-dropdown-modal-register" name="registerProject">
 	                                     <option value="">프로젝트 선택</option>
-	                                     <option value="PMS 제작 프로젝트">PMS 제작 프로젝트</option>
-	                                     <option value="프로젝트 2번째">프로젝트 2번째</option>
-	                                     <option value="본격 취업 프로젝트">본격 취업 프로젝트</option>
-	                                     <option value="임시 프로젝트">임시 프로젝트</option>
 	                                 </select>
 	                             </div>
 	                            </div>
 	                            <div class="form-group row">
 	                             <label class="col-lg-3 col-form-label" for="registerTeam">팀</label>
 	                             <div class="col-lg-7">
-	                                 <select class="form-control" id="registerTeam" name="registerTeam">
+	                                 <select class="form-control" id="team-dropdown-modal-register" name="registerTeam">
 	                                     <option value="">팀 선택</option>
-	                                     <option value="개발1팀">개발1팀</option>
-	                                     <option value="개발2팀">개발2팀</option>
-	                                     <option value="개발3팀">개발3팀</option>
 	                                 </select>
 	                             </div>
 	                            </div>
@@ -334,10 +338,10 @@
 	                             <div class="col-lg-7">
 	                                 <select class="form-control" id="registerAuthority" name="registerAuthority">
 	                                     <option value="">권한 선택</option>
-	                                     <option value="ROLE_PE">팀원</option>
-	                                     <option value="ROLE_PM">PM</option>
-	                                     <option value="ROLE_ADMIN">관리자</option>
-	                                     <option value="ROLE_CLIENT">고객사</option>
+	                                     <option value="ROLE_PE">ROLE_PE</option>
+	                                     <option value="ROLE_PM">ROLE_PM</option>
+	                                     <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+	                                     <option value="ROLE_CLIENT">ROLE_CLIENT</option>
 	                                 </select>
 	                             </div>
 	                            </div>
@@ -415,5 +419,5 @@
     <script src="${pageContext.request.contextPath}/resources/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
 </body>
-
+</html>
 </html>

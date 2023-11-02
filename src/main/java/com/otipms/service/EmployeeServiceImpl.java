@@ -192,6 +192,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 	}
 
+	@Override
+	public void updateEmployeeInfo(Employee employee) {
+		employeeDao.updateEmployee(employee);
+		employeeDao.updateEmployeeInfo(employee);
+		
+	}
+
+	@Override
+	public void disableEmployee(int empId) {
+		employeeDao.disableEmployee(empId);
+		
+	}
+
 	
 
 }

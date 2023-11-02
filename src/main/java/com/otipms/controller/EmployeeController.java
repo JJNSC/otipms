@@ -3,8 +3,6 @@ package com.otipms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otipms.dto.Employee;
-import com.otipms.dto.Project;
 import com.otipms.dto.ProjectTeams;
 import com.otipms.interceptor.Login;
 import com.otipms.service.EmployeeService;
@@ -117,5 +114,41 @@ public class EmployeeController {
 	public void resetEmpPassword(@RequestParam("empId") String empId) {
 		log.info("비밀번호 초기화할 empId : " + empId);
 		employeeService.resetEmployeePassword(Integer.parseInt(empId));
+	}
+	
+	@RequestMapping("/modifySingleEmployeeInfo")
+	public String modifySingleEmployeeInfo(@RequestParam("empId") int empId,
+										 @RequestParam("nowEmpName") String empName,
+										 @RequestParam("nowEmpRank") String empRank,
+										 @RequestParam("nowEmpTel") String empTel,
+										 @RequestParam("nowEmpEmail") String empEmail,
+										 @RequestParam("nowProject") int projectNo,
+										 @RequestParam("nowTeam") int teamNo,
+										 @RequestParam("nowRole") String role) {
+		log.info("사용자 정보 변경 empId : "+ empId);
+		log.info("사용자 정보 변경 empName : "+ empName);
+		log.info("사용자 정보 변경 empRank : "+ empRank);
+		log.info("사용자 정보 변경 empTel : "+ empTel);
+		log.info("사용자 정보 변경 projectNo : "+ projectNo);
+		log.info("사용자 정보 변경 teamNo : "+ teamNo);
+		log.info("사용자 정보 변경 role : "+ role);
+		Employee employee = new Employee();
+		employee.setEmpId(empId);
+		employee.setEmpName(empName);
+		employee.setEmpRank(empRank);
+		employee.setEmpTel(empTel);
+		employee.setEmpEmail(empEmail);
+		employee.setTeamNo(teamNo);
+		employee.setProjectNo(projectNo);
+		employee.setRole(role);
+		employeeService.updateEmployeeInfo(employee);
+		return "redirect: employeeList";
+	}
+	@ResponseBody
+	@RequestMapping("/disableEmployee")
+	public String disableEmployee(@RequestParam("empId") int empId) {
+		employeeService.disableEmployee(empId);
+		
+		return "/otipms/employeeManagement/employeeList";
 	}
 }

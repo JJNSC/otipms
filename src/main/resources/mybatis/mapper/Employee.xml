@@ -48,14 +48,18 @@
 	</insert>
 	
 	<select id="selectByEmployeeId" parameterType="int" resultType="Employee">
-		select *
-		  from emp 
-		 where 1=1
+		SELECT *
+		  FROM emp 
+		 WHERE 1=1
 		   AND empId = #{empId}
+		   AND empEnabled = 1
 	</select>
 	
 	<select id="selectInfoByEmployeeId" parameterType="int" resultType="Employee">
-		select * from empInfo where empId = #{empId}
+		SELECT * 
+		  FROM empInfo 
+		 WHERE 1 = 1 
+		   AND empId = #{empId} 
 	</select>
 	
 	<select id="getTeamNoByTeamName" parameterType="String" resultType="int">
@@ -63,13 +67,17 @@
 	</select>
 	
 	<select id="getEmployeeByTeamNo" parameterType="int" resultType="Employee">
-		select *
-			from emp e, empinfo ei
-			where e.empId = ei.empId and teamNo = #{teamNo}
+		SELECT *
+	      FROM emp e, empinfo ei
+		 WHERE e.empId = ei.empId  
+		   AND teamNo = #{teamNo} 
+		   AND e.empEnabled = 1
 	</select>
 	
 	<select id="checkEmployeeByTel" parameterType="String" resultType="int">
-		select count(*) from empInfo where empTel=#{empTel}
+		SELECT count(*) 
+		  FROM empInfo 
+		 WHERE empTel=#{empTel}
 	</select>
 	
 	<select id="selectAllEmployee" resultType="Employee">
@@ -87,6 +95,7 @@
 		 WHERE e.empId = ei.empId
 		   AND p.projectNo = t.projectNo
 		   AND t.teamNo = ei.teamNo
+		   AND e.empEnabled = 1
 	</select>
 	
 	<update id="updateTeamNo" parameterType="Employee">
@@ -103,8 +112,9 @@
 	
 	<select id="selectEmployeeByRole" parameterType="String" resultType="Employee">
 		select e.*, eif.emptel, eif.empemail from emp e inner join (select  empid ,emptel, empemail from empinfo ) eif
-		on e.empid = eif.empid 
-		where role=#{role}
+		    on e.empid = eif.empid 
+		 where role=#{role}
+		   AND e.empEnabled = 1 
 	</select>
 	
 	<select id="selectEmployeeByTeamNo" parameterType="int" resultType="Employee">
@@ -120,6 +130,7 @@
      	    ON e.empId = eif.empId 
      	 WHERE 1=1
      	   AND teamNo=#{teamNo} 
+     	   AND empEnabled = 1 
 	</select>
 	
 	<select id="selectEmployeeByTeamNoAndRole" parameterType="Employee" resultType="Employee">
@@ -129,6 +140,7 @@
 	        ON emp.empId = empinfo.empId 
 	     WHERE teamNo=#{teamNo} 
 	       AND role=#{role}
+	       AND empEnabled = 1 
 	</select>
 	
 	<update id="updateToNoTeam" parameterType="Team">
@@ -155,6 +167,28 @@
 		   SET empPw=#{empPw}
 		 WHERE 1=1 
 		   AND empId=#{empId}
+	</update>
+	
+	<update id="updateEmployee" parameterType="Employee">
+		UPDATE emp
+	 	   SET empName = #{empName}
+	 	     , empRank = #{empRank}
+	 	     , role = #{role}
+	 	 WHERE empId = #{empId}
+	</update>
+	
+	<update id="updateEmployeeInfo" parameterType="Employee">
+		UPDATE empInfo
+	 	   SET teamNo = #{teamNo}
+	 	     , empEmail = #{empEmail}
+	 	     , empTel = #{empTel}
+	 	 WHERE empId = #{empId}
+	</update>
+	
+	<update id="disableEmployee" parameterType="int">
+		UPDATE emp
+		   SET empEnabled = 0
+		 WHERE empId = #{empId}
 	</update>
 
 </mapper>

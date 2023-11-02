@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // For Responsive
           className: 'control',
           searchable: false,
-          orderable: false,
+          orderable: true,
           responsivePriority: 2,
           targets: 0,
           render: function (data, type, full, meta) {
@@ -125,19 +125,21 @@ document.addEventListener("DOMContentLoaded", function () {
         {
         	//date
         	targets: 7,
+        	orderable: false,
         	render: function (data, type, full, meta) {
         		var $thisEmpId = full['empId']; //date 필드에서 날짜 정보를 가져옴
 //        		return '<a href="modifySingleEmployee?empId=' + $thisEmpId +'"><i style="margin:auto;" class="fa fa-pencil color-muted"></i></a>';
         		return '<a data-toggle="modal" data-target="#modifyInfo" data-whatever="@mdo" data-employeeId="'+ $thisEmpId 
-        		+'" onclick="prepareModify('+$thisEmpId+')"><i style="margin:auto;" class="fa fa-pencil color-muted"></i></a>';
+        		+'" onclick="prepareModify('+$thisEmpId+')"><i style="padding-left:14px;" class="fa fa-pencil color-muted"></i></a>';
         	}
         },
         {
         	//date
         	targets: 8,
+        	orderable: false,
         	render: function (data, type, full, meta) {
         		var $deleteEmpId = full['empId']; //date 필드에서 날짜 정보를 가져옴
-        		return '<a href="deleteSingleEmployee?empId=' + $deleteEmpId +'"><i class="btn fa fa-close color-danger"></i ></a>';
+        		return '<a onclick="alertBeforeDisableEmp(' + $deleteEmpId +')"><i style="padding-left:14px;" class="fa fa-close color-danger"></i ></a>';
         	}
         }
       ],

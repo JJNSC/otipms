@@ -25,4 +25,6 @@ public interface EmployeeService {
 	public void addMultiEmployee(Employee employee);
 	public List<ProjectTeams> getTeamsPerProjects();
 	public void resetEmployeePassword(int empId);
+	public void updateEmployeeInfo(Employee employee);
+	public void disableEmployee(int empId);
 }
