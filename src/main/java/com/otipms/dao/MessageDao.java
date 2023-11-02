@@ -16,6 +16,13 @@ public interface MessageDao {
 	public List<Message> selectMyImportantMessage(int empId);
 	public List<Message> selectMyTemporaryMessage(int empId);
 	public List<Message> selectMyTrashMessage(int empId);
+	
+	//비동기
+	public List<Message> selectMyReceivedMessageA(Integer empId);
+	
+	
+	
+	
 	public Message selectMessagebyMessageNo(int messageNo);
 	public void updateImportantMessage(Message message);
 	public void updateTrashMessage(Message message);

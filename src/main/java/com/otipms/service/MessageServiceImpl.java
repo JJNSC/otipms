@@ -23,9 +23,6 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Autowired
 	private MessageDao messageDao;
-	
-	@Autowired
-	private SqlSession sqlSession;
 
 	@Autowired
 	private AlarmDao alarmDao;
@@ -34,6 +31,14 @@ public class MessageServiceImpl implements MessageService {
 	public List<Message> getMyReceivedMessage(int empId) {
 		return messageDao.selectMyReceivedMessage(empId);
 	}
+	
+	//비동기
+	@Override
+	public List<Message> getMyReceivedMessageA(String empId){
+		Integer empIdInt = Integer.parseInt(empId);
+		return messageDao.selectMyReceivedMessageA(empIdInt);
+	}
+	
 	
 	@Override
 	public List<Message> getMySentMessage(int empId) {
@@ -120,13 +125,13 @@ public class MessageServiceImpl implements MessageService {
 			messageDao.writeCC(cc);
 			if (cc.getCcType() != 2){
             	Alarm alarm = new Alarm();
-            	alarm.setEmpId(cc.getEmpId());
+            	alarm.setAlarmEmpId(cc.getEmpId());
             	alarm.setAlarmContentCode("쪽지 알림");
             	alarm.setAlarmContent("쪽지가 도착했습니다.");
             	Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
             	alarm.setAlarmDate(currentTimestamp);
             	alarm.setAlarmChk(0);
-            	alarm.setMessageNo(cc.getMessageNo());
+            	alarm.setAlarmMessageNo(cc.getMessageNo());
             	alarmDao.insertAlarm(alarm);
             }
         }

@@ -366,29 +366,6 @@ public class MailController {
 	    }
 	    return ccList;
 	}
-
-	/*private List<MediaFile> buildMailMediaList(List<MultipartFile> attachmentFiles, int messageNo) {
-	    List<MediaFile> mailMediaList = new ArrayList<>();
-
-	    for (MultipartFile attachmentFile : attachmentFiles) {
-	        if (!attachmentFile.isEmpty()) {
-	            MediaFile mediaFile = new MediaFile();
-	            
-	            mediaFile.setMessageNo(messageNo);
-	            mediaFile.setMediaFileName(attachmentFile.getOriginalFilename());
-	            mediaFile.setMediaFileType(attachmentFile.getContentType());
-	            try {
-	                // 파일 데이터를 바이트 배열로 변환하여 저장
-	                mediaFile.setMediaFileData(attachmentFile.getBytes());
-	            } catch (IOException e) {
-	                
-	                e.printStackTrace();
-	            }
-	            mailMediaList.add(mediaFile);
-	        }
-	    }
-	    return mailMediaList;
-	}*/
 	
 	//쪽지 사원 찾기
 	@Login

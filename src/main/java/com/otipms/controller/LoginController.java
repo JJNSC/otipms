@@ -118,13 +118,13 @@ public class LoginController {
 			
 			Alarm alarm = new Alarm();
 	        alarm.setAlarmNo(alarmNo);
-	        alarm.setEmpId(empId);
+	        alarm.setAlarmEmpId(empId);
 	        
 	        alarmService.updateAlarmChecked(alarm);
 	        
 	        Alarm falarm = alarmService.getAlarm(alarmNo);
 	        
-	        int messageNo = falarm.getMessageNo();
+	        int messageNo = falarm.getAlarmMessageNo();
 	        
 	        Map<String, Object> parameters = new HashMap<>();
 	        parameters.put("messageNo", messageNo);

@@ -24,6 +24,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/mail.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/headernside.js"></script>
     
     <!-- Socket -->
     <script type="text/javascript"
@@ -100,8 +101,9 @@
 				                            </div>
 		                          		</div>
                                     </div>
+                                    <input type="hidden" value="${employee.empId}" id="memIdSpan">
                                     <div id="email-list-container" class="email-list m-t-15">
-									    <c:forEach items="${messages}" var="message" varStatus="loop">
+									    <%-- <c:forEach items="${messages}" var="message" varStatus="loop">
 									        <div class="message message-${loop.index+1}">
 									            <div class="col-mail col-mail-1 received">
 									                <div class="email-checkbox">
@@ -128,7 +130,7 @@
 									                        </c:if>
 									                    </div>
 									                    <div class="date">
-									                    	<%-- <fmt:formatDate value="${message.messageReservedDate}" type="date" dateStyle="full" /> --%>
+									                    	<fmt:formatDate value="${message.messageReservedDate}" type="date" dateStyle="full" />
 									                    	<c:set var="currentDate" value="<%= new java.util.Date() %>" />
 												            <c:set var="oneDay" value="86400000" /> <!-- 24 hours in milliseconds -->
 												            <c:set var="timeDifference" value="${currentDate.time - message.messageReservedDate.time}" />
@@ -144,7 +146,7 @@
 									                </div>
 									            </a>
 									        </div>
-									    </c:forEach>
+									    </c:forEach> --%>
 									</div>
                                     <!-- panel -->
                                     <div class="row mt-3 justify-content-center">

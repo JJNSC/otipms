@@ -13,6 +13,11 @@ public interface MessageService {
 	public List<Message> getMyImportantMessage(int empId);
 	public List<Message> getMyTemporaryMessage(int empId);
 	public List<Message> getMyTrashMessage(int empId);
+	
+	
+	//비동기
+	public List<Message> getMyReceivedMessageA(String empId);
+	
 	public Message getMessageByMessageNo(int messageNo);
 	public void toggleMessageImportance(Message message);
 	public void updateMessageTrash(Message message);

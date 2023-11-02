@@ -1,13 +1,3 @@
-window.onload = function(){
-	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
-	var empId = document.getElementById("memIdSpan").value;
-	
-	webSocket.onopen = () => {
-		console.log("소켓 오픈");
-		
-		webSocket.send(empId);
-	}
-}
 // 드롭다운 항목 클릭 시 호출되는 함수
 function filter(selectedItem) {
     // 버튼 엘리먼트 선택

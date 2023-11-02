@@ -4,12 +4,12 @@
 	
 	<select id="selectAlarmByEmpId" parameterType="int" resultType="Alarm">
 		  SELECT a.AlarmNo
-		  	   , a.empId
+		  	   , a.empId AS alarmEmpId
 		  	   , a.AlarmContentCode
 		  	   , a.AlarmContent
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
-		  	   , a.MessageNo
+		  	   , a.MessageNo AS alarmMessageNo
 		    FROM Alarm a
       INNER JOIN emp e
 		      ON a.empId = e.empId
@@ -19,12 +19,12 @@
 	</select>
 	<select id="selectAlarmCountByEmpId" parameterType="int" resultType="Alarm">
 		  SELECT a.AlarmNo
-		  	   , a.EmpId
+		  	   , a.EmpId AS alarmEmpId
 		  	   , a.AlarmContentCode
 		  	   , a.AlarmContent
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
-		  	   , a.MessageNo
+		  	   , a.MessageNo AS alarmMessageNo
 		    FROM Alarm a
       INNER JOIN emp e
 		      ON a.EmpId = e.EmpId
@@ -37,18 +37,18 @@
 	
 	<select id="selectAlarmCountByEmpIdI" parameterType="java.lang.Integer" resultType="Alarm">
 		  SELECT a.AlarmNo
-		  	   , a.EmpId
+		  	   , a.EmpId AS alarmEmpId
 		  	   , a.AlarmContentCode
 		  	   , a.AlarmContent
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
-		  	   , a.MessageNo
+		  	   , a.MessageNo AS alarmMessageNo
 		    FROM Alarm a
       INNER JOIN emp e
 		      ON a.EmpId = e.EmpId
 	  INNER JOIN message m
 	  		  ON m.messageNo = a.messageNo
-		   WHERE a.EmpId = #{empId}
+		   WHERE a.EmpId = #{alarmEmpId}
 		     AND e.empEnabled = 1
    AND TO_NUMBER(a.AlarmChk) = 0
 	</select>
@@ -70,12 +70,12 @@
 		          )
 			 VALUES 
 			      ( #{alarmNo}
-			      , #{empId}
+			      , #{alarmEmpId}
 			      , #{alarmContentCode}
 			      , #{alarmContent}
 			      , SYSDATE
 			      , 0
-			      , #{messageNo}
+			      , #{alarmMessageNo}
 			      )
 	</insert>
 	
@@ -97,7 +97,7 @@
 	<select id="selectAlarmByMessageNo" parameterType="java.util.Map" resultType="Alarm">
 		SELECT *
 		  FROM ALARM
-		 WHERE messageNo = #{messageNo}
-		   AND empId = #{empId}
+		 WHERE messageNo = #{alarmMessageNo}
+		   AND empId = #{alarmEmpId}
 	</select>
 </mapper>

@@ -14,7 +14,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otipms.dao.AlarmDao;
 import com.otipms.dto.Alarm;
+import com.otipms.dto.Message;
 import com.otipms.service.AlarmService;
+import com.otipms.service.MessageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +32,9 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	@Autowired
 	private AlarmService alarmService;
 	
+	@Autowired
+	private MessageService messageService;
+	
 	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	
 	//클라이언트가 서버에 접속 성공시 호출
@@ -43,19 +48,20 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String memId = message.getPayload();
 	    log.info("메세지 도착: {} : " + memId);
-	    //Thread.sleep(400);
 		List<Alarm> alarms = alarmService.selectAlarmCountByEmpIdI(memId);
-		
+		List<Message> messages = messageService.getMyReceivedMessageA(memId);
 	    // 세션에 알림 개수와 알림 내용을 전달
 	    Map<String, Object> notificationData = new HashMap<>();
-	    notificationData.put("count", alarms.size());
+	    notificationData.put("alcount", alarms.size());
 	    notificationData.put("alarms", alarms);
-
+	    notificationData.put("mscount", messages.size());
+	    notificationData.put("messages", messages);
+	    
 	    TextMessage sendMsg = new TextMessage(new ObjectMapper().writeValueAsString(notificationData));
 
-	    // 모든 연결된 세션에 알림을 보냅니다.
+	    // 모든 연결된 세션에 알림 및 메세지를 보냅니다.
 	    for (WebSocketSession single : sessions) {
-	    	log.info("알람 전송 : " + sendMsg);
+	        log.info("Response 전송 : " + sendMsg);
 	        single.sendMessage(sendMsg);
 	    }
 	}
