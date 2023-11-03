@@ -1,9 +1,6 @@
 package com.otipms.controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +53,20 @@ public class TaskController {
 			map.put("scope", "all");
 			List<TaskEmployee> taskEmployeeList = taskService.getTaskEmployeeList(map);
 			model.addAttribute("taskEmployeeList", taskEmployeeList);
+		} else {
+			//else if(LoginController.loginEmployee.getRole().equals("ROLE_PM")) {
+			//위와 같았으나 사실 ADMIN을 제외하면 모든 사람이 이렇게 나와야 함
+			int projectNo = taskService.getProjectNo(LoginController.loginEmployee.getEmpId());
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("scope", "project");
+			map.put("projectNo", projectNo);
+			List<TaskEmployee> taskEmployeeList = taskService.getTaskEmployeeList(map);
+			model.addAttribute("taskEmployeeList", taskEmployeeList);
+			model.addAttribute("projectNo", projectNo);
+			
+			List<Team> teamList = taskService.getTeamList(projectNo + "");
+			model.addAttribute("teamList", teamList);
 		}
 		
 		return "task/projectTask";
@@ -179,7 +190,18 @@ public class TaskController {
 		return taskService.getTask(taskNo);
 	}
 	
-	//태스크 수정
+	/**
+	 * 태스크 수정
+	 * @param taskNo
+	 * @param taskName
+	 * @param taskComment
+	 * @param empId
+	 * @param startDate
+	 * @param endDate
+	 * @param status
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/modifyTask")
 	@ResponseBody
 	public Map<String, Object> modifyTask(String taskNo
@@ -215,16 +237,9 @@ public class TaskController {
 	/**
 	 * 태스크 삭제
 	 * @param taskNo
+	 * @param empId
 	 * @return
 	 */
-	/*@RequestMapping("/deleteTask")
-	@ResponseBody
-	public List<Task> deleteTask(String taskNo) {
-		List<Task> taskList = taskService.deleteTask(taskNo);
-		
-		return taskList;
-	}*/
-	
 	@RequestMapping("/deleteTask")
 	@ResponseBody
 	public Map<String, Object> deleteTask(String taskNo, String empId) {

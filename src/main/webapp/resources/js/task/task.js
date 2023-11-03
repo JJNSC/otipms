@@ -1,11 +1,11 @@
-window.onload = function() {
+/*window.onload = function() {
 			today = new Date();
 			console.log("today.toISOString() >>>" + today.toISOString());
 			today = today.toISOString().slice(0, 10);
 			console.log("today >>>> " + today);
 			bir = document.getElementById("startDate");
 			bir.value = today;
-		}
+		}*/
 
 //프로젝트 선택
 function selectProject() {
@@ -356,7 +356,11 @@ function getTaskList(empId) {
 						taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
 					}
 					taskhtml += '<td class="text-center">';
-					taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+					if(($("#loginEmployeeRole").val() == "ROLE_PE" || $("#loginEmployeeRole").val() == "ROLE_CLIENT") && empId != $("#loginEmployeeId").val()) {
+						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger d-none" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+					} else {
+						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+					}
 					taskhtml += '</td>';
 					taskhtml += '</tr>';
 				});
@@ -400,8 +404,36 @@ function getTaskDetail(taskNo) {
 				$("#doneStatus").prop("selected", "selected");
 			}
 			
-			$("#registerTaskBtn").addClass("d-none");
-			$("#updateTaskBtn").removeClass("d-none");
+			if(($("#loginEmployeeRole").val() == "ROLE_PE" || $("#loginEmployeeRole").val() == "ROLE_CLIENT") && data.empId == $("#loginEmployeeId").val()) {
+				$("#updateTaskBtn").addClass("d-none");
+
+				$("#taskNoInput").attr("readonly", true);
+				$("#taskName").attr("readonly", true);
+				$("#taskComment").attr("readonly", false);
+				$("#empIdInput").attr("readonly", true);
+				$("#employeeName").attr("readonly", true);
+				$("#startDate").attr("readonly", false);
+				$("#endDate").attr("readonly", false);
+				$("#status").attr("readonly", false);
+				$("#status option").attr("disabled", true);
+			}
+			if(($("#loginEmployeeRole").val() == "ROLE_PE" || $("#loginEmployeeRole").val() == "ROLE_CLIENT") && data.empId != $("#loginEmployeeId").val()) {
+				$("#updateTaskBtn").addClass("d-none");
+				
+				$("#taskNoInput").attr("readonly", true);
+				$("#taskName").attr("readonly", true);
+				$("#taskComment").attr("readonly", true);
+				$("#empIdInput").attr("readonly", true);
+				$("#employeeName").attr("readonly", true);
+				$("#startDate").attr("readonly", true);
+				$("#endDate").attr("readonly", true);
+				$("#status").attr("readonly", true);
+				$("#status option").attr("disabled", true);
+			} else {
+				$("#registerTaskBtn").addClass("d-none");
+				$("#updateTaskBtn").removeClass("d-none");
+			}
+			
 
 		},
 		error: function(error) {
@@ -410,7 +442,7 @@ function getTaskDetail(taskNo) {
 	});
 }
 
-//태스크 수정
+//태스크 수정(ADMIN, PM)
 function updateTask() {
 	var taskNo = $("#taskNoInput").val();
 	var taskName = $("#taskName").val();

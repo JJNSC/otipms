@@ -19,14 +19,14 @@
     <script src="${pageContext.request.contextPath}/resources/js/task/task.js"></script>
     
     <script>
-	    	window.onload = function() {
+	    	/* window.onload = function() {
 			today = new Date();
 			console.log("today.toISOString() >>>" + today.toISOString());
 			today = today.toISOString().slice(0, 10);
 			console.log("today >>>> " + today);
 			bir = document.getElementById("startDate");
 			bir.value = today;
-		}
+		} */
 		/* $(document).ready(function() {
 			conosole.log("되니?");
 			
@@ -105,10 +105,14 @@
                         <div class="card card-custom">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4><b>프로젝트 업무 관리</b></h4> 
-                                    <span style="float: right">
-                                    	<button type="button" class="btn mt-3 mb-1 btn-primary" onclick="addTask()">추가</button>
-                                    </span>
+                                    <h4><b>프로젝트 업무 관리</b></h4>
+                                    <input type="hidden" id="loginEmployeeId" value="${employee.empId}">
+                                    <input type="hidden" id="loginEmployeeRole" value="${employee.role}">
+                                    <c:if test="${employee.role eq 'ROLE_ADMIN' or employee.role eq 'ROLE_PM'}">
+	                                    <span style="float: right">
+	                                    	<button type="button" class="btn mt-3 mb-1 btn-primary" onclick="addTask()">추가</button>
+	                                    </span>
+                                    </c:if> 
                                 </div>
                                 <div class="row my-3">
                                 	<c:if test="${employee.role eq 'ROLE_ADMIN'}">
@@ -125,14 +129,28 @@
 										    </select>
 										</div>
                                 	</c:if>
+                                	<c:if test="${employee.role ne 'ROLE_ADMIN'}">
+                                		<div class="col-lg-4" style="display:none;">
+										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
+										    	<option selected="selected" value="${projectNo}">${projectNo}</option>
+										    </select>
+										</div>
+                                	</c:if>
+                                	
 									<div class="col-lg-3"  style="display:inline-block;">
 		                                 <select class="form-control" id="teamSelect" name="teamSelect" onchange="selectTeam()">
-		                                     <option value="">팀 선택</option>
+		                                     <option value="팀 선택">팀 선택</option>
+		                                     <c:if test="${employee.role ne 'ROLE_ADMIN'}">
+		                                     	<c:forEach var="team" items="${teamList}">
+										    		<option value="${team.teamNo}">${team.teamName}</option>
+										    	</c:forEach>		                                     
+		                                     </c:if>
 		                                     <!-- <option value="html">개발1팀</option>
 		                                     <option value="html">개발2팀</option>
 		                                     <option value="html">개발3팀</option> -->
 		                                 </select>
-		                            </div>                                
+		                            </div>
+		                                                            
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -320,9 +338,16 @@
 	                                        </div>
 	                                    </div>
 		                                <div class="form-footer text-right">
-	                                        <button type="button" class="btn btn-default waves-effect" onclick="resetForm()">초기화</button>
-	                                        <button type="button" id="registerTaskBtn" class="btn btn-danger waves-effect waves-light save-category" onclick="registerTask()">등록</button>
-	                                        <button type="button" id="updateTaskBtn" class="btn btn-danger waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
+	                                        <!-- <button type="button" class="btn btn-default waves-effect" onclick="resetForm()">초기화</button> -->
+	                                        <c:if test="${employee.role eq 'ROLE_ADMIN' or employee.role eq 'ROLE_PM'}">
+		                                        <button type="button" id="resetBtn" class="btn btn-default waves-effect" onclick="resetForm()">초기화</button>
+		                                        <button type="button" id="registerTaskBtn" class="btn btn-danger waves-effect waves-light save-category" onclick="registerTask()">등록</button>
+		                                        <button type="button" id="updateTaskBtn" class="btn btn-danger waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
+	                                        </c:if>
+	                                        <c:if test="${employee.role ne 'ROLE_ADMIN' or employee.role ne 'ROLE_PM'}">
+		                                        <button type="button" id="resetBtn" class="btn btn-default waves-effect d-none" onclick="resetForm()">초기화</button>
+	                                        	<button type="button" id="updateTaskBtn" class="btn btn-danger waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
+	                                        </c:if>
 	                                    </div>
 	                                </form>
                                 </div>
@@ -368,7 +393,7 @@
     
     <script>
     	function taskEmployeeTr(taskEmployeeTr) {
-    		console.log("이게 되나??");
+    		console.log("이게 되나??");  
     		console.log($(taskEmployeeTr));
     		console.log($(taskEmployeeTr).attr("aria-expanded"))
     		if ($(taskEmployeeTr).attr("aria-expanded") == "false") {

@@ -162,4 +162,17 @@
 	       </if>
 		   AND TASKDELETED = 0
 	</select>
+	
+	<!-- 사용자가 속한 프로젝트 번호 조회 -->
+	<select id="selectProjectNo" parameterType="int" resultType="int">
+		SELECT p.projectNo
+		  FROM EMPINFO ei
+		 INNER JOIN TEAM t
+			ON ei.TEAMNO = t.TEAMNO
+		 INNER JOIN PROJECT p
+			ON t.PROJECTNO = p.PROJECTNO
+		 WHERE 1=1
+		   AND ei.EMPID = #{empId}
+		   AND p.PROJECTDELETED = 0
+	</select>
 </mapper>

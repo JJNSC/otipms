@@ -74,4 +74,11 @@ public interface TaskDao {
 	 */
 	public int countTaskList(Map<String, Object> map);
 
+	/**
+	 * 사용자 번호로 사용자가 속한 프로젝트 번호 조회
+	 * @param empId
+	 * @return
+	 */
+	public int selectProjectNo(int empId);
+
 }

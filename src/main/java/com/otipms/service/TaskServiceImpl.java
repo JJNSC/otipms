@@ -103,4 +103,10 @@ public class TaskServiceImpl implements TaskService {
 		return progressRate;
 	}
 
+	//사용자가 속한 프로젝트 번호 조회
+	@Override
+	public int getProjectNo(int empId) {
+		return taskDao.selectProjectNo(empId);
+	}
+
 }

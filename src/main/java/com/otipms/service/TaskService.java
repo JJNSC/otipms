@@ -77,4 +77,11 @@ public interface TaskService {
 	 */
 	public double calculateProgressRate(int empId);
 
+	/**
+	 * 사용자가 속한 프로젝트 번호 조회
+	 * @param empId
+	 * @return
+	 */
+	public int getProjectNo(int empId);
+
 }
