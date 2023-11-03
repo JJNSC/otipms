@@ -243,7 +243,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee selectProfileEmp(int empId) {
-		return employeeDao.selectProfileEmp(empId);
+		return employeeDao.selectProfileEmpByEmpId(empId);
 	}
 
 	

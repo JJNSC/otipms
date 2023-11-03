@@ -169,7 +169,7 @@ public class EmployeeController {
 		return "/otipms/employeeManagement/employeeList";
 	}
 	
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("/exportEmployeeToExcel")
 	public String exportEmployeeToExcel(@RequestParam(name="projectName", required=false, defaultValue="0")String projectName,
 										@RequestParam(name="teamName", required=false, defaultValue="0")String teamName,
@@ -198,40 +198,19 @@ public class EmployeeController {
         List<Employee> employeeList = new ArrayList<>();
         if(projectName.equals("0")) {
         	employeeList = employeeService.getAllEmployee();
+        	int i =1;
+        	data.put(String.valueOf(i), new Object[]{"사원번호", "사원명", "직책", "연락처", "프로젝트", "팀", "권한","회사명","이메일"});
+        	for(Employee emp : employeeList) {
+        		
+        		data.put(String.valueOf(i), new Object[]{"사원번호", "사원명", "직책", "연락처", "프로젝트", "팀", "권한","회사명","이메일"});
+        		i++;
+        	}
         }else if(!projectName.equals("0")&&teamName.equals("0")) {
         	
         }else if(!projectName.equals("0")&&!teamName.equals("0")) {
         	
         }
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		return "Data received successfully";
-	}
+	}*/
 }

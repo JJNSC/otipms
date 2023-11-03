@@ -62,7 +62,7 @@
 		   AND empId = #{empId} 
 	</select>
 	
-	<select id="selectProfileEmp" parameterType="int " resultType="Employee">
+	<select id="selectProfileEmpByEmpId" parameterType="int" resultType="Employee">
 		SELECT e.empName
 		     , e.empRank
 		     , t.teamName
@@ -77,10 +77,6 @@
 		   AND e.EMPID = #{empId}
 		   AND e.EMPENABLED = 1
 		 
-	</select>
-	
-	<select id="getTeamNoByTeamName" parameterType="String" resultType="int">
-		select teamNo from team where teamName=#{teamName}
 	</select>
 	
 	<select id="getEmployeeByTeamNo" parameterType="int" resultType="Employee">

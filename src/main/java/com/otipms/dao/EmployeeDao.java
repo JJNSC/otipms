@@ -28,5 +28,5 @@ public interface EmployeeDao {
 	public void disableEmployee(int empId);
 	public Employee getEmployeeInfoByProjectNoAndTeamName(Employee employee);
 	public List<Employee> getProjectEmployees(String projectName);
-	public Employee selectProfileEmp(int empId);
+	public Employee selectProfileEmpByEmpId(int empId);
 }
