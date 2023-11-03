@@ -83,7 +83,7 @@
 							                    <div class="input-group icons" style="margin-top:0px;">
 							                    	<input type="hidden" value="${employee.empId}" id="memIdSpan">
 							                    	<input type="hidden" value="${cnt}" id="cntSpan">
-							                        <input type="search" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search Dashboard">
+							                        <input id="search" type="search" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search Dashboard">
 							                        <div class="input-group-prepend">
 							                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1">
 							                            	<i class="mdi mdi-magnify"></i>
