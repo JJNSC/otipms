@@ -107,11 +107,11 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
                                                 <label>고객 연락처</label>
-                                                <input type="text" class="form-control" value="${customerInfo.empTel }" readonly="readonly">
+                                                <input type="text" class="form-control" id="ClientTel" value="${customerInfo.empTel }" readonly="readonly">
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label>고객 이메일</label>
-                                                <input type="text" class="form-control" value="${customerInfo.empEmail }" readonly="readonly">
+                                                <input type="text" class="form-control" id="ClientEmail" value="${customerInfo.empEmail }" readonly="readonly">
                                             </div>
                                            
                                         </div>

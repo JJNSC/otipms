@@ -27,4 +27,7 @@ public interface EmployeeService {
 	public void resetEmployeePassword(int empId);
 	public void updateEmployeeInfo(Employee employee);
 	public void disableEmployee(int empId);
+	public List<Employee> getProjectEmployees(String projectName);
+	public List<Employee> getProjectTeamEmployees(String projectName,String teamName);
+	public Employee selectProfileEmp(int empId);
 }

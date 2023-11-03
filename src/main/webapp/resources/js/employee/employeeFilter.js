@@ -35,11 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     return false;
                 });
                 
-                const filterDiv  = document.getElementById("DataTables_Table_0_filter");
+         /*       const filterDiv  = document.getElementById("DataTables_Table_0_filter");
                 
                 const searchBar = filterDiv.querySelector("input[type='search']");
                 
-                searchBar.val="PMS 제작 프로젝트";
+                searchBar.val="PMS 제작 프로젝트";*/
             }
             
             projectData.forEach((project) => {
@@ -47,21 +47,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 option.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
                 option.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
                 projectDropdown.appendChild(option);
-                projectDropdownModal.appendChild(option);
-                projectDropdownModalRegister.appendChild(option);
+            });
+            projectData.forEach((project) => {
+            	const option2 = document.createElement("option");
+            	option2.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	option2.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	projectDropdownModal.appendChild(option2);
+            });
+            projectData.forEach((project) => {
+            	const option3 = document.createElement("option");
+            	option3.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	option3.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	projectDropdownModalRegister.appendChild(option3);
             });
 
             projectDropdown.addEventListener("change", function () {
             	const selectedProject = projectDropdown.value;
             	const selectedProjectData = projectData.find((project) => project.projectName === selectedProject);
 
-				const filterDiv  = document.getElementById("DataTables_Table_0_filter");
-				const searchBar = filterDiv.querySelector("input[type='search']");
+				/*const filterDiv  = document.getElementById("DataTables_Table_0_filter");
+				const searchBar = filterDiv.querySelector("input[type='search']");*/
 				
-				var dt_product_table = $('.datatables-products');
+				/*var dt_product_table = $('.datatables-products');
 				
 				
-            	searchBar.value = selectedProject;
+            	searchBar.value = selectedProject;*/
             	
                 // 이전 하위 드롭다운 제거
                 while (teamDropdown.options.length > 1) {
@@ -93,8 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
             	
             	if (selectedProjectDataModal) {
             		// 프로젝트 선택에 따라 팀 데이터 필터링
-            		const filteredTeams = teamData.filter((team) => team.projectNo === selectedProjectDataModal.projectNo);
-            		filteredTeams.forEach((team) => {
+            		const filteredTeamsModal = teamData.filter((team) => team.projectNo === selectedProjectDataModal.projectNo);
+            		filteredTeamsModal.forEach((team) => {
             			const option = document.createElement("option");
             			option.value = team.teamName;
             			option.text = team.teamName;
@@ -116,8 +126,8 @@ document.addEventListener("DOMContentLoaded", function () {
             	
             	if (selectedProjectDataModalRegister) {
             		// 프로젝트 선택에 따라 팀 데이터 필터링
-            		const filteredTeams = teamData.filter((team) => team.projectNo === selectedProjectDataModalRegister.projectNo);
-            		filteredTeams.forEach((team) => {
+            		const filteredTeamsModalRegister = teamData.filter((team) => team.projectNo === selectedProjectDataModalRegister.projectNo);
+            		filteredTeamsModalRegister.forEach((team) => {
             			const option = document.createElement("option");
             			option.value = team.teamName;
             			option.text = team.teamName;

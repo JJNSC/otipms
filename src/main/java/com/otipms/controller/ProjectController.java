@@ -62,10 +62,10 @@ public class ProjectController {
 			
 			
 			//해당 프로젝트당 고객 정보(고객명,연락처,이메일)
-			employee.setRole("ROLE_CLIENT");
+			employee.setTeamName("고객");
 			System.out.println("project : "+ project);
 			System.out.println("project.getEmpId() : "+ project.getEmpId());
-			Employee customerInfo = employeeService.getEmployeeAllInfo(project.getEmpId());
+			Employee customerInfo = projectService.getEmployeeInfoByProjectNoAndTeamName(employee);
 			log.info("고객사 정보 : "+customerInfo);
 			if( customerInfo==null ||customerInfo.equals(null)) {
 				Employee noInfo =new Employee();
@@ -208,11 +208,11 @@ public class ProjectController {
 	public String modifyProject(@RequestParam("projectNo") String projectNo,
 								@RequestParam("projectName") String projectName,
 							 	@RequestParam("projectDate") String projectDate,
-							 	@RequestParam("ProjectManagerId") String PMId,
+							 	@RequestParam(name="ProjectManagerId", required=false, defaultValue="0") String PMId,
 							 	@RequestParam(name="beforeProjectManagerId", required=false, defaultValue="0" ) String beforePMId,
 							 	@RequestParam("projectOutLines")String projectContent,
 							 	@RequestParam("customerCompany") String projectCompanyName,
-							 	@RequestParam("customerId") String empId,
+							 	@RequestParam(name="customerId", required=false, defaultValue="0") String empId,
 								@RequestParam(name="beforeCustomerId", required=false, defaultValue="0") String beforeEmpId){
 		System.out.println("projectNo :" + projectNo );
 		System.out.println("projectName :" + projectName );

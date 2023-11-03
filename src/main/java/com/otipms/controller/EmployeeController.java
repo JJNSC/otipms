@@ -1,12 +1,21 @@
 package com.otipms.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,11 +53,19 @@ public class EmployeeController {
 	
 	@ResponseBody
 	@RequestMapping("/employeeListJson")
-	public String employeeListJson() throws JsonProcessingException {
+	public String employeeListJson(@RequestParam(name="project", required=false,defaultValue="0" ) String projectName,
+								   @RequestParam(name="team", required=false, defaultValue="0") String teamName) throws JsonProcessingException {
 		
-		List<Employee> data = employeeService.getAllEmployee();
-		log.info("그냥 데이터:" + data);
-		  
+		List<Employee> data = new ArrayList<>();
+		if(projectName.equals("0")) {
+			data = employeeService.getAllEmployee();
+			log.info("그냥 데이터:" + data);
+		}else if (!projectName.equals("0") && teamName.equals("0")) {
+			data = employeeService.getProjectEmployees(projectName);
+		}else if(!projectName.equals("0") && !teamName.equals("0")){
+			data = employeeService.getProjectTeamEmployees(projectName,teamName);
+		}
+		
 		//data를 json데이터로 바꾸기
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonData = objectMapper.writeValueAsString(data);
@@ -150,5 +167,71 @@ public class EmployeeController {
 		employeeService.disableEmployee(empId);
 		
 		return "/otipms/employeeManagement/employeeList";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/exportEmployeeToExcel")
+	public String exportEmployeeToExcel(@RequestParam(name="projectName", required=false, defaultValue="0")String projectName,
+										@RequestParam(name="teamName", required=false, defaultValue="0")String teamName,
+										@RequestParam(name="excelFileName", required=false, defaultValue="employeeList")String excelFileName,
+										@RequestParam(name="excelSheetName", required=false, defaultValue="employeeList")String excelSheetName) {
+	    
+		String filePath = "C:\\FileStore";	
+		Date currentDate = new Date();
+		    
+		// 날짜와 시간을 원하는 형식으로 포맷합니다.
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd_HHmm");
+		String formattedDate = dateFormat.format(currentDate);
+		
+		System.out.println("현재 날짜와 시간: " + formattedDate);
+		String fileNm = excelFileName+formattedDate+".xlsx";
+		log.info("엑셀 파일명어캐돠나요 : "+ fileNm);
+		
+		// 빈 Workbook 생성
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        // 빈 Sheet를 생성
+        XSSFSheet sheet = workbook.createSheet(excelSheetName);
+        
+        // Sheet를 채우기 위한 데이터들을 Map에 저장
+        Map<String, Object[]> data = new TreeMap<>();
+        List<Employee> employeeList = new ArrayList<>();
+        if(projectName.equals("0")) {
+        	employeeList = employeeService.getAllEmployee();
+        }else if(!projectName.equals("0")&&teamName.equals("0")) {
+        	
+        }else if(!projectName.equals("0")&&!teamName.equals("0")) {
+        	
+        }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return "Data received successfully";
 	}
 }

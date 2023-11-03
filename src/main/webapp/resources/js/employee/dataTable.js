@@ -12,20 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var empNo = null;
   
   var dt_product_table = $('.datatables-products'),
-    productAdd = "noticeAdd",
-    statusObj = {
-      1: { title: 'Scheduled', class: 'bg-label-warning' },
-      2: { title: 'Publish', class: 'bg-label-success' },
-      3: { title: 'Inactive', class: 'bg-label-danger' }
-    },
-    categoryObj = {
-      0: { title: 'Household' },
-      1: { title: 'Office' },
-      2: { title: 'Electronics' },
-      3: { title: 'Shoes' },
-      4: { title: 'Accessories' },
-      5: { title: 'Game' }
-    }
+    productAdd = "noticeAdd"
   
   //DataTable
   if (dt_product_table.length) {
@@ -255,4 +242,25 @@ document.addEventListener("DOMContentLoaded", function () {
     $('.dataTables_filter .form-control').removeClass('form-control-sm');
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
+  
+  //해당 select 요소에 대한 jQuery 선택자
+  var projectDropdown = $('#project-dropdown');
+  var teamDropdown = $('#team-dropdown');
+
+  // select 요소의 값이 변경될 때 이벤트 리스너 추가
+  projectDropdown.on('change', function() {
+  var selectedProject = projectDropdown.val();
+  var selectedTeam = teamDropdown.val();
+
+  // DataTables의 ajax 요청을 다시 호출
+  dt_products.ajax.url('employeeListJson?project=' + selectedProject + '&team=' + selectedTeam).load();
+  });
+
+  teamDropdown.on('change', function() {
+  var selectedProject = projectDropdown.val();
+  var selectedTeam = teamDropdown.val();
+
+  // DataTables의 ajax 요청을 다시 호출
+  dt_products.ajax.url('employeeListJson?project=' + selectedProject + '&team=' + selectedTeam).load();
+  });
 });

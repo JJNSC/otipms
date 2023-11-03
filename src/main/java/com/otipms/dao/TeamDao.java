@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.otipms.dto.Employee;
 import com.otipms.dto.ProjectTeams;
 import com.otipms.dto.Team;
 
@@ -21,4 +22,5 @@ public interface TeamDao {
 	public void removeTeam(int teamNo);
 	public int getTeamNoByProjectNoAndTeamName(Team team);
 	public List<ProjectTeams> getTeamsPerProjects();
+	public Team selectTeamByEmpId(int empId);
 }

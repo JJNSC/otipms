@@ -95,7 +95,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public Employee getEmployeeInfoByProjectNoAndTeamName(Employee employee) {
-		return projectDao.getEmployeeInfoByProjectNoAndTeamName(employee);
+		return employeeDao.getEmployeeInfoByProjectNoAndTeamName(employee);
 	}
 
 	@Override
@@ -136,11 +136,12 @@ public class ProjectServiceImpl implements ProjectService {
 			employeeDao.updateTeamNo(oldPM);
 		}
 		//새로운 PM
-		Employee newPM = new Employee();
-		newPM.setEmpId(pmId);
-		newPM.setTeamNo(PMTeam.getTeamNo());
-		employeeDao.updateTeamNo(newPM);
-		
+		if(pmId != 0) {
+			Employee newPM = new Employee();
+			newPM.setEmpId(pmId);
+			newPM.setTeamNo(PMTeam.getTeamNo());
+			employeeDao.updateTeamNo(newPM);
+		}
 		//Client팀
 		Team clientTeam = new Team();
 		clientTeam.setProjectNo(project.getProjectNo());
@@ -156,11 +157,12 @@ public class ProjectServiceImpl implements ProjectService {
 			employeeDao.updateTeamNo(oldClient);
 		}
 		//새로운 고객
-		Employee newClient = new Employee();
-		newClient.setEmpId(clientId);
-		newClient.setTeamNo(clientTeam.getTeamNo());
-		employeeDao.updateTeamNo(newClient);
-		
+		if(clientId !=0) {
+			Employee newClient = new Employee();
+			newClient.setEmpId(clientId);
+			newClient.setTeamNo(clientTeam.getTeamNo());
+			employeeDao.updateTeamNo(newClient);
+		}
 	}
 
 	@Override
