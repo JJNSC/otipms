@@ -238,7 +238,7 @@ window.onload = function(){
 	
 	function showEmailsForPage(pageNumber, itemsPerPage, messageList) {
 		var selectedButton = document.querySelectorAll('[id^="page-"]');
-		selectedButton.forEach(function(selectButton){
+		selectedButton.forEach(function(selectButton){ 
 			selectButton.classList.remove("selected");
 		});
 		
