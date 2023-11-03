@@ -62,6 +62,23 @@
 		   AND empId = #{empId} 
 	</select>
 	
+	<select id="selectProfileEmp" parameterType="int " resultType="Employee">
+		SELECT e.empName
+		     , e.empRank
+		     , t.teamName
+		     , ei.empEmail
+		     , ei.empTel
+		  FROM EMP e
+		 INNER JOIN EMPINFO ei
+		    ON e.EMPID = ei.EMPID
+		 INNER JOIN TEAM t
+		    ON ei.TEAMNO = t.TEAMNO
+		 WHERE 1=1
+		   AND e.EMPID = #{empId}
+		   AND e.EMPENABLED = 1
+		 
+	</select>
+	
 	<select id="getTeamNoByTeamName" parameterType="String" resultType="int">
 		select teamNo from team where teamName=#{teamName}
 	</select>
@@ -88,6 +105,8 @@
 		     , e.empId
 		     , ei.empTel
 		     , e.role
+		     , p.projectCompanyName
+		     . ei.empEmail
 		  FROM emp e
 		     , empinfo ei
 		     , team t
@@ -114,23 +133,26 @@
 		SELECT e.*
 		     , eif.empTel
 		     , eif.empEmail
-		     , eif.teamNo 
-		  FROM emp e 
-    	 INNER JOIN (
-			  		SELECT empId
+		     , eif.teamNo
+		  FROM emp e
+		 INNER JOIN (
+		       		SELECT empId
 		                 , empTel
-		                 , empEmail
-		                 , teamNo 
-          			  FROM empInfo
-                    ) eif
-            ON e.empId = eif.empId 
-         WHERE role= #{role}
-           AND e.empEnabled = 1 
-           AND eif.teamNo IN (
-                       		 SELECT t.teamNo 
-                   			   FROM team t 
-               				  WHERE teamName = '미배정'
-               				 )
+			             , empEmail
+			             , teamNo
+		         	  FROM empInfo
+				    ) eif 
+		    ON e.empId = eif.empId
+		 WHERE role = #{role}
+		   AND e.empEnabled = 1
+		   AND (
+		       eif.teamNo IS NULL OR eif.teamNo 
+		       IN (
+		     	  SELECT t.teamNo
+		       	    FROM team t
+		      	   WHERE teamName = '미배정'
+   	 		      )
+   	 		   )
 	</select>
 	
 	<select id="selectEmployeeByTeamNo" parameterType="int" resultType="Employee">
@@ -147,6 +169,32 @@
      	 WHERE 1=1
      	   AND teamNo=#{teamNo} 
      	   AND empEnabled = 1 
+	</select>
+	
+	<select id="getEmployeeInfoByProjectNoAndTeamName" parameterType="Employee" resultType="Employee">
+		SELECT e.empId
+		     , e.empName
+		     , e.empRank
+		     , e.role
+		     , eif.teamno
+		     , eif.empTel
+		     , eif.empEmail
+		  FROM emp e 
+		 INNER JOIN (
+		       SELECT empId
+		            , teamNo
+		            , empTel
+		            , empEmail
+		         FROM empInfo 
+		              ) eif 
+		    ON e.empId = eif.empId 
+		 WHERE eif.teamno IN (
+		                SELECT teamNo 
+		                  FROM team 
+		                 WHERE projectNo = #{projectNo}
+		                   AND teamName=#{teamName}
+		                   AND e.empenabled=1
+		                     )
 	</select>
 	
 	<select id="selectEmployeeByTeamNoAndRole" parameterType="Employee" resultType="Employee">
@@ -206,5 +254,29 @@
 		   SET empEnabled = 0
 		 WHERE empId = #{empId}
 	</update>
+	
+	<select id="getProjectEmployees" parameterType="String" resultType="Employee">
+		SELECT e.*
+		     , eif.teamNo
+		     , eif.empTel
+		     , eif.empEmail 
+		  FROM emp e 
+         INNER JOIN (
+                    SELECT empId 
+                         , teamNo  
+                         , empTel  
+                         , empEmail  
+                      FROM empInfo 
+                     WHERE teamNo IN (
+                     				 SELECT teamNo 
+                     				   FROM team 
+                     				  WHERE projectNo = (
+                     				  					SELECT projectNo 
+                     				  					  FROM project
+                     				  					 WHERE projectName = #{projectName}
+                     				  					)
+                     				 )
+                     ) eif ON E.empId = eif.empId
+	</select>
 
 </mapper>

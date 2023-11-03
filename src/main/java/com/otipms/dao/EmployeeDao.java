@@ -14,7 +14,7 @@ public interface EmployeeDao {
 	public Employee selectByEmployeeId(int empId);
 	public Employee selectInfoByEmployeeId(int empId);
 	public int checkEmployeeByTel(String empTel);
-	public Employee getEmployeeByTeamNo(int teamNo);
+	public List<Employee> getEmployeeByTeamNo(int teamNo);
 	public List<Employee> selectAllEmployee();
 	public void updateTeamNo(Employee employee);
 	public List<Employee> selectEmployeeByRole(String role);
@@ -26,4 +26,7 @@ public interface EmployeeDao {
 	public void updateEmployee(Employee employee);
 	public void updateEmployeeInfo(Employee employee);
 	public void disableEmployee(int empId);
+	public Employee getEmployeeInfoByProjectNoAndTeamName(Employee employee);
+	public List<Employee> getProjectEmployees(String projectName);
+	public Employee selectProfileEmp(int empId);
 }

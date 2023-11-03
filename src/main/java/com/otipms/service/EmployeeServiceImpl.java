@@ -205,6 +205,47 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 	}
 
+	@Override
+	public List<Employee> getProjectEmployees(String projectName) {
+		List<Employee> empListDB = employeeDao.getProjectEmployees(projectName);
+		List<Employee> empList = new ArrayList<>();
+		int projectNo= projectDao.selectProjectNoByProjectName(projectName);
+		for(Employee emp : empListDB) {
+			emp.setProjectName(projectName);
+			emp.setProjectNo(projectNo);
+			Team team = teamDao.selectTeamByEmpId(emp.getEmpId());
+			emp.setTeamNo(team.getTeamNo());
+			emp.setTeamName(team.getTeamName());
+			empList.add(emp);
+		}
+		
+		return empList;
+	}
+
+	@Override
+	public List<Employee> getProjectTeamEmployees(String projectName, String teamName) {
+		int projectNo = projectDao.selectProjectNoByProjectName(projectName);
+		Team team = new Team();
+		team.setProjectNo(projectNo);
+		team.setTeamName(teamName);
+		int teamNo = teamDao.getTeamNoByProjectNoAndTeamName(team);
+		List<Employee> empListDB = employeeDao.getEmployeeByTeamNo(teamNo);
+		List<Employee> empList = new ArrayList<>();
+		for(Employee emp : empListDB) {
+			emp.setProjectName(projectName);
+			emp.setProjectNo(projectNo);
+			emp.setTeamName(teamName);
+			emp.setTeamNo(teamNo);
+			empList.add(emp);
+		}
+		return empList;
+	}
+
+	@Override
+	public Employee selectProfileEmp(int empId) {
+		return employeeDao.selectProfileEmp(empId);
+	}
+
 	
 
 }

@@ -107,6 +107,57 @@
 			}
 		}
 	</script>
+	<script>
+	    /* function getTableData() {
+	        var employeeTable = document.getElementById('employeeTable');
+	        var tableData = [];
+	
+	        for (var i = 1, row; row = employeeTable.rows[i]; i++) {
+	            var rowData = {};
+	            rowData.empId = row.cells[0].innerHTML;
+	            rowData.empName = row.cells[1].innerHTML;
+	            rowData.empRank = row.cells[2].innerHTML;
+	            rowData.empTel = row.cells[3].innerHTML;
+	            rowData.projectName = row.cells[4].innerHTML;
+	            rowData.teamName = row.cells[5].innerHTML;
+	            rowData.role = row.cells[6].innerHTML;
+	            // 나머지 테이블 데이터 열 추가
+	
+	            tableData.push(rowData);
+	        }
+	
+	        return tableData;
+	    } */
+	    
+	    function sendTableData() {
+	       // var tableData = getTableData(); // 위에서 정의한 함수를 사용하여 데이터 가져오기
+			var projectName = $("#project-dropdown").val();
+			var teamName = $("#team-dropdown").val();
+			var excelFileName = $("#excelFileName").val();
+			var excelSheetName = $("#excelSheetName").val();
+	        
+			 var requestData = {
+					 projectName: projectName,
+					 teamName: teamName,
+					 excelFileName:excelFileName,
+					 excelSheetName:excelSheetName
+				    };
+	        $.ajax({
+	            type: 'POST',
+	            url: '/otipms/employeeManagement/exportEmployeeToExcel',
+	            data: requestData, // 데이터를 JSON 문자열로 변환
+	            //contentType: 'application/json',
+	            success: function(response) {
+	                // AJAX 요청 성공 시 실행할 코드
+	                console.log('Data sent successfully');
+	            },
+	            error: function() {
+	                // AJAX 요청 실패 시 실행할 코드
+	                console.log('Failed to send data');
+	            }
+	        });
+	    }
+	</script> 	
 </head>
 
 <body>
@@ -142,35 +193,22 @@
                                 <span style="float: right; ">
                                		<button type="button" class="btn btn-primary" style="margin-right:10px; position:relative; right:40px;" data-toggle="modal" data-target="#multiRegister" data-whatever="@mdo">일괄 등록</button>
                                 </span>
+                                <span style="float: right; ">
+                               		<button type="button" class="btn btn-primary" style="margin-right:10px; position:relative; right:40px;" data-toggle="modal" data-target="#nameExcelFile" data-whatever="@mdo">Excel로 내보내기</button>
+                                </span>
 								<div class="col-lg-3" style="display:inline-block; margin-left:15px;">
-								    <%-- <select class="form-control" id="projectSelect" name="projectSelect">
-								        <option value="">프로젝트 선택</option>
-							        	<c:forEach var="oneProjectTeams" items="${projectTeams }" varStatus="pts_project">
-						        			<option value="html">${oneProjectTeams.project.projectName }</option>
-								         </c:forEach>
-								    </select> --%>
-								    <select id="project-dropdown">
+								    <select class="form-control" id="project-dropdown" name="project-dropdown">
 							            <option value="">프로젝트 선택</option>
 							        </select>
-							        <div class="product_names">
-							        
-							        </div>
 								</div>
 								<div class="col-lg-2"  style="display:inline-block;">
-						 			<%-- <c:forEach var="oneProjectTeams" items="${projectTeams }" varStatus="pts_team">
-		                                <select class="form-control" id="projectSelect" name="projectSelect">
-		                                    <option value="">팀 선택</option>
-		                                    <c:forEach var="oneProjectTeam" items="${oneProjectTeams.teamList }" varStatus="pt_team">
-		                                    	<option value="html">${oneProjectTeam.teamName}</option>
-		                                    </c:forEach>
-		                                </select>
-	                                </c:forEach> --%>
-	                                <select id="team-dropdown">
+						 			
+	                                <select id="team-dropdown" class="form-control">
 							            <option value="">팀 선택</option>
 							        </select>
 	                            </div>
                                 <div class="table-responsive">
-                                    <table class="table table-striped datatables-products table-bordered zero-configuration">
+                                    <table id="employeeTable" class="table table-striped datatables-products table-bordered zero-configuration">
                                         <thead>
                                             <tr>
                                                 <th>사원번호</th>
@@ -184,6 +222,8 @@
                                                 <th class="text-center">삭제</th>
                                             </tr>
                                         </thead>
+                                        
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -280,6 +320,37 @@
 			        </div>
 			    </div> 	
 			</div>
+             <div class="modal fade" id="nameExcelFile" tabindex="-1" role="dialog" aria-labelledby="nameExcelFileLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h5 class="modal-title" id="nameExcelFileLabel">사용자 명단 내보내기</h5>
+			            </div>
+			            <div class="modal-body">
+			                <form class="form-valide">
+	                            <div class="form-group row">
+	                                <label class="col-lg-4 col-form-label" for="val-username">파일 명
+	                                </label>
+	                                <div class="col-lg-7">
+	                                    <input type="text" class="form-control" id="excelFileName" name="excelFileName" placeholder="엑셀 파일명을 입력하세요.">
+	                                </div>
+	                            </div>
+	                            <div class="form-group row">
+	                                <label class="col-lg-4 col-form-label" for="val-username">시트 명
+	                                </label>
+	                                <div class="col-lg-7">
+	                                    <input type="text" class="form-control" id="excelSheetName" name="excelSheetName" placeholder="엑셀 시트명을 입력하세요.">
+	                                </div>
+	                            </div>
+	                        </form>
+			            </div>
+			            <div class="modal-footer">
+			            	<button type="button" class="btn btn-primary" onclick="sendTableData()">출력하기</button>
+			                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			            </div>
+			        </div>
+			    </div> 	
+			</div>
             <div class="modal fade" id="singleRegister" tabindex="-1" role="dialog" aria-labelledby="singleRegisterLabel" aria-hidden="true">
 			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
@@ -361,7 +432,7 @@
 			                <h5 class="modal-title" id="multiRegisterLabel">일괄 등록</h5>
 			            </div>
 			           <%--  <form id="multiRegisterBtn" method="post" class="dropzone" action="${pageContext.request.contextPath}/multiRegister" enctype="multipart/form-data"> --%>
-			            <form id="multiRegisterBtn" method="post" class="dropzone" action="#" enctype="multipart/form-data">
+			            <form id="multiRegisterBtn" method="post" class="dropzone" action="${pageContext.request.contextPath}/multiRegister" enctype="multipart/form-data">
 				            <div class="form-group row ml-2 mt-3">
 	                            <label class="col-lg-3 col-form-label" for="val-username">프로젝트 명<br>(엑셀 시트명)
 	                            </label>
@@ -376,6 +447,8 @@
 		                            </div>
 		                        </div>
 				            </div>
+				            <button id="activeRegisterClose" type="button" class="btn btn-secondary d-none float-right mr-3 mb-2" data-dismiss="modal">닫기</button>
+				            <button id="activeRegister" form="multiRegisterBtn" class="btn btn-primary d-none float-right mr-2 mb-2">등록</button>
 			            </form>
 			            <table class="table">
 			            	<thead>
@@ -396,14 +469,15 @@
 			            	</tbody>
 			            </table>
 			            <div class="modal-footer">
-			            	<button onclick="multiRestRegister()" class="btn btn-primary">등록</button>
-<!-- 			            	<button onclick="multiRestRegister()" class="btn btn-primary" data-dismiss="modal">등록</button> -->
-			                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			            	<button id="activePreview" onclick="multiRestRegister()" class="btn btn-primary">미리보기</button>
+			                <button id="activePreviewClose" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			            </div>
 			            <script>
 				            function multiRestRegister() {
 				                // FormData 객체 생성
 				                var formData = new FormData($('#multiRegisterBtn')[0]);
+				                var activePreviewBtn = document.getElementById("activePreview");
+				                var activeRegisterBtn = document.getElementById("activeRegister");
 	
 				                $.ajax({
 				                    url: '/otipms/restMultiRegister',
@@ -415,6 +489,10 @@
 				                        // 성공 처리
 				                        console.log(data);
 				                        updateTable(data);
+				                        activePreviewBtn.classList.add("d-none");
+				                        activePreviewClose.classList.add("d-none");
+				                        activeRegisterBtn.classList.remove("d-none");
+				                        activeRegisterClose.classList.remove("d-none");
 				                    },
 				                    error: function() {
 				                        // 실패 처리

@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class PoiMakeExcel {
 	
 	public static String filePath = "C:\\FileStore";
-    public static String fileNm = "poi_making_file_test.xlsx";
+    public static String fileNm = "poi_making_file_test123.xlsx";
 
     public static void main(String[] args) {
 
@@ -27,7 +27,7 @@ public class PoiMakeExcel {
 
         // Sheet를 채우기 위한 데이터들을 Map에 저장
         Map<String, Object[]> data = new TreeMap<>();
-        data.put("1", new Object[]{"사원번호", "사원명", "직책", "연락처", "프로젝트", "팀", "권한"});
+        data.put("1", new Object[]{"사원번호", "사원명", "직책", "연락처", "프로젝트", "팀", "권한","회사명","이메일"});
         data.put("2", new Object[]{"1000001", "김진성", "부장", "010-1111-1111","프로젝트 2번째", "개발2팀","팀장"});
         data.put("3", new Object[]{"1010001", "김진성", "사원", "010-1111-2222","PMS 제작 프로젝트", "개발2팀","팀원"});
         data.put("4", new Object[]{"1000002", "김종진", "부장", "010-2222-3333","프로젝트 2번째", "개발1팀","팀장"});

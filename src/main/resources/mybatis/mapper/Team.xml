@@ -84,4 +84,13 @@
 		   AND projectNo=#{projectNo}
 	</select>
 	
+	<select id="selectTeamByEmpId" parameterType="int" resultType="Team">
+		SELECT * 
+		  FROM team 
+		 WHERE teamNo = (
+		 				SELECT teamNo 
+		 				  FROM empInfo 
+		 				 WHERE empId = #{empId}
+		 				)
+	</select>
 </mapper>

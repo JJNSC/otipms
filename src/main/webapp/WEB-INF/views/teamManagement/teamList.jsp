@@ -249,7 +249,7 @@
 					                <div class="basic-form">
                                     <form id="addTeamForProject" action="addTeam" method="post">
                                         <div class="form-row">
-	                                        <div class="form-group col-md-10">
+	                                        <div class="form-group col-md-9">
 	                                            <label>프로젝트 명</label>
                                                 <select id="inputState" class="form-control" name="selectedProject">
                                                     <option selected="selected">프로젝트 선택</option>
@@ -260,7 +260,7 @@
 	                                        </div>
 	                                    </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-10">
+                                            <div class="form-group col-md-9">
                                                 <label>팀 명</label>
                                                 <input type="text" name="teamName" class="form-control">
                                             </div>
