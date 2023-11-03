@@ -3497,12 +3497,14 @@ input[type="button"].btn-block {
     box-shadow: 0 0 0 0.2rem rgba(117, 113, 249, 0.25); }
   .page-link:not(:disabled):not(.disabled) {
     cursor: pointer; }
-
+	
 .page-item:first-child .page-link {
   margin-left: 0;
   border-top-left-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem; }
-
+  .selected{
+		background-color: #3E6494;
+	}
 .page-item:last-child .page-link {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem; }

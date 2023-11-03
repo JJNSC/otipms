@@ -12,11 +12,13 @@ window.onload = function(){
 	var previousAlarmCount = 0;
 	
 	var alarmData = {
+			alarmList: [],
+			messageList: [],
 	        alarmCount: 0,
-	        alarmList: [],
 	        messageCount: 0,
-	        messageList: []
 	    };
+	var searchInput = document.getElementById("search");
+	
 	
 	webSocket.onopen = () => {
 		console.log("소켓 오픈");
@@ -31,12 +33,33 @@ window.onload = function(){
 	
 	webSocket.onmessage = (e) => {
 		var receivedData = JSON.parse(e.data);
-		alarmData.alarmList = receivedData.alarmList;
-	    alarmData.messageList = receivedData.messageList;
-	    alarmData.alcount = receivedData.alcount;
-	    var messageCount = receivedData.mscount;
-	    previousAlarmCount = alarmData.alcount; // 이전 알림 개수 업데이트
+		alarmData.alarmList = receivedData.alarms;
+	    alarmData.messageList = receivedData.messages;
+	    alarmData.alarmCount = receivedData.alcount;
+	    alarmData.messageCount = receivedData.mscount;
+	    
+	    var alarmList = alarmData.alarmList;
+	    var messageList = alarmData.messageList;
+	    var alarmCount = alarmData.alarmCount
+	    var messageCount = alarmData.messagecount;
 		
+	    /*var filterType = "";
+	    var searchText = "";*/
+	    
+	    var currentPage = 1;
+	    var itemsPerPage = 10;
+	    console.log("메세지 안 알람 리스트 : " + alarmData.alarmList);
+	    console.log("메세지 안 쪽지 리스트 : " + alarmData.messageList);
+	    console.log("메세지 안 알람 카운트 : " + alarmData.alarmCount);
+	    console.log("메세지 안 쪽지 카운트 : " + alarmData.messageCount);
+	    
+	    
+	    
+	    console.log("메세지 안 알람 리스트2 : " + alarmList);
+	    console.log("메세지 안 쪽지 리스트2 : " + messageList);
+	    console.log("메세지 안 알람 카운트2 : " + alarmCount);
+	    console.log("메세지 안 쪽지 카운트2 : " + messageCount);
+	    
 		//알람 수 변경(헤더의 알람 수)
 		updateAlarmCount();
 		//총 알람 갯수 변경(쪽지 알람의 총 갯수 표기)
@@ -45,21 +68,26 @@ window.onload = function(){
 		$.get("http://localhost:8080/otipms/alarms?empId=" + empId, function (alarmList) {
 			updateAlarmList(alarmList);
 		});
-		
+		//쪽지함 쪽지 실시간 변경
+		$.get("http://localhost:8080/otipms/mail/receivedMails?empId=" + empId, function(messageList){
+			updateMessageList(messageList);
+			
+			updatePaging(messageList);
+		});
 		//알람 갯수 > 이전 알람 갯수 일 경우
 	    if (alarmData.alcount > previousAlarmCount) {
 	    	//알람 토스트 띄우기
 	    	showAlarmIcon(v_alarmIcon);
+	    	previousAlarmCount = alarmData.alcount;// 이전 알림 개수 업데이트
 	    }
 	    
-	    //쪽지함 쪽지 실시간 변경
-	    $.get("http://localhost:8080/otipms/mail/receivedMails?empId="+empId, function(messageList){
-	    	updateMessageList(messageList);
-	    	updatePaging(messageList);
-	    });
 	}
 	
-	
+	console.log("메세지 밖 알람 리스트2 : " + alarmData.alarmList);
+    console.log("메세지 밖 쪽지 리스트2 : " + alarmData.messageList);
+    console.log("메세지 밖 알람 카운트2 : " + alarmData.alarmCount);
+    console.log("메세지 밖 쪽지 카운트2 : " + alarmData.messageCount);
+    
 	//안읽은 알람 수
 	var updateAlarmCount = function () {
 	    // 알림 개수를 업데이트
@@ -74,6 +102,7 @@ window.onload = function(){
 	function updateAlarmList(alarmList){
 	    var alarmListContainer = document.getElementById("alarmList");
 	    
+	    console.log("메세지 밖 알람 리스트 : " + alarmData.alarmList);
 	    if(alarmListContainer){
 	    	alarmListContainer.innerHTML = ""; 
 	    	
@@ -118,7 +147,9 @@ window.onload = function(){
 	
 	function updateMessageList(messageList) {
 		var messageListContainer  = document.getElementById("email-list-container");
-	    
+		
+		console.log("메세지 밖 쪽지 리스트3 : " + alarmData.messageList);
+		
 		if(messageListContainer){
 	    	messageListContainer.innerHTML = ""; // 기존 메일 목록을 초기화합니다.
 	    	
@@ -172,8 +203,10 @@ window.onload = function(){
 		}
 	    var itemsPerPage = 10; // 페이지당 보여질 쪽지 수
 	    var totalPages = Math.ceil(filteredEmailsCount / itemsPerPage);
+	    
 	    console.log("메일 수 : " + filteredEmailsCount)
 	    console.log("쪽 수 : " + totalPages)
+	    console.log("메세지 밖 쪽지 리스트4 : " + alarmData.messageList);
 	    
 	    var pagingContainer = document.getElementById("pagingContainer");
 	    pagingContainer.innerHTML = ""; // 기존 페이지 버튼 초기화
@@ -185,10 +218,10 @@ window.onload = function(){
 	    	pageli.className = "page-item";
 	        var pageButton = document.createElement("a");
 	    	pageButton.className = "page-link";
+	    	pageButton.id = "page-"+i;
 	        pageButton.innerText = i;
 	        pageButton.dataset.page = i; // 페이지 번호를 data 속성으로 저장
 	        showEmailsForPage(1,10,messageList);
-	        console.log(messageList);
 	        pageButton.addEventListener("click", function (event) {
 	            // 페이지 버튼을 클릭했을 때 해당 페이지의 쪽지를 보여줌
 	            var pageNumber = event.target.dataset.page;
@@ -202,8 +235,23 @@ window.onload = function(){
 	    navElement.appendChild(ulElement);
 	    pagingContainer.appendChild(navElement);
 	}
-		
+	
 	function showEmailsForPage(pageNumber, itemsPerPage, messageList) {
+		var selectedButton = document.querySelectorAll('[id^="page-"]');
+		selectedButton.forEach(function(selectButton){ 
+			selectButton.classList.remove("selected");
+		});
+		
+		var currentPage = pageNumber;
+		
+		var currentButton = document.getElementById("page-"+currentPage);
+		if(currentButton){
+			currentButton.classList.add("selected");
+		} /*else {
+			var firstButton = document.getElementById("page-1");
+			firstButton.classList.add("selected");
+		}*/
+		
 		// 시작 및 종료 인덱스 계산
 		var startIndex = (pageNumber - 1) * itemsPerPage;
 		var endIndex = startIndex + itemsPerPage;
@@ -213,10 +261,47 @@ window.onload = function(){
 		console.log(startIndex);
 		console.log(endIndex);
 		console.log(messagesToDisplay);
+		console.log("메세지 밖 쪽지 리스트5 : " + alarmData.messageList);
 		
 		updateMessageList(messagesToDisplay);
 	}
+	
+	// 다음 버튼 클릭 이벤트 핸들러
+	function onNextButtonClick() {
+	    currentPage++; // 다음 페이지 번호로 이동
+	    // 메시지 목록 업데이트 및 표시
+	    var messagesToDisplay = getMessagesForPage(messageList, currentPage, itemsPerPage);
+	    updateMessageList(messagesToDisplay);
+	}
 
+	// 이전 버튼 클릭 이벤트 핸들러
+	function onPrevButtonClick() {
+	    if (currentPage > 1) {
+	        currentPage--; // 이전 페이지 번호로 이동
+	        // 메시지 목록 업데이트 및 표시
+	        var messagesToDisplay = getMessagesForPage(messageList, currentPage, itemsPerPage);
+	        updateMessageList(messagesToDisplay);
+	    }
+	}
+
+	// 페이지 버튼 초기화
+	function initializePagination() {
+	    // 이전 버튼을 만들고 클릭 이벤트 핸들러 연결
+	    var prevButton = document.createElement("button");
+	    prevButton.innerText = "이전";
+	    prevButton.addEventListener("click", onPrevButtonClick);
+	    
+	    // 다음 버튼을 만들고 클릭 이벤트 핸들러 연결
+	    var nextButton = document.createElement("button");
+	    nextButton.innerText = "다음";
+	    nextButton.addEventListener("click", onNextButtonClick);
+	    
+	    // 페이지 버튼 컨테이너에 버튼 추가
+	    var pagingContainer = document.getElementById("pagingContainer");
+	    pagingContainer.innerHTML = "";
+	    pagingContainer.appendChild(prevButton);
+	    pagingContainer.appendChild(nextButton);
+	}
 }
 
 //실시간 쪽지 알림을 위한 체킹
