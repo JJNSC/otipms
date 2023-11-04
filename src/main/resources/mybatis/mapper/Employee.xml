@@ -68,15 +68,21 @@
 		     , t.teamName
 		     , ei.empEmail
 		     , ei.empTel
+		     , m.mediaFileName
+		     , m.mediaFileType
+		     , m.mediaFileData
 		  FROM EMP e
 		 INNER JOIN EMPINFO ei
 		    ON e.EMPID = ei.EMPID
 		 INNER JOIN TEAM t
 		    ON ei.TEAMNO = t.TEAMNO
+		  LEFT OUTER JOIN MEDIAFILE m
+		    ON e.EMPID = m.EMPID
 		 WHERE 1=1
 		   AND e.EMPID = #{empId}
 		   AND e.EMPENABLED = 1
-		 
+		   AND MEDIAFILENAME like '%Profile'
+		   AND rownum = 1
 	</select>
 	
 	<select id="getEmployeeByTeamNo" parameterType="int" resultType="Employee">
@@ -302,5 +308,15 @@
 		     , #{mediaFileType}
 		     , #{mediaFileData})
 	</insert>
-
+	
+	<update id="updateEmployeeProfileImg" parameterType="MediaFile">
+		UPDATE MEDIAFILE
+		   SET MEDIAFILENAME = #{mediaFileName}
+		     , MEDIAFILETYPE = #{mediaFileType}
+		     , MEDIAFILEDATA = #{mediaFileData}
+		 WHERE 1=1
+		   AND EMPID = #{empId}
+		   AND MEDIAFILENAME like '%Profile'
+	</update>
+	
 </mapper>

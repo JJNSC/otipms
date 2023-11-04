@@ -253,7 +253,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee selectProfileEmp(int empId) {
-		return employeeDao.selectProfileEmpByEmpId(empId);
+		Employee employee = employeeDao.selectProfileEmpByEmpId(empId);
+		if(employee == null) {
+			//받아오기 
+			MediaFile mediaFile = employeeDao.getDefaultProfileImg();
+			//사원번호 세팅
+			mediaFile.setEmpId(empId);
+			//db에 저장
+			employeeDao.insertEmployeeDefaultProfileImg(mediaFile);
+			//한번 더 가져오기
+			employee = employeeDao.selectProfileEmpByEmpId(empId);
+		}
+		return employee;
 	}
 
 	//비밀번호 수정
@@ -262,6 +273,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		employee.setEmpPw(pwEncoder.encode(employee.getEmpPw()));
 		employeeDao.resetEmployeePassword(employee);
+	}
+
+	//프로필 사진 변경
+	@Override
+	public void updateProfileImg(MediaFile mediaFile) {
+		int result = employeeDao.updateEmployeeProfileImg(mediaFile);
+		if(result == 0) {
+			employeeDao.insertEmployeeDefaultProfileImg(mediaFile);
+		}
 	}
 
 	

@@ -44,8 +44,16 @@
 					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
 						<div class="card" style="padding: 20px;">
 							<div class="profile-photo">
-								<a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
-								<img src="${pageContext.request.contextPath}/resources/images/testProfile.jpg" alt="" class="avatar-photo">
+								<input class="d-none" type="file" id="imageInput" accept="image/*" onchange="changeProfile()">
+								<!-- <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a> -->
+								<span class="edit-avatar" onclick="uploadImage()"><i class="fa fa-pencil"></i></span>
+								<c:if test="${employee.mediaFileData != null}">
+									<img id="profileImage" src="data:${employee.mediaFileData};base64, ${base64Img}" alt="" class="avatar-photo" width="160px" height="160px"/>
+								</c:if>
+								<%-- <c:if test="${employee.mediaFileData == null}">
+									<img id="profileImage" src="${pageContext.request.contextPath}/resources/images/defaultHuman.jpg" alt="" class="avatar-photo" width="160px" height="160px">
+								</c:if> --%>
+								<%-- <img id="profileImage" src="${pageContext.request.contextPath}/resources/images/testProfile.jpg" alt="" class="avatar-photo" width="160px" height="160px"> --%>
 								<%-- <img src="${pageContext.request.contextPath}/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"> --%>
 								<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">

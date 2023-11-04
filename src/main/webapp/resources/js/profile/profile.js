@@ -142,3 +142,38 @@ function writeNewPasswordCheck() {
 		$("#submitInput").attr("disabled", true);
 	}
 }
+
+function uploadImage() {
+	$("#imageInput").click();
+}
+
+function changeProfile() {
+	var profileImage = document.getElementById("profileImage");
+	var imageInput = document.getElementById("imageInput");
+	var selectedImage = imageInput.files[0];
+	
+	if (selectedImage) {
+        /*// 이미지를 미리보기로 설정
+        const imageURL = URL.createObjectURL(selectedImage);
+        profileImage.src = imageURL;*/
+        
+        // 이미지를 컨트롤러로 전달하는 예시
+        const formData = new FormData();
+        formData.append("image", selectedImage);
+
+        fetch("/otipms/updateProfile", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 서버에서의 응답에 따른 동작을 수행합니다.
+        	// 이미지를 미리보기로 설정
+            const imageURL = URL.createObjectURL(selectedImage);
+            profileImage.src = imageURL;
+        })
+        .catch(error => {
+            console.error("이미지 업로드 중 오류 발생:", error);
+        });
+    }
+}

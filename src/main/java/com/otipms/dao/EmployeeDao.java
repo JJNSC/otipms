@@ -34,4 +34,11 @@ public interface EmployeeDao {
 	public MediaFile getDefaultProfileImg();
 	//회원가입 시 기본 프로필 이미지 부여하기 
 	public void insertEmployeeDefaultProfileImg(MediaFile mediaFile);
+	/**
+	 * 프로필 사진 수정
+	 * @param mediaFile
+	 * @return
+	 * @author 이은지
+	 */
+	public int updateEmployeeProfileImg(MediaFile mediaFile);
 }

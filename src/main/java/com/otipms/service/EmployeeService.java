@@ -3,6 +3,7 @@ package com.otipms.service;
 import java.util.List;
 
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.ProjectTeams;
 
 public interface EmployeeService {
@@ -36,4 +37,10 @@ public interface EmployeeService {
 	 * @author 이은지
 	 */
 	public void modifyPassword(Employee employee);
+	/**
+	 * 프로필 사진 수정
+	 * @param mediaFile
+	 * @author 이은지
+	 */
+	public void updateProfileImg(MediaFile mediaFile);
 }

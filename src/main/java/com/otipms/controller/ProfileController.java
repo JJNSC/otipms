@@ -1,12 +1,19 @@
 package com.otipms.controller;
 
+import java.io.IOException;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.EmployeeService.LoginResult;
 
@@ -30,6 +37,11 @@ public class ProfileController {
 		
 		Employee employee = employeeService.selectProfileEmp(LoginController.loginEmployee.getEmpId());
 		model.addAttribute("employee", employee);
+		
+		if(employee.getMediaFileData() != null) {
+			String base64Img = Base64.getEncoder().encodeToString(employee.getMediaFileData());
+			model.addAttribute("base64Img", base64Img);
+		}
 		return "profile/profile";
 	}
 	
@@ -49,6 +61,19 @@ public class ProfileController {
 			return "fail";
 		}
 		return null;
+	}
+	
+	@RequestMapping("/updateProfile")
+	//@ResponseBody
+	public ResponseEntity<String> updateProfile(@RequestParam("image") MultipartFile imageFile) throws IOException {
+		MediaFile mediaFile = new MediaFile();
+		mediaFile.setEmpId(LoginController.loginEmployee.getEmpId());
+		mediaFile.setMediaFileName("Profile");
+		mediaFile.setMediaFileType(imageFile.getContentType());
+		mediaFile.setMediaFileData(imageFile.getBytes());
+		
+		employeeService.updateProfileImg(mediaFile);
+		return ResponseEntity.ok("{\"message\": \"이미지 업로드 성공\"}");
 	}
 	
 	@RequestMapping("/indexTest")
