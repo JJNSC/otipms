@@ -30,4 +30,10 @@ public interface EmployeeService {
 	public List<Employee> getProjectEmployees(String projectName);
 	public List<Employee> getProjectTeamEmployees(String projectName,String teamName);
 	public Employee selectProfileEmp(int empId);
+	/**
+	 * 비밀번호 수정
+	 * @param employee
+	 * @author 이은지
+	 */
+	public void modifyPassword(Employee employee);
 }

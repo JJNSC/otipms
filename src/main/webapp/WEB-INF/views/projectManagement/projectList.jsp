@@ -174,7 +174,7 @@
 						                                             	<a href="modifyProjectForm?projectNo=${project.projectNo}&pmId=${pm.empId}&customerId=${customerInfo.empId}">
 						                                            			<i class="fa fa-pencil color-muted"></i>
 						                                            		</a>
-						                                             </td>
+						                                             </td>	
 						                                             <td class="text-center"> 
 						                                              	<button type="button" class="btn fa fa-trash-o color-danger" data-toggle="modal" 
 						                                              	data-target="#modalGrid" data-projectno="${project.projectNo }" onclick="prepareDelete(${project.projectNo})"></button>

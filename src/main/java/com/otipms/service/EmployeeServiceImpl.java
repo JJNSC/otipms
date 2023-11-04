@@ -256,6 +256,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.selectProfileEmpByEmpId(empId);
 	}
 
+	//비밀번호 수정
+	@Override
+	public void modifyPassword(Employee employee) {
+		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		employee.setEmpPw(pwEncoder.encode(employee.getEmpPw()));
+		employeeDao.resetEmployeePassword(employee);
+	}
+
 	
 
 }
