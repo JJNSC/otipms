@@ -150,6 +150,7 @@
 	            success: function(response) {
 	                // AJAX 요청 성공 시 실행할 코드
 	                console.log('Data sent successfully');
+	                alert("excel파일 생성 완료.");
 	            },
 	            error: function() {
 	                // AJAX 요청 실패 시 실행할 코드
@@ -363,7 +364,7 @@
 	                        </form>
 			            </div>
 			            <div class="modal-footer">
-			            	<button type="button" class="btn btn-primary" onclick="sendTableData()">출력하기</button>
+			            	<button type="button" class="btn btn-primary" onclick="sendTableData()" data-dismiss="modal">출력하기</button>
 			                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			            </div>
 			        </div>
