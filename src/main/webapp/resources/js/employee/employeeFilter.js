@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	        const teamDropdownModal = document.getElementById("team-dropdown-modal");
 	        const projectDropdownModalRegister = document.getElementById("project-dropdown-modal-register");
 	        const teamDropdownModalRegister = document.getElementById("team-dropdown-modal-register");
+	        const projectDropdownExport = document.getElementById("project-dropdown-export");
+	        const teamDropdownExport = document.getElementById("team-dropdown-export");
 	        const employeeList = document.getElementById("employee-list");
 	        
 	        var employeeData = data.employeeData;
@@ -25,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 const selectedTeamModal = teamDropdownModal.value;
                 const selectedProjectModalRegister = projectDropdownModalRegister.value;
                 const selectedTeamModalRegister = teamDropdownModalRegister.value;
+                const selectedProjectExport = projectDropdownExport.value;
+                const selectedTeamExport = teamDropdownExport.value;
                 const filteredEmployees = employeeData.filter((employee) => {
                     if (
                         (!selectedProject || employee.projectName === selectedProject) ||
@@ -59,6 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
             	option3.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
             	option3.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
             	projectDropdownModalRegister.appendChild(option3);
+            });
+            projectData.forEach((project) => {
+            	const option4 = document.createElement("option");
+            	option4.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	option4.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	projectDropdownExport.appendChild(option4);
             });
 
             projectDropdown.addEventListener("change", function () {
@@ -138,6 +148,29 @@ document.addEventListener("DOMContentLoaded", function () {
             	
             	populateEmployeeList();
             });
+            projectDropdownExport.addEventListener("change", function () {
+            	const selectedProjectExport = projectDropdownExport.value;
+            	const selectedProjectDataExport = projectData.find((project) => project.projectName === selectedProjectExport);
+            	
+            	// 이전 하위 드롭다운 제거
+            	while (teamDropdownExport.options.length > 1) {
+            		teamDropdownExport.remove(1);
+            	}
+            	
+            	if (selectedProjectDataExport) {
+            		// 프로젝트 선택에 따라 팀 데이터 필터링
+            		const filteredTeamsExport = teamData.filter((team) => team.projectNo === selectedProjectDataExport.projectNo);
+            		filteredTeamsExport.forEach((team) => {
+            			const option = document.createElement("option");
+            			option.value = team.teamName;
+            			option.text = team.teamName;
+            			teamDropdownExport.appendChild(option);
+            		});
+            	}
+            	const selectedTeamExport= teamDropdownExport.value;
+            	
+            	populateEmployeeList();
+            });
             teamDropdown.addEventListener("change", function () {
                 // 다음 드롭다운 값 갱신
                 const selectedProject = projectDropdown.value;
@@ -171,6 +204,17 @@ document.addEventListener("DOMContentLoaded", function () {
             	
             	// 프로젝트 선택 후 직급 드롭다운도 갱신
             	const selectedTeamModalRegister = teamDropdownModalRegister.value;
+            	//updatePositionDropdown(selectedProjectId, selectedTeam);
+            	
+            	populateEmployeeList();
+            });
+            teamDropdownExport.addEventListener("change", function () {
+            	// 다음 드롭다운 값 갱신
+            	const selectedProjectExport = projectDropdownExport.value;
+            	const selectedProjectIdExport = projectData.find((project) => project.projectName === selectedProjectExport).projectNo;
+            	
+            	// 프로젝트 선택 후 직급 드롭다운도 갱신
+            	const selectedTeamExport = teamDropdownExport.value;
             	//updatePositionDropdown(selectedProjectId, selectedTeam);
             	
             	populateEmployeeList();

@@ -131,8 +131,8 @@
 	    
 	    function sendTableData() {
 	       // var tableData = getTableData(); // 위에서 정의한 함수를 사용하여 데이터 가져오기
-			var projectName = $("#project-dropdown").val();
-			var teamName = $("#team-dropdown").val();
+			var projectName = $("#project-dropdown-export").val();
+			var teamName = $("#team-dropdown-export").val();
 			var excelFileName = $("#excelFileName").val();
 			var excelSheetName = $("#excelSheetName").val();
 	        
@@ -328,6 +328,24 @@
 			            </div>
 			            <div class="modal-body">
 			                <form class="form-valide">
+			                	<div class="form-group row">
+	                                <label class="col-lg-4 col-form-label" for="val-username">프로젝트 명
+	                                </label>
+				                	<div class="col-lg-7" style="display:inline-block;">
+									    <select class="form-control" id="project-dropdown-export" name="project-dropdown">
+								            <option value="">프로젝트 선택</option>
+								        </select>
+									</div>
+								</div>
+								<div class="form-group row">
+	                                <label class="col-lg-4 col-form-label" for="val-username">팀 명
+	                                </label>
+									<div class="col-lg-7"  style="display:inline-block;">
+		                                <select id="team-dropdown-export" class="form-control">
+								            <option value="">팀 선택</option>
+								        </select>
+		                            </div>
+	                            </div>
 	                            <div class="form-group row">
 	                                <label class="col-lg-4 col-form-label" for="val-username">파일 명
 	                                </label>

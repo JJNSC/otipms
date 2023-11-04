@@ -1,12 +1,18 @@
 package com.otipms.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,7 +175,7 @@ public class EmployeeController {
 		return "/otipms/employeeManagement/employeeList";
 	}
 	
-	/*@ResponseBody
+	@ResponseBody
 	@RequestMapping("/exportEmployeeToExcel")
 	public String exportEmployeeToExcel(@RequestParam(name="projectName", required=false, defaultValue="0")String projectName,
 										@RequestParam(name="teamName", required=false, defaultValue="0")String teamName,
@@ -178,6 +184,10 @@ public class EmployeeController {
 	    
 		String filePath = "C:\\FileStore";	
 		Date currentDate = new Date();
+		log.info("projectName : " +projectName );
+		log.info("teamName : " +teamName );
+		log.info("excelFileName : " +excelFileName );
+		log.info("excelSheetName : " +excelSheetName );
 		    
 		// 날짜와 시간을 원하는 형식으로 포맷합니다.
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd_HHmm");
@@ -196,21 +206,56 @@ public class EmployeeController {
         // Sheet를 채우기 위한 데이터들을 Map에 저장
         Map<String, Object[]> data = new TreeMap<>();
         List<Employee> employeeList = new ArrayList<>();
+        data.put("1", new Object[]{"사원번호", "사원명", "직책", "연락처", "프로젝트", "팀", "권한","회사명","이메일"});
+        int i =2;
         if(projectName.equals("0")) {
         	employeeList = employeeService.getAllEmployee();
-        	int i =1;
-        	data.put(String.valueOf(i), new Object[]{"사원번호", "사원명", "직책", "연락처", "프로젝트", "팀", "권한","회사명","이메일"});
         	for(Employee emp : employeeList) {
-        		
-        		data.put(String.valueOf(i), new Object[]{"사원번호", "사원명", "직책", "연락처", "프로젝트", "팀", "권한","회사명","이메일"});
+        		data.put(String.valueOf(i), new Object[]{emp.getEmpId(), emp.getEmpName(), emp.getEmpRank(), emp.getEmpTel(), emp.getProjectName(), emp.getTeamName(), emp.getRole(),emp.getProjectCompanyName(),emp.getEmpEmail()});
         		i++;
         	}
         }else if(!projectName.equals("0")&&teamName.equals("0")) {
+        	employeeList = employeeService.getProjectEmployees(projectName);
+        	for(Employee emp : employeeList) {
+        		data.put(String.valueOf(i), new Object[]{emp.getEmpId(), emp.getEmpName(), emp.getEmpRank(), emp.getEmpTel(), emp.getProjectName(), emp.getTeamName(), emp.getRole(),emp.getProjectCompanyName(),emp.getEmpEmail()});
+        		i++;
+        	}
         	
         }else if(!projectName.equals("0")&&!teamName.equals("0")) {
-        	
+        	employeeList = employeeService.getProjectTeamEmployees(projectName,teamName);
+        	for(Employee emp : employeeList) {
+        		data.put(String.valueOf(i), new Object[]{emp.getEmpId(), emp.getEmpName(), emp.getEmpRank(), emp.getEmpTel(), emp.getProjectName(), emp.getTeamName(), emp.getRole(),emp.getProjectCompanyName(),emp.getEmpEmail()});
+        		i++;
+        	}
+        }
+        
+        // data에서 keySet를 가져온다. 이 Set 값들을 조회하면서 데이터들을 sheet에 입력한다.
+        Set<String> keyset = data.keySet();
+        int rownum = 0;
+
+        // 알아야할 점, TreeMap을 통해 생성된 keySet는 for를 조회시, 키값이 오름차순으로 조회된다.
+        for (String key : keyset) {
+            Row row = sheet.createRow(rownum++);
+            Object[] objArr = data.get(key);
+            int cellnum = 0;
+            for (Object obj : objArr) {
+                Cell cell = row.createCell(cellnum++);
+                if (obj instanceof String) {
+                    cell.setCellValue((String)obj);
+                } else if (obj instanceof Integer) {
+                    cell.setCellValue((Integer)obj);
+                }
+            }
+        }
+
+        try {
+            FileOutputStream out = new FileOutputStream(new File(filePath, fileNm));
+            workbook.write(out);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 		
 		return "Data received successfully";
-	}*/
+	}
 }

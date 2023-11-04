@@ -102,7 +102,7 @@
 		     , ei.empTel
 		     , e.role
 		     , p.projectCompanyName
-		     . ei.empEmail
+		     , ei.empEmail
 		  FROM emp e
 		     , empinfo ei
 		     , team t
