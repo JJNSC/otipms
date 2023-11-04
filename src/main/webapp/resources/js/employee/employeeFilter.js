@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	        const teamDropdownModalRegister = document.getElementById("team-dropdown-modal-register");
 	        const projectDropdownExport = document.getElementById("project-dropdown-export");
 	        const teamDropdownExport = document.getElementById("team-dropdown-export");
+	        const excelSheetName = document.getElementById("project-dropdown-excelSheetName");
+	        const excelSheetNameTeam = document.getElementById("team-dropdown-excelSheetName");
 	        const employeeList = document.getElementById("employee-list");
 	        
 	        var employeeData = data.employeeData;
@@ -29,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 const selectedTeamModalRegister = teamDropdownModalRegister.value;
                 const selectedProjectExport = projectDropdownExport.value;
                 const selectedTeamExport = teamDropdownExport.value;
+                const selectedExcelSheetName = excelSheetName.value;
+                const selectedExcelSheetNameTeam = excelSheetNameTeam.value;
                 const filteredEmployees = employeeData.filter((employee) => {
                     if (
                         (!selectedProject || employee.projectName === selectedProject) ||
@@ -69,6 +73,12 @@ document.addEventListener("DOMContentLoaded", function () {
             	option4.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
             	option4.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
             	projectDropdownExport.appendChild(option4);
+            });
+            projectData.forEach((project) => {
+            	const option5 = document.createElement("option");
+            	option5.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	option5.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	excelSheetName.appendChild(option5);
             });
 
             projectDropdown.addEventListener("change", function () {
@@ -171,6 +181,29 @@ document.addEventListener("DOMContentLoaded", function () {
             	
             	populateEmployeeList();
             });
+            excelSheetName.addEventListener("change", function () {
+            	const selectedExcelSheetName = excelSheetName.value;
+            	const selectedProjectExcelSheetName = projectData.find((project) => project.projectName === selectedExcelSheetName);
+            	
+            	// 이전 하위 드롭다운 제거
+            	while (excelSheetNameTeam.options.length > 1) {
+            		excelSheetNameTeam.remove(1);
+            	}
+            	
+            	if (selectedExcelSheetName) {
+            		// 프로젝트 선택에 따라 팀 데이터 필터링
+            		const filteredExcelSheet = teamData.filter((team) => team.projectNo === selectedProjectExcelSheetName.projectNo);
+            		filteredExcelSheet.forEach((team) => {
+            			const option = document.createElement("option");
+            			option.value = team.teamName;
+            			option.text = team.teamName;
+            			excelSheetNameTeam.appendChild(option);
+            		});
+            	}
+            	const selectedExcelSheetNameTeam= excelSheetNameTeam.value;
+            	
+            	populateEmployeeList();
+            });
             teamDropdown.addEventListener("change", function () {
                 // 다음 드롭다운 값 갱신
                 const selectedProject = projectDropdown.value;
@@ -215,6 +248,17 @@ document.addEventListener("DOMContentLoaded", function () {
             	
             	// 프로젝트 선택 후 직급 드롭다운도 갱신
             	const selectedTeamExport = teamDropdownExport.value;
+            	//updatePositionDropdown(selectedProjectId, selectedTeam);
+            	
+            	populateEmployeeList();
+            });
+            excelSheetNameTeam.addEventListener("change", function () {
+            	// 다음 드롭다운 값 갱신
+            	const selectedExcelSheetName = excelSheetName.value;
+            	const selectedProjectIdExport = projectData.find((project) => project.projectName === selectedExcelSheetName).projectNo;
+            	
+            	// 프로젝트 선택 후 직급 드롭다운도 갱신
+            	const selectedExcelSheetNameTeam = excelSheetNameTeam.value;
             	//updatePositionDropdown(selectedProjectId, selectedTeam);
             	
             	populateEmployeeList();

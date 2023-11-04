@@ -148,13 +148,6 @@ public class EmployeeController {
 										 @RequestParam("nowProject") int projectNo,
 										 @RequestParam("nowTeam") int teamNo,
 										 @RequestParam("nowRole") String role) {
-		log.info("사용자 정보 변경 empId : "+ empId);
-		log.info("사용자 정보 변경 empName : "+ empName);
-		log.info("사용자 정보 변경 empRank : "+ empRank);
-		log.info("사용자 정보 변경 empTel : "+ empTel);
-		log.info("사용자 정보 변경 projectNo : "+ projectNo);
-		log.info("사용자 정보 변경 teamNo : "+ teamNo);
-		log.info("사용자 정보 변경 role : "+ role);
 		Employee employee = new Employee();
 		employee.setEmpId(empId);
 		employee.setEmpName(empName);

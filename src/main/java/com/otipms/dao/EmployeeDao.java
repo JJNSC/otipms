@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Team;
 
 @Mapper
@@ -29,4 +30,8 @@ public interface EmployeeDao {
 	public Employee getEmployeeInfoByProjectNoAndTeamName(Employee employee);
 	public List<Employee> getProjectEmployees(String projectName);
 	public Employee selectProfileEmpByEmpId(int empId);
+	//기본 프로필 이미지 가져오기(mediaFileNo 를통해)
+	public MediaFile getDefaultProfileImg();
+	//회원가입 시 기본 프로필 이미지 부여하기 
+	public void insertEmployeeDefaultProfileImg(MediaFile mediaFile);
 }

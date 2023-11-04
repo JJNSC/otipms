@@ -273,6 +273,34 @@
                      				  					)
                      				 )
                      ) eif ON E.empId = eif.empId
+         WHERE e.empenabled=1
 	</select>
+	
+	<select id="getDefaultProfileImg" resultType="MediaFile">
+		SELECT *
+		  FROM mediaFile 
+		 WHERE 1=1
+		   AND mediaFileNo = 14
+	</select>
+	
+	<insert id="insertEmployeeDefaultProfileImg" parameterType="MediaFile">
+		<selectKey keyProperty="mediaFileNo" resultType="int" order="BEFORE">
+			SELECT mediaFileNo_seq.nextval 
+			  FROM dual
+		</selectKey>
+		INSERT 
+		  INTO mediaFile (
+		       mediaFileNo
+		     , empId
+		     , mediaFileName
+		     , mediaFileType
+		     , mediaFileData) 
+		VALUES (
+		       #{mediaFileNo}
+		     , #{empId}
+		     , #{mediaFileName}
+		     , #{mediaFileType}
+		     , #{mediaFileData})
+	</insert>
 
 </mapper>

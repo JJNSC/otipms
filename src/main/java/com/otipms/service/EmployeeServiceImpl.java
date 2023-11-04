@@ -15,6 +15,7 @@ import com.otipms.dao.EmployeeDao;
 import com.otipms.dao.ProjectDao;
 import com.otipms.dao.TeamDao;
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Project;
 import com.otipms.dto.ProjectTeams;
 import com.otipms.dto.Team;
@@ -43,10 +44,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LocalDate currentDate = LocalDate.now();
         DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yy");
         String currentYear = currentDate.format(yearFormatter);
+        //currentYear => 실질적으로 만들어진 사원번호 (yy00seq)
         currentYear = currentYear+"00"+Integer.valueOf(employee.getEmpId());
         
 		employee.setEmpId(Integer.parseInt(currentYear));
 		employeeDao.insertEmployeeInfo(employee);
+		
+		//기본 이미지 받아와서 세팅하기 
+		//받아오기 
+		MediaFile mediaFile = employeeDao.getDefaultProfileImg();
+		//사원번호 세팅
+		mediaFile.setEmpId(Integer.parseInt(currentYear));
+		//db에 저장
+		employeeDao.insertEmployeeDefaultProfileImg(mediaFile);
 		
 		return employee.getEmpId();
 	}

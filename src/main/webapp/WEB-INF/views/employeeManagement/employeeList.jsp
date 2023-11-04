@@ -455,9 +455,23 @@
 				            <div class="form-group row ml-2 mt-3">
 	                            <label class="col-lg-3 col-form-label" for="val-username">프로젝트 명<br>(엑셀 시트명)
 	                            </label>
-	                            <div class="col-lg-7">
-	                                <input type="text" class="form-control" id="excelSheetName" name="excelSheetName" placeholder="프로젝트 명 입력">
+	                            <div class="col-lg-7" style="display:inline-block; margin-left:15px;">
+								    <select class="form-control" id="project-dropdown-excelSheetName" name="excelSheetName">
+							            <option value="">프로젝트 선택</option>
+							        </select>
+								</div>
+								<div class="form-group row d-none">
+	                                <label class="col-lg-4 col-form-label" for="val-username">팀 명
+	                                </label>
+									<div class="col-lg-7"  style="display:inline-block;">
+		                                <select id="team-dropdown-excelSheetName" class="form-control">
+								            <option value="">팀 선택</option>
+								        </select>
+		                            </div>
 	                            </div>
+	                            <!-- <div class="col-lg-7">
+	                                <input type="text" class="form-control" id="excelSheetName" name="excelSheetName" placeholder="프로젝트 명 입력">
+	                            </div> -->
 	                        </div>
 	                        <div class="modal-body">
 		                        <div class="form-group">

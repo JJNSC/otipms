@@ -16,6 +16,7 @@
 		<typeAlias alias="ProjectTeams" type="com.otipms.dto.ProjectTeams"/>
 		<typeAlias alias="TASK" type="com.otipms.dto.Task"/>
 		<typeAlias alias="TaskEmployee" type="com.otipms.dto.TaskEmployee"/>
+		<typeAlias alias="MediaFile" type="com.otipms.dto.MediaFile"/>
 	</typeAliases>
 
 </configuration>

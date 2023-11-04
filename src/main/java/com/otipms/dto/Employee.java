@@ -23,5 +23,8 @@ public class Employee {
 	private String projectName;
 	private String teamName;
 	private String projectCompanyName;
-	//dd
+	//프로필 사진을 위한 
+	private String mediaFileName;
+	private String mediaFileType;
+	private byte[] mediaFileData;
 }
