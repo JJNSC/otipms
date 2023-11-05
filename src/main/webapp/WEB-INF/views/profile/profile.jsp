@@ -72,7 +72,7 @@
 								</div>
 							</div>
 							<h5 class="text-center h5 mb-0">${employee.empName}</h5>
-							<p class="text-center text-muted font-14">${employee.empRank} <c:if test="${employee.teamName != '미배정'}"> | ${employee.teamName}</p></c:if>
+							<p class="text-center text-muted font-14">${employee.empRank} <c:if test="${employee.teamName != '미배정'}"> | ${employee.teamName}</c:if></p>
 							<div class="profile-info">
 								<h5 class="mb-20 h5 text-blue">사원 정보</h5>
 								<ul>

@@ -23,6 +23,7 @@
 		, BOARDCONTENT
 		, BOARDWRITEDATE
 		, BOARDHITCOUNT
+		, BOARDDELETED
 		)
 		VALUES (
 		BOARDNO_SEQ.nextval
@@ -32,28 +33,68 @@
 		, #{boardContent}
 		, sysdate
 		, 0
+		, 0
 		)
 	</insert>
 	
-	<!-- 게시판 별 게시글 총 개수 조회 -->
+	<!-- 게시판 별 게시글 총 개수 조회  -->
 	<select id="countBoard" parameterType="hashMap" resultType="int">
 		SELECT count(*) 
-		  FROM BOARD
-		 WHERE BOARDTYPENO in (
-							  SELECT BOARDTYPENO
-							    FROM BOARDTYPE
-							   WHERE 1=1
-							     AND BOARDTYPENAME = #{boardType}
-						      <if test="boardType == '질의 게시판'">
-							     <if test="inquiryBoardType != null and inquiryBoardType != '전체'">
-							     AND INQUIRYBOARDTYPE = #{inquiryBoardType}
-							     </if>
-						      </if>
-						         AND (
-					         	     BOARDDELETED is null 
-					         	     OR BOARDDELETED = 0
-					         	     )
-							  )
+		  FROM BOARD b
+		 INNER JOIN BOARDTYPE bt
+			ON b.BOARDTYPENO = bt.BOARDTYPENO
+		 WHERE 1=1
+		   AND b.BOARDDELETED = 0
+		   AND bt.BOARDTYPENAME = #{boardType}
+	      <if test="boardType == '질의 게시판'">
+		     <if test="inquiryBoardType != null and inquiryBoardType != '전체'">
+		     AND bt.INQUIRYBOARDTYPE = #{inquiryBoardType}
+		     </if>
+	      </if>
+	      <if test="boardType == '팀 게시판'">
+		     AND bt.TEAMNO = #{teamNo}
+	      </if>
+	     <if test="searchType != null">
+	      AND b.BOARDNO in (
+					           <choose>
+							       <when test="searchType == '게시글'"> 
+							       	   SELECT BOARDNO
+							      	     FROM BOARD
+							            WHERE BOARDCONTENT like '%${searchKeyword}%'
+							              AND BOARDDELETED = 0
+							       </when>
+							       <when test="searchType == '제목'"> 
+							      	   SELECT BOARDNO
+							      	     FROM BOARD
+							            WHERE BOARDTITLE like '%${searchKeyword}%'
+							              AND BOARDDELETED = 0
+							       </when>
+							       <when test="searchType == '작성자'"> 
+							      	   SELECT BOARDNO
+									 	 FROM BOARD b
+									    INNER JOIN EMP e
+										   ON b.EMPID = e.EMPID
+							            WHERE e.EMPNAME like '%${searchKeyword}%' 
+							              AND b.BOARDDELETED = 0
+							       </when>
+							       <when test="searchType == '댓글'"> 
+							           SELECT BOARDNO
+									 	 FROM BOARDCOMMENT
+							            WHERE COMMENTCONTENT like '%${searchKeyword}%' 
+							              AND COMMENTDELETED = 0
+							       </when>
+							       <when test="searchType == '댓글 작성자'"> 
+							           SELECT BOARDNO
+									 	 FROM BOARDCOMMENT bc
+									    INNER JOIN EMP e
+										   ON bc.EMPID = e.EMPID
+							            WHERE e.EMPNAME like '%${searchKeyword}%'
+							              AND bc.COMMENTDELETED = 0
+							       </when>
+						           <!-- <otherwise> 쿼리문5 </otherwise> -->
+						       </choose>
+						  )
+		 </if>
 	</select>
 	
 	<!-- 페이저로 게시글 목록 조회 -->
@@ -97,16 +138,57 @@
 					        LEFT OUTER JOIN MEDIAFILE m
 					          ON b.BOARDNO = m.BOARDNO
 					       WHERE 1=1
+					         AND b.BOARDDELETED = 0
 					         AND BOARDTYPENAME = #{boardType}
 				          <if test="boardType == '질의 게시판'">
 						     <if test="inquiryBoardType != null and inquiryBoardType != '전체'">
 						     AND INQUIRYBOARDTYPE = #{inquiryBoardType}
 						     </if>
 					      </if>
-					         AND (
-					         	 BOARDDELETED is null 
-					         	 OR BOARDDELETED = 0
-					         	 )
+					      <if test="boardType == '팀 게시판'">
+						     AND bt.TEAMNO = #{teamNo}
+					      </if>
+					      <if test="searchType != null">
+						     AND b.BOARDNO in (
+										          <choose>
+												      <when test="searchType == '게시글'"> 
+												       	  SELECT BOARDNO
+												      	    FROM BOARD
+												           WHERE BOARDCONTENT like '%${searchKeyword}%'
+												             AND BOARDDELETED = 0
+												      </when>
+												      <when test="searchType == '제목'"> 
+												      	  SELECT BOARDNO
+												      	    FROM BOARD
+												           WHERE BOARDTITLE like '%${searchKeyword}%'
+												             AND BOARDDELETED = 0
+												      </when>
+												      <when test="searchType == '작성자'"> 
+												      	  SELECT BOARDNO
+														 	FROM BOARD b
+														   INNER JOIN EMP e
+															  ON b.EMPID = e.EMPID
+												           WHERE e.EMPNAME like '%${searchKeyword}%' 
+												             AND b.BOARDDELETED = 0
+												      </when>
+												      <when test="searchType == '댓글'"> 
+												          SELECT BOARDNO
+														 	FROM BOARDCOMMENT
+												           WHERE COMMENTCONTENT like '%${searchKeyword}%' 
+												             AND COMMENTDELETED = 0
+												      </when>
+												      <when test="searchType == '댓글 작성자'"> 
+												          SELECT BOARDNO
+														 	FROM BOARDCOMMENT bc
+														   INNER JOIN EMP e
+															  ON bc.EMPID = e.EMPID
+												           WHERE e.EMPNAME like '%${searchKeyword}%'
+												             AND bc.COMMENTDELETED = 0
+												      </when>
+											           <!-- <otherwise> 쿼리문5 </otherwise> -->
+											      </choose>
+											 )
+						  </if>
 					    ORDER BY boardWriteDate DESC
 				          )
 				    WHERE rownum <![CDATA[<=]]> #{boardPager.endRowNo}
@@ -159,7 +241,8 @@
 		   	   b.BOARDDELETED = 0
 		   	   OR b.BOARDDELETED is null
 		   	   )
-		   AND m.MEDIAFILENAME like 'profile%'
+		   AND m.MEDIAFILENAME like '%Profile'
+		   AND rownum = 1
 	</select>
 	
 	<!-- 조회수 갱신 -->
@@ -227,7 +310,7 @@
 		   	   COMMENTDELETED = 0 
 		   	   OR COMMENTDELETED is null
 		   	   )
-		   AND m.MEDIAFILENAME like 'profile%'
+		   AND m.MEDIAFILENAME like '%Profile'
 		 ORDER BY COMMENTWRITEDATE ASC
 	</select>
 	

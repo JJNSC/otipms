@@ -49,7 +49,7 @@
                                 </div>
 				                <c:if test="${boardType eq '질의 게시판'}">
 	                                <div class="dropdown d-inline-block my-1">
-		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownCategoryFilter" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">전체  </button>
+		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownCategoryFilter" data-toggle="dropdown" aria-expanded="false" style="padding: 5px 9px;">${inquiryType}  </button>
 		                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
 		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">전체  </a> 
 		                                	<a class="dropdown-item" href="#" onclick="categoryFilter(this)">시스템 관리 문의  </a> 
@@ -65,7 +65,7 @@
 			                                    
 			                                    console.log("어라...option은? " + option);
 			                                    
-			                                    chooseInquiryType(option, 1);
+			                                    chooseInquiryType(option);
 			                                    
 			                                    /* $.ajax({
 			                                		url: "/otipms/asncBoard",
@@ -120,41 +120,48 @@
                                             </c:if>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
-	                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
-	                                                <td>${board.boardNo}</td>
-	                                                <c:if test="${boardType eq '질의 게시판'}">
-		                                                <td>${board.inquiryBoardType}</td>
-	                                                </c:if>
-	                                                <td>
-	                                                	${board.boardTitle}
-	                                                	<c:if test="${board.mediaFileName != null}">
-		                                                	&nbsp;
-		                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
-	                                                	</c:if>
-	                                                	<c:if test="${board.commentCount != 0}">
-		                                                	&nbsp;
-		                                                	<span class="text-red">[${board.commentCount}]</span>
-	                                                	</c:if>
-	                                                </td>
-	                                                <td>${board.empName}</td>
-	                                                <!-- 오늘 날짜면 시간만 보이도록 -->
-	                                                <c:set var="now" value="<%= new java.util.Date() %>" />
-	                                                <c:choose>
-													    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
-													        <td>
-													            <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/>
-													        </td>
-													    </c:when>
-													    <c:otherwise>
-													        <td>
-													            <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/>
-													        </td>
-													    </c:otherwise>
-													</c:choose>
-	                                                <td>${board.boardHitcount}</td>
-	                                            </tr>
-                                        	</c:forEach>
+                                        	<c:if test="${fn:length(boardPagerMap.boardList) == 0}">
+                                        		<tr>
+                                        			<td colspan="5">게시글이 존재하지 않습니다.<td>
+                                        		</tr>
+                                        	</c:if>
+                                        	<c:if test="${fn:length(boardPagerMap.boardList) != 0}">
+	                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
+		                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
+		                                                <td>${board.boardNo}</td>
+		                                                <c:if test="${boardType eq '질의 게시판'}">
+			                                                <td>${board.inquiryBoardType}</td>
+		                                                </c:if>
+		                                                <td>
+		                                                	${board.boardTitle}
+		                                                	<c:if test="${board.mediaFileName != null}">
+			                                                	&nbsp;
+			                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
+		                                                	</c:if>
+		                                                	<c:if test="${board.commentCount != 0}">
+			                                                	&nbsp;
+			                                                	<span class="text-red">[${board.commentCount}]</span>
+		                                                	</c:if>
+		                                                </td>
+		                                                <td>${board.empName}</td>
+		                                                <!-- 오늘 날짜면 시간만 보이도록 -->
+		                                                <c:set var="now" value="<%= new java.util.Date() %>" />
+		                                                <c:choose>
+														    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
+														        <td>
+														            <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/>
+														        </td>
+														    </c:when>
+														    <c:otherwise>
+														        <td>
+														            <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/>
+														        </td>
+														    </c:otherwise>
+														</c:choose>
+		                                                <td>${board.boardHitcount}</td>
+		                                            </tr>
+	                                        	</c:forEach>
+	                                        </c:if>
                                         </tbody>
                                     </table>
                                 </div>
@@ -163,75 +170,26 @@
                             	<div class="bootstrap-pagination">
 	                           		<!-- <nav> -->
 	                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
-	                           			<c:if test="${boardType eq '질의 게시판'}">
-		                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
-					                        <!-- <ul class="pagination justify-content-center"> -->
-					                        
-				                        	<c:if test="${pager.groupNo>1}">
-				                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePageInquiry(this)">이전</input>
-				                            </c:if>
-				                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-												<c:if test="${pager.pageNo == i}">
-													<input type="button" class="page-link selected" value="${i}" onclick="movePageInquiry(this)">
-												</c:if>
-												<c:if test="${pager.pageNo != i}">
-													<input type="button" class="page-link" value="${i}" onclick="movePageInquiry(this)">
-												</c:if>
-											</c:forEach>
-											<c:if test="${pager.groupNo<pager.totalGroupNo}">
-												<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePageInquiry(this)">다음</input>
-				                            </c:if>
-					                   </c:if>
-					                   <c:if test="${boardType ne '질의 게시판'}">
-		                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
-					                        <!-- <ul class="pagination justify-content-center"> -->
-					                        
-				                        	<c:if test="${pager.groupNo>1}">
-				                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
-				                            </c:if>
-				                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-												<c:if test="${pager.pageNo == i}">
-													<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
-												</c:if>
-												<c:if test="${pager.pageNo != i}">
-													<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
-												</c:if>
-											</c:forEach>
-											<c:if test="${pager.groupNo<pager.totalGroupNo}">
-												<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
-				                            </c:if>
-					                   </c:if>
-				                            
-				                            <!-- 동기식 -->
-				                        	<%-- <c:if test="${pager.groupNo>1}">
-				                            	<li class="page-item"><a class="page-link" href="board?pageNo=${pager.startPageNo-1}" tabindex="-1">이전</a></li>
-				                            </c:if>
-				                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-												<c:if test="${pager.pageNo == i}">
-													<li class="page-item active"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
-												</c:if>
-												<c:if test="${pager.pageNo != i}">
-													<li class="page-item"><a class="page-link" href="board?pageNo=${i}">${i}</a></li>
-												</c:if>
-											</c:forEach>
-											<c:if test="${pager.groupNo<pager.totalGroupNo}">
-												<li class="page-item"><a class="page-link" href="board?pageNo=${pager.endPageNo+1}">다음</a></li>
-				                            </c:if> --%>
-				                            
-				                            <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-				                            <li class="page-item"><a class="page-link" href="#">3</a>
-				                            </li>
-				                            <li class="page-item"><a class="page-link" href="#">4</a>
-				                            </li>
-				                            <li class="page-item"><a class="page-link" href="#">5</a>
-				                            </li>
-				                            <li class="page-item"><a class="page-link" href="#">다음</a>
-				                            </li> -->
-				                        <!-- </ul> -->
+	                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
+				                        <!-- <ul class="pagination justify-content-center"> -->
+				                        
+			                        	<c:if test="${pager.groupNo>1}">
+			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
+			                            </c:if>
+			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+											<c:if test="${pager.pageNo == i}">
+												<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
+											</c:if>
+											<c:if test="${pager.pageNo != i}">
+												<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
+											</c:if>
+										</c:forEach>
+										<c:if test="${pager.groupNo<pager.totalGroupNo}">
+											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
+			                            </c:if>
 				                    </nav>
-		                    		<script type="text/javascript">
-		                                function movePageInquiry(clickedInput) {
+		                    		<!-- <script type="text/javascript">
+		                                /* function movePageInquiry(clickedInput) {
 		                                    /* $(".dropdownCategoryFilter").innerHTML = selectedItem.innerHTML; */
 		                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + clickedInput.value);
 		                                    console.log("일단 첫번째 pageNo 뭐가 맞을까 " + $(clickedInput).val())
@@ -243,19 +201,25 @@
 		                                function movePage(clickedInput) {
 		                                    var pageNo = clickedInput.value;
 		                                    
-		                                    movePageNormal(pageNo);
-		                                }
-	                               	</script>
+		                                    //movePageNormal(pageNo);
+		                                } */
+	                               	</script> -->
 				                </div>
                             </c:if>
 			                <div class="mb-3 text-right px-5">
 			                	<div class="dropdown d-inline-block">
-	                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownSearchFilter" data-toggle="dropdown" aria-expanded="false">게시글 + 댓글  </button>
+			                		<c:if test="${searchType != null}">
+		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownSearchFilter" data-toggle="dropdown" aria-expanded="false">${searchType}  </button>
+                                	</c:if>
+                                	<c:if test="${searchType == null}">
+		                                <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownSearchFilter" data-toggle="dropdown" aria-expanded="false">게시글  </button>
+                                	</c:if>
+	                                <!-- <button type="button" class="btn btn-primary btn-custom dropdown-toggle dropdownSearchFilter" data-toggle="dropdown" aria-expanded="false">게시글  </button> -->
 	                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">게시글 + 댓글  </a> 
-	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">제목만  </a> 
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">게시글  </a> 
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">제목  </a> 
 	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">작성자  </a>
-	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">댓글 내용  </a>
+	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">댓글  </a>
 	                                	<a class="dropdown-item" href="#" onclick="searchFilter(this)">댓글 작성자  </a>
 	                                </div>
 	                                <script type="text/javascript">
@@ -264,19 +228,56 @@
 		                                	var dropdownButton = document.querySelector(".dropdownSearchFilter");
 		                                    var filterKeyword = selectedItem.innerHTML;
 		                                    dropdownButton.innerHTML = filterKeyword;
-		                                    $("#filter").val(filterkeyword);
+		                                    
+		                                    if(filterKeyword == '게시글  ') {
+		                                    	filterKeyword = "게시글";
+		                                	} else if(filterKeyword == '제목  ') {
+		                                		filterKeyword = "제목";
+		                                	} else if(filterKeyword == '작성자  ') {
+		                                		filterKeyword = "작성자";
+		                                	} else if(filterKeyword == '댓글  ') {
+		                                		filterKeyword = "댓글";
+		                                	} else if(filterKeyword == '댓글 작성자  ') {
+		                                		filterKeyword = "댓글 작성자";
+		                                	}
+		                                    console.log("filterKeyword: " + filterKeyword);
+		                                    var searchType = document.querySelector("#searchType");
+		                                    searchType.value = filterKeyword;
+		                                    //$("#searchType").val(filterkeyword);
 		                                }
 	                                </script>
 	                            </div>
-								<div class="input-group mb-3 input-group-custom">
+	                            <c:if test="${searchType == null}">
+	                                <div class="input-group mb-3 input-group-custom">
+										<form action="searchBoard" method="post" class="d-flex">
+											<input type="hidden" id="searchType" name="searchType" value="게시글">
+											<input type="text" class="form-control form-custom" name="searchKeyword" value="">
+			                                <div class="input-group-append">
+			                                    <button class="btn btn-primary" type="submit">검색</button>
+			                                </div>
+										</form>
+		                            </div>
+                               	</c:if>
+                               	<c:if test="${searchType != null}">
+	                                <div class="input-group mb-3 input-group-custom">
+										<form action="searchBoard" method="post" class="d-flex">
+											<input type="hidden" id="searchType" name="searchType" value="${searchType}">
+											<input type="text" class="form-control form-custom" name="searchKeyword" value="${searchKeyword}">
+			                                <div class="input-group-append">
+			                                    <button class="btn btn-primary" type="submit">검색</button>
+			                                </div>
+										</form>
+		                            </div>
+                               	</c:if>
+								<!-- <div class="input-group mb-3 input-group-custom">
 									<form action="searchBoard" method="post" class="d-flex">
-										<input type="hidden" id="filter" name="filter">
-										<input type="text" class="form-control form-custom" name="keyword">
+										<input type="hidden" id="searchType" name="searchType">
+										<input type="text" class="form-control form-custom" name="searchKeyword" value="">
 		                                <div class="input-group-append">
 		                                    <button class="btn btn-primary" type="submit">검색</button>
 		                                </div>
 									</form>
-	                            </div>
+	                            </div> -->
 	                            <div class="btn-write">
 	                            	<a href="${pageContext.request.contextPath}/writeBoard" type="button" class="btn btn-primary text-white">글쓰기</a>
 	                            </div>
@@ -334,7 +335,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/board.js"></script> --%>
+	<script src="${pageContext.request.contextPath}/resources/js/board/board.js"></script>
 </body>
 
 </html>
