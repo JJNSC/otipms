@@ -18,14 +18,71 @@ document.addEventListener("DOMContentLoaded", function () {
     		    };
     	var ccType = recipientTypeToNumber[recipientType];
     	
-
-    	selectedEmployees[recipientType].push(selectedEmployee);
-        updateSelectedEmployeesUI(selectedEmployee, recipientType);
+    	
+    	console.log("selectedEmployee" + selectedEmployee);
+    	console.log("selectedEmployees[recipientType]) : " + selectedEmployees[recipientType]);
+    	
+    	
+    	if (isEmployeeSelected(selectedEmployee, selectedEmployees[recipientType])) {
+            
+    		
+    		console.log("같은 종류 selectedEmployee : " + selectedEmployee);
+    		
+    		
+    		alert("이미 선택한 사원입니다.");
+            return;
+        }
+    	
+		console.log("selectedEmployees : " + JSON.stringify(selectedEmployees));
+    	
+		
+		if (isEmployeeInOtherList(selectedEmployee, recipientType, selectedEmployees)) {
+            
+    		
+    		console.log("다른 종류 selectedEmployee : " + JSON.stringify(selectedEmployees));
+            console.log("참조 종류 : " + recipientType);
+    		
+            
+            alert("다른 목록에서 이미 선택한 사원입니다.");
+            return;
+        }
+    	console.log("recipientType : " + recipientType);
+    	
+    	
+    	selectedEmployees[recipientType] = selectedEmployees[recipientType].filter(employee => !isSameType(employee, ccType)); // 동일 유형의 사원 제거
+        console.log("동일사원 제거 selectedEmployees[recipientType] : " + JSON.stringify(selectedEmployees[recipientType]));
+    	
+        
+        selectedEmployees[recipientType] = selectedEmployees[recipientType].concat(selectedEmployee); // 새로운 사원 추가
+    	console.log("새 사원 추가 selectedEmployees[recipientType] : " + JSON.stringify(selectedEmployees[recipientType]));
+        
+        updateSelectedEmployeesUI(selectedEmployees[recipientType], recipientType);
     };
+    
+    function isSameType(employee, ccType) {
+        return employee.ccType === ccType;
+    }
+    
+    function isEmployeeSelected(employee, selectedList) {
+        // 이미 선택한 사원인지 확인
+        return selectedList.some(selected => selected.employeeId === employee[0].employeeId);
+    }
 
+    function isEmployeeInOtherList(employee, currentList, allLists) {
+        // 다른 목록에 이미 포함되어 있는지 확인
+        for (var listType in allLists) {
+            if (listType !== currentList) {
+                if (isEmployeeSelected(employee, allLists[listType])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     function updateSelectedEmployeesUI(selectedEmployee, recipientType) {
-    	const selectedTextbox = document.querySelector(`#selected${recipientType}Textbox`);
-        const selectedEmployeesContainer = document.querySelector(`#selected${recipientType}Employees`);
+    	const selectedTextbox = document.querySelector(`#selected${recipientType}Textbox`); 
+        const selectedEmployeesContainer = document.querySelector(`#selected${recipientType}Employees`); 
         
         if (selectedTextbox && selectedEmployeesContainer) {
             // 선택된 사원 정보를 텍스트 상자에 채우기
@@ -34,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedEmployeeNames.push(`${employee.position} ${employee.name}`);
             }
             selectedTextbox.value = selectedEmployeeNames.join(', ');
-            
+            selectedEmployeesContainer.innerHTML = '';
             console.log(selectedTextbox.value);
             // 선택된 사원들을 화면에 추가
             selectedEmployee.forEach(employee => {

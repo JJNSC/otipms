@@ -194,6 +194,15 @@
 		   END
 	</update>
 	
+	<!-- 쪽지 휴지통에서 삭제하기 -->
+	<update id="updateRealTrashMessage" parameterType="Message">
+		UPDATE CC
+		   SET messageStatus = 4
+		 WHERE messageNo = #{messageNo} 
+		   AND empId = #{empId} 
+		   AND messageStatus = 2
+	</update>
+	
 	<!-- 쪽지 클릭 시, 쪽지 읽음 표시 -->
 	<update id="updateMessageChecked" parameterType="Message">
 		UPDATE CC

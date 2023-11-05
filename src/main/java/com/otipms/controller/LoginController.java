@@ -41,6 +41,10 @@ public class LoginController {
 	private AlarmService alarmService;
 	
 	public static Employee loginEmployee;
+
+	public static MediaFile multipartFile;
+	
+	public static String profileImg;
 	
 	
 	@RequestMapping("/")
@@ -92,7 +96,6 @@ public class LoginController {
 		return "redirect:/";
 	}*/
 	
-	@Login
 	@RequestMapping("/index")
 	public String index(Model model, HttpSession session, Authentication authentication) {
 		// 현재 로그인한 사용자의 정보 가져오기
@@ -104,9 +107,11 @@ public class LoginController {
 	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
 	    if(employeeService.getProfileImgByEmpId(empId)!=null) {
 	    	MediaFile mf = employeeService.getProfileImgByEmpId(empId);
-	    	String base64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
-			model.addAttribute("base64Img", base64Img);
-			model.addAttribute("mf", mf);
+	    	multipartFile = mf;
+	    	String dbBase64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
+	    	profileImg = dbBase64Img;
+			model.addAttribute("base64Img", profileImg);
+			model.addAttribute("mf", multipartFile);
 	    }else {
 	    	MediaFile mf = employeeService.getDefaultImg();
 	    	String base64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());

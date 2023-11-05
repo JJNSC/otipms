@@ -93,7 +93,8 @@
 				                              		<input class="form-check-input" type="checkbox" id="email-select-all" onclick="checkall()">
 				                                	<label class="form-check-label" for="email-select-all"></label>
 				                              	</div>
-			                              		<i class="fa fa-trash font-18 align-middle ml-2" style="cursor: pointer;" onclick="deletemail()"></i>
+			                              		<i class="fa fa-archive font-18 align-middle ml-2 mr-2" style="cursor: pointer;" onclick="deletemail()"></i>
+			                              		<i class="fa fa-trash font-18 align-middle ml-2" style="cursor: pointer;" onclick="realdeletemail()"></i>
 				                            </div>
 		                          		</div>
                                     </div>

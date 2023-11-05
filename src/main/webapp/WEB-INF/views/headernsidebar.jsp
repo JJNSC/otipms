@@ -168,7 +168,7 @@
                         <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
                         </a> -->
-                        <a class="" href="mySchedule" aria-expanded="false">
+                        <a class="" href="${pageContext.request.contextPath}/mySchedule" aria-expanded="false">
                             <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
                         </a>
                     </li>
@@ -177,9 +177,9 @@
                             <i class="icon-notebook menu-icon"></i><span class="nav-text">업무 관리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="projectTask">프로젝트 업무 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/projectTask">프로젝트 업무 관리</a></li>
                             <!-- <li><a href="./page-register.html">팀 업무 관리</a></li> -->
-                            <li><a href="myTask">개인 업무 관리</a></li>
+                            <li><a href="${pageContext.request.contextPath}/myTask">개인 업무 관리</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -187,7 +187,7 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
                         </a> -->
                         <!-- has-arrow 지우긴 했는데 클릭한 이후 선택된 상태로 남는지는 확인해야 함 -->
-                        <a class="" href="checkEmployeeList/employeeList" aria-expanded="false">
+                        <a class="" href="${pageContext.request.contextPath}/checkEmployeeList/employeeList" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
                         </a>
                     </li>
@@ -197,10 +197,10 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">게시판</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="board?boardType=공지사항">공지사항</a></li>
-                            <li><a href="board?boardType=질의 게시판">질의 게시판</a></li>
-                            <!-- <li><a href="board?boardType=자유 게시판">자유 게시판</a></li> -->
-                            <li><a href="board?boardType=팀 게시판">팀 게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board?boardType=공지사항">공지사항</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board?boardType=질의 게시판">질의 게시판</a></li>
+                            <%-- <li><a href="${pageContext.request.contextPath}/board?boardType=자유 게시판">자유 게시판</a></li> --%>
+                            <li><a href="${pageContext.request.contextPath}/board?boardType=팀 게시판">팀 게시판</a></li>
                         </ul>
                     </li>
                     <li class="">

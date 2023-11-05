@@ -5,8 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html id="startPage" lang="en">
-<!DOCTYPE html>
-<html id="startPage" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -108,27 +106,6 @@
 		}
 	</script>
 	<script>
-	    /* function getTableData() {
-	        var employeeTable = document.getElementById('employeeTable');
-	        var tableData = [];
-	
-	        for (var i = 1, row; row = employeeTable.rows[i]; i++) {
-	            var rowData = {};
-	            rowData.empId = row.cells[0].innerHTML;
-	            rowData.empName = row.cells[1].innerHTML;
-	            rowData.empRank = row.cells[2].innerHTML;
-	            rowData.empTel = row.cells[3].innerHTML;
-	            rowData.projectName = row.cells[4].innerHTML;
-	            rowData.teamName = row.cells[5].innerHTML;
-	            rowData.role = row.cells[6].innerHTML;
-	            // 나머지 테이블 데이터 열 추가
-	
-	            tableData.push(rowData);
-	        }
-	
-	        return tableData;
-	    } */
-	    
 	    function sendTableData() {
 	       // var tableData = getTableData(); // 위에서 정의한 함수를 사용하여 데이터 가져오기
 			var projectName = $("#project-dropdown-export").val();
@@ -162,7 +139,9 @@
 </head>
 
 <body>
- <%@include file="/WEB-INF/views/headernsidebar.jsp" %>
+	<jsp:include page="../headernsidebar.jsp">
+		<jsp:param name="employee" value="${employee}" />
+	</jsp:include>
         <!--**********************************
             Content body start
         ***********************************-->

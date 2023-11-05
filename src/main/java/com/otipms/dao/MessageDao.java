@@ -26,6 +26,7 @@ public interface MessageDao {
 	public Message selectMessagebyMessageNo(int messageNo);
 	public void updateImportantMessage(Message message);
 	public void updateTrashMessage(Message message);
+	public void updateRealTrashMessage(Message message);
 	
 	//쪽지 읽음 표시
 	public void updateMessageChecked(Message message);

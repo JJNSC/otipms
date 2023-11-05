@@ -75,6 +75,11 @@ public class MessageServiceImpl implements MessageService {
 		messageDao.updateTrashMessage(message);
 	}
 
+	@Override
+	public void updateMessageRealTrash(Message message) {
+		messageDao.updateRealTrashMessage(message);
+	}
+	
 	//쪽지 읽음 표시
 	@Override
 	public void updateMessageChecked(Message message) {
