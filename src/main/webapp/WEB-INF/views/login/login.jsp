@@ -62,7 +62,7 @@
 							<h2 class="text-center text-primary">Login To OTI PMS</h2>
 						</div>
 						<form method="post" action="${pageContext.request.contextPath}/login">
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<input type="text" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<div class="input-group custom">
 								<input type="text" id="empId" name="empId" class="form-control form-control-lg" placeholder="UserID">
 								<div class="input-group-append custom">

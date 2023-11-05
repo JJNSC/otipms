@@ -21,8 +21,12 @@
 			authentication-success-handler-ref="authenticationSuccessHandler"
 			authentication-failure-handler-ref="authenticationFailureHandler"/>
 			
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+			
 		<security:logout 
 			logout-url="/logout"
+			invalidate-session="true"
+			delete-cookies="remember-me, JSEEIONID"
 			success-handler-ref="logoutSuccessHandler"/>
 			
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
