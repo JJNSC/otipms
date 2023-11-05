@@ -187,7 +187,7 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
                         </a> -->
                         <!-- has-arrow 지우긴 했는데 클릭한 이후 선택된 상태로 남는지는 확인해야 함 -->
-                        <a class="" href="searchHuman" aria-expanded="false">
+                        <a class="" href="checkEmployeeList/employeeList" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
                         </a>
                     </li>
