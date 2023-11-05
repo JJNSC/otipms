@@ -25,7 +25,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
     
-    <!-- Editer -->
+    <!-- Editer --> 
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	
 	<!-- selector -->
