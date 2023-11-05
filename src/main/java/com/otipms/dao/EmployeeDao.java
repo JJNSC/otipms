@@ -34,4 +34,6 @@ public interface EmployeeDao {
 	public MediaFile getDefaultProfileImg();
 	//회원가입 시 기본 프로필 이미지 부여하기 
 	public void insertEmployeeDefaultProfileImg(MediaFile mediaFile);
+	//사원번호로 프로필 사진 가져오기
+	public MediaFile selectProfileImgByEmpId(int empId);
 }

@@ -302,5 +302,15 @@
 		     , #{mediaFileType}
 		     , #{mediaFileData})
 	</insert>
+	
+	<select id="selectProfileImgByEmpId" parameterType="int" resultType="MediaFile">
+		SELECT *
+		  FROM mediaFile 
+		 WHERE 1=1
+		   AND empId=#{empId}
+		   AND messengerNo IS NULL
+		   AND boardNo IS NULL
+		   AND messageNo IS NULL
+	</select>
 
 </mapper>

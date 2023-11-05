@@ -3,6 +3,7 @@ package com.otipms.service;
 import java.util.List;
 
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.ProjectTeams;
 
 public interface EmployeeService {
@@ -30,4 +31,6 @@ public interface EmployeeService {
 	public List<Employee> getProjectEmployees(String projectName);
 	public List<Employee> getProjectTeamEmployees(String projectName,String teamName);
 	public Employee selectProfileEmp(int empId);
+	public MediaFile getProfileImgByEmpId(int empId);
+	public MediaFile getDefaultImg();
 }

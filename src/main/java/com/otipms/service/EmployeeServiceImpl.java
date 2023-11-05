@@ -250,10 +250,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return empList;
 	}
-
+	
+	//사원 번호로 프로필 사진 세팅하기
 	@Override
 	public Employee selectProfileEmp(int empId) {
 		return employeeDao.selectProfileEmpByEmpId(empId);
+	}
+	
+	//사원번호로 프로필 사진 가져오기
+	@Override
+	public MediaFile getProfileImgByEmpId(int empId) {
+		return employeeDao.selectProfileImgByEmpId(empId);
+	}
+
+	@Override
+	public MediaFile getDefaultImg() {
+		return employeeDao.getDefaultProfileImg();
 	}
 
 	

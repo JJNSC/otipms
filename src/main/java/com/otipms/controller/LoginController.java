@@ -1,5 +1,6 @@
 package com.otipms.controller;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otipms.dto.Alarm;
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
@@ -100,6 +102,17 @@ public class LoginController {
 	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
 	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
 	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
+	    if(employeeService.getProfileImgByEmpId(empId)!=null) {
+	    	MediaFile mf = employeeService.getProfileImgByEmpId(empId);
+	    	String base64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
+			model.addAttribute("base64Img", base64Img);
+			model.addAttribute("mf", mf);
+	    }else {
+	    	MediaFile mf = employeeService.getDefaultImg();
+	    	String base64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
+			model.addAttribute("base64Img", base64Img);
+			model.addAttribute("mf", mf);
+	    }
 	    
 	    model.addAttribute("employee", empDetails.getEmployee());
 	    model.addAttribute("alarm", alarm);

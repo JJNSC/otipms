@@ -31,6 +31,9 @@
 
 		gtag('config', 'UA-119386393-1');
 	</script>
+<!-- 	<script>
+		$
+	</script> -->
 </head>
 <body class="login-page">
 	<div class="login-header box-shadow">
@@ -75,8 +78,8 @@
 							<div class="row pb-30">
 								<div class="col-6">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck1">
-										<label class="custom-control-label" for="customCheck1">Remember</label>
+										<input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe">
+										<label class="custom-control-label" for="rememberMe">로그인 상태 유지</label>
 									</div>
 								</div>
 								<div class="col-6">
