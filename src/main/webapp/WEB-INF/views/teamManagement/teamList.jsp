@@ -83,7 +83,9 @@
 
 <body>
 
-    <%@include file="/WEB-INF/views/headernsidebar.jsp" %>
+    <jsp:include page="../headernsidebar.jsp">
+		<jsp:param name="employee" value="${employee}" />
+	</jsp:include>
         <!--**********************************
             Content body start
         ***********************************-->
