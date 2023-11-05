@@ -18,11 +18,37 @@ document.addEventListener("DOMContentLoaded", function () {
     		    };
     	var ccType = recipientTypeToNumber[recipientType];
     	
-
+    	if (isEmployeeSelected(selectedEmployee, selectedEmployees[recipientType])) {
+            alert("이미 선택한 사원입니다.");
+            return;
+        }
+    	
+    	if (isEmployeeInOtherList(selectedEmployee, recipientType, selectedEmployees)) {
+            alert("다른 목록에서 이미 선택한 사원입니다.");
+            return;
+        }
+    	
     	selectedEmployees[recipientType].push(selectedEmployee);
         updateSelectedEmployeesUI(selectedEmployee, recipientType);
     };
+    
+    function isEmployeeSelected(employee, selectedList) {
+        // 이미 선택한 사원인지 확인
+        return selectedList.some(selected => selected.employeeId === employee.employeeId);
+    }
 
+    function isEmployeeInOtherList(employee, currentList, allLists) {
+        // 다른 목록에 이미 포함되어 있는지 확인
+        for (var listType in allLists) {
+            if (listType !== currentList) {
+                if (isEmployeeSelected(employee, allLists[listType])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     function updateSelectedEmployeesUI(selectedEmployee, recipientType) {
     	const selectedTextbox = document.querySelector(`#selected${recipientType}Textbox`);
         const selectedEmployeesContainer = document.querySelector(`#selected${recipientType}Employees`);

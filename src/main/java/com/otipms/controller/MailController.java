@@ -109,6 +109,27 @@ public class MailController {
         }
     }
 	
+	@PostMapping("/updateMessageRealTrash")
+    @ResponseBody
+    public String updateMessageRealTrash(@RequestParam("messageNo") int messageNo, Authentication authentication) {
+		try {
+			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+			int empId = empDetails.getEmployee().getEmpId();
+			
+			Message message = new Message();
+	        message.setMessageNo(messageNo);
+	        message.setEmpId(empId);
+	        
+	        messageService.updateMessageRealTrash(message);
+        
+        // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
+        return "success";
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	return "error";
+        }
+    }
+	
 	@PostMapping("/updateCheckedDate")
     @ResponseBody
     public String updateCheckedDate(@RequestParam("ccNo") int ccNo, Authentication authentication) {

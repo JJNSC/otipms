@@ -41,6 +41,26 @@ function deletemail(){
     });
 }
 
+function realdeletemail() {
+	// 모든 이메일 체크박스를 찾기.
+    var emailCheckboxes = document.querySelectorAll(".email-checkbox input[type='checkbox']");
+    // 선택된 체크박스를 저장할 배열을 만들기.
+    var selectedMessageIndices = [];
+    // 체크된 체크박스를 확인하고 인덱스를 저장.
+    
+    emailCheckboxes.forEach(function (checkbox, index) {
+        if (checkbox.checked) {
+            selectedMessageIndices.push(index);
+        }
+    });
+    
+    selectedMessageIndices.forEach(function (index) {
+    	var emailCheckbox = emailCheckboxes[index];
+        var messageNo = emailCheckbox.value;
+        sendToRealTrash(messageNo, index);
+    });
+}
+
 function sendToTrash(messageNo, index) {
     // 서버로 메일을 휴지통으로 보내는 요청을 보냅니다.
     $.ajax({
@@ -63,6 +83,31 @@ function sendToTrash(messageNo, index) {
         }
     });
 }
+
+
+function sendToRealTrash(messageNo, index) {
+    // 서버로 메일을 휴지통으로 보내는 요청을 보냅니다.
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/otipms/mail/updateMessageRealTrash", // 서버로 메일을 휴지통으로 보내는 URL
+        data: { messageNo: messageNo },
+        success: function (data) {
+            if (data === "success") {
+                // 서버에서 성공적으로 메일을 휴지통으로 보냈을 경우
+                var emailMessage = document.querySelector(".message.message-" + (index + 1));
+                if (emailMessage) {
+                    emailMessage.remove();
+                }
+            } else {
+                alert("서버 오류: 메일을 휴지통으로 보내지 못했습니다.");
+            }
+        },
+        error: function () {
+            alert("서버 오류: 메일을 휴지통으로 보내지 못했습니다.");
+        }
+    });
+}
+
 
 function checkimportant(messageNo ,index, event) {
 	event.stopPropagation();

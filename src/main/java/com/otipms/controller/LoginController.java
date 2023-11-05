@@ -92,7 +92,6 @@ public class LoginController {
 		return "redirect:/";
 	}*/
 	
-	@Login
 	@RequestMapping("/index")
 	public String index(Model model, HttpSession session, Authentication authentication) {
 		// 현재 로그인한 사용자의 정보 가져오기

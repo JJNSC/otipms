@@ -21,6 +21,8 @@ public interface MessageService {
 	public Message getMessageByMessageNo(int messageNo);
 	public void toggleMessageImportance(Message message);
 	public void updateMessageTrash(Message message);
+	public void updateMessageRealTrash(Message message);
+	
 	public void updateMessageChecked(Message message);
 	public void updateMessageCheckedRec(Message message);
 	
