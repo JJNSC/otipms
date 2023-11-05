@@ -36,4 +36,11 @@ public interface EmployeeDao {
 	public void insertEmployeeDefaultProfileImg(MediaFile mediaFile);
 	//사원번호로 프로필 사진 가져오기
 	public MediaFile selectProfileImgByEmpId(int empId);
+	/**
+	 * 프로필 사진 수정
+	 * @param mediaFile
+	 * @return
+	 * @author 이은지
+	 */
+	public int updateEmployeeProfileImg(MediaFile mediaFile);
 }

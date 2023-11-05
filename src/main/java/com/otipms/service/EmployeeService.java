@@ -33,4 +33,16 @@ public interface EmployeeService {
 	public Employee selectProfileEmp(int empId);
 	public MediaFile getProfileImgByEmpId(int empId);
 	public MediaFile getDefaultImg();
+	/**
+	 * 비밀번호 수정
+	 * @param employee
+	 * @author 이은지
+	 */
+	public void modifyPassword(Employee employee);
+	/**
+	 * 프로필 사진 수정
+	 * @param mediaFile
+	 * @author 이은지
+	 */
+	public void updateProfileImg(MediaFile mediaFile);
 }
