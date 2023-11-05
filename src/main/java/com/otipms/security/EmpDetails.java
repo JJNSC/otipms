@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.User;
 
 import com.otipms.dto.Employee;
 
+import lombok.extern.slf4j.Slf4j;
+
 /*
  * 어떤 컬럼이 id이고 password인지를 알려줌
  */
