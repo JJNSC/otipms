@@ -51,4 +51,7 @@ public interface MessageDao {
 	public Message selectMyCCByMessageNo(Map<String, Object> paramMap);
 	//쪽지함에서 읽은걸로 알람정보 제거하기
 	public Message selectMessageNoByCC(Map<String, Object> paramMap);
+	
+	//해당하는 쪽지에 미디어파일이 있나?
+	public List<MediaFile> haveMediaFile(int messageNo);
 }

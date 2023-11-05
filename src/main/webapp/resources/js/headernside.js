@@ -181,7 +181,7 @@ window.onload = function(){
 	    			<div class="col-mail col-mail-2">
 	    			<div class="subject">${message.messageTitle}</div>
 	    			<div class="clip">
-	    			<span class="icon-copy ion-paperclip mr-5"></span>
+	    			<span class="${message.mediaFile != null && message.mediaFile.length > 0 ? 'icon-copy ion-paperclip mr-5' : ''}"></span>
 	    			</div>
 	    			<div class="date">
 	    			${messageDateFormatted}

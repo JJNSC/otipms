@@ -1,5 +1,6 @@
 package com.otipms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.otipms.dao.MessageDao;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.service.MessageService;
 
@@ -26,19 +29,38 @@ public class MailRestController {
 	@Autowired
 	private MessageService messageService;
 	
+	@Autowired
+	private MessageDao messageDao;
+	
 	//쪽지 수신함
-	@GetMapping("/receivedMails")
-	public List<Message> receivedMail(@RequestParam int empId) {
-		
-		return messageService.getMyReceivedMessage(empId);
+	@GetMapping(value="/receivedMails", produces = "application/json; charset=UTF-8")
+	public ResponseEntity<String> receivedMail(@RequestParam int empId) throws JsonProcessingException {
+		List<Message> receivedMails = messageService.getMyReceivedMessage(empId);
+		List<Message> plusreceivedMails = new ArrayList<>();
+		for (Message message : receivedMails) {
+			int mesmessageNo = message.getMessageNo();
+			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
+			message.setMediaFile(mediaFiles);
+			plusreceivedMails.add(message);
+		}
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(plusreceivedMails);
+		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
 	//쪽지 발신함
 	@GetMapping(value="/sentMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> sentMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> sentMails = messageService.getMySentMessage(empId);
+		List<Message> plussentMails = new ArrayList<>();
+		for (Message message : sentMails) {
+			int mesmessageNo = message.getMessageNo();
+			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
+			message.setMediaFile(mediaFiles);
+			plussentMails.add(message);
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(sentMails);
+		String json = objectMapper.writeValueAsString(plussentMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
@@ -46,8 +68,15 @@ public class MailRestController {
 	@GetMapping(value="/importantMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> importantMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> importantMails = messageService.getMyImportantMessage(empId);
+		List<Message> plusimportantMails = new ArrayList<>();
+		for (Message message : importantMails) {
+			int mesmessageNo = message.getMessageNo();
+			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
+			message.setMediaFile(mediaFiles);
+			plusimportantMails.add(message);
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(importantMails);
+		String json = objectMapper.writeValueAsString(plusimportantMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
@@ -55,8 +84,15 @@ public class MailRestController {
 	@GetMapping(value="/temporaryMails" , produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> temporaryMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> temporaryMails = messageService.getMyTemporaryMessage(empId);
+		List<Message> plustemporaryMails = new ArrayList<>();
+		for (Message message : temporaryMails) {
+			int mesmessageNo = message.getMessageNo();
+			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
+			message.setMediaFile(mediaFiles);
+			plustemporaryMails.add(message);
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(temporaryMails);
+		String json = objectMapper.writeValueAsString(plustemporaryMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
@@ -64,8 +100,15 @@ public class MailRestController {
 	@GetMapping(value="/trashMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> trashMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> trashMails = messageService.getMyTrashMessage(empId);
+		List<Message> plustrashMails = new ArrayList<>();
+		for (Message message : trashMails) {
+			int mesmessageNo = message.getMessageNo();
+			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
+			message.setMediaFile(mediaFiles);
+			plustrashMails.add(message);
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(trashMails);
+		String json = objectMapper.writeValueAsString(plustrashMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 }

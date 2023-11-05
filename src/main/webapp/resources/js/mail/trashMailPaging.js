@@ -23,7 +23,7 @@ window.onload = function(){
 				messageDiv.className = "message message-" + (index + 1);
 				
 				var messageDateFormatted = parseMessageDate(message.messageReservedDate);
-				
+				console.log("미디어 파일 : " + message.MediaFile);
 				// 메일 내용을 생성합니다.
 				var messageContent = `
 					<div class="col-mail col-mail-1 received">
@@ -43,7 +43,7 @@ window.onload = function(){
 					<div class="col-mail col-mail-2">
 					<div class="subject">${message.messageTitle}</div>
 					<div class="clip">
-					<span class="icon-copy ion-paperclip mr-5"></span>
+					<span class="${message.mediaFile != null && message.mediaFile.length > 0 ? 'icon-copy ion-paperclip mr-5' : ''}"></span>
 					</div>
 					<div class="date">
 					${messageDateFormatted}

@@ -230,6 +230,17 @@
 		   
 	</select>
 	
+	<!-- 쪽지에 첨부파일이 있는지에 대한 확인을 위한 쪽지 첨부파일 확인 -->
+	<select id="haveMediaFile" parameterType="int" resultType="MediaFile">
+		SELECT mf.mediaFileNo, mf.messageNo, mf.mediaFileName, mf.mediaFileType
+		  FROM mediaFile mf
+		  	 , emp e
+		     , message m
+		 WHERE m.messageNo = mf.messageNo
+		   AND mf.empId = e.empId
+		   AND m.messageNo = #{messageNo}
+    </select>
+    
 	<!-- 쪽지 상세 정보(중요 여부) -->
 	<select id="detailMessageImportant" parameterType="map" resultType="int">
 		SELECT c.messageImportant
@@ -263,7 +274,7 @@
 	</select>
 	
 	<!-- 미디어 파일 다운로드를 위한 select문 -->
-	<select id="selectMediaFileByMediaFileNo" parameterType="int" resultType="com.otipms.dto.MediaFile">
+	<select id="selectMediaFileByMediaFileNo" parameterType="int" resultType="MediaFile">
 		SELECT *
 		  FROM mediaFile
 		 WHERE mediaFileNo = #{mediaFileNo}
@@ -323,7 +334,7 @@
 	</insert>
 	
 	<!-- 첨부파일 추가 -->
-	<insert id="writeMailMedia" parameterType="com.otipms.dto.MediaFile">
+	<insert id="writeMailMedia" parameterType="MediaFile">
 		<selectKey keyProperty="mediaFileNo" resultType="int" order="BEFORE">
 			 SELECT mediaFileNo_seq.nextval 
 			   FROM DUAL
@@ -368,7 +379,7 @@
 	</insert>
 	
 	<!-- 첨부파일 완전 추가 -->
-	<update id="updateMailMedia" parameterType="com.otipms.dto.MediaFile">
+	<update id="updateMailMedia" parameterType="MediaFile">
 		UPDATE MEDIAFILE
     	   SET empId = #{empId}
     	     , messageNo = #{messageNo}
