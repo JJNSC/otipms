@@ -21,13 +21,16 @@
 			authentication-success-handler-ref="authenticationSuccessHandler"
 			authentication-failure-handler-ref="authenticationFailureHandler"/>
 			
-		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
-			
 		<security:logout 
 			logout-url="/logout"
-			invalidate-session="true"
-			delete-cookies="remember-me, JSEEIONID"
 			success-handler-ref="logoutSuccessHandler"/>
+			
+		<security:remember-me 
+			key="otipms" 
+			token-validity-seconds="604800"
+			remember-me-parameter="_spring_security_remember_me"
+			remember-me-cookie="rememberMe"
+			authentication-success-handler-ref="authenticationSuccessHandler"/>
 			
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
 		<!-- logout도 post 방식으로 요청(_csrf의 토큰을 전달해야함) -->

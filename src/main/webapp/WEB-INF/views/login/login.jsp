@@ -62,7 +62,7 @@
 							<h2 class="text-center text-primary">Login To OTI PMS</h2>
 						</div>
 						<form method="post" action="${pageContext.request.contextPath}/login">
-							<input type="text" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<div class="input-group custom">
 								<input type="text" id="empId" name="empId" class="form-control form-control-lg" placeholder="UserID">
 								<div class="input-group-append custom">
@@ -78,7 +78,7 @@
 							<div class="row pb-30">
 								<div class="col-6">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe">
+										<input type="checkbox" class="custom-control-input" id="rememberMe" name="_spring_security_remember_me">
 										<label class="custom-control-label" for="rememberMe">로그인 상태 유지</label>
 									</div>
 								</div>
