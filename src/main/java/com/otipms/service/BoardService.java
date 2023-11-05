@@ -19,19 +19,25 @@ public interface BoardService {
 	public void writeBoard(Board board);
 
 	/**
-	 * 게시판 유형별 총 게시글 목록 수 조회
+	 * 페이징이 필요한 게시글 총 수
 	 * @param boardType
 	 * @param inquiryType
+	 * @param searchType
+	 * @param searchKeyword
 	 * @return
 	 */
-	public int getTotalBoardNum(String boardType, String inquiryType);
+	public int getTotalBoardNum(String boardType, String inquiryType, String searchType, String searchKeyword);
 
 	/**
 	 * 페이징 처리된 게시글 목록 조회
 	 * @param boardPager
+	 * @param boardType
+	 * @param inquiryType
+	 * @param searchType
+	 * @param searchKeyword
 	 * @return
 	 */
-	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType);
+	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType, String searchType, String searchKeyword);
 
 	/**
 	 * 게시글 조회

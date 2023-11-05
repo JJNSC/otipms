@@ -49,7 +49,7 @@
                             	<div class="card-title mb-1">
                                     <!-- <h4>공지사항</h4> -->
                                     <%-- <h4>${boardType}</h4> --%>
-                                    <h4 class="d-inline-block">${board.boardTypeName}</h4><c:if test="${board.boardTypeName eq '질의 게시판'}"> <h5 class="d-inline-block">&nbsp;/&nbsp;  ${board.inquiryBoardType}</h5></c:if>
+                                    <h4 class="d-inline-block"><a href="board">${board.boardTypeName}</a></h4><c:if test="${board.boardTypeName eq '질의 게시판'}"> <h5 class="d-inline-block">&nbsp;/&nbsp;  ${board.inquiryBoardType}</h5></c:if>
                                 </div>
                             	<div class="mt-4 pl-3 row" style="margin-bottom: 0.8rem;">
                                     <h3 style="padding-top: 10px;">${board.boardTitle}</h3>
@@ -66,10 +66,10 @@
 		                                   <!--  <div class="mr-3"><img src="/otipms/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div> -->
 		                                    <div class="">
 		                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
-		                                        	<c:if test="${board.teamName == null}">
+		                                        	<c:if test="${board.teamName == null or board.teamName == '미배정'}">
 		                                        		${board.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;"> ${board.empRank}</span>
 		                                        	</c:if>
-		                                        	<c:if test="${board.teamName != null}">
+		                                        	<c:if test="${board.teamName != null and board.teamName != '미배정'}">
 		                                        		${board.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;"> ${board.empRank} | ${board.teamName}</span>
 		                                        	</c:if>
 		                                        </h6>
@@ -89,7 +89,7 @@
                                 	</div>
                                 	<div class="col-6 text-right pt=4" style=" padding-top: 30px; padding-right: 29px;">
 		                                <!-- <button type="button" class="btn mb-1 btn-light-custom">수정</button> -->
-		                                <c:if test="${board.empId == employee.empId}">
+		                                <c:if test="${board.empId == employee.empId or employee.role == 'ROLE_ADMIN'}">
 		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-secondary" style=" margin-right: 7px;">수정</a>                                                                	
 		                                    <a href="#" type="button" class="text-danger" data-toggle="modal" data-target="#deleteBoard">샥제</a>
 		                                </c:if>
@@ -109,10 +109,10 @@
 	                                				</c:if>
 				                                    <div class="">
 				                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
-				                                        	<c:if test="${comment.teamName == null}">
+				                                        	<c:if test="${comment.teamName == null or comment.teamName == '미배정'}">
 					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${comment.empRank}</span>
 				                                        	</c:if>
-				                                        	<c:if test="${comment.teamName != null}">
+				                                        	<c:if test="${comment.teamName != null and comment.teamName != '미배정'}">
 					                                        	${comment.empName} <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${comment.empRank} | ${comment.teamName}</span>
 				                                        	</c:if>
 				                                        	
@@ -242,10 +242,10 @@
 									<div class="comment_inbox">
 										<span class="comment_inbox_name">
 											<strong style="font-weight: 700; font-size: 0.875rem;">${employee.empName} </strong> 
-											<c:if test="${employee.teamName == null}">
+											<c:if test="${employee.teamName == null or employee.teamName == '미배정'}">
 												<span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${employee.empRank}</span>
 	                                       	</c:if>
-	                                       	<c:if test="${employee.teamName != null}">
+	                                       	<c:if test="${employee.teamName != null and employee.teamName != '미배정'}">
 												<span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${employee.empRank} | ${employee.teamName}</span>
 	                                       	</c:if>
 											<%-- <span style="font-weight: 300; font-size: 0.8rem; color: #9097c4;">${employee.empRank} | ${employee.teamName}</span></span> --%>

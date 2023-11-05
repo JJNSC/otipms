@@ -29,22 +29,26 @@ public class BoardServiceImpl implements BoardService {
 
 	//게시판 유형 별 게시글 목록 수 조회
 	@Override
-	public int getTotalBoardNum(String boardType, String inquiryType) {
+	public int getTotalBoardNum(String boardType, String inquiryType, String searchType, String searchKeyword) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardType", boardType);
 		map.put("inquiryBoardType", inquiryType);
-		log.info("아니 대체 DAO에서 inquiryBoardType이 뭐길래 전체로만 떠서 걸러지는 거야 뭐야" + inquiryType);
+		map.put("searchType", searchType);
+		map.put("searchKeyword", searchKeyword);
 		int totalBoardNum = boardDao.countBoard(map);
 		return totalBoardNum;
 	}
 
 	//페이저로 페이징된 게시글 목록 조회
 	@Override
-	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType) {
+	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType, String searchType,
+									String searchKeyword) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardPager", boardPager);
 		map.put("boardType", boardType);
 		map.put("inquiryBoardType", inquiryType);
+		map.put("searchType", searchType);
+		map.put("searchKeyword", searchKeyword);
 		List<Board> boardList = boardDao.selectBoardByPage(map);
 		for(Board board : boardList) {
 			board.setCommentCount(boardDao.countBoardComment(board.getBoardNo()));

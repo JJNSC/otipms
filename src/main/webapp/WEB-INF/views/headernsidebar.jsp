@@ -199,7 +199,7 @@
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a href="board?boardType=공지사항">공지사항</a></li>
                             <li><a href="board?boardType=질의 게시판">질의 게시판</a></li>
-                            <li><a href="board?boardType=자유 게시판">자유 게시판</a></li>
+                            <!-- <li><a href="board?boardType=자유 게시판">자유 게시판</a></li> -->
                             <li><a href="board?boardType=팀 게시판">팀 게시판</a></li>
                         </ul>
                     </li>
