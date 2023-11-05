@@ -34,6 +34,9 @@ public class TeamController {
 	@Login
 	@RequestMapping("/teamList")
 	public String teamList(Model model) {
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		List<Project> projectList = projectService.getAllProjects();
 		List<TeamList> allTeam = new ArrayList<>();
 		if(projectList.equals(null)||projectList==null) {

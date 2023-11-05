@@ -14,6 +14,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/projectList.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
     <script>
 		$(document).ready(function() {
@@ -25,7 +26,7 @@
 		        const target = $(this).data('target');
 		        $(target).collapse('toggle');
 		    });
-		});
+		}); 
 		
 		function prepareDelete(projectNo) {
 		    // 모달 내의 숨겨진 입력 필드에 projectNo를 설정
@@ -82,8 +83,11 @@
 </head>
 
 <body>
-
-    <%@include file="/WEB-INF/views/headernsidebar.jsp" %>
+    <jsp:include page="../headernsidebar.jsp">
+		<jsp:param name="employee" value="${employee}" />
+		<jsp:param name="mf" value="${mf}" />
+		<jsp:param name="base64Img" value="${base64Img}" />
+	</jsp:include>
 
         <!--**********************************
             Content body start

@@ -41,6 +41,9 @@ public class ProjectController {
 		List<Project> projectList = projectService.getAllProjects();
 		log.info("projectList: "+projectList);
 		model.addAttribute("projectList", projectList);
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		//해당 프로젝트당 PM
 		List<Employee> PMList = new ArrayList<>();
 		List<Employee> customerInfoList = new ArrayList<>();
@@ -98,6 +101,9 @@ public class ProjectController {
 									  @RequestParam(name="pmId", defaultValue="0") int pmId,
 									  @RequestParam(name="customerId", defaultValue="0") int customerId,
 									  Model model) {
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		if(projectNo==0) {
 			
 		}else {
@@ -138,7 +144,10 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("/addProjectForm")
-	public String addProjectForm() {
+	public String addProjectForm(Model model) {
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		return "projectManagement/addProject";
 	}
 	
@@ -149,7 +158,11 @@ public class ProjectController {
 							 @RequestParam("ProjectManagerId") String PMId,
 							 @RequestParam(name="projectOutLines", defaultValue="프로젝트 개요")String projectContent,
 							 @RequestParam("customerCompany") String projectCompanyName,
-							 @RequestParam("customerId") String empId) {
+							 @RequestParam("customerId") String empId,
+							 Model model) {
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		System.out.println("projectName :" + projectName );
 		System.out.println("projectDate :" + projectDate );
 		System.out.println("PMId :" + PMId );
@@ -213,7 +226,11 @@ public class ProjectController {
 							 	@RequestParam("projectOutLines")String projectContent,
 							 	@RequestParam("customerCompany") String projectCompanyName,
 							 	@RequestParam(name="customerId", required=false, defaultValue="0") String empId,
-								@RequestParam(name="beforeCustomerId", required=false, defaultValue="0") String beforeEmpId){
+								@RequestParam(name="beforeCustomerId", required=false, defaultValue="0") String beforeEmpId,
+								Model model){
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		System.out.println("projectNo :" + projectNo );
 		System.out.println("projectName :" + projectName );
 		System.out.println("projectDate :" + projectDate );

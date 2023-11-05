@@ -46,6 +46,9 @@ public class EmployeeController {
 	
 	@RequestMapping("/employeeList")
 	public String employeeList(@RequestParam(name="errMsg",required=false,defaultValue="1") String errMsg,Model model) {
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		if(errMsg.equals("1")) {
 			
 		}else {
