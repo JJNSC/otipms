@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     function updateSelectedEmployeesUI(selectedEmployee, recipientType) {
-    	const selectedTextbox = document.querySelector(`#selected${recipientType}Textbox`);
+    	const selectedTextbox = document.querySelector(`#selected${recipientType}Textbox`); 
         const selectedEmployeesContainer = document.querySelector(`#selected${recipientType}Employees`); 
         
         if (selectedTextbox && selectedEmployeesContainer) {
