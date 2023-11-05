@@ -77,6 +77,9 @@
                                         </div>
                                     </div>
                                     <div class="read-content">
+                                    	<button onclick="javascript:void(window.open('readTime?messageNo=${messageContent.messageNo}','_blank','width=600, height=600, left=600, top=30'))"
+                                    	   class="btn btn-primary btn-block" 
+                                    	   style="position:absolute; width:150px; right:20px">읽음 여부</button>
                                         <div class="media pt-5">
                                             <img class="mr-3 rounded-circle" src="/otipms/resources/images/user/1.jpg" style="width:60px; height:60px;">
                                             <div class="media-body">
@@ -94,31 +97,50 @@
                                                 <fmt:formatDate value="${messageContent.messageReservedDate}" pattern="HH:mm:ss       yyyy.MM.dd" />
                                                 <br/>
                                                 <span class="m-b-5 font-weight-bold">수신자 : </span>
-                                                <c:forEach items="${messageEmployee}" var="messageEmpRec">
-                                                	<c:choose>
-	                                                	<c:when test="${messageEmpRec.ccType == 1}">
-			                                                <span class="m-b-3">${messageEmpRec.empRank}</span>
-			                                                <span class="m-b-3">${messageEmpRec.empName},</span>
-	                                                	</c:when>
-	                                                </c:choose>
-                                                </c:forEach>
-                                                <br/>
-                                                <span class="m-b-3 font-weight-bold">참조 : </span>
-                                               	<c:forEach items="${messageEmployee}" var="messageEmpRei">
-                                                	<c:choose>
-                                                		<c:when test="${empty messageEmployee}">
-                                                		</c:when>
-	                                                	<c:when test="${messageEmpRei.ccType == 3}">
-			                                                <span class="m-b-3">${messageEmpRei.empRank}</span>
-			                                                <span class="m-b-3">${messageEmpRei.empName},</span>
-	                                                	</c:when>
-	                                                </c:choose>
-                                                </c:forEach>
-                                                <br/>
-                                                <c:forEach items="${messageEmployee}" var="messageEmpBli">
+                                                <c:set var="recipients" value="" />
+												    <c:forEach items="${messageEmployee}" var="messageEmpRec" varStatus="recLoop">
+												        <c:choose>
+												            <c:when test="${messageEmpRec.ccType == 1}">
+												                <c:if test="${recLoop.index > 0 && recLoop.index < 2}">
+												                    <c:set var="recipients" value="${recipients}, " />
+												                </c:if>
+												                <c:if test="${recLoop.index < 2}">
+													                <c:set var="recipients" value="${recipients}${messageEmpRec.empRank} ${messageEmpRec.empName}" />
+												            	</c:if>
+												            	<c:set var="recipientCount" value="${recipientCount + 1}" />
+												            </c:when>
+												        </c:choose>
+												    </c:forEach>
+												    ${recipients}
+												    <c:if test="${recipientCount > 2}">
+												        외 <span class="m-b-3">${recipientCount  - 2}명</span>
+												    </c:if>
+												    <br/>
+												    
+	                                                <span class="m-b-3 font-weight-bold">참조 : </span>
+	                                                <c:set var="references" value="" />
+	                                                <c:set var="referencesCount" value="0" />
+	                                               	<c:forEach items="${messageEmployee}" var="messageEmpRei" varStatus="reiLoop">
+	                                                	<c:choose>
+		                                                	<c:when test="${messageEmpRei.ccType == 3}">
+				                                                <c:if test="${reiLoop.index > 0 && reiLoop.index < 2}">
+												                    <c:set var="references" value="${references}, " />
+												                </c:if>
+												                <c:if test="${reiLoop.index < 2}">
+													                <c:set var="references" value="${references}${messageEmpRei.empRank} ${messageEmpRei.empName}" />
+												            	</c:if>
+												            	<c:set var="referencesCount" value="${referencesCount + 1}" />
+		                                                	</c:when>
+		                                                </c:choose>
+	                                                </c:forEach>
+	                                                ${references}
+												    <c:if test="${referencesCount > 2}">
+												        외 <span class="m-b-3">${referencesCount  - 2}명</span>
+												    </c:if>
+	                                                <br/>
+	                                                
+                                                <c:forEach items="${messageEmployee}" var="messageEmpBli" varStatus="loop">
 	                                               	<c:choose>
-	                                               		<c:when test="${empty messageEmployee}">
-                                                		</c:when>
 		                                               	<c:when test="${messageEmpBli.ccType == 4 && employee.empId == messageEmpBli.empId}">
 			                                                <span class="m-b-3 font-weight-bold">비밀참조 : </span>
 			                                                <span class="m-b-3">${messageEmpBli.empRank}</span>

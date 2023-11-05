@@ -115,6 +115,11 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
+	public List<Message> readMail(int messageNo){
+		return messageDao.readMail(messageNo);
+	}
+	
+	@Override
 	public MediaFile getMediaFile(int mediaFileNo) {
 		return messageDao.selectMediaFileByMediaFileNo(mediaFileNo);
 	}

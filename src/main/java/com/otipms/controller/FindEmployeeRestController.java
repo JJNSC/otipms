@@ -1,6 +1,8 @@
 package com.otipms.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.otipms.dto.CC;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Message;
 import com.otipms.dto.Project;
@@ -83,6 +83,48 @@ public class FindEmployeeRestController {
         jsonData.put("teamData", teamData);
 
         return new ResponseEntity<>(jsonData, HttpStatus.OK);
+    }
+    
+    @GetMapping("api/employeeDataRead")
+    public ResponseEntity<Map<String, List<Map<String, String>>>> employeeDataRead(@RequestParam("messageNo") int messageNo) {
+    	List<Message> messages = messageService.readMail(messageNo);
+    	
+    	 Map<String, List<Map<String, String>>> jsonData = new HashMap<>();
+    	 List<Map<String, String>> messageData = new ArrayList<>();
+    	 
+    	 for(Message message : messages) {
+    		 Map<String, String> messageMap = new HashMap<>();
+    		 if(message.getCcType() == 1) {
+    			 messageMap.put("ccType", "수신");
+    		 } else if(message.getCcType() == 3) {
+    			 messageMap.put("ccType", "참조");
+    		 } else if(message.getCcType() == 4) {
+    			 messageMap.put("ccType", "비밀 참조");
+    		 }
+    		 
+    		 messageMap.put("empRank", message.getEmpRank());
+    		 messageMap.put("empName", message.getEmpName());
+    		 
+    		 if(message.getMessageChecked() == 1) {
+    			 messageMap.put("messageChecked", "읽지 않음");
+    		 } else {
+    			 messageMap.put("messageChecked", "읽음");
+    		 }
+    		 
+    		 Date date = new Date();
+	         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	         if (message.getCcCheckedDate() == null) {
+	        	    messageMap.put("ccCheckedDate", "읽지 않음");
+	        	} else {
+	        	    String dateStr = dateFormat.format(message.getCcCheckedDate());
+	        	    messageMap.put("ccCheckedDate", dateStr);
+	        	}
+    		 
+    		 messageData.add(messageMap);
+    	 }
+    	 
+    	 jsonData.put("messageData", messageData);
+    	 return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     
     @GetMapping("/api/RolePMData")

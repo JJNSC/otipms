@@ -26,17 +26,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.otipms.dto.Alarm;
 import com.otipms.dto.CC;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
-import com.otipms.service.AlarmService;
-import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
-import com.otipms.service.ProjectService;
-import com.otipms.service.TeamService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -401,5 +396,15 @@ public class MailController {
 	public String findEmployee() {
 	    
 	    return "mail/findEmployee";
+	}
+	
+	@RequestMapping("/readTime")
+	public String readTime(@RequestParam("messageNo") int messageNo,Model model) {
+		int mesMessageNo = messageNo;
+		
+		log.info("messageNo : " + mesMessageNo);
+		model.addAttribute("mesMessageNo", mesMessageNo);
+		
+		return "mail/readTime";
 	}
 }
