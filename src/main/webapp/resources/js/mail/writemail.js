@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     function updateSelectedEmployeesUI(selectedEmployee, recipientType) {
     	const selectedTextbox = document.querySelector(`#selected${recipientType}Textbox`);
-        const selectedEmployeesContainer = document.querySelector(`#selected${recipientType}Employees`);
+        const selectedEmployeesContainer = document.querySelector(`#selected${recipientType}Employees`); 
         
         if (selectedTextbox && selectedEmployeesContainer) {
             // 선택된 사원 정보를 텍스트 상자에 채우기
