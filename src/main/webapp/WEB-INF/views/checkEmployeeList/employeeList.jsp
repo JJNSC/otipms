@@ -78,11 +78,8 @@
                                                 <th>연락처</th>
                                                 <th>프로젝트</th>
                                                 <th>팀</th>
-                                                <!-- <th>권한</th> -->
                                             </tr>
                                         </thead>
-                                        
-                                        
                                     </table>
                                 </div>
                             </div>

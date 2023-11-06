@@ -31,6 +31,7 @@
 
 		gtag('config', 'UA-119386393-1');
 	</script>
+	
 <!-- 	<script>
 		$
 	</script> -->
@@ -40,13 +41,10 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="login">
-					<img src="${pageContext.request.contextPath}/resources/vendors/images/ic_oti_logo.jpg" alt="">
+					<img src="${pageContext.request.contextPath}/resources/vendors/images/otipms.jpg" style="height:70px;" alt="">
 				</a>
 			</div>
 			<div class="login-menu">
-				<ul>
-					<li><a href="imsiMakeId">임시 아이디 생성 공간</a></li>
-				</ul>
 			</div>
 		</div>
 	</div>
@@ -76,14 +74,17 @@
 								</div>
 							</div>
 							<div class="row pb-30">
-								<div class="col-6">
+								<div class="col-8">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="rememberMe" name="_spring_security_remember_me">
+										<input type="checkbox" class="custom-control-input" style="accent-color:#11407a;" id="rememberMe" name="_spring_security_remember_me">
 										<label class="custom-control-label" for="rememberMe">로그인 상태 유지</label>
 									</div>
 								</div>
-								<div class="col-6">
-									<div class="forgot-password">인사과 번호 : 02-1111-1111</div>
+								<div class="col-9 d-none">
+									<div class="forgot-password ml-0 pl-0"></div>
+								</div>
+								<div class="col-9 mt-2">
+									<i class="icon-copy ion-ios-telephone mr-3 ml-1 "></i>인사과 번호 : 02-1111-1111
 								</div>
 							</div>
 							<div class="row">
