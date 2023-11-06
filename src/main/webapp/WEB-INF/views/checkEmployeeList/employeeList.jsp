@@ -34,6 +34,8 @@
 <body>
 	<jsp:include page="../headernsidebar.jsp">
 		<jsp:param name="employee" value="${employee}" />
+		<jsp:param name="mf" value="${mf}" />
+		<jsp:param name="base64Img" value="${base64Img}" />
 	</jsp:include>
         <!--**********************************
             Content body start
@@ -76,7 +78,7 @@
                                                 <th>연락처</th>
                                                 <th>프로젝트</th>
                                                 <th>팀</th>
-                                                <th>권한</th>
+                                                <!-- <th>권한</th> -->
                                             </tr>
                                         </thead>
                                         

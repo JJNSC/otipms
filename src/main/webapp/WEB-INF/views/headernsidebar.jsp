@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
     <div class="nav-header">
         <div class="brand-logo">
             <a href="${pageContext.request.contextPath}/index">
@@ -203,25 +204,18 @@
                             <li><a href="${pageContext.request.contextPath}/board?boardType=팀 게시판">팀 게시판</a></li>
                         </ul>
                     </li>
-                    <li class="">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">시스템 관리</span>
-                        </a>
-                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="${pageContext.request.contextPath}/projectManagement/projectList">프로젝트 관리</a></li>
-                            <li><a href="${pageContext.request.contextPath}/teamManagement/teamList">팀 관리</a></li>
-                            <li><a href="${pageContext.request.contextPath}/employeeManagement/employeeList">인력 관리</a></li> 
-                            <!-- <li><a href="./ui-button.html">권한 관리</a></li>
-                            <li><a href="./ui-button-group.html">게시판 관리</a></li> -->
-                        <!-- </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
-                        </a>
-                        <ul aria-expanded="false"> -->
-                        </ul>
-                    </li>
+                   	<sec:authorize access="hasRole('ROLE_ADMIN')">
+	                    <li class="">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+	                            <i class="icon-grid menu-icon"></i><span class="nav-text">시스템 관리</span>
+	                        </a>
+	                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+	                            <li><a href="${pageContext.request.contextPath}/projectManagement/projectList">프로젝트 관리</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/teamManagement/teamList">팀 관리</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/employeeManagement/employeeList">인력 관리</a></li> 
+	                        </ul>
+	                    </li>
+                    </sec:authorize>
                 </ul>
             </div>
         </div>

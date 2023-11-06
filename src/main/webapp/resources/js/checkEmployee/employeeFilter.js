@@ -66,11 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // 프로젝트 선택 후 직급 드롭다운도 갱신
                 const selectedTeam = teamDropdown.value;
-                //updatePositionDropdown(selectedProjectId, selectedTeam);
                 
-                /*const filterDiv  = document.getElementById("DataTables_Table_0_filter");
-				const searchBar = filterDiv.querySelector("input[type='search']");
-                searchBar.value = selectedProject.concat(" ").concat(selectedTeam);*/
 
                 populateEmployeeList();
             });
