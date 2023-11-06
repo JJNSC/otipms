@@ -56,7 +56,7 @@
 	<!-- 쪽지 발신함 조회 -->
 	<select id="selectMySentMessage" parameterType="int" resultType="Message">
 		SELECT c.messageNo
-		     , c.empId
+		     , m.empId
 		     , e.empName
 		     , e.empRank
 		     , m.messageTitle
@@ -66,6 +66,7 @@
 		     , c.messageImportant
 		     , c.ccType
 		     , c.ccNo
+		     , c.empId as ccempId
 		  FROM emp e
 		  JOIN message m 
 		    ON e.empId = m.empId
@@ -81,7 +82,7 @@
 	<!-- 중요 쪽지함 조회 -->
 	<select id="selectMyImportantMessage" parameterType="int" resultType="Message">
 		SELECT c.messageNo
-		     , c.empId
+		     , m.empId
 		     , e.empName
 		     , e.empRank
 		     , m.messageTitle
@@ -91,6 +92,7 @@
 		     , c.messageImportant
 		     , c.ccType
 		     , c.ccNo
+		     , c.empId as ccempId
 		  FROM emp e
 		  JOIN message m 
 		    ON e.empId = m.empId
@@ -106,7 +108,7 @@
 	<!-- 임시 쪽지함 조회 -->
 	<select id="selectMyTemporaryMessage" parameterType="int" resultType="Message">
 		SELECT c.messageNo
-		     , c.empId
+		     , m.empId
 		     , e.empName
 		     , e.empRank
 		     , m.messageTitle
@@ -116,6 +118,7 @@
 		     , c.messageImportant
 		     , c.ccType
 		     , c.ccNo
+		     , c.empId as ccempId
 		  FROM emp e
 		  JOIN message m 
 		    ON e.empId = m.empId
@@ -131,7 +134,7 @@
 	<!-- 쪽지 휴지통 조회 -->
 	<select id="selectMyTrashMessage" parameterType="int" resultType="Message">
 		SELECT c.messageNo
-		     , c.empId
+		     , m.empId
 		     , e.empName
 		     , e.empRank
 		     , m.messageTitle
@@ -141,6 +144,7 @@
 		     , c.messageImportant
 		     , c.ccType
 		     , c.ccNo
+		     , c.empId as ccempId
 		  FROM emp e
 		  JOIN message m 
 		    ON e.empId = m.empId

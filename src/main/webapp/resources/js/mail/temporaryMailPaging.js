@@ -36,7 +36,7 @@ window.onload = function(){
 					</div>
 					<div class="col-mail col-mail-profile">
 					<div class="profile">
-					<img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
+					<img src="data:${message.mediaFileType};base64, ${message.profile}" height="40" width="40" alt="">
 					<span class="rank">${message.empRank}</span>
 					<span class="name">${message.empName}</span>
 					</div>

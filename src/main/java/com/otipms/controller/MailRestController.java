@@ -30,7 +30,6 @@ public class MailRestController {
 	
 	@Autowired
 	private MessageService messageService;
-	
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
@@ -72,6 +71,15 @@ public class MailRestController {
 			int mesmessageNo = message.getMessageNo();
 			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
 			message.setMediaFile(mediaFiles);
+			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
+	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
+	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+	    		message.setMediaFileType(mf.getMediaFileType());
+		    }else {
+		    	MediaFile mf = employeeService.getDefaultImg();
+		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+		    	message.setMediaFileType(mf.getMediaFileType());
+		    }
 			plussentMails.add(message);
 		}
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -88,6 +96,15 @@ public class MailRestController {
 			int mesmessageNo = message.getMessageNo();
 			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
 			message.setMediaFile(mediaFiles);
+			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
+	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
+	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+	    		message.setMediaFileType(mf.getMediaFileType());
+		    }else {
+		    	MediaFile mf = employeeService.getDefaultImg();
+		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+		    	message.setMediaFileType(mf.getMediaFileType());
+		    }
 			plusimportantMails.add(message);
 		}
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -104,6 +121,15 @@ public class MailRestController {
 			int mesmessageNo = message.getMessageNo();
 			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
 			message.setMediaFile(mediaFiles);
+			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
+	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
+	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+	    		message.setMediaFileType(mf.getMediaFileType());
+		    }else {
+		    	MediaFile mf = employeeService.getDefaultImg();
+		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+		    	message.setMediaFileType(mf.getMediaFileType());
+		    }
 			plustemporaryMails.add(message);
 		}
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -120,6 +146,15 @@ public class MailRestController {
 			int mesmessageNo = message.getMessageNo();
 			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
 			message.setMediaFile(mediaFiles);
+			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
+	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
+	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+	    		message.setMediaFileType(mf.getMediaFileType());
+		    }else {
+		    	MediaFile mf = employeeService.getDefaultImg();
+		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+		    	message.setMediaFileType(mf.getMediaFileType());
+		    }
 			plustrashMails.add(message);
 		}
 		ObjectMapper objectMapper = new ObjectMapper();
