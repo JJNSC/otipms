@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.otipms.dao.BoardDao;
 import com.otipms.dao.EmployeeDao;
 import com.otipms.dao.ProjectDao;
 import com.otipms.dao.TeamDao;
@@ -19,6 +20,8 @@ public class TeamServiceImpl implements TeamService {
 	private TeamDao teamDao;
 	@Autowired
 	private EmployeeDao employeeDao;
+	@Autowired
+	private BoardDao boardDao;
 
 	@Override
 	public List<Team> getTeamByProjectName(String projectName) {
@@ -55,7 +58,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void addTeam(Team team) {
 		teamDao.addTeam(team);
-		
+		boardDao.insertTeamBoardType(team.getTeamNo());
 	}
 
 	@Override
@@ -81,6 +84,7 @@ public class TeamServiceImpl implements TeamService {
 		
 		//해당 teamNo 를 가지고 있는 팀 삭제 
 		teamDao.removeTeam(teamNo);
+		
 		
 	}
 	
