@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Team;
 
@@ -16,8 +17,9 @@ public interface BoardService {
 	/**
 	 * 게시글 작성
 	 * @param board
+	 * @return
 	 */
-	public void writeBoard(Board board);
+	public int writeBoard(Board board);
 
 	/**
 	 * 페이징이 필요한 게시글 총 수
@@ -86,4 +88,23 @@ public interface BoardService {
 	 * @return
 	 */
 	public Team getTeamName(int empId);
+
+	/**
+	 * 게시글 추가 시 파일 저장
+	 * @param mediaFile
+	 */
+	public void addBoardMediaFile(MediaFile mediaFile);
+
+	/**
+	 * 게시글 수정 시 파일 수정
+	 * @param mediaFile
+	 */
+	public void deleteBoardMediaFile(MediaFile mediaFile);
+
+	/**
+	 * 게시글 파일 조회
+	 * @param boardNo
+	 * @return
+	 */
+	public List<MediaFile> getBoardMediaList(String boardNo);
 }

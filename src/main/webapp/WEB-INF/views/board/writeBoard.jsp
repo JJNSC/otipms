@@ -21,6 +21,8 @@
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	<!-- Dropzone -->
 	<link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
+	
+	<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
 </head>
 
@@ -66,7 +68,7 @@
 	                                    <h4>${boardType}</h4>
                                     </c:if>
                                 </div>
-                                <form action="submitBoard" method="post" id="submitBoardForm">
+                                <form action="submitBoard" method="post" id="submitBoardForm" enctype="multipart/form-data">
 	                            	<div class="mt-4 pl-1 row" style="margin-bottom: 0.8rem;">
 	                                    <h5 class="col-2" style="padding-top: 10px;">글쓰기</h5>
 	                                    <span class="col-10 text-right">
@@ -173,28 +175,116 @@
 													<h5 class="m-b-20"><i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i> 첨부파일</h5>
 												</div>
 											</div>
-											<div class="dropzone dz-clickable" action="#" name="dropzone" id="my-awesome-dropzone" style="min-height: 150px; border: 1px dashed #1a73e8;">
-												<div class="dz-default dz-message" style="margin: 3em 0;">
-													<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
-												</div>
+											<div>
+												<input type="file" name="files" multiple>
 											</div>
 										</div>
-										<script>
-											Dropzone.autoDiscover = false;
-											$(".dropzone").dropzone({
-											addRemoveLinks: true,
-											removedfile: function (file) {
-											var name = file.name;
-											var _ref;
-											return (_ref = file.previewElement) != null
-											? _ref.parentNode.removeChild(file.previewElement)
-											: void 0;
-											},
-											});
-										</script>
 	                                </div>
     	                        </form>
-                            </div>
+    	                        <!-- <div class="pd-20 card-box mb-30">
+										<form class="dropzone dz-clickable" id="my-awesome-dropzone">
+		                                    <div class="dz-default dz-message">
+		                                       <span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
+		                                    </div>
+		                                 </form>
+									 <script>
+									 	/* uploadedFiles = []; */
+									 
+	                                    Dropzone.autoDiscover = false; // deprecated 된 옵션. false로 해놓는걸 공식문서에서 명시
+	                                    const dropzone = new Dropzone('form#my-awesome-dropzone', {
+	                                       url: 'http://localhost:8080/otipms/mail/upload',
+	                                       method: 'post',
+	                                       autoProcessQueue: true,
+	                                       createImageThumbnails: true,
+	                                       clickable: true,
+	                                       autoQueue: false,
+	                                       thumbnailHeight: 120, 
+	                                        thumbnailWidth: 120,
+	                                        maxFilesize: 30,
+	                                        uploadMultiple: false,
+	                                        addRemoveLinks: true, 
+	                                        dictRemoveFile: '삭제'
+	                                    });
+	                                    
+	                                    // 업로드 시작 이벤트 리스너
+	                                     /* dropzone.on("addedfile", function(file) {
+	                                         // 파일이 추가될 때 업로드 대기열을 처리
+	                                         console.log("파일이 추가되었습니다.", file);
+	                                         console.log(file.name);
+	                                         console.log(file.type);
+	                                         
+	                                         const reader = new FileReader();
+	                                         reader.onload = function () {
+	                                             // 파일 데이터 (base64 내용)이 여기에서 사용 가능합니다.
+	                                             const base64Data = reader.result;
+	                                             console.log("파일 데이터 (Base64):", base64Data);
+	                                             // 필요한 경우 추가 처리를 수행하거나 데이터를 저장할 수 있습니다.
+	                                             
+	                                             const fileInfo = {
+	                                                     name: file.name,
+	                                                     type: file.type,
+	                                                     data: base64Data,
+	                                                 };
+	                                            uploadedFiles.push(fileInfo);
+	                                         };
+	                                         
+	                                         // 파일을 base64 문자열로 읽기
+	                                         reader.readAsDataURL(file);
+	                                         dropzone.processQueue();
+	                                     }); */
+	                                     dropzone.on("addedfile", function(file) {
+	                                    	 addDropzoneFunction(file);
+	                                    	 dropzone.processQueue();
+	                                     });
+	                                    
+	                                     dropzone.on("removedfile", function(file) {
+	                                         const fileName = file.name;
+	                                         const fileIndex = uploadedFiles.findIndex((info) => info.name === fileName);
+	                                         if (fileIndex !== -1) {
+	                                             uploadedFiles.splice(fileIndex, 1);
+	                                         }
+	                                     });
+	
+	                                     /* function submitBoardTest(event) {
+	                                    		console.log($("#boardTitle").val());
+	                                    		
+	                                    		//$(event.target).preventDefault();
+	                                    		event.preventDefault();
+	                                    		
+	                                    		var modifiedUploadedFiles = [];
+	                                    		for (var i = 0; i < uploadedFiles.length; i++) {
+	                                    		    var file = uploadedFiles[i];
+	                                    		    var base64Data = file.data;
+	                                    		    var indexOfComma = base64Data.indexOf(',');
+	                                    		    if (indexOfComma !== -1) {
+	                                    		        var dataWithoutPrefix = base64Data.substr(indexOfComma + 1); // `,` 이후의 데이터 추출
+	                                    		        modifiedUploadedFiles.push({
+	                                    		            name: file.name,
+	                                    		            type: file.type,
+	                                    		            data: dataWithoutPrefix
+	                                    		        });
+	                                    		    }
+	                                    		}
+	                                    		
+	                                    		$.ajax({
+	                                    		      url: '/otipms/insertBoardFileData',
+	                                    		      type: 'POST',
+	                                    		      data: JSON.stringify({
+	                                    		         uploadedFiles: modifiedUploadedFiles
+	                                    		      }),
+	                                    		      contentType: 'application/json',
+	                                    		      success: function (data) {
+	                                    		         console.log("data" + data.messageId);
+	                                    		      },
+	                                    		      error: function (error) {
+	                                    		         console.log("오류 발생: " + error.responseText);
+	                                    		         alert("파일 업로드 중 오류가 발생했습니다.");
+	                                    		      }
+	                                    		   });
+	                                    	} */
+	                                 </script>
+    	                        
+                            </div> -->
                         </div>
                         <!-- /# card -->
                     </div>
@@ -231,14 +321,14 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/resources/js/board.js"></script> --%>
     
     <!-- Editer -->-
 	<%-- <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script> --%>
     
     <script src="${pageContext.request.contextPath}/resources/js/board/writeBoard.js"></script>
     
-    <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 </body>
 
 </html>

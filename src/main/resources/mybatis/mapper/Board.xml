@@ -40,6 +40,11 @@
 		)
 	</insert>
 	
+	<select id="selectBoardNoInserted" resultType="int">
+		SELECT BOARDNO_SEQ.currval
+		  FROM dual
+	</select>
+	
 	<!-- 게시판 별 게시글 총 개수 조회  -->
 	<select id="countBoard" parameterType="hashMap" resultType="int">
 		SELECT count(*) 
@@ -111,7 +116,6 @@
 			     , boardDeleted
 			     , inquiryBoardType
 			     , empName
-			     , mediaFileName
 			  FROM (
 				   SELECT rownum as rnum
 				   		, boardNo
@@ -122,7 +126,6 @@
 				   		, boardDeleted
 				   		, inquiryBoardType
 				   		, empName
-				   		, mediaFileName
 				     FROM (
 					      SELECT b.boardNo
 					      	   , b.boardTitle
@@ -132,14 +135,11 @@
 					      	   , b.boardDeleted
 					      	   , bt.inquiryBoardType
 					      	   , e.empName
-					      	   , m.mediaFileName
 					        FROM BOARD b
 					       INNER JOIN BOARDTYPE bt
 					       	  ON b.BOARDTYPENO = bt.BOARDTYPENO
 					       INNER JOIN EMP e
 					       	  ON b.EMPID = e.EMPID
-					        LEFT OUTER JOIN MEDIAFILE m
-					          ON b.BOARDNO = m.BOARDNO
 					       WHERE 1=1
 					         AND b.BOARDDELETED = 0
 					         AND BOARDTYPENAME = #{boardType}
@@ -370,4 +370,41 @@
 			 , null
 			   )
 	</insert>
+	
+	<!-- 파일 추가 -->
+	<insert id="addBoardMediaFile" parameterType="MediaFile">
+		INSERT INTO MEDIAFILE 
+		(
+		MEDIAFILENO
+		, BOARDNO
+		, MEDIAFILENAME
+		, MEDIAFILETYPE
+		, MEDIAFILEDATA
+		)
+		VALUES (
+		MEDIAFILENO_SEQ.nextval
+		, #{boardNo}
+		, #{mediaFileName}
+		, #{mediaFileType}
+		, #{mediaFileData}
+		)
+	</insert>
+	
+	<!-- 파일 수정 -->
+	<delete id="deleteBoardMediaFile" parameterType="MediaFile">
+		DELETE FROM MEDIAFILE
+		 WHERE BOARDNO = #{boardNo}
+	</delete>
+	
+	<!-- 게시글 파일 조회 -->
+	<select id="selectBoardMediaFile" parameterType="int" resultType="MediaFile">
+		SELECT mediaFileNo
+			 , boardNo
+			 , mediaFileName
+			 , mediaFileType
+			 , mediaFileData
+	      FROM MEDIAFILE
+	     WHERE 1=1
+	       AND BOARDNO = #{boardNo}
+	</select>
 </mapper>

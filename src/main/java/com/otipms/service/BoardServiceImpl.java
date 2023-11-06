@@ -7,10 +7,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dao.BoardDao;
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Team;
 
@@ -24,8 +26,9 @@ public class BoardServiceImpl implements BoardService {
 
 	//게시글 작성
 	@Override
-	public void writeBoard(Board board) {
+	public int writeBoard(Board board) {
 		boardDao.insertBoard(board);
+		return boardDao.selectBoardNoInserted();
 	}
 
 	//게시판 유형 별 게시글 목록 수 조회
@@ -55,6 +58,10 @@ public class BoardServiceImpl implements BoardService {
 		List<Board> boardList = boardDao.selectBoardByPage(map);
 		for(Board board : boardList) {
 			board.setCommentCount(boardDao.countBoardComment(board.getBoardNo()));
+			List<MediaFile> mediaFiles = boardDao.selectBoardMediaFile(board.getBoardNo());
+			if(mediaFiles.size() != 0) {
+				board.setMediaFileName("첨부파일 있음");
+			}
 		}
 		return boardList;
 	}
@@ -106,6 +113,24 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Team getTeamName(int empId) {
 		return boardDao.selectTeamName(empId);
+	}
+
+	//게시글 작성 시 파일 저장
+	@Override
+	public void addBoardMediaFile(MediaFile mediaFile) {
+		boardDao.addBoardMediaFile(mediaFile);
+	}
+
+	//게시글 수정 시 파일 삭제
+	@Override
+	public void deleteBoardMediaFile(MediaFile mediaFile) {
+		boardDao.deleteBoardMediaFile(mediaFile);
+	}
+	
+	//게시글 파일 조회
+	@Override
+	public List<MediaFile> getBoardMediaList(String boardNo) {
+		return boardDao.selectBoardMediaFile(Integer.parseInt(boardNo));
 	}
 	
 }

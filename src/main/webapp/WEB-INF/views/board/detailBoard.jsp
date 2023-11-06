@@ -105,6 +105,13 @@
                                 <div class="compose-content pt-3" style="min-height: 86px; border-top: 1px solid #ebecef; padding-left: 1.5rem !important; padding-top: 2.5rem !important; padding-bottom: 2.5rem !important;">
                                    	${board.boardContent}
                                 </div>
+                                <c:forEach var="mediaFile" items="${mediaList}">
+	                                <div>
+	                                <a href="${pageContext.request.contextPath}/mail/download/${mediaFile.mediaFileNo}" class="text-muted" download="${mediaFile.mediaFileName}">
+	                                   ${mediaFile.mediaFileName}
+	                                </a>
+	                                </div>
+                                </c:forEach>
                                 <!-- 댓글 -->
                                 <c:forEach var="comment" items="${commentList}">
                                 	<div class="compose-content" style="border-top: 1px solid #ebecef; padding-top: 1.5rem; padding-bottom: 1.1rem;">

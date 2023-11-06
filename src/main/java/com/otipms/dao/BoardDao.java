@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Team;
 
 @Mapper
@@ -95,5 +96,30 @@ public interface BoardDao {
 	 * @param teamNo
 	 */
 	public void insertTeamBoardType(int teamNo);
+
+	/**
+	 * 게시글 작성 시 파일 추가
+	 * @param mediaFile
+	 */
+	public void addBoardMediaFile(MediaFile mediaFile);
+
+	/**
+	 * 게시글 수정 시 파일 수정
+	 * @param mediaFile
+	 */
+	public void deleteBoardMediaFile(MediaFile mediaFile);
+	
+	/**
+	 * 게시글 파일 조회
+	 * @param boardNo
+	 * @return
+	 */
+	public List<MediaFile> selectBoardMediaFile(int boardNo);
+	
+	/**
+	 * 추가된 게시글 번호 조회
+	 * @return
+	 */
+	public int selectBoardNoInserted();
 	
 }

@@ -1,5 +1,7 @@
 package com.otipms.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -8,14 +10,19 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Team;
 import com.otipms.service.BoardService;
@@ -278,17 +285,20 @@ public class BoardController {
 	 * @param myEditor
 	 * @param model
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping("/submitBoard") 
 	public String submitBoard(@RequestParam(value="boardNo", required=false) String boardNo
 							 , String inquiryType
 							 , String boardTitle
 							 , String myEditor
+							 , @RequestParam(value="files", required=false) List<MultipartFile> files
 							 , Model model
-							 , HttpSession session) {
+							 , HttpSession session) throws IOException {
 		log.info("boardNo: " + boardNo);
 		log.info("에디터 제목: " + boardTitle);
 		log.info("에디터 내용: " + myEditor);
+		log.info("파일 내용: " + files);
 		
 		if(boardNo == null || boardNo.equals("")) {
 			//board 삽입
@@ -301,7 +311,20 @@ public class BoardController {
 			board.setInquiryBoardType(inquiryType);
 			board.setTeamNo(team.getTeamNo());
 			 
-			boardService.writeBoard(board);
+			int boardNoInserted = boardService.writeBoard(board);
+			
+			if(files.get(0).getBytes().length != 0) {
+				for(MultipartFile mf : files) {
+					MediaFile mediaFile = new MediaFile();
+					mediaFile.setBoardNo(boardNoInserted);
+					mediaFile.setMediaFileName(mf.getOriginalFilename());
+					mediaFile.setMediaFileType(mf.getContentType());
+					mediaFile.setMediaFileData(mf.getBytes());
+					
+					boardService.addBoardMediaFile(mediaFile);
+				}
+			}
+			
 			return "redirect:/board";
 		} else {
 			//board 수정
@@ -313,11 +336,87 @@ public class BoardController {
 			board.setTeamNo(team.getTeamNo());
 			
 			boardService.modifyBoard(board);
+			
+			MediaFile mediaFile = new MediaFile();
+			mediaFile.setBoardNo(Integer.parseInt(boardNo));
+			boardService.deleteBoardMediaFile(mediaFile);
+			
+			if(files.get(0).getBytes().length != 0) {
+				for(MultipartFile mf : files) {
+					mediaFile = new MediaFile();
+					mediaFile.setBoardNo(Integer.parseInt(boardNo));
+					mediaFile.setMediaFileName(mf.getOriginalFilename());
+					mediaFile.setMediaFileType(mf.getContentType());
+					mediaFile.setMediaFileData(mf.getBytes());
+					
+					boardService.addBoardMediaFile(mediaFile);
+				}
+			}
+			
 			return "redirect:/detailBoard?boardNo=" + boardNo;
 		}
 		
 	}
 	
+	@RequestMapping("/insertBoardFileData")
+	@ResponseBody
+	/*public ResponseEntity<Map<String, Object>> insertBoardFileData(@RequestBody Map<String, Object> request) {
+		List<Map<String, Object>> uploadedFiles =  (List<Map<String, Object>>) request.get("uploadedFiles");
+		
+		log.info("혹시 두번 출력되나..?" + request.get("uploadedFiled"));
+		
+		List<MediaFile> mediaFiles = new ArrayList<>();
+        for (Map<String, Object> fileData : uploadedFiles) {
+            MediaFile mediaFile = new MediaFile();
+            mediaFile.setMediaFileName((String) fileData.get("name"));
+            log.info("name..? " + (String) fileData.get("name"));
+            mediaFile.setMediaFileType((String) fileData.get("type"));
+            
+            // Base64로 인코딩된 데이터를 디코딩하여 바이트 배열로 변환
+            String base64Data = (String) fileData.get("data");
+            byte[] mediaFileData = Base64.getDecoder().decode(base64Data);
+            mediaFile.setMediaFileData(mediaFileData);
+            
+            log.info("mediaFile: " + mediaFile);
+            mediaFiles.add(mediaFile);
+        }
+        
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("messageId", "메롱");
+           
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+	}*/
+	public ResponseEntity<Map<String, Object>> insertBoardFileData(@RequestBody Map<String, Object> jsonData) {
+		// JSON 데이터를 직접 처리
+        List<Map<String, Object>> uploadedFiles = (List<Map<String, Object>>) jsonData.get("uploadedFiles");
+		
+		log.info("혹시 두번 출력되나..?" + jsonData.get("uploadedFiled"));
+		
+		List<MediaFile> mediaFiles = new ArrayList<>();
+        for (Map<String, Object> fileData : uploadedFiles) {
+            MediaFile mediaFile = new MediaFile();
+            mediaFile.setMediaFileName((String) fileData.get("name"));
+            log.info("name..? " + (String) fileData.get("name"));
+            mediaFile.setMediaFileType((String) fileData.get("type"));
+            
+            // Base64로 인코딩된 데이터를 디코딩하여 바이트 배열로 변환
+            String base64Data = (String) fileData.get("data");
+            byte[] mediaFileData = Base64.getDecoder().decode(base64Data);
+            mediaFile.setMediaFileData(mediaFileData);
+            
+            log.info("mediaFile: " + mediaFile);
+            mediaFiles.add(mediaFile);
+        }
+        
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("messageId", "메롱");
+           
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+	}
 	/**
 	 * 게시글로 이동
 	 * @param model
@@ -337,6 +436,10 @@ public class BoardController {
 			board.setBase64Img(Base64.getEncoder().encodeToString(board.getMediaFileData()));
 		}
 		model.addAttribute("board", board);
+		
+		//게시글 파일 조회
+		List<MediaFile> mediaFiles = boardService.getBoardMediaList(boardNo);
+		model.addAttribute("mediaList", mediaFiles);
 		
 		//댓글 조회
 		List<BoardComment> boardCommentList = boardService.boardCommentList(boardNo);
