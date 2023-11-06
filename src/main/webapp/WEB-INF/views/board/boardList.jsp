@@ -45,7 +45,12 @@
                             <div class="card-body">
                                 <div class="card-title">
                                     <!-- <h4>공지사항</h4> -->
-                                    <h4>${boardType}</h4>
+                                    <c:if test="${boardType ne '팀 게시판'}">
+	                                    <h4>${boardType}</h4>
+                                    </c:if>
+                                    <c:if test="${boardType eq '팀 게시판'}">
+	                                    <h4>${teamName} 게시판</h4>
+                                    </c:if>
                                 </div>
 				                <c:if test="${boardType eq '질의 게시판'}">
 	                                <div class="dropdown d-inline-block my-1">

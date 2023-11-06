@@ -12,6 +12,9 @@
 			 <if test="boardTypeName.equals('질의 게시판') and inquiryBoardType != null">
 			   AND INQUIRYBOARDTYPE = #{inquiryBoardType}
 			 </if>
+			 <if test="boardTypeName.equals('팀 게시판')">
+			   AND TEAMNO = #{teamNo}
+		     </if>
 		</selectKey>
 		
 		INSERT INTO BOARD 
@@ -330,6 +333,7 @@
 		   AND COMMENTNO = #{commentNo}
 	</update>
 	
+	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="Board">
 		UPDATE BOARD
 		   SET BOARDTITLE = #{boardTitle}
@@ -342,4 +346,28 @@
 		   	   OR BOARDDELETED is null
 		   	   )
 	</update>
+	
+	<!-- 사원번호로 팀이름 조회 -->
+	<select id="selectTeamName" parameterType="int" resultType="Team">
+		SELECT t.teamName
+		     , t.teamNo
+	      FROM EMP e
+	     INNER JOIN EMPINFO ei
+	        ON e.EMPID = ei.EMPID
+	     INNER JOIN TEAM t
+	        ON ei.TEAMNO = t.TEAMNO
+	     WHERE 1=1
+	       AND e.EMPID = #{empId}
+	</select>
+	
+	<!-- 팀 게시판 추가 -->
+	<insert id="insertTeamBoardType" parameterType="int">
+		INSERT INTO BOARDTYPE
+		VALUES (
+			   BOARDTYPENO_SEQ.nextval
+			 , #{teamNo}
+			 , '팀 게시판'
+			 , null
+			   )
+	</insert>
 </mapper>

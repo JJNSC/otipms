@@ -12,6 +12,7 @@ import com.otipms.dao.BoardDao;
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
 import com.otipms.dto.Pager;
+import com.otipms.dto.Team;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,10 +30,11 @@ public class BoardServiceImpl implements BoardService {
 
 	//게시판 유형 별 게시글 목록 수 조회
 	@Override
-	public int getTotalBoardNum(String boardType, String inquiryType, String searchType, String searchKeyword) {
+	public int getTotalBoardNum(String boardType, String inquiryType, int teamNo, String searchType, String searchKeyword) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardType", boardType);
 		map.put("inquiryBoardType", inquiryType);
+		map.put("teamNo", teamNo);
 		map.put("searchType", searchType);
 		map.put("searchKeyword", searchKeyword);
 		int totalBoardNum = boardDao.countBoard(map);
@@ -41,12 +43,13 @@ public class BoardServiceImpl implements BoardService {
 
 	//페이저로 페이징된 게시글 목록 조회
 	@Override
-	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType, String searchType,
+	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType, int teamNo, String searchType,
 									String searchKeyword) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardPager", boardPager);
 		map.put("boardType", boardType);
 		map.put("inquiryBoardType", inquiryType);
+		map.put("teamNo", teamNo);
 		map.put("searchType", searchType);
 		map.put("searchKeyword", searchKeyword);
 		List<Board> boardList = boardDao.selectBoardByPage(map);
@@ -97,6 +100,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void modifyBoard(Board board) {
 		boardDao.updateBoard(board);
+	}
+
+	//로그인한 회원 아이디로 팀 이름 가져오기
+	@Override
+	public Team getTeamName(int empId) {
+		return boardDao.selectTeamName(empId);
 	}
 	
 }

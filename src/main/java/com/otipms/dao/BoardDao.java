@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.Team;
 
 @Mapper
 public interface BoardDao {
@@ -81,4 +82,18 @@ public interface BoardDao {
 	 * @param board
 	 */
 	public void updateBoard(Board board);
+
+	/**
+	 * 사원 번호로 팀이름 조회
+	 * @param empId
+	 * @return
+	 */
+	public Team selectTeamName(int empId);
+	
+	/**
+	 * 팀 게시판 추가
+	 * @param teamNo
+	 */
+	public void insertTeamBoardType(int teamNo);
+	
 }

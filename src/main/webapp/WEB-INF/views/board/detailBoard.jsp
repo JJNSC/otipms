@@ -49,7 +49,12 @@
                             	<div class="card-title mb-1">
                                     <!-- <h4>공지사항</h4> -->
                                     <%-- <h4>${boardType}</h4> --%>
-                                    <h4 class="d-inline-block"><a href="board">${board.boardTypeName}</a></h4><c:if test="${board.boardTypeName eq '질의 게시판'}"> <h5 class="d-inline-block">&nbsp;/&nbsp;  ${board.inquiryBoardType}</h5></c:if>
+                                    <c:if test="${board.boardTypeName ne '팀 게시판'}">
+	                                    <h4 class="d-inline-block"><a href="board">${board.boardTypeName}</a></h4><c:if test="${board.boardTypeName eq '질의 게시판'}"> <h5 class="d-inline-block">&nbsp;/&nbsp;  ${board.inquiryBoardType}</h5></c:if>
+                                    </c:if>
+                                    <c:if test="${board.boardTypeName eq '팀 게시판'}">
+	                                    <h4>${teamName} 게시판</h4>
+                                    </c:if>
                                 </div>
                             	<div class="mt-4 pl-3 row" style="margin-bottom: 0.8rem;">
                                     <h3 style="padding-top: 10px;">${board.boardTitle}</h3>

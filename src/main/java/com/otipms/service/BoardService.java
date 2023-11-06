@@ -5,6 +5,7 @@ import java.util.List;
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
 import com.otipms.dto.Pager;
+import com.otipms.dto.Team;
 
 /**
  * 
@@ -22,22 +23,24 @@ public interface BoardService {
 	 * 페이징이 필요한 게시글 총 수
 	 * @param boardType
 	 * @param inquiryType
+	 * @param teamNo
 	 * @param searchType
 	 * @param searchKeyword
 	 * @return
 	 */
-	public int getTotalBoardNum(String boardType, String inquiryType, String searchType, String searchKeyword);
+	public int getTotalBoardNum(String boardType, String inquiryType, int teamNo, String searchType, String searchKeyword);
 
 	/**
 	 * 페이징 처리된 게시글 목록 조회
 	 * @param boardPager
 	 * @param boardType
 	 * @param inquiryType
+	 * @param teamNo
 	 * @param searchType
 	 * @param searchKeyword
 	 * @return
 	 */
-	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType, String searchType, String searchKeyword);
+	public List<Board> getBoardList(Pager boardPager, String boardType, String inquiryType, int teamNo, String searchType, String searchKeyword);
 
 	/**
 	 * 게시글 조회
@@ -76,4 +79,11 @@ public interface BoardService {
 	 * @param board
 	 */
 	public void modifyBoard(Board board);
+
+	/**
+	 * 로그인한 회원 아이디로 팀 이름 가져오기
+	 * @param empId
+	 * @return
+	 */
+	public Team getTeamName(int empId);
 }

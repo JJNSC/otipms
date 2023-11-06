@@ -4,15 +4,12 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
 import com.otipms.dto.Pager;
+import com.otipms.dto.Team;
 import com.otipms.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class BoardController {
-
+	private Team team = new Team();
+	
 	@Autowired
 	public BoardService boardService;
 	
@@ -95,14 +94,20 @@ public class BoardController {
 			session.setAttribute("inquiryType", inquiryType);
 		}
 		
+		if(boardType.equals("팀 게시판")) {
+			team = boardService.getTeamName(LoginController.loginEmployee.getEmpId());
+		}
+		
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
-		Map<String, Object> boardPagerMap = pageBoard(pageNo, boardType, inquiryType, null, null);
+		Map<String, Object> boardPagerMap = pageBoard(pageNo, boardType, inquiryType, team.getTeamNo(), null, null);
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		if(boardType.equals("질의 게시판")) {
 			model.addAttribute("inquiryType", inquiryType);
+		} else if(boardType.equals("팀 게시판")) {
+			model.addAttribute("teamName", team.getTeamName());
 		}
 		return "board/boardList";
 	}
@@ -137,7 +142,7 @@ public class BoardController {
 	    
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoardpageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
-		Map<String, Object> map = pageBoard(pageNo, "질의 게시판", inquiryType, searchType, searchKeyword);
+		Map<String, Object> map = pageBoard(pageNo, "질의 게시판", inquiryType, team.getTeamNo(), searchType, searchKeyword);
 		log.info("map이당 " + map);
 		return map;
 	}
@@ -160,7 +165,7 @@ public class BoardController {
 		
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoardpageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
-		Map<String, Object> map = pageBoard(pageNo, boardType, inquiryType, searchType, searchKeyword);
+		Map<String, Object> map = pageBoard(pageNo, boardType, inquiryType, team.getTeamNo(), searchType, searchKeyword);
 		log.info("map이당 " + map);
 		return map;
 	}
@@ -192,12 +197,14 @@ public class BoardController {
 		
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
-		Map<String, Object> boardPagerMap = pageBoard(pageNo, boardType, inquiryType, searchType, searchKeyword);
+		Map<String, Object> boardPagerMap = pageBoard(pageNo, boardType, inquiryType, team.getTeamNo(), searchType, searchKeyword);
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		if(boardType.equals("질의 게시판")) {
 			model.addAttribute("inquiryType", inquiryType);
+		} else if(boardType.equals("팀 게시판")) {
+			model.addAttribute("teamName", team.getTeamName());
 		}
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("searchKeyword", searchKeyword);
@@ -215,14 +222,14 @@ public class BoardController {
 	 */
 	//자 이 메소드가 할 건 무엇이냐.
 	//일단 페이지번호와 게시판 유형과 질의 게시판 카테고리와 검색어 타입과 검색어를 받아서 필요한 페이지를 전달만 해주는 역할!
-	private HashMap<String, Object> pageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword) {
+	private HashMap<String, Object> pageBoard(String pageNo, String boardType, String inquiryType, int teamNo, String searchType, String searchKeyword) {
 		
 		// 게시글 총 개수 (searchType은 null이라도 들어가야 함)
-		int totalBoardNum = boardService.getTotalBoardNum(boardType, inquiryType, searchType, searchKeyword);
+		int totalBoardNum = boardService.getTotalBoardNum(boardType, inquiryType, teamNo, searchType, searchKeyword);
 		
 		// Pager 객체 생성 (게시글 행 수, 페이지 개수, 총 페이지 개수, 페이지 시작 번호) 후 select
 		Pager boardPager = new Pager(5, 5, totalBoardNum, Integer.parseInt(pageNo));
-		List<Board> boardList = boardService.getBoardList(boardPager, boardType, inquiryType, searchType, searchKeyword);
+		List<Board> boardList = boardService.getBoardList(boardPager, boardType, inquiryType, teamNo, searchType, searchKeyword);
 		
 		//pagination에 필요한 pager와 boardList를 map에 담아서 return 
 		HashMap<String, Object> boardPagerMap = new HashMap<String, Object>();
@@ -251,6 +258,7 @@ public class BoardController {
 		}
 		
 		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("teamName", team.getTeamName());
 		return "board/writeBoard";
 	}
 	
@@ -266,7 +274,8 @@ public class BoardController {
 							 , String inquiryType
 							 , String boardTitle
 							 , String myEditor
-							 , Model model) {
+							 , Model model
+							 , HttpSession session) {
 		log.info("boardNo: " + boardNo);
 		log.info("에디터 제목: " + boardTitle);
 		log.info("에디터 내용: " + myEditor);
@@ -277,9 +286,11 @@ public class BoardController {
 			board.setEmpId(LoginController.loginEmployee.getEmpId());
 			board.setBoardTitle(boardTitle);
 			board.setBoardContent(myEditor);
-			//board.setBoardTypeName(boardType);
+			String boardType = (String) session.getAttribute("boardType");
+			board.setBoardTypeName(boardType);
 			board.setInquiryBoardType(inquiryType);
-			
+			board.setTeamNo(team.getTeamNo());
+			 
 			boardService.writeBoard(board);
 			return "redirect:/board";
 		} else {
@@ -289,6 +300,7 @@ public class BoardController {
 			board.setBoardTitle(boardTitle);
 			board.setBoardContent(myEditor);
 			board.setInquiryBoardType(inquiryType);
+			board.setTeamNo(team.getTeamNo());
 			
 			boardService.modifyBoard(board);
 			return "redirect:/detailBoard?boardNo=" + boardNo;
@@ -323,6 +335,7 @@ public class BoardController {
 			log.info(comment.getTeamName());
 		}
 		model.addAttribute("commentList", boardCommentList);
+		model.addAttribute("teamName", team.getTeamName());
 		return "board/detailBoard";
 	}
 	
