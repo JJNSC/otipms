@@ -58,4 +58,7 @@ public interface MessageDao {
 	
 	//해당하는 쪽지에 미디어파일이 있나?
 	public List<MediaFile> haveMediaFile(int messageNo);
+	
+	//프사
+	public Message getProfile(int empId);
 }

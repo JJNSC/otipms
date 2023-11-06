@@ -21,12 +21,13 @@ public class Message {
 	private String mediaFileName;
 	private String mediaFileType;
 	private int ccType;
-	
+	private int ccempId;
 	
 	//추가
 	private int ccNo;
 	private Date ccCheckedDate;
 	private List<CC> ccList;
+	private String profile;
 	private List<MediaFile> MediaFile;
 	
 }

@@ -27,6 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
 					if (message.messageChecked === "읽지 않음") {
 				        const cancelButton = document.createElement("button");
 				        cancelButton.textContent = "발송 취소";
+				        cancelButton.style.color = "#fff";
+				        cancelButton.style.backgroundColor = "#3E6494";
+				        cancelButton.style.borderColor = "#3E6494";
+				        cancelButton.style.width = "70px";
+				        cancelButton.style.height = "25px";
+				        cancelButton.style.fontSize = "13px";
+				        cancelButton.style.cursor = "pointer";
 				        cancelButton.addEventListener("click", function () {
 				        	$.ajax({
 				                url: 'http://localhost:8080/otipms/mail/deleteCC',

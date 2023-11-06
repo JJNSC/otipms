@@ -5,7 +5,7 @@
 	<!-- 쪽지 수신함 조회 -->
 	<select id="selectMyReceivedMessage" parameterType="int" resultType="Message">
 		SELECT c.messageNo
-		     , c.empId
+		     , m.empId
 		     , e.empName
 		     , e.empRank
 		     , m.messageTitle
@@ -15,6 +15,7 @@
 		     , c.messageImportant
 		     , c.ccType
 		     , c.ccNo
+		     , c.empId as ccempId
 		  FROM emp e
 		  JOIN message m 
 		    ON e.empId = m.empId
@@ -437,4 +438,5 @@
 	       AND empId = #{empId}
          AND ( ccType IN (1,3,4))
 	</select>
+	
 </mapper>

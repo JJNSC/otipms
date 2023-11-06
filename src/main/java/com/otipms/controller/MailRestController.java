@@ -1,6 +1,7 @@
 package com.otipms.controller;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otipms.dao.MessageDao;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
+import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,8 @@ public class MailRestController {
 	private MessageService messageService;
 	
 	@Autowired
+	private EmployeeService employeeService;
+	@Autowired
 	private MessageDao messageDao;
 	
 	//쪽지 수신함
@@ -39,8 +43,19 @@ public class MailRestController {
 		List<Message> plusreceivedMails = new ArrayList<>();
 		for (Message message : receivedMails) {
 			int mesmessageNo = message.getMessageNo();
+			//지금 들어가고 있는 EmpId는 messageNo의 empId임 (로그인 한 사람 고정 값이라는 뜻)
+			//가져와야 할 사원의 번호는 해당 messageNo에 해당하는 cc
 			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
 			message.setMediaFile(mediaFiles);
+			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
+	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
+	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+	    		message.setMediaFileType(mf.getMediaFileType());
+		    }else {
+		    	MediaFile mf = employeeService.getDefaultImg();
+		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+		    	message.setMediaFileType(mf.getMediaFileType());
+		    }
 			plusreceivedMails.add(message);
 		}
 		ObjectMapper objectMapper = new ObjectMapper();

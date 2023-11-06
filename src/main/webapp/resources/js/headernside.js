@@ -33,27 +33,23 @@ window.onload = function(){
 	
 	webSocket.onmessage = (e) => {
 		var receivedData = JSON.parse(e.data);
+		console.log(receivedData);
 		alarmData.alarmList = receivedData.alarms;
 	    alarmData.messageList = receivedData.messages;
 	    alarmData.alarmCount = receivedData.alcount;
 	    alarmData.messageCount = receivedData.mscount;
+	    console.log(alarmData.messageList);
 	    
 	    var alarmList = alarmData.alarmList;
 	    var messageList = alarmData.messageList;
 	    var alarmCount = alarmData.alarmCount
 	    var messageCount = alarmData.messagecount;
-		
+	    console.log(messageList);
 	    /*var filterType = "";
 	    var searchText = "";*/
 	    
 	    var currentPage = 1;
 	    var itemsPerPage = 10;
-	    console.log("메세지 안 알람 리스트 : " + alarmData.alarmList);
-	    console.log("메세지 안 쪽지 리스트 : " + alarmData.messageList);
-	    console.log("메세지 안 알람 카운트 : " + alarmData.alarmCount);
-	    console.log("메세지 안 쪽지 카운트 : " + alarmData.messageCount);
-	    
-	    
 	    
 	    console.log("메세지 안 알람 리스트2 : " + alarmList);
 	    console.log("메세지 안 쪽지 리스트2 : " + messageList);
@@ -70,6 +66,7 @@ window.onload = function(){
 		});
 		//쪽지함 쪽지 실시간 변경
 		$.get("http://localhost:8080/otipms/mail/receivedMails?empId=" + empId, function(messageList){
+			console.log(messageList);
 			updateMessageList(messageList);
 			
 			updatePaging(messageList);
@@ -83,11 +80,6 @@ window.onload = function(){
 	    
 	}
 	
-	console.log("메세지 밖 알람 리스트2 : " + alarmData.alarmList);
-    console.log("메세지 밖 쪽지 리스트2 : " + alarmData.messageList);
-    console.log("메세지 밖 알람 카운트2 : " + alarmData.alarmCount);
-    console.log("메세지 밖 쪽지 카운트2 : " + alarmData.messageCount);
-    
 	//안읽은 알람 수
 	var updateAlarmCount = function () {
 	    // 알림 개수를 업데이트
@@ -172,7 +164,7 @@ window.onload = function(){
 	    			</div>
 	    			<div class="col-mail col-mail-profile">
 	    			<div class="profile">
-	    			<img src="/otipms/resources/images/users/2.jpg" height="40" width="40">
+	    			<img src="data:${message.mediaFileType};base64, ${message.profile}" height="40" width="40" alt="">
 	    			<span class="rank">${message.empRank}</span>
 	    			<span class="name">${message.empName}</span>
 	    			</div>
