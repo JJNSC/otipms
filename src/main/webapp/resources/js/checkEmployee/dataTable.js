@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
           { data: 'empTel' },
           { data: 'projectName' },
           { data: 'teamName' },
-          { data: 'role' }
+          //{ data: 'role' }
       ],
       columnDefs: [
         {
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         		var $teamName = full['teamName']; //date 필드에서 날짜 정보를 가져옴
         		return '<span class="text-truncate d-flex align-items-center">' + $teamName + '</span>';
         	}
-        },
+        }/*,
         {
         	//date
         	targets: 6,
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         		var $role = full['role']; //date 필드에서 날짜 정보를 가져옴
         		return '<span class="text-truncate d-flex align-items-center">' + $role + '</span>';
         	}
-        }
+        }*/
       ],
       order: [2, 'asc'], //set any columns order asc/desc
       dom:
