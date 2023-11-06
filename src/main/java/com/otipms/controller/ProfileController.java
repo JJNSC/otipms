@@ -29,7 +29,7 @@ public class ProfileController {
 	 * 프로필 수정 페이지로 이동
 	 * @param model
 	 * @return
-	 */
+	 */ 
 	@RequestMapping("/profile")
 	public String profile(Model model) {
 		log.info("프로필");
