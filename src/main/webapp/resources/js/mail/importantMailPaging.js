@@ -20,7 +20,7 @@ window.onload = function(){
 			console.log(messageList);
 			messageList.forEach((message, index) => {
 				var messageDiv = document.createElement("div");
-				messageDiv.className = "message message-" + (index + 1);
+				messageDiv.className = "message message-" + (index + 1); 
 				
 				var messageDateFormatted = parseMessageDate(message.messageReservedDate);
 				console.log("미디어 파일 : " + message.MediaFile);
