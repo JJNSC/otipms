@@ -23,8 +23,10 @@
 
 <body>
 	<jsp:include page="../headernsidebar.jsp">
-		<jsp:param name="employee" value="${employee}" />
-	</jsp:include>
+      <jsp:param name="employee" value="${employee}" />
+      <jsp:param name="mf" value="${mf}" />
+      <jsp:param name="base64Img" value="${base64Img}" />
+   </jsp:include>
         <!--**********************************
             Content body start
         ***********************************-->

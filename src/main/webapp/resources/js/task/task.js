@@ -415,6 +415,7 @@ function getTaskDetail(taskNo) {
 				$("#startDate").attr("readonly", false);
 				$("#endDate").attr("readonly", false);
 				$("#status").attr("readonly", false);
+				$("#searchHumanBtn").attr("disabled", true);
 				$("#status option").attr("disabled", true);
 			}
 			if(($("#loginEmployeeRole").val() == "ROLE_PE" || $("#loginEmployeeRole").val() == "ROLE_CLIENT") && data.empId != $("#loginEmployeeId").val()) {
@@ -428,6 +429,7 @@ function getTaskDetail(taskNo) {
 				$("#startDate").attr("readonly", true);
 				$("#endDate").attr("readonly", true);
 				$("#status").attr("readonly", true);
+				$("#searchHumanBtn").attr("disabled", true);
 				$("#status option").attr("disabled", true);
 			} else {
 				$("#registerTaskBtn").addClass("d-none");

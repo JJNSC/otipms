@@ -77,14 +77,23 @@
 			min-height: 145px;
 		}
 		
+		.btn-primary.disabled, .btn-primary:disabled {
+		    color: #fff;
+		    /* background-color: #7571f9;
+		    border-color: #7571f9; */
+		    background-color: #2f588b;
+		    border-color: #2f588b; 
+		}
 	</style>	
 
 </head>
 
 <body>
     <jsp:include page="../headernsidebar.jsp">
-		<jsp:param name="employee" value="${employee}" />
-	</jsp:include>
+      <jsp:param name="employee" value="${employee}" />
+      <jsp:param name="mf" value="${mf}" />
+      <jsp:param name="base64Img" value="${base64Img}" />
+   </jsp:include>
         <!--**********************************
             Content body start
         ***********************************-->
@@ -276,7 +285,7 @@
                                 
                                 <div class="mt-4">
                                     <form>
-	                                    <div class="row mb-3">
+	                                    <div class="row mb-3 d-none">
 	                                        <div class="col-md-12">
 	                                            <label class="control-label">태크스 번호 hidden 처리할 예정</label>
 	                                            <input class="form-control form-white" type="text" id="taskNoInput" name="taskNoInput">
@@ -295,7 +304,7 @@
 	                                            <textarea class="textarea_editor form-control bg-light" rows="5" placeholder="내용을 입력해주세요." id="taskComment" name="taskComment"></textarea>
 	                                        </div>
 	                                    </div>
-	                                    <div class="row mb-3">
+	                                    <!-- <div class="row mb-3">
 	                                    	<div class="col-md-12">
 	                                    		<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
 		                                              type="button" 
@@ -304,17 +313,33 @@
 		                                            	사원 찾기
 		                                        </button>
 	                                    	</div>
-	                                    </div>
-	                                    <div class="row mb-3">
+	                                    </div> -->
+	                                    <div class="row mb-3 d-none">
 	                                        <div class="col-md-12">
 	                                            <label class="control-label">사원번호 hidden 처리할 예정</label>
 	                                            <input class="form-control form-white" type="text" id="empIdInput" name="empIdInput">
 	                                        </div>
 	                                    </div>
-	                                    <div class="row mb-3">
+	                                    <!-- <div class="row mb-3">
 	                                        <div class="col-md-12">
 	                                            <label class="control-label">담당자</label><span id="empIdInval" class="text-danger d-none"> *</span>
 	                                            <input class="form-control form-white" type="text" id="employeeName" name="employeeName">
+	                                        </div>
+	                                    </div> -->
+	                                    <div class="row mb-3">
+	                                        <div class="col-md-12">
+	                                            <label class="control-label">담당자</label><span id="empIdInval" class="text-danger d-none"> *</span>
+	                                            <div class="d-flex">
+		                                            <input class="form-control form-white" type="text" id="employeeName" name="employeeName">
+	                                            	<div class="d-flex">
+	                                            		<button id="searchHumanBtn"
+	                                            			  class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+				                                              type="button" 
+				                                              onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))">
+				                                           <i class="icon-copy fa fa-search" aria-hidden="true"></i>
+				                                        </button>
+	                                            	</div>
+	                                            </div>
 	                                        </div>
 	                                    </div>
 	                                    <div class="row mb-3">
