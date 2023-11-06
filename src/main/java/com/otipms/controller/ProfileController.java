@@ -37,6 +37,8 @@ public class ProfileController {
 		
 		Employee employee = employeeService.selectProfileEmp(LoginController.loginEmployee.getEmpId());
 		model.addAttribute("employee", employee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		
 		if(employee.getMediaFileData() != null) {
 			String base64Img = Base64.getEncoder().encodeToString(employee.getMediaFileData());
@@ -80,6 +82,8 @@ public class ProfileController {
 	public String indextTest(Model model) {
 		log.info("메인 테스트 페이지");
 		model.addAttribute("employee", LoginController.loginEmployee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		return "indexTest";
 	}
 }

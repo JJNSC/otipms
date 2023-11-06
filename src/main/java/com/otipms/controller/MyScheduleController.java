@@ -16,6 +16,8 @@ public class MyScheduleController {
 	public String mySchedule(Model model) {
 		log.info("개인일정");
 		model.addAttribute("employee", LoginController.loginEmployee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		return "mySchedule/mySchedule";
 	}
 	

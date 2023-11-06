@@ -109,6 +109,10 @@ public class BoardController {
 		} else if(boardType.equals("팀 게시판")) {
 			model.addAttribute("teamName", team.getTeamName());
 		}
+		
+		model.addAttribute("employee", LoginController.loginEmployee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		return "board/boardList";
 	}
 	
@@ -208,6 +212,10 @@ public class BoardController {
 		}
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("searchKeyword", searchKeyword);
+		
+		model.addAttribute("employee", LoginController.loginEmployee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		return "board/boardList";
 	}
 	
@@ -258,6 +266,8 @@ public class BoardController {
 		}
 		
 		model.addAttribute("employee", LoginController.loginEmployee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		model.addAttribute("teamName", team.getTeamName());
 		return "board/writeBoard";
 	}
@@ -318,6 +328,8 @@ public class BoardController {
 		
 		//로그인 정보
 		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("base64Img", LoginController.profileImg);
+		model.addAttribute("mf", LoginController.multipartFile);
 		
 		//게시글 조회
 		Board board = boardService.detailBoard(boardNo);

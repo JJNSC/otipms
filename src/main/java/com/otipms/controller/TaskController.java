@@ -29,6 +29,8 @@ public class TaskController {
 	public String myTask(Model model) {
 		log.info("개인업무일정");
 		model.addAttribute("employee", LoginController.loginEmployee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		return "task/myTask";
 	}
 	
@@ -43,6 +45,8 @@ public class TaskController {
 	public String projectTask(Model model) {
 		log.info("프로젝트업무일정");
 		model.addAttribute("employee", LoginController.loginEmployee);
+	    model.addAttribute("base64Img", LoginController.profileImg);
+	    model.addAttribute("mf", LoginController.multipartFile);
 		
 		//로그인한 사람의 ROLE이 ROLE_ADMIN일 경우
 		if(LoginController.loginEmployee.getRole().equals("ROLE_ADMIN")) {
