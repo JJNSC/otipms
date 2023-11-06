@@ -75,6 +75,9 @@ public class ProfileController {
 		mediaFile.setMediaFileData(imageFile.getBytes());
 		
 		employeeService.updateProfileImg(mediaFile);
+		
+		LoginController.multipartFile = employeeService.getProfileImgByEmpId(LoginController.loginEmployee.getEmpId());
+		LoginController.profileImg =  Base64.getEncoder().encodeToString(mediaFile.getMediaFileData());
 		return ResponseEntity.ok("{\"message\": \"이미지 업로드 성공\"}");
 	}
 	

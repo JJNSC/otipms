@@ -1,15 +1,20 @@
 package com.otipms.security;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.controller.LoginController;
+import com.otipms.dto.MediaFile;
+import com.otipms.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +28,9 @@ SavedRequestAwareAuthenticationSuccessHandler
 @Slf4j
 //public class Ch17AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler  {
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+	@Autowired
+	private EmployeeService employeeService;
+	
 	@Override
 	public void onAuthenticationSuccess(
 			HttpServletRequest request, 
@@ -41,6 +49,15 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         } else {
             setDefaultTargetUrl("/index"); // 기본 리다이렉트 경로
         }
+        
+        if(employeeService.getProfileImgByEmpId(empDetails.getEmployee().getEmpId())!=null) {
+        	LoginController.multipartFile = employeeService.getProfileImgByEmpId(empDetails.getEmployee().getEmpId());
+        	LoginController.profileImg = Base64.getEncoder().encodeToString(LoginController.multipartFile.getMediaFileData());
+	    }else {
+	    	LoginController.multipartFile = employeeService.getDefaultImg();
+	    	LoginController.profileImg = Base64.getEncoder().encodeToString(LoginController.multipartFile.getMediaFileData());
+	    }
+        
 		LoginController.loginEmployee = empDetails.getEmployee();
 		
 		super.onAuthenticationSuccess(request, response, authentication);

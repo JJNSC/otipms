@@ -329,4 +329,65 @@
 		   AND MEDIAFILENAME like '%Profile'
 	</update>
 	
+	<select id="getEmployeeCount" resultType="int">
+		SELECT count(*) 
+		  FROM emp
+	</select>
+	
+	<insert id="insertInitialAdmin" parameterType="Employee">
+		INSERT 
+		  INTO emp (
+		  	   empId
+		  	 , empPw
+		  	 , empName
+		  	 , empRank
+		  	 , role
+		  	 , empEnabled
+		  	   )
+		VALUES (
+	         , #{empId}
+	         , #{empPw}
+	         , #{empName}
+	         , #{empRank}
+	         , #{role}
+	         , 1
+	           )
+		  )
+	</insert>
+	
+	<insert id="insertInitialAdminInfo" parameterType="Employee">	
+		INSERT 
+		  INTO empInfo (
+		       empId
+		     , TeamNo
+		     , empTel
+		     , empEmail
+		       )
+	    VALUES (
+	           #{empId}
+	         , null  
+	         , #{empTel}
+	         , null
+	           )
+	</insert>
+	
+	<insert id="insertDefaultProfileImage" parameterType="MediaFile">
+		<selectKey keyProperty="mediaFileNo" resultType="int" order="BEFORE">
+			select mediaFileNo_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
+		</selectKey>
+		INSERT 
+		  INTO mediaFile (
+		       mediaFileNo
+		     , mediaFileName
+		     , mediaFileType
+		     , mediaFileData
+		       )
+		VALUES (
+		       #{mediaFileNo}
+		     , #{mediaFileName}
+		     , #{mediaFileType}
+		     , #{mediaFileData}
+		       )
+	</insert>
+	
 </mapper>

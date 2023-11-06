@@ -36,6 +36,13 @@ public interface EmployeeDao {
 	public void insertEmployeeDefaultProfileImg(MediaFile mediaFile);
 	//사원번호로 프로필 사진 가져오기
 	public MediaFile selectProfileImgByEmpId(int empId);
+	//총 사원수 가져오기
+	public int getEmployeeCount();
+	//최초 관리자 등록
+	public void insertInitialAdmin(Employee employee);
+	public void insertInitialAdminInfo(Employee employee);
+	//기본 프로필 사진 등록 
+	public void insertDefaultProfileImage(MediaFile mediaFile);
 	/**
 	 * 프로필 사진 수정
 	 * @param mediaFile

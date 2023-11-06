@@ -1,5 +1,6 @@
 package com.otipms.service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dao.EmployeeDao;
 import com.otipms.dao.ProjectDao;
@@ -294,6 +296,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public MediaFile getDefaultImg() {
 		return employeeDao.getDefaultProfileImg();
+	}
+
+	@Override
+	public int getEmployeeCount() {
+		return employeeDao.getEmployeeCount();
+	}
+	
+	//최조 관리자, 기본 프로필 사진 등록
+	@Override
+	public void addInitialInfo(Employee employee, MultipartFile defaultProfileImage) {
+		//비밀번호 암호화
+		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		employee.setEmpPw(pwEncoder.encode(employee.getEmpPw()));
+		//관리자 회원가입
+		employeeDao.insertInitialAdmin(employee);
+		employeeDao.insertInitialAdminInfo(employee);
+		//기본 프로필 사진 세팅
+		MediaFile mediaFile = new MediaFile();
+		mediaFile.setMediaFileName("defaultProfile");
+		mediaFile.setMediaFileType(defaultProfileImage.getContentType());
+		try {
+			mediaFile.setMediaFileData(defaultProfileImage.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		employeeDao.insertDefaultProfileImage(mediaFile);
 	}
 
 	

@@ -2,6 +2,8 @@ package com.otipms.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.ProjectTeams;
@@ -33,6 +35,10 @@ public interface EmployeeService {
 	public Employee selectProfileEmp(int empId);
 	public MediaFile getProfileImgByEmpId(int empId);
 	public MediaFile getDefaultImg();
+	//총 사원수 가져오기
+	public int getEmployeeCount();
+	//최초 관리자, 기본 프로필 사진 등록
+	public void addInitialInfo(Employee employee, MultipartFile defaultProfileImage);
 	/**
 	 * 비밀번호 수정
 	 * @param employee

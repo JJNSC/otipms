@@ -49,8 +49,17 @@ public class LoginController {
 	
 	@RequestMapping("/")
 	public String login() {
+		int empCount = employeeService.getEmployeeCount();
+		if(empCount==0) {
+			return "login/initialAccess";
+		}else {
+			return "login/login";
+		}
+	}
+	@RequestMapping("/admin")
+	public String admin() {
 		
-		return "login/login";
+		return "login/initialAccess";
 	}
 	
 	@RequestMapping("/loginForm")
@@ -106,7 +115,7 @@ public class LoginController {
 	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
 	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
 	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
-	    if(employeeService.getProfileImgByEmpId(empId)!=null) {
+	    /*if(employeeService.getProfileImgByEmpId(empId)!=null) {
 	    	MediaFile mf = employeeService.getProfileImgByEmpId(empId);
 	    	multipartFile = mf;
 	    	String dbBase64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
@@ -118,7 +127,9 @@ public class LoginController {
 	    	String base64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
 			model.addAttribute("base64Img", base64Img);
 			model.addAttribute("mf", mf);
-	    }
+	    }*/
+	    model.addAttribute("base64Img", profileImg);
+	    model.addAttribute("mf", multipartFile);
 	    
 	    model.addAttribute("employee", empDetails.getEmployee());
 	    model.addAttribute("alarm", alarm);

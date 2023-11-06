@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -253,5 +254,29 @@ public class EmployeeController {
         }
 		
 		return "Data received successfully";
+	}
+	
+	@RequestMapping("/createAdmin")
+	public String createAdmin(@RequestParam("adminId") String empId,
+							  @RequestParam("adminPw") String empPw,
+							  @RequestParam("adminName") String empName,
+							  @RequestParam("adminPosition") String empRank,
+							  @RequestParam("adminTel") String empTel,
+							  @RequestParam("defaultProfileImage") MultipartFile defaultProfileImage) {
+		log.info("empId : "+empId);
+		log.info("empPw : "+empPw);
+		log.info("empName : "+empName);
+		log.info("empRank : "+empRank);
+		log.info("defaultProfileImage : "+defaultProfileImage);
+		Employee admin = new Employee();
+		admin.setEmpId(Integer.parseInt(empId));
+		admin.setEmpPw(empPw);
+		admin.setEmpName(empName);
+		admin.setEmpRank(empRank);
+		admin.setEmpTel(empTel);
+		admin.setRole("ROLE_ADMIN");
+		//employeeService.addInitialInfo(admin,defaultProfileImage);
+		
+		return "redirect:/";
 	}
 }
