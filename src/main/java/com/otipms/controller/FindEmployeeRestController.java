@@ -119,13 +119,15 @@ public class FindEmployeeRestController {
 	        	    String dateStr = dateFormat.format(message.getCcCheckedDate());
 	        	    messageMap.put("ccCheckedDate", dateStr);
 	        	}
-    		 
+    		 messageMap.put("empId", String.valueOf(message.getEmpId()));
+	         
     		 messageData.add(messageMap);
     	 }
     	 
     	 jsonData.put("messageData", messageData);
     	 return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
+    
     
     @GetMapping("/api/RolePMData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> RolePMData() {

@@ -37,6 +37,7 @@ public interface MessageService {
 	//쪽지 상세 보기 (쪽지 읽음 여부 및 읽은 시간)
 	public List<Message> readMail(int MessageNo);
 	
+	public void deleteMessage(int messageNo, int empId);
 	
 	public int writeMessage(Message message);
 	public void writeCC(List<CC> ccList);

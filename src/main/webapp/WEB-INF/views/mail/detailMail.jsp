@@ -39,19 +39,20 @@
                                 <div class="email-left-box">
                                 	<a href="writeMail" class="btn btn-primary btn-block">쪽지 보내기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="receivedMail" class="list-group-item border-0 p-r-0">
+                                    	<a href="receivedMail" class="list-group-item border-0 text-primary p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
-                                    		 수신 쪽지함
-                                    		<span class="badge badge-primary badge-sm float-right m-t-5">198</span>
+                                    		<b>수신 쪽지함</b>
+                                    		<span class="badge badge-primary badge-sm float-right m-t-5">${cnt1}</span>
                                     	</a>
                                         <a href="sentMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>
                                         	보낸 쪽지함
+                                        	<span class="badge badge-primary badge-sm float-right m-t-5">${cnt2}</span>
                                         </a>
                                         <a href="importantMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-star-o font-18 align-middle mr-2"></i>
                                         	중요 쪽지함
-                                        	<span class="badge badge-danger badge-sm float-right m-t-5">47</span>
+                                        	<span class="badge badge-danger badge-sm float-right m-t-5">${cnt3}</span>
                                         </a>
                                         <a href="temporaryMail" class="list-group-item border-0 p-r-0">
                                         	<i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>
@@ -60,7 +61,7 @@
                                         <a href="trashMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-trash font-18 align-middle mr-2"></i>
                                         	쪽지 휴지통
-                                        	
+                                        	<span class="badge badge-danger badge-sm float-right m-t-5">${cnt4}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -77,9 +78,16 @@
                                         </div>
                                     </div>
                                     <div class="read-content">
-                                    	<button onclick="javascript:void(window.open('readTime?messageNo=${messageContent.messageNo}','_blank','width=600, height=600, left=600, top=30'))"
-                                    	   class="btn btn-primary btn-block" 
-                                    	   style="position:absolute; width:150px; right:20px">읽음 여부</button>
+                                    	<c:if test="${employee.empId == messageContent.empId}">
+	                                    	<button onclick="javascript:void(window.open('readTime?messageNo=${messageContent.messageNo}','_blank','width=600, height=600, left=600, top=30'))"
+	                                    	   class="btn btn-primary btn-block" 
+	                                    	   style="position:absolute; width:150px; right:20px">읽음 여부</button>
+                                    	</c:if>
+                                    	<c:if test="${employee.empId != messageContent.empId}">
+                                    		<button onclick="javascript:void(window.open('readTime?messageNo=${messageContent.messageNo}','_blank','width=600, height=600, left=600, top=30'))"
+	                                    	   class="btn btn-primary btn-block" 
+	                                    	   style="position:absolute; width:150px; right:20px">수신자 확인</button>
+                                    	</c:if>
                                         <div class="media pt-5">
                                             <img class="mr-3 rounded-circle" src="/otipms/resources/images/user/1.jpg" style="width:60px; height:60px;">
                                             <div class="media-body">
@@ -98,23 +106,24 @@
                                                 <br/>
                                                 <span class="m-b-5 font-weight-bold">수신자 : </span>
                                                 <c:set var="recipients" value="" />
+                                                <c:set var="recipientsCount" value="0" />
 												    <c:forEach items="${messageEmployee}" var="messageEmpRec" varStatus="recLoop">
 												        <c:choose>
-												            <c:when test="${messageEmpRec.ccType == 1}">
-												                <c:if test="${recLoop.index > 0 && recLoop.index < 2}">
-												                    <c:set var="recipients" value="${recipients}, " />
-												                </c:if>
-												                <c:if test="${recLoop.index < 2}">
+													        <c:when test="${messageEmpRec.ccType == 1}">
+													            <c:if test="${recipientsCount < 2}">
+													                <c:if test="${recipientsCount > 0}">
+													                    <c:set var="recipients" value="${recipients}, " />
+													                </c:if>
 													                <c:set var="recipients" value="${recipients}${messageEmpRec.empRank} ${messageEmpRec.empName}" />
-												            	</c:if>
-												            	<c:set var="recipientCount" value="${recipientCount + 1}" />
-												            </c:when>
-												        </c:choose>
-												    </c:forEach>
-												    ${recipients}
-												    <c:if test="${recipientCount > 2}">
-												        외 <span class="m-b-3">${recipientCount  - 2}명</span>
-												    </c:if>
+													            </c:if>
+													            <c:set var="recipientsCount" value="${recipientsCount + 1}" />
+													        </c:when>
+													    </c:choose>
+	                                                </c:forEach>
+	                                                ${recipients}
+													<c:if test="${recipientsCount > 2}">
+													    외 <span class="m-b-3">${recipientsCount - 2}명</span>
+													</c:if>
 												    <br/>
 												    
 	                                                <span class="m-b-3 font-weight-bold">참조 : </span>
@@ -122,21 +131,21 @@
 	                                                <c:set var="referencesCount" value="0" />
 	                                               	<c:forEach items="${messageEmployee}" var="messageEmpRei" varStatus="reiLoop">
 	                                                	<c:choose>
-		                                                	<c:when test="${messageEmpRei.ccType == 3}">
-				                                                <c:if test="${reiLoop.index > 0 && reiLoop.index < 2}">
-												                    <c:set var="references" value="${references}, " />
-												                </c:if>
-												                <c:if test="${reiLoop.index < 2}">
+													        <c:when test="${messageEmpRei.ccType == 3}">
+													            <c:if test="${referencesCount < 2}">
+													                <c:if test="${referencesCount > 0}">
+													                    <c:set var="references" value="${references}, " />
+													                </c:if>
 													                <c:set var="references" value="${references}${messageEmpRei.empRank} ${messageEmpRei.empName}" />
-												            	</c:if>
-												            	<c:set var="referencesCount" value="${referencesCount + 1}" />
-		                                                	</c:when>
-		                                                </c:choose>
+													            </c:if>
+													            <c:set var="referencesCount" value="${referencesCount + 1}" />
+													        </c:when>
+													    </c:choose>
 	                                                </c:forEach>
 	                                                ${references}
-												    <c:if test="${referencesCount > 2}">
-												        외 <span class="m-b-3">${referencesCount  - 2}명</span>
-												    </c:if>
+													<c:if test="${referencesCount > 2}">
+													    외 <span class="m-b-3">${referencesCount - 2}명</span>
+													</c:if>
 	                                                <br/>
 	                                                
                                                 <c:forEach items="${messageEmployee}" var="messageEmpBli" varStatus="loop">
@@ -151,13 +160,13 @@
                                             </div>
                                         </div>
                                         <br/>
-                                        <div>
+                                        <div style="max-width: 640px;">
                                         	<b>제목 : </b>
-                                        	<span>${messageContent.messageTitle}</span>
+                                        	<span >${messageContent.messageTitle}</span>
                                         </div>
                                         <hr>
                                         <div class="media mb-4 mt-1">
-                                            <div class="media-body">
+                                            <div class="media-body" style="max-width: 640px;">
                                                 ${messageContent.messageContent}
                                             </div>
                                         </div>

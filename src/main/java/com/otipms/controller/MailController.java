@@ -52,10 +52,16 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMyReceivedMessage(empId);
-	    int cnt = messageService.getMyReceivedMessage(empId).size();
+	    int cnt1 = messageService.getMyReceivedMessage(empId).size();
+	    int cnt2 = messageService.getMySentMessage(empId).size();
+	    int cnt3 = messageService.getMyImportantMessage(empId).size();
+	    int cnt4 = messageService.getMyTrashMessage(empId).size();
 	    
+		model.addAttribute("cnt1", cnt1);
+		model.addAttribute("cnt2", cnt2);
+		model.addAttribute("cnt3", cnt3);
+		model.addAttribute("cnt4", cnt4);
 		model.addAttribute("messages", messages);
-		model.addAttribute("cnt", cnt);
 	    model.addAttribute("employee", empDetails.getEmployee());
 		
 		return "mail/receivedMail";
@@ -173,9 +179,15 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMySentMessage(empId);
-		int cnt = messageService.getMySentMessage(empId).size();
-		
-		model.addAttribute("cnt", cnt);
+		int cnt1 = messageService.getMyReceivedMessage(empId).size();
+	    int cnt2 = messageService.getMySentMessage(empId).size();
+	    int cnt3 = messageService.getMyImportantMessage(empId).size();
+	    int cnt4 = messageService.getMyTrashMessage(empId).size();
+	    
+		model.addAttribute("cnt1", cnt1);
+		model.addAttribute("cnt2", cnt2);
+		model.addAttribute("cnt3", cnt3);
+		model.addAttribute("cnt4", cnt4);
 		model.addAttribute("employee", empDetails.getEmployee());
 	    model.addAttribute("messages", messages);
 		return "mail/sentMail";
@@ -190,9 +202,15 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMyImportantMessage(empId);
-		int cnt = messageService.getMyImportantMessage(empId).size();
-		
-		model.addAttribute("cnt", cnt);
+		int cnt1 = messageService.getMyReceivedMessage(empId).size();
+	    int cnt2 = messageService.getMySentMessage(empId).size();
+	    int cnt3 = messageService.getMyImportantMessage(empId).size();
+	    int cnt4 = messageService.getMyTrashMessage(empId).size();
+	    
+		model.addAttribute("cnt1", cnt1);
+		model.addAttribute("cnt2", cnt2);
+		model.addAttribute("cnt3", cnt3);
+		model.addAttribute("cnt4", cnt4);
 		model.addAttribute("employee", empDetails.getEmployee());
 	    model.addAttribute("messages", messages);
 		return "mail/importantMail";
@@ -208,7 +226,15 @@ public class MailController {
 		
 		List<Message> messages = messageService.getMyTemporaryMessage(empId);
 		int cnt = messageService.getMyTemporaryMessage(empId).size();
-		
+		int cnt1 = messageService.getMyReceivedMessage(empId).size();
+	    int cnt2 = messageService.getMySentMessage(empId).size();
+	    int cnt3 = messageService.getMyImportantMessage(empId).size();
+	    int cnt4 = messageService.getMyTrashMessage(empId).size();
+	    
+		model.addAttribute("cnt1", cnt1);
+		model.addAttribute("cnt2", cnt2);
+		model.addAttribute("cnt3", cnt3);
+		model.addAttribute("cnt4", cnt4);
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("employee", empDetails.getEmployee());
 		model.addAttribute("messages", messages);
@@ -224,9 +250,15 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		
 		List<Message> messages = messageService.getMyTrashMessage(empId);
-		int cnt = messageService.getMyTrashMessage(empId).size();
-		
-		model.addAttribute("cnt", cnt);
+		int cnt1 = messageService.getMyReceivedMessage(empId).size();
+	    int cnt2 = messageService.getMySentMessage(empId).size();
+	    int cnt3 = messageService.getMyImportantMessage(empId).size();
+	    int cnt4 = messageService.getMyTrashMessage(empId).size();
+	    
+		model.addAttribute("cnt1", cnt1);
+		model.addAttribute("cnt2", cnt2);
+		model.addAttribute("cnt3", cnt3);
+		model.addAttribute("cnt4", cnt4);
 		model.addAttribute("employee", empDetails.getEmployee());
 		model.addAttribute("messages", messages);
 		return "mail/trashMail";
@@ -238,12 +270,21 @@ public class MailController {
 	public String detailMail(@RequestParam("messageNo") int messageNo, Model model,Authentication authentication) {
 		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-	    model.addAttribute("employee", empDetails.getEmployee());
+		int empId = empDetails.getEmployee().getEmpId();
+		model.addAttribute("employee", empDetails.getEmployee());
 		
 		List<Message> messageEmployee = messageService.detailMessageEmployee(messageNo);
 		Message messageContent = messageService.detailMessageContent(messageNo);
 		List<Message> messageMedia = messageService.detailMessageMediaFile(messageNo);
-		
+		int cnt1 = messageService.getMyReceivedMessage(empId).size();
+	    int cnt2 = messageService.getMySentMessage(empId).size();
+	    int cnt3 = messageService.getMyImportantMessage(empId).size();
+	    int cnt4 = messageService.getMyTrashMessage(empId).size();
+	    
+		model.addAttribute("cnt1", cnt1);
+		model.addAttribute("cnt2", cnt2);
+		model.addAttribute("cnt3", cnt3);
+		model.addAttribute("cnt4", cnt4);
 		model.addAttribute("messageEmployee", messageEmployee);
 		model.addAttribute("messageContent", messageContent);
 		model.addAttribute("messageMedia", messageMedia);
@@ -285,6 +326,15 @@ public class MailController {
             return new ResponseEntity<>("File upload failed", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+	
+	@PostMapping("/deleteCC")
+	@ResponseBody
+	public String deleteCC(@RequestParam("messageNo") int messageNo, @RequestParam("empId") int empId) {
+		log.info("messageNo : " + messageNo);
+		log.info("empId : " + empId);
+		messageService.deleteMessage(messageNo, empId);
+		return "success";
+	}
 	
 	@PostMapping("/sendMail")
 	@ResponseBody
@@ -399,11 +449,16 @@ public class MailController {
 	}
 	
 	@RequestMapping("/readTime")
-	public String readTime(@RequestParam("messageNo") int messageNo,Model model) {
+	public String readTime(@RequestParam("messageNo") int messageNo, Model model, Authentication authentication) {
 		int mesMessageNo = messageNo;
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		int empId = empDetails.getEmployee().getEmpId();
+		int msempId = messageService.detailMessageContent(messageNo).getEmpId();
 		
 		log.info("messageNo : " + mesMessageNo);
+		model.addAttribute("employee", empDetails.getEmployee());
 		model.addAttribute("mesMessageNo", mesMessageNo);
+		model.addAttribute("msempId", msempId);
 		
 		return "mail/readTime";
 	}

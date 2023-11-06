@@ -47,16 +47,17 @@
                                     	<a href="receivedMail" class="list-group-item border-0 text-primary p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
                                     		<b>수신 쪽지함</b>
-                                    		<span class="badge badge-primary badge-sm float-right m-t-5">198</span>
+                                    		<span class="badge badge-primary badge-sm float-right m-t-5">${cnt1}</span>
                                     	</a>
                                         <a href="sentMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>
                                         	보낸 쪽지함
+                                        	<span class="badge badge-primary badge-sm float-right m-t-5">${cnt2}</span>
                                         </a>
                                         <a href="importantMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-star-o font-18 align-middle mr-2"></i>
                                         	중요 쪽지함
-                                        	<span class="badge badge-danger badge-sm float-right m-t-5">47</span>
+                                        	<span class="badge badge-danger badge-sm float-right m-t-5">${cnt3}</span>
                                         </a>
                                         <a href="temporaryMail" class="list-group-item border-0 p-r-0">
                                         	<i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>
@@ -65,6 +66,7 @@
                                         <a href="trashMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-trash font-18 align-middle mr-2"></i>
                                         	쪽지 휴지통
+                                        	<span class="badge badge-danger badge-sm float-right m-t-5">${cnt4}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -82,7 +84,7 @@
 	                                        <div class="header-left" style="margin-left:20px;">
 							                    <div class="input-group icons" style="margin-top:0px;">
 							                    	<input type="hidden" value="${employee.empId}" id="memIdSpan">
-							                    	<input type="hidden" value="${cnt}" id="cntSpan">
+							                    	<input type="hidden" value="${cnt1}" id="cntSpan">
 							                        <input id="search" type="search" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search Dashboard">
 							                        <div class="input-group-prepend">
 							                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1">

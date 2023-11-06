@@ -1,10 +1,10 @@
 package com.otipms.service;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -117,6 +117,15 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> readMail(int messageNo){
 		return messageDao.readMail(messageNo);
+	}
+	
+	@Override
+	public void deleteMessage(int messageNo, int empId) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("messageNo", messageNo);
+		paramMap.put("empId", empId);
+		
+		messageDao.deleteMessage(paramMap);
 	}
 	
 	@Override

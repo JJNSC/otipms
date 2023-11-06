@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,9 +49,16 @@
                         <div class="card">
                             <div class="card-body">
                             	<input type="hidden" value="${mesMessageNo}" id="messageNo">
+                            	<input type="hidden" value="${employee.empId}" id="empId">
+                            	<input type="hidden" value="${msempId}" id="msempId">
                                 <div class="compose-content mt-5 mb-5">
 								    <div class="mt-3">
-								    	<span>읽음 여부 확인</span>
+								    	<c:if test="${employee.empId == msempId}">
+								    		<span>읽음 여부 확인</span>
+								    	</c:if>
+								    	<c:if test="${employee.empId != msempId}">
+								    		<span>쪽지 수신자 확인</span>
+								    	</c:if>
 									</div>
                                     <hr>
                                     <div class="tab-content">
@@ -56,18 +66,34 @@
                                             <div class="p-t-15">
                                             	 <div class="table-responsive">
 				                                    <table class="table table-hover table-custom" style="width:96%;">
-				                                        <thead>
-				                                            <tr>
-				                                                <th class="text-center">유형</th>
-				                                                <th class="text-center">직급</th>
-				                                                <th class="text-center">이름</th>
-				                                                <th class="text-center">읽음 여부</th>
-				                                                <th class="text-center ">시간</th>
-				                                            </tr>
-				                                        </thead>
-				                                        <tbody id="employee-list">
-				                                        	
-				                                        </tbody>
+				                                        <c:if test="${employee.empId == msempId}">
+					                                        <thead>
+					                                            <tr>
+					                                                <th class="text-center">유형</th>
+					                                                <th class="text-center">직급</th>
+					                                                <th class="text-center">이름</th>
+					                                                <th class="text-center">읽은 시간</th>
+					                                                <th class="text-center ">발송 취소</th>
+					                                            </tr>
+					                                        </thead>
+					                                        <tbody id="employee-list">
+					                                        	
+					                                        </tbody>
+				                                        </c:if>
+				                                        <c:if test="${employee.empId != msempId}">
+				                                        	<thead>
+					                                            <tr>
+					                                                <th class="text-center"></th>
+					                                                <th class="text-center">유형</th>
+					                                                <th class="text-center"></th>
+					                                                <th class="text-center">직급</th>
+					                                                <th class="text-center ">이름</th>
+					                                            </tr>
+					                                        </thead>
+					                                        <tbody id="employee-list">
+					                                        	
+					                                        </tbody>
+				                                        </c:if>
 				                                    </table>
 		                                		</div>
                                        		</div>
