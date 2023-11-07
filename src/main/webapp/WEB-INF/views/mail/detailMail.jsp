@@ -69,12 +69,6 @@
                                 <div class="email-right-box">
                                     <div class="toolbar" role="toolbar">
                                         <div class="btn-group m-b-20">
-                                            <button type="button" class="btn btn-light" onclick="checkimportant(event)">
-                                            	<i class="icon-copy star ion-ios-star-outline"></i>
-                                            </button>
-                                            <button type="button"  class="btn" data-toggle="modal" data-target="#modalGrid">
-                                            	<i class="fa fa-trash"></i>
-                                            </button>
                                         </div>
                                     </div>
                                     <div class="read-content">
@@ -89,7 +83,7 @@
 	                                    	   style="position:absolute; width:150px; right:20px">수신자 확인</button>
                                     	</c:if>
                                         <div class="media pt-5">
-                                            <img class="mr-3 rounded-circle" src="/otipms/resources/images/user/1.jpg" style="width:60px; height:60px;">
+                                            <img src="data:${messageContent.mediaFileType};base64, ${messageContent.profile}" height="60" width="60" alt="" style="margin-right:5px;">
                                             <div class="media-body">
                                                 <span class="m-b-5 font-weight-bold">발신자 : </span>
                                                 <c:forEach items="${messageEmployee}" var="messageEmpSen">

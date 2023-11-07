@@ -31,6 +31,7 @@ import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
+import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,8 @@ public class MailController {
 	@Autowired
 	private MessageService messageService;
 	
+	@Autowired
+	private EmployeeService employeeService;
 	//쪽지 수신함
 	@Login
 	@RequestMapping("/receivedMail")
@@ -276,6 +279,17 @@ public class MailController {
 		List<Message> messageEmployee = messageService.detailMessageEmployee(messageNo);
 		Message messageContent = messageService.detailMessageContent(messageNo);
 		List<Message> messageMedia = messageService.detailMessageMediaFile(messageNo);
+		
+		if(employeeService.getProfileImgByEmpId(messageContent.getEmpId())!=null) {
+    		MediaFile mf = employeeService.getProfileImgByEmpId(messageContent.getEmpId());
+    		messageContent.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+    		messageContent.setMediaFileType(mf.getMediaFileType());
+	    }else {
+	    	MediaFile mf = employeeService.getDefaultImg();
+	    	messageContent.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
+	    	messageContent.setMediaFileType(mf.getMediaFileType());
+	    }
+		
 		int cnt1 = messageService.getMyReceivedMessage(empId).size();
 	    int cnt2 = messageService.getMySentMessage(empId).size();
 	    int cnt3 = messageService.getMyImportantMessage(empId).size();
