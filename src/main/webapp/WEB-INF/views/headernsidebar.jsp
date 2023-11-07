@@ -124,7 +124,7 @@
                                             <a href="profile"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('mail/receivedMail','_blank','width=920, height=680, left=800, top=30'))">
+                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/mail/receivedMail','_blank','width=920, height=680, left=800, top=30'))">
                                                 <i class="icon-envelope-open"></i>
                                                 <span>Inbox</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
@@ -133,7 +133,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('chat/chat', '_blank', 'width=684, height=950, left=1000, top=30'))">
+                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/chat/chat', '_blank', 'width=684, height=950, left=1000, top=30'))">
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>Chat</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
