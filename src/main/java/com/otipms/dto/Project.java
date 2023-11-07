@@ -16,4 +16,5 @@ public class Project {
 	private Boolean projectDeleted;
 	private int empId;
 	private double progressRate;
+	private String empName;		//담당 pm 이름
 }

@@ -61,9 +61,8 @@ public interface TaskService {
 	/**
 	 * 태스크 수정
 	 * @param task
-	 * @return
 	 */
-	public List<Task> modifyTask(Task task);
+	public void modifyTask(Task task);
 
 	/**
 	 * 태스크 삭제
@@ -90,5 +89,12 @@ public interface TaskService {
 	public TaskCount getProjectTaskInfo(int projectNo);
 	//프로젝트에 속한 팀들의 진척도 조회
 	public List<Double> getTeamProgressRateList(int projectNo);
+
+	/**
+	 * 사용자가 속한 프로젝트 조회
+	 * @param empId
+	 * @return
+	 */
+	public Project getProject(int empId);
 
 }

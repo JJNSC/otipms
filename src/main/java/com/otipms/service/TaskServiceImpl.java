@@ -74,9 +74,9 @@ public class TaskServiceImpl implements TaskService {
 
 	//태스크 수정
 	@Override
-	public List<Task> modifyTask(Task task) {
+	public void modifyTask(Task task) {
 		taskDao.updateTask(task);
-		return taskDao.selectTaskList(task.getEmpId());
+		//return taskDao.selectTaskList(task.getEmpId());
 	}
 
 	//태스크 삭제
@@ -187,6 +187,11 @@ public class TaskServiceImpl implements TaskService {
 			progressRateList.add(progressRate);
 		}
 		return progressRateList;
+	}
+	//사용자가 속한 프로젝트 조회
+	@Override
+	public Project getProject(int empId) {
+		return taskDao.selectProject(empId);
 	}
 
 }

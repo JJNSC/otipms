@@ -39,7 +39,6 @@ window.onload = function(){
 					<span class="name">${message.empName}</span>
 					</div>
 					</div>
-					<a href="detailMail?messageNo=${message.messageNo}" onclick="updateMessageChecked(${message.ccNo})">
 					<div class="col-mail col-mail-2">
 					<div class="subject">${message.messageTitle}</div>
 					<div class="clip">

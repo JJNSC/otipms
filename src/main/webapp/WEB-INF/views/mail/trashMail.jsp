@@ -41,17 +41,14 @@
                                     	<a href="receivedMail" class="list-group-item border-0 p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
                                     		수신 쪽지함
-                                    		<span class="badge badge-primary badge-sm float-right m-t-5">${cnt1}</span>
                                     	</a>
                                         <a href="sentMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>
                                         	보낸 쪽지함
-                                        	<span class="badge badge-primary badge-sm float-right m-t-5">${cnt2}</span>
                                         </a>
                                         <a href="importantMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-star-o font-18 align-middle mr-2"></i>
                                         	중요 쪽지함
-                                        	<span class="badge badge-danger badge-sm float-right m-t-5">${cnt3}</span>
                                         </a>
                                         <a href="temporaryMail" class="list-group-item border-0 p-r-0">
                                         	<i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>
@@ -60,23 +57,12 @@
                                         <a href="trashMail" class="list-group-item border-0 text-primary p-r-0">
                                         	<i class="fa fa-trash font-18 align-middle mr-2"></i>
                                         	<b>쪽지 휴지통</b>
-                                        	<span class="badge badge-danger badge-sm float-right m-t-5">${cnt4}</span>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="email-right-box">
                                     <div role="toolbar" class="toolbar">
                                         <div class="btn-group">
-                                            <button aria-expanded="false" data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button"> 
-                                            	Filter
-                                            	<span class="caret m-l-5"></span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                           		<a href="javascript: void(0);" class="dropdown-item">발신자</a>
-                                           		<a href="javascript: void(0);" class="dropdown-item">날짜</a>
-                                           		<a href="javascript: void(0);" class="dropdown-item">읽음여부</a>
-                                           		<a href="javascript: void(0);" class="dropdown-item">첨부파일</a>
-                                            </div>
 	                                        <div class="header-left" style="margin-left:20px;">
 							                    <div class="input-group icons" style="margin-top:0px;">
 							                        <input type="search" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search Dashboard">

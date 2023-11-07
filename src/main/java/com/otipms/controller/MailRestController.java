@@ -39,26 +39,8 @@ public class MailRestController {
 	@GetMapping(value="/receivedMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> receivedMail(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> receivedMails = messageService.getMyReceivedMessage(empId);
-		List<Message> plusreceivedMails = new ArrayList<>();
-		for (Message message : receivedMails) {
-			int mesmessageNo = message.getMessageNo();
-			//지금 들어가고 있는 EmpId는 messageNo의 empId임 (로그인 한 사람 고정 값이라는 뜻)
-			//가져와야 할 사원의 번호는 해당 messageNo에 해당하는 cc
-			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
-			message.setMediaFile(mediaFiles);
-			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
-	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
-	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-	    		message.setMediaFileType(mf.getMediaFileType());
-		    }else {
-		    	MediaFile mf = employeeService.getDefaultImg();
-		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-		    	message.setMediaFileType(mf.getMediaFileType());
-		    }
-			plusreceivedMails.add(message);
-		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(plusreceivedMails);
+		String json = objectMapper.writeValueAsString(receivedMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
@@ -66,24 +48,8 @@ public class MailRestController {
 	@GetMapping(value="/sentMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> sentMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> sentMails = messageService.getMySentMessage(empId);
-		List<Message> plussentMails = new ArrayList<>();
-		for (Message message : sentMails) {
-			int mesmessageNo = message.getMessageNo();
-			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
-			message.setMediaFile(mediaFiles);
-			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
-	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
-	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-	    		message.setMediaFileType(mf.getMediaFileType());
-		    }else {
-		    	MediaFile mf = employeeService.getDefaultImg();
-		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-		    	message.setMediaFileType(mf.getMediaFileType());
-		    }
-			plussentMails.add(message);
-		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(plussentMails);
+		String json = objectMapper.writeValueAsString(sentMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
@@ -91,24 +57,8 @@ public class MailRestController {
 	@GetMapping(value="/importantMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> importantMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> importantMails = messageService.getMyImportantMessage(empId);
-		List<Message> plusimportantMails = new ArrayList<>();
-		for (Message message : importantMails) {
-			int mesmessageNo = message.getMessageNo();
-			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
-			message.setMediaFile(mediaFiles);
-			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
-	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
-	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-	    		message.setMediaFileType(mf.getMediaFileType());
-		    }else {
-		    	MediaFile mf = employeeService.getDefaultImg();
-		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-		    	message.setMediaFileType(mf.getMediaFileType());
-		    }
-			plusimportantMails.add(message);
-		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(plusimportantMails);
+		String json = objectMapper.writeValueAsString(importantMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
@@ -116,24 +66,8 @@ public class MailRestController {
 	@GetMapping(value="/temporaryMails" , produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> temporaryMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> temporaryMails = messageService.getMyTemporaryMessage(empId);
-		List<Message> plustemporaryMails = new ArrayList<>();
-		for (Message message : temporaryMails) {
-			int mesmessageNo = message.getMessageNo();
-			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
-			message.setMediaFile(mediaFiles);
-			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
-	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
-	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-	    		message.setMediaFileType(mf.getMediaFileType());
-		    }else {
-		    	MediaFile mf = employeeService.getDefaultImg();
-		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-		    	message.setMediaFileType(mf.getMediaFileType());
-		    }
-			plustemporaryMails.add(message);
-		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(plustemporaryMails);
+		String json = objectMapper.writeValueAsString(temporaryMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 	
@@ -141,24 +75,8 @@ public class MailRestController {
 	@GetMapping(value="/trashMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> trashMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> trashMails = messageService.getMyTrashMessage(empId);
-		List<Message> plustrashMails = new ArrayList<>();
-		for (Message message : trashMails) {
-			int mesmessageNo = message.getMessageNo();
-			List<MediaFile> mediaFiles = messageDao.haveMediaFile(mesmessageNo);
-			message.setMediaFile(mediaFiles);
-			if(employeeService.getProfileImgByEmpId(message.getEmpId())!=null) {
-	    		MediaFile mf = employeeService.getProfileImgByEmpId(message.getEmpId());
-	    		message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-	    		message.setMediaFileType(mf.getMediaFileType());
-		    }else {
-		    	MediaFile mf = employeeService.getDefaultImg();
-		    	message.setProfile(Base64.getEncoder().encodeToString(mf.getMediaFileData()));
-		    	message.setMediaFileType(mf.getMediaFileType());
-		    }
-			plustrashMails.add(message);
-		}
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(plustrashMails);
+		String json = objectMapper.writeValueAsString(trashMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 }
