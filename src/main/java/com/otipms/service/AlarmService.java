@@ -14,4 +14,6 @@ public interface AlarmService {
 	public Alarm getAlarm(int alarmNo);
 	
 	public Alarm setAlarm(Map<String,Object> param);
+	
+	public void deleteAlarm(int messageNo, int empId);
 }

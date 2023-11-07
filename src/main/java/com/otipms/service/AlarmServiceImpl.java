@@ -1,5 +1,6 @@
 package com.otipms.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,15 @@ public class AlarmServiceImpl implements AlarmService {
 	@Override
 	public Alarm setAlarm(Map<String,Object> param) {
 		return alarmDao.selectAlarmByMessageNo(param);
+	}
+
+	@Override
+	public void deleteAlarm(int messageNo, int empId) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("messageNo", messageNo);
+		paramMap.put("empId", empId);
+		
+		alarmDao.deleteAlarm(paramMap);		
 	}
 	
 }

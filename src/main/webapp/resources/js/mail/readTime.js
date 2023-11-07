@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	var messageNo = document.getElementById("messageNo").value;
 	var empId = document.getElementById("empId").value;
 	var msempId = document.getElementById("msempId").value;
+	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 	
 	console.log(empId);
 	console.log(msempId);
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				                },
 				                success : function (data){
 				                	row.remove();
+				                	webSocket.send(empId);
 				                },
 				                error : function (error){
 				                	console.log("쪽지 삭제에 실패");

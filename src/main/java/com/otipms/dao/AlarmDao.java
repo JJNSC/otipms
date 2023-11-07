@@ -19,4 +19,7 @@ public interface AlarmDao {
 	public Alarm selectAlarm(int alarmNo);
 	//메세지번호 -> 알람
 	public Alarm selectAlarmByMessageNo(Map<String, Object> param);
+	
+	//알람 삭제
+	public void deleteAlarm(Map<String, Object> param);
 }

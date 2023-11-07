@@ -31,6 +31,7 @@ import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
+import com.otipms.service.AlarmService;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
 
@@ -46,6 +47,9 @@ public class MailController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private AlarmService alarmService;
 	//쪽지 수신함
 	@Login
 	@RequestMapping("/receivedMail")
@@ -347,6 +351,7 @@ public class MailController {
 		log.info("messageNo : " + messageNo);
 		log.info("empId : " + empId);
 		messageService.deleteMessage(messageNo, empId);
+		alarmService.deleteAlarm(messageNo, empId);
 		return "success";
 	}
 	
