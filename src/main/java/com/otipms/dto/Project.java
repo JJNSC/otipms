@@ -15,4 +15,5 @@ public class Project {
 	private String projectContent;
 	private Boolean projectDeleted;
 	private int empId;
+	private double progressRate;
 }

@@ -1,6 +1,8 @@
 package com.otipms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.otipms.dao.EmployeeDao;
 import com.otipms.dao.ProjectDao;
+import com.otipms.dao.TaskDao;
 import com.otipms.dao.TeamDao;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Project;
+import com.otipms.dto.TaskEmployee;
 import com.otipms.dto.Team;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +29,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private TeamDao teamDao;
+	@Autowired
+	private TaskDao taskDao;
 
 	//프로젝트 생성하기 
 	//PM, 고객사 팀 동시 생성 하기 
@@ -178,6 +184,34 @@ public class ProjectServiceImpl implements ProjectService {
 			}
 		}
 		
+	}
+	//프로젝트별 진척도 받아오기
+	@Override
+	public double getProjectProgressRate(Map<String, Object> map) {
+		//프로젝트별 인원들의 총 taskEmployeeList 빋아오기 
+		//프로젝트 인원별  완료 된업무 개수 받아와서 다 더하고 
+		//프로젝트 인원별 총 업무 개수 받아와서 다 더한담에 옆에있는 calculateProgressRate 참고해서 진척률 계산해서 넘겨주자.
+		List<TaskEmployee> taskEmployeeList = taskDao.selectTaskEmployeeList(map);
+		//프로젝트의 총 업무 개수
+		int totalTaskCount = 0;
+		//프로젝트의 완료된 업무 개수
+		int doneTaskCount = 0;
+		double progressRate = 0;
+		for(TaskEmployee taskEmployee : taskEmployeeList) {
+			Map<String, Object> map2 = new HashMap<>();
+			map2.put("empId", taskEmployee.getEmpId());
+			map2.put("scope", "전체");
+			totalTaskCount += taskDao.countTaskList(map2);
+			map2.replace("scope", "진행완료");
+			doneTaskCount += taskDao.countTaskList(map2);
+		}
+		if(totalTaskCount != 0 && doneTaskCount != 0) {
+			progressRate = Math.round( ((double) doneTaskCount / (double) totalTaskCount) * 100 );
+			log.info("done? " + (double) doneTaskCount);
+			log.info("total? " + (double) totalTaskCount);
+			log.info("계산? " + progressRate);
+		}
+		return progressRate;
 	}
 	
 	

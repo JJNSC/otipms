@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otipms.dto.Employee;
 import com.otipms.dto.Project;
+import com.otipms.dto.TaskEmployee;
 import com.otipms.interceptor.Login;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.ProjectService;
+import com.otipms.service.TaskService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +44,7 @@ public class ProjectController {
 		//프로젝트 리스트
 		List<Project> projectList = projectService.getAllProjects();
 		log.info("projectList: "+projectList);
-		model.addAttribute("projectList", projectList);
+		
 		model.addAttribute("employee", LoginController.loginEmployee);
 		model.addAttribute("base64Img", LoginController.profileImg);
 		model.addAttribute("mf", LoginController.multipartFile);
@@ -48,6 +52,15 @@ public class ProjectController {
 		List<Employee> PMList = new ArrayList<>();
 		List<Employee> customerInfoList = new ArrayList<>();
 		for(Project project : projectList) {
+
+			//프로젝트당 진척률 계산
+			Map<String, Object> map = new HashMap<>();
+			map.put("scope", "project");
+			map.put("projectNo", project.getProjectNo());
+			double projectProgress =  projectService.getProjectProgressRate(map);
+			
+			project.setProgressRate(projectProgress);
+			
 			Employee employee = new Employee();
 			int projectNo = project.getProjectNo();
 			employee.setProjectNo(projectNo);
@@ -90,6 +103,9 @@ public class ProjectController {
 		log.info("customerInfoList: "+customerInfoList);
 		//해당 프로젝트당 고객 정보(고객명,연락처,이메일)
 		model.addAttribute("customerInfoList", customerInfoList);
+		
+		//프로젝트 리스트
+		model.addAttribute("projectList", projectList);
 		
 		
 		return "projectManagement/projectList";

@@ -167,12 +167,25 @@
 																		</c:choose>
 																		${formattedEndDate}
 					                                                </td>
-					                                                <td>
-																		<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>
-					                                                	<div class="progress" style="height: 9px">
-										                                    <div class="progress-bar bg-info wow  progress-" style="width: 88%;" role="progressbar"><span class="sr-only">60% Complete</span>
-										                                    </div>
-										                                </div>
+					                                                <td class="progressTd">
+						                                                <c:if test="${project.progressRate < 20}">
+																			<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">${project.progressRate}%</span></h5>
+						                                                	<div class="progress" style="height: 9px">
+											                                    <div class="progress-bar bg-danger wow  progress-" style="width: ${project.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+											                                </div>
+						                                                </c:if>
+						                                                <c:if test="${20 <= project.progressRate and project.progressRate < 80}">
+																			<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">${project.progressRate}%</span></h5>
+						                                                	<div class="progress" style="height: 9px">
+											                                    <div class="progress-bar bg-info wow  progress-" style="width: ${project.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+											                                </div>
+						                                                </c:if>
+						                                                <c:if test="${80 <= project.progressRate}">
+																			<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">${project.progressRate}%</span></h5>
+						                                                	<div class="progress" style="height: 9px">
+											                                    <div class="progress-bar bg-success wow  progress-" style="width: ${project.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+											                                </div>
+						                                                </c:if>
 					                                                </td>
 						                                            <td class="text-right" style="padding-right:20px"> 
 						                                             	<a href="modifyProjectForm?projectNo=${project.projectNo}&pmId=${pm.empId}&customerId=${customerInfo.empId}">
