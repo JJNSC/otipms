@@ -18,6 +18,7 @@
 		<typeAlias alias="TaskEmployee" type="com.otipms.dto.TaskEmployee"/>
 		<typeAlias alias="MediaFile" type="com.otipms.dto.MediaFile"/>
 		<typeAlias alias="Messenger" type="com.otipms.dto.Messenger"/>
+		<typeAlias alias="Schedule" type="com.otipms.dto.Schedule"/>
 	</typeAliases>
 
 </configuration>
