@@ -213,6 +213,11 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return progressRate;
 	}
+
+	@Override
+	public Project getProjectDetail(int projectNo) {
+		return projectDao.selectProjectDetail(projectNo);
+	}
 	
 	
 

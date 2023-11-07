@@ -7,6 +7,184 @@
 			bir.value = today;
 		}*/
 
+
+//=============개인 업무 관리==================
+
+//프로젝트 상세버튼
+function openProjectDetail() {
+	var projectNo = $("#projectNoInput").val();
+	
+	$.ajax({
+		url: "/otipms/getProjectDetail",
+		method: "post",
+		data: {
+			projectNo:projectNo
+		},
+		success: function(data) {
+			$("#taskNoLabel").html("프로젝트 번호 (히든 처리할 예정)")
+			$("#projectNoInput").val(data.projectNo);
+			$("#taskNameLabel").html("프로젝트 이름")
+			$("#taskNameInput").val(data.projectName);
+			$("#taskCommentLabel").html("프로젝트 개요")
+			$("#taskCommentInput").val(data.projectContent);
+			//담당자
+			$("#taskEmpInput").val(data.empName);
+			//기간
+			//$("#projectDateInput").val(dateFormat(new Date(data.projectStartDate), 3) + " - " + dateFormat(new Date(data.projectEndDate), 3));
+			//시작일
+			$("#taskStartDateInput").val(dateFormat(new Date(data.projectStartDate), 1));
+			//종료일
+			$("#taskEndDateInput").val(dateFormat(new Date(data.projectEndDate), 1));
+			//고객명
+			$("#taskClientInput").val(data.projectCompanyName);
+			//작업상태
+			$("#taskStatusSelect option[value='진행중']").prop("selected", true);
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	});
+	
+	//작업개요 readonly 추가
+	$("#taskCommentInput").attr("readonly", true);
+	//기간 d-none 추가
+	//$("#taskDateInput").addClass("d-none");
+	//$("#projectDateInput").removeClass("d-none");
+	//시작일 readonly 추가
+	$("#taskStartDateInput").attr("readonly", true);
+	//종료일 readonly 추가
+	$("#taskEndDateInput").attr("readonly", true);
+	//고객명 d-none 제거
+	$("#taskDetailForm-client").removeClass("d-none");
+	//색상 d-none 추가
+	$("#taskDetailForm-color").addClass("d-none");
+	//작업상태 readonly 추가
+	$("#taskStatusSelect").attr("readonly", true);
+	$("#taskStatusSelect option").attr("disabled", true);
+	//수정버튼 d-none 추가
+	$("#updateMoalBtn").addClass("d-none");
+}
+
+//태스크 상세
+function openTaskDetail(detailBtn) {
+	var taskNo = $(detailBtn).prev().val();
+	
+	$.ajax({
+		url: "/otipms/getTaskDetail",
+		method: "post",
+		data: {
+			taskNo:taskNo
+		},
+		success: function(data) {
+			$("#taskNoLabel").html("업무 번호 (히든 처리할 예정)")
+			$("#taskNoInput").val(data.taskNo);
+			$("#taskNameLabel").html("업무 이름")
+			$("#taskNameInput").val(data.taskName);
+			$("#taskCommentLabel").html("업무 개요")
+			$("#taskCommentInput").val(data.taskComment);
+			//담당자
+			$("#taskEmpInput").val(data.empName);
+			//기간
+			//$("#taskDateInput").val(dateFormat(new Date(data.taskStartDate), 3) + " - " + dateFormat(new Date(data.taskEndDate), 3));
+			//시작일
+			$("#taskStartDateInput").val(dateFormat(new Date(data.taskStartDate), 1));
+			//종료일
+			$("#taskEndDateInput").val(dateFormat(new Date(data.taskEndDate), 1));
+			//작업상태
+			$("#taskStatusSelect option[value='" + data.taskStatus + "']").prop("selected", true);
+			/*if(data.taskStatus == '작업전') {
+				$("#taskStatusSelect option[value='taskBefore']").prop("selected", true);
+			} else if(data.taskStatus == '작업중') {
+				$("#taskStatusSelect option[value='taskIng']").prop("selected", true);
+			} else if(data.taskStatus == '작업완료') {
+				$("#taskStatusSelect option[value='taskDone']").prop("selected", true);
+			}*/
+			//작업색상
+			$("#taskColorSelect option[value='" + data.taskColor + "']").prop("selected", true);
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	});
+	
+	//작업개요 readonly 제거
+	$("#taskCommentInput").attr("readonly", false);
+	//기간 d-none 제거
+	//$("#taskDateInput").removeClass("d-none");
+	//$("#projectDateInput").addClass("d-none");
+	//시작일 readonly 제거
+	$("#taskStartDateInput").attr("readonly", false);
+	//종료일 readonly 제거
+	$("#taskEndDateInput").attr("readonly", false);
+	//고객명 d-none 추가
+	$("#taskDetailForm-client").addClass("d-none");
+	//색상 d-none 제거
+	$("#taskDetailForm-color").removeClass("d-none");
+	//작업상태 readonly 제거
+	$("#taskStatusSelect").attr("readonly", false);
+	$("#taskStatusSelect option").attr("disabled", false);
+	//수정버튼 d-none 제거
+	$("#updateMoalBtn").removeClass("d-none");
+}
+
+//태스크 수정
+function updateTaskDetail() {
+	var taskNo = $("#taskNoInput").val();
+	var taskComment = $("#taskCommentInput").val();
+	var taskStartDate = $("#taskStartDateInput").val();
+	var taskEndDate = $("#taskEndDateInput").val();
+	var taskStatus = $("#taskStatusSelect").val();
+	var taskColor = $("#taskColorSelect").val();
+	
+	$.ajax({
+		url: "/otipms/updateTask",
+		method: "post",
+		data: {
+			taskNo:taskNo,
+			taskComment:taskComment,
+			startDate:taskStartDate,
+			endDate:taskEndDate,
+			status:taskStatus,
+			taskColor:taskColor
+		},
+		success: function(data) {
+			let html = '';
+			
+			html += '<tr>';
+			html += '<td><div class="taskEvent-red mb-1" style="position: relative;">' + data.project.projectName + '</div></td>';
+			html += '<td class="text-success">진행중</td>';
+			html += '<td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button></td>';
+			html += '</tr>';
+			
+			if(data.taskList != null && data.taskList.length != 0) {
+				$.each(data.taskList, function(index, task) {
+					html += '<tr>';
+					html += '<td><div class="taskEvent-' + task.taskColor + ' mb-1" style="position: relative;">' + task.taskName + '</div></td>';
+					if(task.taskStatus == '진행전') {
+						html += '<td class="text-light">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == '진행중') {
+						html += '<td class="text-success">' + task.taskStatus + '</td>';
+					} else if(task.taskStatus == '진행완료') {
+						html += '<td class="text-danger">' + task.taskStatus + '</td>';
+					}
+					html += '<td>';
+					html += '<input id="taskNoFromModel" type="hidden" value="' + task.taskNo + '">';
+					html += '<button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openTaskDetail(this)">상세</button>';
+					html += '</td>';
+					html += '</tr>';
+				});
+			}
+			
+			$("#taskListTableBody").html(html);
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	});
+}
+
+//=============프로젝트 업무 관리==================
+
 //프로젝트 선택
 function selectProject() {
 	var project = $("#projectSelect").val();
@@ -416,7 +594,7 @@ function getTaskDetail(taskNo) {
 				$("#endDate").attr("readonly", false);
 				$("#status").attr("readonly", false);
 				$("#searchHumanBtn").attr("disabled", true);
-				$("#status option").attr("disabled", true);
+				$("#status option").attr("disabled", false);
 			}
 			if(($("#loginEmployeeRole").val() == "ROLE_PE" || $("#loginEmployeeRole").val() == "ROLE_CLIENT") && data.empId != $("#loginEmployeeId").val()) {
 				$("#updateTaskBtn").addClass("d-none");
@@ -728,6 +906,7 @@ function dateFormat(date, type) {
     switch(type) {
     case 1: return date.getFullYear() + '-' + month + '-' + day;
     case 2: return hour + ':' + minute;
+    case 3: return date.getFullYear() + '/' + month + '/' + day;
     default: return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute;
     }
 

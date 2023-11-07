@@ -81,4 +81,11 @@ public interface TaskDao {
 	 */
 	public int selectProjectNo(int empId);
 
+	/**
+	 * 사용자 번호로 사용자가 속한 프로젝트 조회
+	 * @param empId
+	 * @return
+	 */
+	public Project selectProject(int empId);
+	
 }

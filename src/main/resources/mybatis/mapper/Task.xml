@@ -92,6 +92,7 @@
 			 , taskEndDate
 			 , taskStatus
 			 , taskDeleted
+			 , taskColor
 		  FROM TASK t
 		 WHERE 1=1
 		   AND EMPID = #{empId}
@@ -109,6 +110,7 @@
 			 , taskEndDate
 			 , taskStatus
 			 , taskDeleted
+			 , taskColor
 		  FROM TASK t
 		 INNER JOIN EMP e
 		    ON t.EMPID = e.EMPID
@@ -120,9 +122,18 @@
 	<!-- 태스크 수정 -->
 	<update id="updateTask" parameterType="Task">
 		UPDATE TASK
-		   SET TASKNAME = #{taskName}
-		     , TASKCOMMENT = #{taskComment}
+		   SET 
+		     <if test="taskName != null">
+		       TASKNAME = #{taskName}
+		     ,
+			 </if>
+		       TASKCOMMENT = #{taskComment}
+		     <if test="taskStartDate == null">
+		     , TASKSTARTDATE = null
+			 </if>
+			 <if test="taskStartDate != null">
 		     , TASKSTARTDATE = #{taskStartDate}
+			 </if>
 		     <if test="taskEndDate == null">
 		     , TASKENDDATE = null
 			 </if>
@@ -130,6 +141,9 @@
 		     , TASKENDDATE = #{taskEndDate}
 			 </if>
 		     , TASKSTATUS = #{taskStatus}
+			 <if test="taskColor != null">
+		     , TASKCOLOR = #{taskColor}
+			 </if>
 		 WHERE 1=1
 		   AND TASKNO = #{taskNo}
 		   AND TASKDELETED = 0
@@ -166,6 +180,20 @@
 	<!-- 사용자가 속한 프로젝트 번호 조회 -->
 	<select id="selectProjectNo" parameterType="int" resultType="int">
 		SELECT p.projectNo
+		  FROM EMPINFO ei
+		 INNER JOIN TEAM t
+			ON ei.TEAMNO = t.TEAMNO
+		 INNER JOIN PROJECT p
+			ON t.PROJECTNO = p.PROJECTNO
+		 WHERE 1=1
+		   AND ei.EMPID = #{empId}
+		   AND p.PROJECTDELETED = 0
+	</select>
+
+	<!-- 사용자가 속한 프로젝트 번호 조회 -->
+	<select id="selectProject" parameterType="int" resultType="Project">
+		SELECT p.projectNo
+			 , p.projectName
 		  FROM EMPINFO ei
 		 INNER JOIN TEAM t
 			ON ei.TEAMNO = t.TEAMNO

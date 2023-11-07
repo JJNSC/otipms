@@ -201,7 +201,9 @@
                             <li><a href="${pageContext.request.contextPath}/board?boardType=공지사항">공지사항</a></li>
                             <li><a href="${pageContext.request.contextPath}/board?boardType=질의 게시판">질의 게시판</a></li>
                             <%-- <li><a href="${pageContext.request.contextPath}/board?boardType=자유 게시판">자유 게시판</a></li> --%>
-                            <li><a href="${pageContext.request.contextPath}/board?boardType=팀 게시판">팀 게시판</a></li>
+                            <c:if test="${employee.role != 'ROLE_CLIENT' and employee.role != 'ROLE_PM'}">
+	                            <li><a href="${pageContext.request.contextPath}/board?boardType=팀 게시판">팀 게시판</a></li>
+                            </c:if>
                         </ul>
                     </li>
                    	<sec:authorize access="hasRole('ROLE_ADMIN')">

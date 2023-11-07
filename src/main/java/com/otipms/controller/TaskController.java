@@ -1,5 +1,6 @@
 package com.otipms.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.otipms.dto.Project;
 import com.otipms.dto.Task;
 import com.otipms.dto.TaskEmployee;
 import com.otipms.dto.Team;
+import com.otipms.service.ProjectService;
 import com.otipms.service.TaskService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +27,79 @@ public class TaskController {
 	@Autowired
 	TaskService taskService;
 	
+	@Autowired
+	ProjectService projectService;
+
+	//=============개인 업무 일정 =============
+	
 	@RequestMapping("/myTask")
 	public String myTask(Model model) {
 		log.info("개인업무일정");
 		model.addAttribute("employee", LoginController.loginEmployee);
 	    model.addAttribute("base64Img", LoginController.profileImg);
 	    model.addAttribute("mf", LoginController.multipartFile);
+	    
+	    Project project = taskService.getProject(LoginController.loginEmployee.getEmpId());
+	    model.addAttribute("project", project);
+	    List<Task> taskList = taskService.getTaskList(LoginController.loginEmployee.getEmpId() + "");
+	    model.addAttribute("taskList", taskList);
 		return "task/myTask";
+	}
+	
+	/**
+	 * 프로젝트 상세 조회
+	 * @param projectNo
+	 * @return
+	 */
+	@RequestMapping("/getProjectDetail")
+	@ResponseBody
+	public Project getProjectDetail(String projectNo) {
+		Project project = projectService.getProjectDetail(Integer.parseInt(projectNo));
+		return project;
+	}
+
+	/**
+	 * 태스크 상세 조회
+	 * @param taskNo
+	 * @return
+	 */
+	@RequestMapping("/getTaskDetail")
+	@ResponseBody
+	public Task getTaskDetail(String taskNo) {
+		Task task = taskService.getTask(taskNo);
+		return task;
+	}
+	
+	//태스크 수정 (ajax 버전)
+	@RequestMapping("/updateTask")
+	@ResponseBody
+	public Map<String, Object> updateTask(String taskNo
+										 , String taskComment
+										 , String startDate
+										 , String endDate
+										 , String status
+										 , String taskColor) throws Exception {
+		Task task = new Task();
+		task.setTaskNo(Integer.parseInt(taskNo));
+		task.setTaskComment(taskComment);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if(!startDate.equals("")) {
+			task.setTaskStartDate(sdf.parse(startDate));
+		}
+		if(!endDate.equals("")) {
+			task.setTaskEndDate(sdf.parse(endDate));
+		}
+		task.setTaskStatus(status);
+		task.setTaskColor(taskColor);
+		
+		taskService.modifyTask(task);
+		
+		Map<String, Object> ajaxMap = new HashMap<>();
+		Project project = taskService.getProject(LoginController.loginEmployee.getEmpId());
+		ajaxMap.put("project", project);
+	    List<Task> taskList = taskService.getTaskList(LoginController.loginEmployee.getEmpId() + "");
+	    ajaxMap.put("taskList", taskList);
+		return ajaxMap;
 	}
 	
 	//=============프로젝트 업무 일정 =============
@@ -227,7 +295,8 @@ public class TaskController {
 		}
 		task.setTaskStatus(status);
 		
-		List<Task> taskList = taskService.modifyTask(task);
+		taskService.modifyTask(task);
+		List<Task> taskList = taskService.getTaskList(empId);
 		
 		double progressRate = taskService.calculateProgressRate(Integer.parseInt(empId));
 		

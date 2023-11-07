@@ -15,4 +15,12 @@ public interface ProjectDao {
 	public void updateProject(Project project);
 	public void updateProjectDeletedStatus(Project project);
 	public int selectProjectNoByProjectName(String projectName);
+	
+	/**
+	 * 프로젝트 번호로 프로젝트 관련 정보 조회
+	 * @param projectNo
+	 * @return
+	 * @author 이은지
+	 */
+	public Project selectProjectDetail(int projectNo);
 }

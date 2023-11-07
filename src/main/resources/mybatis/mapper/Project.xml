@@ -74,5 +74,26 @@
 		   AND projectName=#{projectName}
 	</select>
 	
+	<!-- 프로젝트 번호로 프로젝트 정보 조회 -->
+	<select id="selectProjectDetail" resultType="Project">
+		SELECT p.projectNo
+			 , p.projectName
+			 , p.projectStartDate
+			 , p.projectEndDate
+			 , p.projectCompanyName
+			 , p.projectContent
+			 , e.empName
+		  FROM project p
+		 INNER JOIN TEAM t
+			ON p.PROJECTNO = t.PROJECTNO
+		 INNER JOIN EMPINFO ei
+			ON t.TEAMNO = ei.TEAMNO
+		 INNER JOIN EMP e
+			ON ei.EMPID = e.EMPID
+		 WHERE 1=1
+		   AND p.PROJECTNO = #{projectNo}
+           AND p.PROJECTDELETED = 0
+           AND e.ROLE = 'ROLE_PM'
+	</select>
 	
 </mapper>

@@ -15,4 +15,11 @@ public interface ProjectService {
 	public void modifyProject(Project project, int pmId, int clientId, int beforePmId, int beforeClientId);
 	public void updateProjectDeletedStatus(Project project);
 	public double getProjectProgressRate(Map<String, Object> map);
+	
+	/**
+	 * 프로젝트 번호로 프로젝트 관련 정보 조회
+	 * @param projectNo
+	 * @return
+	 */
+	public Project getProjectDetail(int projectNo);
 }
