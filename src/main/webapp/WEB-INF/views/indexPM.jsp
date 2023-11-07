@@ -63,7 +63,7 @@
 	                <div class="col-lg-4">
                         <div class="card" style="height:65%;">
                             <div class="card-body">
-                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">프로젝트 명 진척률</h4>
+                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">${project.projectName } 진척률</h4>
                                 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
                                 <script>
                                 	var beforeCnt = ${projectTaskCount.undoneTaskCnt};	
@@ -110,10 +110,10 @@
 							<table class="table table-custom">
 								<thead>
 								    <tr>
-								        <th style="width:10%" class="text-center">번호</th>
-								        <th style="width:30%" class="text-center">팀명</th>
-								        <th style="width:20%">팀장</th>
-								        <th >진척률</th>
+								        <th style="width:8%" class="text-center">번호</th>
+								        <th style="width:20%" class="text-center">팀명</th>
+								        <th style="width:10%">팀장</th>
+								        <th style="width:25%">진척률</th>
 								        <th style="width:10%"></th>
 								    </tr>
 								</thead>
@@ -288,7 +288,7 @@
 	                    <div >
 		                    <div class="card">
 			                    <div class="card-body">
-			                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">고객 정보1</h4>
+			                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">고객 정보</h4>
 			                    	 <table>
 			                    	 	<thead>
 			                    	 		<tr>

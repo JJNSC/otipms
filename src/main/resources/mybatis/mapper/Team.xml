@@ -41,6 +41,14 @@
       order by teamNo desc
 	</select> 
 	
+	<select id="selectTeamListByProjectNoForMainPage" parameterType="int" resultType="Team">
+		SELECT * 
+		  FROM team 
+		 WHERE projectNo = #{projectNo} 
+		   AND teamName NOT IN ('미배정','고객')
+      ORDER BY teamNo desc
+	</select> 
+	
 	<update id="updateTeamLeader" parameterType="Team">
 		UPDATE team 
 		   SET empId = #{empId} 

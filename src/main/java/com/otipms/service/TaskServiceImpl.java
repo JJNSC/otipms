@@ -169,22 +169,24 @@ public class TaskServiceImpl implements TaskService {
 		List<Team> teamList = teamDao.selectTeamListByProjectNo(projectNo);
 		List<Double> progressRateList = new ArrayList<>();
 		for(Team team : teamList) {
-			int teamTotalTaskCnt =0;
-			int teamFinishTaskCnt =0;
-			double progressRate = 0;
-			List<Employee> employeeList = employeeDao.getEmployeeByTeamNo(team.getTeamNo());
-			for(Employee taskEmployee : employeeList) {
-				Map<String, Object> map2 = new HashMap<>();
-				map2.put("empId", taskEmployee.getEmpId());
-				map2.put("scope", "전체");
-				teamTotalTaskCnt += taskDao.countTaskList(map2);
-				map2.replace("scope", "진행완료");
-				teamFinishTaskCnt += taskDao.countTaskList(map2);
+			if(!team.getTeamName().equals("미배정")&&!team.getTeamName().equals("고객")) {
+				int teamTotalTaskCnt =0;
+				int teamFinishTaskCnt =0;
+				double progressRate = 0;
+				List<Employee> employeeList = employeeDao.getEmployeeByTeamNo(team.getTeamNo());
+				for(Employee taskEmployee : employeeList) {
+					Map<String, Object> map2 = new HashMap<>();
+					map2.put("empId", taskEmployee.getEmpId());
+					map2.put("scope", "전체");
+					teamTotalTaskCnt += taskDao.countTaskList(map2);
+					map2.replace("scope", "진행완료");
+					teamFinishTaskCnt += taskDao.countTaskList(map2);
+				}
+				if(teamTotalTaskCnt != 0 && teamFinishTaskCnt != 0) {
+					progressRate = Math.round( ((double) teamFinishTaskCnt / (double) teamTotalTaskCnt) * 100 );
+				}
+				progressRateList.add(progressRate);
 			}
-			if(teamTotalTaskCnt != 0 && teamFinishTaskCnt != 0) {
-				progressRate = Math.round( ((double) teamFinishTaskCnt / (double) teamTotalTaskCnt) * 100 );
-			}
-			progressRateList.add(progressRate);
 		}
 		return progressRateList;
 	}

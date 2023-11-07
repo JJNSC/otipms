@@ -49,6 +49,22 @@ public class TeamServiceImpl implements TeamService {
 		teamList.setTeamList(teams);
 		return teamList;
 	}
+	@Override
+	public TeamList getTeamListByProjectNoForMainPage(int projectNo) {
+		TeamList teamList = new TeamList();
+		List<Team> teams = teamDao.selectTeamListByProjectNoForMainPage(projectNo);
+		for(Team team : teams) {
+			Employee emp =employeeDao.selectByEmployeeId(team.getEmpId());
+			if(emp==null||emp.equals(null)) {
+				
+			}else {
+				team.setEmpName(emp.getEmpName());
+				team.setEmpRank(emp.getEmpRank());
+			}
+		}
+		teamList.setTeamList(teams);
+		return teamList;
+	}
 	
 	@Override
 	public Team getTeamByTeamNo(int teamNo) {

@@ -60,10 +60,214 @@
         </script> -->
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
             	<div class="row">
-	                <div class="col-lg-4">
-                        <div class="card" style="height:65%;">
+                    <div class="col-lg-8 ">
+						<div class="card">
+							<div class="card-body" style="padding-top:0px;padding-bottom:0px;">
+								<div class="year-calendar">
+									<div class="pignose-calendar pignose-calendar-blue pignose-calendar-default">
+										<div class="pignose-calendar-top">
+											<a href="#"
+												class="pignose-calendar-top-nav pignose-calendar-top-prev">
+												<span class="icon-arrow-left pignose-calendar-top-icon"></span>
+											</a>
+											<div class="pignose-calendar-top-date">
+												<span class="pignose-calendar-top-month">October</span> <span
+													class="pignose-calendar-top-year">2023</span>
+											</div>
+											<a href="#"
+												class="pignose-calendar-top-nav pignose-calendar-top-next">
+												<span class="icon-arrow-right pignose-calendar-top-icon"></span>
+											</a>
+										</div>
+										<div class="pignose-calendar-header">
+											<div class="pignose-calendar-week pignose-calendar-week-sun">SUN</div>
+											<div class="pignose-calendar-week pignose-calendar-week-mon">MON</div>
+											<div class="pignose-calendar-week pignose-calendar-week-tue">TUE</div>
+											<div class="pignose-calendar-week pignose-calendar-week-wed">WED</div>
+											<div class="pignose-calendar-week pignose-calendar-week-thu">THU</div>
+											<div class="pignose-calendar-week pignose-calendar-week-fri">FRI</div>
+											<div class="pignose-calendar-week pignose-calendar-week-sat">SAT</div>
+										</div>
+										<div class="pignose-calendar-body">
+											<div class="pignose-calendar-row">
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+													data-date="2023-10-01">
+													<a href="#">1</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+													data-date="2023-10-02">
+													<a href="#">2</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+													data-date="2023-10-03">
+													<a href="#">3</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+													data-date="2023-10-04">
+													<a href="#">4</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+													data-date="2023-10-05">
+													<a href="#">5</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
+													data-date="2023-10-06">
+													<a href="#">6</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+													data-date="2023-10-07">
+													<a href="#">7</a>
+												</div>
+											</div>
+											<div class="pignose-calendar-row">
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+													data-date="2023-10-08">
+													<a href="#">8</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+													data-date="2023-10-09">
+													<a href="#">9</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+													data-date="2023-10-10">
+													<a href="#">10</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+													data-date="2023-10-11">
+													<a href="#">11</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+													data-date="2023-10-12">
+													<a href="#">12</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri pignose-calendar-unit-active pignose-calendar-unit-first-active"
+													data-date="2023-10-13">
+													<a href="#">13</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+													data-date="2023-10-14">
+													<a href="#">14</a>
+												</div>
+											</div>
+											<div class="pignose-calendar-row">
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+													data-date="2023-10-15">
+													<a href="#">15</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+													data-date="2023-10-16">
+													<a href="#">16</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+													data-date="2023-10-17">
+													<a href="#">17</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+													data-date="2023-10-18">
+													<a href="#">18</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+													data-date="2023-10-19">
+													<a href="#">19</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
+													data-date="2023-10-20">
+													<a href="#">20</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+													data-date="2023-10-21">
+													<a href="#">21</a>
+												</div>
+											</div>
+											<div class="pignose-calendar-row">
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+													data-date="2023-10-22">
+													<a href="#">22</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+													data-date="2023-10-23">
+													<a href="#">23</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+													data-date="2023-10-24">
+													<a href="#">24</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+													data-date="2023-10-25">
+													<a href="#">25</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+													data-date="2023-10-26">
+													<a href="#">26</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
+													data-date="2023-10-27">
+													<a href="#">27</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+													data-date="2023-10-28">
+													<a href="#">28</a>
+												</div>
+											</div>
+											<div class="pignose-calendar-row">
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+													data-date="2023-10-29">
+													<a href="#">29</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+													data-date="2023-10-30">
+													<a href="#">30</a>
+												</div>
+												<div
+													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+													data-date="2023-10-31">
+													<a href="#">31</a>
+												</div>
+												<div class="pignose-calendar-unit pignose-calendar-unit-wed"></div>
+												<div class="pignose-calendar-unit pignose-calendar-unit-thu"></div>
+												<div class="pignose-calendar-unit pignose-calendar-unit-fri"></div>
+												<div class="pignose-calendar-unit pignose-calendar-unit-sat"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-lg-4 ">
+                        <div class="card" style="height:80%;">
                             <div class="card-body">
-                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">프로젝트 명 진척률</h4>
+                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">${project.projectName } 진척률</h4>
                                 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
                                 <script>
                                 	var beforeCnt = ${projectTaskCount.undoneTaskCnt};	
@@ -103,101 +307,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5">
-					<div class="card " style="height:65%; ">
-						<h4 class="card-title ml-5" style="color:#616161; font-weight: bolder; margin-top:30px;">팀별 진척도</h4>
-						<div class="card-body pt-0" style="width:100%; overflow-y: auto;">
-							<table class="table table-custom">
-								<thead>
-								    <tr>
-								        <th style="width:10%" class="text-center">번호</th>
-								        <th style="width:30%" class="text-center">팀명</th>
-								        <th style="width:20%">팀장</th>
-								        <th >진척률</th>
-								        <th style="width:10%"></th>
-								    </tr>
-								</thead>
-								<tbody style="overflow: scroll; width:100px;">
-									<c:forEach var="team" items="${teamList}" varStatus="a">
-										<c:forEach var="progressRate" items="${progressRateList}" varStatus="b">
-											<c:if test="${a.index==b.index}">
-												<tr class="reviewTitle table-hover" id="projectNo${project.projectNo }" >
-													<td class="text-center">${team.teamNo }</td>
-													<td class="text-center">
-														${team.teamName }
-													</td>
-	                                    			<td>${team.empName }</td>
-													<td class="progressTd">
-														<c:if test="${progressRate < 20}">
-															<div class="progress" style="height: 9px">
-																<div class="progress-bar bg-danger wow  progress-" style="width: ${progressRate}%;" role="progressbar">
-																	<span class="sr-only">60% Complete</span>
-																</div>
-															</div>
-														</c:if>
-														<c:if test="${20 <= progressRate and progressRate < 80}">
-															<div class="progress" style="height: 9px">
-																<div class="progress-bar bg-info wow  progress-" style="width: ${progressRate}%;" role="progressbar">
-																	<span class="sr-only">60% Complete</span>
-																</div>
-															</div>
-														</c:if>
-														<c:if test="${80 <= progressRate}">
-															<div class="progress" style="height: 9px">
-																<div class="progress-bar bg-success wow  progress-" style="width: ${progressRate}%;" role="progressbar">
-																	<span class="sr-only">60% Complete</span>
-																</div>
-															</div>
-														</c:if>
-													</td>
-													<td>
-														<h5 > <span class="float-right">${progressRate}%</span></h5>
-													</td>
-												</tr>
-											</c:if>
-										</c:forEach>
-									</c:forEach>
-							    </tbody>
-							</table>
-						</div>
-					</div>
-                   </div>
-                   <div class="col-lg-3" style="height:70%;">
-					    <div class="card" >
-					        <div class="card-body px-0">
-					            <h4 class="card-title px-4 mb-3">Todo</h4>
-					            <div class="todo-list">
-					                <div class="tdl-holder">
-					                    <div class="tdl-content">
-					                        <ul id="todo_list" style="height: 337px;">
-					                            <li><label><input type="checkbox"><i></i><span>Get up</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Stand up</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox"><i></i><span>Don't give up the fight.</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a href='#' class="ti-trash"></a></label></li>
-					                        </ul>
-					                    </div>
-					                    <div class="px-4">
-					                        <input type="text" class="tdl-new form-control" placeholder="Write new item and hit 'Enter'...">
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					    </div>
-					</div>
                 </div>
-                <div class="row" style="position:relative; bottom: 180px; height:28%;">
+					
+                <div class="row" style="height:28%;position:relative; bottom:20px;">
                     <!-- /# column -->
-                    <div class="col-lg-9" style=" padding-right:10px;">
+                    <div class="col-lg-8" style=" padding-right:10px;">
                         <div class="card card-custom">
-                            <div class="card-body" style="height:304px;]">
+                            <div class="card-body" style="height:304px; padding:20px,28px;">
                                 <div class="card-title">
                                     <h4 style="color:#616161; font-weight: bolder;">공지사항</h4>
                                 </div>
@@ -284,32 +400,68 @@
                         </div>
                         <!-- /# card -->
                     </div>
-                    <div class="col-lg-3 col-md-3" style="height: 190px;position: relative;top:180px;">
+                    <div class="col-lg-4 col-md-4" style="height:28%;position: relative;bottom:15px;">
 	                    <div >
-		                    <div class="card">
-			                    <div class="card-body">
-			                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">고객 정보1</h4>
+		                    <div class="card" style="height:28%;">
+			                    <div class="card-body" style="height:28%;">
+			                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">프로젝트 정보</h4>
+			                    	 <table>
+			                    	 	<thead>
+			                    	 		<tr >
+			                    	 			<th >프로젝트 명</th>
+			                    	 			<td style="width:32px;"></td>
+			                    	 			<td>${project.projectName}</td>
+			                    	 		</tr>
+			                    	 		<tr>
+			                    	 			<th>프로젝트 시작 날짜</th>
+			                    	 			<td ></td>
+			                    	 			<td>
+			                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectStartDate}"></fmt:formatDate>
+			                    	 			</td>
+			                    	 		</tr>
+			                    	 		<tr>
+			                    	 			<th>프로젝트 종료 날짜</th>
+			                    	 			<td ></td>
+			                    	 			<td>
+			                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectEndDate}"></fmt:formatDate>
+			                    	 			</td>
+			                    	 		</tr>
+			                    	 		<tr>
+			                    	 			<th>프로젝트 개요</th>
+			                    	 			<td ></td>
+			                    	 			<td>${project.projectContent}</td>
+			                    	 		</tr>
+			                    	 	</thead>
+			                    	 </table>
+		                    	 </div>
+		                    	 <div class="card-body" style="height:28%;">
+			                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">PM(Project Manager) 정보</h4>
 			                    	 <table>
 			                    	 	<thead>
 			                    	 		<tr>
-			                    	 			<th>고객 명</th>
+			                    	 			<th>사원 번호</th>
 			                    	 			<td style="width:32px;"></td>
-			                    	 			<td>${client.empName}</td>
+			                    	 			<td>${pmInfo.empId}</td>
 			                    	 		</tr>
 			                    	 		<tr>
-			                    	 			<th>고객 사</th>
+			                    	 			<th>PM 이름</th>
 			                    	 			<td ></td>
-			                    	 			<td>${client.projectCompanyName}</td>
+			                    	 			<td>${pmInfo.empName}</td>
+			                    	 		</tr>
+			                    	 		<tr>
+			                    	 			<th>직급</th>
+			                    	 			<td ></td>
+			                    	 			<td>${pmInfo.empRank}</td>
 			                    	 		</tr>
 			                    	 		<tr>
 			                    	 			<th>연락처</th>
 			                    	 			<td ></td>
-			                    	 			<td>${client.empTel}</td>
+			                    	 			<td>${pmInfo.empTel}</td>
 			                    	 		</tr>
 			                    	 		<tr>
 			                    	 			<th>이메일</th>
 			                    	 			<td ></td>
-			                    	 			<td>${client.empEmail}</td>
+			                    	 			<td>${pmInfo.empEmail}</td>
 			                    	 		</tr>
 			                    	 	</thead>
 			                    	 </table>
@@ -318,21 +470,90 @@
 	                	</div>
                 	</div>
                 <div class="d-none">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Order Summary</h4>
-                                <div id="morris-bar-chart"></div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body pb-0 d-flex justify-content-between">
+                                        <div>
+                                            <h4 class="mb-1">Product Sales</h4>
+                                            <p>Total Earnings of the Month</p>
+                                            <h3 class="m-0">$ 12,555</h3>
+                                        </div>
+                                        <div>
+                                            <ul>
+                                                <li class="d-inline-block mr-3"><a class="text-dark" href="#">Day</a></li>
+                                                <li class="d-inline-block mr-3"><a class="text-dark" href="#">Week</a></li>
+                                                <li class="d-inline-block"><a class="text-dark" href="#">Month</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="chart-wrapper">
+                                        <canvas id="chart_widget_2"></canvas>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="w-100 mr-2">
+                                                <h6>Pixel 2</h6>
+                                                <div class="progress" style="height: 6px">
+                                                    <div class="progress-bar bg-danger" style="width: 40%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="ml-2 w-100">
+                                                <h6>iPhone X</h6>
+                                                <div class="progress" style="height: 6px">
+                                                    <div class="progress-bar bg-primary" style="width: 80%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
-                    </div>    
+                    </div>
                 </div>
+
+                
+
                 <div class="d-none">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Order Summary</h4>
+                                    <div id="morris-bar-chart"></div>
+                                </div>
+                            </div>
+                            
+                        </div>    
+                    </div>
+                
+
+                <div class="d-none">
+                    <div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6">
+
+                        <div class="card">
+                            <div class="chart-wrapper mb-4">
+                                <div class="px-4 pt-4 d-flex justify-content-between">
+                                    <div>
+                                        <h4>Sales Activities</h4>
+                                        <p>Last 6 Month</p>
+                                    </div>
+                                    <div>
+                                        <span><i class="fa fa-caret-up text-success"></i></span>
+                                        <h4 class="d-inline-block text-success">720</h4>
+                                        <p class=" text-danger">+120.5(5.0%)</p>
+                                    </div>
+                                </div>
+                                <div>
+                                        <canvas id="chart_widget_3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xl-6 col-lg-12 col-sm-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                    <!-- <h4 class="card-title mb-0">Store Location</h4> -->
+                                    <h4 class="card-title mb-0">Store Location</h4>
                                 <div id="world-map" style="height: 470px;"></div>
                             </div>        
                         </div>
@@ -385,6 +606,7 @@
     <!-- Pignose Calender -->
     <script src="${pageContext.request.contextPath}/resources/plugins/moment/moment.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/pg-calendar/js/pignose.calendar.min.js"></script>
+    
     <!-- ChartistJS -->
     <script src="${pageContext.request.contextPath}/resources/plugins/chartist/js/chartist.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>

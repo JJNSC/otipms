@@ -33,6 +33,7 @@ import com.otipms.service.AlarmService;
 import com.otipms.service.BoardService;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
+import com.otipms.service.ProjectService;
 import com.otipms.service.TaskService;
 import com.otipms.service.TeamService;
 
@@ -58,6 +59,9 @@ public class LoginController {
 
 	@Autowired
 	private BoardService boardService;
+
+	@Autowired
+	private ProjectService projectService;
 	
 	public static Employee loginEmployee;
 
@@ -133,14 +137,83 @@ public class LoginController {
 		//4. 해당 프로젝트의 고객 정보 (고객명, 고객사, 연락처, 이메일)
 		//5. TODOLIST는 은지 끝나고 나서 추가.
 		
+		
 		//로그인한 사람의 정보를 넣어주면 해당 로그인한 사람이 속한 프로젝트의 업무들의 정보를 받아오자.
 		int projectNo = taskService.getProjectNo(loginEmployee.getEmpId());
 		TaskCount projectTaskCount = taskService.getProjectTaskInfo(projectNo);
 		model.addAttribute("projectTaskCount", projectTaskCount);
 		
+		//프로젝트 정보
+		Project project = projectService.selectProjectByProjectNo(projectNo);
+		model.addAttribute("project", project);
+		
 		//해당 프로젝트의 고객 정보 (고객명, 고객사, 연락처, 이메일)
 		Employee client = employeeService.getClientInfoByProjectNo(projectNo); 
 		model.addAttribute("client", client);
+		
+		//프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 
+		TeamList teamLists = teamService.getTeamListByProjectNoForMainPage(projectNo);
+		List<Team> teamList =  teamLists.getTeamList();
+		model.addAttribute("teamList", teamList);
+		
+		//팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
+		List<Double> progressRateList = taskService.getTeamProgressRateList(projectNo);
+		model.addAttribute("progressRateList", progressRateList);
+		
+		//공지사항 내용
+		String pageNo;
+		String isNull =(String) session.getAttribute("indexPageNo");
+		if(isNull==null) {
+			pageNo = "1";
+			session.setAttribute("indexPageNo", pageNo);
+		}else {
+			pageNo=(String) session.getAttribute("indexPageNo");
+		}
+		
+		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
+		log.info("map이당 " + boardPagerMap);
+		model.addAttribute("boardPagerMap", boardPagerMap);
+		
+		return "indexPM";
+	}
+	@RequestMapping("/indexClient")
+	public String indexClient(Model model, HttpSession session) {
+		//보내야할 데이터 종류 
+		//1. 프로젝트 총 업무수, 진행중인 업무수, 완료된 업무수 + %까지
+		//2. 프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
+		//3. 공지사항 내용 
+		//4. 해당 프로젝트의 고객 정보 (고객명, 고객사, 연락처, 이메일)
+		//5. TODOLIST는 은지 끝나고 나서 추가.
+		
+		//로그인한 사람의 정보를 넣어주면 해당 로그인한 사람이 속한 프로젝트의 업무들의 정보를 받아오자.
+		int projectNo = taskService.getProjectNo(loginEmployee.getEmpId());
+		TaskCount projectTaskCount = taskService.getProjectTaskInfo(projectNo);
+		model.addAttribute("projectTaskCount", projectTaskCount);
+		
+		Project project = projectService.selectProjectByProjectNo(projectNo);
+		model.addAttribute("project", project);
+		
+		//해당 프로젝트의 고객 정보 (고객명, 고객사, 연락처, 이메일)
+		Employee client = employeeService.getClientInfoByProjectNo(projectNo); 
+		model.addAttribute("client", client);
+		
+		//해당프로젝트의 PM 정보
+		Employee pm = new Employee();
+		pm.setProjectNo(projectNo);
+		pm.setTeamName("PM");
+		
+		//해당 프로젝트당 PM 이름
+		Employee PMInfo = projectService.getEmployeeInfoByProjectNoAndTeamName(pm);
+		if(PMInfo==null || PMInfo.equals(null)) {
+			PMInfo.setEmpId(0);
+			PMInfo.setEmpName("담당자 미 배치");
+			PMInfo.setEmpRank("-");
+			PMInfo.setEmpTel("-");
+			PMInfo.setEmpEmail("-");
+			model.addAttribute("pmInfo", PMInfo);
+		}else {
+			model.addAttribute("pmInfo", PMInfo);
+		}
 		
 		//프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 
 		TeamList teamLists = teamService.getTeamListByProjectNo(projectNo);
@@ -165,7 +238,32 @@ public class LoginController {
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
-		return "indexPM";
+		return "indexClient";
+	}
+	@RequestMapping("/indexAdmin")
+	public String indexAdmin(Model model, HttpSession session) {
+		//보내야할 데이터 종류 
+		//1. 프로젝트 총 업무수, 진행중인 업무수, 완료된 업무수 + %까지
+		//2. 프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
+		//3. 공지사항 내용 
+		//4. 해당 프로젝트의 고객 정보 (고객명, 고객사, 연락처, 이메일)
+		//5. TODOLIST는 은지 끝나고 나서 추가.
+		
+		//공지사항 내용
+		String pageNo;
+		String isNull =(String) session.getAttribute("indexPageNo");
+		if(isNull==null) {
+			pageNo = "1";
+			session.setAttribute("indexPageNo", pageNo);
+		}else {
+			pageNo=(String) session.getAttribute("indexPageNo");
+		}
+		
+		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
+		log.info("map이당 " + boardPagerMap);
+		model.addAttribute("boardPagerMap", boardPagerMap);
+		
+		return "indexAdmin";
 	}
 	@RequestMapping("/indexPE")
 	public String indexPE(Model model, HttpSession session) {
