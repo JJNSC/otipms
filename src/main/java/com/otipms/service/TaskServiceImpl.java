@@ -194,6 +194,41 @@ public class TaskServiceImpl implements TaskService {
 		return taskDao.selectProject(empId);
 	}
 
+	@Override
+	public TaskCount getEmployeeTaskCount(int empId) {
+		//개인의 진행중업무, 진행완료, 진행전 개수, 퍼센트 
+		TaskCount tc = new TaskCount();
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("empId", empId);
+		map2.put("scope", "전체");
+		int totalTaskCnt = 0;
+		totalTaskCnt +=	taskDao.countTaskList(map2);
+		map2.replace("scope", "진행완료");
+		int finishTaskCnt = 0;
+		finishTaskCnt += taskDao.countTaskList(map2);
+		map2.replace("scope", "진행중");
+		int proceedingTaskCnt = 0;
+		proceedingTaskCnt += taskDao.countTaskList(map2);
+		
+		tc.setTotalTaskCnt(totalTaskCnt);
+		tc.setFinishedTaskCnt(finishTaskCnt);
+		tc.setProceedingTaskCnt(proceedingTaskCnt);
+		tc.setUndoneTaskCnt(totalTaskCnt-finishTaskCnt-proceedingTaskCnt);
+		
+		double finishRate = 0;
+		if(totalTaskCnt != 0 && finishTaskCnt != 0) {
+			finishRate = Math.round( ((double) finishTaskCnt / (double) totalTaskCnt) * 1000 )/10;
+		}
+		tc.setFinishedTaskRate(finishRate);
+		double proceedingRate = 0;
+		if(totalTaskCnt != 0 && proceedingTaskCnt != 0) {
+			proceedingRate = Math.round( ((double) proceedingTaskCnt / (double) totalTaskCnt) * 1000 )/10;
+		}
+		tc.setFinishedTaskRate(proceedingRate);
+		tc.setUndoneTaskRate(100-finishRate-proceedingRate);
+		return tc;
+	}
+
 }
 
 

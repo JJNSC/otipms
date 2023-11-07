@@ -52,109 +52,109 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div style="min-height:764px; margin-left: 15.1875rem;">
-        <script>
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
+        <!-- <script>
         	var element = document.getElementById('contentBody');
         	element.style.setProperty('min-height', '800px', 'important');
-        </script>
-            <div class="container-fluid mt-3" style="height 739px;">
+        </script> -->
+        <!-- <div class="content-body"> -->
+            <!-- <div class="container-fluid mt-3" style="height 739px;"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
             	<div class="row">
 	                <div class="col-lg-4">
-                        <div class="card" style="height:70%;">
+                        <div class="card" style="height:48%;">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">프로젝트 명 진척률</h4>
-                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-                                <script>
-                                	var beforeCnt = ${projectTaskCount.undoneTaskCnt};	
-                                	var nowCnt = ${projectTaskCount.proceedingTaskCnt};	
-                                	var finishCnt = ${projectTaskCount.finishedTaskCnt};	
-                                	var beforeRate = ${projectTaskCount.undoneTaskRate};	
-                                	var nowRate = ${projectTaskCount.proceedingTaskRate};	
-                                	var finishRate = ${projectTaskCount.finishedTaskRate};	
-                                
-									var xValues = ["진행전 "+beforeRate+"%" ,"진행중 "+nowRate+"%", "완료 "+finishRate+"%"];
-									var yValues = [beforeCnt, nowCnt, finishCnt];
-									var barColors = [
-										,
-									  "#2b5797",
-									  "#00aba9"
-									];
-									
-									new Chart("myChart", {
-									  type: "doughnut",
-									  data: {
-									    labels: xValues,
-									    datasets: [{
-									      backgroundColor: barColors,
-									      data: yValues
-									    }]
-									  },
-									  options: {
-										    title: {
-										      display: false,
-										      text: "48.7% 진행중",
-										      position: "bottom"
-										    }
-										  }
-									});
-								</script>
+                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">${me.empName } 님 작업 진척률</h4>
+                                <c:if test="${employeeTaskCount.undoneTaskCnt==0&&employeeTaskCount.proceedingTaskCnt==0&&employeeTaskCount.finishedTaskCnt==0 }">
+                                	<div class="text-center"><h4 style="color:#9097c4; font-weight: 400; margin-top:30%;">할당된 작업이 없습니다.</h4></div>
+                                </c:if>
+                                <c:if test="${employeeTaskCount.undoneTaskCnt!=0||employeeTaskCount.proceedingTaskCnt!=0||employeeTaskCount.finishedTaskCnt!=0 }">
+	                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+	                                <script>
+	                                	var beforeCnt = ${employeeTaskCount.undoneTaskCnt};	
+	                                	var nowCnt = ${employeeTaskCount.proceedingTaskCnt};	
+	                                	var finishCnt = ${employeeTaskCount.finishedTaskCnt};	
+	                                	var beforeRate = ${employeeTaskCount.undoneTaskRate};	
+	                                	var nowRate = ${employeeTaskCount.proceedingTaskRate};	
+	                                	var finishRate = ${employeeTaskCount.finishedTaskRate};	
+	                                
+										var xValues = ["진행전 "+beforeRate+"%" ,"진행중 "+nowRate+"%", "완료 "+finishRate+"%"];
+										var yValues = [beforeCnt, nowCnt, finishCnt];
+										var barColors = [
+											,
+										  "#2b5797",
+										  "#00aba9"
+										];
+										
+										new Chart("myChart", {
+										  type: "doughnut",
+										  data: {
+										    labels: xValues,
+										    datasets: [{
+										      backgroundColor: barColors,
+										      data: yValues
+										    }]
+										  },
+										  options: {
+											    title: {
+											      display: false,
+											      text: "48.7% 진행중",
+											      position: "bottom"
+											    }
+											  }
+										});
+									</script>
+								</c:if>
                                 <!-- <canvas id="doughutChart" width="500" height="250"></canvas> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5">
-					<div class="card " style="height:70%; ">
-						<h4 class="card-title ml-5 mt-5">팀별 진척도</h4>
+					<div class="card " style="height:48%; ">
+						<h4 class="card-title ml-5" style="font-weight: bolder;color:#616161;margin-top:30px;">업무 별 진척도</h4>
 						<div class="card-body pt-0" style="width:100%; overflow-y: auto;">
 							<table class="table table-custom">
 								<thead>
 								    <tr>
 								        <th style="width:10%" class="text-center">번호</th>
-								        <th style="width:30%" class="text-center">팀명</th>
-								        <th style="width:20%">팀장</th>
-								        <th >진척률</th>
-								        <th style="width:10%"></th>
+								        <th style="width:3%"></th>
+								        <th style="width:30%" >업무이름</th>
+								        <th style="width:20%">업무 시작일</th>
+								        <th style="width:20%">업무 종료일</th>
+								        <th style="width:15%">진행상태</th>
 								    </tr>
 								</thead>
 								<tbody style="overflow: scroll; width:100px;">
-									<c:forEach var="team" items="${teamList}" varStatus="a">
-										<c:forEach var="progressRate" items="${progressRateList}" varStatus="b">
-											<c:if test="${a.index==b.index}">
-												<tr class="reviewTitle table-hover" id="projectNo${project.projectNo }" >
-													<td class="text-center">${team.teamNo }</td>
-													<td class="text-center">
-														${team.teamName }
-													</td>
-	                                    			<td>${team.empName }</td>
-													<td class="progressTd">
-														<c:if test="${progressRate < 20}">
-															<div class="progress" style="height: 9px">
-																<div class="progress-bar bg-danger wow  progress-" style="width: ${progressRate}%;" role="progressbar">
-																	<span class="sr-only">60% Complete</span>
-																</div>
-															</div>
-														</c:if>
-														<c:if test="${20 <= progressRate and progressRate < 80}">
-															<div class="progress" style="height: 9px">
-																<div class="progress-bar bg-info wow  progress-" style="width: ${progressRate}%;" role="progressbar">
-																	<span class="sr-only">60% Complete</span>
-																</div>
-															</div>
-														</c:if>
-														<c:if test="${80 <= progressRate}">
-															<div class="progress" style="height: 9px">
-																<div class="progress-bar bg-success wow  progress-" style="width: ${progressRate}%;" role="progressbar">
-																	<span class="sr-only">60% Complete</span>
-																</div>
-															</div>
-														</c:if>
-													</td>
-													<td>
-														<h5 > <span class="float-right">${progressRate}%</span></h5>
-													</td>
-												</tr>
-											</c:if>
-										</c:forEach>
+									<c:forEach var="task" items="${taskList}" varStatus="a">
+										<tr class="reviewTitle table-hover" >
+											<td class="text-center">${a.index+1}</td>
+											<td></td>
+											<td >
+												${task.taskName }
+											</td>
+                                   			<td>
+                                   				<fmt:formatDate pattern="yyyy-MM-dd" value="${task.taskStartDate}"/>
+                                   			</td>
+											<td>
+												<c:if test="${task.taskEndDate==null }">
+													<div style="padding-left :30% ;">--</div>
+												</c:if>
+												<c:if test="${task.taskEndDate!=null }">
+													<fmt:formatDate pattern="yyyy-MM-dd" value="${task.taskEndDate }"/>
+												</c:if>
+											</td>
+											<td >
+												<c:if test="${task.taskStatus=='진행완료'}">
+													<span style="color:#00aba9;font-weight: bold;">${task.taskStatus}</span>
+												</c:if>
+												<c:if test="${task.taskStatus=='진행중'}">
+													<span style="color:#2b5797;font-weight: bold;">${task.taskStatus}</span>
+												</c:if>
+												<c:if test="${task.taskStatus=='진행전'}">
+													<span style="color:#b5b5b5; font-weight: bold;">${task.taskStatus}</span>
+												</c:if>
+											</td>
+										</tr>
 									</c:forEach>
 							    </tbody>
 							</table>
@@ -192,13 +192,13 @@
 					    </div>
 					</div>
                 </div>
-                <div class="row" style="position:relative; bottom: 130px; height:28%;">
+                <div class="row" style="position:relative; bottom: 385px; height:28%;">
                     <!-- /# column -->
                     <div class="col-lg-9" style=" padding-right:10px;">
                         <div class="card card-custom">
                             <div class="card-body" style="height:304px;]">
                                 <div class="card-title">
-                                    <h4>공지사항</h4>
+                                    <h4 style="font-weight: bolder;color:#616161;">공지사항</h4>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-custom">
@@ -283,39 +283,6 @@
                         </div>
                         <!-- /# card -->
                     </div>
-                    <div class="col-lg-3 col-md-3" style="height: 175px;position: relative;top:130px;">
-	                    <div >
-		                    <div class="card">
-			                    <div class="card-body">
-			                    	 <h4 class="card-title">고객 정보</h4>
-			                    	 <table>
-			                    	 	<thead>
-			                    	 		<tr>
-			                    	 			<th>고객 명</th>
-			                    	 			<td style="width:32px;"></td>
-			                    	 			<td>${client.empName}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>고객 사</th>
-			                    	 			<td ></td>
-			                    	 			<td>${client.projectCompanyName}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>연락처</th>
-			                    	 			<td ></td>
-			                    	 			<td>${client.empTel}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>이메일</th>
-			                    	 			<td ></td>
-			                    	 			<td>${client.empEmail}</td>
-			                    	 		</tr>
-			                    	 	</thead>
-			                    	 </table>
-		                    	 </div>
-		                    </div>
-	                	</div>
-                	</div>
                 <div class="d-none">
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
@@ -349,9 +316,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by OTIPMS 2023</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end
@@ -390,7 +357,7 @@
 
 
 
-    <script src="${pageContext.request.contextPath}/resources/js/dashboard/dashboard-1.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/index/dashboardPE.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/index/indexPM.js"></script>
 
 </body>

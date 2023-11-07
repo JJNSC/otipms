@@ -23,6 +23,7 @@ import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Project;
+import com.otipms.dto.Task;
 import com.otipms.dto.TaskCount;
 import com.otipms.dto.Team;
 import com.otipms.dto.TeamList;
@@ -165,6 +166,39 @@ public class LoginController {
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		return "indexPM";
+	}
+	@RequestMapping("/indexPE")
+	public String indexPE(Model model, HttpSession session) {
+		//보내야할 데이터 종류 
+		//1. 진행전 업무수 , 진행중인 업무수, 완료된 업무수 + %까지
+		//2. 본인 업무 리스트
+		//3. 공지사항 내용 
+		//4. TODOLIST는 은지 끝나고 나서 추가.
+		model.addAttribute("me", loginEmployee);
+		
+		//진행전 업무수 , 진행중인 업무수, 완료된 업무수 + %까지
+		TaskCount employeeTaskCount = taskService.getEmployeeTaskCount(loginEmployee.getEmpId());
+		model.addAttribute("employeeTaskCount", employeeTaskCount);
+		
+		//업무 리스트 받아오기 
+		List<Task> taskList = taskService.getTaskList(String.valueOf(loginEmployee.getEmpId()));
+		model.addAttribute("taskList", taskList);
+		
+		//공지사항 내용
+		String pageNo;
+		String isNull =(String) session.getAttribute("indexPageNo");
+		if(isNull==null) {
+			pageNo = "1";
+			session.setAttribute("indexPageNo", pageNo);
+		}else {
+			pageNo=(String) session.getAttribute("indexPageNo");
+		}
+		
+		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
+		log.info("map이당 " + boardPagerMap);
+		model.addAttribute("boardPagerMap", boardPagerMap);
+		
+		return "indexPE";
 	}
 	
 	/**

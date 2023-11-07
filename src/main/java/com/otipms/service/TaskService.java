@@ -96,5 +96,7 @@ public interface TaskService {
 	 * @return
 	 */
 	public Project getProject(int empId);
+	//개인의 업무 개수,퍼센트 조회
+	public TaskCount getEmployeeTaskCount(int empId);
 
 }
