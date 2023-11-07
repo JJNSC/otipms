@@ -1,3 +1,4 @@
+var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 // 드롭다운 항목 클릭 시 호출되는 함수
 function filter(selectedItem) {
     // 버튼 엘리먼트 선택
@@ -39,6 +40,7 @@ function deletemail(){
         var messageNo = emailCheckbox.value;
         sendToTrash(messageNo, index);
     });
+    websocket.send(empId);
 }
 
 function realdeletemail() {
@@ -59,6 +61,7 @@ function realdeletemail() {
         var messageNo = emailCheckbox.value;
         sendToRealTrash(messageNo, index);
     });
+    websocket.send(empId);
 }
 
 function sendToTrash(messageNo, index) {
@@ -73,6 +76,7 @@ function sendToTrash(messageNo, index) {
                 var emailMessage = document.querySelector(".message.message-" + (index + 1));
                 if (emailMessage) {
                     emailMessage.remove();
+                    websocket.send(empId);
                 }
             } else {
                 alert("서버 오류: 메일을 휴지통으로 보내지 못했습니다.");
@@ -97,6 +101,7 @@ function sendToRealTrash(messageNo, index) {
                 var emailMessage = document.querySelector(".message.message-" + (index + 1));
                 if (emailMessage) {
                     emailMessage.remove();
+                    websocket.send(empId);
                 }
             } else {
                 alert("서버 오류: 메일을 휴지통으로 보내지 못했습니다.");
@@ -122,8 +127,10 @@ function checkimportant(messageNo ,index, event) {
             
             if ($icon.hasClass("ion-ios-star-outline")) {
                 $icon.removeClass("ion-ios-star-outline").addClass("ion-ios-star");
+                websocket.send(empId);
             } else if ($icon.hasClass("ion-ios-star")) {
                 $icon.removeClass("ion-ios-star").addClass("ion-ios-star-outline");
+                websocket.send(empId);
             }
         },
         error: function() {

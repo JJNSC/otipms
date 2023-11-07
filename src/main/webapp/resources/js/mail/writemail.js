@@ -97,7 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
             selectedEmployee.forEach(employee => {
                 const div = document.createElement("div");
                 div.classList.add("selected-employee");
-                div.innerHTML = `${employee.position} ${employee.name} <span class="d-none">${employee.employeeId}</span><button class="remove-employee">x</button>`;
+                div.style.display = "inline-block";
+                div.innerHTML = 
+                	`<span>${employee.position} ${employee.name}</span> 
+                	<span class="d-none">${employee.employeeId}</span>
+                	<button class="remove-employee" style="border: 0px;background: transparent;margin-left:5px;margin-right:8px;outline:none;">x</button>`;
                 selectedEmployeesContainer.appendChild(div);
             });
             
