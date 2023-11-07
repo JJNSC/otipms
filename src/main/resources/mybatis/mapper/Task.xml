@@ -160,6 +160,9 @@
 		   <if test="scope == '진행완료'">
 		   AND TASKSTATUS = '진행완료'
 	       </if>
+	       <if test="scope == '진행중'">
+		   AND TASKSTATUS = '진행중'
+	       </if>
 		   AND TASKDELETED = 0
 	</select>
 	

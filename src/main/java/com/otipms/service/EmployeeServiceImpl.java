@@ -325,6 +325,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDao.insertDefaultProfileImage(mediaFile);
 	}
 
+	@Override
+	public Employee getClientInfoByProjectNo(int projectNo) {
+		Project project = projectDao.selectProjectByProjectNo(projectNo);
+		Employee client = employeeDao.selectByEmployeeId(project.getEmpId());
+		Employee clientInfo = employeeDao.selectInfoByEmployeeId(project.getEmpId());
+		client.setEmpEmail(clientInfo.getEmpEmail());
+		client.setEmpTel(clientInfo.getEmpTel());
+		client.setProjectCompanyName(project.getProjectCompanyName());
+		return client;
+	}
+
 	
 
 }

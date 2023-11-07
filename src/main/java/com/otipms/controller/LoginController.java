@@ -17,14 +17,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otipms.dto.Alarm;
+import com.otipms.dto.Board;
 import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
+import com.otipms.dto.Pager;
+import com.otipms.dto.Project;
+import com.otipms.dto.TaskCount;
+import com.otipms.dto.Team;
+import com.otipms.dto.TeamList;
 import com.otipms.interceptor.Login;
 import com.otipms.security.EmpDetails;
 import com.otipms.service.AlarmService;
+import com.otipms.service.BoardService;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
+import com.otipms.service.TaskService;
+import com.otipms.service.TeamService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +48,15 @@ public class LoginController {
 	
 	@Autowired
 	private AlarmService alarmService;
+	
+	@Autowired
+	private TaskService taskService;
+
+	@Autowired
+	private TeamService teamService;
+
+	@Autowired
+	private BoardService boardService;
 	
 	public static Employee loginEmployee;
 
@@ -105,6 +123,85 @@ public class LoginController {
 		employeeService.AddEmploy(employee);
 		return "redirect:/";
 	}*/
+	@RequestMapping("/indexPM")
+	public String indexPM(Model model, HttpSession session) {
+		//보내야할 데이터 종류 
+		//1. 프로젝트 총 업무수, 진행중인 업무수, 완료된 업무수 + %까지
+		//2. 프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
+		//3. 공지사항 내용 
+		//4. 해당 프로젝트의 고객 정보 (고객명, 고객사, 연락처, 이메일)
+		//5. TODOLIST는 은지 끝나고 나서 추가.
+		
+		//로그인한 사람의 정보를 넣어주면 해당 로그인한 사람이 속한 프로젝트의 업무들의 정보를 받아오자.
+		int projectNo = taskService.getProjectNo(loginEmployee.getEmpId());
+		TaskCount projectTaskCount = taskService.getProjectTaskInfo(projectNo);
+		model.addAttribute("projectTaskCount", projectTaskCount);
+		
+		//해당 프로젝트의 고객 정보 (고객명, 고객사, 연락처, 이메일)
+		Employee client = employeeService.getClientInfoByProjectNo(projectNo); 
+		model.addAttribute("client", client);
+		
+		//프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 
+		TeamList teamLists = teamService.getTeamListByProjectNo(projectNo);
+		List<Team> teamList =  teamLists.getTeamList();
+		model.addAttribute("teamList", teamList);
+		
+		//팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
+		List<Double> progressRateList = taskService.getTeamProgressRateList(projectNo);
+		model.addAttribute("progressRateList", progressRateList);
+		
+		//공지사항 내용
+		String pageNo;
+		String isNull =(String) session.getAttribute("indexPageNo");
+		if(isNull==null) {
+			pageNo = "1";
+			session.setAttribute("indexPageNo", pageNo);
+		}else {
+			pageNo=(String) session.getAttribute("indexPageNo");
+		}
+		
+		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
+		log.info("map이당 " + boardPagerMap);
+		model.addAttribute("boardPagerMap", boardPagerMap);
+		
+		return "indexPM";
+	}
+	
+	/**
+	 * 페이지 이동
+	 * @param pageNo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/moveMainPage")
+	@ResponseBody
+	public Map<String, Object> movePage(String pageNo, HttpSession session) {
+		//여기는 단순 페이지 이동이기 때문에 뭐든 세션에 다 있을 거임!
+		session.setAttribute("pageNo", pageNo);
+		
+		//게시글 목록 페이징
+		//HashMap<String, Object> pageBoardpageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
+		Map<String, Object> map = pageBoardMainPage(pageNo, "공지사항");
+		log.info("map이당 " + map);
+		return map;
+	}
+	
+	private HashMap<String, Object> pageBoardMainPage(String pageNo, String boardType) {
+		
+		// 게시글 총 개수 (searchType은 null이라도 들어가야 함)
+		int totalBoardNum = boardService.getTotalBoardNum(boardType, null, 0, null, null);
+		
+		// Pager 객체 생성 (게시글 행 수, 페이지 개수, 총 페이지 개수, 페이지 시작 번호) 후 select
+		Pager boardPager = new Pager(4, 5, totalBoardNum, Integer.parseInt(pageNo));
+		List<Board> boardList = boardService.getBoardList(boardPager, boardType, null, 0, null, null);
+		
+		//pagination에 필요한 pager와 boardList를 map에 담아서 return 
+		HashMap<String, Object> boardPagerMap = new HashMap<String, Object>();
+		boardPagerMap.put("boardPager", boardPager);
+		boardPagerMap.put("boardList", boardList);
+		
+		return boardPagerMap;
+	}
 	
 	@RequestMapping("/index")
 	public String index(Model model, HttpSession session, Authentication authentication) {
@@ -115,22 +212,6 @@ public class LoginController {
 	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
 	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
 	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
-	    
-	    /*if(employeeService.getProfileImgByEmpId(empId)!=null) {
-	    	MediaFile mf = employeeService.getProfileImgByEmpId(empId);
-	    	multipartFile = mf;
-	    	String dbBase64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
-	    	profileImg = dbBase64Img;
-			model.addAttribute("base64Img", profileImg);
-			model.addAttribute("mf", multipartFile);
-	    }else {
-	    	MediaFile mf = employeeService.getDefaultImg();
-	    	String base64Img = Base64.getEncoder().encodeToString(mf.getMediaFileData());
-			model.addAttribute("base64Img", base64Img);
-			model.addAttribute("mf", mf);
-	    }*/
-	    
-	    
 	    
 	    model.addAttribute("base64Img", profileImg);
 	    model.addAttribute("mf", multipartFile);

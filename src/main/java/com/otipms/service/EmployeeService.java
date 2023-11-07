@@ -51,4 +51,6 @@ public interface EmployeeService {
 	 * @author 이은지
 	 */
 	public void updateProfileImg(MediaFile mediaFile);
+	//프로젝트 번호로 고객 정보 가져오기 
+	public Employee getClientInfoByProjectNo(int projectNo);
 }

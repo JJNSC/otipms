@@ -3,8 +3,10 @@ package com.otipms.service;
 import java.util.List;
 import java.util.Map;
 
+import com.otipms.dto.Employee;
 import com.otipms.dto.Project;
 import com.otipms.dto.Task;
+import com.otipms.dto.TaskCount;
 import com.otipms.dto.TaskEmployee;
 import com.otipms.dto.Team;
 
@@ -83,5 +85,10 @@ public interface TaskService {
 	 * @return
 	 */
 	public int getProjectNo(int empId);
+	
+	//사용자가 속한 프로젝트의 업무 정보 조회
+	public TaskCount getProjectTaskInfo(int projectNo);
+	//프로젝트에 속한 팀들의 진척도 조회
+	public List<Double> getTeamProgressRateList(int projectNo);
 
 }

@@ -254,6 +254,7 @@ public class BoardController {
 		return boardPagerMap;
 	}
 	
+	
 	/**
 	 * 게시글 작성 폼으로 이동
 	 * @param model
