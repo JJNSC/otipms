@@ -129,7 +129,7 @@ public class LoginController {
 		return "redirect:/";
 	}*/
 	@RequestMapping("/indexPM")
-	public String indexPM(Model model, HttpSession session) {
+	public String indexPM(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 
 		//1. 프로젝트 총 업무수, 진행중인 업무수, 완료된 업무수 + %까지
 		//2. 프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
@@ -174,10 +174,25 @@ public class LoginController {
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+	    int empId = empDetails.getEmployee().getEmpId();
+	    
+	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
+	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
+	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
+	    
+	    model.addAttribute("base64Img", profileImg);
+	    model.addAttribute("mf", multipartFile);
+	    
+	    model.addAttribute("employee", empDetails.getEmployee());
+	    model.addAttribute("alarm", alarm);
+	    model.addAttribute("alarmCnt", alarmCnt);
+	    model.addAttribute("totalAlarmCnt", totalAlarmCnt);
+		
 		return "indexPM";
 	}
 	@RequestMapping("/indexClient")
-	public String indexClient(Model model, HttpSession session) {
+	public String indexClient(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 
 		//1. 프로젝트 총 업무수, 진행중인 업무수, 완료된 업무수 + %까지
 		//2. 프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
@@ -238,10 +253,25 @@ public class LoginController {
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+	    int empId = empDetails.getEmployee().getEmpId();
+	    
+	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
+	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
+	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
+	    
+	    model.addAttribute("base64Img", profileImg);
+	    model.addAttribute("mf", multipartFile);
+	    
+	    model.addAttribute("employee", empDetails.getEmployee());
+	    model.addAttribute("alarm", alarm);
+	    model.addAttribute("alarmCnt", alarmCnt);
+	    model.addAttribute("totalAlarmCnt", totalAlarmCnt);
+		
 		return "indexClient";
 	}
 	@RequestMapping("/indexAdmin")
-	public String indexAdmin(Model model, HttpSession session) {
+	public String indexAdmin(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 
 		//1. 프로젝트 총 업무수, 진행중인 업무수, 완료된 업무수 + %까지
 		//2. 프로젝트에 속한 팀 리스트(팀번호, 팀명, 팀장, 팀에 속한 사람들의 완료된 업무수/팀에 속한 사람들의 총 업무수*100
@@ -263,10 +293,25 @@ public class LoginController {
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+	    int empId = empDetails.getEmployee().getEmpId();
+	    
+	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
+	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
+	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
+	    
+	    model.addAttribute("base64Img", profileImg);
+	    model.addAttribute("mf", multipartFile);
+	    
+	    model.addAttribute("employee", empDetails.getEmployee());
+	    model.addAttribute("alarm", alarm);
+	    model.addAttribute("alarmCnt", alarmCnt);
+	    model.addAttribute("totalAlarmCnt", totalAlarmCnt);
+		
 		return "indexAdmin";
 	}
 	@RequestMapping("/indexPE")
-	public String indexPE(Model model, HttpSession session) {
+	public String indexPE(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 
 		//1. 진행전 업무수 , 진행중인 업무수, 완료된 업무수 + %까지
 		//2. 본인 업무 리스트
@@ -295,6 +340,21 @@ public class LoginController {
 		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
+		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+	    int empId = empDetails.getEmployee().getEmpId();
+	    
+	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
+	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
+	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
+	    
+	    model.addAttribute("base64Img", profileImg);
+	    model.addAttribute("mf", multipartFile);
+	    
+	    model.addAttribute("employee", empDetails.getEmployee());
+	    model.addAttribute("alarm", alarm);
+	    model.addAttribute("alarmCnt", alarmCnt);
+	    model.addAttribute("totalAlarmCnt", totalAlarmCnt);
 		
 		return "indexPE";
 	}

@@ -47,7 +47,17 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         if ("0000".equals(enteredPassword)) {
             setDefaultTargetUrl("/profile"); // "0000" 비밀번호일 때 리다이렉트할 경로
         } else {
-            setDefaultTargetUrl("/index"); // 기본 리다이렉트 경로
+        	if(empDetails.getEmployee().getRole().equals("ROLE_PE")) {
+        		setDefaultTargetUrl("/indexPE");
+        	}else if(empDetails.getEmployee().getRole().equals("ROLE_PM")) {
+        		setDefaultTargetUrl("/indexPM");
+        	}else if(empDetails.getEmployee().getRole().equals("ROLE_ADMIN")) {
+        		setDefaultTargetUrl("/indexAdmin");
+        	}else if(empDetails.getEmployee().getRole().equals("ROLE_CLIENT")) {
+        		setDefaultTargetUrl("/indexClient");
+        	}else {
+        		setDefaultTargetUrl("/index"); // 기본 리다이렉트 경로
+        	}
         }
         
         if(employeeService.getProfileImgByEmpId(empDetails.getEmployee().getEmpId())!=null) {

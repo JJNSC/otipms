@@ -49,8 +49,8 @@
 								<input class="d-none" type="file" id="imageInput" accept="image/*" onchange="changeProfile()">
 								<!-- <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a> -->
 								<span class="edit-avatar" onclick="uploadImage()"><i class="fa fa-pencil"></i></span>
-								<c:if test="${employee.mediaFileData != null}">
-									<img id="profileImage" src="data:${employee.mediaFileData};base64, ${base64Img}" alt="" class="avatar-photo" width="160px" height="160px"/>
+								<c:if test="${profileEmployee.mediaFileData != null}">
+									<img id="profileImage" src="data:${profileEmployee.mediaFileData};base64, ${base64Img}" alt="" class="avatar-photo" width="160px" height="160px"/>
 								</c:if>
 								<%-- <c:if test="${employee.mediaFileData == null}">
 									<img id="profileImage" src="${pageContext.request.contextPath}/resources/images/defaultHuman.jpg" alt="" class="avatar-photo" width="160px" height="160px">
@@ -73,18 +73,18 @@
 									</div>
 								</div>
 							</div>
-							<h5 class="text-center h5 mb-0">${employee.empName}</h5>
-							<p class="text-center text-muted font-14">${employee.empRank} <c:if test="${employee.teamName != '미배정'}"> | ${employee.teamName}</c:if></p>
+							<h5 class="text-center h5 mb-0">${profileEmployee.empName}</h5>
+							<p class="text-center text-muted font-14">${profileEmployee.empRank} <c:if test="${profileEmployee.teamName != '미배정'}"> | ${profileEmployee.teamName}</c:if></p>
 							<div class="profile-info">
 								<h5 class="mb-20 h5 text-blue">사원 정보</h5>
 								<ul>
 									<li class="mb-1">
 										<span>이메일:</span>
-										${employee.empEmail}
+										${profileEmployee.empEmail}
 									</li>
 									<li class="mb-1">
 										<span>연락처:</span>
-										${employee.empTel}
+										${profileEmployee.empTel}
 									</li>
 								</ul>
 							</div>

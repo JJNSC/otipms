@@ -6,7 +6,18 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
     <div class="nav-header">
         <div class="brand-logo">
-            <a href="${pageContext.request.contextPath}/index" style="padding:0px;" class="ml-3">
+        	<c:if test="${employee.role=='ROLE_ADMIN' }">
+            <a href="${pageContext.request.contextPath}/indexAdmin" style="padding:0px;" class="ml-3">
+            </c:if>
+        	<c:if test="${employee.role=='ROLE_PM' }">
+            <a href="${pageContext.request.contextPath}/indexPM" style="padding:0px;" class="ml-3">
+            </c:if>
+        	<c:if test="${employee.role=='ROLE_PE' }">
+            <a href="${pageContext.request.contextPath}/indexPE" style="padding:0px;" class="ml-3">
+            </c:if>
+        	<c:if test="${employee.role=='ROLE_CLIENT' }">
+            <a href="${pageContext.request.contextPath}/indexClient" style="padding:0px;" class="ml-3">
+            </c:if>
                 <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                 <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                 <span class="brand-title">

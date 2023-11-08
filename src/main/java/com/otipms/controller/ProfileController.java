@@ -36,7 +36,7 @@ public class ProfileController {
 		//model.addAttribute("employee", LoginController.loginEmployee);
 		
 		Employee employee = employeeService.selectProfileEmp(LoginController.loginEmployee.getEmpId());
-		model.addAttribute("employee", employee);
+		model.addAttribute("employee", LoginController.loginEmployee);
 	    model.addAttribute("base64Img", LoginController.profileImg);
 	    model.addAttribute("mf", LoginController.multipartFile);
 		
@@ -44,6 +44,7 @@ public class ProfileController {
 			String base64Img = Base64.getEncoder().encodeToString(employee.getMediaFileData());
 			model.addAttribute("base64Img", base64Img);
 		}
+		model.addAttribute("profileEmployee", employee);
 		return "profile/profile";
 	}
 	
