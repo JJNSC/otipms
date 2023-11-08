@@ -1,9 +1,18 @@
 package com.otipms.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.otipms.dto.Messenger;
+import com.otipms.security.EmpDetails;
 import com.otipms.service.AlarmService;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
@@ -29,8 +38,55 @@ public class MessengerController {
 	private MessengerService messengerService;
 	
 	@RequestMapping("/chat")
-	public String chat() {
-		log.info("dd");
+	public String chat(Model model, Authentication authentication) {
+		
+		
 		return "chat/chat";
+	}
+	
+	@GetMapping("/chatRoom")
+	public String chatRoom(Model model, Authentication authentication) {
+		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		
+		List<Messenger> chatRoom = messengerService.selectChatRoom(empDetails.getEmployee().getEmpId());
+		
+		log.info("chatRoom : " + chatRoom);
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("chatRoom", chatRoom);
+
+		
+		return "chat/chatRoom";
+	}
+	
+	
+	@GetMapping("/chatContent")
+	public String chatContent(@RequestParam("mrNo") int mrNo, Model model, Authentication authentication) {
+		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		int empId = empDetails.getEmployee().getEmpId();
+		
+		Messenger chatRoomEmp = messengerService.getEmpNotMe(mrNo, empId);
+		List<Messenger> chatContent = messengerService.getChatContent(mrNo);
+		
+		model.addAttribute("employee", LoginController.loginEmployee);
+		model.addAttribute("chatRoomEmp", chatRoomEmp);
+		model.addAttribute("chatContent", chatContent);
+		model.addAttribute("mrNo", mrNo);
+		
+		return "chat/chatContent";
+	}
+	
+	@PostMapping("/sendMessage")
+	public String sendMessage(@RequestParam int mrNo, @RequestParam int empId, @RequestParam String message) {
+	    
+		messengerService.insertChat(mrNo, empId, message);
+		
+	    return "redirect:chat";
+	}
+	
+	@RequestMapping("/findEmployee")
+	public String findEmployee() {
+		return "chat/findEmployee";
 	}
 }

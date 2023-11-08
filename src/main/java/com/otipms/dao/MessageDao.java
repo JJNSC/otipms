@@ -41,7 +41,6 @@ public interface MessageDao {
 	public List<Message> detailMessageMediaFile(int messageNo);
 	//쪽지 상세 보기 (읽은 사람 여부 및 시간)
 	public List<Message> readMail(int messageNo);
-	
 	public void deleteMessage(Map<String, Object> paramMap);
 	
 	//쪽지 쓰기

@@ -1,5 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.otipms.dao.MessengerDao">
+	<select id="selectChatRoom" parameterType="int" resultType="Messenger">
+		SELECT DISTINCT r.mrNo
+              		  , e.empName
+              		  , e.empRank
+              		  , m.empId
+           		   FROM MessengerRoom r
+           		   JOIN Messenger m 
+             		 ON r.mrNo = m.mrNo
+           		   JOIN emp e 
+             		 ON m.empId = e.empId
+          		  WHERE r.mrNo 
+             		 IN (
+                		SELECT mrNo
+                  		  FROM Messenger
+                 		 WHERE empId = #{empId}
+                		)
+                	AND m.empId != #{empId}
+	</select>
 	
+	<select id="getChatContent" parameterType="int" resultType="Messenger">
+		SELECT m.messengerNo
+			 , m.mrNo
+			 , m.empId
+			 , e.empName
+			 , e.empRank
+			 , m.messengerContent
+			 , m.messengerDate
+		  FROM Messenger m
+		  JOIN emp e 
+		    ON m.empId = e.empId
+		 WHERE m.mrNo = #{mrNo}
+	  ORDER BY m.messengerDate
+	</select>
+	
+	<insert id="insertChatRoom" parameterType="Messenger">
+		<selectKey keyProperty="mrNo" resultType="int" order="BEFORE">
+			SELECT mrNo_seq.nextval
+			  FROM DUAL
+		</selectKey>
+		INSERT INTO MESSENGERROOM
+		          ( 
+				  	mrNo
+				  , mrLastChat
+				  , mrDate
+				  )
+		   VALUES (
+	        	    #{mrNo, jdbcType=NUMERIC}
+	        	  , null
+	        	  , sysdate
+	    		  )
+	</insert>
+	
+	<insert id="insertChatRoomContent" parameterType="map">
+		<selectKey keyProperty="messengerNo" resultType="int" order="BEFORE">
+			SELECT messengerNo_seq.nextval
+			  FROM DUAL
+		</selectKey>
+		INSERT INTO MESSENGER
+		          ( 
+		            messengerNo
+				  ,	mrNo
+				  , empId
+				  , messengerContent
+				  , messengerDate
+				  )
+		   VALUES (
+	        	    #{messengerNo}
+	        	  , #{mrNo}
+	        	  , #{empId}
+	        	  , '환영합니다.'
+	        	  , sysdate
+	    		  )
+	</insert>
+	
+	<select id="getEmpNotMe" parameterType="map" resultType="Messenger">
+		SELECT DISTINCT e.empName
+					  , e.empRank
+				   FROM Messenger m
+				   JOIN emp e 
+				     ON m.empId = e.empId
+				  WHERE m.mrNo = #{mrNo}
+				    AND m.empId != #{empId}
+	</select>
+	
+	<insert id="insertChat" parameterType="map">
+		<selectKey keyProperty="messengerNo" resultType="int" order="BEFORE">
+			SELECT messengerNo_seq.nextval
+			  FROM DUAL
+		</selectKey>
+		INSERT INTO MESSENGER
+		          ( 
+		            messengerNo
+				  ,	mrNo
+				  , empId
+				  , messengerContent
+				  , messengerDate
+				  )
+		   VALUES (
+	        	    #{messengerNo}
+	        	  , #{mrNo}
+	        	  , #{empId}
+	        	  , #{messengerContent}
+	        	  , sysdate
+	    		  )
+	</insert>
 </mapper>

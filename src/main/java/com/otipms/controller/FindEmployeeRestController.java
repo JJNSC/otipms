@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,7 @@ import com.otipms.dto.Project;
 import com.otipms.dto.Team;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
+import com.otipms.service.MessengerService;
 import com.otipms.service.ProjectService;
 import com.otipms.service.TeamService;
 
@@ -36,6 +39,21 @@ public class FindEmployeeRestController {
     private TeamService teamService;
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private MessengerService messengerService;
+    
+    @PostMapping("/api/createChatRoom")
+    public String createChatRoom(@RequestBody List<Employee> selectedEmployees) {
+        // selectedEmployees를 사용하여 채팅 방 생성 또는 추가 로직을 수행
+    	
+    	log.info("selectedEmployees : " + selectedEmployees);
+    	Employee employee = selectedEmployees.get(0);
+    	log.info("selectedEmployees.get(0).getEmpId() : " + employee.getEmpId());
+    	messengerService.insertChatRoom(employee.getEmpId());
+    	
+    	return "success";
+    }
+
 
     @GetMapping("/api/employeeData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> getEmployeeData() {

@@ -27,34 +27,15 @@
 		
 	</head>
 	<body class="header-white sidebar-dark">
-		<div class="main-container">
-			<div class="pd-ltr-20 xs-pd-20-10">
-				<div class="min-height-200px">
-					<div class="bg-white border-radius-4 box-shadow mb-30" style="max-height:980px;">
-						<div class="row no-gutters" style="max-height:980px;">
-							<div class="col-lg-3 col-md-4 col-sm-12" style="max-height:980px;">
-								<div class="chat-list bg-light-gray">
-									<div class="chat-search">
-										<span class="icon-copy fa fa-search"></span>
-										<input type="text" placeholder="Search Contact" />
-										<img src="${pageContext.request.contextPath}/resources/images/chatplus.png" 
-											  style="width:35px;height:30px;margin-left:15px;margin-top:13px;cursor:pointer"
-											  type="button"
-											  onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))"
-										/>
-									</div>
-									<div id="chatRoomContainer" class="notification-list chat-notification-list customscroll">
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-9 col-md-8 col-sm-12" style="max-height:980px;">
-								<div class="chat-detail">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<ul>
+			<c:forEach var="ChatRoom" items="${chatRoom}">
+				<li>
+					<a href="#" data-mrno="${ChatRoom.mrNo}">
+						<img src="/otipms/resources/images/user/1.jpg" alt=""/>
+						<h3 class="clearfix">${ChatRoom.empRank} ${ChatRoom.empName}</h3>
+					</a>
+				</li>
+			</c:forEach>
+		</ul>
 	</body>
 </html>
