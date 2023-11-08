@@ -23,6 +23,7 @@ import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Project;
+import com.otipms.dto.Schedule;
 import com.otipms.dto.Task;
 import com.otipms.dto.TaskCount;
 import com.otipms.dto.Team;
@@ -34,6 +35,7 @@ import com.otipms.service.BoardService;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
 import com.otipms.service.ProjectService;
+import com.otipms.service.ScheduleService;
 import com.otipms.service.TaskService;
 import com.otipms.service.TeamService;
 
@@ -62,6 +64,9 @@ public class LoginController {
 
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private ScheduleService scheduleService;
 	
 	public static Employee loginEmployee;
 
@@ -174,6 +179,10 @@ public class LoginController {
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
+		//내 개인 일정 
+		List<Schedule> scheduleList = scheduleService.getScheduleList(LoginController.loginEmployee.getEmpId());
+	    model.addAttribute("scheduleList", scheduleList);
+		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    int empId = empDetails.getEmployee().getEmpId();
 	    
@@ -253,6 +262,10 @@ public class LoginController {
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
+		//내 개인 일정 
+		List<Schedule> scheduleList = scheduleService.getScheduleList(LoginController.loginEmployee.getEmpId());
+	    model.addAttribute("scheduleList", scheduleList);
+		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    int empId = empDetails.getEmployee().getEmpId();
 	    
@@ -292,6 +305,10 @@ public class LoginController {
 		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
+		
+		//내 개인 일정 
+		List<Schedule> scheduleList = scheduleService.getScheduleList(LoginController.loginEmployee.getEmpId());
+	    model.addAttribute("scheduleList", scheduleList);
 		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    int empId = empDetails.getEmployee().getEmpId();
@@ -341,6 +358,11 @@ public class LoginController {
 		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
+		//내 개인 일정 
+		List<Schedule> scheduleList = scheduleService.getScheduleList(LoginController.loginEmployee.getEmpId());
+	    model.addAttribute("scheduleList", scheduleList);
+		
+	    //헤더의 웹소켓
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    int empId = empDetails.getEmployee().getEmpId();
 	    

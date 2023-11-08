@@ -67,6 +67,48 @@ public class MyScheduleController {
 		
 		return "redirect:/mySchedule";
 	}
+	/**
+	 * 메인페이지에서 일정 추가
+	 * @param scheduleName
+	 * @param scheduleComment
+	 * @param scheduleStartDate
+	 * @param scheduleEndDate
+	 * @param scheduleColor
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("createScheduleMainPage")
+	public String createScheduleMainPage(
+			@RequestParam String scheduleName,
+			@RequestParam String scheduleComment,
+			@RequestParam String scheduleStartDate,
+			@RequestParam String scheduleEndDate,
+			@RequestParam String scheduleColor,
+			@RequestParam String role) throws Exception {
+		
+		Schedule schedule = new Schedule();
+		schedule.setEmpId(LoginController.loginEmployee.getEmpId());
+		schedule.setScheduleName(scheduleName);
+		schedule.setScheduleComment(scheduleComment);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		/*if(!startDate.equals("")) {
+			task.setTaskStartDate(sdf.parse(startDate));
+		}*/
+		schedule.setScheduleStartDate(sdf.parse(scheduleStartDate));
+		schedule.setScheduleEndDate(sdf.parse(scheduleEndDate));
+		schedule.setScheduleColor(scheduleColor);
+		
+		scheduleService.addSchedule(schedule);
+		if(role.equals("ROLE_ADMIN")) {
+			return "redirect:/indexAdmin";
+		}else if(role.equals("ROLE_CLIENT")) {
+			return "redirect:/indexClient";
+		}else if(role.equals("ROLE_PM")) {
+			return "redirect:/indexPM";
+		}else {
+			return "redirect:/indexPE";
+		}
+	}
 	
 	/**
 	 * 체크 클릭시 수정
@@ -137,11 +179,70 @@ public class MyScheduleController {
 		
 		return "redirect:/mySchedule";
 	}
+	/**
+	 * 일정 수정
+	 * @param scheduleNo
+	 * @param scheduleName
+	 * @param scheduleComment
+	 * @param scheduleStartDate
+	 * @param scheduleEndDate
+	 * @param scheduleColor
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("updateScheduleMainPage")
+	public String updateScheduleMainPage(
+			@RequestParam String scheduleNo,
+			@RequestParam String scheduleName,
+			@RequestParam String scheduleComment,
+			@RequestParam String scheduleStartDate,
+			@RequestParam String scheduleEndDate,
+			@RequestParam String scheduleColor,
+			@RequestParam String role) throws Exception {
+		
+		Schedule schedule = new Schedule();
+		schedule.setScheduleNo(Integer.parseInt(scheduleNo));
+		schedule.setScheduleName(scheduleName);
+		schedule.setScheduleComment(scheduleComment);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		/*if(!startDate.equals("")) {
+			task.setTaskStartDate(sdf.parse(startDate));
+		}*/
+		schedule.setScheduleStartDate(sdf.parse(scheduleStartDate));
+		schedule.setScheduleEndDate(sdf.parse(scheduleEndDate));
+		schedule.setScheduleColor(scheduleColor);
+		
+		scheduleService.updateSchedule(schedule);
+		
+		if(role.equals("ROLE_ADMIN")) {
+			return "redirect:/indexAdmin";
+		}else if(role.equals("ROLE_CLIENT")) {
+			return "redirect:/indexClient";
+		}else if(role.equals("ROLE_PM")) {
+			return "redirect:/indexPM";
+		}else {
+			return "redirect:/indexPE";
+		}
+	}
 	
 	@RequestMapping("/deleteSchedule")
 	public String deleteSchedule(@RequestParam String scheduleNo) {
 		scheduleService.deleteSchedule(scheduleNo);
 		return "redirect:/mySchedule";
+	}
+	@RequestMapping("/deleteScheduleMainPage")
+	public String deleteScheduleMainPage(@RequestParam String scheduleNo,
+										 @RequestParam String role) {
+		scheduleService.deleteSchedule(scheduleNo);
+		if(role.equals("ROLE_ADMIN")) {
+			return "redirect:/indexAdmin";
+		}else if(role.equals("ROLE_CLIENT")) {
+			return "redirect:/indexClient";
+		}else if(role.equals("ROLE_PM")) {
+			return "redirect:/indexPM";
+		}else {
+			return "redirect:/indexPE";
+		}
 	}
 	
 }
