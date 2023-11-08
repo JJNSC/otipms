@@ -48,15 +48,16 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	//클라이언트가 서버에 접속 성공시 호출
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		log.info("소켓 연결 완료 : " + session);
+		log.info("알람 소켓 연결 완료 : " + session);
 		sessions.add(session); //리스트에 접속한 session들을 담음
+		log.info("접속한 알람 소켓 인원 : " + sessions.size());
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String memId = message.getPayload();
 	    log.info("메세지 도착: {} : " + memId);
-	    Thread.sleep(500);
+	    //Thread.sleep(500);
 	    List<Message> messages = messageService.getMyReceivedMessageA(memId);
 		List<Alarm> alarms = alarmService.selectAlarmCountByEmpIdI(memId);
 	    // 세션에 알림 개수와 알림 내용을 전달
@@ -75,8 +76,9 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		log.info("소켓 연결 종료");
+		log.info("알람 소켓 연결 종료");
 		sessions.remove(session);
+		log.info("접속한 알람 소켓 인원 : " + sessions.size());
 	}
 	
 }

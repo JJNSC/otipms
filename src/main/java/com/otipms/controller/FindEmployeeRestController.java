@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.otipms.dto.Employee;
 import com.otipms.dto.Message;
+import com.otipms.dto.Messenger;
 import com.otipms.dto.Project;
 import com.otipms.dto.Team;
 import com.otipms.service.EmployeeService;
@@ -43,15 +44,20 @@ public class FindEmployeeRestController {
     private MessengerService messengerService;
     
     @PostMapping("/api/createChatRoom")
-    public String createChatRoom(@RequestBody List<Employee> selectedEmployees) {
+    public Messenger createChatRoom(@RequestBody List<Employee> selectedEmployees) {
         // selectedEmployees를 사용하여 채팅 방 생성 또는 추가 로직을 수행
     	
-    	log.info("selectedEmployees : " + selectedEmployees);
+    	Messenger messenger = new Messenger();
     	Employee employee = selectedEmployees.get(0);
-    	log.info("selectedEmployees.get(0).getEmpId() : " + employee.getEmpId());
-    	messengerService.insertChatRoom(employee.getEmpId());
+    	int mrNo = messengerService.insertChatRoom(employee.getEmpId());
+    	Employee empInfo = employeeService.getEmployeeInfo(employee.getEmpId());
+    	messenger.setMrNo(mrNo);
+    	messenger.setEmpName(empInfo.getEmpName());
+    	messenger.setEmpRank(empInfo.getEmpRank());
     	
-    	return "success";
+    	log.info("messenger : " + messenger);
+    	
+    	return messenger;
     }
 
 

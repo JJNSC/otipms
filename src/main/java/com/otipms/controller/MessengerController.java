@@ -26,15 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MessengerController {
 	
 	@Autowired
-	private MessageService messageService;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
-	private AlarmService alarmService;
-	
-	@Autowired
 	private MessengerService messengerService;
 	
 	@RequestMapping("/chat")
@@ -82,7 +73,7 @@ public class MessengerController {
 	    
 		messengerService.insertChat(mrNo, empId, message);
 		
-	    return "redirect:chat";
+		return "chat/chat";
 	}
 	
 	@RequestMapping("/findEmployee")

@@ -1,5 +1,5 @@
 window.onload = function(){
-	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
+	var webSocket = new WebSocket("ws://192.168.0.169:8080/otipms/ws-alarm");
 	var empId = document.getElementById("memIdSpan").value;
 	var cntSpan = document.getElementById("cntSpan")
 	if (cntSpan) {
@@ -26,7 +26,7 @@ window.onload = function(){
 		webSocket.send(empId);
 		updateAlarmCount();
 		updateTotalAlarmCount();
-		$.get("http://localhost:8080/otipms/alarms?empId=" + empId, function (alarmList) {
+		$.get("/otipms/alarms?empId=" + empId, function (alarmList) {
 	        updateAlarmList(alarmList);
 		});
 	}
@@ -61,11 +61,11 @@ window.onload = function(){
 		//총 알람 갯수 변경(쪽지 알람의 총 갯수 표기)
 		updateTotalAlarmCount();
 		//웹소켓 세션에 접속한 사람의 쪽지 알람 리스트 변경
-		$.get("http://localhost:8080/otipms/alarms?empId=" + empId, function (alarmList) {
+		$.get("/otipms/alarms?empId=" + empId, function (alarmList) {
 			updateAlarmList(alarmList);
 		});
 		//쪽지함 쪽지 실시간 변경
-		$.get("http://localhost:8080/otipms/mail/receivedMails?empId=" + empId, function(messageList){
+		$.get("/otipms/mail/receivedMails?empId=" + empId, function(messageList){
 			console.log(messageList);
 			updateMessageList(messageList);
 			
@@ -83,7 +83,7 @@ window.onload = function(){
 	//안읽은 알람 수
 	var updateAlarmCount = function () {
 	    // 알림 개수를 업데이트
-	    $.get("http://localhost:8080/otipms/alarmCnt?empId=" + empId, function (data) {
+	    $.get("/otipms/alarmCnt?empId=" + empId, function (data) {
 	      var alarmCount = data;
 	      $("#alarmCnt").text(alarmCount);
 	      $("#alarmCnt2").text(alarmCount);
@@ -128,7 +128,7 @@ window.onload = function(){
 		
 	//총 알람 갯수
 	var updateTotalAlarmCount = function () {
-	  $.get("http://localhost:8080/otipms/alarmTotalCnt?empId=" + empId, function (data) {
+	  $.get("/otipms/alarmTotalCnt?empId=" + empId, function (data) {
 	    var totalAlarmCount = data;
 	    var totalAlarmCountSpan = document.getElementById("totalAlarmCount");
 	    if (totalAlarmCountSpan) {
@@ -299,7 +299,7 @@ window.onload = function(){
 function updateCheckedAlarm(alarmNo) {
 	$.ajax({
 		type: "POST", 
-		url: "http://localhost:8080/otipms/updateCheckedAlarm", 
+		url: "/otipms/updateCheckedAlarm", 
 		data: { alarmNo: alarmNo },
 		success: function (data) {
 			webSocket.send(empId);

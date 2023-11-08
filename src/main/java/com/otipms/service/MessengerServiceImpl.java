@@ -41,7 +41,7 @@ public class MessengerServiceImpl implements MessengerService {
 	}
 
 	@Override
-	public void insertChatRoom(int empId) {
+	public int insertChatRoom(int empId) {
 		
 		Messenger messenger = new Messenger();
 	    messenger.setMrNo(0);
@@ -59,6 +59,8 @@ public class MessengerServiceImpl implements MessengerService {
 		
 		messengerDao.insertChatRoomContent(paramMap);
 		messengerDao.insertChatRoomContent(paramMap2);
+		
+		return mrNo;
 	}
 
 	@Override

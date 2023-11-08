@@ -2,32 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<!-- Basic Page Info -->
-		<meta charset="utf-8" />
-		<title>채팅</title>
-
-		<!-- CSS -->
-		<link href="${pageContext.request.contextPath}/resources/css/chat/core.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/resources/css/chat/style.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/resources/css/chat/stylechat.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
-		
-		<!-- js -->
-		<script src="${pageContext.request.contextPath}/resources/js/chat/chat.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/chat/core.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/chat/script.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/chat/process.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/chat/layout-settings.js"></script>
-		
-		<!-- selector -->
-		<link href="${pageContext.request.contextPath}/resources/css/chat/select2.min.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		
-	</head>
-	<body class="header-white sidebar-dark">
 		<div class="chat-profile-header clearfix">
 			<div class="left">
 				<div class="clearfix">
@@ -47,7 +21,7 @@
 		</div>
 		<div class="chat-box">
 			<div class="chat-desc customscroll" style="overflow-y: auto;">
-				<ul>
+				<ul id="chatList">
 					<c:forEach var="ChatContent" items="${chatContent}">
 						<c:choose>
 							<c:when test="${employee.empId == ChatContent.empId}">
@@ -63,7 +37,7 @@
 							<div class="chat-body clearfix">
 								<p>${ChatContent.messengerContent}</p>
 								<div class="chat_time">
-									<fmt:formatDate value="${ChatContent.messengerDate}" pattern="hh:mm"/>
+									<fmt:formatDate value="${ChatContent.messengerDate}" pattern="yyyy.MM.d a h:mm:ss"/>
 								</div>
 							</div>
 						</li>
@@ -87,5 +61,3 @@
 				</div>
 			</div>
 		</div>
-	</body>
-</html>
