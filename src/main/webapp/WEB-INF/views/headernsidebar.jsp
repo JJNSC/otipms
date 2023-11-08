@@ -33,7 +33,7 @@ width:15.1875rem;
                 <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                 <span class="brand-title">
                     <!-- <img src="images/logo-text.png" alt=""> -->
-                    <img src="${pageContext.request.contextPath}/resources/vendors/images/otipms.jpg" style="width:200px; height:90px;" alt="">
+                    <img src="${pageContext.request.contextPath}/resources/vendors/images/otipms.jpg" style="margin-top: 5px; height: 70px; margin-left: 20px;" alt="">
                 </span>
             </a>
         </div>
