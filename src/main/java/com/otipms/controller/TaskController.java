@@ -1,6 +1,5 @@
 package com.otipms.controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +43,19 @@ public class TaskController {
 	    List<Task> taskList = taskService.getTaskList(LoginController.loginEmployee.getEmpId() + "");
 	    model.addAttribute("taskList", taskList);
 		return "task/myTask";
+	}
+	
+	/**
+	 * 업무 달력 표시
+	 * @return
+	 */
+	@RequestMapping("/getTaskListForCalendar")
+	@ResponseBody
+	public Map<String, Object> getTaskListForCalendar() {
+		Map<String, Object> ajaxMap = new HashMap<>();
+		List<Task> taskList = taskService.getTaskList(LoginController.loginEmployee.getEmpId() + "");
+		ajaxMap.put("taskList", taskList);
+		return ajaxMap;
 	}
 	
 	/**

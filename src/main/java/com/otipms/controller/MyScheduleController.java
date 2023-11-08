@@ -1,7 +1,9 @@
 package com.otipms.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,19 @@ public class MyScheduleController {
 	    List<Schedule> scheduleList = scheduleService.getScheduleList(LoginController.loginEmployee.getEmpId());
 	    model.addAttribute("scheduleList", scheduleList);
 		return "mySchedule/mySchedule";
+	}
+	
+	/**
+	 * 일정 달력 표시
+	 * @return
+	 */
+	@RequestMapping("/getScheduleList")
+	@ResponseBody
+	public Map<String, Object> getScheduleList() {
+		Map<String, Object> ajaxMap = new HashMap<>();
+		List<Schedule> scheduleList = scheduleService.getScheduleList(LoginController.loginEmployee.getEmpId());
+		ajaxMap.put("scheduleList", scheduleList);
+		return ajaxMap;
 	}
 	
 	/**

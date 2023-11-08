@@ -230,22 +230,23 @@ function(e) {
     "use strict";
  // Ajax 요청
     $.ajax({
-        url: "/otipms/getScheduleList",
+        url: "/otipms/getTaskListForCalendar",
         method: "post",
         data: {},
         success: function(data) {
 
             // FullCalendar의 events 속성 업데이트
-            list = data.scheduleList.map(function(schedule) {
-            	const startDate = new Date(schedule.scheduleStartDate);
-                const endDate = new Date(schedule.scheduleEndDate);
-            	console.log("날짜가.... " + schedule.scheduleStartDate);
+            list = data.taskList.map(function(task) {
+            	const startDate = new Date(task.taskStartDate);
+                const endDate = new Date(task.taskEndDate);
+            	console.log("시작 날짜가.... " + task.taskStartDate);
+            	console.log("종료 날짜가.... " + task.taskEndDate);
             	
             	return {
-        			title: schedule.scheduleName,
+        			title: task.taskName,
         			start: startDate,
         			end: endDate,
-        			className: "bg-" + schedule.scheduleColor // 원하는 클래스명으로 변경
+        			className: "bg-" + task.taskColor // 원하는 클래스명으로 변경
         		};
             });
 

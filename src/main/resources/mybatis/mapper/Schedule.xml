@@ -32,6 +32,9 @@
 		SELECT scheduleNo
 			 , empId
 			 , scheduleName
+			 , scheduleStartDate
+			 , scheduleEndDate
+			 , scheduleColor
 			 , scheduleChecked
 		  FROM SCHEDULE
 		 WHERE 1=1

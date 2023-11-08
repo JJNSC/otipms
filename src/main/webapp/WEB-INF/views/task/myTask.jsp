@@ -18,6 +18,43 @@
     <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
     
     <script src="${pageContext.request.contextPath}/resources/js/task/task.js"></script>
+    
+    <style type="text/css">
+    	/* 일정 달력 */
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-custom.fc-draggable {
+		    background-color: #2f588b !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-red.fc-draggable {
+		    background-color: #ffcfd2 !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-orange.fc-draggable {
+		    background-color: #fde4cf !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-yellow.fc-draggable {
+		    background-color: #fbf8cc !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightGreen.fc-draggable {
+		    background-color: #b9fbc0 !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-green.fc-draggable {
+		    background-color: #98f5e1 !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightBlue.fc-draggable {
+		    background-color: #8eecf5 !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-blue.fc-draggable {
+		    background-color: #90dbf4 !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-purple.fc-draggable {
+		    background-color: #cfbaf0 !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-pink.fc-draggable {
+		    background-color: #f1c0e8 !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.fc-draggable {
+			color: #76838f;
+		}
+    </style>
 
 </head>
 
@@ -347,8 +384,9 @@
     <script src="${pageContext.request.contextPath}/resources/plugins/jqueryui/js/jquery-ui.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/moment/moment.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/fullcalendar/js/fullcalendar.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/plugins-init/fullcalendar-init.js"></script>
-    
+    <%-- <script src="${pageContext.request.contextPath}/resources/js/plugins-init/fullcalendar-init.js"></script> --%>
+    <script src="${pageContext.request.contextPath}/resources/js/plugins-init/fullcalendar-init-task.js"></script>
+        
     <script src="${pageContext.request.contextPath}/resources/plugins/moment/moment.js"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
     <!-- Clock Plugin JavaScript -->
