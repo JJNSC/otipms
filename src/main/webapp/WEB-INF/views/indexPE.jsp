@@ -33,6 +33,113 @@
 			 height : 96%;
 		}
 		
+		.tdl-holder-custom .labelCustom {
+		    /* cursor: pointer; */
+		    display: block;
+		    line-height: 52px;
+		    padding-left: 0;
+		    position: relative;
+		    margin: 0 !important;
+		    color: #464a53;
+		}
+		
+		.tdl-holder-custom input[type=checkbox] {
+		    cursor: pointer;
+		    opacity: 0;
+		    position: absolute;
+		}
+		
+		.tdl-holder-custom input[type=checkbox] + i {
+		    background-color: #ddd;
+		    display: block;
+		    height: 20px;
+		    position: absolute;
+		    top: 15px;
+		    width: 20px;
+		    z-index: 1;
+		}
+		
+		.tdl-holder-custom input[type=checkbox]:checked + i::after {
+		    content: "\f00c";
+		    font-family: 'fontAwesome';
+		    display: block;
+		    left: 1px;
+		    position: absolute;
+		    top: -17px;
+		    z-index: 2;
+		    color: #162336;
+		}
+		
+		/* .tdl-holder-custom input[type=checkbox]:checked ~ span {
+		    text-decoration: line-through;
+		    position: relative;
+		} */
+		.tdl-holder-custom input[type=checkbox]:checked + label + span {
+		    text-decoration: line-through;
+		    position: relative;
+		}
+		
+		.tdl-holder-custom li span {
+		    margin-left: 35px;
+		    font-weight: 500;
+		    vertical-align: middle;
+		    -webkit-transition: all .2s linear;
+		    /* -moz-transition: all .2s linear;
+		    -o-transition: all .2s linear; */
+		    transition: all 0.2s linear;
+		    
+		    cursor:pointer;
+		}
+		
+		/* .tdl-holder-custom label a {
+		    color: #464a53;
+		    line-height: normal;
+		    height: 100%;
+		    text-align: center;
+		    text-decoration: none;
+		    width: 50px;
+		    transition: all 0.2s linear;
+		    padding: 18px 0px;
+		    font-size: 18px;
+		    display: flex;
+		    position: absolute;
+		    right: 0;
+		    display: inline-block;
+		} */
+		.tdl-holder-custom .labelCustom a {
+		    color: #464a53;
+		    line-height: normal;
+		    height: 100%;
+		    text-align: center;
+		    text-decoration: none;
+		    width: 50px;
+		    transition: all 0.2s linear;
+		    padding: 18px 0px;
+		    font-size: 18px;
+		    display: flex;
+		    position: absolute;
+		    right: 0;
+		    display: inline-block;
+		}
+		
+		[class^="ti-"], [class*=" ti-"] {
+		    font-family: 'themify';
+		    speak: none;
+		    font-style: normal;
+		    font-weight: normal;
+		    font-variant: normal;
+		    text-transform: none;
+		    line-height: 1;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    
+		    cursor: pointer;
+		}
+		
+		.ti-trash:before {
+		    content: "\e605";
+		}
+		
 		/* 수직 스크롤바 숨김 */
       ::-webkit-scrollbar {
           width: 0;
@@ -64,108 +171,206 @@
             <!-- <div class="container-fluid mt-3" style="height 739px;"> -->
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
             	<div class="row">
-	                <div class="col-lg-4">
-                        <div class="card" style="height:48%;">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">${me.empName } 님 작업 진척률</h4>
-                                <c:if test="${employeeTaskCount.undoneTaskCnt==0&&employeeTaskCount.proceedingTaskCnt==0&&employeeTaskCount.finishedTaskCnt==0 }">
-                                	<div class="text-center"><h4 style="color:#9097c4; font-weight: 400; margin-top:30%;">할당된 작업이 없습니다.</h4></div>
-                                </c:if>
-                                <c:if test="${employeeTaskCount.undoneTaskCnt!=0||employeeTaskCount.proceedingTaskCnt!=0||employeeTaskCount.finishedTaskCnt!=0 }">
-	                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-	                                <script>
-	                                	var beforeCnt = ${employeeTaskCount.undoneTaskCnt};	
-	                                	var nowCnt = ${employeeTaskCount.proceedingTaskCnt};	
-	                                	var finishCnt = ${employeeTaskCount.finishedTaskCnt};	
-	                                	var beforeRate = ${employeeTaskCount.undoneTaskRate};	
-	                                	var nowRate = ${employeeTaskCount.proceedingTaskRate};	
-	                                	var finishRate = ${employeeTaskCount.finishedTaskRate};	
-	                                
-										var xValues = ["진행전 "+beforeRate+"%" ,"진행중 "+nowRate+"%", "완료 "+finishRate+"%"];
-										var yValues = [beforeCnt, nowCnt, finishCnt];
-										var barColors = [
-											,
-										  "#2b5797",
-										  "#00aba9"
-										];
-										
-										new Chart("myChart", {
-										  type: "doughnut",
-										  data: {
-										    labels: xValues,
-										    datasets: [{
-										      backgroundColor: barColors,
-										      data: yValues
-										    }]
-										  },
-										  options: {
-											    title: {
-											      display: false,
-											      text: "48.7% 진행중",
-											      position: "bottom"
-											    }
-											  }
-										});
-									</script>
-								</c:if>
-                                <!-- <canvas id="doughutChart" width="500" height="250"></canvas> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-					<div class="card " style="height:48%; ">
-						<h4 class="card-title ml-5" style="font-weight: bolder;color:#616161;margin-top:30px;">업무 별 진척도</h4>
-						<div class="card-body pt-0" style="width:100%; overflow-y: auto;">
-							<table class="table table-custom">
-								<thead>
-								    <tr>
-								        <th style="width:10%" class="text-center">번호</th>
-								        <th style="width:3%"></th>
-								        <th style="width:30%" >업무이름</th>
-								        <th style="width:20%">업무 시작일</th>
-								        <th style="width:20%">업무 종료일</th>
-								        <th style="width:15%">진행상태</th>
-								    </tr>
-								</thead>
-								<tbody style="overflow: scroll; width:100px;">
-									<c:forEach var="task" items="${taskList}" varStatus="a">
-										<tr class="reviewTitle table-hover" >
-											<td class="text-center">${a.index+1}</td>
-											<td></td>
-											<td >
-												${task.taskName }
-											</td>
-                                   			<td>
-                                   				<fmt:formatDate pattern="yyyy-MM-dd" value="${task.taskStartDate}"/>
-                                   			</td>
-											<td>
-												<c:if test="${task.taskEndDate==null }">
-													<div style="padding-left :30% ;">--</div>
-												</c:if>
-												<c:if test="${task.taskEndDate!=null }">
-													<fmt:formatDate pattern="yyyy-MM-dd" value="${task.taskEndDate }"/>
-												</c:if>
-											</td>
-											<td >
-												<c:if test="${task.taskStatus=='진행완료'}">
-													<span style="color:#00aba9;font-weight: bold;">${task.taskStatus}</span>
-												</c:if>
-												<c:if test="${task.taskStatus=='진행중'}">
-													<span style="color:#2b5797;font-weight: bold;">${task.taskStatus}</span>
-												</c:if>
-												<c:if test="${task.taskStatus=='진행전'}">
-													<span style="color:#b5b5b5; font-weight: bold;">${task.taskStatus}</span>
-												</c:if>
-											</td>
-										</tr>
-									</c:forEach>
-							    </tbody>
-							</table>
-						</div>
-					</div>
-                   </div>
-					<div class="col-lg-3">
-                        <div class="card">
+            		<div class="col-lg-9" style="padding-right: 0px;">
+            			<div class="row" style="height: 52%;">
+            				<!-- 작업 진척률 -->
+            				<div class="col-5" style="padding-right: 0px;">
+            					<div class="card" style="height:48%; height: 26rem;">
+		                            <div class="card-body">
+		                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">${me.empName } 님 작업 진척률</h4>
+		                                <c:if test="${employeeTaskCount.undoneTaskCnt==0&&employeeTaskCount.proceedingTaskCnt==0&&employeeTaskCount.finishedTaskCnt==0 }">
+		                                	<div class="text-center"><h4 style="color:#9097c4; font-weight: 400; margin-top:30%;">할당된 작업이 없습니다.</h4></div>
+		                                </c:if>
+		                                <c:if test="${employeeTaskCount.undoneTaskCnt!=0||employeeTaskCount.proceedingTaskCnt!=0||employeeTaskCount.finishedTaskCnt!=0 }">
+			                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+			                                <script>
+			                                	var beforeCnt = ${employeeTaskCount.undoneTaskCnt};	
+			                                	var nowCnt = ${employeeTaskCount.proceedingTaskCnt};	
+			                                	var finishCnt = ${employeeTaskCount.finishedTaskCnt};	
+			                                	var beforeRate = ${employeeTaskCount.undoneTaskRate};	
+			                                	var nowRate = ${employeeTaskCount.proceedingTaskRate};	
+			                                	var finishRate = ${employeeTaskCount.finishedTaskRate};	
+			                                
+												var xValues = ["진행전 "+beforeRate+"%" ,"진행중 "+nowRate+"%", "완료 "+finishRate+"%"];
+												var yValues = [beforeCnt, nowCnt, finishCnt];
+												var barColors = [
+													,
+												  "#2b5797",
+												  "#00aba9"
+												];
+												
+												new Chart("myChart", {
+												  type: "doughnut",
+												  data: {
+												    labels: xValues,
+												    datasets: [{
+												      backgroundColor: barColors,
+												      data: yValues
+												    }]
+												  },
+												  options: {
+													    title: {
+													      display: false,
+													      text: "48.7% 진행중",
+													      position: "bottom"
+													    }
+													  }
+												});
+											</script>
+										</c:if>
+		                                <!-- <canvas id="doughutChart" width="500" height="250"></canvas> -->
+		                            </div>
+		                        </div>
+            				</div>
+            				<!-- 업무별 진척도 -->
+            				<div class="col-7">
+            					<div class="card " style="height: 26rem;">
+									<h4 class="card-title ml-5" style="font-weight: bolder;color:#616161;margin-top:30px;">업무 별 진척도</h4>
+									<div class="card-body pt-0" style="width:100%; overflow-y: auto;">
+										<table class="table table-custom">
+											<thead>
+											    <tr>
+											        <th style="width:10%" class="text-center">번호</th>
+											        <th style="width:3%"></th>
+											        <th style="width:30%" >업무이름</th>
+											        <th style="width:20%">업무 시작일</th>
+											        <th style="width:20%">업무 종료일</th>
+											        <th style="width:15%">진행상태</th>
+											    </tr>
+											</thead>
+											<tbody style="overflow: scroll; width:100px;">
+												<c:forEach var="task" items="${taskList}" varStatus="a">
+													<tr class="reviewTitle table-hover" >
+														<td class="text-center">${a.index+1}</td>
+														<td></td>
+														<td >
+															${task.taskName }
+														</td>
+			                                   			<td>
+			                                   				<fmt:formatDate pattern="yyyy-MM-dd" value="${task.taskStartDate}"/>
+			                                   			</td>
+														<td>
+															<c:if test="${task.taskEndDate==null }">
+																<div style="padding-left :30% ;">--</div>
+															</c:if>
+															<c:if test="${task.taskEndDate!=null }">
+																<fmt:formatDate pattern="yyyy-MM-dd" value="${task.taskEndDate }"/>
+															</c:if>
+														</td>
+														<td >
+															<c:if test="${task.taskStatus=='진행완료'}">
+																<span style="color:#00aba9;font-weight: bold;">${task.taskStatus}</span>
+															</c:if>
+															<c:if test="${task.taskStatus=='진행중'}">
+																<span style="color:#2b5797;font-weight: bold;">${task.taskStatus}</span>
+															</c:if>
+															<c:if test="${task.taskStatus=='진행전'}">
+																<span style="color:#b5b5b5; font-weight: bold;">${task.taskStatus}</span>
+															</c:if>
+														</td>
+													</tr>
+												</c:forEach>
+										    </tbody>
+										</table>
+									</div>
+								</div>
+            				</div>
+            			</div>
+            			<!-- 공지사항 -->
+            			<div class="row">
+            				<div class="col-12">
+            					<div class="card card-custom">
+		                            <div class="card-body" style="height:304px;]">
+		                                <div class="card-title">
+		                                    <h4 style="font-weight: bolder;color:#616161;">공지사항</h4>
+		                                </div>
+		                                <div class="table-responsive">
+		                                    <table class="table table-hover table-custom">
+		                                        <thead>
+			                                        <tr>
+			                                            <th></th>
+			                                            <th style="width: 35%">제목</th>
+			                                            <th>작성자</th>
+			                                            <th>작성일</th>
+			                                            <th>조회수</th>
+			                                        </tr>
+		                                        </thead>
+		                                        <tbody id="boardTbody">
+		                                        	<c:if test="${fn:length(boardPagerMap.boardList) == 0}">
+		                                        		<tr>
+		                                        			<td></td>
+		                                        			<td></td>
+		                                        			<td colspan="2">게시글이 존재하지 않습니다.<td>
+		                                        		</tr>
+		                                        	</c:if>
+		                                        	<c:if test="${fn:length(boardPagerMap.boardList) != 0}">
+			                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
+				                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
+				                                                <td>${board.rnum}</td>
+				                                                <td>
+				                                                	${board.boardTitle}
+				                                                	<c:if test="${board.mediaFileName != null}">
+					                                                	&nbsp;
+					                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
+				                                                	</c:if>
+				                                                	<c:if test="${board.commentCount != 0}">
+					                                                	&nbsp;
+					                                                	<span class="text-red">[${board.commentCount}]</span>
+				                                                	</c:if>
+				                                                </td>
+				                                                <td>${board.empName}</td>
+				                                                <!-- 오늘 날짜면 시간만 보이도록 -->
+				                                                <c:set var="now" value="<%= new java.util.Date() %>" />
+				                                                <c:choose>
+																    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
+																        <td>
+																            <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/>
+																        </td>
+																    </c:when>
+																    <c:otherwise>
+																        <td>
+																            <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/>
+																        </td>
+																    </c:otherwise>
+																</c:choose>
+				                                                <td>${board.boardHitcount}</td>
+				                                            </tr>
+			                                        	</c:forEach>
+			                                        </c:if>
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+		                            </div>
+		                            <c:if test="${fn:length(boardPagerMap.boardList) != 0}">
+		                            	<div class="bootstrap-pagination">
+			                           		<!-- <nav> -->
+			                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
+			                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
+						                        <!-- <ul class="pagination justify-content-center"> -->
+					                        	<c:if test="${pager.groupNo>1}">
+					                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
+					                            </c:if>
+					                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+													<c:if test="${pager.pageNo == i}">
+														<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
+													</c:if>
+													<c:if test="${pager.pageNo != i}">
+														<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
+													</c:if>
+												</c:forEach>
+												<c:if test="${pager.groupNo<pager.totalGroupNo}">
+													<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
+					                            </c:if>
+						                    </nav>
+						                </div>
+		                            </c:if>
+		                        </div>
+            				</div>
+            			</div>
+            		</div>
+            		<!-- 일정 -->
+            		<div class="col-lg-3">
+            			<div class="card" style="height: 49.2rem;">
                             <div class="card-body">
                                 <div class="card-title">
                                     <h4 style="color:#616161; font-weight: bolder;">개인 일정</h4>
@@ -241,9 +446,9 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /# card -->
-                    </div>
-                </div>
+            		</div>
+            	</div>
+            
                  <!-- Modal Add Category -->
                 <div class="modal fade none-border" id="add-category">
                     <div class="modal-dialog">
@@ -315,95 +520,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="position:relative; bottom: 385px; height:28%;">
+                <div class="row d-none" style="position:relative; bottom: 385px; height:28%;">
                     <!-- /# column -->
                     <div class="col-lg-9" style=" padding-right:10px;">
-                        <div class="card card-custom">
-                            <div class="card-body" style="height:304px;]">
-                                <div class="card-title">
-                                    <h4 style="font-weight: bolder;color:#616161;">공지사항</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-custom">
-                                        <thead>
-	                                        <tr>
-	                                            <th></th>
-	                                            <th>제목</th>
-	                                            <th>작성자</th>
-	                                            <th>작성일</th>
-	                                            <th>조회수</th>
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="boardTbody">
-                                        	<c:if test="${fn:length(boardPagerMap.boardList) == 0}">
-                                        		<tr>
-                                        			<td></td>
-                                        			<td></td>
-                                        			<td colspan="2">게시글이 존재하지 않습니다.<td>
-                                        		</tr>
-                                        	</c:if>
-                                        	<c:if test="${fn:length(boardPagerMap.boardList) != 0}">
-	                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
-		                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
-		                                                <td>${board.rnum}</td>
-		                                                <td>
-		                                                	${board.boardTitle}
-		                                                	<c:if test="${board.mediaFileName != null}">
-			                                                	&nbsp;
-			                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
-		                                                	</c:if>
-		                                                	<c:if test="${board.commentCount != 0}">
-			                                                	&nbsp;
-			                                                	<span class="text-red">[${board.commentCount}]</span>
-		                                                	</c:if>
-		                                                </td>
-		                                                <td>${board.empName}</td>
-		                                                <!-- 오늘 날짜면 시간만 보이도록 -->
-		                                                <c:set var="now" value="<%= new java.util.Date() %>" />
-		                                                <c:choose>
-														    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
-														        <td>
-														            <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/>
-														        </td>
-														    </c:when>
-														    <c:otherwise>
-														        <td>
-														            <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/>
-														        </td>
-														    </c:otherwise>
-														</c:choose>
-		                                                <td>${board.boardHitcount}</td>
-		                                            </tr>
-	                                        	</c:forEach>
-	                                        </c:if>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <c:if test="${fn:length(boardPagerMap.boardList) != 0}">
-                            	<div class="bootstrap-pagination">
-	                           		<!-- <nav> -->
-	                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
-	                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
-				                        <!-- <ul class="pagination justify-content-center"> -->
-			                        	<c:if test="${pager.groupNo>1}">
-			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
-			                            </c:if>
-			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-											<c:if test="${pager.pageNo == i}">
-												<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
-											</c:if>
-											<c:if test="${pager.pageNo != i}">
-												<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
-											</c:if>
-										</c:forEach>
-										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
-			                            </c:if>
-				                    </nav>
-				                </div>
-                            </c:if>
-                        </div>
+                        
                         <!-- /# card -->
                     </div>
                 <div class="d-none">
