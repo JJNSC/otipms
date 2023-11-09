@@ -226,7 +226,7 @@ public class TaskServiceImpl implements TaskService {
 		if(totalTaskCnt != 0 && proceedingTaskCnt != 0) {
 			proceedingRate = Math.round( ((double) proceedingTaskCnt / (double) totalTaskCnt) * 1000 )/10;
 		}
-		tc.setFinishedTaskRate(proceedingRate);
+		tc.setProceedingTaskRate(proceedingRate);
 		tc.setUndoneTaskRate(100-finishRate-proceedingRate);
 		return tc;
 	}

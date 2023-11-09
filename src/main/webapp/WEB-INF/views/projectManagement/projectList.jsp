@@ -138,7 +138,7 @@
                                         				<c:forEach var="customerInfo" items="${customerInfoList}" varStatus="c">
                                         					<c:if test="${b.index==c.index}">
 					                                            <tr class="reviewTitle table-hover " data-toggle="collapse" data-review-id="${project.projectNo }" id="projectNo${project.projectNo }" href="#collapseExample${project.projectNo }" role="button" aria-expanded="false" aria-controls="collapseExample">
-					                                                <td class="text-center">${project.projectNo }</td>
+					                                                <td class="text-center">P${project.projectNo }</td>
 					                                                <td>
 																	   ${project.projectName }
 																	</td>

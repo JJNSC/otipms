@@ -3,7 +3,6 @@
 <mapper namespace="com.otipms.dao.BoardDao">
 	<!-- 새 게시글 삽입 -->
 	<insert id="insertBoard" parameterType="Board">
-		
 		<selectKey keyProperty="boardTypeNo" resultType="int" order="BEFORE">
 			SELECT BOARDTYPENO
 			  FROM BOARDTYPE
@@ -407,4 +406,27 @@
 	     WHERE 1=1
 	       AND BOARDNO = #{boardNo}
 	</select>
+	
+	<!-- 최초 게시물 타입 등록 -->
+	<insert id="insertInitialBoardType" parameterType="Board">
+		<selectKey keyProperty="boardTypeNo" resultType="int" order="BEFORE">
+			SELECT BOARDTYPENO_SEQ.nextval
+			  FROM DUAL
+		</selectKey>
+		INSERT 
+		  INTO boardType(
+		       boardTypeNo
+  		     , boardTypeName
+  		       <if test="boardTypeName.equals('질의 게시판')">
+			     , inquiryBoardType
+  		       </if>
+  		       )
+		VALUES (
+		       #{boardTypeNo}
+		     , #{boardTypeName}
+		       <if test="boardTypeName.equals('질의 게시판')">
+		       	, #{inquiryBoardType}
+		       </if>
+		       )
+	</insert>
 </mapper>

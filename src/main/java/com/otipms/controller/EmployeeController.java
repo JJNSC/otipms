@@ -275,7 +275,7 @@ public class EmployeeController {
 		admin.setEmpRank(empRank);
 		admin.setEmpTel(empTel);
 		admin.setRole("ROLE_ADMIN");
-		//employeeService.addInitialInfo(admin,defaultProfileImage);
+		employeeService.addInitialInfo(admin,defaultProfileImage);
 		
 		return "redirect:/";
 	}

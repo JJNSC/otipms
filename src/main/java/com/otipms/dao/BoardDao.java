@@ -121,5 +121,7 @@ public interface BoardDao {
 	 * @return
 	 */
 	public int selectBoardNoInserted();
+	//최초 게시판 종류 등록
+	public void insertInitialBoardType(Board board);
 	
 }

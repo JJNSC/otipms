@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.dao.BoardDao;
 import com.otipms.dao.EmployeeDao;
 import com.otipms.dao.ProjectDao;
 import com.otipms.dao.TeamDao;
+import com.otipms.dto.Board;
 import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Project;
@@ -34,6 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private TeamDao teamDao;
 	@Autowired
 	private ProjectDao projectDao;
+	@Autowired
+	private BoardDao boardDao;
 
 	@Transactional
 	@Override
@@ -303,7 +307,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.getEmployeeCount();
 	}
 	
-	//최조 관리자, 기본 프로필 사진 등록
+	//최조 관리자, 기본 프로필 사진 등록, 게시판 타입 등록
 	@Override
 	public void addInitialInfo(Employee employee, MultipartFile defaultProfileImage) {
 		//비밀번호 암호화
@@ -323,6 +327,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 			e.printStackTrace();
 		}
 		employeeDao.insertDefaultProfileImage(mediaFile);
+		Board initialBoard = new Board();
+		initialBoard.setBoardTypeName("공지사항");
+		boardDao.insertInitialBoardType(initialBoard);
+		initialBoard.setBoardTypeName("질의 게시판");
+		initialBoard.setInquiryBoardType("시스템 관리");
+		boardDao.insertInitialBoardType(initialBoard);
+		initialBoard.setInquiryBoardType("아키텍쳐");
+		boardDao.insertInitialBoardType(initialBoard);
+		initialBoard.setInquiryBoardType("DBA");
+		boardDao.insertInitialBoardType(initialBoard);
 	}
 
 	@Override
