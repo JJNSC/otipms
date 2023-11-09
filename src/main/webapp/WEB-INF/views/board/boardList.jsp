@@ -135,7 +135,7 @@
                                         	<c:if test="${fn:length(boardPagerMap.boardList) != 0}">
 	                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
 		                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
-		                                                <td>${board.boardNo}</td>
+		                                                <td>${board.rnum}</td>
 		                                                <c:if test="${boardType eq '질의 게시판'}">
 			                                                <td>${board.inquiryBoardType}</td>
 		                                                </c:if>

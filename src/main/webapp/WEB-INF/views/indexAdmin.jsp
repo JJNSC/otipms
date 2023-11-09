@@ -33,6 +33,113 @@
 			 height : 96%;
 		}
 		
+		.tdl-holder-custom .labelCustom {
+		    /* cursor: pointer; */
+		    display: block;
+		    line-height: 52px;
+		    padding-left: 0;
+		    position: relative;
+		    margin: 0 !important;
+		    color: #464a53;
+		}
+		
+		.tdl-holder-custom input[type=checkbox] {
+		    cursor: pointer;
+		    opacity: 0;
+		    position: absolute;
+		}
+		
+		.tdl-holder-custom input[type=checkbox] + i {
+		    background-color: #ddd;
+		    display: block;
+		    height: 20px;
+		    position: absolute;
+		    top: 15px;
+		    width: 20px;
+		    z-index: 1;
+		}
+		
+		.tdl-holder-custom input[type=checkbox]:checked + i::after {
+		    content: "\f00c";
+		    font-family: 'fontAwesome';
+		    display: block;
+		    left: 1px;
+		    position: absolute;
+		    top: -17px;
+		    z-index: 2;
+		    color: #162336;
+		}
+		
+		/* .tdl-holder-custom input[type=checkbox]:checked ~ span {
+		    text-decoration: line-through;
+		    position: relative;
+		} */
+		.tdl-holder-custom input[type=checkbox]:checked + label + span {
+		    text-decoration: line-through;
+		    position: relative;
+		}
+		
+		.tdl-holder-custom li span {
+		    margin-left: 35px;
+		    font-weight: 500;
+		    vertical-align: middle;
+		    -webkit-transition: all .2s linear;
+		    /* -moz-transition: all .2s linear;
+		    -o-transition: all .2s linear; */
+		    transition: all 0.2s linear;
+		    
+		    cursor:pointer;
+		}
+		
+		/* .tdl-holder-custom label a {
+		    color: #464a53;
+		    line-height: normal;
+		    height: 100%;
+		    text-align: center;
+		    text-decoration: none;
+		    width: 50px;
+		    transition: all 0.2s linear;
+		    padding: 18px 0px;
+		    font-size: 18px;
+		    display: flex;
+		    position: absolute;
+		    right: 0;
+		    display: inline-block;
+		} */
+		.tdl-holder-custom .labelCustom a {
+		    color: #464a53;
+		    line-height: normal;
+		    height: 100%;
+		    text-align: center;
+		    text-decoration: none;
+		    width: 50px;
+		    transition: all 0.2s linear;
+		    padding: 18px 0px;
+		    font-size: 18px;
+		    display: flex;
+		    position: absolute;
+		    right: 0;
+		    display: inline-block;
+		}
+		
+		[class^="ti-"], [class*=" ti-"] {
+		    font-family: 'themify';
+		    speak: none;
+		    font-style: normal;
+		    font-weight: normal;
+		    font-variant: normal;
+		    text-transform: none;
+		    line-height: 1;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    
+		    cursor: pointer;
+		}
+		
+		.ti-trash:before {
+		    content: "\e605";
+		}
+		
 		/* 수직 스크롤바 숨김 */
       ::-webkit-scrollbar {
           width: 0;
@@ -65,7 +172,7 @@
             	<div class="row">
                     <div class="col-lg-8 ">
 						<div class="card">
-							<div class="card-body" style="padding-top:0px;padding-bottom:0px;">
+							<div class="card-body" style="padding-top:0px;padding-bottom:10px;">
 								<div class="year-calendar">
 									<div class="pignose-calendar pignose-calendar-blue pignose-calendar-default">
 										<div class="pignose-calendar-top">
@@ -463,7 +570,7 @@
                                         <thead>
 	                                        <tr>
 	                                            <th></th>
-	                                            <th>제목</th>
+	                                            <th style="width: 35%">제목</th>
 	                                            <th>작성자</th>
 	                                            <th>작성일</th>
 	                                            <th>조회수</th>
@@ -480,7 +587,7 @@
                                         	<c:if test="${fn:length(boardPagerMap.boardList) != 0}">
 	                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
 		                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
-		                                                <td>${board.boardNo}</td>
+		                                                <td>${board.rnum}</td>
 		                                                <td>
 		                                                	${board.boardTitle}
 		                                                	<c:if test="${board.mediaFileName != null}">

@@ -243,7 +243,7 @@ public class BoardController {
 		int totalBoardNum = boardService.getTotalBoardNum(boardType, inquiryType, teamNo, searchType, searchKeyword);
 		
 		// Pager 객체 생성 (게시글 행 수, 페이지 개수, 총 페이지 개수, 페이지 시작 번호) 후 select
-		Pager boardPager = new Pager(5, 5, totalBoardNum, Integer.parseInt(pageNo));
+		Pager boardPager = new Pager(10, 5, totalBoardNum, Integer.parseInt(pageNo));
 		List<Board> boardList = boardService.getBoardList(boardPager, boardType, inquiryType, teamNo, searchType, searchKeyword);
 		
 		//pagination에 필요한 pager와 boardList를 map에 담아서 return 

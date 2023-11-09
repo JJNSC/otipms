@@ -34,7 +34,8 @@ function chooseInquiryType(option, pageNo) {
 				/*$.each(data.boardList, function(index, board) {*/
 					/*htmlBoard += '<tr>';*/
 					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardNo=" + board.boardNo + "'" + ';">';
-					htmlBoard += '<td>' + board.boardNo + '</td>';
+					/*htmlBoard += '<td>' + board.boardNo + '</td>';*/
+					htmlBoard += '<td>' + board.rnum + '</td>';
 					htmlBoard += '<td>' + board.inquiryBoardType + '</td>';
 					htmlBoard += '<td>';
 					htmlBoard += '	' + board.boardTitle;
@@ -143,7 +144,8 @@ function movePageNormal(pageNo) {
 				/*$.each(data.boardList, function(index, board) {*/
 					/*htmlBoard += '<tr>';*/
 					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardNo=" + board.boardNo + "'" + ';">';
-					htmlBoard += '<td>' + board.boardNo + '</td>';
+					/*htmlBoard += '<td>' + board.boardNo + '</td>';*/
+					htmlBoard += '<td>' + board.rnum + '</td>';
 					htmlBoard += '<td>';
 					htmlBoard += '	' + board.boardTitle;
 					if(board.mediaFileName != null) {

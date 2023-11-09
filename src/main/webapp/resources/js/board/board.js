@@ -42,7 +42,8 @@ function chooseInquiryType(option) {
 				/*$.each(data.boardList, function(index, board) {*/
 					/*htmlBoard += '<tr>';*/
 					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardNo=" + board.boardNo + "'" + ';">';
-					htmlBoard += '<td>' + board.boardNo + '</td>';
+					/*htmlBoard += '<td>' + board.boardNo + '</td>';*/
+					htmlBoard += '<td>' + board.rnum + '</td>';
 					htmlBoard += '<td>' + board.inquiryBoardType + '</td>';
 					htmlBoard += '<td>';
 					htmlBoard += '	' + board.boardTitle;
@@ -152,7 +153,8 @@ function movePage(clickedInput) {
 				/*$.each(data.boardList, function(index, board) {*/
 					/*htmlBoard += '<tr>';*/
 					htmlBoard += '<tr onclick="window.location.href=' + "'detailBoard?boardNo=" + board.boardNo + "'" + ';">';
-					htmlBoard += '<td>' + board.boardNo + '</td>';
+					/*htmlBoard += '<td>' + board.boardNo + '</td>';*/
+					htmlBoard += '<td>' + board.rnum + '</td>';
 					if(board.inquiryBoardType != null) {
 						htmlBoard += '<td>' + board.inquiryBoardType + '</td>';
 					}

@@ -36,4 +36,5 @@ public class Board {
 	private String mediaFileType;
 	private byte[] mediaFileData;		//프로필 사진
 	private String base64Img;
+	private int rnum;					//게시판 번호
 }
