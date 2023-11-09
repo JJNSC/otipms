@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 	  
 	$.ajax({
-	    url: 'http://localhost:8080/otipms/api/employeeData',
+	    url: '/otipms/api/employeeData',
 	    type: 'GET',
 	    dataType: 'json',
 	    success: function (data) {

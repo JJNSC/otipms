@@ -2,7 +2,7 @@ window.onload = function(){
 	var empId = document.getElementById("memIdSpan").value;
 	var filteredEmailsCount = document.getElementById("cntSpan").value;
 	$.ajax({
-	    url: "http://localhost:8080/otipms/mail/trashMails?empId="+empId,
+	    url: "/otipms/mail/trashMails?empId="+empId,
 	    dataType: "json",
 	    success: function (data) {
 	        var messageList = data;
@@ -34,7 +34,6 @@ window.onload = function(){
 					</div>
 					<div class="col-mail col-mail-profile">
 					<div class="profile">
-					<img src="data:${message.mediaFileType};base64, ${message.profile}" height="40" width="40" alt="">
 					<span class="rank">${message.empRank}</span>
 					<span class="name">${message.empName}</span>
 					</div>
@@ -66,7 +65,7 @@ window.onload = function(){
 		var navElement = document.createElement("nav");
 		var ulElement = document.createElement("ul");
 		ulElement.className = "pagination";
-		$.get("http://localhost:8080/otipms/mail/trashMails?empId="+empId, function (data) {
+		$.get("/otipms/mail/trashMails?empId="+empId, function (data) {
 			console.log(messageList);
 			for (var i = 1; i <= totalPages; i++) {
 				var pageli = document.createElement("li");

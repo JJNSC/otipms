@@ -1,4 +1,4 @@
-var chatWebSocket = new WebSocket("ws://192.168.0.169:8080/otipms/ws-chat");
+var chatWebSocket = new WebSocket("ws://192.168.27.220:8080/otipms/ws-chat");
 window.onload = function(){
 	
 	chatWebSocket.onopen = () => {
@@ -134,7 +134,7 @@ function createChatRoomElement(chatRoomInfo) {
 }
 
 function scrollToBottom() {
-    var chatList = document.getElementById('chatList');
+    var chatList = document.getElementById('chatBox');
     chatList.scrollTop = chatList.scrollHeight;
 }
 

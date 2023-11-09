@@ -189,7 +189,7 @@ function sendMail() {
     var empId = document.getElementById("memIdSpan").value;
 	// AJAX를 사용하여 서버로 데이터 전송
 	$.ajax({
-		url: 'http://localhost:8080/otipms/mail/sendMail',
+		url: '/otipms/mail/sendMail',
 		type: 'POST',
 		data: JSON.stringify({
 			title: title,

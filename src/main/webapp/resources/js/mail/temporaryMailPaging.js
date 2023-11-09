@@ -2,7 +2,7 @@ window.onload = function(){
 	var empId = document.getElementById("memIdSpan").value;
 	var filteredEmailsCount = document.getElementById("cntSpan").value;
 	$.ajax({
-	    url: "http://localhost:8080/otipms/mail/temporaryMails?empId="+empId,
+	    url: "/otipms/mail/temporaryMails?empId="+empId,
 	    dataType: "json",
 	    success: function (data) {
 	        var messageList = data;
@@ -68,7 +68,7 @@ window.onload = function(){
 		var navElement = document.createElement("nav");
 		var ulElement = document.createElement("ul");
 		ulElement.className = "pagination";
-		$.get("http://localhost:8080/otipms/mail/temporaryMails?empId="+empId, function (data) {
+		$.get("/otipms/mail/temporaryMails?empId="+empId, function (data) {
 			console.log(messageList);
 			for (var i = 1; i <= totalPages; i++) {
 				var pageli = document.createElement("li");

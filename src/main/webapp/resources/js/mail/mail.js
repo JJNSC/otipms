@@ -68,7 +68,7 @@ function sendToTrash(messageNo, index) {
     // 서버로 메일을 휴지통으로 보내는 요청을 보냅니다.
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/otipms/mail/updateMessageTrash", // 서버로 메일을 휴지통으로 보내는 URL
+        url: "/otipms/mail/updateMessageTrash", // 서버로 메일을 휴지통으로 보내는 URL
         data: { messageNo: messageNo },
         success: function (data) {
             if (data === "success") {
@@ -93,7 +93,7 @@ function sendToRealTrash(messageNo, index) {
     // 서버로 메일을 휴지통으로 보내는 요청을 보냅니다.
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/otipms/mail/updateMessageRealTrash", // 서버로 메일을 휴지통으로 보내는 URL
+        url: "/otipms/mail/updateMessageRealTrash", // 서버로 메일을 휴지통으로 보내는 URL
         data: { messageNo: messageNo },
         success: function (data) {
             if (data === "success") {
@@ -119,7 +119,7 @@ function checkimportant(messageNo ,index, event) {
 	
 	$.ajax({
         type: "POST",
-        url: "http://localhost:8080/otipms/mail/updateMessageImportant", // 서버 업데이트를 처리할 URL
+        url: "/otipms/mail/updateMessageImportant", // 서버 업데이트를 처리할 URL
         data: { messageNo: messageNo },
         success: function(data) {
             
@@ -143,7 +143,7 @@ function updateMessageChecked(ccNo) {
     console.log("ccNo: ", ccNo);
 	$.ajax({
         type: "POST",  // 또는 다른 HTTP 메서드
-        url: "http://localhost:8080/otipms/mail/updateCheckedDate", // 서버 URL로 대체
+        url: "/otipms/mail/updateCheckedDate", // 서버 URL로 대체
         data: { ccNo: ccNo }, // 업데이트에 필요한 데이터를 전달
         success: function (data) {
         	webSocket.send(empId);

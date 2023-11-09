@@ -50,7 +50,6 @@
                                     	<a href="receivedMail" class="list-group-item border-0 text-primary p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
                                     		<b>수신 쪽지함</b>
-                                    		<span class="badge badge-primary badge-sm float-right m-t-5">198</span>
                                     	</a>
                                         <a href="sentMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>
@@ -59,7 +58,6 @@
                                         <a href="importantMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-star-o font-18 align-middle mr-2"></i>
                                         	중요 쪽지함
-                                        	<span class="badge badge-danger badge-sm float-right m-t-5">47</span>
                                         </a>
                                         <a href="temporaryMail" class="list-group-item border-0 p-r-0">
                                         	<i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>

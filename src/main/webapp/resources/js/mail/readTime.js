@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	if(empId == msempId){
 		$.ajax({
-			url: 'http://localhost:8080/otipms/api/employeeDataRead?messageNo='+messageNo,
+			url: '/otipms/api/employeeDataRead?messageNo='+messageNo,
 			type: 'GET',
 			dataType: 'json',
 			success: function (data) {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				        cancelButton.style.cursor = "pointer";
 				        cancelButton.addEventListener("click", function () {
 				        	$.ajax({
-				                url: 'http://localhost:8080/otipms/mail/deleteCC',
+				                url: '/otipms/mail/deleteCC',
 				                type : 'POST',
 				                data : {
 				                	messageNo : messageNo,
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	} else {
 		$.ajax({
-			url: 'http://localhost:8080/otipms/api/employeeDataRead?messageNo='+messageNo,
+			url: '/otipms/api/employeeDataRead?messageNo='+messageNo,
 			type: 'GET',
 			dataType: 'json',
 			success: function (data) {

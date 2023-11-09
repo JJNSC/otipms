@@ -20,7 +20,7 @@
 			</div>
 		</div>
 		<div class="chat-box">
-			<div class="chat-desc customscroll" style="overflow-y: auto;">
+			<div id="chatBox" class="chat-desc customscroll" style="overflow-y: auto;">
 				<ul id="chatList">
 					<c:forEach var="ChatContent" items="${chatContent}">
 						<c:choose>

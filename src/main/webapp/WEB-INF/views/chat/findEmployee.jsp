@@ -23,7 +23,6 @@
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/chat/chat.js"></script>
     
     <!-- Editer -->
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
@@ -57,7 +56,7 @@
 								            <option value="">직급 선택</option>
 								        </select>
 								    </div>
-                                    <div style="display:inline-block; position: absolute; right: 30px; top: 105px;">
+                                    <div style="display:inline-block; position: absolute; right: 30px; top: 60px;">
 	                                    <input class="form-control" id="hzInput" type="text" placeholder="사원 찾기" style="width:150px;"/>
                                     </div>
                                     <hr>
