@@ -280,7 +280,7 @@
             			<div class="row">
             				<div class="col-12">
             					<div class="card card-custom">
-		                            <div class="card-body" style="height:304px;]">
+		                            <div class="card-body" style="height:304px;">
 		                                <div class="card-title">
 		                                    <h4 style="font-weight: bolder;color:#616161;">공지사항</h4>
 		                                </div>
