@@ -57,6 +57,7 @@ public class MessengerController {
 		Employee employee = empDetails.getEmployee();
 		
 		Messenger chatRoomEmp = messengerService.getEmpNotMe(mrNo, empId);
+		log.info("notMeEmp : " + chatRoomEmp);
 		List<Messenger> chatContent = messengerService.getChatContent(mrNo);
 		
 		model.addAttribute("employee", employee);

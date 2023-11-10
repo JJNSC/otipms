@@ -51,7 +51,7 @@
 				  )
 		   VALUES (
 	        	    #{mrNo, jdbcType=NUMERIC}
-	        	  , null
+	        	  , '환영합니다.'
 	        	  , sysdate
 	    		  )
 	</insert>

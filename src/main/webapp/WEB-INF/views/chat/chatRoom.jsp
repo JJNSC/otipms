@@ -6,10 +6,11 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 	<ul id="chatRoomList">
 		<c:forEach var="ChatRoom" items="${chatRoom}">
-			<li>
+			<li id="chatRoom${ChatRoom.mrNo}">
 				<a href="#" data-mrno="${ChatRoom.mrNo}">
 					<img src="/otipms/resources/images/user/1.jpg" alt=""/>
-					<span style="display:block;
+					<span 
+						  style="display:block;
 								 clear: both;
 							     font-size: 16px;
 							     color: #202342;
@@ -19,7 +20,7 @@
 							     padding-bottom: 5px;">
 							     ${ChatRoom.empRank} ${ChatRoom.empName}
 					</span>
-					<span style="position: absolute;right: 0px;top: 18px;">
+					<span class="chatTime" style="position: absolute;right: 0px;top: 18px;">
 						<c:set var="currentDate" value="<%= new java.util.Date() %>"/>
 						<c:choose>
     						<c:when test="${fn:substring(ChatRoom.mrDate, 0, 9) eq fn:substring(currentDate, 0, 9)}">
@@ -30,7 +31,9 @@
 				        	</c:otherwise>
 				        </c:choose>
 					</span>
-					<span style="white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;max-width: 160px;">${ChatRoom.mrLastChat}</span>
+					<span class="chatMessage" style="white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;max-width: 160px;">
+					${ChatRoom.mrLastChat}
+					</span>
 				</a>
 			</li>
 		</c:forEach>

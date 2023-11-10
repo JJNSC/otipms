@@ -41,10 +41,10 @@
 										<img src="${pageContext.request.contextPath}/resources/images/chatplus.png" 
 											  style="width:35px;height:30px;margin-left:15px;margin-top:13px;cursor:pointer"
 											  type="button"
-											  onclick="javascript:void(window.open('chat/findEmployee','_blank','width=600, height=600, left=600, top=30'))"
+											  onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))"
 										/>
 									</div>
-									<div id="chatRoomContainer" class="notification-list chat-notification-list customscroll">
+									<div id="chatRoomContainer" class="notification-list chat-notification-list customscroll" style="overflow-y: auto;">
 									</div>
 								</div>
 							</div>
