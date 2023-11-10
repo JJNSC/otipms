@@ -16,7 +16,7 @@ window.onload = function(){
 	    console.log("messageContent : " + messageContent);
 	    console.log("messageDate : " + messageDate);
 	    addChatYourMessage(messageContent, messageDate);
-	}
+	} 
 	
 	chatWebSocket.onclose = () => {
 		console.log("소켓 종료");
