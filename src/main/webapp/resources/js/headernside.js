@@ -229,31 +229,31 @@ window.onload = function(){
 	setInterval(updateTimeAndDate, 1000);
 	
 	function fetchWeatherData() {
-	    const apiUrl = 'https://api.weatherbit.io/v2.0/current?lat=37.5665&lon=126.9780&key=a35d4b980cb04cd0b0c0896cfa7c57fc&include=minutely';
-	    
+	    const apiKey = 'd882c2af9b206cdc8ebf11d52eaad5df'; // 본인의 API 키로 대체해야 합니다.
+	    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Seoul,KR&appid=${apiKey}&units=metric`;
+
 	    fetch(apiUrl)
 	        .then((response) => response.json())
 	        .then((data) => {
-	            const weatherDescription = data.data[0].weather.description;
-	            const temperature = data.data[0].temp;
+	            const weatherDescription = data.weather[0].description;
+	            const temperature = data.main.temp;
 
+	            // 날씨 아이콘 선택
 	            let weatherIcon;
 	            if (weatherDescription.includes('맑음')) {
 	                weatherIcon = '☀️';
-	            } else if (weatherDescription.includes('구름')) {
+	            } else if (weatherDescription.includes('흐림')) {
 	                weatherIcon = '☁️';
 	            } else if (weatherDescription.includes('비')) {
 	                weatherIcon = '🌧️';
 	            } else if (weatherDescription.includes('눈')) {
 	                weatherIcon = '❄️';
-	            } else if (weatherDescription.includes('바람')) {
-	                weatherIcon = '💨';
 	            } else {
 	                weatherIcon = '🌦️';
 	            }
 
 	            const weatherElement = document.getElementById('weather');
-	            weatherElement.textContent = `서울 날씨 : ${weatherIcon} ${temperature}°C`;
+	            weatherElement.textContent = `서울 날씨: ${weatherIcon} ${temperature}°C`;
 	        })
 	        .catch((error) => {
 	            console.error('날씨 정보를 가져오는 중 오류 발생:', error);
@@ -261,7 +261,7 @@ window.onload = function(){
 	}
 
 	fetchWeatherData();
-	setInterval(fetchWeatherData, 600000); // 10분마다 업데이트
+	setInterval(fetchWeatherData, 600000); 
 	
 	function updatePaging(messageList) {
 		var filteredEmailsCountContainer = document.getElementById("cntSpan")

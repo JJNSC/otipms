@@ -143,7 +143,7 @@ width:15.1875rem;
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="profile"><i class="icon-user"></i> <span>내 정보</span></a>
+                                            <a href="${pageContext.request.contextPath}/profile"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void(window.open('${pageContext.request.contextPath}/mail/receivedMail','_blank','width=920, height=680, left=800, top=30'))">
