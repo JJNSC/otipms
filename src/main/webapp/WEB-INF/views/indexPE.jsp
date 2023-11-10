@@ -177,12 +177,12 @@
             				<div class="col-5" style="padding-right: 0px;">
             					<div class="card" style="height:48%; height: 26rem;">
 		                            <div class="card-body">
-		                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">${me.empName } 님 작업 진척률</h4>
+		                                <h4 class="card-title mb-5" style="color:#616161; font-weight: bolder;">${me.empName } 님 작업 진척률</h4>
 		                                <c:if test="${employeeTaskCount.undoneTaskCnt==0&&employeeTaskCount.proceedingTaskCnt==0&&employeeTaskCount.finishedTaskCnt==0 }">
 		                                	<div class="text-center"><h4 style="color:#9097c4; font-weight: 400; margin-top:30%;">할당된 작업이 없습니다.</h4></div>
 		                                </c:if>
 		                                <c:if test="${employeeTaskCount.undoneTaskCnt!=0||employeeTaskCount.proceedingTaskCnt!=0||employeeTaskCount.finishedTaskCnt!=0 }">
-			                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+			                                <canvas id="myChart" style="width:100%;max-width:800px; height:270px;"></canvas>
 			                                <script>
 			                                	var beforeCnt = ${employeeTaskCount.undoneTaskCnt};	
 			                                	var nowCnt = ${employeeTaskCount.proceedingTaskCnt};	
