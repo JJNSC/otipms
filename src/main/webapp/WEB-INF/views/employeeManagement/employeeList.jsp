@@ -141,11 +141,14 @@
 <body>
 	<jsp:include page="../headernsidebar.jsp">
 		<jsp:param name="employee" value="${employee}" />
+		<jsp:param name="mf" value="${mf}" />
+		<jsp:param name="base64Img" value="${base64Img}" />
 	</jsp:include>
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body" style="min-height: 1000px;">
+        <!-- <div class="content-body" style="min-height: 1000px;"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
             <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
@@ -156,12 +159,13 @@
                 </div>
             </div> -->
             <!-- row -->
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4><span style="position:relative; left:30px;"><b>인력 관리</b></span></h4>
+                                <h4><span style="position:relative; left:30px; font-weight: bolder;">인력 관리</span></h4>
                                 <!-- <span style="float: right;">
                                 	<a href="addAndModifyEmployee">
                                 		<button type="button" class="btn btn-primary" style="position:relative; right:40px;">등록</button>
@@ -578,9 +582,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

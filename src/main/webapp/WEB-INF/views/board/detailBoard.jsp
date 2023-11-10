@@ -80,19 +80,21 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body" style="min-height: 1000px;"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
 
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
 				<div class="row">
                     <!-- /# column -->
                     <div class="col">
@@ -102,10 +104,10 @@
                                     <!-- <h4>공지사항</h4> -->
                                     <%-- <h4>${boardType}</h4> --%>
                                     <c:if test="${board.boardTypeName ne '팀 게시판'}">
-	                                    <h4 class="d-inline-block"><a href="board">${board.boardTypeName}</a></h4><c:if test="${board.boardTypeName eq '질의 게시판'}"> <h5 class="d-inline-block">&nbsp;/&nbsp;  ${board.inquiryBoardType}</h5></c:if>
+	                                    <h4 class="d-inline-block" style="font-weight: bolder;"><a href="board" style="color: #222222;">${board.boardTypeName}</a></h4><c:if test="${board.boardTypeName eq '질의 게시판'}"> <h5 class="d-inline-block">&nbsp;/&nbsp;  ${board.inquiryBoardType}</h5></c:if>
                                     </c:if>
                                     <c:if test="${board.boardTypeName eq '팀 게시판'}">
-	                                    <h4>${teamName} 게시판</h4>
+	                                    <h4 style="font-weight: bolder;">${teamName} 게시판</h4>
                                     </c:if>
                                 </div>
                             	<div class="mt-4 pl-3 row" style="margin-bottom: 0.8rem;">
@@ -471,9 +473,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

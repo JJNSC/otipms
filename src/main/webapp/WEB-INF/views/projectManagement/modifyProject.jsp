@@ -24,12 +24,15 @@
 
     <jsp:include page="../headernsidebar.jsp">
 		<jsp:param name="employee" value="${employee}" />
+		<jsp:param name="mf" value="${mf}" />
+		<jsp:param name="base64Img" value="${base64Img}" />
 	</jsp:include>
 
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
             <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
@@ -60,7 +63,7 @@
 			                                        </div>
 			                                    </div>
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <%-- <div class="form-group col-md-4">
                                                 <label>담당자 (PM)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
                                                 <label class="sr-only">담당자 검색</label>
                                                 <div class="input-group mb-2">
@@ -77,6 +80,22 @@
                                                     	<input type="text" class="form-control"style="background-color:transparent; border:0px;" id="PMINFO"placeholder="${pmInfo.empRank } ${pmInfo.empName} ">
                                                 	</div>
                                                 </div>
+                                            </div> --%>
+                                            <div class="form-group col-md-4">
+                                                <label>담당자 (PM)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                                <label class="sr-only">담당자 검색</label>
+                                                <div class="d-flex">
+                                                	<input type="hidden" class="form-control" name="beforeProjectManagerId" value="${pmInfo.empId }">
+	                                	 			<input type="hidden" class="form-control" id="PMid" name="ProjectManagerId" value="${pmInfo.empId }">
+                                                   	<input type="text" class="form-control"style="background-color:transparent;" id="PMINFO"placeholder="${pmInfo.empRank } ${pmInfo.empName} ">
+                                                	<div class="d-flex">
+                                                		<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+			                                        		type="button" 
+			                                        		onclick="javascript:void(window.open('findPM','_blank','width=600, height=600, left=600, top=30'))">
+			                                        		<i class="icon-copy fa fa-search" aria-hidden="true"></i>
+			                                        	</button>
+                                                	</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -89,7 +108,7 @@
 	                                            <input type="text" class="form-control" name="customerCompany" value="${projectInfo.projectCompanyName }" placeholder="${projectInfo.projectCompanyName }">
 	                                        </div>
                                         </div>
-                                        <div class="form-group col-md-4" style="padding-left:0px;">
+                                        <%-- <div class="form-group col-md-4" style="padding-left:0px;">
                                             <label>고객 명 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
                                             <label class="sr-only">고객사 검색</label>
                                             <div class="input-group mb-2">
@@ -104,6 +123,22 @@
                                                 <input type="hidden" class="form-control"  name="beforeCustomerId" value="${customerInfo.empId }">
                                                 <input type="hidden" class="form-control" id="ClientId" name="customerId" value="${customerInfo.empId }">
                                                 <input type="text" class="form-control"  style="background-color:transparent; border:0px;" id="ClientINFO" placeholder="${customerInfo.empName }">
+                                            </div>
+                                        </div> --%>
+                                        <div class="form-group col-md-4" style="padding-left:0px;">
+                                            <label>고객 명 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                            <label class="sr-only">고객사 검색</label>
+                                            <div class="d-flex">
+                                            	<input type="hidden" class="form-control"  name="beforeCustomerId" value="${customerInfo.empId }">
+                                                <input type="hidden" class="form-control" id="ClientId" name="customerId" value="${customerInfo.empId }">
+                                                <input type="text" class="form-control"  style="background-color:transparent;" id="ClientINFO" placeholder="${customerInfo.empName }">
+                                            	<div class="d-flex">
+                                            		<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+			                                        		type="button" 
+			                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
+			                                        	<i class="icon-copy fa fa-search" aria-hidden="true"></i>
+			                                        </button>
+                                            	</div>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -138,9 +173,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

@@ -277,7 +277,12 @@ input {
 
 button,
 select {
-  text-transform: none; }
+  text-transform: none;
+  border-radius: 0;
+  box-shadow: none;
+  height: 28px;
+  border: 1px solid #ced4da;
+  color: #495057; }
 
 button,
 html [type="button"],
@@ -11396,7 +11401,8 @@ table.dataTable thead .sorting::after {
   margin-bottom: 30px;
   border: 0px;
   border-radius: 0.625rem;
-  box-shadow: 6px 11px 41px -28px #a99de7; }
+  /* box-shadow: 6px 11px 41px -28px #a99de7; */
+  box-shadow: 6px 11px 41px -28px #B5C4D6; }
   .card-title {
     font-size: 18px;
     font-weight: 500;

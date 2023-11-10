@@ -77,7 +77,10 @@
 		.no-right-border {
 		  border-right: none; /* 왼쪽 테두리 제거 */
 		}
-		
+		/* 수직 스크롤바 숨김 */
+		::-webkit-scrollbar {
+		    width: 0;
+		}
 	</style>	
 
 </head>
@@ -92,25 +95,27 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
                     <!-- /# column -->
                     <div class="col">
-                        <div class="card card-custom">
+                        <div class="card card-custom" style="box-shadow: 6px 11px 41px -28px #B5C4D6;">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4><b>프로젝트 목록</b></h4> 
+                                    <h4 style="font-weight: bolder;">프로젝트 목록</h4> 
                                     <span style="float: right">
                                     	<a href="addProjectForm">
                                     		<button type="button" class="btn mb-1 btn-primary">등록</button>
@@ -200,7 +205,7 @@
 					                                            <tr style="background-color:#f3f3f3;" id="${project.projectNo }bottom">
 														   			<td style="padding-top :0px; padding-bottom :0px;"colspan="8">
 												                      	<div class="collapse" id="collapseExample${project.projectNo }">
-																         	<div class="card card-body mt-3 noHover" style="height:200px;">
+																         	<div class="card card-body mt-3 noHover" style="height:200px; box-shadow: 6px 11px 41px -28px #B5C4D6;">
 							                                            		<table border="1" class="table-in-table">
 							                                            			<tr>
 							                                            				<td class="no-right-border col-md-8">
@@ -285,9 +290,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

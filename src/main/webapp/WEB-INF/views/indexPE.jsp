@@ -177,7 +177,7 @@
             				<div class="col-5" style="padding-right: 0px;">
             					<div class="card" style="height:48%; height: 26rem;">
 		                            <div class="card-body">
-		                                <h4 class="card-title mb-5" style="color:#616161; font-weight: bolder;">${me.empName } 님 작업 진척률</h4>
+		                                <h4 class="card-title mb-5" style="font-weight: bolder;">${me.empName }님 작업 진척률</h4>
 		                                <c:if test="${employeeTaskCount.undoneTaskCnt==0&&employeeTaskCount.proceedingTaskCnt==0&&employeeTaskCount.finishedTaskCnt==0 }">
 		                                	<div class="text-center"><h4 style="color:#9097c4; font-weight: 400; margin-top:30%;">할당된 작업이 없습니다.</h4></div>
 		                                </c:if>
@@ -225,7 +225,7 @@
             				<!-- 업무별 진척도 -->
             				<div class="col-7">
             					<div class="card " style="height: 26rem;">
-									<h4 class="card-title ml-5" style="font-weight: bolder;color:#616161;margin-top:30px;">업무 별 진척도</h4>
+									<h4 class="card-title ml-4" style="font-weight: bolder; margin-top:30px;">업무 별 진척도</h4>
 									<div class="card-body pt-0" style="width:100%; overflow-y: auto;">
 										<table class="table table-custom">
 											<thead>
@@ -282,7 +282,7 @@
             					<div class="card card-custom">
 		                            <div class="card-body" style="height:304px;">
 		                                <div class="card-title">
-		                                    <h4 style="font-weight: bolder;color:#616161;">공지사항</h4>
+		                                    <h4 style="font-weight: bolder;">공지사항</h4>
 		                                </div>
 		                                <div class="table-responsive">
 		                                    <table class="table table-hover table-custom">
@@ -373,7 +373,7 @@
             			<div class="card" style="height: 49.2rem;">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4 style="color:#616161; font-weight: bolder;">개인 일정</h4>
+                                    <h4 style="font-weight: bolder;">개인 일정</h4>
                                     <input type="hidden" id="mainPageRole" value="${employee.role }">
                                 </div>
                                 <div class="row">

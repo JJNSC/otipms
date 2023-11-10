@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>막내온탑 >v<</title>
+    <title>OTIPMS</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
     <!-- Custom Stylesheet -->
@@ -35,19 +35,21 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
 
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
 				<div class="row">
                     <!-- /# column -->
                     <div class="col">
@@ -58,14 +60,14 @@
                                     <c:if test="${board != null}">
 	                                    <%-- <h4>${board.boardTypeName}</h4> --%>
 	                                    <c:if test="${board.boardTypeName ne '팀 게시판'}">
-		                                    <h4>${board.boardTypeName}</h4>
+		                                    <h4 style="font-weight: bolder;">${board.boardTypeName}</h4>
 	                                    </c:if>
 	                                    <c:if test="${board.boardTypeName eq '팀 게시판'}">
-		                                    <h4>${teamName} 게시판</h4>
+		                                    <h4 style="font-weight: bolder;">${teamName} 게시판</h4>
 	                                    </c:if>
                                     </c:if>
                                     <c:if test="${board == null}">
-	                                    <h4>${boardType}</h4>
+	                                    <h4 style="font-weight: bolder;">${boardType}</h4>
                                     </c:if>
                                 </div>
                                 <form action="submitBoard" method="post" id="submitBoardForm" enctype="multipart/form-data">
@@ -301,9 +303,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

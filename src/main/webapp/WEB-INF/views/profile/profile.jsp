@@ -29,21 +29,22 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
-
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
-					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30" style="padding-right: 0px;">
 						<div class="card" style="padding: 20px;">
 							<div class="profile-photo">
 								<input class="d-none" type="file" id="imageInput" accept="image/*" onchange="changeProfile()">
@@ -101,7 +102,7 @@
 												<form id="updatePasswordForm" onsubmit="submitUpdatePasswordForm()">
 													<ul class="profile-edit-list">
 														<li class="weight-500">
-															<h4 class="text-blue h5 mb-20" style="margin-bottom: 34px;">비밀번호 변경</h4>
+															<h4 class="text-blue h5 mb-20" style="margin-bottom: 34px; font-weight: bolder;">비밀번호 변경</h4>
 															<div class="form-group">
 																<label>현재 비밀번호</label>
 																<input id="currentPasswordCheck" class="form-control form-control" type="password" placeholder="**********">
@@ -161,9 +162,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

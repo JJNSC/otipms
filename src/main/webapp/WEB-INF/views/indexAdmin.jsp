@@ -381,7 +381,7 @@
 	                        <div class="card card-custom">
 	                            <div class="card-body" style="height:304px; padding:20px,28px;">
 	                                <div class="card-title">
-	                                    <h4 style="color:#616161; font-weight: bolder;">공지사항</h4>
+	                                    <h4 style="font-weight: bolder;">공지사항</h4>
 	                                </div>
 	                                <div class="table-responsive">
 	                                    <table class="table table-hover table-custom">
@@ -472,7 +472,7 @@
                         <div class="card" style="height: 51.57rem;">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4 style="color:#616161; font-weight: bolder;">개인 일정</h4>
+                                    <h4 style="font-weight: bolder;">개인 일정</h4>
                                     <input type="hidden" id="mainPageRole" value="${employee.role }">
                                 </div>
                                 <div class="row">

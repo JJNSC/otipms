@@ -82,28 +82,30 @@
 </head>
 
 <body>
-
     <jsp:include page="../headernsidebar.jsp">
 		<jsp:param name="employee" value="${employee}" />
+		<jsp:param name="mf" value="${mf}" />
+		<jsp:param name="base64Img" value="${base64Img}" />
 	</jsp:include>
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
            <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">팀 관리</h4>
+                                <h4 class="card-title" style="font-weight: bolder;">팀 관리</h4>
                                     <span style="float: right;">
 	                               		<button type="button" class="btn btn-primary" style="position:relative; bottom:20px; right:70px;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">등록</button>
 	                                </span>
@@ -287,9 +289,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

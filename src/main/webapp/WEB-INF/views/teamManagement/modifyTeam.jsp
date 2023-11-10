@@ -23,7 +23,12 @@
 
 <body>
 
-   <%@include file="/WEB-INF/views/headernsidebar.jsp" %>
+   <%-- <%@include file="/WEB-INF/views/headernsidebar.jsp" %> --%>
+   <jsp:include page="../headernsidebar.jsp">
+		<jsp:param name="employee" value="${employee}" />
+		<jsp:param name="mf" value="${mf}" />
+		<jsp:param name="base64Img" value="${base64Img}" />
+	</jsp:include>
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -31,16 +36,17 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
             <div class="col-lg-12">
                         <div class="card">
@@ -74,25 +80,37 @@
 	                                                <label>팀장 (PL)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
 	                                                <label class="sr-only">팀장 검색</label>
                                                 </c:if>
-                                                <div class="input-group mb-2">
+                                                <!-- <div class="input-group mb-2"> -->
+                                                <div class="d-flex">
 	                                                <input type="hidden" class="form-control" name="teamNo" value="${oldTeam.teamNo }">
 	                                                <input type="hidden" class="form-control" id="ClientId" name="newTeamEmpId" value="${oldTeam.empId }">
-	                                                <input type="text" class="form-control"  style="background-color:transparent; border:0px;" id="ClientINFO" placeholder="${oldTeam.empRank } ${oldTeam.empName }">
-                                                    <div class="text-left m-t-15">
+	                                                <input type="text" class="form-control"  style="background-color:transparent;" id="ClientINFO" placeholder="${oldTeam.empRank } ${oldTeam.empName }">
+                                                    <!-- <div class="text-left m-t-15"> -->
+                                                    <div class="d-flex">
                                                     	<c:if test="${oldTeam.teamName.equals('고객')}">
-					                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+					                                        <!-- <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
 					                                        		type="button" 
 					                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
 					                                        	<i class="fa fa-paper-plane m-r-5"></i>
 					                                        	 고객 찾기
+					                                        </button> -->
+					                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+					                                        		type="button" 
+					                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
+					                                        	<i class="icon-copy fa fa-search" aria-hidden="true"></i>
 					                                        </button>
 				                                        </c:if>
                                                     	<c:if test="${!oldTeam.teamName.equals('고객')}">
-					                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+					                                        <%-- <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
 															    type="button" 
 															    onclick="openFindPL(${oldTeam.teamNo })">
 															    <i class="fa fa-paper-plane m-r-5"></i>
 															    팀장 찾기
+															</button> --%>
+															<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+															    type="button" 
+															    onclick="openFindPL(${oldTeam.teamNo })">
+															    <i class="icon-copy fa fa-search" aria-hidden="true"></i>
 															</button>
 															
 															<script>
@@ -129,9 +147,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

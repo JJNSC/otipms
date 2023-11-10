@@ -277,7 +277,7 @@
 		                            <!-- <div class="card-body" style="height:304px; padding:20px,28px;"> -->
 		                            <div class="card-body" style="height:304px;">
 		                                <div class="card-title">
-		                                    <h4 style="color:#616161; font-weight: bolder;">공지사항</h4>
+		                                    <h4 style="font-weight: bolder;">공지사항</h4>
 		                                </div>
 		                                <div class="table-responsive">
 		                                    <table class="table table-hover table-custom">
@@ -369,7 +369,7 @@
             				<div class="col-12">
             					<div class="card" style="height: 25.7rem;">
 		                            <div class="card-body">
-		                                <h4 class="card-title mb-5" style="color:#616161; font-weight: bolder;">${project.projectName } 진척률</h4>
+		                                <h4 class="card-title mb-5" style="font-weight: bolder;">${project.projectName } 진척률</h4>
 		                                <canvas id="myChart" style="width:100%;max-width:800px; height:270px;"></canvas>
 		                                <script>
 		                                	var beforeCnt = ${projectTaskCount.undoneTaskCnt};	
@@ -415,7 +415,7 @@
             				<div class="col-12">
             					<div class="card" style="height:100%;">
 				                    <div class="card-body" style="">
-				                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">프로젝트 정보</h4>
+				                    	 <h4 class="card-title" style="font-weight: bolder;">프로젝트 정보</h4>
 				                    	 <table>
 				                    	 	<thead>
 				                    	 		<tr >
@@ -446,7 +446,7 @@
 				                    	 </table>
 			                    	 </div>
 			                    	 <div class="card-body">
-				                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">PM(Project Manager) 정보</h4>
+				                    	 <h4 class="card-title" style="font-weight: bolder;">PM(Project Manager) 정보</h4>
 				                    	 <table>
 				                    	 	<thead>
 				                    	 		<tr>

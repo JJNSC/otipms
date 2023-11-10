@@ -84,6 +84,11 @@
 		    background-color: #2f588b;
 		    border-color: #2f588b; 
 		}
+		
+		/* 수평 스크롤바 숨김 */
+		::-webkit-scrollbar {
+		    background: transparent;
+		}
 	</style>	
 
 </head>
@@ -97,25 +102,27 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
                     <!-- /# column -->
-                    <div class="col-7">
+                    <div class="col-7" style="padding-right: 0px;">
                         <div class="card card-custom">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4><b>프로젝트 업무 관리</b></h4>
+                                	<h4 style="font-weight: bolder;">프로젝트 업무 관리</h4>
                                     <input type="hidden" id="loginEmployeeId" value="${employee.empId}">
                                     <input type="hidden" id="loginEmployeeRole" value="${employee.role}">
                                     <c:if test="${employee.role eq 'ROLE_ADMIN' or employee.role eq 'ROLE_PM'}">
@@ -126,7 +133,7 @@
                                 </div>
                                 <div class="row my-3">
                                 	<c:if test="${employee.role eq 'ROLE_ADMIN'}">
-                                		<div class="col-lg-4" style="display:inline-block;">
+                                		<div class="col-lg-5" style="display:inline-block;">
 										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
 										    	<option>프로젝트 선택</option>
 										    	<c:forEach var="project" items="${projectList}">
@@ -275,7 +282,7 @@
                         <div class="card card-custom">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4><b>업무 상세 내용</b></h4> 
+                                    <h4 style="font-weight: bolder;">업무 상세 내용</h4>
                                     <!-- <span style="float: right">
                                     	<a href="addAndModifyProject">
                                     		<button type="button" class="btn mt-3 mb-1 btn-primary">등록</button>
@@ -404,9 +411,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

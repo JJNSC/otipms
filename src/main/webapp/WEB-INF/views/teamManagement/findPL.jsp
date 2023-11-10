@@ -45,7 +45,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="compose-content mt-5 mb-5">
+                                <div class="compose-content mt-5">
                                    	<!-- <div>
 								        <select id="project-dropdown">
 								            <option value="">프로젝트 선택</option>
@@ -88,13 +88,15 @@
                                    		</div>
                                    	</div>
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="sendSelectedPL()">
-                                        	<i class="fa fa-paper-plane m-r-5"></i>
-                                        	 OK
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" style="height: 35px;" onclick="sendSelectedPL()">
+                                        	<!-- <i class="fa fa-paper-plane m-r-5"></i> -->
+                                        	<i class="icon-copy fa fa-check" aria-hidden="true"></i>
+                                        	 확인
                                         </button>
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="closeWindow()">
-                                        	<i class="ti-close m-r-5"></i>
-                                        	 cancel
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" style="height: 35px;" onclick="closeWindow()">
+                                        	<!-- <i class="ti-close m-r-5"></i> -->
+                                        	<i class="icon-copy fa fa-close" aria-hidden="true"></i>
+                                        	 취소
                                         </button>
                                     </div>
                                     <div class="row mt-3">

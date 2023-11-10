@@ -28,6 +28,11 @@
 		.paddingright{
 			padding-right:5%;
 		}
+		
+		/* 수평 스크롤바 숨김 */
+		::-webkit-scrollbar {
+		    background: transparent;
+		}
 	</style>	
 	<script>
 	    var contextPath = "${pageContext.request.contextPath}";
@@ -43,7 +48,8 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body" style="min-height: 1000px;">
+        <!-- <div class="content-body" style="min-height: 1000px;"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
             <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
@@ -55,12 +61,16 @@
             </div> -->
             <!-- row -->
             <input class="d-none" id="contextPage" value="${pageContext.request.contextPath}"></input>
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4><span style="position:relative; left:30px;"><b>인력 조회</b></span></h4>
+                            	<div class="card-title">
+                                	<h4 class="ml-4" style="font-weight: bolder;">인력 조회</h4>
+                                </div>
+                                <!-- <h4 style="font-weight: bolder;"><span style="position:relative; left:30px;">인력 조회</span></h4> -->
 								<div class="col-lg-3" style="display:inline-block; margin-left:15px;">
 								    <select class="form-control" id="project-dropdown" name="project-dropdown">
 							            <option value="">프로젝트 선택</option>
@@ -103,9 +113,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

@@ -54,6 +54,10 @@
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.fc-draggable {
 			color: #76838f;
 		}
+		/* 수직 스크롤바 숨김 */
+		::-webkit-scrollbar {
+		    width: 0;
+		}
     </style>
 
 </head>
@@ -67,286 +71,78 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4><b>업무 일정</b></h4>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="card-box m-b-50">
+           <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
+            	<div class="row">
+            		<div class="col-lg-7 pr-0">
+            			<div class="card">
+            				<div class="card-body">
+            					<div class="row">
+            						<div class="col-lg-12">
+            							<div class="card-box m-b-50">
                                             <div id="calendar"></div>
                                         </div>
-                                    </div>
-									<div class="col-lg-4 mt-5">
-                                        <div id="external-events" class="m-t-20 mt-5">
-                                            <!-- <div class="external-event ui-draggable ui-draggable-handle" data-class="bg-primary" style="position: relative;"><i class="fa fa-move"></i>New Theme Release</div> -->
-                                            <div class="basic-form">
-			                                    <form>
-			                                        <div class="form-group">
-			                                            <div class="form-check form-check-inline mr-4">
-			                                                <label class="form-check-label">
-			                                                <input type="checkbox" class="form-check-input" value="">모두 선택</label>
-			                                            </div>
-			                                            <div class="form-check form-check-inline">
-			                                                <label class="form-check-label">
-			                                                <input type="checkbox" class="form-check-input" value="">진행전</label>
-			                                            </div>
-			                                            <div class="form-check form-check-inline">
-			                                                <label class="form-check-label">
-			                                                <input type="checkbox" class="form-check-input" value="">진행중</label>
-			                                            </div>
-			                                            <div class="form-check form-check-inline disabled">
-			                                                <label class="form-check-label">
-			                                                <input type="checkbox" class="form-check-input" value="">진행 완료</label>
-			                                            </div>
-			                                        </div>
-			                                    </form>
-			                                </div>
-                                            <table class="table table-hover taskTable">
-		                                        <tbody id="taskListTableBody">
-		                                            <tr>
-		                                                <td><div class="taskEvent-red mb-1" style="position: relative;">${project.projectName}</div></td>
-		                                                <td class="text-success">진행중</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button></td>
-		                                            </tr>
-		                                            
-		                                            <c:forEach var="task" items="${taskList}">
-			                                            <tr>
-			                                                <td><div class="taskEvent-${task.taskColor} mb-1" style="position: relative;">${task.taskName}</div></td>
-			                                                <c:if test="${task.taskStatus == '진행전'}">
-				                                                <td class="text-light">${task.taskStatus}</td>
-			                                                </c:if>
-			                                                <c:if test="${task.taskStatus == '진행중'}">
-				                                                <td class="text-success">${task.taskStatus}</td>
-			                                                </c:if>
-			                                                <c:if test="${task.taskStatus == '진행완료'}">
-				                                                <td class="text-danger">${task.taskStatus}</td>
-			                                                </c:if>
-			                                                <td>
-			                                                	<input id="taskNoFromModel" type="hidden" value="${task.taskNo}">
-			                                                	<button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openTaskDetail(this)">상세</button>
-			                                                </td>
-			                                            </tr>
-		                                            </c:forEach>
-		                                            <tr>
-		                                                <td><div class="taskEvent-orange mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                            <tr>
-		                                                <td><div class="taskEvent-yellow mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                            <tr>
-		                                                <td><div class="taskEvent-lightGreen mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                            <tr>
-		                                                <td><div class="taskEvent-green mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                            <tr>
-		                                                <td><div class="taskEvent-lightBlue mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                            <tr>
-		                                                <td><div class="taskEvent-blue mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                            <tr>
-		                                                <td><div class="taskEvent-purple mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                            <tr>
-		                                                <td><div class="taskEvent-pink mb-1" style="position: relative;"><i class="fa fa-move"></i>개인업무2</div></td>
-		                                                <td class="text-danger">진행 완료</td>
-		                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail">상세</button></td>
-		                                            </tr>
-		                                        </tbody>
-		                                    </table>
-                                        </div>
-                                        <!-- checkbox -->
-                                        <!-- <div class="checkbox m-t-40">
-                                            <input id="drop-remove" type="checkbox">
-                                            <label for="drop-remove">&nbsp; 드롭 후 제거</label>
-                                        </div> -->
-                                    </div>
-                                    <!-- end col -->
-                                    <!-- Modal Add Category -->
-                                    <div class="modal fade none-border" id="taskDetail">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title"><strong>업무 상세</strong></h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label id="taskNoLabel" class="control-label">업무 번호 (히든 처리할 예정)</label>
-                                                                <input id="taskNoInput" class="form-control form-white" value="" type="text" name="category-name" readonly>
-                                                                <input id="projectNoInput" class="form-control form-white" type="text" value="${project.projectNo}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label id="taskNameLabel" class="control-label">업무 이름</label>
-                                                                <input id="taskNameInput" class="form-control form-white" type="text" name="category-name" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label id="taskCommentLabel" class="control-label">업무 개요</label>
-                                                                <textarea id="taskCommentInput" class="form-control form-white" name="category-name"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label class="control-label">담당자</label>
-                                                                <input id="taskEmpInput" class="form-control form-white" type="text" name="category-name" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <%-- <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label for="example-datetime-local-input" class="control-label">기간</label>
-                                                                <%
-															        // Java 코드를 사용하여 내일 날짜를 가져옴
-															        java.time.LocalDate today = java.time.LocalDate.now();
-															        java.time.LocalDate tomorrow = today.plusDays(1);
-															        
-															        // 원하는 형식으로 날짜를 포맷팅 (예: "yyyy-MM-dd")
-															        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy");
-															        String formattedDate = today.format(formatter);
-															        String formattedTomorrow = tomorrow.format(formatter);
-															    %>
-				                                            	<input id="taskDateInput" class="form-control input-daterange-datepicker" type="text" name="projectDate" value="${formattedDate}-${formattedTomorrow}">
-                                                            	<input id="taskDateInput" class="form-control input-daterange-datepicker" type="text" name="taskDate">
-                                                            	<input id="projectDateInput" class="form-control input-daterange-datepicker" type="text" name="projectDate" readonly>
-                                                            </div>
-                                                        </div> --%>
-                                                        <div class="row mb-3">
-					                                        <div class="col-md-12">
-					                                            <label for="example-datetime-local-input" class="control-label">시작일</label>
-					                                            <input id="taskStartDateInput" class="form-control form-white" type="date" id="startDate" name="startDate">
-					                                        </div>
-					                                    </div>
-					                                    <div class="row mb-3">
-					                                        <div class="col-md-12">
-					                                            <label for="example-datetime-local-input" class="control-label">종료일</label>
-					                                            <input id="taskEndDateInput" class="form-control form-white" type="date" id="endDate" name="endDate">
-					                                        </div>
-					                                    </div>
-					                                    
-                                                        <!-- <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label for="example-datetime-local-input" class="control-label">시작일</label>
-                                                                <input id="taskStartDateInput" class="form-control form-white dateSelectable" required aria-required="true" type="date" name="category-name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label for="example-datetime-local-input" class="control-label">종료일</label>
-                                                                <input id="taskEndDateInput" class="form-control form-white dateSelectable" required aria-required="true" type="date" name="category-name">
-                                                            </div>
-                                                        </div> -->
-                                                        <div id="taskDetailForm-client" class="row mb-3 d-none">
-                                                            <div class="col-md-12">
-                                                                <label id="taskClientLabel" for="example-datetime-local-input" class="control-label">고객명</label>
-                                                                <input id="taskClientInput" class="form-control form-white" type="text" name="category-name" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label class="control-label">작업 상태</label>
-                                                                <select id="taskStatusSelect" class="form-control form-white" name="category-status">
-                                                                    <option value="진행전">진행전</option>
-                                                                    <option value="진행중">진행중</option>
-                                                                    <option value="진행완료">진행완료</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div id="taskDetailForm-color" class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label class="control-label">색상</label>
-                                                                <select id="taskColorSelect" class="form-control form-white" data-placeholder="표시 색상을 고르세여" name="category-color">
-                                                                    <option value="red">Red</option>
-                                                                    <option value="orange">Orange</option>
-                                                                    <option value="yellow">Yellow</option>
-                                                                    <option value="lightGreen">Light Green</option>
-                                                                    <option value="green">Green</option>
-                                                                    <option value="lightBlue">Light Blue</option>
-                                                                    <option value="blue">Blue</option>
-                                                                    <option value="purple">Purple</option>
-                                                                    <option value="pink">Pink</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button id="closeMoalBtn" type="button" class="btn btn-default waves-effect" data-dismiss="modal">닫기</button>
-                                                    <button id="updateMoalBtn" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="updateTaskDetail()">수정</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="modal fade" id="taskDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="message-text" class="col-form-label">Message:</label>
-                                                            <textarea class="form-control" id="message-text"></textarea>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Send message</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!-- END MODAL -->
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            		<div class="col-lg-5">
+            			<div class="card">
+            				<div class="card-body">
+            					<div class="card-title">
+                                    <h4 style="font-weight: bolder;">개인 업무 관리</h4>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- /# card -->
-                    </div>
+                                <div class="row">
+                                	<div class="col-lg-12">
+                                		<table class="table table-hover taskTable">
+	                                        <tbody id="taskListTableBody">
+	                                            <tr>
+	                                                <td><div class="taskEvent-red mb-1" style="position: relative;">${project.projectName}</div></td>
+	                                                <td class="text-success">진행중</td>
+	                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button></td>
+	                                            </tr>
+	                                            
+	                                            <c:forEach var="task" items="${taskList}">
+		                                            <tr>
+		                                                <td><div class="taskEvent-${task.taskColor} mb-1" style="position: relative;">${task.taskName}</div></td>
+		                                                <c:if test="${task.taskStatus == '진행전'}">
+			                                                <td class="text-light">${task.taskStatus}</td>
+		                                                </c:if>
+		                                                <c:if test="${task.taskStatus == '진행중'}">
+			                                                <td class="text-success">${task.taskStatus}</td>
+		                                                </c:if>
+		                                                <c:if test="${task.taskStatus == '진행완료'}">
+			                                                <td class="text-danger">${task.taskStatus}</td>
+		                                                </c:if>
+		                                                <td>
+		                                                	<input id="taskNoFromModel" type="hidden" value="${task.taskNo}">
+		                                                	<button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openTaskDetail(this)">상세</button>
+		                                                </td>
+		                                            </tr>
+	                                            </c:forEach>
+	                                        </tbody>
+	                                    </table>
+                                	</div>
+                                </div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
                     <!-- /# column -->
-                </div>
             </div>
             <!-- #/ container -->
         </div>
@@ -354,14 +150,132 @@
             Content body end
         ***********************************-->
         
+        <div class="modal fade none-border" id="taskDetail">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h4 class="modal-title"><strong>업무 상세</strong></h4>
+	                </div>
+	                <div class="modal-body">
+	                    <form>
+	                        <div class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label id="taskNoLabel" class="control-label">업무 번호 (히든 처리할 예정)</label>
+	                                <input id="taskNoInput" class="form-control form-white" value="" type="text" name="category-name" readonly>
+	                                <input id="projectNoInput" class="form-control form-white" type="text" value="${project.projectNo}" readonly>
+	                            </div>
+	                        </div>
+	                        <div class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label id="taskNameLabel" class="control-label">업무 이름</label>
+	                                <input id="taskNameInput" class="form-control form-white" type="text" name="category-name" readonly>
+	                            </div>
+	                        </div>
+	                        <div class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label id="taskCommentLabel" class="control-label">업무 개요</label>
+	                                <textarea id="taskCommentInput" class="form-control form-white" name="category-name"></textarea>
+	                            </div>
+	                        </div>
+	                        <div class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label class="control-label">담당자</label>
+	                                <input id="taskEmpInput" class="form-control form-white" type="text" name="category-name" readonly>
+	                            </div>
+	                        </div>
+	                        <%-- <div class="row mb-3">
+	                                         <div class="col-md-12">
+	                                             <label for="example-datetime-local-input" class="control-label">기간</label>
+	                                             <%
+	    // Java 코드를 사용하여 내일 날짜를 가져옴
+	    java.time.LocalDate today = java.time.LocalDate.now();
+	    java.time.LocalDate tomorrow = today.plusDays(1);
+	    
+	    // 원하는 형식으로 날짜를 포맷팅 (예: "yyyy-MM-dd")
+	    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	    String formattedDate = today.format(formatter);
+	    String formattedTomorrow = tomorrow.format(formatter);
+	%>
+	                             	<input id="taskDateInput" class="form-control input-daterange-datepicker" type="text" name="projectDate" value="${formattedDate}-${formattedTomorrow}">
+	                                         	<input id="taskDateInput" class="form-control input-daterange-datepicker" type="text" name="taskDate">
+	                                         	<input id="projectDateInput" class="form-control input-daterange-datepicker" type="text" name="projectDate" readonly>
+	                                         </div>
+	                                     </div> --%>
+	                        <div class="row mb-3">
+	             <div class="col-md-12">
+	                 <label for="example-datetime-local-input" class="control-label">시작일</label>
+	                 <input id="taskStartDateInput" class="form-control form-white" type="date" id="startDate" name="startDate">
+	             </div>
+	         </div>
+	         <div class="row mb-3">
+	             <div class="col-md-12">
+	                 <label for="example-datetime-local-input" class="control-label">종료일</label>
+	                 <input id="taskEndDateInput" class="form-control form-white" type="date" id="endDate" name="endDate">
+	             </div>
+	         </div>
+	         
+	                        <!-- <div class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label for="example-datetime-local-input" class="control-label">시작일</label>
+	                                <input id="taskStartDateInput" class="form-control form-white dateSelectable" required aria-required="true" type="date" name="category-name">
+	                            </div>
+	                        </div>
+	                        <div class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label for="example-datetime-local-input" class="control-label">종료일</label>
+	                                <input id="taskEndDateInput" class="form-control form-white dateSelectable" required aria-required="true" type="date" name="category-name">
+	                            </div>
+	                        </div> -->
+	                        <div id="taskDetailForm-client" class="row mb-3 d-none">
+	                            <div class="col-md-12">
+	                                <label id="taskClientLabel" for="example-datetime-local-input" class="control-label">고객명</label>
+	                                <input id="taskClientInput" class="form-control form-white" type="text" name="category-name" readonly>
+	                            </div>
+	                        </div>
+	                        <div class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label class="control-label">작업 상태</label>
+	                                <select id="taskStatusSelect" class="form-control form-white" name="category-status">
+	                                    <option value="진행전">진행전</option>
+	                                    <option value="진행중">진행중</option>
+	                                    <option value="진행완료">진행완료</option>
+	                                </select>
+	                            </div>
+	                        </div>
+	                        <div id="taskDetailForm-color" class="row mb-3">
+	                            <div class="col-md-12">
+	                                <label class="control-label">색상</label>
+	                                <select id="taskColorSelect" class="form-control form-white" data-placeholder="표시 색상을 고르세여" name="category-color">
+	                                    <option value="red">Red</option>
+	                                    <option value="orange">Orange</option>
+	                                    <option value="yellow">Yellow</option>
+	                                    <option value="lightGreen">Light Green</option>
+	                                    <option value="green">Green</option>
+	                                    <option value="lightBlue">Light Blue</option>
+	                                    <option value="blue">Blue</option>
+	                                    <option value="purple">Purple</option>
+	                                    <option value="pink">Pink</option>
+	                                </select>
+	                            </div>
+	                        </div>
+	                    </form>
+	                </div>
+	                <div class="modal-footer">
+	                    <button id="closeMoalBtn" type="button" class="btn btn-default waves-effect" data-dismiss="modal">닫기</button>
+	                    <button id="updateMoalBtn" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="updateTaskDetail()">수정</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+        
         
         <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

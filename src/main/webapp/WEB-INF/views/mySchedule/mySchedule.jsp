@@ -20,6 +20,9 @@
     <script src="${pageContext.request.contextPath}/resources/js/mySchedule/mySchedule.js"></script>
     
     <style type="text/css">
+    	.nk-sidebar{
+			 height : 96%;
+		}
 		.tdl-holder label {
 		    padding-left: 0;
 		}
@@ -50,62 +53,34 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
 
-            <div class="container-fluid">
+            <!-- <div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="col-lg-7" style="padding-right: 0px;">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title">
+                                <!-- <div class="card-title">
                                     <h4>개인 일정</h4>
-                                </div>
+                                </div> -->
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="card-box m-b-50">
                                             <div id="calendar"></div>
                                         </div>
                                     </div>
-									<!-- <div class="col-lg-4 mt-5">
-                                        <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> 일정 추가</a>
-                                        <div id="external-events" class="m-t-20">
-                                            <p>Drag and drop your event or click in the calendar</p>
-                                            <ul id="todo_list" style="height: 337px; overflow: hidden; width: auto;">
-					                            <li><label><input type="checkbox"><i></i><span>Get up</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Stand up</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox"><i></i><span>Don't give up the fight.</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                            <li><label><input type="checkbox" checked=""><i></i><span>Do something else</span><a href="#" class="ti-trash"></a></label></li>
-					                        </ul>
-                                            <div class="external-event bg-primary text-white" data-class="bg-primary"><i class="fa fa-move"></i>New Theme Release</div>
-                                            <div class="external-event bg-success text-white" data-class="bg-success"><i class="fa fa-move"></i>My Event</div>
-                                            <div class="external-event bg-warning text-white" data-class="bg-warning"><i class="fa fa-move"></i>Meet manager</div>
-                                            <div class="external-event bg-dark text-white" data-class="bg-dark"><i class="fa fa-move"></i>Create New theme</div>
-                                        </div>
-                                        checkbox
-                                        <div class="checkbox m-t-40">
-                                            <input id="drop-remove" type="checkbox">
-                                            <label for="drop-remove">&nbsp; 드롭 후 제거</label>
-                                        </div>
-                                    </div> -->
-                                    <!-- end col -->
                                     <!-- BEGIN MODAL -->
                                     <div class="modal fade none-border" id="event-modal">
                                         <div class="modal-dialog">
@@ -282,10 +257,10 @@
                     </div>
                     <!-- /# column -->
                     <div class="col-lg-5">
-                        <div class="card">
+                        <div class="card" style="height: 51.7rem;">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4>개인 일정</h4>
+                                    <h4 style="font-weight: bolder;">개인 일정</h4>
                                 </div>
                                 <div class="row">
                                 	<div class="col-lg-12">
@@ -373,9 +348,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end

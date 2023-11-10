@@ -45,8 +45,11 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="compose-content mt-5 mb-5">
-                                   	<div>
+                            	<div class="card-title">
+                            		<h4 style="font-weight: bolder;">사원 찾기</h4>
+                            	</div>
+                                <div class="compose-content">
+                                   	<!-- <div>
 								        <select id="project-dropdown">
 								            <option value="">프로젝트 선택</option>
 								        </select>
@@ -56,9 +59,29 @@
 								        <select id="position-dropdown">
 								            <option value="">직급 선택</option>
 								        </select>
+								    </div> -->
+								    <div class="row mb-3">
+								    	<div class="col-6 pr-0">
+									        <select id="project-dropdown" style="width: 100%;">
+									            <option value="">프로젝트 선택</option>
+									        </select>
+								    	</div>
+								    	<div class="col-3 pr-0">
+									        <select id="team-dropdown" style="width: 100%;">
+									            <option value="">팀 선택</option>
+									        </select>
+								    	</div>
+								    	<div class="col-3 pr-0">
+									        <select id="position-dropdown" style="width: 87%;">
+									            <option value="">직급 선택</option>
+									        </select>
+								    	</div>
 								    </div>
-                                    <div style="display:inline-block; position: absolute; right: 30px; top: 105px;">
+                                    <!-- <div style="display:inline-block; position: absolute; right: 30px; top: 105px;">
 	                                    <input class="form-control" id="hzInput" type="text" placeholder="사원 찾기" style="width:150px;"/>
+                                    </div> -->
+                                    <div>
+	                                    <input class="form-control" id="hzInput" type="text" placeholder="사원 찾기" style="width:197px;"/>
                                     </div>
                                     <hr>
                                     <div class="tab-content">
@@ -84,17 +107,16 @@
                                    		</div>
                                    	</div>
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="sendSelectedEmployees()">
-                                        	<i class="fa fa-paper-plane m-r-5"></i>
-                                        	 OK
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" style="height: 35px;" onclick="sendSelectedEmployees()">
+                                        	<!-- <i class="fa fa-paper-plane m-r-5"></i> -->
+                                        	<i class="icon-copy fa fa-check" aria-hidden="true"></i>
+                                        	 확인
                                         </button>
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="closeWindow()">
-                                        	<i class="ti-close m-r-5"></i>
-                                        	 cancel
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" style="height: 35px;" onclick="closeWindow()">
+                                        	<!-- <i class="ti-close m-r-5"></i> -->
+                                        	<i class="icon-copy fa fa-close" aria-hidden="true"></i>
+                                        	 취소
                                         </button>
-                                    </div>
-                                    <div class="row mt-3">
-                                    
                                     </div>
                                 </div>
                             </div>

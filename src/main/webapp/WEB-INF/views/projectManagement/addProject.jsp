@@ -24,12 +24,15 @@
 
     <jsp:include page="../headernsidebar.jsp">
 		<jsp:param name="employee" value="${employee}" />
+		<jsp:param name="mf" value="${mf}" />
+		<jsp:param name="base64Img" value="${base64Img}" />
 	</jsp:include>
 
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <!-- <div class="content-body"> -->
+        <div style="height:810px; margin-left: 15.1875rem; margin-top:100px;">
 
             <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
@@ -43,7 +46,7 @@
             <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                	<h4 class="card-title"><b>프로젝트 등록</b></h4>
+                                	<h4 class="card-title" style="font-weight: bolder;">프로젝트 등록</h4>
                                 <div class="basic-form">
                                     <form action="${pageContext.request.contextPath}/projectManagement/addProject" method="post">
                                         <div class="form-row">
@@ -69,8 +72,8 @@
 			                                        </div>
 			                                    </div>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label>담당자 (PM)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                            <!-- <div class="form-group col-md-4">
+                                                <label>담당자 (PM)</label> 추후 과장 이상만 나오게끔 필터링해보자
                                                 <label class="sr-only">담당자 검색</label>
                                                 <div class="input-group mb-2">
                                                     <div class="text-left m-t-15">
@@ -84,6 +87,21 @@
 				                                	<input type="text" class="form-control d-none" id="PMid" name="ProjectManagerId" readonly="readonly">
                                                    	<input type="text" class="form-control" style="background-color:transparent; border:0px;" id="PMINFO" readonly="readonly">
                                                 </div>
+                                            </div> -->
+                                            <div class="form-group col-md-4">
+                                                <label>담당자 (PM)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                                <label class="sr-only">담당자 검색</label>
+                                                <div class="d-flex">
+                                                	<input type="text" class="form-control form-white d-none" id="PMid" name="ProjectManagerId" readonly="readonly">
+                                                   	<input type="text" class="form-control form-white" style="background-color:transparent;" id="PMINFO" readonly="readonly">
+                                                   	<div class="d-flex">
+                                                   		<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+			                                        		type="button" 
+			                                        		onclick="javascript:void(window.open('findPM','_blank','width=600, height=600, left=600, top=30'))">
+			                                        		<i class="icon-copy fa fa-search" aria-hidden="true"></i>
+			                                        	</button>
+                                                   	</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -96,8 +114,8 @@
 	                                            <input type="text" class="form-control" name="customerCompany" placeholder="고객사 명 입력">
 	                                        </div>
                                         </div>
-                                        <div class="form-group col-md-4" style="padding-left:0px;">
-                                            <label>고객 명 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                        <!-- <div class="form-group col-md-4" style="padding-left:0px;">
+                                            <label>고객 명 (Customer)</label> 추후 과장 이상만 나오게끔 필터링해보자
                                             <label class="sr-only">고객사 검색</label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group mb-2">
@@ -111,6 +129,21 @@
 			                                    	</div>
 				                                	<input type="text" class="form-control d-none" id="ClientId" name="customerId" readonly="readonly">
                                                    	<input type="text" class="form-control" style="background-color:transparent; border:0px;" id="ClientINFO" readonly="readonly">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="form-group col-md-4" style="padding-left:0px;">
+                                            <label>고객 명 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
+                                            <label class="sr-only">고객사 검색</label>
+                                            <div class="d-flex">
+                                            	<input type="text" class="form-control d-none" id="ClientId" name="customerId" readonly="readonly">
+                                                <input type="text" class="form-control" style="background-color:transparent;" id="ClientINFO" readonly="readonly">
+                                                <div class="d-flex">
+                                                	<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+				                                        		type="button" 
+				                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
+			                                        	<i class="icon-copy fa fa-search" aria-hidden="true"></i>
+			                                        </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -210,9 +243,9 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <!-- <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            </div> -->
         </div>
         <!--**********************************
             Footer end
