@@ -1,5 +1,5 @@
 window.onload = function(){
-	var webSocket = new WebSocket("ws://192.168.27.220:8080/otipms/ws-alarm");
+	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 	var empId = document.getElementById("memIdSpan").value;
 	var cntSpan = document.getElementById("cntSpan")
 	if (cntSpan) {

@@ -29,6 +29,9 @@
 			padding-right:5%;
 		}
 	</style>	
+	<script>
+	    var contextPath = "${pageContext.request.contextPath}";
+	</script>
 </head>
 
 <body>
@@ -51,6 +54,7 @@
                 </div>
             </div> -->
             <!-- row -->
+            <input class="d-none" id="contextPage" value="${pageContext.request.contextPath}"></input>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -78,6 +82,7 @@
                                                 <th>연락처</th>
                                                 <th>프로젝트</th>
                                                 <th>팀</th>
+                                                <th>쪽지</th>
                                             </tr>
                                         </thead>
                                     </table>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +113,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setProjectNo(project.getProjectNo());
 		employee.setProjectName(project.getProjectName());
 		employee.setProjectCompanyName(project.getProjectCompanyName());
+		
+		Employee empProfile = selectProfileEmp(empId);
+		if(empProfile.getMediaFileData() != null) {
+			String base64Img = Base64.getEncoder().encodeToString(empProfile.getMediaFileData());
+			employee.setBase64Img(base64Img);
+			employee.setMediaFileType(empProfile.getMediaFileType());
+			employee.setMediaFileData(empProfile.getMediaFileData());
+		}
 		return employee;
 	}
 

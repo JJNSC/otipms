@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,6 +86,13 @@
 										        <div class="form-group row">
 													<div class="col-sm-12 col-md-10">
 									                    <div class="selected-employees" id="selectedRecipientEmployees">
+									                    	<c:if test="${directSend.empName!=null }">
+									                    		<div class="selected-employee" style="display: inline-block;">
+									                    			<span>${directSend.empRank } ${directSend.empName }</span> 
+                													<span class="d-none">${directSend.empId }</span>
+                													<button class="remove-employee" style="border: 0px;background: transparent;margin-left:5px;margin-right:8px;outline:none;">x</button>
+                												</div>
+									                    	</c:if>
 									                    </div>
 									                    <input type="text" id="selectedRecipientTextbox" style="display:none;">
 									                </div>
@@ -258,6 +266,10 @@
             </div>
         </div>
 	</div>
+	<input type="hidden" id="directSendEmpName" value="${directSend.empName }"></input>
+	<input type="hidden" id="directSendEmpId" value="${directSend.empId }"></input>
+	<input type="hidden" id="directSendRole" value="${directSend.empRank }"></input>
+	<input type="hidden" id="checkAdded" value="0"></input>
 </body>
 
 </html>

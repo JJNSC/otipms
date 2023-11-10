@@ -27,4 +27,5 @@ public class Employee {
 	private String mediaFileName;
 	private String mediaFileType;
 	private byte[] mediaFileData;
+	private String base64Img;
 }
