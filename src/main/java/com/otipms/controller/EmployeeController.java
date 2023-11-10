@@ -19,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Employee;
 import com.otipms.dto.ProjectTeams;
 import com.otipms.interceptor.Login;
@@ -36,6 +35,7 @@ import com.otipms.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
 
+@RuntimeCheck
 @Slf4j
 @Controller
 @RequestMapping("/employeeManagement")
@@ -43,7 +43,6 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
-	
 	
 	@RequestMapping("/employeeList")
 	public String employeeList(@RequestParam(name="errMsg",required=false,defaultValue="1") String errMsg,Model model) {
@@ -55,7 +54,6 @@ public class EmployeeController {
 		}else {
 			model.addAttribute("errMsg", errMsg);
 		}
-		System.out.println("사원 리스트");
 		List<ProjectTeams> projectTeamsList = employeeService.getTeamsPerProjects();
 		model.addAttribute("projectTeams", projectTeamsList);
 		return "employeeManagement/employeeList";
@@ -69,7 +67,6 @@ public class EmployeeController {
 		List<Employee> data = new ArrayList<>();
 		if(projectName.equals("0")) {
 			data = employeeService.getAllEmployee();
-			log.info("그냥 데이터:" + data);
 		}else if (!projectName.equals("0") && teamName.equals("0")) {
 			data = employeeService.getProjectEmployees(projectName);
 		}else if(!projectName.equals("0") && !teamName.equals("0")){
@@ -79,7 +76,6 @@ public class EmployeeController {
 		//data를 json데이터로 바꾸기
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonData = objectMapper.writeValueAsString(data);
-		log.info("json데이터로 바꿔줌 :" + jsonData);
 		    
 		return jsonData;
 

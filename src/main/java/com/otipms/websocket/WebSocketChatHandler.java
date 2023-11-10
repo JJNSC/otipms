@@ -71,18 +71,22 @@ public class WebSocketChatHandler extends TextWebSocketHandler{
 	    Messenger messenger = messengerService.getEmpNotMe(mrNo, myempId);
 	    
 	    int empId = messenger.getEmpId();
-	    
 	    WebSocketSession targetSession = userSessions.get(empId);
 	    
-	    if(targetSession != null) {
-	    	Map<String, String> sendMessage = new HashMap<>();
-	    	sendMessage.put("mrNo", mrNoStr);
-	    	sendMessage.put("empId", empIdStr);
-	        sendMessage.put("messageContent", messageContent);
-	        sendMessage.put("messageDate", messageDate);
-	        String sendMessageJson = objectMapper.writeValueAsString(sendMessage);
+	    log.info("targetSession : " + targetSession);
+	    
+	    Map<String, String> sendMessage = new HashMap<>();
+	    sendMessage.put("mrNo", mrNoStr);
+	    sendMessage.put("empId", empIdStr);
+	    sendMessage.put("messageContent", messageContent);
+	    sendMessage.put("messageDate", messageDate);
+	    
+	    String sendMessageJson = objectMapper.writeValueAsString(sendMessage);
+	    log.info("sendMessageJson : " + sendMessageJson);
+	 
+	    for (WebSocketSession single : sessions) {
 	        
-	        targetSession.sendMessage(new TextMessage(sendMessageJson));
+	        single.sendMessage(new TextMessage(sendMessageJson));
 	    }
 	}
 	

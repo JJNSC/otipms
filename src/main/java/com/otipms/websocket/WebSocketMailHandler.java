@@ -48,7 +48,6 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String memId = message.getPayload();
-	    log.info("메세지 도착: {} : " + memId);
 	    //Thread.sleep(500);
 	    List<Message> messages = messageService.getMyReceivedMessageA(memId);
 		List<Alarm> alarms = alarmService.selectAlarmCountByEmpIdI(memId);

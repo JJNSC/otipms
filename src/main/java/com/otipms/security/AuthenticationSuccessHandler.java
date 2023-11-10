@@ -37,8 +37,6 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 			HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		
-		log.info("실행");
-		
 		// 현재 로그인한 사용자의 정보 가져오기
 	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    String enteredPassword = request.getParameter("empPw"); // 입력한 비밀번호 가져오기

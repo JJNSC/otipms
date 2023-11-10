@@ -16,6 +16,7 @@
 		<link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
 		
 		<!-- js -->
+		<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/chat/chat.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/chat/core.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/chat/process.js"></script>
@@ -43,7 +44,7 @@
 											  onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))"
 										/>
 									</div>
-									<div id="chatRoomContainer" class="notification-list chat-notification-list customscroll">
+									<div id="chatRoomContainer" class="notification-list chat-notification-list customscroll" style="overflow-y: auto;">
 									</div>
 								</div>
 							</div>

@@ -54,7 +54,8 @@ public class FindEmployeeRestController {
     	messenger.setMrNo(mrNo);
     	messenger.setEmpName(empInfo.getEmpName());
     	messenger.setEmpRank(empInfo.getEmpRank());
-    	
+    	messenger.setMrLastChat("환영합니다.");
+    	messenger.setMrDate(new Date());
     	log.info("messenger : " + messenger);
     	
     	return messenger;
