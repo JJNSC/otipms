@@ -62,413 +62,445 @@
         </script> -->
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
             	<div class="row">
-                    <div class="col-lg-8 ">
-						<div class="card">
-							<div class="card-body" style="padding-top:0px;padding-bottom:0px;">
-								<div class="year-calendar">
-									<div class="pignose-calendar pignose-calendar-blue pignose-calendar-default">
-										<div class="pignose-calendar-top">
-											<a href="#"
-												class="pignose-calendar-top-nav pignose-calendar-top-prev">
-												<span class="icon-arrow-left pignose-calendar-top-icon"></span>
-											</a>
-											<div class="pignose-calendar-top-date">
-												<span class="pignose-calendar-top-month">October</span> <span
-													class="pignose-calendar-top-year">2023</span>
-											</div>
-											<a href="#"
-												class="pignose-calendar-top-nav pignose-calendar-top-next">
-												<span class="icon-arrow-right pignose-calendar-top-icon"></span>
-											</a>
-										</div>
-										<div class="pignose-calendar-header">
-											<div class="pignose-calendar-week pignose-calendar-week-sun">SUN</div>
-											<div class="pignose-calendar-week pignose-calendar-week-mon">MON</div>
-											<div class="pignose-calendar-week pignose-calendar-week-tue">TUE</div>
-											<div class="pignose-calendar-week pignose-calendar-week-wed">WED</div>
-											<div class="pignose-calendar-week pignose-calendar-week-thu">THU</div>
-											<div class="pignose-calendar-week pignose-calendar-week-fri">FRI</div>
-											<div class="pignose-calendar-week pignose-calendar-week-sat">SAT</div>
-										</div>
-										<div class="pignose-calendar-body">
-											<div class="pignose-calendar-row">
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
-													data-date="2023-10-01">
-													<a href="#">1</a>
+            		<div class="col-lg-8" style="padding-right: 0px;">
+           				<!-- 달력 -->
+            			<div class="row" style="height: 54%">
+            				<div class="col-12">
+            					<div class="card" style="height: 28.3rem;">
+									<div class="card-body" style="padding-top:0px;padding-bottom:0px;">
+										<div class="year-calendar">
+											<div class="pignose-calendar pignose-calendar-blue pignose-calendar-default">
+												<div class="pignose-calendar-top">
+													<a href="#"
+														class="pignose-calendar-top-nav pignose-calendar-top-prev">
+														<span class="icon-arrow-left pignose-calendar-top-icon"></span>
+													</a>
+													<div class="pignose-calendar-top-date">
+														<span class="pignose-calendar-top-month">October</span> <span
+															class="pignose-calendar-top-year">2023</span>
+													</div>
+													<a href="#"
+														class="pignose-calendar-top-nav pignose-calendar-top-next">
+														<span class="icon-arrow-right pignose-calendar-top-icon"></span>
+													</a>
 												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
-													data-date="2023-10-02">
-													<a href="#">2</a>
+												<div class="pignose-calendar-header">
+													<div class="pignose-calendar-week pignose-calendar-week-sun">SUN</div>
+													<div class="pignose-calendar-week pignose-calendar-week-mon">MON</div>
+													<div class="pignose-calendar-week pignose-calendar-week-tue">TUE</div>
+													<div class="pignose-calendar-week pignose-calendar-week-wed">WED</div>
+													<div class="pignose-calendar-week pignose-calendar-week-thu">THU</div>
+													<div class="pignose-calendar-week pignose-calendar-week-fri">FRI</div>
+													<div class="pignose-calendar-week pignose-calendar-week-sat">SAT</div>
 												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
-													data-date="2023-10-03">
-													<a href="#">3</a>
+												<div class="pignose-calendar-body">
+													<div class="pignose-calendar-row">
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+															data-date="2023-10-01">
+															<a href="#">1</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+															data-date="2023-10-02">
+															<a href="#">2</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+															data-date="2023-10-03">
+															<a href="#">3</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+															data-date="2023-10-04">
+															<a href="#">4</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+															data-date="2023-10-05">
+															<a href="#">5</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
+															data-date="2023-10-06">
+															<a href="#">6</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+															data-date="2023-10-07">
+															<a href="#">7</a>
+														</div>
+													</div>
+													<div class="pignose-calendar-row">
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+															data-date="2023-10-08">
+															<a href="#">8</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+															data-date="2023-10-09">
+															<a href="#">9</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+															data-date="2023-10-10">
+															<a href="#">10</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+															data-date="2023-10-11">
+															<a href="#">11</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+															data-date="2023-10-12">
+															<a href="#">12</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri pignose-calendar-unit-active pignose-calendar-unit-first-active"
+															data-date="2023-10-13">
+															<a href="#">13</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+															data-date="2023-10-14">
+															<a href="#">14</a>
+														</div>
+													</div>
+													<div class="pignose-calendar-row">
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+															data-date="2023-10-15">
+															<a href="#">15</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+															data-date="2023-10-16">
+															<a href="#">16</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+															data-date="2023-10-17">
+															<a href="#">17</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+															data-date="2023-10-18">
+															<a href="#">18</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+															data-date="2023-10-19">
+															<a href="#">19</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
+															data-date="2023-10-20">
+															<a href="#">20</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+															data-date="2023-10-21">
+															<a href="#">21</a>
+														</div>
+													</div>
+													<div class="pignose-calendar-row">
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+															data-date="2023-10-22">
+															<a href="#">22</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+															data-date="2023-10-23">
+															<a href="#">23</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+															data-date="2023-10-24">
+															<a href="#">24</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
+															data-date="2023-10-25">
+															<a href="#">25</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
+															data-date="2023-10-26">
+															<a href="#">26</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
+															data-date="2023-10-27">
+															<a href="#">27</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
+															data-date="2023-10-28">
+															<a href="#">28</a>
+														</div>
+													</div>
+													<div class="pignose-calendar-row">
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
+															data-date="2023-10-29">
+															<a href="#">29</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
+															data-date="2023-10-30">
+															<a href="#">30</a>
+														</div>
+														<div
+															class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
+															data-date="2023-10-31">
+															<a href="#">31</a>
+														</div>
+														<div class="pignose-calendar-unit pignose-calendar-unit-wed"></div>
+														<div class="pignose-calendar-unit pignose-calendar-unit-thu"></div>
+														<div class="pignose-calendar-unit pignose-calendar-unit-fri"></div>
+														<div class="pignose-calendar-unit pignose-calendar-unit-sat"></div>
+													</div>
 												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
-													data-date="2023-10-04">
-													<a href="#">4</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
-													data-date="2023-10-05">
-													<a href="#">5</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
-													data-date="2023-10-06">
-													<a href="#">6</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
-													data-date="2023-10-07">
-													<a href="#">7</a>
-												</div>
-											</div>
-											<div class="pignose-calendar-row">
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
-													data-date="2023-10-08">
-													<a href="#">8</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
-													data-date="2023-10-09">
-													<a href="#">9</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
-													data-date="2023-10-10">
-													<a href="#">10</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
-													data-date="2023-10-11">
-													<a href="#">11</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
-													data-date="2023-10-12">
-													<a href="#">12</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri pignose-calendar-unit-active pignose-calendar-unit-first-active"
-													data-date="2023-10-13">
-													<a href="#">13</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
-													data-date="2023-10-14">
-													<a href="#">14</a>
-												</div>
-											</div>
-											<div class="pignose-calendar-row">
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
-													data-date="2023-10-15">
-													<a href="#">15</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
-													data-date="2023-10-16">
-													<a href="#">16</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
-													data-date="2023-10-17">
-													<a href="#">17</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
-													data-date="2023-10-18">
-													<a href="#">18</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
-													data-date="2023-10-19">
-													<a href="#">19</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
-													data-date="2023-10-20">
-													<a href="#">20</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
-													data-date="2023-10-21">
-													<a href="#">21</a>
-												</div>
-											</div>
-											<div class="pignose-calendar-row">
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
-													data-date="2023-10-22">
-													<a href="#">22</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
-													data-date="2023-10-23">
-													<a href="#">23</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
-													data-date="2023-10-24">
-													<a href="#">24</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed"
-													data-date="2023-10-25">
-													<a href="#">25</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu"
-													data-date="2023-10-26">
-													<a href="#">26</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri"
-													data-date="2023-10-27">
-													<a href="#">27</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat"
-													data-date="2023-10-28">
-													<a href="#">28</a>
-												</div>
-											</div>
-											<div class="pignose-calendar-row">
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun"
-													data-date="2023-10-29">
-													<a href="#">29</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon"
-													data-date="2023-10-30">
-													<a href="#">30</a>
-												</div>
-												<div
-													class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue"
-													data-date="2023-10-31">
-													<a href="#">31</a>
-												</div>
-												<div class="pignose-calendar-unit pignose-calendar-unit-wed"></div>
-												<div class="pignose-calendar-unit pignose-calendar-unit-thu"></div>
-												<div class="pignose-calendar-unit pignose-calendar-unit-fri"></div>
-												<div class="pignose-calendar-unit pignose-calendar-unit-sat"></div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
+            				</div>
+            			</div>
+           				<!-- 공지사항 -->
+           				<div class="row">
+           					<div class="col-12">
+            					<div class="card card-custom">
+		                            <!-- <div class="card-body" style="height:304px; padding:20px,28px;"> -->
+		                            <div class="card-body" style="height:304px;">
+		                                <div class="card-title">
+		                                    <h4 style="color:#616161; font-weight: bolder;">공지사항</h4>
+		                                </div>
+		                                <div class="table-responsive">
+		                                    <table class="table table-hover table-custom">
+		                                        <thead>
+			                                        <tr>
+			                                            <th></th>
+			                                            <th style="width: 35%;">제목</th>
+			                                            <th>작성자</th>
+			                                            <th>작성일</th>
+			                                            <th>조회수</th>
+			                                        </tr>
+		                                        </thead>
+		                                        <tbody id="boardTbody">
+		                                        	<c:if test="${fn:length(boardPagerMap.boardList) == 0}">
+		                                        		<tr>
+		                                        			<td></td>
+		                                        			<td></td>
+		                                        			<td colspan="2">게시글이 존재하지 않습니다.<td>
+		                                        		</tr>
+		                                        	</c:if>
+		                                        	<c:if test="${fn:length(boardPagerMap.boardList) != 0}">
+			                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
+				                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
+				                                                <td>${board.rnum}</td>
+				                                                <td>
+				                                                	${board.boardTitle}
+				                                                	<c:if test="${board.mediaFileName != null}">
+					                                                	&nbsp;
+					                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
+				                                                	</c:if>
+				                                                	<c:if test="${board.commentCount != 0}">
+					                                                	&nbsp;
+					                                                	<span class="text-red">[${board.commentCount}]</span>
+				                                                	</c:if>
+				                                                </td>
+				                                                <td>${board.empName}</td>
+				                                                <!-- 오늘 날짜면 시간만 보이도록 -->
+				                                                <c:set var="now" value="<%= new java.util.Date() %>" />
+				                                                <c:choose>
+																    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
+																        <td>
+																            <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/>
+																        </td>
+																    </c:when>
+																    <c:otherwise>
+																        <td>
+																            <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/>
+																        </td>
+																    </c:otherwise>
+																</c:choose>
+				                                                <td>${board.boardHitcount}</td>
+				                                            </tr>
+			                                        	</c:forEach>
+			                                        </c:if>
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+		                            </div>
+		                            <c:if test="${fn:length(boardPagerMap.boardList) != 0}">
+		                            	<div class="bootstrap-pagination">
+			                           		<!-- <nav> -->
+			                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
+			                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
+						                        <!-- <ul class="pagination justify-content-center"> -->
+					                        	<c:if test="${pager.groupNo>1}">
+					                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
+					                            </c:if>
+					                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+													<c:if test="${pager.pageNo == i}">
+														<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
+													</c:if>
+													<c:if test="${pager.pageNo != i}">
+														<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
+													</c:if>
+												</c:forEach>
+												<c:if test="${pager.groupNo<pager.totalGroupNo}">
+													<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
+					                            </c:if>
+						                    </nav>
+						                </div>
+		                            </c:if>
+		                        </div>
+            				</div>
+           				</div>
+            		</div>
+            		<div class="col-lg-4">
+            			<!-- 진척도 -->
+            			<div class="row" style="height:49%;">
+            				<div class="col-12">
+            					<div class="card" style="height: 25.7rem;">
+		                            <div class="card-body">
+		                                <h4 class="card-title mb-5" style="color:#616161; font-weight: bolder;">${project.projectName } 진척률</h4>
+		                                <canvas id="myChart" style="width:100%;max-width:800px; height:270px;"></canvas>
+		                                <script>
+		                                	var beforeCnt = ${projectTaskCount.undoneTaskCnt};	
+		                                	var nowCnt = ${projectTaskCount.proceedingTaskCnt};	
+		                                	var finishCnt = ${projectTaskCount.finishedTaskCnt};	
+		                                	var beforeRate = ${projectTaskCount.undoneTaskRate};	
+		                                	var nowRate = ${projectTaskCount.proceedingTaskRate};	
+		                                	var finishRate = ${projectTaskCount.finishedTaskRate};	
+		                                
+											var xValues = ["진행전 "+beforeRate+"%" ,"진행중 "+nowRate+"%", "완료 "+finishRate+"%"];
+											var yValues = [beforeCnt, nowCnt, finishCnt];
+											var barColors = [
+												,
+											  "#2b5797",
+											  "#00aba9"
+											];
+											
+											new Chart("myChart", {
+											  type: "doughnut",
+											  data: {
+											    labels: xValues,
+											    datasets: [{
+											      backgroundColor: barColors,
+											      data: yValues
+											    }]
+											  },
+											  options: {
+												    title: {
+												      display: false,
+												      text: "48.7% 진행중",
+												      position: "bottom"
+												    }
+												  }
+											});
+										</script>
+		                                <!-- <canvas id="doughutChart" width="500" height="250"></canvas> -->
+		                            </div>
+		                        </div>
+            				</div>
+            			</div>
+            			<!-- 프로젝트 정보 -->
+            			<div class="row">
+            				<div class="col-12">
+            					<div class="card" style="height:100%;">
+				                    <div class="card-body" style="">
+				                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">프로젝트 정보</h4>
+				                    	 <table>
+				                    	 	<thead>
+				                    	 		<tr >
+				                    	 			<th >프로젝트 명</th>
+				                    	 			<td style="width:32px;"></td>
+				                    	 			<td>${project.projectName}</td>
+				                    	 		</tr>
+				                    	 		<tr>
+				                    	 			<th>프로젝트 시작 날짜</th>
+				                    	 			<td ></td>
+				                    	 			<td>
+				                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectStartDate}"></fmt:formatDate>
+				                    	 			</td>
+				                    	 		</tr>
+				                    	 		<tr>
+				                    	 			<th>프로젝트 종료 날짜</th>
+				                    	 			<td ></td>
+				                    	 			<td>
+				                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectEndDate}"></fmt:formatDate>
+				                    	 			</td>
+				                    	 		</tr>
+				                    	 		<tr>
+				                    	 			<th>프로젝트 개요</th>
+				                    	 			<td ></td>
+				                    	 			<td>${project.projectContent}</td>
+				                    	 		</tr>
+				                    	 	</thead>
+				                    	 </table>
+			                    	 </div>
+			                    	 <div class="card-body">
+				                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">PM(Project Manager) 정보</h4>
+				                    	 <table>
+				                    	 	<thead>
+				                    	 		<tr>
+				                    	 			<th>사원 번호</th>
+				                    	 			<td style="width:32px;"></td>
+				                    	 			<td>${pmInfo.empId}</td>
+				                    	 		</tr>
+				                    	 		<tr>
+				                    	 			<th>PM 이름</th>
+				                    	 			<td ></td>
+				                    	 			<td>${pmInfo.empName}</td>
+				                    	 		</tr>
+				                    	 		<tr>
+				                    	 			<th>직급</th>
+				                    	 			<td ></td>
+				                    	 			<td>${pmInfo.empRank}</td>
+				                    	 		</tr>
+				                    	 		<tr>
+				                    	 			<th>연락처</th>
+				                    	 			<td ></td>
+				                    	 			<td>${pmInfo.empTel}</td>
+				                    	 		</tr>
+				                    	 		<tr>
+				                    	 			<th>이메일</th>
+				                    	 			<td ></td>
+				                    	 			<td>${pmInfo.empEmail}</td>
+				                    	 		</tr>
+				                    	 	</thead>
+				                    	 </table>
+			                    	 </div>
+			                    </div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            	
+            	<div class="row">
+                    <div class="col-lg-8 ">
+						
 					</div>
                     <div class="col-lg-4 ">
-                        <div class="card" style="height:80%;">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4" style="color:#616161; font-weight: bolder;">${project.projectName } 진척률</h4>
-                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-                                <script>
-                                	var beforeCnt = ${projectTaskCount.undoneTaskCnt};	
-                                	var nowCnt = ${projectTaskCount.proceedingTaskCnt};	
-                                	var finishCnt = ${projectTaskCount.finishedTaskCnt};	
-                                	var beforeRate = ${projectTaskCount.undoneTaskRate};	
-                                	var nowRate = ${projectTaskCount.proceedingTaskRate};	
-                                	var finishRate = ${projectTaskCount.finishedTaskRate};	
-                                
-									var xValues = ["진행전 "+beforeRate+"%" ,"진행중 "+nowRate+"%", "완료 "+finishRate+"%"];
-									var yValues = [beforeCnt, nowCnt, finishCnt];
-									var barColors = [
-										,
-									  "#2b5797",
-									  "#00aba9"
-									];
-									
-									new Chart("myChart", {
-									  type: "doughnut",
-									  data: {
-									    labels: xValues,
-									    datasets: [{
-									      backgroundColor: barColors,
-									      data: yValues
-									    }]
-									  },
-									  options: {
-										    title: {
-										      display: false,
-										      text: "48.7% 진행중",
-										      position: "bottom"
-										    }
-										  }
-									});
-								</script>
-                                <!-- <canvas id="doughutChart" width="500" height="250"></canvas> -->
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 					
                 <div class="row" style="height:28%;position:relative; bottom:20px;">
                     <!-- /# column -->
                     <div class="col-lg-8" style=" padding-right:10px;">
-                        <div class="card card-custom">
-                            <div class="card-body" style="height:304px; padding:20px,28px;">
-                                <div class="card-title">
-                                    <h4 style="color:#616161; font-weight: bolder;">공지사항</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-custom">
-                                        <thead>
-	                                        <tr>
-	                                            <th></th>
-	                                            <th>제목</th>
-	                                            <th>작성자</th>
-	                                            <th>작성일</th>
-	                                            <th>조회수</th>
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="boardTbody">
-                                        	<c:if test="${fn:length(boardPagerMap.boardList) == 0}">
-                                        		<tr>
-                                        			<td></td>
-                                        			<td></td>
-                                        			<td colspan="2">게시글이 존재하지 않습니다.<td>
-                                        		</tr>
-                                        	</c:if>
-                                        	<c:if test="${fn:length(boardPagerMap.boardList) != 0}">
-	                                        	<c:forEach var="board" items="${boardPagerMap.boardList}">
-		                                       		<tr onclick="window.location.href='detailBoard?boardNo=${board.boardNo}';">
-		                                                <td>${board.rnum}</td>
-		                                                <td>
-		                                                	${board.boardTitle}
-		                                                	<c:if test="${board.mediaFileName != null}">
-			                                                	&nbsp;
-			                                                	<i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i>
-		                                                	</c:if>
-		                                                	<c:if test="${board.commentCount != 0}">
-			                                                	&nbsp;
-			                                                	<span class="text-red">[${board.commentCount}]</span>
-		                                                	</c:if>
-		                                                </td>
-		                                                <td>${board.empName}</td>
-		                                                <!-- 오늘 날짜면 시간만 보이도록 -->
-		                                                <c:set var="now" value="<%= new java.util.Date() %>" />
-		                                                <c:choose>
-														    <c:when test="${fn:substring(board.boardWriteDate, 0, 10) == fn:substring(now, 0, 10)}">
-														        <td>
-														            <fmt:formatDate value="${board.boardWriteDate}" pattern="HH:mm"/>
-														        </td>
-														    </c:when>
-														    <c:otherwise>
-														        <td>
-														            <fmt:formatDate value="${board.boardWriteDate}" pattern="yyyy.MM.dd"/>
-														        </td>
-														    </c:otherwise>
-														</c:choose>
-		                                                <td>${board.boardHitcount}</td>
-		                                            </tr>
-	                                        	</c:forEach>
-	                                        </c:if>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <c:if test="${fn:length(boardPagerMap.boardList) != 0}">
-                            	<div class="bootstrap-pagination">
-	                           		<!-- <nav> -->
-	                           		<nav class="justify-content-center" style="display: flex; margin-bottom: 1rem;">
-	                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
-				                        <!-- <ul class="pagination justify-content-center"> -->
-			                        	<c:if test="${pager.groupNo>1}">
-			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
-			                            </c:if>
-			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-											<c:if test="${pager.pageNo == i}">
-												<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
-											</c:if>
-											<c:if test="${pager.pageNo != i}">
-												<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
-											</c:if>
-										</c:forEach>
-										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
-			                            </c:if>
-				                    </nav>
-				                </div>
-                            </c:if>
-                        </div>
+                        
                         <!-- /# card -->
                     </div>
                     <div class="col-lg-4 col-md-4" style="height:28%;position: relative;bottom:15px;">
 	                    <div >
-		                    <div class="card" style="height:28%;">
-			                    <div class="card-body" style="height:28%;">
-			                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">프로젝트 정보</h4>
-			                    	 <table>
-			                    	 	<thead>
-			                    	 		<tr >
-			                    	 			<th >프로젝트 명</th>
-			                    	 			<td style="width:32px;"></td>
-			                    	 			<td>${project.projectName}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>프로젝트 시작 날짜</th>
-			                    	 			<td ></td>
-			                    	 			<td>
-			                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectStartDate}"></fmt:formatDate>
-			                    	 			</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>프로젝트 종료 날짜</th>
-			                    	 			<td ></td>
-			                    	 			<td>
-			                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectEndDate}"></fmt:formatDate>
-			                    	 			</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>프로젝트 개요</th>
-			                    	 			<td ></td>
-			                    	 			<td>${project.projectContent}</td>
-			                    	 		</tr>
-			                    	 	</thead>
-			                    	 </table>
-		                    	 </div>
-		                    	 <div class="card-body" style="height:28%;">
-			                    	 <h4 class="card-title" style="color:#616161; font-weight: bolder;">PM(Project Manager) 정보</h4>
-			                    	 <table>
-			                    	 	<thead>
-			                    	 		<tr>
-			                    	 			<th>사원 번호</th>
-			                    	 			<td style="width:32px;"></td>
-			                    	 			<td>${pmInfo.empId}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>PM 이름</th>
-			                    	 			<td ></td>
-			                    	 			<td>${pmInfo.empName}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>직급</th>
-			                    	 			<td ></td>
-			                    	 			<td>${pmInfo.empRank}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>연락처</th>
-			                    	 			<td ></td>
-			                    	 			<td>${pmInfo.empTel}</td>
-			                    	 		</tr>
-			                    	 		<tr>
-			                    	 			<th>이메일</th>
-			                    	 			<td ></td>
-			                    	 			<td>${pmInfo.empEmail}</td>
-			                    	 		</tr>
-			                    	 	</thead>
-			                    	 </table>
-		                    	 </div>
-		                    </div>
+		                    
 	                	</div>
                 	</div>
                 <div class="d-none">
