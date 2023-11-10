@@ -78,6 +78,12 @@ public class MessengerServiceImpl implements MessengerService {
 	public void updateLastChat(Messenger messenger) {
 		messengerDao.updateLastChat(messenger);
 	}
+
+	@Override
+	public void deleteChat(int mrNo) {
+		messengerDao.deleteChatData(mrNo);
+		messengerDao.deleteChatRoom(mrNo);
+	}
 	
 	
 }

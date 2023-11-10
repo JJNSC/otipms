@@ -260,3 +260,20 @@ function getCurrentDateTime() {
     var currentDateTime = new Date();
     return currentDateTime.toLocaleString(); 
 }
+
+function deleteChat(mrNo,event) {
+	event.preventDefault();
+    // 서비스 호출
+    $.ajax({
+        type: 'POST', // 또는 'GET'
+        url: '/otipms/chat/deleteChat', // 채팅방 삭제 서비스 엔드포인트
+        data: { mrNo: mrNo }, // 전달할 데이터
+        success: function(response) {
+        	console.log("성공");
+        	window.location.href = '/otipms/chat/chat'; // 리다이렉트할 페이지의 URL로 대체
+        },
+        error: function(error) {
+            console.error('채팅방 지우기 에러 :', error);
+        }
+    });
+}

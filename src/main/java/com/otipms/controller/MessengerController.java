@@ -81,6 +81,13 @@ public class MessengerController {
 		return "chat/chat";
 	}
 	
+	@PostMapping("/deleteChat")
+	public String deleteChat(@RequestParam int mrNo) {
+		messengerService.deleteChat(mrNo);
+		
+		return "redirect:chat";
+	}
+	
 	@RequestMapping("/findEmployee")
 	public String findEmployee() {
 		

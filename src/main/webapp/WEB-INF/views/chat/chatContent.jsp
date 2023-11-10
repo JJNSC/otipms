@@ -16,8 +16,30 @@
 			<input type="hidden" value="${employee.empId}" id="empId"/>
 			<input type="hidden" value="${mrNo}" id="mrNo"/>
 			<div class="right text-right" style="padding-top: 15px;">
-				<a href="#" class="btn btn-primary btn-block" style="width:150px;">채팅방 나가기</a>
+				<a href="#" 
+				   class="btn btn-primary btn-block"
+				   style="width:150px;" 
+				   data-toggle="modal"
+				   data-target="#delete-Chat"
+				   >채팅방 나가기</a>
 			</div>
+			<div class="modal fade none-border" id="delete-Chat">
+             	<div class="modal-dialog">
+                	<div class="modal-content">
+                    	<div class="modal-header">
+                        	<h4 class="modal-title"><strong>채팅방 나가기</strong></h4>
+                        </div>
+                        <div class="modal-body" style="padding-bottom:0;">
+                          	<p>채팅방을 나가시겠습니까?</p>
+                          	<p>나갈 시 채팅 내역이 삭제됩니다.</p>
+                        </div>
+                       	<div class="modal-footer">
+                        	<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">취소</button>
+                        	<button id="delete" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal"  onclick="deleteChat(${mrNo},event)">삭제</button>
+                        </div>
+                    </div>
+                </div>
+       		</div>
 		</div>
 		<div class="chat-box">
 			<div id="chatBox" class="chat-desc customscroll" style="overflow-y: auto;">

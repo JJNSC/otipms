@@ -116,4 +116,14 @@
     	     , mrDate = sysdate
     	 WHERE mrNo = #{mrNo}
 	</update>
+	
+	<delete id="deleteChatData" parameterType="int">
+		DELETE FROM MESSENGER
+         WHERE mrNo = #{mrNo}
+	</delete>
+	
+	<delete id="deleteChatRoom" parameterType="int">
+		DELETE FROM MESSENGERROOM
+		 WHERE mrNo = #{mrNo}
+	</delete>
 </mapper>
