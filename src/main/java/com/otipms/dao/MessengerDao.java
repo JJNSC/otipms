@@ -23,4 +23,8 @@ public interface MessengerDao {
 	//직접 채팅 입력
 	public void insertChat(Map<String, Object> paramMap);
 	public void updateLastChat(Messenger messenger);
+	
+	//채팅방 삭제
+	public void deleteChatData(int mrNo);
+	public void deleteChatRoom(int mrNo);
 }
