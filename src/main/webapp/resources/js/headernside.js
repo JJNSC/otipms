@@ -221,7 +221,7 @@ window.onload = function(){
 	    const dayOfWeek = daysOfWeek[now.getDay()];
 
 	    timeElement.textContent = `${hours}:${minutes}:${seconds}`;
-	    dateElement.textContent = `${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`;
+	    dateElement.textContent = `${year}/${month}/${day} (${dayOfWeek})`;
 	}
 	
 	// 초기 호출 및 1초마다 업데이트
@@ -253,7 +253,8 @@ window.onload = function(){
 	            }
 
 	            const weatherElement = document.getElementById('weather');
-	            weatherElement.textContent = `서울 날씨: ${weatherIcon} ${temperature}°C`;
+	            //weatherElement.textContent = `서울 ${weatherIcon} ${temperature}°C`;
+	            weatherElement.innerHTML = `<i class="icon-copy ion-location"></i> 서울 ${weatherIcon} ${temperature}°C`;
 	        })
 	        .catch((error) => {
 	            console.error('날씨 정보를 가져오는 중 오류 발생:', error);
