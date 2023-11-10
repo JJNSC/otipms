@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
     	console.log("selectedEmployee" + selectedEmployee);
     	console.log("selectedEmployees[recipientType]) : " + selectedEmployees[recipientType]);
     	
-    	
     	if (isEmployeeSelected(selectedEmployee, selectedEmployees[recipientType])) {
             
     		
