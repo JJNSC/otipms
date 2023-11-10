@@ -29,19 +29,11 @@ import lombok.extern.slf4j.Slf4j;
 public class WebSocketMailHandler extends TextWebSocketHandler{
 	
 	@Autowired
-	private AlarmDao alarmDao;
-	public void setAlarmDAO(AlarmDao alarmDao) {
-		this.alarmDao = alarmDao;
-	}
-	
-	@Autowired
 	private AlarmService alarmService;
 	
 	@Autowired
 	private MessageService messageService;
 	
-	@Autowired
-	private EmployeeService employeeService;
 	
 	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	

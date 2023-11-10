@@ -24,15 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 public class WebSocketChatHandler extends TextWebSocketHandler{
 	
 	@Autowired
-	private AlarmService alarmService;
-	
-	@Autowired
-	private MessageService messageService;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
 	private MessengerService messengerService;
 	
 	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();

@@ -1,3 +1,4 @@
+var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 document.addEventListener("DOMContentLoaded", function () {
 	function checksave() {
         window.history.back();
@@ -215,7 +216,6 @@ function sendMail() {
             });
         }
     }
-    var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
     var empId = document.getElementById("memIdSpan").value;
 	// AJAX를 사용하여 서버로 데이터 전송
 	$.ajax({

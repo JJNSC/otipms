@@ -23,7 +23,6 @@
     <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/mail.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/headernside.js"></script>
     
     <!-- Socket -->

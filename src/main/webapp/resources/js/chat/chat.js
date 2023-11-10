@@ -108,6 +108,12 @@ window.onload = function(){
             }
         });
     });
+	
+	var wsSend=()=>{
+		setInterval(function() {
+			chatWebSocket.send(empId);
+		}, 1500);
+	}
 }
 
 function createChatRoomElement(chatRoomInfo) {
