@@ -80,7 +80,7 @@
                                     	</c:if>
                                         <div class="media pt-5">
                                             <img class="rounded-circle" src="data:${messageContent.mediaFileType};base64, ${messageContent.profile}" height="60" width="60" alt="" style="margin-right:5px;">
-                                            <div class="media-body">
+                                            <div class="media-body"> 
                                                 <span class="m-b-5 font-weight-bold">발신자 : </span>
                                                 <c:forEach items="${messageEmployee}" var="messageEmpSen">
 	                                                <c:choose>
