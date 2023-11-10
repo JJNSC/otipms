@@ -1,4 +1,4 @@
-var chatWebSocket = new WebSocket("ws://192.168.27.220:8080/otipms/ws-chat");
+var chatWebSocket = new WebSocket("ws://localhost:8080/otipms/ws-chat");
 window.onload = function(){
 	
 	chatWebSocket.onopen = () => {

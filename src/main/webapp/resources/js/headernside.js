@@ -1,5 +1,5 @@
 window.onload = function(){
-	var webSocket = new WebSocket("ws://192.168.27.220:8080/otipms/ws-alarm");
+	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 	var empId = document.getElementById("memIdSpan").value;
 	var cntSpan = document.getElementById("cntSpan")
 	if (cntSpan) {
@@ -11,7 +11,7 @@ window.onload = function(){
 	}
 	var previousAlarmCount = 0;
 	
-	var alarmData = {
+	var alarmData = { 
 			alarmList: [],
 			messageList: [],
 	        alarmCount: 0,
@@ -78,6 +78,14 @@ window.onload = function(){
 	    	previousAlarmCount = alarmData.alcount;// 이전 알림 개수 업데이트
 	    }
 	    
+	    
+	}
+	
+	var wsSend=()=>{
+		setInterval(function() {
+			console.log("체크 하기");
+			webSocket.send(empId);
+		}, 10000);
 	}
 	
 	//안읽은 알람 수

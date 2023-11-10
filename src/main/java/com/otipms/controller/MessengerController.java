@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.otipms.dto.Messenger;
 import com.otipms.security.EmpDetails;
-import com.otipms.service.AlarmService;
-import com.otipms.service.EmployeeService;
-import com.otipms.service.MessageService;
 import com.otipms.service.MessengerService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +42,6 @@ public class MessengerController {
 		log.info("chatRoom : " + chatRoom);
 		model.addAttribute("employee", LoginController.loginEmployee);
 		model.addAttribute("chatRoom", chatRoom);
-
 		
 		return "chat/chatRoom";
 	}
@@ -70,7 +66,6 @@ public class MessengerController {
 	
 	@PostMapping("/sendMessage")
 	public String sendMessage(@RequestParam int mrNo, @RequestParam int empId, @RequestParam String message) {
-	    
 		messengerService.insertChat(mrNo, empId, message);
 		
 		return "chat/chat";
@@ -78,6 +73,7 @@ public class MessengerController {
 	
 	@RequestMapping("/findEmployee")
 	public String findEmployee() {
+		
 		return "chat/findEmployee";
 	}
 }
