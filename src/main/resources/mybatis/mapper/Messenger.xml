@@ -6,6 +6,8 @@
               		  , e.empName
               		  , e.empRank
               		  , m.empId
+              		  , r.mrLastChat
+              		  , r.mrDate
            		   FROM MessengerRoom r
            		   JOIN Messenger m 
              		 ON r.mrNo = m.mrNo
@@ -18,6 +20,7 @@
                  		 WHERE empId = #{empId}
                 		)
                 	AND m.empId != #{empId}
+               ORDER BY r.mrDate desc
 	</select>
 	
 	<select id="getChatContent" parameterType="int" resultType="Messenger">
@@ -106,4 +109,11 @@
 	        	  , sysdate
 	    		  )
 	</insert>
+	
+	<update id="updateLastChat" parameterType="Messenger">
+		UPDATE MESSENGERROOM
+    	   SET mrLastChat = #{mrLastChat}
+    	     , mrDate = sysdate
+    	 WHERE mrNo = #{mrNo}
+	</update>
 </mapper>

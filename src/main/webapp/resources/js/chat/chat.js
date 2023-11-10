@@ -7,16 +7,24 @@ window.onload = function(){
 	}
 	
 	chatWebSocket.onmessage = (e) => {
+		var empId = $('#empId').val();
+		var crmrNo = $('#mrNo').val();
 		const message = JSON.parse(e.data);
 		console.log("나 파싱 받앗숴~ : " + message);
 		const mrNo = message.mrNo;
-	    const empId = message.empId;
+	    const nmempId = message.empId;
 	    const messageContent = message.messageContent;
 	    const messageDate = message.messageDate;
 	    
 	    console.log("messageContent : " + messageContent);
 	    console.log("messageDate : " + messageDate);
-	    addChatYourMessage(messageContent, messageDate);
+	    
+	    console.log("empId : " + empId);
+	    console.log("nmempId : " + nmempId);
+	    if(nmempId != empId && mrNo == crmrNo){
+	    	addChatYourMessage(messageContent, messageDate);
+	    }
+	    		
 	} 
 	
 	chatWebSocket.onclose = () => {
@@ -40,6 +48,7 @@ window.onload = function(){
             data: { mrNo: mrNo },
             success: function(response) {
                 $('.chat-detail').html(response);
+                scrollToBottom();
             },
             error: function() {
                 alert('에러가 발생했습니다.');

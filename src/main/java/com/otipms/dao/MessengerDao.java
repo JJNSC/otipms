@@ -22,4 +22,5 @@ public interface MessengerDao {
 	
 	//직접 채팅 입력
 	public void insertChat(Map<String, Object> paramMap);
+	public void updateLastChat(Messenger messenger);
 }

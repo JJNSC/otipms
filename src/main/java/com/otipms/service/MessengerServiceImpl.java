@@ -73,6 +73,11 @@ public class MessengerServiceImpl implements MessengerService {
 		
 		messengerDao.insertChat(paramMap);
 	}
+
+	@Override
+	public void updateLastChat(Messenger messenger) {
+		messengerDao.updateLastChat(messenger);
+	}
 	
 	
 }

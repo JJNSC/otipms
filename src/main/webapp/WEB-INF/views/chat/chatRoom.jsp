@@ -2,12 +2,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 	<ul id="chatRoomList">
 		<c:forEach var="ChatRoom" items="${chatRoom}">
 			<li>
 				<a href="#" data-mrno="${ChatRoom.mrNo}">
 					<img src="/otipms/resources/images/user/1.jpg" alt=""/>
-					<h3 class="clearfix">${ChatRoom.empRank} ${ChatRoom.empName}</h3>
+					<span style="display:block;
+								 clear: both;
+							     font-size: 16px;
+							     color: #202342;
+							     font-weight: 700;
+							     text-transform: capitalize;
+							     font-family: 'Inter',sans-serif;
+							     padding-bottom: 5px;">
+							     ${ChatRoom.empRank} ${ChatRoom.empName}
+					</span>
+					<span style="position: absolute;right: 0px;top: 18px;">
+						<c:set var="currentDate" value="<%= new java.util.Date() %>"/>
+						<c:choose>
+    						<c:when test="${fn:substring(ChatRoom.mrDate, 0, 9) eq fn:substring(currentDate, 0, 9)}">
+				        		<fmt:formatDate value="${ChatRoom.mrDate}" pattern="HH:mm"/>
+				        	</c:when>
+				        	<c:otherwise>
+						        <fmt:formatDate value="${ChatRoom.mrDate}" pattern="MM/dd"/>
+				        	</c:otherwise>
+				        </c:choose>
+					</span>
+					<span style="white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;max-width: 160px;">${ChatRoom.mrLastChat}</span>
 				</a>
 			</li>
 		</c:forEach>
