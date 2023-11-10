@@ -43,6 +43,11 @@ width:15.1875rem;
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
+							<span>
+								<span id="date" class="mr-2" style="color:#fff"></span>
+	                        	<span id="time" class="mr-2" style="color:#fff"></span>
+	                        	<span id="weather" class="mr-2"  style="color:#fff"></span>
+                        	</span>
                         	<a class="nav-link nav-icons" href="javascript:void(0);" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="mdi mdi-email-outline"></i>
 								<span id="alarmCnt" class="badge badge-pill badge-custom"></span>
@@ -239,6 +244,7 @@ width:15.1875rem;
                 </ul>
             </div>
         </div>
+        
         <script src="${pageContext.request.contextPath}/resources/js/headernside.js"></script>
         <link href="${pageContext.request.contextPath}/resources/css/headernside.css" rel="stylesheet">
         <!--**********************************

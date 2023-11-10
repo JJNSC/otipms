@@ -201,6 +201,66 @@ window.onload = function(){
 	    	});
 	    }
 	}
+	//날짜 1초마다 업데이트 
+	function updateTimeAndDate() {
+	    const now = new Date();
+	    const timeElement = document.getElementById('time');
+	    const dateElement = document.getElementById('date');
+	    const dayElement = document.getElementById('day');
+
+	    const hours = now.getHours().toString().padStart(2, '0');
+	    const minutes = now.getMinutes().toString().padStart(2, '0');
+	    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+	    const year = now.getFullYear();
+	    const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+	    const day = now.getDate().toString().padStart(2, '0');
+	    
+	    const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+	    
+	    const dayOfWeek = daysOfWeek[now.getDay()];
+
+	    timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+	    dateElement.textContent = `${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`;
+	}
+	
+	// 초기 호출 및 1초마다 업데이트
+	updateTimeAndDate();
+	setInterval(updateTimeAndDate, 1000);
+	
+	function fetchWeatherData() {
+	    const apiUrl = 'https://api.weatherbit.io/v2.0/current?lat=37.5665&lon=126.9780&key=a35d4b980cb04cd0b0c0896cfa7c57fc&include=minutely';
+	    fetch(apiUrl)
+	        .then((response) => response.json())
+	        .then((data) => {
+	            const weatherDescription = data.data[0].weather.description;
+	            const temperature = data.data[0].temp;
+
+	            let weatherIcon;
+	            if (weatherDescription.includes('맑음')) {
+	                weatherIcon = '☀️';
+	            } else if (weatherDescription.includes('구름')) {
+	                weatherIcon = '☁️';
+	            } else if (weatherDescription.includes('비')) {
+	                weatherIcon = '🌧️';
+	            } else if (weatherDescription.includes('눈')) {
+	                weatherIcon = '❄️';
+	            } else if (weatherDescription.includes('바람')) {
+	                weatherIcon = '💨';
+	            } else {
+	                weatherIcon = '🌦️';
+	            }
+
+	            const weatherElement = document.getElementById('weather');
+	            weatherElement.textContent = `서울 날씨 : ${weatherIcon} ${temperature}°C`;
+	        })
+	        .catch((error) => {
+	            console.error('날씨 정보를 가져오는 중 오류 발생:', error);
+	        });
+	}
+
+	fetchWeatherData();
+	setInterval(fetchWeatherData, 600000); // 10분마다 업데이트
 	
 	function updatePaging(messageList) {
 		var filteredEmailsCountContainer = document.getElementById("cntSpan")

@@ -28,6 +28,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/customStyle.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/index/mySchedule.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
 		.nk-sidebar{
 			 height : 96%;
