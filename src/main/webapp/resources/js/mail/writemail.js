@@ -236,7 +236,7 @@ function sendMail() {
             var messageId = data.messageId;
             // 파일 업로드를 수행하고 메시지와 연결
             webSocket.send(empId);
-			window.history.back();
+            window.location.href = '/otipms/mail/sentMail';
 		},
 		error: function (error) {
 			console.log("오류 발생: " + error.responseText);
