@@ -40,11 +40,6 @@ width:15.1875rem;
     </div>
         <div class="header">    
             <div class="header-content clearfix">
-                <div class="nav-control">
-                    <div class="hamburger">
-                        <span class="toggle-icon"><i class="icon-menu"></i></span>
-                    </div>
-                </div>
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
@@ -136,19 +131,19 @@ width:15.1875rem;
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                                <span class="activity active"></span>
+                               
                                 <img src="data:${mf.mediaFileType};base64, ${base64Img}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="profile"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="profile"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void(window.open('${pageContext.request.contextPath}/mail/receivedMail','_blank','width=920, height=680, left=800, top=30'))">
                                                 <i class="icon-envelope-open"></i>
-                                                <span>Inbox</span>
+                                                <span>쪽지</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
                                                 	<span id="alarmCnt2">0</span>
                                                 </div>
@@ -157,7 +152,7 @@ width:15.1875rem;
                                         <li>
                                             <a href="javascript:void(window.open('${pageContext.request.contextPath}/chat/chat', '_blank', 'width=724, height=950, left=1000, top=30'))">
                                                 <i class="icon-copy fa fa-comments-o"></i>
-                                                <span>Chat</span>
+                                                <span>채팅</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
                                                 	5
                                                 </div>
@@ -165,9 +160,9 @@ width:15.1875rem;
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>화면 잠금</span></a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/logout"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="${pageContext.request.contextPath}/logout"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
                             </div>
