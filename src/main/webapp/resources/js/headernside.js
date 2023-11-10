@@ -11,7 +11,7 @@ window.onload = function(){
 	}
 	var previousAlarmCount = 0;
 	
-	var alarmData = { 
+	var alarmData = {
 			alarmList: [],
 			messageList: [],
 	        alarmCount: 0,
@@ -78,14 +78,6 @@ window.onload = function(){
 	    	previousAlarmCount = alarmData.alcount;// 이전 알림 개수 업데이트
 	    }
 	    
-	    
-	}
-	
-	var wsSend=()=>{
-		setInterval(function() {
-			console.log("체크 하기");
-			webSocket.send(empId);
-		}, 10000);
 	}
 	
 	//안읽은 알람 수
@@ -369,7 +361,7 @@ function parseMessageDate(messageDate){
 		currentDate.getDate() === messageDateObj.getDate();
 	
 	var dateFormatted;
-	if(isSameDate){
+	if(isSameDate){ 
 		dateFormatted = messageDateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 	} else {
 		dateFormatted = messageDateObj.toLocaleDateString('en-US', { year: '2-digit', month: '2-digit', day: '2-digit' });
