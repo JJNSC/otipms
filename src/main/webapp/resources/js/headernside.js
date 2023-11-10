@@ -230,6 +230,7 @@ window.onload = function(){
 	
 	function fetchWeatherData() {
 	    const apiUrl = 'https://api.weatherbit.io/v2.0/current?lat=37.5665&lon=126.9780&key=a35d4b980cb04cd0b0c0896cfa7c57fc&include=minutely';
+	    
 	    fetch(apiUrl)
 	        .then((response) => response.json())
 	        .then((data) => {
