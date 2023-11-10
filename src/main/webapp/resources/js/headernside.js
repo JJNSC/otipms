@@ -353,7 +353,7 @@ function parseTO_DATE(toDateStr) {
 
 function parseMessageDate(messageDate){
 	var messageDateObj = new Date(messageDate);
-	var currentDate = new Date();
+	var currentDate = new Date(); 
 	
 	var isSameDate =
 		currentDate.getFullYear() === messageDateObj.getFullYear() &&
