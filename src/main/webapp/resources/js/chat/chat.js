@@ -1,6 +1,7 @@
-var chatWebSocket = new WebSocket("ws://192.168.0.169:8080/otipms/ws-chat");
 window.onload = function(){
-	
+	var chatWebSocket = null;
+	var socket = new WebSocket("ws://192.168.0.169:8080/otipms/chat/ws-chat");
+	chatWebSocket = socket;
 	chatWebSocket.onopen = () => {
 		console.log("소켓 연결");
 	}
@@ -109,11 +110,6 @@ window.onload = function(){
         });
     });
 	
-	var wsSend=()=>{
-		setInterval(function() {
-			chatWebSocket.send(empId);
-		}, 1500);
-	}
 }
 
 function createChatRoomElement(chatRoomInfo) {

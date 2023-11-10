@@ -27,7 +27,7 @@
 	
 	<bean id="alarmHandler" class="com.otipms.websocket.WebSocketMailHandler">
 	</bean>
-	<websocket:handlers allowed-origins="*">
+	<websocket:handlers allowed-origin-patterns="*">
 	  <websocket:mapping handler="alarmHandler" path="/ws-alarm" />
 	  <websocket:handshake-interceptors>
 	  	<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
@@ -37,9 +37,10 @@
 	<bean id="chatHandler" class="com.otipms.websocket.WebSocketChatHandler">
 	</bean>
 	<websocket:handlers allowed-origins="*">
-	  <websocket:mapping handler="chatHandler" path="/ws-chat" />
+	  <websocket:mapping handler="chatHandler" path="/chat/ws-chat"/>
 	  <websocket:handshake-interceptors>
 	  	<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 	  </websocket:handshake-interceptors>
 	</websocket:handlers>
+	
 </beans>
