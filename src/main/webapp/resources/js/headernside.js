@@ -35,6 +35,7 @@ window.onload = function(){
 			
 			updatePaging(messageList);
 		});
+		wsSend();
 	}
 	
 	webSocket.onmessage = (e) => {
@@ -91,7 +92,7 @@ window.onload = function(){
 	var wsSend=()=>{
 		setInterval(function() {
 			webSocket.send(empId);
-		}, 1500);
+		}, 3000);
 	}
 	
 	//안읽은 알람 수
