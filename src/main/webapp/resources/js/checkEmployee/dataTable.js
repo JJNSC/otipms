@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
           { data: 'empTel' },
           { data: 'projectName' },
           { data: 'teamName' },
-          //{ data: 'role' }
+          { data: 'empId' }
       ],
       columnDefs: [
         {
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                // Create a text output for Product name
                var $row_output =
-                 '<div class="d-flex justify-content-start align-items-center product-name">' +
+                 '<div class="d-flex justify-content-start align-items-center product-name" >' +
                  '<div class="d-flex flex-column">' +
                  '<h6 class="text-body text-nowrap mb-0">' +
                  $empName + 
@@ -98,15 +98,20 @@ document.addEventListener("DOMContentLoaded", function () {
         		var $teamName = full['teamName']; //date 필드에서 날짜 정보를 가져옴
         		return '<span class="text-truncate d-flex align-items-center">' + $teamName + '</span>';
         	}
-        }/*,
+        },
         {
         	//date
         	targets: 6,
+        	searchable: false,
+            orderable: false,
         	render: function (data, type, full, meta) {
-        		var $role = full['role']; //date 필드에서 날짜 정보를 가져옴
-        		return '<span class="text-truncate d-flex align-items-center">' + $role + '</span>';
+        		var $employeeId = full['empId']; //date 필드에서 날짜 정보를 가져옴
+        		return '<span class="text-truncate d-flex align-items-center" ' +
+        	    'onclick="openMailWindow(' + $employeeId + ')">' +
+        	    '<i class="icon-copy ion-paper-airplane"></i>' +
+        	    '</span>';
         	}
-        }*/
+        }
       ],
       order: [2, 'asc'], //set any columns order asc/desc
       dom:
@@ -242,3 +247,13 @@ document.addEventListener("DOMContentLoaded", function () {
   dt_products.ajax.url('employeeListJson?project=' + selectedProject + '&team=' + selectedTeam).load();
   });
 });
+
+function openMailWindow(employeeId) {
+    var url = contextPath + '/mail/writeMail?empId=' + employeeId;
+    var options = 'width=920, height=680, left=800, top=30';
+    window.open(url, '_blank', options);
+}
+
+
+
+

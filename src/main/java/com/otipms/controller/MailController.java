@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dto.CC;
+import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.interceptor.Login;
@@ -325,10 +326,15 @@ public class MailController {
 	//쪽지 쓰기
 	@Login
 	@RequestMapping("/writeMail")
-	public String writeMail(Model model,Authentication authentication) {
+	public String writeMail(Model model,Authentication authentication,
+							@RequestParam(name="empId", required=false, defaultValue="0") int sendEmpId) {
 		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		int empId = empDetails.getEmployee().getEmpId();
+		if(sendEmpId!=0) {
+			Employee sendEmp = employeeService.getEmployeeInfo(sendEmpId);
+			model.addAttribute("directSend", sendEmp);
+		}
 		
 		model.addAttribute("employee", empDetails.getEmployee());
 	    return "mail/writeMail";

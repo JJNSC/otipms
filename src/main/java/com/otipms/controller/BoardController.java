@@ -22,10 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Team;
 import com.otipms.service.BoardService;
+import com.otipms.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +43,8 @@ public class BoardController {
 	
 	@Autowired
 	public BoardService boardService;
+	@Autowired
+	public EmployeeService employeeService;
 	
 	/**
 	 * 게시판 이동
@@ -437,6 +441,9 @@ public class BoardController {
 			board.setBase64Img(Base64.getEncoder().encodeToString(board.getMediaFileData()));
 		}
 		model.addAttribute("board", board);
+		
+		Employee emp = employeeService.getEmployeeAllInfo(board.getEmpId());
+		model.addAttribute("writer", emp);
 		
 		//게시글 파일 조회
 		List<MediaFile> mediaFiles = boardService.getBoardMediaList(boardNo);

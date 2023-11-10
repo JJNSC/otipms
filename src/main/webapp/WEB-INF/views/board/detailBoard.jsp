@@ -19,6 +19,56 @@
     
 	<%-- <link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css"> --%>
 
+	<script>
+	    function showEmpInfo(empId) {
+	    	$.ajax({
+	            url: 'http://localhost:8080/otipms/employeeManagement/employeeInfoJson', // 해당 URL은 실제로 사용하는 URL로 변경해야 합니다.
+	            type: 'GET',
+	            data: { empId: empId },
+	            success: function (data) {
+	                // 요청이 성공하면 모달 내용을 업데이트
+	                updateModalContent(data);
+	            },
+	            error: function () {
+	                // 요청 실패 시 예외 처리
+	                alert('사원 정보를 불러오는 중 문제가 발생했습니다.');
+	            }
+	        });
+		}
+	    function updateModalContent(employeeData) {
+	    	var profileImage = $('#profileImageEmp');
+	        profileImage.attr('src', 'data:' + employeeData.mediaFileData + ';base64, ' + employeeData.base64Img);
+	        profileImage.attr('alt', ''); // alt 속성도 업데이트
+
+	        // 나머지 필드 업데이트
+	        $('#profileEmpName').val(employeeData.empName);
+	        $('#profileEmpName').text(employeeData.empName);
+	        $('#profileEmpTel').val(employeeData.empTel);
+	        $('#profileEmpTel').text(employeeData.empTel);
+	        $('#profileEmpEmail').val(employeeData.empEmail);
+	        $('#profileEmpEmail').text(employeeData.empEmail);
+	        $('#profileEmpRank').val(employeeData.empRank);
+	        $('#profileEmpRank').text(employeeData.empRank);
+	        $('#profileEmpTeamName').val(employeeData.teamNo);
+	        $('#profileEmpTeamName').text(employeeData.teamName);
+
+	        // 모달 열기
+	        $('#writerInfoModal').modal('show');
+	    }
+	</script>
+	
+	<script>
+		var toWriter = document.getElementById('openWriterMail');
+		toWriter.addEventListener('click', function() {
+			openMailWindow('${board.empId}');
+		});
+	
+		function openMailWindow(employeeId) {
+			var url = '${pageContext.request.contextPath}/mail/writeMail?empId=' + employeeId;
+			var options = 'width=920, height=680, left=800, top=30';
+			window.open(url, '_blank', options);
+		}
+	</script>
 </head>
 
 <body>
@@ -68,7 +118,22 @@
                                 	<div class="col-6 mb-3">
                                 		<div class="d-flex align-items-center">
                                 			<c:if test="${board.mediaFileData != null}">
-			                                    <div style="margin-right: 0.8rem !important;"><img src="data:${board.mediaFileData};base64, ${board.base64Img}" class="rounded-circle" width="40" height="40"></div>
+			                                   <%--  <div style="margin-right: 0.8rem !important;" 
+			                                    data-toggle="modal" data-target="#writerInfoModal" data-whatever="@mdo" 
+			                                    onclick="showEmpInfo(${board.empId})"> --%>
+											     <div style="margin-right: 0.8rem !important;" class="bootstrap-popover">
+											        <img
+											            data-container="body"
+											            data-toggle="popover"
+											            data-placement="top"
+											            data-html="true"
+											            data-content="이메일: ${writer.empEmail }<br>전화번호: ${writer.empTel }<br><span id='openWriterMail' onclick='openMailWindow(${board.empId })'>쪽지보내기 : <i class='icon-copy ion-paper-airplane'></i></span>"
+											            src="data:${board.mediaFileData};base64, ${board.base64Img}"
+											            class="rounded-circle"
+											            width="40"
+											            height="40"
+											        />
+											    </div>
                                				</c:if>
 		                                   <!--  <div class="mr-3"><img src="/otipms/resources/images/testHuman.jpg" alt="user" class="rounded-circle" width="40" height="40"></div> -->
 		                                    <div class="">
@@ -119,7 +184,20 @@
 	                                		<div class="col-6">
 	                                			<div class="d-flex align-items-center">
 	                                				<c:if test="${comment.mediaFileData != null}">
-	                                					<div style="margin-right: 0.8rem !important;"><img src="data:${comment.mediaFileData};base64, ${comment.base64Img}" class="rounded-circle" width="40" height="40"></div>
+	                                					<%-- <div style="margin-right: 0.8rem !important;"><img src="data:${comment.mediaFileData};base64, ${comment.base64Img}" class="rounded-circle" width="40" height="40"></div> --%>
+	                                					<div style="margin-right: 0.8rem !important;" class="bootstrap-popover">
+													        <img
+													            data-container="body"
+													            data-toggle="popover"
+													            data-placement="top"
+													            data-html="true"
+													            data-content="이메일: ${comment.empEmail }<br>전화번호: ${comment.empTel }<br><span id='openWriterMail' onclick='openMailWindow(${comment.empId })'>쪽지보내기 : <i class='icon-copy ion-paper-airplane'></i></span>"
+													            src="data:${comment.mediaFileData};base64, ${comment.base64Img}"
+													            class="rounded-circle"
+													            width="40"
+													            height="40"
+													        />
+													    </div>
 	                                				</c:if>
 				                                    <div class="">
 				                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
@@ -198,7 +276,43 @@
 			                            </div>
 			                        </div>
 		                		</div>
-                                
+		                		
+		                		<!-- 댓글 작성자 클릭시 정보 나오는 모달  -->
+                                 <div class="modal fade" id="writerInfoModal" tabindex="-1" role="dialog" aria-labelledby="nameExcelFileLabel" aria-hidden="true">
+								    <div class="modal-dialog" role="document">
+								        <div class="modal-content">
+								            <div class="modal-header">
+								                <h5 class="modal-title" id="nameExcelFileLabel">작성자 정보</h5>
+								            </div>
+								            <div class="modal-body">
+								                <div class="card" style="padding: 20px;">
+													<div class="profile-photo">
+														<!-- <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a> -->
+														<c:if test="${profileEmployee.mediaFileData != null}">
+															<img id="profileImageEmp" src="data:${profileEmployee.mediaFileData};base64, ${base64Img}" alt="" class="avatar-photo" width="160px" height="160px"/>
+														</c:if>
+													</div>
+													<h5 class="text-center h5 mb-0" id="profileEmpName">${profileEmployee.empName}</h5>
+													<p class="text-center text-muted font-14" ><span id="profileEmpRank">${profileEmployee.empRank}</span> <c:if test="${profileEmployee.teamName != '미배정'}"> | <span id="profileEmpTeamName">${profileEmployee.teamName}</span></c:if></p>
+													<div class="profile-info">
+														<h5 class="mb-20 h5 text-blue">사원 정보</h5>
+														<ul>
+															<li class="mb-1">
+																<span>이메일:</span>
+																<span id="profileEmpEmail">${profileEmployee.empEmail}</span>
+															</li>
+															<li class="mb-1">
+																<span>연락처:</span>
+																<span id="profileEmpTel">${profileEmployee.empTel}</span>
+															</li>
+														</ul>
+													</div>
+								                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+												</div>
+								            </div>
+								        </div>
+								    </div> 	
+								</div>
                                 <!-- <div class="modal fade" id="deleteComment">
 			                        <div class="modal-dialog" role="document">
 			                            <div class="modal-content">

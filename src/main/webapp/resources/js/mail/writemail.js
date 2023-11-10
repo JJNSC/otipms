@@ -11,6 +11,35 @@ document.addEventListener("DOMContentLoaded", function () {
     	};
     
     window.receiveSelectedEmployees = function (selectedEmployee, recipientType) {
+    	
+    	//인력 조회에서 클릭한 사원의 정보
+    	const directSendEmpId = document.querySelector('#directSendEmpId').value;
+    	const directSendEmpName = document.querySelector('#directSendEmpName').value;
+    	const directSendRole = document.querySelector('#directSendRole').value;
+    	const checkAdded = document.querySelector('#checkAdded').value;
+    	
+	    
+	    // 값이 null이 아닌 경우에만 처리
+	    if (directSendEmpId && directSendEmpName && directSendRole && checkAdded=="0") {
+	        // 객체에서 필요한 값 추출
+	        const employeeId = selectedEmployee[0].employeeId;
+	        const position = selectedEmployee[0].position;
+	        const name = selectedEmployee[0].name;
+
+	        // 값 추가
+	        selectedEmployee.push({
+	            employeeId: directSendEmpId,
+	            position: directSendRole,
+	            name: directSendEmpName,
+	            ccType: recipientType
+	        });
+	        const checkAddedInput = document.querySelector('#checkAdded');
+	        checkAddedInput.value = '1';
+
+	        // 콘솔에 확인
+	        console.log("selectedEmployee after adding values: ", selectedEmployee);
+	    }
+	    
     	var recipientTypeToNumber = {
     		        'Recipient': 1,
     		        'Reference': 3,
@@ -79,6 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return false;
     }
+    
+  
     
     function updateSelectedEmployeesUI(selectedEmployee, recipientType) {
     	const selectedTextbox = document.querySelector(`#selected${recipientType}Textbox`); 

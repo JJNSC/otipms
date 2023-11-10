@@ -294,6 +294,8 @@
 			 , c.commentDeleted
 			 , e.empName
 			 , e.empRank
+			 , ei.empTel
+			 , ei.empEmail
 			 , t.teamNo
 		     , t.teamName
 		     , m.mediaFileData

@@ -29,4 +29,6 @@ public class BoardComment {
 	private String teamName;		//팀명
 	private byte[] mediaFileData;	//프로필 사진
 	private String base64Img;
+	private String empEmail;
+	private String empTel;
 }
