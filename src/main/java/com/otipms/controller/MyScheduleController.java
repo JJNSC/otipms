@@ -173,6 +173,7 @@ public class MyScheduleController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("updateSchedule")
 	public String updateSchedule(
 			@RequestParam String scheduleNo,
@@ -209,6 +210,7 @@ public class MyScheduleController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("updateScheduleMainPage")
 	public String updateScheduleMainPage(
 			@RequestParam String scheduleNo,
@@ -244,11 +246,13 @@ public class MyScheduleController {
 		}
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/deleteSchedule")
 	public String deleteSchedule(@RequestParam String scheduleNo) {
 		scheduleService.deleteSchedule(scheduleNo);
 		return "redirect:/mySchedule";
 	}
+	@RuntimeCheck
 	@RequestMapping("/deleteScheduleMainPage")
 	public String deleteScheduleMainPage(@RequestParam String scheduleNo,
 										 @RequestParam String role) {

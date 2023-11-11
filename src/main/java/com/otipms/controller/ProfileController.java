@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.service.EmployeeService;
@@ -30,6 +31,7 @@ public class ProfileController {
 	 * @param model
 	 * @return
 	 */ 
+	@RuntimeCheck
 	@RequestMapping("/profile")
 	public String profile(Model model) {
 		log.info("프로필");
@@ -48,6 +50,7 @@ public class ProfileController {
 		return "profile/profile";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/updatePassword")
 	@ResponseBody
 	public String updatePassword(String password, String newPassword) {
@@ -66,6 +69,7 @@ public class ProfileController {
 		return null;
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/updateProfile")
 	//@ResponseBody
 	public ResponseEntity<String> updateProfile(@RequestParam("image") MultipartFile imageFile) throws IOException {
