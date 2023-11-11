@@ -92,7 +92,7 @@ width:15.1875rem;
                                 </div>
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li>
+                                        <li> 
                                             <a href="javascript:void()">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
                                                 <div class="notification-content">
