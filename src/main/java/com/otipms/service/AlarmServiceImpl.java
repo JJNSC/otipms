@@ -62,5 +62,15 @@ public class AlarmServiceImpl implements AlarmService {
 	public void deleteAlarmAll(int empId) {
 		alarmDao.deleteAlarmAll(empId);
 	}
+
+	@Override
+	public List<Alarm> selectAlarmChatCountByEmpId(int empId) {
+		return alarmDao.selectAlarmChatCountByEmpId(empId);
+	}
+	
+	@Override
+	public void deleteChatAlarmAll(int empId) {
+		alarmDao.deleteChatAlarmAll(empId);
+	}
 	
 }

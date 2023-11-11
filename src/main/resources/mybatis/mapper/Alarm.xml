@@ -10,11 +10,13 @@
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
 		  	   , a.MessageNo AS alarmMessageNo
+		  	   , a.MessengerNo AS alarmMessengerNo
 		    FROM Alarm a
       INNER JOIN emp e
 		      ON a.empId = e.empId
 		   WHERE a.empId = #{empId}
 		     AND e.empEnabled = 1
+		     AND a.MessengerNo IS NULL
 		ORDER BY a.AlarmDate desc
 	</select>
 	<select id="selectAlarmCountByEmpId" parameterType="int" resultType="Alarm">
@@ -25,6 +27,7 @@
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
 		  	   , a.MessageNo AS alarmMessageNo
+		  	   , a.MessengerNo AS alarmMessengerNo
 		    FROM Alarm a
       INNER JOIN emp e
 		      ON a.EmpId = e.EmpId
@@ -32,6 +35,25 @@
 	  		  ON m.messageNo = a.messageNo
 		   WHERE a.EmpId = #{empId}
 		     AND e.empEnabled = 1
+		     AND a.MessengerNo IS NULL
+   AND TO_NUMBER(a.AlarmChk) = 0
+	</select>
+	
+	<select id="selectAlarmChatCountByEmpId" parameterType="int" resultType="Alarm">
+		  SELECT a.AlarmNo
+		  	   , a.EmpId AS alarmEmpId
+		  	   , a.AlarmContentCode
+		  	   , a.AlarmContent
+		  	   , a.AlarmDate
+		  	   , a.AlarmChk
+		  	   , a.MessageNo AS alarmMessageNo
+		  	   , a.MessengerNo AS alarmMessengerNo
+		    FROM Alarm a
+      INNER JOIN emp e
+		      ON a.EmpId = e.EmpId
+		   WHERE a.EmpId = #{empId}
+		     AND e.empEnabled = 1
+		     AND a.MessageNo IS NULL
    AND TO_NUMBER(a.AlarmChk) = 0
 	</select>
 	
@@ -43,6 +65,7 @@
 		  	   , a.AlarmDate
 		  	   , a.AlarmChk
 		  	   , a.MessageNo AS alarmMessageNo
+		  	   , a.MessengerNo AS alarmMessengerNo
 		    FROM Alarm a
       INNER JOIN emp e
 		      ON a.EmpId = e.EmpId
@@ -50,6 +73,7 @@
 	  		  ON m.messageNo = a.messageNo
 		   WHERE a.EmpId = #{alarmEmpId}
 		     AND e.empEnabled = 1
+		     AND a.MessengerNo IS NULL
    AND TO_NUMBER(a.AlarmChk) = 0
 	</select>
 	
@@ -79,6 +103,34 @@
 			      )
 	</insert>
 	
+	
+	<insert id="insertAlarmChat" parameterType="Alarm">
+		<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
+			 SELECT alarmNo_seq.nextval 
+			   FROM DUAL
+		</selectKey>
+		INSERT INTO ALARM 
+		          (
+		            alarmNo
+		          , empId
+		          , alarmContentCode
+		          , alarmContent
+		          , alarmDate
+		          , alarmChk
+		          , messengerNo
+		          )
+			 VALUES 
+			      ( #{alarmNo}
+			      , #{alarmEmpId}
+			      , #{alarmContentCode}
+			      , #{alarmContent}
+			      , SYSDATE
+			      , 0
+			      , #{alarmMessengerNo}
+			      )
+	</insert>
+	
+	
 	<update id="checkedAlarm" parameterType="Alarm">
 		UPDATE ALARM
     	   SET alarmChk = 1
@@ -95,6 +147,7 @@
 		  	 , AlarmDate
 		  	 , AlarmChk
 		  	 , messageNo AS alarmMessageNo
+		  	 , messengerNo AS alarmMessengerNo
 		  FROM ALARM
 		 WHERE alarmNo = #{alarmNo}
 	</select>
@@ -114,9 +167,17 @@
            AND empId = #{empId}
 	</delete>
 	
-	<!-- 알람 전체 삭제(사원번호) -->
+	<!-- 쪽지 알람 전체 삭제(사원번호) -->
 	<delete id="deleteAlarmAll" parameterType="int">
 		DELETE FROM ALARM
 		 	  WHERE empId = #{empId}
+		 	    AND messengerNo IS NULL
+	</delete>
+	
+	<!-- 채팅 알람 전체 삭제(사원번호) -->
+	<delete id="deleteChatAlarmAll" parameterType="int">
+		DELETE FROM ALARM
+		 	  WHERE empId = #{empId}
+		 	    AND messageNo IS NULL
 	</delete>
 </mapper>

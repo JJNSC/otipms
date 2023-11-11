@@ -24,6 +24,7 @@ window.onload = function(){
 		console.log("소켓 오픈");
 		webSocket.send(empId);
 		updateAlarmCount();
+		updateAlarmChatCount();
 		updateTotalAlarmCount();
 		$.get("/otipms/alarms?empId=" + empId, function (alarmList) {
 	        updateAlarmList(alarmList);
@@ -65,6 +66,7 @@ window.onload = function(){
 	    
 		//알람 수 변경(헤더의 알람 수)
 		updateAlarmCount();
+		updateAlarmChatCount();
 		//총 알람 갯수 변경(쪽지 알람의 총 갯수 표기)
 		updateTotalAlarmCount();
 		//웹소켓 세션에 접속한 사람의 쪽지 알람 리스트 변경
@@ -105,6 +107,14 @@ window.onload = function(){
 	    });
 	  };
 	
+	var updateAlarmChatCount = function () {
+		// 채팅 알림 개수 업데이트
+		$.get("/otipms/alarmChatCnt?empId="+empId, function(data){
+			var alarmCount = data;
+			 $("#alarmChatCnt").text(alarmCount);
+		      $("#alarmChatCnt2").text(alarmCount);
+		});
+	};
 	//쪽지 알람의 내용
 	function updateAlarmList(alarmList){
 	    var alarmListContainer = document.getElementById("alarmList");
@@ -602,15 +612,29 @@ function updateMessageChecked(ccNo) {
     });
 }
 
-function deleteAlarm(empId,event){
+function deleteAlarm(empId, event){
 	event.preventDefault();
 	$.ajax({
         type: "POST",  // 또는 다른 HTTP 메서드
         url: "/otipms/mail/deleteAlarm", // 서버 URL로 대체
         data: { empId: empId }, // 업데이트에 필요한 데이터를 전달
         success: function (data) {
-        	webSocket.send(empId);
-        	console.log("알람을 전부 삭제했다.");
+        	console.log("쪽지 알람을 전부 삭제했다.");
+        },
+        error: function () {
+            alert("서버 오류: 알람 삭제를 완료할 수 없습니다.");
+        }
+    });
+}
+
+function deleteChatAlarm(empId, event){
+	event.preventDefault();
+	$.ajax({
+        type: "POST",  // 또는 다른 HTTP 메서드
+        url: "/otipms/mail/deleteChatAlarm", // 서버 URL로 대체
+        data: { empId: empId }, // 업데이트에 필요한 데이터를 전달
+        success: function (data) {
+        	console.log("채팅 알람을 전부 삭제했다.");
         },
         error: function () {
             alert("서버 오류: 알람 삭제를 완료할 수 없습니다.");

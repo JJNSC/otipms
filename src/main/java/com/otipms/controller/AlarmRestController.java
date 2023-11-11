@@ -34,4 +34,10 @@ public class AlarmRestController {
     public int getAlarmTotalCnt(@RequestParam int empId) {
     	return alarmService.selectAlarmByEmpId(empId).size();
     }
+    
+    @GetMapping("/alarmChatCnt")
+    public int getAlarmChatCnt(@RequestParam int empId) {
+    	log.info("알람 수 : " + alarmService.selectAlarmChatCountByEmpId(empId).size());
+    	return alarmService.selectAlarmChatCountByEmpId(empId).size();
+    }
 }

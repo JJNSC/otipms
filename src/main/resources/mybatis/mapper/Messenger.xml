@@ -81,6 +81,7 @@
 	<select id="getEmpNotMe" parameterType="map" resultType="Messenger">
 		SELECT DISTINCT e.empName
 					  , e.empRank
+					  , e.empId
 				   FROM Messenger m
 				   JOIN emp e 
 				     ON m.empId = e.empId

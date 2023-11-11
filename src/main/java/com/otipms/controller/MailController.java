@@ -510,4 +510,13 @@ public class MailController {
 		
 		return "success";
 	}
+	
+	@PostMapping("/deleteChatAlarm")
+	@ResponseBody
+	public String deleteChatAlarm(@RequestParam("empId") int empId) {
+		
+		alarmService.deleteChatAlarmAll(empId);
+		
+		return "success";
+	}
 }

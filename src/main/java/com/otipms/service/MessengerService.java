@@ -17,7 +17,7 @@ public interface MessengerService {
 	public int insertChatRoom(int empId);
 	
 	//채팅 입력
-	public void insertChat(int mrNo, int empId, String messengerContent);
+	public int insertChat(int mrNo, int empId, String messengerContent);
 	public void updateLastChat(Messenger messenger);
 	
 	//채팅방 삭제

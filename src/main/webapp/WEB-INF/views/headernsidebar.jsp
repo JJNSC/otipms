@@ -78,58 +78,21 @@ width:15.1875rem;
                                 </div>
                             </div>
                         </li>
-                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
+                        <li class="icons dropdown">
+                        	<a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
-                                <!-- <span class="badge badge-pill gradient-2">3</span> -->
-                                <span class="badge badge-pill badge-custom">3</span>
+                                <span id="alarmChatCnt" class="badge badge-pill badge-custom">0</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">2 New Notifications</span>  
-                                    <a href="javascript:void()" class="d-inline-block">
-                                        <span class="badge badge-pill gradient-2">5</span>
-                                    </a>
+                                    <span class="">New Chat</span>  
                                 </div>
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li> 
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Events near you</h6>
-                                                    <span class="notification-text">Within next 5 days</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Event Started</h6>
-                                                    <span class="notification-text">One hour ago</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Event Ended Successfully</h6>
-                                                    <span class="notification-text">One hour ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Events to Join</h6>
-                                                    <span class="notification-text">After two days</span> 
-                                                </div>
-                                            </a>
-                                        </li>
+                                <div id="alarmListChatContainer" class="dropdown-content-body" style="max-height: 300px; overflow-y:scroll;">
+                                    <ul id="alarmChatList" style="padding:0px;height:310px;">
                                     </ul>
-                                    
+                                    <div id="totalAlarm"style="text-align:center;">
+									  	<a href="#" class="btn btn-primary btn-block" onclick="deleteChatAlarm(${employee.empId},event)">알림 전체 삭제</a>
+									</div>
                                 </div>
                             </div>
                         </li>
@@ -164,7 +127,7 @@ width:15.1875rem;
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>채팅</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
-                                                	5
+                                                	<span id="alarmChatCnt2">5</span>
                                                 </div>
                                             </a>
                                         </li>

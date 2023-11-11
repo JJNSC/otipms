@@ -1,5 +1,6 @@
 package com.otipms.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.otipms.aop.time.RuntimeCheck;
+import com.otipms.dao.AlarmDao;
+import com.otipms.dto.Alarm;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Messenger;
 import com.otipms.security.EmpDetails;
+import com.otipms.service.AlarmService;
+import com.otipms.service.EmployeeService;
 import com.otipms.service.MessengerService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +33,15 @@ public class MessengerController {
 	
 	@Autowired
 	private MessengerService messengerService;
+	
+	@Autowired
+	private AlarmService alarmService;
+	
+	@Autowired
+	private EmployeeService employeeService;
+	
+	@Autowired
+	private AlarmDao alarmDao;
 	
 	@RuntimeCheck
 	@RequestMapping("/chat")
@@ -74,14 +88,33 @@ public class MessengerController {
 	@RuntimeCheck
 	@PostMapping("/sendMessage")
 	public String sendMessage(@RequestParam int mrNo, @RequestParam int empId, @RequestParam String message) {
-		messengerService.insertChat(mrNo, empId, message);
+		// 채팅 고유 번호 가져오는 서비스 + 채팅 추가
+		int messengerNo = messengerService.insertChat(mrNo, empId, message);
+		log.info("messengerNo : " + messengerNo);
+		//빈 깡통 만들기
 		Messenger messenger = new Messenger();
 		
+		//채팅방 번호 셋
 		messenger.setMrNo(mrNo);
+		//채팅 마지막 내용 저장
 		messenger.setMrLastChat(message);
 		
+		//마지막 내용 저장하는 서비스 (좌상단)
 		messengerService.updateLastChat(messenger);
 		
+		Employee employee = employeeService.getEmployeeInfo(empId);
+		Messenger nmMessenger = messengerService.getEmpNotMe(mrNo, empId);
+		
+		Alarm alarm = new Alarm();
+		alarm.setAlarmEmpId(nmMessenger.getEmpId());
+		alarm.setAlarmContent(" ");
+		alarm.setAlarmContentCode(employee.getEmpRank() + " " +employee.getEmpName()+"님으로부터 채팅이 도착했습니다.");
+		alarm.setAlarmMessengerNo(messengerNo);
+		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+    	alarm.setAlarmDate(currentTimestamp);
+    	alarm.setAlarmChk(0);
+    	alarmDao.insertAlarmChat(alarm);
+    	
 		return "chat/chat";
 	}
 	

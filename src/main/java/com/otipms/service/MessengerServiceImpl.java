@@ -64,7 +64,7 @@ public class MessengerServiceImpl implements MessengerService {
 	}
 
 	@Override
-	public void insertChat(int mrNo, int empId, String messengerContent) {
+	public int insertChat(int mrNo, int empId, String messengerContent) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("mrNo", mrNo);  
 		paramMap.put("empId", empId); 
@@ -72,6 +72,10 @@ public class MessengerServiceImpl implements MessengerService {
 		
 		
 		messengerDao.insertChat(paramMap);
+		
+		int messengerNo = (int) paramMap.get("messengerNo");
+		
+		return messengerNo;
 	}
 
 	@Override
