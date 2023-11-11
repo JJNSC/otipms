@@ -52,7 +52,7 @@ width:15.1875rem;
 								<i class="mdi mdi-email-outline"></i>
 								<span id="alarmCnt" class="badge badge-pill badge-custom"></span>
 								<input type="hidden" value="${employee.empId}" id="memIdSpan">
-								<div class="alertMail" id="alarmIcon">
+								<div class="alertMail" id="alarmIcon" style="background-color: #fff">
 						            <a class="thumbnail" href="#">Msg</a>
 						            <div class="content">
 						            	<h3>${employee.empName}님</h3>
