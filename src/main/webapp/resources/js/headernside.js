@@ -601,3 +601,19 @@ function updateMessageChecked(ccNo) {
         }
     });
 }
+
+function deleteAlarm(empId,event){
+	event.preventDefault();
+	$.ajax({
+        type: "POST",  // 또는 다른 HTTP 메서드
+        url: "/otipms/mail/deleteAlarm", // 서버 URL로 대체
+        data: { empId: empId }, // 업데이트에 필요한 데이터를 전달
+        success: function (data) {
+        	webSocket.send(empId);
+        	console.log("알람을 전부 삭제했다.");
+        },
+        error: function () {
+            alert("서버 오류: 알람 삭제를 완료할 수 없습니다.");
+        }
+    });
+}

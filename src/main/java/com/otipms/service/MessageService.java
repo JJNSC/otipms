@@ -39,6 +39,8 @@ public interface MessageService {
 	
 	public void deleteMessage(int messageNo, int empId);
 	
+	//발신자 찾기
+	public int selectEmpIdByMessageNo(int messageNo);
 	public int writeMessage(Message message);
 	public void writeCC(List<CC> ccList);
 	public void uploadAndSave(List<MediaFile> mediaFile);

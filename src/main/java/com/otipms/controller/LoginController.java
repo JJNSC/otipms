@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Alarm;
 import com.otipms.dto.Board;
 import com.otipms.dto.Employee;
@@ -72,7 +73,7 @@ public class LoginController {
 	
 	public static String profileImg;
 	
-	
+	@RuntimeCheck
 	@RequestMapping("/")
 	public String login() {
 		int empCount = employeeService.getEmployeeCount();
@@ -88,11 +89,13 @@ public class LoginController {
 		return "login/initialAccess";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/loginForm")
 	public String loginForm() {
 		return "login/login";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/indexPM")
 	public String indexPM(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 
@@ -160,6 +163,8 @@ public class LoginController {
 		
 		return "indexPM";
 	}
+	
+	@RuntimeCheck
 	@RequestMapping("/indexClient")
 	public String indexClient(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 
@@ -243,6 +248,8 @@ public class LoginController {
 		
 		return "indexClient";
 	}
+	
+	@RuntimeCheck
 	@RequestMapping("/indexAdmin")
 	public String indexAdmin(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 
@@ -287,6 +294,8 @@ public class LoginController {
 		
 		return "indexAdmin";
 	}
+	
+	@RuntimeCheck
 	@RequestMapping("/indexPE")
 	public String indexPE(Model model, HttpSession session, Authentication authentication) {
 		//보내야할 데이터 종류 

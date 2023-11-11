@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RuntimeCheckClass {
 
-	@Around("bean(*Controller)")
+	/*@Around("bean(*Controller)")
 	public Object runtimeCheckAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
 		
 		StopWatch stopWatch = new StopWatch();
@@ -23,5 +23,16 @@ public class RuntimeCheckClass {
 		
 		log.info(stopWatch.prettyPrint());
 		return proceed;
-	}
+	}*/
+	 @Around("@annotation(com.otipms.aop.time.RuntimeCheck)")
+	    public Object runtimeCheckAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
+	        StopWatch stopWatch = new StopWatch();
+	        stopWatch.start(joinPoint.getSignature().toShortString());
+
+	        Object result = joinPoint.proceed();
+
+	        stopWatch.stop();
+	        log.info("{} took {} ms", joinPoint.getSignature(), stopWatch.getTotalTimeMillis());
+	        return result;
+	    }
 }

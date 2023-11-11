@@ -59,16 +59,21 @@ width:15.1875rem;
 						            	<span class="preview">새로운 쪽지가 도착했습니다.</span>
 						          	</div>
 						        </div>
+						        <div class="alertChat" id="chatIcon" style="display:none;">
+						        	<a class="thumbnail" href="#">Chat</a>
+						        	<h3>${employee.empName}님</h3>
+						        	<span class="preview">새로운 채팅이 도착했습니다.</span>
+						        </div>
 							</a>
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
                                     <span class="">New Messages</span>  
                                 </div>
                                 <div id="alarmListContainer" class="dropdown-content-body" style="max-height: 300px; overflow-y:scroll;">
-                                    <ul id="alarmList" style="padding:0px">
+                                    <ul id="alarmList" style="padding:0px;height:310px;">
                                     </ul>
                                     <div id="totalAlarm"style="text-align:center;">
-									  	총 알림 갯수 (<span id="totalAlarmCount">0</span>개)
+									  	<a href="#" class="btn btn-primary btn-block" onclick="deleteAlarm(${employee.empId},event)">알림 전체 삭제</a>
 									</div>
                                 </div>
                             </div>
@@ -87,7 +92,7 @@ width:15.1875rem;
                                 </div>
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li>
+                                        <li> 
                                             <a href="javascript:void()">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
                                                 <div class="notification-content">

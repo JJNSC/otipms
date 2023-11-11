@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Project;
 import com.otipms.dto.Task;
 import com.otipms.dto.TaskEmployee;
@@ -31,6 +32,7 @@ public class TaskController {
 
 	//=============개인 업무 일정 =============
 	
+	@RuntimeCheck
 	@RequestMapping("/myTask")
 	public String myTask(Model model) {
 		log.info("개인업무일정");
@@ -63,6 +65,7 @@ public class TaskController {
 	 * @param projectNo
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/getProjectDetail")
 	@ResponseBody
 	public Project getProjectDetail(String projectNo) {
@@ -75,6 +78,7 @@ public class TaskController {
 	 * @param taskNo
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/getTaskDetail")
 	@ResponseBody
 	public Task getTaskDetail(String taskNo) {
@@ -83,6 +87,7 @@ public class TaskController {
 	}
 	
 	//태스크 수정 (ajax 버전)
+	@RuntimeCheck
 	@RequestMapping("/updateTask")
 	@ResponseBody
 	public Map<String, Object> updateTask(String taskNo
@@ -121,6 +126,7 @@ public class TaskController {
 	 * @param model
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/projectTask")
 	public String projectTask(Model model) {
 		log.info("프로젝트업무일정");
@@ -161,6 +167,7 @@ public class TaskController {
 	 * @param projectNo
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("selectProject")
 	@ResponseBody
 	public Map<String, Object> selectProject(String projectNo) {
@@ -189,6 +196,7 @@ public class TaskController {
 	 * @param teamNo
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("selectTeam")
 	@ResponseBody
 	public Map<String, Object> selectTeam(String projectNo, String teamNo) {
@@ -221,6 +229,7 @@ public class TaskController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("/registerTask")
 	@ResponseBody
 	public Map<String, Object> registerTask(String taskName
@@ -256,6 +265,7 @@ public class TaskController {
 	 * @param empId
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/getTaskList")
 	@ResponseBody
 	public List<Task> getTaskList(String empId) {
@@ -267,6 +277,7 @@ public class TaskController {
 	 * @param taskNo
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/getTask")
 	@ResponseBody
 	public Task getTask(String taskNo) {
@@ -286,6 +297,7 @@ public class TaskController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("/modifyTask")
 	@ResponseBody
 	public Map<String, Object> modifyTask(String taskNo
@@ -325,6 +337,7 @@ public class TaskController {
 	 * @param empId
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/deleteTask")
 	@ResponseBody
 	public Map<String, Object> deleteTask(String taskNo, String empId) {

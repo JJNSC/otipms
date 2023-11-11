@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Messenger;
 import com.otipms.security.EmpDetails;
@@ -28,12 +29,14 @@ public class MessengerController {
 	@Autowired
 	private MessengerService messengerService;
 	
+	@RuntimeCheck
 	@RequestMapping("/chat")
 	public String chat(Model model, Authentication authentication) {
 		
 		return "chat/chat";
 	}
 	
+	@RuntimeCheck
 	@GetMapping("/chatRoom")
 	public String chatRoom(Model model, Authentication authentication) {
 		
@@ -48,7 +51,7 @@ public class MessengerController {
 		return "chat/chatRoom";
 	}
 	
-	
+	@RuntimeCheck
 	@GetMapping("/chatContent")
 	public String chatContent(@RequestParam("mrNo") int mrNo, Model model, Authentication authentication) {
 		
@@ -68,6 +71,7 @@ public class MessengerController {
 		return "chat/chatContent";
 	}
 	
+	@RuntimeCheck
 	@PostMapping("/sendMessage")
 	public String sendMessage(@RequestParam int mrNo, @RequestParam int empId, @RequestParam String message) {
 		messengerService.insertChat(mrNo, empId, message);
@@ -81,6 +85,7 @@ public class MessengerController {
 		return "chat/chat";
 	}
 	
+	@RuntimeCheck
 	@PostMapping("/deleteChat")
 	public String deleteChat(@RequestParam int mrNo) {
 		messengerService.deleteChat(mrNo);
@@ -88,6 +93,7 @@ public class MessengerController {
 		return "redirect:chat";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/findEmployee")
 	public String findEmployee() {
 		

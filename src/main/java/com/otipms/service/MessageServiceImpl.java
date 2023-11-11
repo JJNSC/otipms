@@ -163,7 +163,12 @@ public class MessageServiceImpl implements MessageService {
         	messageDao.writeMailMedia(file);
         }
     }
-	
+	@Override
+	public int selectEmpIdByMessageNo(int messageNo) {
+		
+		int empId = messageDao.selectEmpIdByMessageNo(messageNo);
+		return empId;
+	}
 	@Override
 	public void updateFile(int messageNo, int empId) {
 	    MediaFile mediaFile = new MediaFile();

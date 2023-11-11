@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Message;
 import com.otipms.dto.Messenger;
@@ -43,6 +44,7 @@ public class FindEmployeeRestController {
     @Autowired
     private MessengerService messengerService;
     
+    @RuntimeCheck
     @PostMapping("/api/createChatRoom")
     public Messenger createChatRoom(@RequestBody List<Employee> selectedEmployees) {
         // selectedEmployees를 사용하여 채팅 방 생성 또는 추가 로직을 수행
@@ -61,7 +63,7 @@ public class FindEmployeeRestController {
     	return messenger;
     }
 
-
+    @RuntimeCheck
     @GetMapping("/api/employeeData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> getEmployeeData() {
         List<Employee> employees = employeeService.getAllEmployee();
@@ -110,6 +112,7 @@ public class FindEmployeeRestController {
         return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     
+    @RuntimeCheck
     @GetMapping("api/employeeDataRead")
     public ResponseEntity<Map<String, List<Map<String, String>>>> employeeDataRead(@RequestParam("messageNo") int messageNo) {
     	List<Message> messages = messageService.readMail(messageNo);
@@ -153,7 +156,7 @@ public class FindEmployeeRestController {
     	 return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     
-    
+    @RuntimeCheck
     @GetMapping("/api/RolePMData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> RolePMData() {
     	
@@ -180,6 +183,7 @@ public class FindEmployeeRestController {
     	return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     
+    @RuntimeCheck
     @GetMapping("/api/RoleClientData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> RoleClientData() {
     	List<Employee> employees = employeeService.selectNoTeamEmployeeByRole("ROLE_CLIENT");
@@ -207,6 +211,7 @@ public class FindEmployeeRestController {
     	return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     
+    @RuntimeCheck
     @GetMapping("/api/projectPeData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> projectPeData(
 												@RequestParam("teamNo")int teamNo) {
@@ -234,7 +239,7 @@ public class FindEmployeeRestController {
     	return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     
-    
+    @RuntimeCheck
     @GetMapping("/api/employeeData2")
     public ResponseEntity<Map<String, List<Map<String, String>>>> getEmployeeData2(
     											@RequestParam("projectNo") int projectNo, 
