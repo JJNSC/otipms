@@ -124,7 +124,7 @@ function(e) {
 }(window.jQuery);*/
 
 var list = [];
-
+ 
 ! function(e) {
     "use strict";
     var t = function() {
