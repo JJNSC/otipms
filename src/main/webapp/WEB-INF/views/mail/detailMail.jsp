@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>쪽지 상세 보기</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
+    <%-- <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png"> --%>
+    <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipms_fav.jpg">
     
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
@@ -71,12 +72,12 @@
                                     	<c:if test="${employee.empId == messageContent.empId}">
 	                                    	<button onclick="javascript:void(window.open('readTime?messageNo=${messageContent.messageNo}','_blank','width=600, height=600, left=600, top=30'))"
 	                                    	   class="btn btn-primary btn-block" 
-	                                    	   style="position:absolute; width:150px; right:20px">읽음 여부</button>
+	                                    	   style="position:absolute; width:93px; top:30px; right:20px; height:35px;">읽음 여부</button>
                                     	</c:if>
                                     	<c:if test="${employee.empId != messageContent.empId}">
                                     		<button onclick="javascript:void(window.open('readTime?messageNo=${messageContent.messageNo}','_blank','width=600, height=600, left=600, top=30'))"
 	                                    	   class="btn btn-primary btn-block" 
-	                                    	   style="position:absolute; width:150px; right:20px">수신자 확인</button>
+	                                    	   style="position:absolute; width:111px; top:28px; right:20px; height:35px;">수신자 확인</button>
                                     	</c:if>
                                         <div class="media pt-5">
                                             <img class="rounded-circle" src="data:${messageContent.mediaFileType};base64, ${messageContent.profile}" height="60" width="60" alt="" style="margin-right:5px;">

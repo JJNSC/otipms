@@ -9,10 +9,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>쪽지 읽음 여부</title>
+    <c:if test="${employee.empId == msempId}">
+   		<title>쪽지 읽음 여부</title>
+   	</c:if>
+   	<c:if test="${employee.empId != msempId}">
+   		<title>수신자 확인</title>
+   	</c:if>
+    <!-- <title>수신자 확인</title> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
+    <%-- <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png"> --%>
+    <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipms_fav.jpg">
     
    <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
@@ -51,7 +58,7 @@
                             	<input type="hidden" value="${mesMessageNo}" id="messageNo">
                             	<input type="hidden" value="${employee.empId}" id="empId">
                             	<input type="hidden" value="${msempId}" id="msempId">
-                                <div class="compose-content mt-5 mb-5">
+                                <div class="compose-content">
 								    <div class="mt-3">
 								    	<c:if test="${employee.empId == msempId}">
 								    		<span>읽음 여부 확인</span>
@@ -65,7 +72,7 @@
                                         <div class="tab-pane fade show active" id="project1" role="tabpanel">
                                             <div class="p-t-15">
                                             	 <div class="table-responsive">
-				                                    <table class="table table-hover table-custom" style="width:96%;">
+				                                    <table class="table table-hover table-custom">
 				                                        <c:if test="${employee.empId == msempId}">
 					                                        <thead>
 					                                            <tr>
@@ -81,13 +88,22 @@
 					                                        </tbody>
 				                                        </c:if>
 				                                        <c:if test="${employee.empId != msempId}">
-				                                        	<thead>
+				                                        	<!-- <thead>
 					                                            <tr>
 					                                                <th class="text-center"></th>
 					                                                <th class="text-center">유형</th>
 					                                                <th class="text-center"></th>
 					                                                <th class="text-center">직급</th>
 					                                                <th class="text-center ">이름</th>
+					                                            </tr>
+					                                        </thead> -->
+					                                        <thead>
+					                                            <tr>
+					                                                <th class="text-center" style="width: 0;"></th>
+					                                                <th class="text-center" style="width: 20%;">유형</th>
+					                                                <th class="text-center" style="width: 0;"></th>
+					                                                <th class="text-center">직급</th>
+					                                                <th class="text-center" style="width: 33%;">이름</th>
 					                                            </tr>
 					                                        </thead>
 					                                        <tbody id="employee-list">
@@ -100,7 +116,7 @@
                                    		</div>
                                    	</div>
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="closeWindow()">
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" style="height: 35px;" onclick="closeWindow()">
                                         	<i class="ti-close m-r-5"></i>
                                         	 닫기
                                         </button>

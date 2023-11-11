@@ -9,7 +9,8 @@
     <title>사원 찾기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
+    <%-- <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png"> --%>
+    <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipms_fav.jpg">
     
    <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
@@ -45,8 +46,8 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="compose-content mt-5 mb-5">
-                                   	<div>
+                                <div class="compose-content">
+                                   	<!-- <div>
 								        <select id="project-dropdown">
 								            <option value="">프로젝트 선택</option>
 								        </select>
@@ -56,28 +57,48 @@
 								        <select id="position-dropdown">
 								            <option value="">직급 선택</option>
 								        </select>
+								    </div> -->
+								    <div class="row mb-3">
+								    	<div class="col-6 pr-0">
+									        <select id="project-dropdown" style="width: 100%;">
+									            <option value="">프로젝트 선택</option>
+									        </select>
+								    	</div>
+								    	<div class="col-3 pr-0">
+									        <select id="team-dropdown" style="width: 100%;">
+									            <option value="">팀 선택</option>
+									        </select>
+								    	</div>
+								    	<div class="col-3 pr-0">
+									        <select id="position-dropdown" style="width: 87%;">
+									            <option value="">직급 선택</option>
+									        </select>
+								    	</div>
 								    </div>
 								    <div id="radio-buttons" class="mt-3">
 									    <label><input type="radio" name="recipient" value="Recipient">수신</label>
 									    <label><input type="radio" name="recipient" value="Reference">참조</label>
 									    <label><input type="radio" name="recipient" value="BlindCopy">비밀참조</label>
 									</div>
-                                    <div style="display:inline-block; position: absolute; right: 30px; top: 105px;">
-	                                    <input class="form-control" id="hzInput" type="text" placeholder="사원 찾기" style="width:150px;"/>
+                                    <div style="display:inline-block; position: absolute; right: 30px; top: 65px;">
+	                                    <input class="form-control" id="hzInput" type="text" placeholder="사원 찾기" style="width: 182px;"/>
                                     </div>
+                                    <!-- <div>
+	                                    <input class="form-control" id="hzInput" type="text" placeholder="사원 찾기" style="width:197px;"/>
+                                    </div> -->
                                     <hr>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="project1" role="tabpanel">
                                             <div class="p-t-15">
                                             	 <div class="table-responsive">
-				                                    <table class="table table-hover table-custom" style="width:96%;">
+				                                    <table class="table table-hover table-custom">
 				                                        <thead>
 				                                            <tr>
 				                                                <th class="text-center"><input type="checkbox" id="selectAllCheckbox"></th>
-				                                                <th class="text-center">프로젝트 명</th>
+				                                                <th class="text-center" style="width: 42%;">프로젝트 명</th>
 				                                                <th class="text-center">팀 명</th>
 				                                                <th class="text-center">직급</th>
-				                                                <th class="text-left ">이름</th>
+				                                                <th class="text-left" style="width: 25%;">이름</th>
 				                                            </tr>
 				                                        </thead>
 				                                        <tbody id="employee-list">
@@ -89,13 +110,15 @@
                                    		</div>
                                    	</div>
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="sendSelectedEmployees()">
-                                        	<i class="fa fa-paper-plane m-r-5"></i>
-                                        	 OK
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" style="height: 35px;" onclick="sendSelectedEmployees()">
+                                        	<!-- <i class="fa fa-paper-plane m-r-5"></i> -->
+                                        	<i class="icon-copy fa fa-check" aria-hidden="true"></i>
+                                        	 확인
                                         </button>
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="closeWindow()">
-                                        	<i class="ti-close m-r-5"></i>
-                                        	 cancel
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" style="height: 35px;" onclick="closeWindow()">
+                                        	<!-- <i class="ti-close m-r-5"></i> -->
+                                        	<i class="icon-copy fa fa-close" aria-hidden="true"></i>
+                                        	 취소
                                         </button>
                                     </div>
                                     <div class="row mt-3">

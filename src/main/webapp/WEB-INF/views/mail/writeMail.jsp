@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>쪽지 보내기</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png">
+    <%-- <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png"> --%>
+    <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipms_fav.jpg">
     
    <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
@@ -74,8 +75,9 @@
 	                                <div class="text-left m-t-15">
                                         <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
                                         		type="button" 
+                                        		style="height: 36.33px;"
                                         		onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))">
-                                        	<i class="fa fa-paper-plane m-r-5"></i>
+                                        	<i class="icon-copy fa fa-search" aria-hidden="true"></i>
                                         	 사원 찾기
                                         </button>
                                     </div>
@@ -119,7 +121,6 @@
 												</div>
 										    </div>
                                             <div class="form-group">
-                                            	<label class="text-dark font-weight-medium">제목</label>
                                                 <input id="mailTitleInput" type="text" class="form-control bg-transparent" placeholder=" 제목을 입력하세요">
                                             </div>
                                             <div class="form-group">
@@ -137,7 +138,7 @@
                                         <div class="pd-20 card-box mb-30">
 											<div class="clearfix mb-20">
 												<div class="pull-left">
-													<h4 class="text-blue h4">첨부파일</h4>
+													<span class="text-blue">첨부파일</span>
 												</div>
 											</div>
 											<form class="dropzone dz-clickable" id="my-awesome-dropzone">
@@ -203,17 +204,17 @@
                                     </div>
                                     <div class="text-left m-t-15">
                                        	<input id="memIdSpan" type="hidden" value="${employee.empId}"/>
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" onclick="sendMail()">
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" style="height: 35px;" type="button" onclick="sendMail()">
                                         	<i class="fa fa-paper-plane m-r-5"></i>
-                                        	 Send
+                                        	 보내기
                                         </button>
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" data-toggle="modal" data-target="#modalGrid">
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" style="height: 35px;" type="button" data-toggle="modal" data-target="#modalGrid">
                                         	<i class="fa fa-archive m-r-5"></i>
-                                        	 Temporary Save
+                                        	 임시저장
                                         </button>
-                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button">
+                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" style="height: 35px;" type="button">
                                         	<i class="ti-close m-r-5 f-s-12"></i>
-                                        	Discard
+                                        	취소
                                         </button>
                                     </div>
                                 </div>

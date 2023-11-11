@@ -26,15 +26,22 @@ document.addEventListener("DOMContentLoaded", function () {
 						<td class="text-center">${message.ccCheckedDate}</td>
 						`;
 					if (message.messageChecked === "읽지 않음") {
-				        const cancelButton = document.createElement("button");
-				        cancelButton.textContent = "발송 취소";
-				        cancelButton.style.color = "#fff";
-				        cancelButton.style.backgroundColor = "#3E6494";
-				        cancelButton.style.borderColor = "#3E6494";
+				        /*const cancelButton = document.createElement("button");
+				        cancelButton.textContent = "발송 취소";*/
+						const cancelButton = document.createElement("button");
+					    const icon = document.createElement("i");
+					    icon.classList.add("icon-copy", "ion-ios-close");
+					    cancelButton.appendChild(icon);
+					    cancelButton.innerHTML += "  발송 취소";
+				        cancelButton.style.color = "#E53935";
+				        cancelButton.style.backgroundColor = "transparent";
+				        cancelButton.style.borderColor = "#E53935";
 				        cancelButton.style.width = "70px";
-				        cancelButton.style.height = "25px";
+				        cancelButton.style.height = "28px";
 				        cancelButton.style.fontSize = "13px";
 				        cancelButton.style.cursor = "pointer";
+				        cancelButton.style.border = "none";
+				        /*cancelButton.style.borderRadius = "0.25rem";*/
 				        cancelButton.addEventListener("click", function () {
 				        	$.ajax({
 				                url: '/otipms/mail/deleteCC',
