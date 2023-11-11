@@ -245,21 +245,21 @@
 																<td class="progressTd">
 																	<c:if test="${progressRate < 20}">
 																		<div class="progress" style="height: 9px">
-																			<div class="progress-bar bg-danger wow  progress-" style="width: ${progressRate}%;" role="progressbar">
+																			<div class="progress-bar wow  progress-" style="width: ${progressRate}%; background-color:#dd2c00;" role="progressbar">
 																				<span class="sr-only">60% Complete</span>
 																			</div>
 																		</div>
 																	</c:if>
 																	<c:if test="${20 <= progressRate and progressRate < 80}">
 																		<div class="progress" style="height: 9px">
-																			<div class="progress-bar bg-info wow  progress-" style="width: ${progressRate}%;" role="progressbar">
+																			<div class="progress-bar wow  progress-" style="width: ${progressRate}%; background-color:#2b5797;" role="progressbar">
 																				<span class="sr-only">60% Complete</span>
 																			</div>
 																		</div>
 																	</c:if>
 																	<c:if test="${80 <= progressRate}">
 																		<div class="progress" style="height: 9px">
-																			<div class="progress-bar bg-success wow  progress-" style="width: ${progressRate}%;" role="progressbar">
+																			<div class="progress-bar wow  progress-" style="width: ${progressRate}%; background-color:#00aba9;" role="progressbar">
 																				<span class="sr-only">60% Complete</span>
 																			</div>
 																		</div>

@@ -177,19 +177,19 @@
 						                                                <c:if test="${project.progressRate < 20}">
 																			<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">${project.progressRate}%</span></h5>
 						                                                	<div class="progress" style="height: 9px">
-											                                    <div class="progress-bar bg-danger wow  progress-" style="width: ${project.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+											                                    <div class="progress-bar wow  progress-" style="width: ${project.progressRate}%; background-color:#dd2c00;" role="progressbar"><span class="sr-only">60% Complete</span></div>
 											                                </div>
 						                                                </c:if>
 						                                                <c:if test="${20 <= project.progressRate and project.progressRate < 80}">
 																			<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">${project.progressRate}%</span></h5>
 						                                                	<div class="progress" style="height: 9px">
-											                                    <div class="progress-bar bg-info wow  progress-" style="width: ${project.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+											                                    <div class="progress-bar wow  progress-" style="width:${project.progressRate}%; background-color:#2b5797;" role="progressbar"><span class="sr-only">60% Complete</span></div>
 											                                </div>
 						                                                </c:if>
 						                                                <c:if test="${80 <= project.progressRate}">
 																			<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">${project.progressRate}%</span></h5>
 						                                                	<div class="progress" style="height: 9px">
-											                                    <div class="progress-bar bg-success wow  progress-" style="width: ${project.progressRate}%;" role="progressbar"><span class="sr-only">60% Complete</span></div>
+											                                    <div class="progress-bar wow  progress-" style="width: ${project.progressRate}%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>
 											                                </div>
 						                                                </c:if>
 					                                                </td>

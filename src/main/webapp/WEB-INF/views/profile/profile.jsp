@@ -46,7 +46,8 @@
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
 					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30" style="padding-right: 0px;">
-						<div class="card" style="padding: 20px;">
+						<div class="card" style="padding:20px; padding-bottom:0px;">
+							<h4 class="text-blue h5 mb-20" style="margin-bottom: 34px; font-weight: bolder;">내 정보</h4>
 							<div class="profile-photo">
 								<input class="d-none" type="file" id="imageInput" accept="image/*" onchange="changeProfile()">
 								<!-- <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a> -->
@@ -78,22 +79,38 @@
 							<h5 class="text-center h5 mb-0">${profileEmployee.empName}</h5>
 							<p class="text-center text-muted font-14">${profileEmployee.empRank} <c:if test="${profileEmployee.teamName != '미배정'}"> | ${profileEmployee.teamName}</c:if></p>
 							<div class="profile-info">
-								<h5 class="mb-20 h5 text-blue">사원 정보</h5>
+								<!-- <h5 class="mb-20 h5 text-blue">사원 정보</h5> -->
 								<ul>
 									<li class="mb-1">
-										<span>이메일:</span>
+										<div style="display:inline-block; width:80px;">이름</div>
+										${profileEmployee.empName}
+									</li>
+									<li class="mb-1">
+										<div style="display:inline-block; width:80px;">직급</div>
+										${profileEmployee.empRank}
+									</li>
+									<li class="mb-1">
+										<div style="display:inline-block; width:80px;">이메일</div>
 										${profileEmployee.empEmail}
 									</li>
 									<li class="mb-1">
-										<span>연락처:</span>
+										<div style="display:inline-block; width:80px;">연락처</div>
 										${profileEmployee.empTel}
+									</li>
+									<li class="mb-1">
+										<div style="display:inline-block; width:80px;">프로젝트</div>
+										${profileEmployee.projectName}
+									</li>
+									<li class="mb-1">
+										<div style="display:inline-block; width:80px;">팀</div>
+										${profileEmployee.teamName}
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
-						<div class="card height-100-p overflow-hidden">
+						<div class="card height-100-p overflow-hidden" style="height:33.3em">
 							<div class="profile-tab height-100-p">
 								<div class="tab height-100-p">
 									<div class="tab-content">

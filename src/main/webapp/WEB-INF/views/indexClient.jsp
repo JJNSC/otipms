@@ -483,17 +483,7 @@
             			</div>
             		</div>
             	</div>
-            	
-            	<div class="row">
-                    <div class="col-lg-8 ">
-						
-					</div>
-                    <div class="col-lg-4 ">
-                        
-                    </div>
-                </div>
-					
-                <div class="row" style="height:28%;position:relative; bottom:20px;">
+                <div class="row d-none" style="height:28%;position:relative; bottom:20px;">
                     <!-- /# column -->
                     <div class="col-lg-8" style=" padding-right:10px;">
                         

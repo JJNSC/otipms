@@ -32,7 +32,7 @@ public class RuntimeCheckClass {
 	        Object result = joinPoint.proceed();
 
 	        stopWatch.stop();
-	        log.info("{} took {} ms", joinPoint.getSignature(), stopWatch.getTotalTimeMillis());
+	        log.info("{} took {} ms", joinPoint.getSignature().toShortString(), stopWatch.getTotalTimeMillis());
 	        return result;
 	    }
 }
