@@ -43,6 +43,9 @@ public interface MessageDao {
 	public List<Message> readMail(int messageNo);
 	public void deleteMessage(Map<String, Object> paramMap);
 	
+	//쪽지 발신자 찾기
+	public int selectEmpIdByMessageNo(int messageNo);
+	
 	//쪽지 쓰기
 	public int writeMessage(Message message);
 	public void writeCC(CC cc);

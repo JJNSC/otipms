@@ -49,9 +49,9 @@
                                 <div class="email-left-box">
                                 	<a href="writeMail" class="btn btn-primary btn-block">쪽지 보내기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="receivedMail" class="list-group-item border-0 text-primary p-r-0">
+                                    	<a href="receivedMail" class="list-group-item border-0 p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i>
-                                    		<b>수신 쪽지함</b>
+                                    		수신 쪽지함
                                     	</a>
                                         <a href="sentMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>

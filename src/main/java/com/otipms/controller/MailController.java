@@ -440,21 +440,25 @@ public class MailController {
 	private List<CC> buildCCList(List<Map<String, Object>> recipients, int messageNo, int ccType) {
 	    List<CC> ccList = new ArrayList<>();
 	    
+	    int empId = messageService.selectEmpIdByMessageNo(messageNo);
+	    
 	    for (Map<String, Object> recipient : recipients) {
 	    	if (recipient.containsKey("employeeId")) {
 	            Object empIdObject = recipient.get("employeeId");
 	            try {
 	                int employeeId = Integer.parseInt(empIdObject.toString());
-	                
-	                CC cc = new CC();
-	                cc.setMessageNo(messageNo);
-	                cc.setEmpId(employeeId);
-	                cc.setCcType(ccType);
-	                cc.setMessageStatus(1);
-	                cc.setMessageChecked(1);
-	                cc.setCcCheckedDate(null);
-
-	                ccList.add(cc);
+	                if(employeeId != empId) {
+	                	
+	                	CC cc = new CC();
+	                	cc.setMessageNo(messageNo);
+	                	cc.setEmpId(employeeId);
+	                	cc.setCcType(ccType);
+	                	cc.setMessageStatus(1);
+	                	cc.setMessageChecked(1);
+	                	cc.setCcCheckedDate(null);
+	                	
+	                	ccList.add(cc);
+	                }
 	            } catch (NumberFormatException e) {
 	                log.info("올바른 정수가 아님: " + empIdObject);
 	            }
