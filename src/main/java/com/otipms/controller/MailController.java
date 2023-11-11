@@ -497,4 +497,13 @@ public class MailController {
 		
 		return "mail/readTime";
 	}
+	
+	@PostMapping("/deleteAlarm")
+	@ResponseBody
+	public String deleteAlarm(@RequestParam("empId") int empId) {
+		
+		alarmService.deleteAlarmAll(empId);
+		
+		return "success";
+	}
 }
