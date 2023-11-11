@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Alarm;
 import com.otipms.service.AlarmService;
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
 import com.otipms.dto.Employee;
@@ -53,6 +54,7 @@ public class BoardController {
 	 * @param session
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/board")
 	public String board(@RequestParam(value="boardType", required=false, defaultValue="") String boardType
 						, Model model
@@ -133,6 +135,7 @@ public class BoardController {
 	 * @param session
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/chooseInquiryCategory")
 	@ResponseBody
 	public Map<String, Object> chooseInquiryCategory(String inquiryType, HttpSession session) {
@@ -168,6 +171,7 @@ public class BoardController {
 	 * @param session
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/movePage")
 	@ResponseBody
 	public Map<String, Object> movePage(String pageNo, HttpSession session) {
@@ -193,6 +197,7 @@ public class BoardController {
 	 * @param session
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/searchBoard")
 	public String searchBoard(String searchType, String searchKeyword, Model model, HttpSession session) {
 		if(searchKeyword == "") {
@@ -264,6 +269,7 @@ public class BoardController {
 	 * @param model
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/writeBoard")
 	public String writeBoard(@RequestParam(value="boardNo", required=false) String boardNo
 							, Model model, HttpSession session) {
@@ -292,6 +298,7 @@ public class BoardController {
 	 * @return
 	 * @throws IOException 
 	 */
+	@RuntimeCheck
 	@RequestMapping("/submitBoard") 
 	public String submitBoard(@RequestParam(value="boardNo", required=false) String boardNo
 							 , String inquiryType
@@ -427,6 +434,7 @@ public class BoardController {
 	 * @param model
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/detailBoard")
 	public String detailBoard(String boardNo, Model model) {
 		
@@ -469,6 +477,7 @@ public class BoardController {
 	 * @param newComment
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/writeComment")
 	//@ResponseBody
 	public String writeComment(String boardNo, String comment, String newComment) {
@@ -491,6 +500,7 @@ public class BoardController {
 	 * @param boardNo
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/deleteBoard")
 	public String deleteBoard(String boardNo) {
 		boardService.deleteBoard(boardNo);
@@ -503,6 +513,7 @@ public class BoardController {
 	 * @param commentNo
 	 * @return
 	 */
+	@RuntimeCheck
 	@RequestMapping("/deleteComment")
 	public String deleteComment(String boardNo, String commentNo) {
 		boardService.deleteBoardComment(commentNo);

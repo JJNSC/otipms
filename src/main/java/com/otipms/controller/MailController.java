@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.CC;
 import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
@@ -53,6 +54,7 @@ public class MailController {
 	private AlarmService alarmService;
 	//쪽지 수신함
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/receivedMail")
 	public String receivedMail(Model model, Authentication authentication) {
 		
@@ -180,6 +182,7 @@ public class MailController {
 	
 	//쪽지 발신함
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/sentMail")
 	public String sentMail(Model model, Authentication authentication) {
 		
@@ -203,6 +206,7 @@ public class MailController {
 	
 	//중요 쪽지함
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/importantMail")
 	public String importantMail(Model model, Authentication authentication) {
 		
@@ -226,6 +230,7 @@ public class MailController {
 	
 	//임시 보관함
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/temporaryMail")
 	public String temporaryMail(Model model, Authentication authentication) {
 		
@@ -251,6 +256,7 @@ public class MailController {
 	
 	//쪽지 휴지통
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/trashMail")
 	public String trashMail(Model model, Authentication authentication) {
 		
@@ -274,6 +280,7 @@ public class MailController {
 	
 	//쪽지 상세 내용
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/detailMail")
 	public String detailMail(@RequestParam("messageNo") int messageNo, Model model,Authentication authentication) {
 		
@@ -325,6 +332,7 @@ public class MailController {
     }
 	//쪽지 쓰기
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/writeMail")
 	public String writeMail(Model model,Authentication authentication,
 							@RequestParam(name="empId", required=false, defaultValue="0") int sendEmpId) {
@@ -468,11 +476,13 @@ public class MailController {
 	//쪽지 사원 찾기
 	@Login
 	@RequestMapping("/findEmployee")
+	@RuntimeCheck
 	public String findEmployee() {
 	    
 	    return "mail/findEmployee";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/readTime")
 	public String readTime(@RequestParam("messageNo") int messageNo, Model model, Authentication authentication) {
 		int mesMessageNo = messageNo;
