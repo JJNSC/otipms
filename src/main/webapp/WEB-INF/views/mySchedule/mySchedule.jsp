@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -172,7 +174,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form>
-                                                        <div class="row mb-3">
+                                                        <div class="row mb-3 d-none">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">일정 번호 (히든 처리할 예정)</label>
                                                                 <input id="scheduleNoInput" class="form-control form-white" type="text" name="category-name">
@@ -181,31 +183,31 @@
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">일정 이름</label>
-                                                                <input id="scheduleNameInput" class="form-control form-white" value="ㅇㅅㅇ 회의" type="text" name="category-name">
+                                                                <input id="scheduleNameInput" class="form-control form-white" type="text" name="category-name">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">일정 상세</label>
-                                                                <input id="scheduleCommentInput" class="form-control form-white" value="토즈모임센터 서울대입구역에서 9시 회의" type="text" name="category-name">
+                                                                <input id="scheduleCommentInput" class="form-control form-white" type="text" name="category-name">
                                                             </div>
                                                         </div>
-                                                        <div class="row mb-3">
+                                                        <!-- <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">사용자 추가</label>
                                                                 <input class="form-control form-white" value="김종진 대리" type="text" name="category-name">
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label for="example-datetime-local-input" class="control-label">시작일</label>
-                                                                <input id="scheduleStartDateInput" class="form-control form-white" type="date" name="category-name">
+                                                                <input id="scheduleStartDateInput" class="form-control form-white" type="datetime-local" name="category-name">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label for="example-datetime-local-input" class="control-label">종료일</label>
-                                                                <input id="scheduleEndDateInput" class="form-control form-white" type="date" name="category-name">
+                                                                <input id="scheduleEndDateInput" class="form-control form-white" type="datetime-local" name="category-name">
                                                             </div>
                                                         </div>
                                                         <%-- <div class="row mb-3">
@@ -227,7 +229,7 @@
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="control-label">색상</label>
-                                                                <select id="scheduleColorSelect" class="form-control form-white" data-placeholder="표시 색상을 고르세여" name="category-color">
+                                                                <select id="scheduleColorSelect" class="form-control form-white" name="category-color">
                                                                     <option value="red">Red</option>
                                                                     <option value="orange">Orange</option>
                                                                     <option value="yellow">Yellow</option>
@@ -244,8 +246,8 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">취소</button>
-                                                    <button id="addBtn" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="createSchedule()">저장</button>
-                                                    <button id="updateBtn" type="button" class="btn btn-danger waves-effect waves-light save-category d-none" data-dismiss="modal" onclick="updateSchedule()">수정</button>
+                                                    <button id="addBtn" type="button" class="btn btn-primary waves-effect waves-light save-category" data-dismiss="modal" onclick="createSchedule()">저장</button>
+                                                    <button id="updateBtn" type="button" class="btn btn-primary waves-effect waves-light save-category d-none" data-dismiss="modal" onclick="updateSchedule()">수정</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -288,11 +290,32 @@
 						                            			<i></i>
 						                            		</label>
 						                            		<c:if test="${schedule.scheduleChecked == true}">
-						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category" style="text-decoration: line-through;">${schedule.scheduleName}</span>
+						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category" style="text-decoration: line-through;">
+						                            				${schedule.scheduleName}
+						                            			</span>
 					                            			</c:if>
 					                            			<c:if test="${schedule.scheduleChecked == false}">
-						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category">${schedule.scheduleName}</span>
+						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category">
+						                            				${schedule.scheduleName}
+						                            			</span>
 					                            			</c:if>
+						                            		<c:set var="now" value="<%= new java.util.Date() %>" />
+					                            			<c:choose>
+						                            			<c:when test="${fn:substring(schedule.scheduleStartDate, 0, 10) == fn:substring(now, 0, 10) and fn:substring(schedule.scheduleEndDate, 0, 10) == fn:substring(now, 0, 10)}">
+							                            			<em style="position: absolute; right: 60px; font-style: normal; font-weight: normal;">
+							                            				<fmt:formatDate value="${schedule.scheduleStartDate}" pattern="HH시"/> 
+							                            				-
+							                            				<fmt:formatDate value="${schedule.scheduleEndDate}" pattern="HH시"/> 
+							                            			</em>
+						                            			</c:when>
+															    <c:otherwise>
+							                            			<em style="position: absolute; right: 60px; font-style: normal; font-weight: normal;">
+							                            				<fmt:formatDate value="${schedule.scheduleStartDate}" pattern="MM/dd"/> 
+							                            				-
+							                            				<fmt:formatDate value="${schedule.scheduleEndDate}" pattern="MM/dd"/> 
+							                            			</em>
+							                            		</c:otherwise>
+															</c:choose>
 						                            		<%-- <span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category">${schedule.scheduleName}</span> --%>
 						                            		<a role="button" class="ti-trash" onclick="deleteSchedule(this)"></a>
 						                            	</strong>

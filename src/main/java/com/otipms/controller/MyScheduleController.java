@@ -70,7 +70,7 @@ public class MyScheduleController {
 		schedule.setEmpId(LoginController.loginEmployee.getEmpId());
 		schedule.setScheduleName(scheduleName);
 		schedule.setScheduleComment(scheduleComment);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		/*if(!startDate.equals("")) {
 			task.setTaskStartDate(sdf.parse(startDate));
 		}*/
@@ -105,7 +105,7 @@ public class MyScheduleController {
 		schedule.setEmpId(LoginController.loginEmployee.getEmpId());
 		schedule.setScheduleName(scheduleName);
 		schedule.setScheduleComment(scheduleComment);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		/*if(!startDate.equals("")) {
 			task.setTaskStartDate(sdf.parse(startDate));
 		}*/
@@ -182,7 +182,7 @@ public class MyScheduleController {
 		schedule.setScheduleNo(Integer.parseInt(scheduleNo));
 		schedule.setScheduleName(scheduleName);
 		schedule.setScheduleComment(scheduleComment);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		/*if(!startDate.equals("")) {
 			task.setTaskStartDate(sdf.parse(startDate));
 		}*/
@@ -219,7 +219,7 @@ public class MyScheduleController {
 		schedule.setScheduleNo(Integer.parseInt(scheduleNo));
 		schedule.setScheduleName(scheduleName);
 		schedule.setScheduleComment(scheduleComment);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		/*if(!startDate.equals("")) {
 			task.setTaskStartDate(sdf.parse(startDate));
 		}*/
@@ -240,11 +240,23 @@ public class MyScheduleController {
 		}
 	}
 	
+	/**
+	 * 일정 삭제
+	 * @param scheduleNo
+	 * @return
+	 */
 	@RequestMapping("/deleteSchedule")
 	public String deleteSchedule(@RequestParam String scheduleNo) {
 		scheduleService.deleteSchedule(scheduleNo);
 		return "redirect:/mySchedule";
 	}
+	
+	/**
+	 * 일정 삭제
+	 * @param scheduleNo
+	 * @param role
+	 * @return
+	 */
 	@RequestMapping("/deleteScheduleMainPage")
 	public String deleteScheduleMainPage(@RequestParam String scheduleNo,
 										 @RequestParam String role) {

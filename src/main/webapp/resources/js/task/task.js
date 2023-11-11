@@ -152,7 +152,7 @@ function updateTaskDetail() {
 			
 			html += '<tr>';
 			html += '<td><div class="taskEvent-red mb-1" style="position: relative;">' + data.project.projectName + '</div></td>';
-			html += '<td class="text-success">진행중</td>';
+			html += '<td style="color: #2b5797;">진행중</td>';
 			html += '<td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button></td>';
 			html += '</tr>';
 			
@@ -161,11 +161,11 @@ function updateTaskDetail() {
 					html += '<tr>';
 					html += '<td><div class="taskEvent-' + task.taskColor + ' mb-1" style="position: relative;">' + task.taskName + '</div></td>';
 					if(task.taskStatus == '진행전') {
-						html += '<td class="text-light">' + task.taskStatus + '</td>';
+						html += '<td style="color: #b5b5b5; font-weight: 600;">' + task.taskStatus + '</td>';
 					} else if(task.taskStatus == '진행중') {
-						html += '<td class="text-success">' + task.taskStatus + '</td>';
+						html += '<td style="color: #2b5797; font-weight: 600;">' + task.taskStatus + '</td>';
 					} else if(task.taskStatus == '진행완료') {
-						html += '<td class="text-danger">' + task.taskStatus + '</td>';
+						html += '<td style="color: #00aba9; font-weight: 600;">' + task.taskStatus + '</td>';
 					}
 					html += '<td>';
 					html += '<input id="taskNoFromModel" type="hidden" value="' + task.taskNo + '">';
@@ -442,11 +442,11 @@ function registerTask() {
 								taskhtml += '<td class="text-center"> - </td>';
 							}
 							if(task.taskStatus == "진행전") {
-								taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+								taskhtml += '<td class="text-center" style="color: #b5b5b5; font-weight: 600;">' + task.taskStatus + '</td>';
 							} else if(task.taskStatus == "진행중") {
-								taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+								taskhtml += '<td class="text-center" style="color: #2b5797; font-weight: 600;">' + task.taskStatus + '</td>';
 							} else if(task.taskStatus == "진행완료") {
-								taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+								taskhtml += '<td class="text-center" style="color: #00aba9; font-weight: 600;">' + task.taskStatus + '</td>';
 							}
 							taskhtml += '<td class="text-center">';
 							taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
@@ -527,11 +527,11 @@ function getTaskList(empId) {
 						taskhtml += '<td class="text-center"> - </td>';
 					}
 					if(task.taskStatus == "진행전") {
-						taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+						taskhtml += '<td class="text-center" style="color: #b5b5b5; font-weight: 600;">' + task.taskStatus + '</td>';
 					} else if(task.taskStatus == "진행중") {
-						taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+						taskhtml += '<td class="text-center" style="color: #2b5797; font-weight: 600;">' + task.taskStatus + '</td>';
 					} else if(task.taskStatus == "진행완료") {
-						taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+						taskhtml += '<td class="text-center" style="color: #00aba9; font-weight: 600;">' + task.taskStatus + '</td>';
 					}
 					taskhtml += '<td class="text-center">';
 					if(($("#loginEmployeeRole").val() == "ROLE_PE" || $("#loginEmployeeRole").val() == "ROLE_CLIENT") && empId != $("#loginEmployeeId").val()) {
@@ -675,11 +675,11 @@ function updateTask() {
 							taskhtml += '<td class="text-center"> - </td>';
 						}
 						if(task.taskStatus == "진행전") {
-							taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+							taskhtml += '<td class="text-center" style="color: #b5b5b5; font-weight: 600;">' + task.taskStatus + '</td>';
 						} else if(task.taskStatus == "진행중") {
-							taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+							taskhtml += '<td class="text-center" style="color: #2b5797; font-weight: 600;">' + task.taskStatus + '</td>';
 						} else if(task.taskStatus == "진행완료") {
-							taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+							taskhtml += '<td class="text-center" style="color: #00aba9; font-weight: 600;">' + task.taskStatus + '</td>';
 						}
 						taskhtml += '<td class="text-center">';
 						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
@@ -761,11 +761,11 @@ function deleteTask() {
 						taskhtml += '<td class="text-center"> - </td>';
 					}
 					if(task.taskStatus == "진행전") {
-						taskhtml += '<td class="text-center text-secondary">' + task.taskStatus + '</td>';
+						taskhtml += '<td class="text-center" style="color: #b5b5b5; font-weight: 600;">' + task.taskStatus + '</td>';
 					} else if(task.taskStatus == "진행중") {
-						taskhtml += '<td class="text-center text-success">' + task.taskStatus + '</td>';
+						taskhtml += '<td class="text-center" style="color: #2b5797; font-weight: 600;">' + task.taskStatus + '</td>';
 					} else if(task.taskStatus == "진행완료") {
-						taskhtml += '<td class="text-center text-danger">' + task.taskStatus + '</td>';
+						taskhtml += '<td class="text-center" style="color: #00aba9; font-weight: 600;">' + task.taskStatus + '</td>';
 					}
 					taskhtml += '<td class="text-center">';
 					taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';

@@ -105,8 +105,8 @@ function openDetailModal(scheduleNo) {
 			$("#scheduleNoInput").val(data.scheduleNo);
 			$("#scheduleNameInput").val(data.scheduleName);
 			$("#scheduleCommentInput").val(data.scheduleComment);
-			$("#scheduleStartDateInput").val(dateFormat(new Date(data.scheduleStartDate), 1));
-			$("#scheduleEndDateInput").val(dateFormat(new Date(data.scheduleEndDate), 1));
+			$("#scheduleStartDateInput").val(dateFormat(new Date(data.scheduleStartDate), 4));
+			$("#scheduleEndDateInput").val(dateFormat(new Date(data.scheduleEndDate), 4));
 			$("#scheduleColorSelect option[value='" + data.scheduleColor + "']").prop("selected", true);
 			
 			$("#addBtn").addClass("d-none");
@@ -136,6 +136,7 @@ function dateFormat(date, type) {
     case 1: return date.getFullYear() + '-' + month + '-' + day;
     case 2: return hour + ':' + minute;
     case 3: return date.getFullYear() + '/' + month + '/' + day;
+    case 4: return date.getFullYear() + '-' + month + '-' + day + "T" + hour + ":" + minute;
     default: return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute;
     }
 

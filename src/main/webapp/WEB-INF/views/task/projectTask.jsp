@@ -86,6 +86,16 @@
 		    border-color: #2f588b; 
 		}
 		
+		.text-secondary {
+			color: #b5b5b5;
+		}
+		.text-success {
+			color: #2b5797;
+		}
+		.text-danger {
+			color: #00aba9;
+		}
+		
 		/* 수평 스크롤바 숨김 */
 		::-webkit-scrollbar {
 		    background: transparent;
@@ -261,12 +271,12 @@
 	                        <div class="modal-dialog" role="document">
 	                            <div class="modal-content">
 	                                <div class="modal-header">
-	                                    <h5 class="modal-title">프로젝트 삭제</h5>
+	                                    <h5 class="modal-title">업무 삭제</h5>
 	                                </div>
 	                                <div class="modal-body">
 	                                    <div class="container-fluid">
 	                                        <div class="row">
-	                                        	해당 프로젝트를 삭제하시겠습니까?
+	                                        	해당 업무를 삭제하시겠습니까?
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -385,12 +395,12 @@
 	                                        <!-- <button type="button" class="btn btn-default waves-effect" onclick="resetForm()">초기화</button> -->
 	                                        <c:if test="${employee.role eq 'ROLE_ADMIN' or employee.role eq 'ROLE_PM'}">
 		                                        <button type="button" id="resetBtn" class="btn btn-default waves-effect" onclick="resetForm()">초기화</button>
-		                                        <button type="button" id="registerTaskBtn" class="btn btn-danger waves-effect waves-light save-category" onclick="registerTask()">등록</button>
-		                                        <button type="button" id="updateTaskBtn" class="btn btn-danger waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
+		                                        <button type="button" id="registerTaskBtn" class="btn btn-primary waves-effect waves-light save-category" onclick="registerTask()">등록</button>
+		                                        <button type="button" id="updateTaskBtn" class="btn btn-primary waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
 	                                        </c:if>
 	                                        <c:if test="${employee.role ne 'ROLE_ADMIN' or employee.role ne 'ROLE_PM'}">
 		                                        <button type="button" id="resetBtn" class="btn btn-default waves-effect d-none" onclick="resetForm()">초기화</button>
-	                                        	<button type="button" id="updateTaskBtn" class="btn btn-danger waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
+	                                        	<button type="button" id="updateTaskBtn" class="btn btn-primary waves-effect waves-light save-category d-none" onclick="updateTask()">수정</button>
 	                                        </c:if>
 	                                    </div>
 	                                </form>

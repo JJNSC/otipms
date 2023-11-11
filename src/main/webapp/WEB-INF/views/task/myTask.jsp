@@ -26,34 +26,34 @@
 		    background-color: #2f588b !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-red.fc-draggable {
-		    background-color: #ffcfd2 !important;
+		    background-color: #B71C1C !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-orange.fc-draggable {
-		    background-color: #fde4cf !important;
+		    background-color: #E65100 !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-yellow.fc-draggable {
-		    background-color: #fbf8cc !important;
+		    background-color: #FFB300 !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightGreen.fc-draggable {
-		    background-color: #b9fbc0 !important;
+		    background-color: #558B2F !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-green.fc-draggable {
-		    background-color: #98f5e1 !important;
+		    background-color: #00695C !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightBlue.fc-draggable {
-		    background-color: #8eecf5 !important;
+		    background-color: #0097A7 !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-blue.fc-draggable {
-		    background-color: #90dbf4 !important;
+		    background-color: #0D47A1 !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-purple.fc-draggable {
-		    background-color: #cfbaf0 !important;
+		    background-color: #512DA8 !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-pink.fc-draggable {
-		    background-color: #f1c0e8 !important;
+		    background-color: #AD1457 !important;
 		}
 		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.fc-draggable {
-			color: #76838f;
+			color: #fff;
 		}
 		/* 수직 스크롤바 숨김 */
 		::-webkit-scrollbar {
@@ -113,7 +113,7 @@
 	                                        <tbody id="taskListTableBody">
 	                                            <tr>
 	                                                <td><div class="taskEvent-red mb-1" style="position: relative;">${project.projectName}</div></td>
-	                                                <td class="text-success">진행중</td>
+	                                                <td style="color: #2b5797; font-weight: 600;">진행중</td>
 	                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button></td>
 	                                            </tr>
 	                                            
@@ -121,13 +121,13 @@
 		                                            <tr>
 		                                                <td><div class="taskEvent-${task.taskColor} mb-1" style="position: relative;">${task.taskName}</div></td>
 		                                                <c:if test="${task.taskStatus == '진행전'}">
-			                                                <td class="text-light">${task.taskStatus}</td>
+			                                                <td style="color: #b5b5b5; font-weight: 600;">${task.taskStatus}</td>
 		                                                </c:if>
 		                                                <c:if test="${task.taskStatus == '진행중'}">
-			                                                <td class="text-success">${task.taskStatus}</td>
+			                                                <td style="color: #2b5797; font-weight: 600;">${task.taskStatus}</td>
 		                                                </c:if>
 		                                                <c:if test="${task.taskStatus == '진행완료'}">
-			                                                <td class="text-danger">${task.taskStatus}</td>
+			                                                <td style="color: #00aba9; font-weight: 600;">${task.taskStatus}</td>
 		                                                </c:if>
 		                                                <td>
 		                                                	<input id="taskNoFromModel" type="hidden" value="${task.taskNo}">
@@ -159,7 +159,7 @@
 	                </div>
 	                <div class="modal-body">
 	                    <form>
-	                        <div class="row mb-3">
+	                        <div class="row mb-3 d-none">
 	                            <div class="col-md-12">
 	                                <label id="taskNoLabel" class="control-label">업무 번호 (히든 처리할 예정)</label>
 	                                <input id="taskNoInput" class="form-control form-white" value="" type="text" name="category-name" readonly>
@@ -263,7 +263,7 @@
 	                </div>
 	                <div class="modal-footer">
 	                    <button id="closeMoalBtn" type="button" class="btn btn-default waves-effect" data-dismiss="modal">닫기</button>
-	                    <button id="updateMoalBtn" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="updateTaskDetail()">수정</button>
+	                    <button id="updateMoalBtn" type="button" class="btn btn-primary waves-effect waves-light save-category" data-dismiss="modal" onclick="updateTaskDetail()">수정</button>
 	                </div>
 	            </div>
 	        </div>
