@@ -96,8 +96,13 @@
 			color: #00aba9;
 		}
 		
-		/* 수평 스크롤바 숨김 */
+		/* 수직 스크롤바 숨김 */
 		::-webkit-scrollbar {
+		    width: 0;
+		}
+		
+		/* 수평 스크롤바 숨김 */
+		::-webkit-scrollbar-thumb {
 		    background: transparent;
 		}
 	</style>	
@@ -234,12 +239,12 @@
 							                                        <thead>
 							                                            <tr>
 							                                                <th scope="col" style="width: 10%;">번호</th>
-							                                                <th scope="col" style="width: 30%;">업무이름</th>
+							                                                <th scope="col" style="width: 35%;">업무이름</th>
 							                                                <!-- <th scope="col" style="width: 30%;">업무내용</th> -->
-							                                                <th scope="col" style="width: 20%;">업무 시작일</th>
-							                                                <th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>
-							                                                <th scope="col" style="width: 20%; text-align: center;">진행 상태</th>
-							                                                <th class="text-center">삭제</th>
+							                                                <th scope="col" style="width: 15%;">업무 시작일</th>
+							                                                <th scope="col" style="width: 15%; text-align: center;">업무 종료일</th>
+							                                                <th scope="col" style="width: 15%; text-align: center;">진행 상태</th>
+							                                                <th class="text-center" style="width: 10%;">삭제</th>
 							                                            </tr>
 							                                        </thead>
 							                                        <tbody class="detailTaskBody">

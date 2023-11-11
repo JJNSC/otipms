@@ -223,17 +223,17 @@ function selectProject() {
 					if(taskEmployee.progressRate < 20) {
 						taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
 						taskehtml += '<div class="progress" style="height: 9px">';
-						taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+						taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + taskEmployee.progressRate + '%; background-color:#dd2c00;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 						taskehtml += '</div>';
 					} else if(20 <= taskEmployee.progressRate && taskEmployee.progressRate < 80) {
 						taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
 						taskehtml += '<div class="progress" style="height: 9px">';
-						taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+						taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + taskEmployee.progressRate + '%; background-color:#2b5797;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 						taskehtml += '</div>';
 					} else if(80 <= taskEmployee.progressRate) {
 						taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
 						taskehtml += '<div class="progress" style="height: 9px">';
-						taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+						taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + taskEmployee.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 						taskehtml += '</div>';
 					}
 					/*taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>';
@@ -319,17 +319,17 @@ var team = $("#teamSelect").val()
 						if(taskEmployee.progressRate < 20) {
 							taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
 							taskehtml += '<div class="progress" style="height: 9px">';
-							taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+							taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + taskEmployee.progressRate + '%; background-color:#dd2c00;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 							taskehtml += '</div>';
 						} else if(20 <= taskEmployee.progressRate && taskEmployee.progressRate < 80) {
 							taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
 							taskehtml += '<div class="progress" style="height: 9px">';
-							taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+							taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + taskEmployee.progressRate + '%; background-color:#2b5797;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 							taskehtml += '</div>';
 						} else if(80 <= taskEmployee.progressRate) {
 							taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + taskEmployee.progressRate + '%</span></h5>';
 							taskehtml += '<div class="progress" style="height: 9px">';
-							taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + taskEmployee.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+							taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + taskEmployee.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 							taskehtml += '</div>';
 						}
 						/*taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">88%</span></h5>';
@@ -472,17 +472,17 @@ function registerTask() {
 				if(data.progressRate < 20) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 					taskehtml += '<div class="progress" style="height: 9px">';
-					taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#dd2c00;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				} else if(20 <= data.progressRate && data.progressRate < 80) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 					taskehtml += '<div class="progress" style="height: 9px">';
-					taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#2b5797;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				} else if(80 <= data.progressRate) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 					taskehtml += '<div class="progress" style="height: 9px">';
-					taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				}
 				console.log(taskehtml);
@@ -704,17 +704,17 @@ function updateTask() {
 				if(data.progressRate < 20) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 					taskehtml += '<div class="progress" style="height: 9px">';
-					taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#dd2c00;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				} else if(20 <= data.progressRate && data.progressRate < 80) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 					taskehtml += '<div class="progress" style="height: 9px">';
-					taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#2b5797;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				} else if(80 <= data.progressRate) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 					taskehtml += '<div class="progress" style="height: 9px">';
-					taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				}
 				console.log(taskehtml);
@@ -791,17 +791,17 @@ function deleteTask() {
 			if(data.progressRate < 20) {
 				taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 				taskehtml += '<div class="progress" style="height: 9px">';
-				taskehtml += '<div class="progress-bar bg-danger wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+				taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#dd2c00;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 				taskehtml += '</div>';
 			} else if(20 <= data.progressRate && data.progressRate < 80) {
 				taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-meh-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 				taskehtml += '<div class="progress" style="height: 9px">';
-				taskehtml += '<div class="progress-bar bg-info wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+				taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#2b5797;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 				taskehtml += '</div>';
 			} else if(80 <= data.progressRate) {
 				taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-smile-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
 				taskehtml += '<div class="progress" style="height: 9px">';
-				taskehtml += '<div class="progress-bar bg-success wow  progress-" style="width: ' + data.progressRate + '%;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
+				taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 				taskehtml += '</div>';
 			}
 			console.log(taskehtml);
