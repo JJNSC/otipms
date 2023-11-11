@@ -52,15 +52,20 @@ width:15.1875rem;
 								<i class="mdi mdi-email-outline"></i>
 								<span id="alarmCnt" class="badge badge-pill badge-custom"></span>
 								<input type="hidden" value="${employee.empId}" id="memIdSpan">
-								<div class="alertMail" id="alarmIcon" style="background-color: #fff">
-						            <a class="thumbnail" href="#">Msg</a>
-						            <div class="content">
+								<div class="alertMail" id="alarmIcon" style="background-color: transparent; border:0px; width:300px; position:absolute; top:5em; left:-2.2em; ">
+						            <!-- <a class="thumbnail" href="#">Msg</a> -->
+						            <%-- <div class="content">
 						            	<h3>${employee.empName}님</h3>
 						            	<span class="preview">새로운 쪽지가 도착했습니다.</span>
-						          	</div>
+						          	</div> --%>
+						          	<div class="content alert  fade show" style="background-color: #f57f17">
+                                    <span type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    	<!-- <span aria-hidden="true">×</span> -->
+                                    </span> 
+                                    <i class="icon-copy fa fa-bell-o" aria-hidden="true"></i>&nbsp;&nbsp; 새로운 쪽지가 도착했습니다.
+                                    </div>
 						        </div>
 						        <div class="alertChat" id="chatIcon" style="display:none;">
-						        	<a class="thumbnail" href="#">Chat</a>
 						        	<h3>${employee.empName}님</h3>
 						        	<span class="preview">새로운 채팅이 도착했습니다.</span>
 						        </div>
