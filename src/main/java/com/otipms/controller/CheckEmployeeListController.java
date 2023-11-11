@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Employee;
 import com.otipms.dto.ProjectTeams;
 import com.otipms.service.EmployeeService;
@@ -26,7 +27,7 @@ public class CheckEmployeeListController {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	
+	@RuntimeCheck
 	@RequestMapping("/employeeList")
 	public String employeeList(@RequestParam(name="errMsg",required=false,defaultValue="1") String errMsg,Model model) {
 		model.addAttribute("employee", LoginController.loginEmployee);
@@ -43,6 +44,7 @@ public class CheckEmployeeListController {
 		return "checkEmployeeList/employeeList";
 	}
 	
+	@RuntimeCheck
 	@ResponseBody
 	@RequestMapping("/employeeListJson")
 	public String employeeListJson(@RequestParam(name="project", required=false,defaultValue="0" ) String projectName,

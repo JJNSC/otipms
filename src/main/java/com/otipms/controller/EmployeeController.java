@@ -35,7 +35,7 @@ import com.otipms.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RuntimeCheck
+
 @Slf4j
 @Controller
 @RequestMapping("/employeeManagement")
@@ -44,6 +44,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@RuntimeCheck
 	@RequestMapping("/employeeList")
 	public String employeeList(@RequestParam(name="errMsg",required=false,defaultValue="1") String errMsg,Model model) {
 		model.addAttribute("employee", LoginController.loginEmployee);
@@ -59,6 +60,7 @@ public class EmployeeController {
 		return "employeeManagement/employeeList";
 	}
 	
+	@RuntimeCheck
 	@ResponseBody
 	@RequestMapping("/employeeListJson")
 	public String employeeListJson(@RequestParam(name="project", required=false,defaultValue="0" ) String projectName,
@@ -81,18 +83,21 @@ public class EmployeeController {
 
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/employeeListTest")
 	public String employeeListTest() {
 		System.out.println("사원 리스트 테스트");
 		return "employeeManagement/employeeListTest";
 	}
 	
+	@RuntimeCheck
 	@Login
 	@RequestMapping("/addAndModifyEmployee")
 	public String addAndModifyEmployee() {
 		return "employeeManagement/addAndModifyEmployee";
 	}
 	
+	@RuntimeCheck
 	@Transactional
 	@PostMapping("/singleResgister")
 	public String singleResgister(@RequestParam("registerEmpName") String empName, 
@@ -123,6 +128,7 @@ public class EmployeeController {
 		return "redirect:/employeeManagement/employeeList";
 	}
 	
+	@RuntimeCheck
 	@ResponseBody
 	@RequestMapping("/employeeInfoJson")
 	public Employee employeeInfoJson(@RequestParam("empId") String empId) {
@@ -132,6 +138,7 @@ public class EmployeeController {
 		return modifyEmpInfo;
 	}
 	
+	@RuntimeCheck
 	@ResponseBody
 	@RequestMapping("/resetEmpPassword")
 	public void resetEmpPassword(@RequestParam("empId") String empId) {
@@ -139,6 +146,7 @@ public class EmployeeController {
 		employeeService.resetEmployeePassword(Integer.parseInt(empId));
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/modifySingleEmployeeInfo")
 	public String modifySingleEmployeeInfo(@RequestParam("empId") int empId,
 										 @RequestParam("nowEmpName") String empName,
@@ -160,6 +168,8 @@ public class EmployeeController {
 		employeeService.updateEmployeeInfo(employee);
 		return "redirect: employeeList";
 	}
+	
+	@RuntimeCheck
 	@ResponseBody
 	@RequestMapping("/disableEmployee")
 	public String disableEmployee(@RequestParam("empId") int empId) {
@@ -168,6 +178,7 @@ public class EmployeeController {
 		return "/otipms/employeeManagement/employeeList";
 	}
 	
+	@RuntimeCheck
 	@ResponseBody
 	@RequestMapping("/exportEmployeeToExcel")
 	public String exportEmployeeToExcel(@RequestParam(name="projectName", required=false, defaultValue="0")String projectName,
@@ -252,6 +263,7 @@ public class EmployeeController {
 		return "Data received successfully";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/createAdmin")
 	public String createAdmin(@RequestParam("adminId") String empId,
 							  @RequestParam("adminPw") String empPw,

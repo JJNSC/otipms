@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Schedule;
 import com.otipms.service.ScheduleService;
 
@@ -23,6 +24,7 @@ public class MyScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;
 
+	@RuntimeCheck
 	@RequestMapping("/mySchedule")
 	public String mySchedule(Model model) {
 		log.info("개인일정");
@@ -58,6 +60,7 @@ public class MyScheduleController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("createSchedule")
 	public String createSchedule(
 			@RequestParam String scheduleName,
@@ -92,6 +95,7 @@ public class MyScheduleController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("createScheduleMainPage")
 	public String createScheduleMainPage(
 			@RequestParam String scheduleName,
@@ -169,6 +173,7 @@ public class MyScheduleController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("updateSchedule")
 	public String updateSchedule(
 			@RequestParam String scheduleNo,
@@ -205,6 +210,7 @@ public class MyScheduleController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RuntimeCheck
 	@RequestMapping("updateScheduleMainPage")
 	public String updateScheduleMainPage(
 			@RequestParam String scheduleNo,
@@ -240,11 +246,13 @@ public class MyScheduleController {
 		}
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/deleteSchedule")
 	public String deleteSchedule(@RequestParam String scheduleNo) {
 		scheduleService.deleteSchedule(scheduleNo);
 		return "redirect:/mySchedule";
 	}
+	@RuntimeCheck
 	@RequestMapping("/deleteScheduleMainPage")
 	public String deleteScheduleMainPage(@RequestParam String scheduleNo,
 										 @RequestParam String role) {

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,7 @@ public class PoiRestController {
 	    }
 	}
 	
+	@RuntimeCheck
 	@PostMapping("/restMultiRegister")
     @ResponseBody
     public List<Map<String, String>> multiRegister(

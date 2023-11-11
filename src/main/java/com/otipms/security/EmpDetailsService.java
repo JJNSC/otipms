@@ -26,9 +26,7 @@ public class EmpDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		int empId = Integer.parseInt(username);
-		System.out.println(empId);
 		Employee employee = employeeDao.selectByEmployeeId(empId);
-		log.info(" employee : "+employee);
 		if(employee == null) {
 			throw new UsernameNotFoundException(username);
 		}

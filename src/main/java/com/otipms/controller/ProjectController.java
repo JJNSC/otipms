@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Employee;
 import com.otipms.dto.Project;
 import com.otipms.dto.TaskEmployee;
@@ -39,6 +40,7 @@ public class ProjectController {
 	private EmployeeService employeeService;
 	
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/projectList")
 	public String projectList(Model model) {
 		//프로젝트 리스트
@@ -112,6 +114,7 @@ public class ProjectController {
 	}
 	
 	@Login
+	@RuntimeCheck
 	@RequestMapping("/modifyProjectForm")
 	public String modifyProjectForm(@RequestParam(name="projectNo", defaultValue="0") int projectNo,
 									  @RequestParam(name="pmId", defaultValue="0") int pmId,
@@ -159,6 +162,7 @@ public class ProjectController {
 		return "projectManagement/modifyProject";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/addProjectForm")
 	public String addProjectForm(Model model) {
 		model.addAttribute("employee", LoginController.loginEmployee);
@@ -167,6 +171,7 @@ public class ProjectController {
 		return "projectManagement/addProject";
 	}
 	
+	@RuntimeCheck
 	@Transactional
 	@RequestMapping("/addProject")
 	public String addProject(@RequestParam(name="projectName", defaultValue="프로젝트 명") String projectName,
@@ -232,6 +237,7 @@ public class ProjectController {
 		return "redirect:/projectManagement/projectList";
 	}
 	
+	@RuntimeCheck
 	@Transactional
 	@RequestMapping("/modifyProject")
 	public String modifyProject(@RequestParam("projectNo") String projectNo,
@@ -306,6 +312,7 @@ public class ProjectController {
 		return "projectManagement/findClient";
 	}
 	
+	@RuntimeCheck
 	@RequestMapping("/disableProject")
 	public String disableProject(@RequestParam(name="disableProjectNo") String projectNo) {
 		System.out.println("disableProject projectNo: "+ projectNo);

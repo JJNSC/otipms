@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dto.Employee;
 import com.otipms.interceptor.Login;
 import com.otipms.service.EmployeeService;
@@ -29,6 +30,7 @@ public class PoiController {
 	private EmployeeService employeeService;
 	
 	@Login
+	@RuntimeCheck
 	@PostMapping("/multiRegister")
 	public String multiRegister(@RequestParam("file") MultipartFile excelFile, @RequestParam("excelSheetName") String excelSheetName) throws IOException { //파일 경로, 파일 명, 시트명 받아와야함.
 		log.info("엑셀 파일 : "+excelFile.getOriginalFilename());
