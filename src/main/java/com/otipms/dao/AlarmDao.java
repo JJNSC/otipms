@@ -22,4 +22,6 @@ public interface AlarmDao {
 	
 	//알람 삭제
 	public void deleteAlarm(Map<String, Object> param);
+	
+	public void deleteAlarmAll(int empId);
 }

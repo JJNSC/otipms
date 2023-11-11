@@ -113,4 +113,10 @@
 	     WHERE messageNo = #{messageNo}
            AND empId = #{empId}
 	</delete>
+	
+	<!-- 알람 전체 삭제(사원번호) -->
+	<delete id="deleteAlarmAll" parameterType="int">
+		DELETE FROM ALARM
+		 	  WHERE empId = #{empId}
+	</delete>
 </mapper>

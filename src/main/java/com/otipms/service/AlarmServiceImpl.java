@@ -57,5 +57,10 @@ public class AlarmServiceImpl implements AlarmService {
 		
 		alarmDao.deleteAlarm(paramMap);		
 	}
+
+	@Override
+	public void deleteAlarmAll(int empId) {
+		alarmDao.deleteAlarmAll(empId);
+	}
 	
 }
