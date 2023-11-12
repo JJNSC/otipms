@@ -122,7 +122,7 @@ width:15.1875rem;
                                                 <i class="icon-envelope-open"></i>
                                                 <span>쪽지</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
-                                                	<span id="alarmCnt2">0</span>
+                                                	<span id="alarmCnt2"></span>
                                                 </div>
                                             </a>
                                         </li>
@@ -131,7 +131,7 @@ width:15.1875rem;
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>채팅</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
-                                                	<span id="alarmChatCnt2">5</span>
+                                                	<span id="alarmChatCnt2"></span>
                                                 </div>
                                             </a>
                                         </li>

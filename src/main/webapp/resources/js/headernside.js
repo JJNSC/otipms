@@ -56,8 +56,6 @@ window.onload = function(){
 	    alarmData.messageCount = receivedData.mscount;
 	    alarmData.chatAlarmList = receivedData.chatalarms;
 	    alarmData.chatAlarmCount = receivedData.calcount;
-	    console.log("1: " + receivedData.chatalarms);
-	    console.log("2: " + alarmData.chatAlarmList);
 	    var alarmList = alarmData.alarmList;
 	    var messageList = alarmData.messageList;
 	    var alarmCount = alarmData.alarmCount
@@ -66,7 +64,6 @@ window.onload = function(){
 	    var chatAlarmCount = alarmData.chatAlarmCount;
 	    /*var filterType = "";
 	    var searchText = "";*/
-	    console.log("3: " + chatAlarmList);
 	    var currentPage = 1;
 	    var itemsPerPage = 10;
 	    
@@ -371,7 +368,6 @@ window.onload = function(){
 		// 시작 및 종료 인덱스 계산
 		var startIndex = (pageNumber - 1) * itemsPerPage;
 		var endIndex = startIndex + itemsPerPage;
-		console.log(messageList);
 		var messagesToDisplay  = messageList.slice(startIndex, endIndex);
 		
 		updateMessageList(messagesToDisplay);
