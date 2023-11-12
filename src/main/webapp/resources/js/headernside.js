@@ -105,7 +105,7 @@ window.onload = function(){
 	var wsSend=()=>{
 		setInterval(function() {
 			webSocket.send(empId);
-		}, 1000);
+		}, 1500);
 	}
 	
 	//안읽은 알람 수
@@ -655,6 +655,19 @@ function checkimportant(messageNo ,index, event) {
         },
         error: function() {
             // 오류 처리
+        }
+    });
+}
+
+function readAll(){
+	$.ajax({
+        type: "POST",  // 또는 다른 HTTP 메서드
+        url: "/otipms/mail/readAll", // 서버 URL로 대체
+        success: function () {
+        	webSocket.send(empId);
+        },
+        error: function () {
+            alert("서버 오류: 업데이트를 완료할 수 없습니다.");
         }
     });
 }

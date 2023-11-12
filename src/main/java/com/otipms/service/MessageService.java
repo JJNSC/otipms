@@ -25,6 +25,8 @@ public interface MessageService {
 	
 	public void updateMessageChecked(Message message);
 	public void updateMessageCheckedRec(Message message);
+	//모두 읽기
+	public void readAll(int empId);
 	
 	//쪽지 상세 보기(발신,수신,참조,비밀참조 인원)
 	public List<Message> detailMessageEmployee(int messageNo);

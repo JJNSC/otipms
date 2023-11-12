@@ -140,6 +140,18 @@ public class MailController {
         	return "error";
         }
     }
+	@PostMapping("/readAll")
+	@ResponseBody
+	public String readAll(Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		int mempId = empDetails.getEmployee().getEmpId();
+		
+		messageService.readAll(mempId);
+		alarmService.deleteAlarmAll(mempId);
+		
+		
+		return "success";
+	}
 	
 	@PostMapping("/updateCheckedDate")
     @ResponseBody
@@ -152,27 +164,6 @@ public class MailController {
 	        message.setCcNo(ccNo);
 	        message.setEmpId(empId);
 	        
-	        messageService.updateMessageChecked(message);
-	        
-	        Map<String, Object> parameters = new HashMap<>();
-	        parameters.put("ccNo", ccNo);
-	        parameters.put("empId", empId);
-	        
-	        Message messageCC = messageService.getMessageNoByCCNo(parameters);
-	        
-	        log.info("messageCC" + messageCC);
-	        
-	        int messageNo = messageCC.getMessageNo();
-	        
-	        /*Map<String, Object> param = new HashMap<>();
-	        param.put("messageNo", messageNo);
-	        param.put("empId", empId);
-	        Alarm alarm = alarmService.setAlarm(param);
-	        
-	        alarmService.updateAlarmChecked(alarm);*/
-	        
-        
-        // 성공적으로 업데이트되었음을 클라이언트에 알립니다.
         return "success";
         } catch (Exception e) {
         	e.printStackTrace();

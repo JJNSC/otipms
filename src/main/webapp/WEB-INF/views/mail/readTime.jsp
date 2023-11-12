@@ -61,10 +61,10 @@
                                 <div class="compose-content">
 								    <div class="mt-3">
 								    	<c:if test="${employee.empId == msempId}">
-								    		<span>읽음 여부 확인</span>
+								    		<h3>읽음 여부 확인</h3>
 								    	</c:if>
 								    	<c:if test="${employee.empId != msempId}">
-								    		<span>쪽지 수신자 확인</span>
+								    		<h3>쪽지 수신자 확인</h3>
 								    	</c:if>
 									</div>
                                     <hr>

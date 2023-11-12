@@ -126,8 +126,6 @@ public class FindEmployeeRestController {
     			 messageMap.put("ccType", "수신");
     		 } else if(message.getCcType() == 3) {
     			 messageMap.put("ccType", "참조");
-    		 } else if(message.getCcType() == 4) {
-    			 messageMap.put("ccType", "비밀 참조");
     		 }
     		 
     		 messageMap.put("empRank", message.getEmpRank());

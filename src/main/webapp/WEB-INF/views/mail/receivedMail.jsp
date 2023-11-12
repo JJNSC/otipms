@@ -86,6 +86,7 @@
 				                                	<label class="form-check-label" for="email-select-all"></label>
 				                              	</div>
 			                              		<i class="fa fa-trash font-18 align-middle ml-2" style="cursor: pointer;" onclick="deletemail()"></i>
+			                              		<i class="icon-copy ion-android-drafts mail" style="margin-left:15px;cursor:pointer;" onclick="readAll()"></i>
 				                            </div>
 		                          		</div>
                                     </div>

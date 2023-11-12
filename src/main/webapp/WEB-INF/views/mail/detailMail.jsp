@@ -185,9 +185,6 @@
                                                	</c:choose>
                                             </c:forEach>
                                         </div>
-                                        <div>
-                                        	<input class="mt-3" type="button" value="일괄 다운로드" id="downloadAll"/>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

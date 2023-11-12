@@ -91,6 +91,11 @@ public class MessageServiceImpl implements MessageService {
 		messageDao.updateMessageCheckedRec(message);
 	}
 	
+	@Override
+	public void readAll(int empId) {
+		messageDao.readAll(empId);
+	}
+	
 	//상세보기
 	@Override
 	public List<Message> detailMessageEmployee(int messageNo) {
