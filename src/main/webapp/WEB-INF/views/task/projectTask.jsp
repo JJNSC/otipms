@@ -189,12 +189,12 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                            	<th style="width: 10.5%;">번호</th>
-                                                <th style="width: 25%;">프로젝트</th>
+                                            	<th style="width: 10%;">번호</th>
+                                                <th style="width: 26%;">프로젝트</th>
                                                 <th style="width: 13%;">팀</th>
                                                 <th style="width: 13%;">사원 명</th>
                                                 <th style="width: 13%;">직책</th>
-                                                <th style="width: 25.5%;">진척률</th>
+                                                <th style="width: 25%;">진척률</th>
                                             </tr>
                                         </thead>
                                         <tbody id="detailTaskList">
@@ -233,7 +233,7 @@
 								                      	<div class="collapse" id="${'task'}${taskEmployee.empId}" style="">
 												         	<div class="card card-body mt-3 noHover">
 												         		<div class="card-title">
-								                                    <h6>업무 목록</h6>
+								                                    <h6><b>업무 목록</b></h6>
 								                                </div>
 							                                    <table>
 							                                        <thead>

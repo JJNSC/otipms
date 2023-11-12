@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Team;
 
@@ -123,5 +124,12 @@ public interface BoardDao {
 	public int selectBoardNoInserted();
 	//최초 게시판 종류 등록
 	public void insertInitialBoardType(Board board);
+	
+	/**
+	 * 게시글 작성자 정보 조회
+	 * @param empId
+	 * @return
+	 */
+	public Employee selectBoardWriterInfo(int empId);
 	
 }

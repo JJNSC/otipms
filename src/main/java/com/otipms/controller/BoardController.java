@@ -450,8 +450,10 @@ public class BoardController {
 		}
 		model.addAttribute("board", board);
 		
-		Employee emp = employeeService.getEmployeeAllInfo(board.getEmpId());
-		model.addAttribute("writer", emp);
+		//게시글 작성자 정보 조회
+		//Employee emp = employeeService.getEmployeeAllInfo(board.getEmpId());
+		Employee employee = boardService.getBoardWriterInfo(board.getEmpId());
+		model.addAttribute("writer", employee);
 		
 		//게시글 파일 조회
 		List<MediaFile> mediaFiles = boardService.getBoardMediaList(boardNo);

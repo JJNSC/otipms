@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Team;
@@ -107,4 +108,11 @@ public interface BoardService {
 	 * @return
 	 */
 	public List<MediaFile> getBoardMediaList(String boardNo);
+
+	/**
+	 * 게시글 작성자 정보 조회
+	 * @param empId
+	 * @return
+	 */
+	public Employee getBoardWriterInfo(int empId);
 }

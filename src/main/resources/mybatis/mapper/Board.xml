@@ -431,4 +431,13 @@
 		       </if>
 		       )
 	</insert>
+	
+	<!-- 게시글 작성자 정보 조회 -->
+	<select id="selectBoardWriterInfo" parameterType="int" resultType="Employee">
+		SELECT empId
+			 , empTel
+			 , empEmail 
+		  FROM EMPINFO
+		 WHERE EMPID = #{empId}
+	</select>
 </mapper>

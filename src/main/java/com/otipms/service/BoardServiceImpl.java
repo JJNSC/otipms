@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.otipms.dao.BoardDao;
 import com.otipms.dto.Board;
 import com.otipms.dto.BoardComment;
+import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
 import com.otipms.dto.Pager;
 import com.otipms.dto.Team;
@@ -131,6 +132,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<MediaFile> getBoardMediaList(String boardNo) {
 		return boardDao.selectBoardMediaFile(Integer.parseInt(boardNo));
+	}
+
+	//게시글 작성자 정보 조회
+	@Override
+	public Employee getBoardWriterInfo(int empId) {
+		return boardDao.selectBoardWriterInfo(empId);
 	}
 	
 }
