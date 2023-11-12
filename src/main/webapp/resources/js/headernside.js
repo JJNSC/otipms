@@ -105,7 +105,7 @@ window.onload = function(){
 	var wsSend=()=>{
 		setInterval(function() {
 			webSocket.send(empId);
-		}, 3000);
+		}, 1000);
 	}
 	
 	//안읽은 알람 수

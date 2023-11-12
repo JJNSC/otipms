@@ -1,6 +1,7 @@
 package com.otipms.controller;
 
 import java.sql.Timestamp;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dao.AlarmDao;
 import com.otipms.dto.Alarm;
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Messenger;
 import com.otipms.security.EmpDetails;
 import com.otipms.service.AlarmService;
@@ -58,10 +60,14 @@ public class MessengerController {
 		Employee employee = empDetails.getEmployee();
 		List<Messenger> chatRoom = messengerService.selectChatRoom(empDetails.getEmployee().getEmpId());
 		
-		log.info("chatRoom : " + chatRoom);
+		for(Messenger messenger : chatRoom) {
+			MediaFile media = employeeService.getProfileImgByEmpId(messenger.getEmpId());
+			messenger.setMediaFile(media);
+			messenger.setMediaFileData(Base64.getEncoder().encodeToString(media.getMediaFileData()));
+		}
+		
 		model.addAttribute("employee", employee);
 		model.addAttribute("chatRoom", chatRoom);
-		
 		return "chat/chatRoom";
 	}
 	
@@ -74,7 +80,10 @@ public class MessengerController {
 		Employee employee = empDetails.getEmployee();
 		
 		Messenger chatRoomEmp = messengerService.getEmpNotMe(mrNo, empId);
-		log.info("notMeEmp : " + chatRoomEmp);
+		MediaFile media = employeeService.getProfileImgByEmpId(chatRoomEmp.getEmpId());
+		chatRoomEmp.setMediaFile(media);
+		chatRoomEmp.setMediaFileData(Base64.getEncoder().encodeToString(media.getMediaFileData()));
+		
 		List<Messenger> chatContent = messengerService.getChatContent(mrNo);
 		
 		model.addAttribute("employee", employee);
@@ -90,7 +99,6 @@ public class MessengerController {
 	public String sendMessage(@RequestParam int mrNo, @RequestParam int empId, @RequestParam String message) {
 		// 채팅 고유 번호 가져오는 서비스 + 채팅 추가
 		int messengerNo = messengerService.insertChat(mrNo, empId, message);
-		log.info("messengerNo : " + messengerNo);
 		//빈 깡통 만들기
 		Messenger messenger = new Messenger();
 		

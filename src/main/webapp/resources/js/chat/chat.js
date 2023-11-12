@@ -135,7 +135,7 @@ function createChatRoomElement(chatRoomInfo) {
     link.setAttribute('data-mrno', chatRoomInfo.mrNo);
 
     var image = document.createElement('img'); // 이미지 요소 생성
-    image.src = '/otipms/resources/images/user/1.jpg';
+    image.src = 'data:${ChatContent.mediaFile.mediaFileType};base64, ${ChatContent.mediaFileData}';
     image.alt = '';
 
     var spanName = document.createElement('span');
@@ -181,10 +181,6 @@ function addChatMessage(message, messengerDate) {
 
     chatItem.classList.add('admin_chat');
 
-    var chatImage = document.createElement('span'); // 이미지 요소 생성
-    chatImage.classList.add('chat-img');
-    chatImage.innerHTML = '<img src="/otipms/resources/images/defaultHuman.jpg" alt="" />';
-
     var chatBody = document.createElement('div'); // 채팅 본문 생성
     chatBody.classList.add('chat-body', 'clearfix');
 
@@ -198,7 +194,6 @@ function addChatMessage(message, messengerDate) {
     chatBody.appendChild(chatText);
     chatBody.appendChild(chatTime);
 
-    chatItem.appendChild(chatImage);
     chatItem.appendChild(chatBody);
 
     chatList.appendChild(chatItem); // 채팅 메시지 항목을 채팅 목록에 추가
@@ -208,13 +203,15 @@ function addChatMessage(message, messengerDate) {
 
 function addChatYourMessage(message, messengerDate) {
     var chatList = document.getElementById('chatList'); // 채팅 메시지를 표시할 요소 (예: ul, div 등)
-
+    var empName = document.getElementById('empName').value;
+    var empRank = document.getElementById('empRank').value;
+    
     var chatItem = document.createElement('li'); // 채팅 메시지 항목 생성
     chatItem.classList.add('clearfix');
 
-    var chatImage = document.createElement('span'); // 이미지 요소 생성
-    chatImage.classList.add('chat-img');
-    chatImage.innerHTML = '<img src="/otipms/resources/images/defaultHuman.jpg" alt="" />';
+    var chatImage = document.createElement('h6'); // 이미지 요소 생성
+    chatImage.style = 'margin-bottom:5px;margin-left:5px;';
+    chatImage.innerHTML = empRank + " " + empName;
 
     var chatBody = document.createElement('div'); // 채팅 본문 생성
     chatBody.classList.add('chat-body', 'clearfix');

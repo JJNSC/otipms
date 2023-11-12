@@ -5,8 +5,10 @@
 		<div class="chat-profile-header clearfix">
 			<div class="left">
 				<div class="clearfix">
+					<input id="empRank" type="hidden" value="${chatRoomEmp.empRank}"/>
+					<input id="empName" type="hidden" value="${chatRoomEmp.empName}"/>
 					<div class="chat-profile-photo">
-						<img src="/otipms/resources/images/user/1.jpg" alt="" />
+						<img src="data:${chatRoomEmp.mediaFile.mediaFileType};base64, ${chatRoomEmp.mediaFileData}" height="40" width="40" alt="">
 					</div>
 					<div class="chat-profile-name">
 						<h3>${chatRoomEmp.empRank} ${chatRoomEmp.empName}</h3>
@@ -51,11 +53,9 @@
 							</c:when>
 							<c:when test="${employee.empId != ChatContent.empId}">
 								<li class="clearfix">
+								<h6 style="margin-bottom:5px;margin-left:5px;">${chatRoomEmp.empRank} ${chatRoomEmp.empName}</h6>
 							</c:when>
 						</c:choose>
-							<span class="chat-img">
-								<img src="/otipms/resources/images/defaultHuman.jpg" alt="" />
-							</span>
 							<div class="chat-body clearfix">
 								<p>${ChatContent.messengerContent}</p>
 								<div class="chat_time">

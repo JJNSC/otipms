@@ -8,7 +8,7 @@
 		<c:forEach var="ChatRoom" items="${chatRoom}">
 			<li id="chatRoom${ChatRoom.mrNo}">
 				<a id="findRoom" href="#" data-mrno="${ChatRoom.mrNo}">
-					<img src="/otipms/resources/images/user/1.jpg" alt=""/>
+					<img src="data:${ChatRoom.mediaFile.mediaFileType};base64, ${ChatRoom.mediaFileData}" height="40" width="40" alt="">
 					<span 
 						  style="display:block;
 								 clear: both;

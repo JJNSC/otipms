@@ -21,9 +21,10 @@ public class Messenger {
 	private String empRank;				//직급
 	private Integer teamNo;				//팀번호
 	private String teamName;			//팀명
+	private MediaFile mediaFile;
 	private String mediaFileName;
 	private String mediaFileType;
-	private byte[] mediaFileData;		//프로필 사진
+	private String mediaFileData;		//프로필 사진
 	private String base64Img;
 	
 	
