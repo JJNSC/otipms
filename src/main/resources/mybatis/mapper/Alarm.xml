@@ -19,6 +19,27 @@
 		     AND a.MessengerNo IS NULL
 		ORDER BY a.AlarmDate desc
 	</select>
+	
+	<select id="selectChatAlarmByEmpId" parameterType="int" resultType="Alarm">
+		  SELECT a.empId AS alarmEmpId
+		  	   , a.AlarmContentCode
+		  	   , a.AlarmContent
+               , MAX(a.AlarmDate) AS MaxAlarmDate
+		  	   , MAX(a.AlarmChk) AS MaxAlarmChk
+		  	   , a.MessageNo AS alarmMessageNo
+		    FROM Alarm a
+      INNER JOIN emp e
+		      ON a.empId = e.empId
+		   WHERE a.empId = #{empId}
+		     AND e.empEnabled = 1
+		     AND a.MessageNo IS NULL
+        GROUP BY a.EmpId,
+                 a.AlarmContentCode,
+                 a.AlarmContent,
+                 a.MessageNo
+	</select>
+	
+	
 	<select id="selectAlarmCountByEmpId" parameterType="int" resultType="Alarm">
 		  SELECT a.AlarmNo
 		  	   , a.EmpId AS alarmEmpId
@@ -40,21 +61,45 @@
 	</select>
 	
 	<select id="selectAlarmChatCountByEmpId" parameterType="int" resultType="Alarm">
-		  SELECT a.AlarmNo
-		  	   , a.EmpId AS alarmEmpId
+		  SELECT DISTINCT a.EmpId AS alarmEmpId
 		  	   , a.AlarmContentCode
 		  	   , a.AlarmContent
-		  	   , a.AlarmDate
-		  	   , a.AlarmChk
+		  	   , MAX(a.AlarmChk) AS MaxAlarmChk
+               , MAX(a.AlarmDate) AS MaxAlarmDate
 		  	   , a.MessageNo AS alarmMessageNo
-		  	   , a.MessengerNo AS alarmMessengerNo
 		    FROM Alarm a
       INNER JOIN emp e
 		      ON a.EmpId = e.EmpId
-		   WHERE a.EmpId = #{empId}
+		   WHERE a.EmpId = #{alarmEmpId}
 		     AND e.empEnabled = 1
 		     AND a.MessageNo IS NULL
    AND TO_NUMBER(a.AlarmChk) = 0
+        GROUP BY a.EmpId,
+                 a.AlarmContentCode,
+                 a.AlarmContent,
+                 a.AlarmChk,
+                 a.MessageNo
+	</select>
+	
+	<select id="selectAlarmChatCountByEmpIdI" parameterType="java.lang.Integer" resultType="Alarm">
+		  SELECT DISTINCT a.EmpId AS alarmEmpId
+		  	   , a.AlarmContentCode
+		  	   , a.AlarmContent
+		  	   , MAX(a.AlarmChk) AS MaxAlarmChk
+               , MAX(a.AlarmDate) AS MaxAlarmDate
+		  	   , a.MessageNo AS alarmMessageNo
+		    FROM Alarm a
+      INNER JOIN emp e
+		      ON a.EmpId = e.EmpId
+		   WHERE a.EmpId = #{alarmEmpId}
+		     AND e.empEnabled = 1
+		     AND a.MessageNo IS NULL
+   AND TO_NUMBER(a.AlarmChk) = 0
+        GROUP BY a.EmpId,
+                 a.AlarmContentCode,
+                 a.AlarmContent,
+                 a.AlarmChk,
+                 a.MessageNo
 	</select>
 	
 	<select id="selectAlarmCountByEmpIdI" parameterType="java.lang.Integer" resultType="Alarm">
@@ -138,6 +183,11 @@
            AND alarmChk = 0
 	</update>
 	
+	<delete id="checkedChatAlarm" parameterType="Alarm">
+   DELETE FROM ALARM
+    	 WHERE empId = #{alarmEmpId}
+           AND messageNo IS NULL
+	</delete>
 	<!-- 알람번호로 쪽지 찾기1 -->
 	<select id="selectAlarm" parameterType="int" resultType="Alarm">
 		SELECT AlarmNo

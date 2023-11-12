@@ -9,7 +9,12 @@ window.onload = function(){
 	if(v_alarmIcon){
 		v_alarmIcon.style.display = 'none';
 	}
+	var v_alarmChatIcon = document.querySelector("#alarmChatIcon");
+	if(v_alarmChatIcon){
+		v_alarmChatIcon.style.display = 'none';
+	}
 	var previousAlarmCount = 0;
+	var previousChatAlarmCount = 0;
 	
 	var alarmData = {
 			alarmList: [],
@@ -30,8 +35,12 @@ window.onload = function(){
 	        updateAlarmList(alarmList);
 		});
 		
+		//웹소켓 세션에 접속한 사람의 채팅 알람 리스트 변경
+		$.get("/otipms/alarmChat?empId=" + empId, function (chatAlarmList) {
+			updateChatAlarmList(chatAlarmList);
+		});
+		
 		$.get("/otipms/mail/receivedMails?empId=" + empId, function(messageList){
-			console.log(messageList);
 			updateMessageList(messageList);
 			
 			updatePaging(messageList);
@@ -41,28 +50,25 @@ window.onload = function(){
 	
 	webSocket.onmessage = (e) => {
 		var receivedData = JSON.parse(e.data);
-		console.log(receivedData);
 		alarmData.alarmList = receivedData.alarms;
 	    alarmData.messageList = receivedData.messages;
 	    alarmData.alarmCount = receivedData.alcount;
 	    alarmData.messageCount = receivedData.mscount;
-	    console.log(alarmData.messageList);
-	    
+	    alarmData.chatAlarmList = receivedData.chatalarms;
+	    alarmData.chatAlarmCount = receivedData.calcount;
+	    console.log("1: " + receivedData.chatalarms);
+	    console.log("2: " + alarmData.chatAlarmList);
 	    var alarmList = alarmData.alarmList;
 	    var messageList = alarmData.messageList;
 	    var alarmCount = alarmData.alarmCount
 	    var messageCount = alarmData.messagecount;
-	    console.log(messageList);
+	    var chatAlarmList = alarmData.chatAlarmList;
+	    var chatAlarmCount = alarmData.chatAlarmCount;
 	    /*var filterType = "";
 	    var searchText = "";*/
-	    
+	    console.log("3: " + chatAlarmList);
 	    var currentPage = 1;
 	    var itemsPerPage = 10;
-	    
-	    console.log("메세지 안 알람 리스트2 : " + alarmList);
-	    console.log("메세지 안 쪽지 리스트2 : " + messageList);
-	    console.log("메세지 안 알람 카운트2 : " + alarmCount);
-	    console.log("메세지 안 쪽지 카운트2 : " + messageCount);
 	    
 		//알람 수 변경(헤더의 알람 수)
 		updateAlarmCount();
@@ -73,22 +79,27 @@ window.onload = function(){
 		$.get("/otipms/alarms?empId=" + empId, function (alarmList) {
 			updateAlarmList(alarmList);
 		});
+		
+		//웹소켓 세션에 접속한 사람의 채팅 알람 리스트 변경
+		$.get("/otipms/alarmChat?empId=" + empId, function (chatAlarmList) {
+			updateChatAlarmList(chatAlarmList);
+		});
+		
 		//쪽지함 쪽지 실시간 변경
 		$.get("/otipms/mail/receivedMails?empId=" + empId, function(messageList){
-			console.log(messageList);
 			updateMessageList(messageList);
-			
 			updatePaging(messageList);
 		});
 		//알람 갯수 > 이전 알람 갯수 일 경우
-		console.log("previousAlarmCount : " + previousAlarmCount);
-		console.log("alarmCount : " + alarmCount);
 	    if (alarmCount > previousAlarmCount) {
 	    	//알람 토스트 띄우기
 	    	showAlarmIcon(v_alarmIcon);
 	    	previousAlarmCount = alarmCount;// 이전 알림 개수 업데이트
 	    }
-	    
+	    if (chatAlarmCount > previousChatAlarmCount){
+	    	showAlarmChatIcon(v_alarmChatIcon);
+	    	previousChatAlarmCount = chatAlarmCount;
+	    }
 	}
 	
 	var wsSend=()=>{
@@ -119,7 +130,6 @@ window.onload = function(){
 	function updateAlarmList(alarmList){
 	    var alarmListContainer = document.getElementById("alarmList");
 	    
-	    console.log("메세지 밖 알람 리스트 : " + alarmData.alarmList);
 	    if(alarmListContainer){
 	    	alarmListContainer.innerHTML = ""; 
 	    	
@@ -150,7 +160,40 @@ window.onload = function(){
 	    	
 	    }
 	  }
-		
+	//쪽지 알람의 내용
+	function updateChatAlarmList(chatAlarmList){
+	    var alarmListContainer = document.getElementById("chatAlarmList");
+	    
+	    if(alarmListContainer){
+	    	alarmListContainer.innerHTML = ""; 
+	    	
+	    	// 알림 목록 업데이트
+	    	chatAlarmList.forEach((alarm) => {
+	    		var alarmItem = document.createElement("li");
+	    		if (alarm.maxAlarmChk === 1) {
+	    			alarmItem.className = "pl-2 bg-secondary";
+	    		} else {
+	    			alarmItem.className = "pl-2";
+	    		}
+	    		var alarmDateFormatted = formatAlarmDate(alarm.maxAlarmDate);
+	    		
+	    		var alarmContent = `
+	    			<a href="javascript:void(window.open('chat/chat','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedChatAlarm()">
+	    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
+	    			<div class="notification-content">
+	    			<h6 class="notification-heading">${alarm.alarmContentCode}</h6>
+	    			<p class="notification-text">${alarm.alarmContent}</p>
+	    			<span class="notification-heading">${alarmDateFormatted}</span>
+	    			</div>
+	    			</a>
+	    			`;
+	    		
+	    		alarmItem.innerHTML = alarmContent;
+	    		alarmListContainer.appendChild(alarmItem);
+	    	});
+	    	
+	    }
+	  }
 	//총 알람 갯수
 	var updateTotalAlarmCount = function () {
 	  $.get("/otipms/alarmTotalCnt?empId=" + empId, function (data) {
@@ -165,7 +208,6 @@ window.onload = function(){
 	function updateMessageList(messageList) {
 		var messageListContainer  = document.getElementById("email-list-container");
 		
-		console.log("메세지 밖 쪽지 리스트3 : " + alarmData.messageList);
 		
 		if(messageListContainer){
 	    	messageListContainer.innerHTML = ""; // 기존 메일 목록을 초기화합니다.
@@ -282,10 +324,6 @@ window.onload = function(){
 	    var itemsPerPage = 10; // 페이지당 보여질 쪽지 수
 	    var totalPages = Math.ceil(filteredEmailsCount / itemsPerPage);
 	    
-	    console.log("메일 수 : " + filteredEmailsCount)
-	    console.log("쪽 수 : " + totalPages)
-	    console.log("메세지 밖 쪽지 리스트4 : " + alarmData.messageList);
-	    
 	    var pagingContainer = document.getElementById("pagingContainer");
 	    pagingContainer.innerHTML = ""; // 기존 페이지 버튼 초기화
 	    var navElement = document.createElement("nav");
@@ -335,11 +373,6 @@ window.onload = function(){
 		var endIndex = startIndex + itemsPerPage;
 		console.log(messageList);
 		var messagesToDisplay  = messageList.slice(startIndex, endIndex);
-		
-		console.log(startIndex);
-		console.log(endIndex);
-		console.log(messagesToDisplay);
-		console.log("메세지 밖 쪽지 리스트5 : " + alarmData.messageList);
 		
 		updateMessageList(messagesToDisplay);
 	}
@@ -397,6 +430,18 @@ function updateCheckedAlarm(alarmNo) {
 	});
 }
 
+function updateCheckedChatAlarm(){
+	$.ajax({
+		type: "POST", 
+		url: "/otipms/updateCheckedChatAlarm", 
+		success: function () {
+			webSocket.send(empId);
+		},
+		error: function () {
+			alert("서버 오류: 업데이트를 완료할 수 없습니다.");
+		}
+	});
+}
 //알람 보여주는 함수
 function showAlarmIcon(v_alarmIcon) {
 	if(v_alarmIcon){
@@ -409,6 +454,23 @@ function showAlarmIcon(v_alarmIcon) {
 			
 			setTimeout(() => {
 				v_alarmIcon.style.display = 'none';
+			}, 2000);
+		}, 5000);
+	}
+}
+
+//알람 보여주는 함수
+function showAlarmChatIcon(v_alarmChatIcon) {
+	if(v_alarmChatIcon){
+		v_alarmChatIcon.style.display = 'inline';
+		v_alarmChatIcon.style.transition = "opacity 2s";
+		v_alarmChatIcon.style.opacity = 1;
+		
+		setTimeout(() => {
+			v_alarmChatIcon.style.opacity = 0;
+			
+			setTimeout(() => {
+				v_alarmChatIcon.style.display = 'none';
 			}, 2000);
 		}, 5000);
 	}

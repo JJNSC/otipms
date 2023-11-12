@@ -37,9 +37,9 @@
 								<div class="chat-list bg-light-gray">
 									<div class="chat-search">
 										<span class="icon-copy fa fa-search"></span>
-										<input type="text" placeholder="Search Contact" />
+										<input id="searchRoom" type="text" placeholder="Search Contact" />
 										<img src="${pageContext.request.contextPath}/resources/images/chatplus.png" 
-											  style="width:35px;height:30px;margin-left:15px;margin-top:13px;cursor:pointer"
+											  style="width:28px;margin-left:43px;margin-top:16px;cursor:pointer"
 											  type="button"
 											  onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))"
 										/>

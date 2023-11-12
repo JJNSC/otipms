@@ -441,4 +441,25 @@ public class LoginController {
         	return "error";
         }
     }
+	
+	@PostMapping("/updateCheckedChatAlarm")
+	@ResponseBody
+	public String updateCheckedChatDate(Authentication authentication) {
+		try {
+			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+			int empId = empDetails.getEmployee().getEmpId();
+			
+			Alarm alarm = new Alarm();
+	        alarm.setAlarmEmpId(empId);
+	        
+	        alarmService.updateChatAlarmChecked(alarm);
+			
+			return "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		
+	
+	}
 }

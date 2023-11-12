@@ -53,21 +53,20 @@ width:15.1875rem;
 								<span id="alarmCnt" class="badge badge-pill badge-custom"></span>
 								<input type="hidden" value="${employee.empId}" id="memIdSpan">
 								<div class="alertMail" id="alarmIcon" style="background-color: transparent; border:0px; width:300px; position:absolute; top:5em; left:-2.2em; ">
-						            <!-- <a class="thumbnail" href="#">Msg</a> -->
-						            <%-- <div class="content">
-						            	<h3>${employee.empName}님</h3>
-						            	<span class="preview">새로운 쪽지가 도착했습니다.</span>
-						          	</div> --%>
 						          	<div class="content alert  fade show" style="background-color: #f57f17">
                                     <span type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     	<!-- <span aria-hidden="true">×</span> -->
                                     </span> 
-                                    <i class="icon-copy fa fa-bell-o" aria-hidden="true"></i>&nbsp;&nbsp; 새로운 쪽지가 도착했습니다.
+                                    <i class="mdi mdi-email-outline" aria-hidden="true"></i>&nbsp;&nbsp; 새로운 쪽지가 도착했습니다.
                                     </div>
 						        </div>
-						        <div class="alertChat" id="chatIcon" style="display:none;">
-						        	<h3>${employee.empName}님</h3>
-						        	<span class="preview">새로운 채팅이 도착했습니다.</span>
+						        <div class="alertMail" id="alarmChatIcon" style="background-color: transparent; border:0px; width:300px; position:absolute; top:9em; left:-2.2em;">
+							        <div class="content alert  fade show" style="background-color: #bf360c">
+	                                    <span type="button" class="close" data-dismiss="alert" aria-label="Close">
+	                                    	<!-- <span aria-hidden="true">×</span> -->
+	                                    </span> 
+	                                    <i class="icon-copy fa fa-bell-o" aria-hidden="true"></i>&nbsp;&nbsp; 새로운 채팅이 도착했습니다.
+	                                    </div>
 						        </div>
 							</a>
                             <div class="drop-down animated fadeIn dropdown-menu">
@@ -93,7 +92,7 @@ width:15.1875rem;
                                     <span class="">New Chat</span>  
                                 </div>
                                 <div id="alarmListChatContainer" class="dropdown-content-body" style="max-height: 300px; overflow-y:scroll;">
-                                    <ul id="alarmChatList" style="padding:0px;height:310px;">
+                                    <ul id="chatAlarmList" style="padding:0px;height:310px;">
                                     </ul>
                                     <div id="totalAlarm"style="text-align:center;">
 									  	<a href="#" class="btn btn-primary btn-block" onclick="deleteChatAlarm(${employee.empId},event)">알림 전체 삭제</a>

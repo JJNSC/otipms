@@ -15,4 +15,9 @@ public class Alarm {
 	private int alarmMessageNo;
 	private int alarmMessengerNo;
 	private int sendempId;
+	
+	
+	//최댓값
+	private int MaxAlarmChk;
+	private Date MaxAlarmDate;
 }

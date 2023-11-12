@@ -51,12 +51,16 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	    //Thread.sleep(500);
 	    List<Message> messages = messageService.getMyReceivedMessageA(memId);
 		List<Alarm> alarms = alarmService.selectAlarmCountByEmpIdI(memId);
+		List<Alarm> chatalarms = alarmService.selectAlarmChatCountByEmpIdI(memId);
+		
 	    // 세션에 알림 개수와 알림 내용을 전달
 	    Map<String, Object> notificationData = new HashMap<>();
 	    notificationData.put("alcount", alarms.size());
 	    notificationData.put("alarms", alarms);
 	    notificationData.put("mscount", messages.size());
 	    notificationData.put("messages", messages);
+	    notificationData.put("chatalarms", chatalarms);
+	    notificationData.put("calcount", chatalarms.size());
 	    TextMessage sendMsg = new TextMessage(new ObjectMapper().writeValueAsString(notificationData));
 	    
 	    // 모든 연결된 세션에 알림 및 메세지를 보냅니다.

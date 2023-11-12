@@ -7,7 +7,7 @@
 	<ul id="chatRoomList">
 		<c:forEach var="ChatRoom" items="${chatRoom}">
 			<li id="chatRoom${ChatRoom.mrNo}">
-				<a href="#" data-mrno="${ChatRoom.mrNo}">
+				<a id="findRoom" href="#" data-mrno="${ChatRoom.mrNo}">
 					<img src="/otipms/resources/images/user/1.jpg" alt=""/>
 					<span 
 						  style="display:block;

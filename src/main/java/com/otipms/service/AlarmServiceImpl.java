@@ -40,6 +40,11 @@ public class AlarmServiceImpl implements AlarmService {
 	}
 
 	@Override
+	public void updateChatAlarmChecked(Alarm alarm) {
+		alarmDao.checkedChatAlarm(alarm);
+	}
+	
+	@Override
 	public Alarm getAlarm(int alarmNo) {
 		return alarmDao.selectAlarm(alarmNo);
 	}
@@ -64,8 +69,19 @@ public class AlarmServiceImpl implements AlarmService {
 	}
 
 	@Override
+	public List<Alarm> selectChatAlarmByEmpId(int empId) {
+		return alarmDao.selectChatAlarmByEmpId(empId);
+	}
+	
+	@Override
 	public List<Alarm> selectAlarmChatCountByEmpId(int empId) {
 		return alarmDao.selectAlarmChatCountByEmpId(empId);
+	}
+	
+	@Override
+	public List<Alarm> selectAlarmChatCountByEmpIdI(String empId) {
+		Integer empIdInt = Integer.parseInt(empId);
+		return alarmDao.selectAlarmChatCountByEmpIdI(empIdInt);
 	}
 	
 	@Override

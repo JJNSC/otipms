@@ -1,6 +1,6 @@
 window.onload = function(){
 	var chatWebSocket = null;
-	var socket = new WebSocket("ws://192.168.0.169:8080/otipms/chat/ws-chat");
+	var socket = new WebSocket("ws://localhost:8080/otipms/chat/ws-chat");
 	chatWebSocket = socket;
 	chatWebSocket.onopen = () => {
 		console.log("소켓 연결");
@@ -117,7 +117,12 @@ window.onload = function(){
             }
         });
     });
-	
+	$("#searchRoom").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#findRoom").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
 }
 
 function createChatRoomElement(chatRoomInfo) {

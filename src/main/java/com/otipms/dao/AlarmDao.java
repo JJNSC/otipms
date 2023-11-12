@@ -13,11 +13,14 @@ public interface AlarmDao {
 	public List<Alarm> selectAlarmCountByEmpId(int empId);
 	public List<Alarm> selectAlarmCountByEmpIdI(Integer empId);
 	
+	public List<Alarm> selectChatAlarmByEmpId(int empId);
 	public List<Alarm> selectAlarmChatCountByEmpId(int empId);
+	public List<Alarm> selectAlarmChatCountByEmpIdI(Integer empId);
 	
 	public void insertAlarm(Alarm alarm);
 	public void insertAlarmChat(Alarm alarm);
 	public void checkedAlarm(Alarm alarm);
+	public void checkedChatAlarm(Alarm alarm);
 	
 	//알람 -> 읽음쪽지
 	public Alarm selectAlarm(int alarmNo);
