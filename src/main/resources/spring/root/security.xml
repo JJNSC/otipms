@@ -46,6 +46,7 @@
 		-->
 		<security:intercept-url pattern="/" access="permitAll"/>
 		<security:intercept-url pattern="/loginForm" access="permitAll"/>
+		<security:intercept-url pattern="/employeeManagement/createAdmin" access="permitAll"/>
 		<security:intercept-url pattern="/**" access="isAuthenticated()"/>
 		
 		<!-- 권한 없음일 경우 보여줄 페이지 설정 -->

@@ -336,6 +336,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 			e.printStackTrace();
 		}
 		employeeDao.insertDefaultProfileImage(mediaFile);
+		
+		//관리자에게 방금생성한 기본 프로필 사진 적용
+		//기본 이미지 받아와서 세팅하기 
+		//받아오기 
+		MediaFile media = employeeDao.getDefaultProfileImg();
+		//사원번호 세팅
+		media.setEmpId(employee.getEmpId());
+		//db에 저장
+		employeeDao.insertEmployeeDefaultProfileImg(media);
+		
 		Board initialBoard = new Board();
 		initialBoard.setBoardTypeName("공지사항");
 		boardDao.insertInitialBoardType(initialBoard);

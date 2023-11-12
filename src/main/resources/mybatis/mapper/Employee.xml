@@ -289,7 +289,7 @@
 		SELECT *
 		  FROM mediaFile 
 		 WHERE 1=1
-		   AND mediaFileNo = 14
+		   AND mediaFileNo = 1
 	</select>
 	
 	<insert id="insertEmployeeDefaultProfileImg" parameterType="MediaFile">
@@ -348,14 +348,13 @@
 		  	 , empEnabled
 		  	   )
 		VALUES (
-	         , #{empId}
+	           #{empId}
 	         , #{empPw}
 	         , #{empName}
 	         , #{empRank}
-	         , #{role}
+	         , 'ROLE_ADMIN'
 	         , 1
 	           )
-		  )
 	</insert>
 	
 	<insert id="insertInitialAdminInfo" parameterType="Employee">	
