@@ -61,10 +61,6 @@
                                         	<i class="fa fa-star-o font-18 align-middle mr-2"></i>
                                         	중요 쪽지함
                                         </a>
-                                        <a href="temporaryMail" class="list-group-item border-0 p-r-0">
-                                        	<i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>
-                                        	임시 저장함
-                                        </a>
                                         <a href="trashMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-trash font-18 align-middle mr-2"></i>
                                         	쪽지 휴지통
