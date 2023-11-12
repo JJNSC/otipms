@@ -70,6 +70,14 @@
 			window.open(url, '_blank', options);
 		}
 	</script>
+	<style>
+       .popover {
+           position: relative;
+           top: 10%;
+           left: 94.38%;
+           transform: translateX(-150%);
+       }
+   </style>
 </head>
 
 <body>
@@ -124,7 +132,7 @@
 			                                   <%--  <div style="margin-right: 0.8rem !important;" 
 			                                    data-toggle="modal" data-target="#writerInfoModal" data-whatever="@mdo" 
 			                                    onclick="showEmpInfo(${board.empId})"> --%>
-											     <div style="margin-right: 0.8rem !important;" class="bootstrap-popover">
+											     <div style="margin-right: 0.8rem !important;" >
 											        <img
 											            data-container="body"
 											            data-toggle="popover"
@@ -188,7 +196,37 @@
 	                                			<div class="d-flex align-items-center">
 	                                				<c:if test="${comment.mediaFileData != null}">
 	                                					<%-- <div style="margin-right: 0.8rem !important;"><img src="data:${comment.mediaFileData};base64, ${comment.base64Img}" class="rounded-circle" width="40" height="40"></div> --%>
-	                                					<div style="margin-right: 0.8rem !important;" class="bootstrap-popover">
+	                                					<div style="margin-right: 0.8rem !important; position: relative;">
+														    <img
+														        data-container="body"
+														        data-toggle="popover"
+														        data-html="true"
+														        data-placement="top"
+														        data-content="이메일: ${comment.empEmail }<br>전화번호: ${comment.empTel }<br><span id='openWriterMail' onclick='openMailWindow(${comment.empId })'>쪽지보내기 : <i class='icon-copy ion-paper-airplane'></i></span>"
+														        src="data:${comment.mediaFileData};base64, ${comment.base64Img}"
+														        class="rounded-circle"
+														        width="40"
+														        height="40"
+														    />
+														    <script>
+														        $('[data-toggle="popover"]').popover({
+														            trigger: 'manual',
+														        }).on('click', function (e) {
+														            e.preventDefault();
+														            e.stopPropagation();
+														            $(this).popover('show');
+														        });
+														
+														        $(document).on('click', function (e) {
+														            $('[data-toggle="popover"]').each(function () {
+														                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+														                    $(this).popover('hide');
+														                }
+														            });
+														        });
+														    </script>
+														</div>
+<%-- 	                                					<div style="margin-right: 0.8rem !important;" class="bootstrap-popover">
 													        <img
 													            data-container="body"
 													            data-toggle="popover"
@@ -200,7 +238,7 @@
 													            width="40"
 													            height="40"
 													        />
-													    </div>
+													    </div> --%>
 	                                				</c:if>
 				                                    <div class="">
 				                                        <h6 class="text-dark mb-0 font-16 font-weight-medium pb-1">
