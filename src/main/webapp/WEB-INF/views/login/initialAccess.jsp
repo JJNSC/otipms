@@ -70,6 +70,9 @@
                                      <div class="form-group">
                                         <input type="text" class="form-control" name="adminTel" placeholder="전화번호 ex)010-0000-0000">
                                     </div>
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" name="adminEmail" placeholder="전화번호 ex)otipms@test.com">
+                                    </div>
                                     <span style="cursor:pointer;" onclick="setDefaultProfileImgBtn()">기본 프로필사진 설정하려면 절 클릭해줘요<strong style="color:darkblue">(CLICK ME!)</strong></span>
 		                            <div id="defaultProfileImgContainer" class="profile-photo d-none mt-4 mb-0">
 										<input class="d-none" type="file" id="imageInput" name="defaultProfileImage" accept="image/*" onchange="changeProfile()">

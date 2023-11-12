@@ -270,6 +270,7 @@ public class EmployeeController {
 							  @RequestParam("adminName") String empName,
 							  @RequestParam("adminPosition") String empRank,
 							  @RequestParam("adminTel") String empTel,
+							  @RequestParam("adminEmail") String empEmail,
 							  @RequestParam("defaultProfileImage") MultipartFile defaultProfileImage) {
 		log.info("empId : "+empId);
 		log.info("empPw : "+empPw);
@@ -282,6 +283,7 @@ public class EmployeeController {
 		admin.setEmpName(empName);
 		admin.setEmpRank(empRank);
 		admin.setEmpTel(empTel);
+		admin.setEmpEmail(empEmail);
 		admin.setRole("ROLE_ADMIN");
 		employeeService.addInitialInfo(admin,defaultProfileImage);
 		
