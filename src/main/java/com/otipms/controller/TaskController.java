@@ -146,16 +146,18 @@ public class TaskController {
 		} else {
 			//else if(LoginController.loginEmployee.getRole().equals("ROLE_PM")) {
 			//위와 같았으나 사실 ADMIN을 제외하면 모든 사람이 이렇게 나와야 함
-			int projectNo = taskService.getProjectNo(LoginController.loginEmployee.getEmpId());
+			//int projectNo = taskService.getProjectNo(LoginController.loginEmployee.getEmpId());
+			Project project = taskService.getProject(LoginController.loginEmployee.getEmpId());
 			
 			Map<String, Object> map = new HashMap<>();
 			map.put("scope", "project");
-			map.put("projectNo", projectNo);
+			map.put("projectNo", project.getProjectNo());
 			List<TaskEmployee> taskEmployeeList = taskService.getTaskEmployeeList(map);
 			model.addAttribute("taskEmployeeList", taskEmployeeList);
-			model.addAttribute("projectNo", projectNo);
+			//model.addAttribute("projectNo", project.getProjectNo());
+			model.addAttribute("project", project);
 			
-			List<Team> teamList = taskService.getTeamList(projectNo + "");
+			List<Team> teamList = taskService.getTeamList(project.getProjectNo() + "");
 			model.addAttribute("teamList", teamList);
 		}
 		
@@ -183,6 +185,9 @@ public class TaskController {
 
 			map.put("scope", "project");
 			map.put("projectNo", Integer.parseInt(projectNo));
+			
+			Project project = taskService.getProjectInfo(projectNo);
+			ajaxMap.put("project", project);
 		}
 		List<TaskEmployee> taskEmployeeList = taskService.getTaskEmployeeList(map);
 		

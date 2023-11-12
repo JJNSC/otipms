@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="row my-3">
                                 	<c:if test="${employee.role eq 'ROLE_ADMIN'}">
-                                		<div class="col-lg-5" style="display:inline-block;">
+                                		<div class="col-lg-4" style="display:inline-block;">
 										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
 										    	<option>프로젝트 선택</option>
 										    	<c:forEach var="project" items="${projectList}">
@@ -165,12 +165,12 @@
                                 	<c:if test="${employee.role ne 'ROLE_ADMIN'}">
                                 		<div class="col-lg-4" style="display:none;">
 										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
-										    	<option selected="selected" value="${projectNo}">${projectNo}</option>
+										    	<option selected="selected" value="${project.projectNo}">${project.projectNo}</option>
 										    </select>
 										</div>
                                 	</c:if>
                                 	
-									<div class="col-lg-3"  style="display:inline-block;">
+									<div class="col-lg-2" style="display:inline-block;">
 		                                 <select class="form-control" id="teamSelect" name="teamSelect" onchange="selectTeam()">
 		                                     <option value="팀 선택">팀 선택</option>
 		                                     <c:if test="${employee.role ne 'ROLE_ADMIN'}">
@@ -183,7 +183,28 @@
 		                                     <option value="html">개발3팀</option> -->
 		                                 </select>
 		                            </div>
-		                                                            
+		                            
+		                            <c:if test="${employee.role eq 'ROLE_ADMIN'}">
+                                		<div id="projectInfo" class="col-lg-6 d-none" style="text-align: right; line-height: 3;">
+			                            	<span id="projectName" class="mr-1"></span>
+			                            	<span>
+			                            		<span id="projectStartDate"></span>
+			                            		- 
+			                            		<span id="projectEndDate"></span>
+			                            	</span>
+			                            </div>
+                                	</c:if>
+		                            <c:if test="${employee.role ne 'ROLE_ADMIN'}">
+                                		<div class="col-lg-10" style="text-align: right; line-height: 3;">
+			                            	<span class="mr-1">${project.projectName} 기간:</span>
+			                            	<span>
+			                            		<fmt:formatDate value="${project.projectStartDate}" pattern="yyyy.MM.dd"/> 
+			                            		- 
+			                            		<fmt:formatDate value="${project.projectEndDate}" pattern="yyyy.MM.dd"/> 
+			                            	</span>
+			                            </div>
+                                	</c:if>
+		                                                 
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table">

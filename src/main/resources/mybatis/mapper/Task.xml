@@ -198,6 +198,8 @@
 	<select id="selectProject" parameterType="int" resultType="Project">
 		SELECT p.projectNo
 			 , p.projectName
+			 , p.projectStartDate
+			 , p.projectEndDate
 		  FROM EMPINFO ei
 		 INNER JOIN TEAM t
 			ON ei.TEAMNO = t.TEAMNO
@@ -207,4 +209,16 @@
 		   AND ei.EMPID = #{empId}
 		   AND p.PROJECTDELETED = 0
 	</select>
+	
+	<!-- 프로젝트 번호로 프로젝트 이름 및 기간 조회 -->
+	<select id="selectProjectInfo" parameterType="int" resultType="Project">
+		SELECT projectNo
+			 , projectName
+			 , projectStartDate
+			 , projectEndDate
+		  FROM PROJECT
+		 WHERE 1=1
+		   AND PROJECTNO = #{projectNo}
+	</select>
+	
 </mapper>

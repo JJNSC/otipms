@@ -87,5 +87,12 @@ public interface TaskDao {
 	 * @return
 	 */
 	public Project selectProject(int empId);
+
+	/**
+	 * 프로젝트 번호로 프로젝트 이름 및 기간 조회
+	 * @param projectNo
+	 * @return
+	 */
+	public Project selectProjectInfo(int projectNo);
 	
 }

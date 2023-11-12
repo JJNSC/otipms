@@ -231,6 +231,12 @@ public class TaskServiceImpl implements TaskService {
 		return tc;
 	}
 
+	//프로젝트 번호로 프로젝트 정보 조회
+	@Override
+	public Project getProjectInfo(String projectNo) {
+		return taskDao.selectProjectInfo(Integer.parseInt(projectNo));
+	}
+
 }
 
 

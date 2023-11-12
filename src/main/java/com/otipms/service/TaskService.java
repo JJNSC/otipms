@@ -99,4 +99,11 @@ public interface TaskService {
 	//개인의 업무 개수,퍼센트 조회
 	public TaskCount getEmployeeTaskCount(int empId);
 
+	/**
+	 * 프로젝트 번호로 프로젝트 이름 및 기간 조회
+	 * @param projectNo
+	 * @return
+	 */
+	public Project getProjectInfo(String projectNo);
+
 }

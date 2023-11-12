@@ -197,6 +197,17 @@ function selectProject() {
 			projectNo:project
 		},
 		success: function(data) {
+			if(project == "프로젝트 선택") {
+				$("#projectInfo").addClass("d-none");
+			} else {
+				$("#projectInfo").removeClass("d-none");
+				$("#projectName").html(data.project.projectName + " 기간:");
+				$("#projectStartDate").html(dateFormat(new Date(data.project.projectStartDate), 4));
+				$("#projectEndDate").html(dateFormat(new Date(data.project.projectEndDate), 4));
+				/*$("#projectStartDate").html(data.project.projectStartDate);
+				$("#projectEndDate").html(data.project.projectEndDate);*/
+			}
+			
 			let teamhtml = "<option>팀 선택</option>";
 			
 			console.log(data);
@@ -934,6 +945,7 @@ function dateFormat(date, type) {
     case 1: return date.getFullYear() + '-' + month + '-' + day;
     case 2: return hour + ':' + minute;
     case 3: return date.getFullYear() + '/' + month + '/' + day;
+    case 4: return date.getFullYear() + '.' + month + '.' + day;
     default: return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute;
     }
 
