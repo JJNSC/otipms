@@ -75,11 +75,11 @@
 		  FROM EMP e
 		 INNER JOIN EMPINFO ei
 		    ON e.EMPID = ei.EMPID
-		 INNER JOIN TEAM t
+		  LEFT OUTER JOIN TEAM t
 		    ON ei.TEAMNO = t.TEAMNO
 		  LEFT OUTER JOIN MEDIAFILE m
 		    ON e.EMPID = m.EMPID
-	     INNER JOIN project p
+	      LEFT OUTER JOIN project p
 	        ON p.projectNo = t.projectNo
 		 WHERE 1=1
 		   AND e.EMPID = #{empId}
