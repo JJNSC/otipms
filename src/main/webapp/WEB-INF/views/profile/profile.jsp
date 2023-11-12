@@ -77,7 +77,7 @@
 								</div>
 							</div>
 							<h5 class="text-center h5 mb-0">${profileEmployee.empName}</h5>
-							<p class="text-center text-muted font-14">${profileEmployee.empRank} <c:if test="${profileEmployee.teamName != '미배정'}"> | ${profileEmployee.teamName}</c:if></p>
+							<p class="text-center text-muted font-14">${profileEmployee.empRank} <c:if test="${profileEmployee.teamName != '미배정' and profileEmployee.teamName != null}"> | ${profileEmployee.teamName}</c:if></p>
 							<div class="profile-info">
 								<!-- <h5 class="mb-20 h5 text-blue">사원 정보</h5> -->
 								<ul>
@@ -103,9 +103,21 @@
 											${profileEmployee.projectName}
 										</li>
 									</c:if>
+									<c:if test="${profileEmployee.projectName == null}">
+										<li class="mb-1">
+											<div style="display:inline-block; width:80px; visibility: hidden;">프로젝트</div>
+											${profileEmployee.projectName}
+										</li>
+									</c:if>
 									<c:if test="${profileEmployee.teamName != null}">
 										<li class="mb-1">
 											<div style="display:inline-block; width:80px;">팀</div>
+											${profileEmployee.teamName}
+										</li>
+									</c:if>
+									<c:if test="${profileEmployee.teamName == null}">
+										<li class="mb-1">
+											<div style="display:inline-block; width:80px; visibility: hidden;">팀</div>
 											${profileEmployee.teamName}
 										</li>
 									</c:if>
