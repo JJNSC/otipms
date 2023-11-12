@@ -97,14 +97,18 @@
 										<div style="display:inline-block; width:80px;">연락처</div>
 										${profileEmployee.empTel}
 									</li>
-									<li class="mb-1">
-										<div style="display:inline-block; width:80px;">프로젝트</div>
-										${profileEmployee.projectName}
-									</li>
-									<li class="mb-1">
-										<div style="display:inline-block; width:80px;">팀</div>
-										${profileEmployee.teamName}
-									</li>
+									<c:if test="${profileEmployee.projectName != null}">
+										<li class="mb-1">
+											<div style="display:inline-block; width:80px;">프로젝트</div>
+											${profileEmployee.projectName}
+										</li>
+									</c:if>
+									<c:if test="${profileEmployee.teamName != null}">
+										<li class="mb-1">
+											<div style="display:inline-block; width:80px;">팀</div>
+											${profileEmployee.teamName}
+										</li>
+									</c:if>
 								</ul>
 							</div>
 						</div>
