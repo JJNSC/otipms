@@ -249,6 +249,18 @@ function selectProject() {
 					taskehtml += '<div class="card card-body mt-3 noHover">';
 					taskehtml += '<div class="card-title">';
 					taskehtml += '<h6>업무 목록</h6>';
+					if($("#loginEmployeeRole").val() == "ROLE_ADMIN" || $("#loginEmployeeRole").val() == "ROLE_PM") {
+						taskehtml += '<button type="button" class="btn mt-3 mb-1 btn-primary"';
+						taskehtml += 'style="position: absolute;';
+						taskehtml += 'top: 0.3em;';
+						taskehtml += 'right: 0.5em;';
+						taskehtml += 'background: transparent;';
+						taskehtml += 'color: #3E6494;';
+						taskehtml += 'border: none;';
+						taskehtml += 'font-weight: bolder;"';
+						taskehtml += 'value="' + taskEmployee.empId + ',' + taskEmployee.empName + '"';
+						taskehtml += 'onclick="addTask(this)"><i class="icon-copy ion-plus mr-1"></i><span style="padding-left: 2px;">추가</span></button>';
+					}
 					taskehtml += '</div>';
 					taskehtml += '<table>';
 					taskehtml += '<thead>';
@@ -345,6 +357,18 @@ var team = $("#teamSelect").val()
 						taskehtml += '<div class="card card-body mt-3 noHover">';
 						taskehtml += '<div class="card-title">';
 						taskehtml += '<h6>업무 목록</h6>';
+						if($("#loginEmployeeRole").val() == "ROLE_ADMIN" || $("#loginEmployeeRole").val() == "ROLE_PM") {
+							taskehtml += '<button type="button" class="btn mt-3 mb-1 btn-primary"';
+							taskehtml += 'style="position: absolute;';
+							taskehtml += 'top: 0.3em;';
+							taskehtml += 'right: 0.5em;';
+							taskehtml += 'background: transparent;';
+							taskehtml += 'color: #3E6494;';
+							taskehtml += 'border: none;';
+							taskehtml += 'font-weight: bolder;"';
+							taskehtml += 'value="' + taskEmployee.empId + ',' + taskEmployee.empName + '"';
+							taskehtml += 'onclick="addTask(this)"><i class="icon-copy ion-plus mr-1"></i><span style="padding-left: 2px;">추가</span></button>';
+						}
 						taskehtml += '</div>';
 						taskehtml += '<table>';
 						taskehtml += '<thead>';
@@ -817,14 +841,17 @@ function deleteTask() {
 }
 
 //새로 추가
-function addTask() {
+function addTask(addBtn) {
 	console.log("추가 클릭")
+	var empId = $(addBtn).val().split(",")[0];
+	var empName = $(addBtn).val().split(",")[1];
 	
 	$("#registerTaskBtn").removeClass("d-none");
 	$("#updateTaskBtn").addClass("d-none");
 	
 	resetForm();
-	$("#startDate").val(dateFormat(new Date(), 1));
+	$("#empIdInput").val(empId);
+	$("#employeeName").val(empName);
 }
 
 //초기화

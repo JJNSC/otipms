@@ -142,9 +142,9 @@
                                     <input type="hidden" id="loginEmployeeId" value="${employee.empId}">
                                     <input type="hidden" id="loginEmployeeRole" value="${employee.role}">
                                     <c:if test="${employee.role eq 'ROLE_ADMIN' or employee.role eq 'ROLE_PM'}">
-	                                    <span style="float: right">
+	                                    <!-- <span style="float: right">
 	                                    	<button type="button" class="btn mt-3 mb-1 btn-primary" onclick="addTask()">추가</button>
-	                                    </span>
+	                                    </span> -->
                                     </c:if> 
                                 </div>
                                 <div class="row my-3">
@@ -234,6 +234,18 @@
 												         	<div class="card card-body mt-3 noHover">
 												         		<div class="card-title">
 								                                    <h6><b>업무 목록</b></h6>
+								                                    <c:if test="${employee.role eq 'ROLE_ADMIN' or employee.role eq 'ROLE_PM'}">
+								                                    <button type="button" class="btn mt-3 mb-1 btn-primary"
+								                                    	    style="position: absolute;
+																				    top: 0.3em;
+																				    right: 0.5em;
+																				    background: transparent;
+																				    color: #3E6494;
+																				    border: none;
+																				    font-weight: bolder;"
+																			value="${taskEmployee.empId},${taskEmployee.empName}"
+								                                    	    onclick="addTask(this)"><i class="icon-copy ion-plus mr-1"></i><span style="padding-left: 2px;">추가</span></button>
+								                                	</c:if>
 								                                </div>
 							                                    <table>
 							                                        <thead>

@@ -97,6 +97,7 @@
 		 WHERE 1=1
 		   AND EMPID = #{empId}
 		   AND TASKDELETED = 0
+		 ORDER BY TASKSTATUS desc
 	</select>
 	
 	<!-- 태스크 조회 -->
