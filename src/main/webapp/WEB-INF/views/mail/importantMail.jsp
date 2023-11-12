@@ -12,7 +12,7 @@
     <title>중요 쪽지함</title>
     <!-- Favicon icon -->
     <%-- <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png"> --%>
-    <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipms_fav.jpg">
+    <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipmsFavicon.png">
     
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/mail/style.css" rel="stylesheet">
