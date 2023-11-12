@@ -8,7 +8,7 @@
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
 		<title>채팅</title>
-
+		<link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipmsFavicon.png">
 		<!-- CSS -->
 		<link href="${pageContext.request.contextPath}/resources/css/chat/core.css" rel="stylesheet"/>
 		<link href="${pageContext.request.contextPath}/resources/css/chat/style.css" rel="stylesheet">
