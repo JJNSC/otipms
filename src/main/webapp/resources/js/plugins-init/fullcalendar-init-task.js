@@ -259,12 +259,19 @@ function(e) {
             });*/
             
             e.CalendarApp.init();
+            
+            // 모든 fc-time 클래스를 갖는 요소를 가져옵니다.
+            const fcTimeElements = document.querySelectorAll('.fc-time');
+
+            // 가져온 모든 요소에 대해 반복하며 display 속성을 none으로 설정합니다.
+            fcTimeElements.forEach(element => {
+                element.style.display = 'none';
+            });
         },
         error: function(error) {
             console.log(error);
         }
     });
-    //e.CalendarApp.init()
 }(window.jQuery);
 
 /*var taskList = [];

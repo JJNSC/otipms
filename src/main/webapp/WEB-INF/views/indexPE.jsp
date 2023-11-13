@@ -371,7 +371,7 @@
             		</div>
             		<!-- 일정 -->
             		<div class="col-lg-3">
-            			<div class="card" style="height: 49.2rem;">
+            			<div class="card" style="height: 49.2rem; z-index: 0;">
                             <div class="card-body">
                                 <div class="card-title">
                                     <h4 style="font-weight: bolder;">개인 일정</h4>

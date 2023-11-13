@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -22,37 +23,40 @@
     
     <style type="text/css">
     	/* 일정 달력 */
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-custom.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-draggable {
 		    background-color: #2f588b !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-red.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-custom.fc-draggable {
+		    background-color: #2f588b !important;
+		}
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-red.fc-draggable {
 		    background-color: #B71C1C !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-orange.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-orange.fc-draggable {
 		    background-color: #E65100 !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-yellow.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-yellow.fc-draggable {
 		    background-color: #FFB300 !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightGreen.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-lightGreen.fc-draggable {
 		    background-color: #558B2F !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-green.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-green.fc-draggable {
 		    background-color: #00695C !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightBlue.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-lightBlue.fc-draggable {
 		    background-color: #0097A7 !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-blue.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-blue.fc-draggable {
 		    background-color: #0D47A1 !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-purple.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-purple.fc-draggable {
 		    background-color: #512DA8 !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-pink.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.bg-pink.fc-draggable {
 		    background-color: #AD1457 !important;
 		}
-		a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.fc-draggable {
+		a.fc-day-grid-event.fc-h-event.fc-event.fc-draggable {
 			color: #fff;
 		}
 		/* 수직 스크롤바 숨김 */
@@ -89,7 +93,7 @@
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
             	<div class="row">
             		<div class="col-lg-7 pr-0">
-            			<div class="card">
+            			<div class="card" style="z-index: 0;">
             				<div class="card-body">
             					<div class="row">
             						<div class="col-lg-12">
@@ -102,20 +106,29 @@
             			</div>
             		</div>
             		<div class="col-lg-5">
-            			<div class="card">
+            			<div class="card" style="z-index: 0;">
             				<div class="card-body">
             					<div class="card-title">
                                     <h4 style="font-weight: bolder;">개인 업무 관리</h4>
+                                </div>
+                                <div class="row" style="line-height: 3; cursor: pointer;">
+                                	<span class="col-lg-12" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">
+	                                    <span class="mr-1">${project.projectName} </span>
+	                                    <fmt:formatDate value="${project.projectStartDate}" pattern="(yyyy.MM.dd"/> - <fmt:formatDate value="${project.projectEndDate}" pattern="yyyy.MM.dd)"/>
+                                	</span>
+                                	<!-- <span class="col-2">
+	                                    <button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button>
+                                	</span> -->
                                 </div>
                                 <div class="row">
                                 	<div class="col-lg-12">
                                 		<table class="table table-hover taskTable">
 	                                        <tbody id="taskListTableBody">
-	                                            <tr>
+	                                            <%-- <tr>
 	                                                <td><div class="taskEvent-red mb-1" style="position: relative;">${project.projectName}</div></td>
 	                                                <td style="color: #2b5797; font-weight: 600;">진행중</td>
 	                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button></td>
-	                                            </tr>
+	                                            </tr> --%>
 	                                            
 	                                            <c:forEach var="task" items="${taskList}">
 		                                            <tr>

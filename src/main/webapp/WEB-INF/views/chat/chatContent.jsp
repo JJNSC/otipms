@@ -17,13 +17,18 @@
 			</div>
 			<input type="hidden" value="${employee.empId}" id="empId"/>
 			<input type="hidden" value="${mrNo}" id="mrNo"/>
-			<div class="right text-right" style="padding-top: 15px;">
-				<a href="#" 
+			<div class="right text-right" style="padding-top: 8px;">
+				<!-- <a href="#" 
 				   class="btn btn-primary btn-block"
 				   style="width:150px;" 
 				   data-toggle="modal"
 				   data-target="#delete-Chat"
-				   >채팅방 나가기</a>
+				   >채팅방 나가기</a> -->
+				 <a href="#"
+				   style="width:150px;" 
+				   data-toggle="modal"
+				   data-target="#delete-Chat"
+				   ><i class="icon-copy fa fa-sign-out" style="font-size: 28px; color: #ffffff;" aria-hidden="true"></i></a>
 			</div>
 			<div class="modal fade none-border" id="delete-Chat">
              	<div class="modal-dialog">
@@ -37,7 +42,7 @@
                         </div>
                        	<div class="modal-footer">
                         	<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">취소</button>
-                        	<button id="delete" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal"  onclick="deleteChat(${mrNo},event)">삭제</button>
+                        	<button id="delete" type="button" class="btn btn-primary waves-effect waves-light save-category" data-dismiss="modal"  onclick="deleteChat(${mrNo},event)">삭제</button>
                         </div>
                     </div>
                 </div>
@@ -70,9 +75,9 @@
 				<div class="file-upload">
 				</div>
 				<div class="chat_text_area">
-					<input type="text" placeholder="Type your message…" id="chatInput"
+					<input type="text" placeholder="메시지를 입력하세요" id="chatInput"
 					style="padding-left: 20px;
-						   height: 87px;
+						   height: 67px;
 						   width: 400px;
 						   border: none;"/>
 				</div>

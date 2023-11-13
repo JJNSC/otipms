@@ -71,7 +71,7 @@ width:15.1875rem;
 							</a>
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">New Messages</span>  
+                                    <span class="">쪽지 알람</span>  
                                 </div>
                                 <div id="alarmListContainer" class="dropdown-content-body" style="max-height: 300px; overflow-y:scroll;">
                                     <ul id="alarmList" style="padding:0px;height:310px;">
@@ -84,12 +84,14 @@ width:15.1875rem;
                         </li>
                         <li class="icons dropdown">
                         	<a href="javascript:void(0)" data-toggle="dropdown">
-                                <i class="mdi mdi-bell-outline"></i>
+                                <!-- <i class="mdi mdi-bell-outline"></i> -->
+                                <i class="icon-copy fa fa-comments-o" aria-hidden="true"></i>
+                                <!-- <i class="icon-copy fa fa-comment-o" aria-hidden="true"></i> -->
                                 <span id="alarmChatCnt" class="badge badge-pill badge-custom">0</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">New Chat</span>  
+                                    <span class="">채팅 알람</span>  
                                 </div>
                                 <div id="alarmListChatContainer" class="dropdown-content-body" style="max-height: 300px; overflow-y:scroll;">
                                     <ul id="chatAlarmList" style="padding:0px;height:310px;">
@@ -126,16 +128,16 @@ width:15.1875rem;
                                             <a href="javascript:void(window.open('${pageContext.request.contextPath}/mail/receivedMail','_blank','width=920, height=760, left=800, top=30'))">
                                                 <i class="icon-envelope-open"></i>
                                                 <span>쪽지</span>
-                                                <div class="badge gradient-3 badge-pill gradient-1">
+                                                <div class="badge badge-pill badge-custom">
                                                 	<span id="alarmCnt2"></span>
                                                 </div>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/chat/chat', '_blank', 'width=774, height=950, left=1000, top=30'))">
+                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/chat/chat', '_blank', 'width=813, height=858, left=1000, top=30'))">
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>채팅</span>
-                                                <div class="badge gradient-3 badge-pill gradient-1">
+                                                <div class="badge badge-pill badge-custom">
                                                 	<span id="alarmChatCnt2"></span>
                                                 </div>
                                             </a>

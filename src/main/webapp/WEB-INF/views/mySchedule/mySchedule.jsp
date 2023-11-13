@@ -73,7 +73,7 @@
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
                     <div class="col-lg-7" style="padding-right: 0px;">
-                        <div class="card">
+                        <div class="card" style="z-index: 0;">
                             <div class="card-body">
                                 <!-- <div class="card-title">
                                     <h4>개인 일정</h4>
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
                                     <!-- BEGIN MODAL -->
-                                    <div class="modal fade none-border" id="event-modal">
+                                    <%-- <div class="modal fade none-border" id="event-modal">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -126,7 +126,7 @@
                                                         <div class="row mb-3">
                                                         	<div class="col-md-12">
                                                                 <label class="control-label">시작일 - 종료일</label>
-							                                	<%-- <%
+							                                	<%
 															    	// Java 코드를 사용하여 내일 날짜를 가져옴
 															        java.time.LocalDate today = java.time.LocalDate.now();
 															        java.time.LocalDate tomorrow = today.plusDays(1);
@@ -135,7 +135,7 @@
 															        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy");
 															        String formattedDate = today.format(formatter);
 															        String formattedTomorrow = tomorrow.format(formatter);
-															    %> --%>
+															    %>
 			                                            		<input class="form-control input-daterange-datepicker" type="text" name="projectDate" value="${formattedDate}-${formattedTomorrow}">	
                                                             </div>
 				                                        </div>
@@ -164,7 +164,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --%>
                                     <!-- Modal Add Category -->
                                     <div class="modal fade none-border" id="add-category">
                                         <div class="modal-dialog">
@@ -260,7 +260,7 @@
                     </div>
                     <!-- /# column -->
                     <div class="col-lg-5">
-                        <div class="card" style="height: 51.7rem;">
+                        <div class="card" style="height: 49.7rem; z-index: 0;">
                             <div class="card-body">
                                 <div class="card-title">
                                     <h4 style="font-weight: bolder;">개인 일정</h4>
@@ -276,7 +276,7 @@
                                         </script>
                                         <div class="tdl-holder-custom m-t-20">
                                             <!-- <p>Drag and drop your event or click in the calendar</p> -->
-                                            <ul id="todo_list" style="height: 723px; overflow: scroll; width: auto; margin-top: 20px;">
+                                            <ul id="todo_list" style="height: 661px; overflow: scroll; width: auto; margin-top: 20px;">
                                             	<c:forEach var="schedule" items="${scheduleList}">
 						                            <li>
 						                            	<strong class="labelCustom">

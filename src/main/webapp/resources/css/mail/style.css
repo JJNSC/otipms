@@ -31,7 +31,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   background-image: linear-gradient(230deg, #fc5286, #fbaaa2); }
 
 .gradient-3, .dropdown-mega-menu .ext-link.link-2 a, .header-right .icons .user-img .activity {
-  background-image: linear-gradient(230deg, #ffc480, #ff763b); }
+  /* background-image: linear-gradient(230deg, #ffc480, #ff763b); */
+  background-image: linear-gradient(230deg, #EF5350 0%, #E53935 100%); }
 
 .gradient-4, .sidebar-right .nav-tabs .nav-item .nav-link.active::after, .sidebar-right .nav-tabs .nav-item .nav-link.active span i::before {
   background-image: linear-gradient(230deg, #0e4cfd, #6a8eff); }

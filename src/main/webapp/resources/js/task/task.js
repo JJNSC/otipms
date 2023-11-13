@@ -148,7 +148,7 @@ function updateTaskDetail() {
 			taskColor:taskColor
 		},
 		success: function(data) {
-			let html = '';
+			/*let html = '';
 			
 			html += '<tr>';
 			html += '<td><div class="taskEvent-red mb-1" style="position: relative;">' + data.project.projectName + '</div></td>';
@@ -175,7 +175,9 @@ function updateTaskDetail() {
 				});
 			}
 			
-			$("#taskListTableBody").html(html);
+			$("#taskListTableBody").html(html);*/
+			
+			location.href = "myTask";
 		},
 		error: function(error) {
 			console.log(error);
