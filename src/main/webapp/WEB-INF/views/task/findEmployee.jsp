@@ -93,10 +93,10 @@
 				                                        <thead>
 				                                            <tr>
 				                                                <th class="text-center"></th>
-				                                                <th class="text-center">프로젝트 명</th>
+				                                                <th class="text-center" style="width: 42%;">프로젝트 명</th>
 				                                                <th class="text-center">팀 명</th>
 				                                                <th class="text-center">직급</th>
-				                                                <th class="text-left ">이름</th>
+				                                                <th class="text-left " style="width: 25%;">이름</th>
 				                                            </tr>
 				                                        </thead>
 				                                        <tbody id="employee-list">

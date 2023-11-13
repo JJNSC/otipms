@@ -26,14 +26,20 @@
 		<link href="${pageContext.request.contextPath}/resources/css/chat/select2.min.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		
+		<style type="text/css">
+			/* 수직 스크롤바 숨김 */
+			::-webkit-scrollbar {
+			    width: 0;
+			}
+		</style>
 	</head>
 	<body class="header-white sidebar-dark">
 		<div class="main-container">
 			<div class="pd-ltr-20 xs-pd-20-10">
 				<div class="min-height-200px">
-					<div class="bg-white border-radius-4 box-shadow mb-30" style="max-height:830px;">
-						<div class="row no-gutters" style="max-height:830px;">
-							<div class="col-lg-3 col-md-4 col-sm-12" style="max-height:830px;">
+					<div class="bg-white border-radius-4 box-shadow mb-30" style="max-height:816px;">
+						<div class="row no-gutters" style="max-height:816px;">
+							<div class="col-lg-3 col-md-4 col-sm-12" style="max-height:816px;">
 								<div class="chat-list bg-light-gray">
 									<div class="chat-search">
 										<span class="icon-copy fa fa-search"></span>
@@ -48,7 +54,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-9 col-md-8 col-sm-12" style="max-height:830px;">
+							<div class="col-lg-9 col-md-8 col-sm-12" style="max-height:819px;">
 								<div class="chat-detail">
 								</div> 
 							</div>

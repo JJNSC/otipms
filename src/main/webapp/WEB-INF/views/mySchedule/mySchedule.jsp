@@ -73,7 +73,7 @@
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
                 <div class="row">
                     <div class="col-lg-7" style="padding-right: 0px;">
-                        <div class="card">
+                        <div class="card" style="z-index: 0;">
                             <div class="card-body">
                                 <!-- <div class="card-title">
                                     <h4>개인 일정</h4>
@@ -260,7 +260,7 @@
                     </div>
                     <!-- /# column -->
                     <div class="col-lg-5">
-                        <div class="card" style="height: 49.7rem;">
+                        <div class="card" style="height: 49.7rem; z-index: 0;">
                             <div class="card-body">
                                 <div class="card-title">
                                     <h4 style="font-weight: bolder;">개인 일정</h4>
