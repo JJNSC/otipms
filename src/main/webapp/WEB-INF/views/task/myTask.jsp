@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -110,15 +111,24 @@
             					<div class="card-title">
                                     <h4 style="font-weight: bolder;">개인 업무 관리</h4>
                                 </div>
+                                <div class="row" style="line-height: 3; cursor: pointer;">
+                                	<span class="col-lg-12" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">
+	                                    <span class="mr-1">${project.projectName} </span>
+	                                    <fmt:formatDate value="${project.projectStartDate}" pattern="(yyyy.MM.dd"/> - <fmt:formatDate value="${project.projectEndDate}" pattern="yyyy.MM.dd)"/>
+                                	</span>
+                                	<!-- <span class="col-2">
+	                                    <button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button>
+                                	</span> -->
+                                </div>
                                 <div class="row">
                                 	<div class="col-lg-12">
                                 		<table class="table table-hover taskTable">
 	                                        <tbody id="taskListTableBody">
-	                                            <tr>
+	                                            <%-- <tr>
 	                                                <td><div class="taskEvent-red mb-1" style="position: relative;">${project.projectName}</div></td>
 	                                                <td style="color: #2b5797; font-weight: 600;">진행중</td>
 	                                                <td><button class="btn btn-sm btn-detail" data-toggle="modal" data-target="#taskDetail" onclick="openProjectDetail()">상세</button></td>
-	                                            </tr>
+	                                            </tr> --%>
 	                                            
 	                                            <c:forEach var="task" items="${taskList}">
 		                                            <tr>

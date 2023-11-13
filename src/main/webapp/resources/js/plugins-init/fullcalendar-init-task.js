@@ -249,15 +249,6 @@ function(e) {
         			className: "bg-" + task.taskColor // 원하는 클래스명으로 변경
         		};
             });
-            
-            if(data.project != null) {
-            	list.push({
-            		title: data.project.projectName,
-            		start: data.project.projectStartDate,
-            		end: data.project.projectEndDate,
-            		className: "bg-red"
-            	});
-            }
 
             /*// FullCalendar 초기화
             var $calendar = $("#calendar"); // FullCalendar가 표시될 엘리먼트 선택자
