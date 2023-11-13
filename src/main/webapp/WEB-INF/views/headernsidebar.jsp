@@ -123,7 +123,7 @@ width:15.1875rem;
                                             <a href="${pageContext.request.contextPath}/profile"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/mail/receivedMail','_blank','width=920, height=680, left=800, top=30'))">
+                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/mail/receivedMail','_blank','width=920, height=760, left=800, top=30'))">
                                                 <i class="icon-envelope-open"></i>
                                                 <span>쪽지</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">

@@ -40,8 +40,9 @@
 
 <body>
     <div id="main-wrapper">
-        <div class="content-body" style="min-height:500px;">
-            <div class="container-fluid">
+       <div style="">
+            <!-- row -->
+            <div style="padding-right:30px;padding-left:30px;margin-left:auto;margin-right:auto;margin-top:1rem;">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -203,10 +204,6 @@
                                         <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" style="height: 35px;" type="button" onclick="sendMail()">
                                         	<i class="fa fa-paper-plane m-r-5"></i>
                                         	 보내기
-                                        </button>
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" style="height: 35px;" type="button" data-toggle="modal" data-target="#modalGrid">
-                                        	<i class="fa fa-archive m-r-5"></i>
-                                        	 임시저장
                                         </button>
                                         <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" style="height: 35px;" type="button">
                                         	<i class="ti-close m-r-5 f-s-12"></i>
