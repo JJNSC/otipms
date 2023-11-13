@@ -53,9 +53,13 @@
 		   SET projectName = #{projectName}
 		     , projectStartDate =#{projectStartDate}
 		     , projectEndDate = #{projectEndDate}
+		     <if test="empId!=0">
 		     , empId=#{empId}
+		     </if>
 		     , projectContent=#{projectContent}
+		     <if test="projectCompanyName!=null">
 		     , projectCompanyName=#{projectCompanyName}
+		     </if>
 		 WHERE 1=1
 		   AND projectNo = #{projectNo}
 	</update>

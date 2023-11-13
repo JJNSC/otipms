@@ -23,6 +23,8 @@ public class EmpDetailsService implements UserDetailsService {
 	@Autowired
 	private EmployeeDao employeeDao;	
 	
+	 private int empStatus;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		int empId = Integer.parseInt(username);

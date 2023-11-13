@@ -108,7 +108,7 @@
                             <div class="card-body">
                                 <h4 class="card-title" style="font-weight: bolder;">팀 관리</h4>
                                     <span style="float: right;">
-	                               		<button type="button" class="btn btn-primary" style="position:relative; bottom:20px; right:70px;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">등록</button>
+	                               		<button type="button" class="btn" style="position:relative; bottom:-40px; right:10px; background-color: transparent; border: none;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="icon-copy ion-plus-round"></i>&nbsp; 팀 추가</button>
 	                                </span>
                                 <!-- Nav tabs -->
                                 
@@ -246,7 +246,7 @@
 					    <div class="modal-dialog" role="document">
 					        <div class="modal-content">
 					            <div class="modal-header">
-					                <h5 class="modal-title" id="exampleModalLabel">담당자 검색</h5>
+					                <h5 class="modal-title" id="exampleModalLabel">팀 추가</h5>
 					                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 					                </button>
 					            </div>

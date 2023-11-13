@@ -375,7 +375,8 @@
 	
 	<insert id="insertDefaultProfileImage" parameterType="MediaFile">
 		<selectKey keyProperty="mediaFileNo" resultType="int" order="BEFORE">
-			select mediaFileNo_seq.nextval from dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
+			SELECT mediaFileNo_seq.nextval 
+			  FROM dual <!-- 시퀀스의 다음 번호를 가지고온다. 그리고 다음단계=>세팅하기 -->
 		</selectKey>
 		INSERT 
 		  INTO mediaFile (
@@ -391,5 +392,19 @@
 		     , #{mediaFileData}
 		       )
 	</insert>
+	
+	<update id="updateEmployeeStatusLogin" parameterType="int">
+		UPDATE emp
+		   SET empStatus = 1
+		 WHERE 1=1
+		   AND empId = #{empId}
+	</update>
+	
+	<update id="updateEmployeeStatusLogout" parameterType="int">
+		UPDATE emp
+		   SET empStatus = 0
+		 WHERE 1=1
+		   AND empId = #{empId}
+	</update>
 	
 </mapper>

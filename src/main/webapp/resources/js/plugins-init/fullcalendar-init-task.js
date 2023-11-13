@@ -191,9 +191,9 @@ var list = [];
             handleWindowResize: !0,
             height: e(window).height() - 200,
             header: {
-                left: "prev,next today",
+                left: "prev",
                 center: "title",
-                right: "month,agendaWeek,agendaDay"
+                right: "next"
             },
             events: a,
             editable: !0,

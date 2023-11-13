@@ -53,4 +53,7 @@ public interface EmployeeService {
 	public void updateProfileImg(MediaFile mediaFile);
 	//프로젝트 번호로 고객 정보 가져오기 
 	public Employee getClientInfoByProjectNo(int projectNo);
+	//
+	public void updateEmployeeStatusLogin(int empId);
+	public void updateEmployeeStatusLogout(int empId);
 }

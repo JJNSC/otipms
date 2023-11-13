@@ -369,6 +369,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return client;
 	}
 
+	@Override
+	public void updateEmployeeStatusLogin(int empId) {
+		employeeDao.updateEmployeeStatusLogin(empId);
+	}
+
+	@Override
+	public void updateEmployeeStatusLogout(int empId) {
+		employeeDao.updateEmployeeStatusLogout(empId);
+		
+	}
+
 	
 
 }

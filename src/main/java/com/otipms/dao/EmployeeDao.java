@@ -50,4 +50,8 @@ public interface EmployeeDao {
 	 * @author 이은지
 	 */
 	public int updateEmployeeProfileImg(MediaFile mediaFile);
+	//로그인 시 1로 상태 변화
+	public void updateEmployeeStatusLogin(int empId);
+	//로그아웃 시 0로 상태 변화
+	public void updateEmployeeStatusLogout(int empId);
 }

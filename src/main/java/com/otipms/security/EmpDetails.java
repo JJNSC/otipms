@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import com.otipms.dao.EmployeeDao;
 import com.otipms.dto.Employee;
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 public class EmpDetails extends User  {
 	private Employee employee;
+	private int empStatus;
+	private EmployeeDao employeeDao;
 	
 	//첫번째 파라미터에는 id, 두번째 파라미터에는 password
 	public EmpDetails(Employee employee, List<GrantedAuthority> authorities) {	
@@ -21,7 +24,16 @@ public class EmpDetails extends User  {
 		super(String.valueOf(employee.getEmpId()), employee.getEmpPw(), employee.getEmpEnabled(), 
 				true, true, true, authorities);
 		this.employee = employee;
+		this.empStatus = employee.getEmpStatus();
 	}
+	
+	public int getEmpStatus() {
+        return empStatus;
+    }
+
+    public void setEmpStatus(int empStatus) {
+        this.empStatus = empStatus;
+    }
 
 	public Employee getEmployee() {
 		return employee;

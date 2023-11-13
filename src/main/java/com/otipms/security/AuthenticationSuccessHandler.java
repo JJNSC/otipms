@@ -41,6 +41,9 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 	    String enteredPassword = request.getParameter("empPw"); // 입력한 비밀번호 가져오기
 	    
+	    empDetails.setEmpStatus(1);
+    	employeeService.updateEmployeeStatusLogin(Integer.parseInt(empDetails.getUsername()));
+	    
 	    // 비밀번호가 "0000"일 경우에 따라 리다이렉트 경로를 설정
         if ("0000".equals(enteredPassword)) {
             setDefaultTargetUrl("/profile"); // "0000" 비밀번호일 때 리다이렉트할 경로

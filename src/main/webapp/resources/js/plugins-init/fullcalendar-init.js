@@ -128,17 +128,26 @@ var list = [];
 ! function(e) {
     "use strict";
     var t = function() {
-        this.$body = e("body"), this.$modal = e("#event-modal"), this.$event = "#external-events div.external-event", this.$calendar = e("#calendar"), this.$saveCategoryBtn = e(".save-category"), this.$categoryForm = e("#add-category form"), this.$extEvents = e("#external-events"), this.$calendarObj = null
+        this.$body = e("body")
+        , this.$modal = e("#event-modal")
+        , this.$event = "#external-events div.external-event"
+        , this.$calendar = e("#calendar")
+        , this.$saveCategoryBtn = e(".save-category")
+        , this.$categoryForm = e("#add-category form")
+        , this.$extEvents = e("#external-events")
+        , this.$calendarObj = null
     };
     t.prototype.onDrop = function(t, n) {
         var a = t.data("eventObject"),
             o = t.attr("data-class"),
             i = e.extend({}, a);
         i.start = n, o && (i.className = [o]), this.$calendar.fullCalendar("renderEvent", i, !0), e("#drop-remove").is(":checked") && t.remove()
-    }, t.prototype.onEventClick = function(t, n, a) {
+    }
+    , t.prototype.onEventClick = function(t, n, a) {
         var o = this,
             i = e("<form></form>");
-        i.append("<label>Change event name</label>"), i.append("<div class='input-group'><input class='form-control' type=text value='" + t.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button></span></div>"), o.$modal.modal({
+        i.append("<label>Change event name</label>"), i.append("<div class='input-group'><input class='form-control' type=text value='" + t.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button></span></div>")
+        , o.$modal.modal({
             backdrop: "static"
         }), o.$modal.find(".delete-event").show().end().find(".save-event").hide().end().find(".modal-body").empty().prepend(i).end().find(".delete-event").unbind("click").on("click", function() {
             o.$calendarObj.fullCalendar("removeEvents", function(e) {
@@ -147,7 +156,8 @@ var list = [];
         }), o.$modal.find("form").on("submit", function() {
             return t.title = i.find("input[type=text]").val(), o.$calendarObj.fullCalendar("updateEvent", t), o.$modal.modal("hide"), !1
         })
-    }, t.prototype.onSelect = function(t, n, a) {
+    }
+    , t.prototype.onSelect = function(t, n, a) {
         var o = this;
         o.$modal.modal({
             backdrop: "static"
@@ -166,7 +176,8 @@ var list = [];
                 className: a
             }, !0), o.$modal.modal("hide")) : alert("You have to give a title to your event"), !1
         }), o.$calendarObj.fullCalendar("unselect")
-    }, t.prototype.enableDrag = function() {
+    }
+    , t.prototype.enableDrag = function() {
         e(this.$event).each(function() {
             var t = {
                 title: e.trim(e(this).text())
@@ -191,9 +202,9 @@ var list = [];
             handleWindowResize: !0,
             height: e(window).height() - 200,
             header: {
-                left: "prev,next today",
+                left: "prev",
                 center: "title",
-                right: "month,agendaWeek,agendaDay"
+                right: "next"
             },
             events: a,
             editable: !0,
