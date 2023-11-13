@@ -56,4 +56,5 @@ public interface EmployeeService {
 	//
 	public void updateEmployeeStatusLogin(int empId);
 	public void updateEmployeeStatusLogout(int empId);
+	
 }

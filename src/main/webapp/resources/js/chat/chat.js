@@ -133,9 +133,16 @@ function createChatRoomElement(chatRoomInfo) {
     var link = document.createElement('a'); // a 요소 생성
     link.href = '#';
     link.setAttribute('data-mrno', chatRoomInfo.mrNo);
-
+    
+    var status = document.createElement('span');
+    if (`${chatRoomInfo.empStatus}` == 1){
+    	status.className= 'activity logined';
+    } else {
+    	status.className= 'activity logout';
+    }
+    
     var image = document.createElement('img'); // 이미지 요소 생성
-    image.src = 'data:${ChatContent.mediaFile.mediaFileType};base64, ${ChatContent.mediaFileData}';
+    image.src = `data:${chatRoomInfo.mediaFile.mediaFileType};base64, ${chatRoomInfo.mediaFileData}`;
     image.alt = '';
 
     var spanName = document.createElement('span');
@@ -158,6 +165,7 @@ function createChatRoomElement(chatRoomInfo) {
     spanMessage.style = 'white-space: nowrap; display: inline-block; overflow: hidden; text-overflow: ellipsis; max-width: 160px;';
     spanMessage.textContent = chatRoomInfo.mrLastChat;
     
+    link.appendChild(status);
     link.appendChild(image);
     link.appendChild(spanName);
     link.appendChild(spanTime);

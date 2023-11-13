@@ -408,4 +408,10 @@
 		   AND empId = #{empId}
 	</update>
 	
+	<!-- 회원 접속 여부 확인 -->
+	<select id="islogined" parameterType="int" resultType="java.lang.Integer">
+  	  SELECT COALESCE(empStatus, 0) AS empStatus
+		  		 FROM emp
+		        WHERE empId = #{empId}
+	</select>
 </mapper>

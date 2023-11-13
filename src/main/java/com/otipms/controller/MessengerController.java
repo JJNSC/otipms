@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.otipms.aop.time.RuntimeCheck;
 import com.otipms.dao.AlarmDao;
+import com.otipms.dao.EmployeeDao;
 import com.otipms.dto.Alarm;
 import com.otipms.dto.Employee;
 import com.otipms.dto.MediaFile;
@@ -45,6 +46,9 @@ public class MessengerController {
 	@Autowired
 	private AlarmDao alarmDao;
 	
+	@Autowired
+	private EmployeeDao employeeDao;
+	
 	@RuntimeCheck
 	@RequestMapping("/chat")
 	public String chat(Model model, Authentication authentication) {
@@ -64,7 +68,9 @@ public class MessengerController {
 			MediaFile media = employeeService.getProfileImgByEmpId(messenger.getEmpId());
 			messenger.setMediaFile(media);
 			messenger.setMediaFileData(Base64.getEncoder().encodeToString(media.getMediaFileData()));
+			messenger.setEmpStatus(employeeDao.islogined(messenger.getEmpId()));
 		}
+		
 		
 		model.addAttribute("employee", employee);
 		model.addAttribute("chatRoom", chatRoom);

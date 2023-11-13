@@ -108,7 +108,12 @@ width:15.1875rem;
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                               
+                               	<c:if test="${employee.empStatus == 1}">
+                               		<span class="loginin logined"></span>
+                               	</c:if>
+                               	<c:if test="${employee.empStatus != 1}">
+                               		<span class="loginin logout"></span>
+                               	</c:if>
                                 <img src="data:${mf.mediaFileType};base64, ${base64Img}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">

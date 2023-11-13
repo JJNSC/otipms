@@ -54,4 +54,7 @@ public interface EmployeeDao {
 	public void updateEmployeeStatusLogin(int empId);
 	//로그아웃 시 0로 상태 변화
 	public void updateEmployeeStatusLogout(int empId);
+	
+	//로그인/로그아웃 여부 회원번호로 찾기
+	public int islogined(int empId);
 }

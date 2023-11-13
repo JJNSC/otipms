@@ -26,6 +26,7 @@ public class Messenger {
 	private String mediaFileType;
 	private String mediaFileData;		//프로필 사진
 	private String base64Img;
+	private int empStatus;				//회원 상태
 	
 	
 }

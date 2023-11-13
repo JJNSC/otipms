@@ -8,6 +8,12 @@
 		<c:forEach var="ChatRoom" items="${chatRoom}">
 			<li id="chatRoom${ChatRoom.mrNo}">
 				<a id="findRoom" href="#" data-mrno="${ChatRoom.mrNo}">
+					<c:if test="${ChatRoom.empStatus == 1}">
+						<span class="activity logined"></span>
+					</c:if>
+					<c:if test="${ChatRoom.empStatus != 1}">
+						<span class="activity logout"></span>
+					</c:if>
 					<img src="data:${ChatRoom.mediaFile.mediaFileType};base64, ${ChatRoom.mediaFileData}" height="40" width="40" alt="">
 					<span 
 						  style="display:block;

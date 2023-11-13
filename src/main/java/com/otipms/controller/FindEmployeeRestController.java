@@ -2,6 +2,7 @@ package com.otipms.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.otipms.aop.time.RuntimeCheck;
+import com.otipms.dao.EmployeeDao;
 import com.otipms.dto.Employee;
+import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.dto.Messenger;
 import com.otipms.dto.Project;
@@ -43,6 +46,8 @@ public class FindEmployeeRestController {
     private MessageService messageService;
     @Autowired
     private MessengerService messengerService;
+    @Autowired
+    private EmployeeDao employeeDao;
     
     @RuntimeCheck
     @PostMapping("/api/createChatRoom")
@@ -53,12 +58,16 @@ public class FindEmployeeRestController {
     	Employee employee = selectedEmployees.get(0);
     	int mrNo = messengerService.insertChatRoom(employee.getEmpId());
     	Employee empInfo = employeeService.getEmployeeInfo(employee.getEmpId());
+    	MediaFile media = employeeService.getProfileImgByEmpId(employee.getEmpId());
+    	messenger.setMediaFile(media);
+		messenger.setMediaFileData(Base64.getEncoder().encodeToString(media.getMediaFileData()));
+		messenger.setEmpStatus(employeeDao.islogined(employee.getEmpId()));
+		
     	messenger.setMrNo(mrNo);
     	messenger.setEmpName(empInfo.getEmpName());
     	messenger.setEmpRank(empInfo.getEmpRank());
     	messenger.setMrLastChat("환영합니다.");
     	messenger.setMrDate(new Date());
-    	log.info("messenger : " + messenger);
     	
     	return messenger;
     }
