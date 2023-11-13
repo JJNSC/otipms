@@ -57,6 +57,9 @@ public class TaskController {
 		Map<String, Object> ajaxMap = new HashMap<>();
 		List<Task> taskList = taskService.getTaskList(LoginController.loginEmployee.getEmpId() + "");
 		ajaxMap.put("taskList", taskList);
+		
+		Project project = taskService.getProject(LoginController.loginEmployee.getEmpId());
+		ajaxMap.put("project", project);
 		return ajaxMap;
 	}
 	

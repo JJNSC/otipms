@@ -170,37 +170,40 @@
     content: "\e605";
 }
 /* 일정 달력 */
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-custom.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.fc-draggable {
     background-color: #2f588b !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-red.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-custom.fc-draggable {
+    background-color: #2f588b !important;
+}
+a.fc-day-grid-event.fc-h-event.fc-event.bg-red.fc-draggable {
     background-color: #B71C1C !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-orange.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-orange.fc-draggable {
     background-color: #E65100 !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-yellow.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-yellow.fc-draggable {
     background-color: #FFB300 !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightGreen.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-lightGreen.fc-draggable {
     background-color: #558B2F !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-green.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-green.fc-draggable {
     background-color: #00695C !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-lightBlue.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-lightBlue.fc-draggable {
     background-color: #0097A7 !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-blue.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-blue.fc-draggable {
     background-color: #0D47A1 !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-purple.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-purple.fc-draggable {
     background-color: #512DA8 !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.bg-pink.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.bg-pink.fc-draggable {
     background-color: #AD1457 !important;
 }
-a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.fc-draggable {
+a.fc-day-grid-event.fc-h-event.fc-event.fc-draggable {
 	color: #fff;
 }
 
