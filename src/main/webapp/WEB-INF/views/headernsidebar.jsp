@@ -52,7 +52,7 @@ width:15.1875rem;
 								<i class="mdi mdi-email-outline"></i>
 								<span id="alarmCnt" class="badge badge-pill badge-custom"></span>
 								<input type="hidden" value="${employee.empId}" id="memIdSpan">
-								<div class="alertMail" id="alarmIcon" style="background-color: transparent; border:0px; width:300px; position:absolute; top:5em; left:-2.2em; ">
+								<div class="alertMail" id="alarmIcon" style="background-color: transparent; border:0px; width:300px; position:absolute; top:5em; left:-2.2em; display:none;">
 						          	<div class="content alert  fade show" style="background-color: #f57f17">
                                     <span type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     	<!-- <span aria-hidden="true">×</span> -->
@@ -60,7 +60,7 @@ width:15.1875rem;
                                     <i class="mdi mdi-email-outline" aria-hidden="true"></i>&nbsp;&nbsp; 새로운 쪽지가 도착했습니다.
                                     </div>
 						        </div>
-						        <div class="alertMail" id="alarmChatIcon" style="background-color: transparent; border:0px; width:300px; position:absolute; top:9em; left:-2.2em;">
+						        <div class="alertMail" id="alarmChatIcon" style="background-color: transparent; border:0px; width:300px; position:absolute; top:9em; left:-2.2em; display:none;">
 							        <div class="content alert  fade show" style="background-color: #bf360c">
 	                                    <span type="button" class="close" data-dismiss="alert" aria-label="Close">
 	                                    	<!-- <span aria-hidden="true">×</span> -->

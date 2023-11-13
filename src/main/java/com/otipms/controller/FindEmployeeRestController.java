@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -297,4 +298,38 @@ public class FindEmployeeRestController {
 
         return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
+    
+    
+    @RequestMapping("/api/projectList")
+    public List<Project> projectList() {
+    	List<Project> projectList = projectService.getAllProjects();
+    	return projectList;
+    }
+    @RequestMapping("/api/teamList")
+    public List<Team> teamList(@RequestParam("projectNo") int projectNo) {
+    	List<Team> teamList = teamService.getTeamListByProjectNo(projectNo).getTeamList();
+    	return teamList;
+    }
+    @RequestMapping("/api/employeeList")
+    public List<Employee> employeeList(@RequestParam("teamNo") int teamNo) {
+    	List<Employee> employeeList = employeeService.selectEmployeeByTeamNo(teamNo);
+    	return employeeList;
+    }
+    @RequestMapping("/api/sendList")
+    public List<Employee> getSendList(@RequestParam("selectedEmployees[]") List<Integer> selectedEmployees) {
+        log.info("선택한 사원들 : "+selectedEmployees);
+        List<Employee> sendList = new ArrayList<>();
+        for(Integer empId : selectedEmployees) {
+        	Employee emp = employeeService.getEmployeeAllInfo(empId);
+        	sendList.add(emp);
+        }
+        return sendList;
+    }
+    
+    
+    
+    
+    
+    
+    
 }

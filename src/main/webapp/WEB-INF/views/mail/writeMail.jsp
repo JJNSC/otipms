@@ -25,7 +25,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/styleSwitcher.js"></script>
     <%-- <script src="${pageContext.request.contextPath}/resources/js/mail/dropzone.js"></script> --%>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/resources/js/mail/writemail.js"></script> --%>
+    <script src="${pageContext.request.contextPath}/resources/js/mail/writemailTest.js"></script>
     
     <!-- Editer -->-
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
@@ -76,6 +77,13 @@
                                         		onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))">
                                         	<i class="icon-copy fa fa-search" aria-hidden="true"></i>
                                         	 사원 찾기
+                                        </button>
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+                                        		type="button" 
+                                        		style="height: 36.33px;"
+                                        		onclick="javascript:void(window.open('findEmployeeTest','_blank','width=1000, height=470, left=300, top=200'))">
+                                        	<i class="icon-copy fa fa-search" aria-hidden="true"></i>
+                                        	 사원 찾기 Test
                                         </button>
                                     </div>
                                     <div class="compose-content mt-5 mb-5">

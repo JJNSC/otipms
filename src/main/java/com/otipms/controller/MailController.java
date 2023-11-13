@@ -477,6 +477,13 @@ public class MailController {
 	    return "mail/findEmployee";
 	}
 	
+	@RequestMapping("/findEmployeeTest")
+	@RuntimeCheck
+	public String findEmployeeTest() {
+		
+		return "mail/findEmployeeTest";
+	}
+	
 	@RuntimeCheck
 	@RequestMapping("/readTime")
 	public String readTime(@RequestParam("messageNo") int messageNo, Model model, Authentication authentication) {
