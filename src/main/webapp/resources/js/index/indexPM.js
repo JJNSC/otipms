@@ -130,8 +130,8 @@ function init() {
 	
 }*/
 
-function movePage(clickedInput) {
-	var pageNo = clickedInput.value;
+function movePage(pageNo) {
+	//var pageNo = clickedInput.value;
 	
 	$.ajax({
 		url: "/otipms/moveMainPage",
@@ -191,19 +191,19 @@ function movePage(clickedInput) {
 				var htmlPager = '';
 				
 				if(data.boardPager.groupNo > 1) {
-					htmlPager += '<input class="page-link" tabindex="-1" value="' + (data.boardPager.startPageNo-1) + '" onclick="movePage(this)">이전</input>'
+					htmlPager += '<input type="button" class="page-link" tabindex="-1" value="이전" onclick="movePage(' + (data.boardPager.startPageNo-1) + ')">'
 				}
 
 				for(let i=data.boardPager.startPageNo; i<=data.boardPager.endPageNo; i++) {
 					if(data.boardPager.pageNo == i) {
-						htmlPager += '<input type="button" class="page-link selected" value="' + i + '" onclick="movePage(this)">';
+						htmlPager += '<input type="button" class="page-link selected" value="' + i + '" onclick="movePage(' + i + ')">';
 					} else {
-						htmlPager += '<input type="button" class="page-link" value="' + i + '" onclick="movePage(this)">';
+						htmlPager += '<input type="button" class="page-link" value="' + i + '" onclick="movePage(' + i + ')">';
 					}
 				}
 				
 				if(data.boardPager.groupNo < data.boardPager.totalGroupNo) {
-					htmlPager += '<input type="button" class="page-link" value="' + (data.boardPager.endPageNo+1) + '" onclick="movePage(this)">다음</input>';
+					htmlPager += '<input type="button" class="page-link" value="다음" onclick="movePage(' + (data.boardPager.endPageNo+1) + ')">';
 				}
 				
 				$("nav").html(htmlPager);
