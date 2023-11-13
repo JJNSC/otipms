@@ -362,7 +362,7 @@
 												</c:forEach>
 												<c:if test="${pager.groupNo<pager.totalGroupNo}">
 													<input type="button" class="page-link" value="다음" onclick="movePage(${pager.endPageNo+1})">
-					                            </c:if>
+					                            </c:if> 
 						                    </nav>
 						                </div>
 		                            </c:if>
