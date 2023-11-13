@@ -34,9 +34,9 @@
 <body>
     <div id="main-wrapper">
         <!-- Content body start -->
-        <div class="content-body" style="min-height:500px;">
+        <div style="height:680px;">
             <!-- row -->
-            <div class="container-fluid">
+            <div style="width:100%;padding-right:30px;padding-left:30px;margin-left:auto;margin-right:auto;margin-top:1rem;height:680px;">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
