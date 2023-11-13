@@ -428,56 +428,9 @@
 												  ></textarea>
 										<!-- <text placeholder="댓글을 남겨보세요" rows="1" class="comment_inbox_text" style="overflow: hidden; overflow-wrap: break-word; height: 17px; border: none;"></text> -->
 										<!----><!---->
-									</div>
-									<div data-v-afadf0bc="" class="comment_attach">
-										<div data-v-afadf0bc="" class="attach_box">
-											<!-- <form action="#" class="dropzone">
-	                                            <div class="form-group mb-0">
-	                                                <div class="fallback">
-	                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
-	                                                </div>
-	                                            </div>
-	                                        </form> -->
-	                                        <form action="#" class="dropzone">
-											    <div class="form-group mb-0">
-											        <div class="fallback">
-											            <label for="fileInput" class="file-label">
-											                <i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i> <!-- 파일 아이콘 -->
-											            </label>
-											            <!-- <input id="fileInput" class="l-border-1" name="file" type="file" multiple="multiple" style="display: none;"> -->
-											            <input id="fileInput" class="l-border-1" name="file" type="file" multiple="multiple" style="display: none;">
-											        </div>
-											    </div>
-											</form>
-											<!-- <div class="pd-20 card-box mb-30">
-												<div class="clearfix mb-20">
-													<div class="pull-left">
-														<h4 class="text-blue h4">첨부파일</h4>
-													</div>
-												</div>
-												<form class="dropzone dz-clickable" action="#" id="my-awesome-dropzone">
-													<div class="dz-default dz-message">
-														<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
-													</div>
-												</form>
-											</div> -->
-											<script>
-											Dropzone.autoDiscover = false;
-											$(".dropzone").dropzone({
-											addRemoveLinks: true,
-											removedfile: function (file) {
-											var name = file.name;
-											var _ref;
-											return (_ref = file.previewElement) != null
-											? _ref.parentNode.removeChild(file.previewElement)
-											: void 0;
-											},
-											});
-											</script>
-										</div>
 										<div class="register_box">
 											<!-- <a href="#" role="button" class="button btn_register" onclick="register()">등록</a> -->
-											<button href="#" role="button" class="button btn_register" onclick="register(this)">등록</button>
+											<button href="#" role="button" style="position: absolute; right: 13px;" class="button btn_register" onclick="register(this)">등록</button>
 											<!-- <button class="button btn_register">등록</button> -->
 											<script type="text/javascript">
 												function register(button) {
@@ -494,6 +447,71 @@
 											</script>
 										</div>
 									</div>
+									<!-- <div data-v-afadf0bc="" class="comment_attach">
+										<div data-v-afadf0bc="" class="attach_box">
+											<form action="#" class="dropzone">
+	                                            <div class="form-group mb-0">
+	                                                <div class="fallback">
+	                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
+	                                                </div>
+	                                            </div>
+	                                        </form>
+	                                        <form action="#" class="dropzone">
+											    <div class="form-group mb-0">
+											        <div class="fallback">
+											            <label for="fileInput" class="file-label">
+											                <i class="icon-copy fa fa-paperclip" aria-hidden="true" style="transform: rotate(445deg);"></i> 파일 아이콘
+											            </label>
+											            <input id="fileInput" class="l-border-1" name="file" type="file" multiple="multiple" style="display: none;">
+											            <input id="fileInput" class="l-border-1" name="file" type="file" multiple="multiple" style="display: none;">
+											        </div>
+											    </div>
+											</form>
+											<div class="pd-20 card-box mb-30">
+												<div class="clearfix mb-20">
+													<div class="pull-left">
+														<h4 class="text-blue h4">첨부파일</h4>
+													</div>
+												</div>
+												<form class="dropzone dz-clickable" action="#" id="my-awesome-dropzone">
+													<div class="dz-default dz-message">
+														<span>파일을 드롭하거나, 클릭하여 업로드 하세요</span>
+													</div>
+												</form>
+											</div>
+											<script>
+											Dropzone.autoDiscover = false;
+											$(".dropzone").dropzone({
+											addRemoveLinks: true,
+											removedfile: function (file) {
+											var name = file.name;
+											var _ref;
+											return (_ref = file.previewElement) != null
+											? _ref.parentNode.removeChild(file.previewElement)
+											: void 0;
+											},
+											});
+											</script>
+										</div>
+										<div class="register_box">
+											<a href="#" role="button" class="button btn_register" onclick="register()">등록</a>
+											<button href="#" role="button" class="button btn_register" onclick="register(this)">등록</button>
+											<button class="button btn_register">등록</button>
+											<script type="text/javascript">
+												function register(button) {
+													var comment = $("#commentText").val();
+													
+													if(comment == null || comment == "") {
+														/* alert("댓글을 입력해주세요."); */
+														$(button).attr("disabled", true);
+													} else {
+														$(button).attr("disabled", false);
+														registerComment();
+													}
+												}
+											</script>
+										</div>
+									</div> -->
 								</div>
                             </div>
                         </div>

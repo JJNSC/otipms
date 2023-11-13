@@ -259,7 +259,7 @@ function selectProject() {
 					taskehtml += '<div class="collapse" id="task' + taskEmployee.empId + '" style="">';
 					taskehtml += '<div class="card card-body mt-3 noHover">';
 					taskehtml += '<div class="card-title">';
-					taskehtml += '<h6>업무 목록</h6>';
+					taskehtml += '<h6><b>업무 목록</b></h6>';
 					if($("#loginEmployeeRole").val() == "ROLE_ADMIN" || $("#loginEmployeeRole").val() == "ROLE_PM") {
 						taskehtml += '<button type="button" class="btn mt-3 mb-1 btn-primary"';
 						taskehtml += 'style="position: absolute;';
@@ -281,7 +281,7 @@ function selectProject() {
 					taskehtml += '<th scope="col" style="width: 20%;">업무 시작일</th>';
 					taskehtml += '<th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>';
 					taskehtml += '<th scope="col" style="width: 20%; text-align: center;">진행 상태</th>';
-					taskehtml += '<th class="text-center">삭제</th>';
+					taskehtml += '<th class="text-center" style="width: 10%;">삭제</th>';
 					taskehtml += '</tr>';
 					taskehtml += '</thead>';
 					taskehtml += '<tbody class="detailTaskBody">';
@@ -367,7 +367,7 @@ var team = $("#teamSelect").val()
 						taskehtml += '<div class="collapse" id="task' + taskEmployee.empId + '" style="">';
 						taskehtml += '<div class="card card-body mt-3 noHover">';
 						taskehtml += '<div class="card-title">';
-						taskehtml += '<h6>업무 목록</h6>';
+						taskehtml += '<h6><b>업무 목록</b></h6>';
 						if($("#loginEmployeeRole").val() == "ROLE_ADMIN" || $("#loginEmployeeRole").val() == "ROLE_PM") {
 							taskehtml += '<button type="button" class="btn mt-3 mb-1 btn-primary"';
 							taskehtml += 'style="position: absolute;';
@@ -389,7 +389,7 @@ var team = $("#teamSelect").val()
 						taskehtml += '<th scope="col" style="width: 20%;">업무 시작일</th>';
 						taskehtml += '<th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>';
 						taskehtml += '<th scope="col" style="width: 20%; text-align: center;">진행 상태</th>';
-						taskehtml += '<th class="text-center">삭제</th>';
+						taskehtml += '<th class="text-center" style="width: 10%;">삭제</th>';
 						taskehtml += '</tr>';
 						taskehtml += '</thead>';
 						taskehtml += '<tbody class="detailTaskBody">';

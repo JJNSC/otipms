@@ -44,6 +44,10 @@
 	</script>
 	
 	<style>
+		body {
+			color: #222324;
+		}
+	
 		.fa-trash-o {
 		  background-color: transparent;
 		}
