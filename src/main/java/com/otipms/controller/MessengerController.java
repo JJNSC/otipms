@@ -128,7 +128,15 @@ public class MessengerController {
 	
 	@RuntimeCheck
 	@PostMapping("/deleteChat")
-	public String deleteChat(@RequestParam int mrNo) {
+	public String deleteChat(@RequestParam int mrNo, Authentication authentication) {
+		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		int empId = empDetails.getEmployee().getEmpId();
+		
+		alarmService.deleteChatAlarmAll(empId);
+		Messenger messenger = messengerService.getEmpNotMe(mrNo, empId);
+		alarmService.deleteChatAlarmAll(messenger.getEmpId());
+		
 		messengerService.deleteChat(mrNo);
 		
 		return "redirect:chat";

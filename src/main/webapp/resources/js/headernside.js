@@ -65,7 +65,6 @@ window.onload = function(){
 	    var currentPage = 1;
 	    var itemsPerPage = 10;
 	    
-	    console.log(messageList);
 		//알람 수 변경(헤더의 알람 수)
 		updateAlarmCount();
 		updateAlarmChatCount();
@@ -204,7 +203,6 @@ window.onload = function(){
 	function updateMessageList(messageList) {
 		var messageListContainer  = document.getElementById("email-list-container");
 		
-		console.log(messageList);
 		if(messageListContainer){
 	    	messageListContainer.innerHTML = ""; // 기존 메일 목록을 초기화합니다.
 	    	
@@ -214,7 +212,6 @@ window.onload = function(){
 	    		messageDiv.className = "message message-" + (index + 1);
 	    		
 	    		var messageDateFormatted = parseMessageDate(message.messageReservedDate);
-	    		console.log(message);
 	    		// 메일 내용을 생성합니다.
 	    		var messageContent = `
 	    			<div class="col-mail col-mail-1 received">
