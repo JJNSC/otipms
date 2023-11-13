@@ -1,32 +1,30 @@
 package com.otipms.websocket;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.otipms.controller.LoginController;
-import com.otipms.dao.AlarmDao;
+import com.otipms.dao.MessageDao;
 import com.otipms.dto.Alarm;
-import com.otipms.dto.MediaFile;
 import com.otipms.dto.Message;
 import com.otipms.service.AlarmService;
-import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class WebSocketMailHandler extends TextWebSocketHandler{
+	
+	@Autowired
+	private MessageDao messageDao;
 	
 	@Autowired
 	private AlarmService alarmService;
@@ -48,8 +46,11 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String memId = message.getPayload();
-	    //Thread.sleep(500);
 	    List<Message> messages = messageService.getMyReceivedMessageA(memId);
+	    for(Message mfmessage : messages) {
+	    	mfmessage.getMessageNo();
+	    	mfmessage.setMediaFile(messageDao.MessageMediaFile(mfmessage.getMessageNo()));
+	    }
 		List<Alarm> alarms = alarmService.selectAlarmCountByEmpIdI(memId);
 		List<Alarm> chatalarms = alarmService.selectAlarmChatCountByEmpIdI(memId);
 		

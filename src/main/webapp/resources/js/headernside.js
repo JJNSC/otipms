@@ -62,11 +62,10 @@ window.onload = function(){
 	    var messageCount = alarmData.messagecount;
 	    var chatAlarmList = alarmData.chatAlarmList;
 	    var chatAlarmCount = alarmData.chatAlarmCount;
-	    /*var filterType = "";
-	    var searchText = "";*/
 	    var currentPage = 1;
 	    var itemsPerPage = 10;
 	    
+	    console.log(messageList);
 		//알람 수 변경(헤더의 알람 수)
 		updateAlarmCount();
 		updateAlarmChatCount();
@@ -205,7 +204,7 @@ window.onload = function(){
 	function updateMessageList(messageList) {
 		var messageListContainer  = document.getElementById("email-list-container");
 		
-		
+		console.log(messageList);
 		if(messageListContainer){
 	    	messageListContainer.innerHTML = ""; // 기존 메일 목록을 초기화합니다.
 	    	
@@ -215,7 +214,7 @@ window.onload = function(){
 	    		messageDiv.className = "message message-" + (index + 1);
 	    		
 	    		var messageDateFormatted = parseMessageDate(message.messageReservedDate);
-	    		
+	    		console.log(message);
 	    		// 메일 내용을 생성합니다.
 	    		var messageContent = `
 	    			<div class="col-mail col-mail-1 received">
@@ -338,8 +337,6 @@ window.onload = function(){
 	        pageButton.addEventListener("click", function (event) {
 	            // 페이지 버튼을 클릭했을 때 해당 페이지의 쪽지를 보여줌
 	            var pageNumber = event.target.dataset.page;
-	            console.log(pageNumber);
-	            console.log(itemsPerPage);
 	            showEmailsForPage(pageNumber, itemsPerPage, messageList);
 	        });
 	        pageli.appendChild(pageButton);
@@ -669,7 +666,6 @@ function readAll(){
 }
 
 function updateMessageChecked(ccNo) {
-    console.log("ccNo: ", ccNo);
 	$.ajax({
         type: "POST",  // 또는 다른 HTTP 메서드
         url: "/otipms/mail/updateCheckedDate", // 서버 URL로 대체

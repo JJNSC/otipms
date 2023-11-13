@@ -28,6 +28,6 @@ public class Message {
 	private Date ccCheckedDate;
 	private List<CC> ccList;
 	private String profile;
-	private List<MediaFile> MediaFile;
+	private List<MediaFile> mediaFile;
 	
 }

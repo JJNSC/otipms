@@ -1,5 +1,6 @@
 package com.otipms.controller;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -303,14 +304,17 @@ public class LoginController {
 		//2. 본인 업무 리스트
 		//3. 공지사항 내용 
 		//4. TODOLIST는 은지 끝나고 나서 추가.
-		model.addAttribute("me", loginEmployee);
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		int empId = empDetails.getEmployee().getEmpId();
+		
+		model.addAttribute("me", empDetails.getEmployee());
 		
 		//진행전 업무수 , 진행중인 업무수, 완료된 업무수 + %까지
-		TaskCount employeeTaskCount = taskService.getEmployeeTaskCount(loginEmployee.getEmpId());
+		TaskCount employeeTaskCount = taskService.getEmployeeTaskCount(empDetails.getEmployee().getEmpId());
 		model.addAttribute("employeeTaskCount", employeeTaskCount);
 		
 		//업무 리스트 받아오기 
-		List<Task> taskList = taskService.getTaskList(String.valueOf(loginEmployee.getEmpId()));
+		List<Task> taskList = taskService.getTaskList(String.valueOf(empDetails.getEmployee().getEmpId()));
 		model.addAttribute("taskList", taskList);
 		
 		//공지사항 내용
@@ -328,18 +332,16 @@ public class LoginController {
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		//내 개인 일정 
-		List<Schedule> scheduleList = scheduleService.getScheduleList(LoginController.loginEmployee.getEmpId());
+		List<Schedule> scheduleList = scheduleService.getScheduleList(empDetails.getEmployee().getEmpId());
 	    model.addAttribute("scheduleList", scheduleList);
 		
-	    //헤더의 웹소켓
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-	    int empId = empDetails.getEmployee().getEmpId();
-	    
 	    List<Alarm> alarm = alarmService.selectAlarmByEmpId(empId);
 	    int alarmCnt = alarmService.selectAlarmCountByEmpId(empId).size();
 	    int totalAlarmCnt = alarmService.selectAlarmByEmpId(empId).size();
 	    
-	    model.addAttribute("base64Img", profileImg);
+	    MediaFile multipartFile = employeeService.getProfileImgByEmpId(empId);
+	    
+	    model.addAttribute("base64Img", Base64.getEncoder().encodeToString(multipartFile.getMediaFileData()));
 	    model.addAttribute("mf", multipartFile);
 	    
 	    model.addAttribute("employee", empDetails.getEmployee());

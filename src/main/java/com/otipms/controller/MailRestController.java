@@ -39,6 +39,9 @@ public class MailRestController {
 	@GetMapping(value="/receivedMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> receivedMail(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> receivedMails = messageService.getMyReceivedMessage(empId);
+		for(Message messages : receivedMails) {
+			messages.setMediaFile(messageDao.MessageMediaFile(messages.getMessageNo()));
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(receivedMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
@@ -48,6 +51,9 @@ public class MailRestController {
 	@GetMapping(value="/sentMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> sentMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> sentMails = messageService.getMySentMessage(empId);
+		for(Message messages : sentMails) {
+			messages.setMediaFile(messageDao.MessageMediaFile(messages.getMessageNo()));
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(sentMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
@@ -57,6 +63,9 @@ public class MailRestController {
 	@GetMapping(value="/importantMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> importantMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> importantMails = messageService.getMyImportantMessage(empId);
+		for(Message messages : importantMails) {
+			messages.setMediaFile(messageDao.MessageMediaFile(messages.getMessageNo()));
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(importantMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
@@ -75,6 +84,9 @@ public class MailRestController {
 	@GetMapping(value="/trashMails", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<String> trashMails(@RequestParam int empId) throws JsonProcessingException {
 		List<Message> trashMails = messageService.getMyTrashMessage(empId);
+		for(Message messages : trashMails) {
+			messages.setMediaFile(messageDao.MessageMediaFile(messages.getMessageNo()));
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(trashMails);
 		return new ResponseEntity<>(json, HttpStatus.OK);
