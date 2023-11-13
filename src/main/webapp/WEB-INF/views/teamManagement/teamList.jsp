@@ -58,6 +58,29 @@
 		}
 	</script>
 	<script>
+		function findActionProjectNo(){
+			var tabedProjectNo =  document.querySelector('.tab-pane.active input').value;
+			
+			$.ajax({
+				type:'GET',
+				url: '/otipms/getProjectName',
+				data: {projectNo:tabedProjectNo},
+				dataType: 'json',
+				success:function(data){
+					var selectedProjectNo = document.querySelector("#selectedProjectNo");
+					var selectedProjectName = document.querySelector("#selectedProjectName");
+					
+					selectedProjectNo.value=tabedProjectNo;
+					selectedProjectName.value=data.projectName;
+					
+				},error: function(error) {
+		            // 실패 시 수행할 작업
+		            console.error('팀  생성실패');
+		        }
+			})
+		}
+	</script>
+	<script>
 	    function deleteTeam() {
 		    // 모달 내의 숨겨진 입력 필드에서 projectNo를 가져옴
 		    var teamNo = document.getElementById('teamNoInput').value;
@@ -77,7 +100,7 @@
 		            // 실패 시 수행할 작업
 		            console.error('팀 삭제 실패');
 		        }
-				});
+			});
 	    }
 	</script>
 </head>
@@ -108,7 +131,7 @@
                             <div class="card-body">
                                 <h4 class="card-title" style="font-weight: bolder;">팀 관리</h4>
                                     <span style="float: right;">
-	                               		<button type="button" class="btn" style="position:relative; bottom:-40px; right:10px; background-color: transparent; border: none;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="icon-copy ion-plus-round"></i>&nbsp; 팀 추가</button>
+	                               		<button type="button" class="btn" style="position:relative; bottom:-40px; right:10px; background-color: transparent; border: none;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onclick="findActionProjectNo()"><i class="icon-copy ion-plus-round"></i>&nbsp; 팀 추가</button>
 	                                </span>
                                 <!-- Nav tabs -->
                                 
@@ -135,6 +158,7 @@
 					                                    <div class="tab-content">
 					                                    	<c:if test="${b.index==c.index }">
 					                                        	<div class="tab-pane fade show active" id="project${b.index }" role="tabpanel">
+					                                        		<input type="hidden" value="${project.projectNo }"></input>
 					                                        </c:if>	
 					                                       <c:if test="${b.index!=c.index  }">
 					                                        	<div class="tab-pane fade show" id="project${b.index }" role="tabpanel">
@@ -256,12 +280,14 @@
                                         <div class="form-row">
 	                                        <div class="form-group col-md-9">
 	                                            <label>프로젝트 명</label>
-                                                <select id="inputState" class="form-control" name="selectedProject">
+                                                <%-- <select id="inputState" class="form-control" name="selectedProject">
                                                     <option selected="selected">프로젝트 선택</option>
                                                     <c:forEach var="project" items="${projectList}" varStatus="e">
                                                     	<option value="${project.projectNo }">${project.projectName }</option>
                                                     </c:forEach>	
-                                                </select>
+                                                </select> --%>
+                                                <input type="hidden" id="selectedProjectNo" name="selectedProject">
+                                                <input type="text" id="selectedProjectName" style="border:none; width:100%;" readonly="readonly">
 	                                        </div>
 	                                    </div>
                                         <div class="form-row">

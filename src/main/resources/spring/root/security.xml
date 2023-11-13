@@ -23,6 +23,10 @@
 			authentication-success-handler-ref="authenticationSuccessHandler"
 			authentication-failure-handler-ref="authenticationFailureHandler"/>
 			
+		<security:session-management>
+            <security:concurrency-control max-sessions="1" expired-url="/logout" />
+        </security:session-management>
+        
 		<security:logout 
 			logout-url="/logout"
 			success-handler-ref="logoutSuccessHandler"/>
@@ -51,6 +55,8 @@
 		
 		<!-- 권한 없음일 경우 보여줄 페이지 설정 -->
 		<security:access-denied-handler error-page="/page-error-error403"/>
+		
+		
 	</security:http>
 	
 	<!-- 
