@@ -148,10 +148,11 @@
                                     </c:if> 
                                 </div>
                                 <div class="row my-3">
+                                	<!-- 프로젝트 선택 -->
                                 	<c:if test="${employee.role eq 'ROLE_ADMIN'}">
                                 		<div class="col-lg-4" style="display:inline-block;">
 										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
-										    	<option>프로젝트 선택</option>
+										    	<!-- <option>프로젝트 선택</option> -->
 										    	<c:forEach var="project" items="${projectList}">
 										    		<option value="${project.projectNo}">${project.projectName}</option>
 										    	</c:forEach>
@@ -162,6 +163,24 @@
 										    </select>
 										</div>
                                 	</c:if>
+                                	<%-- <c:if test="${employee.role eq 'ROLE_ADMIN'}">
+                                		<div class="col-lg-4" style="display:inline-block;">
+										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
+										    	<c:forEach var="project" items="${projectList}">
+										    		<c:if test="${project.projectNo == firstProject.projectNo}">
+											    		<option value="${project.projectNo}" selected>${project.projectName}</option>
+										    		</c:if>
+										    		<c:if test="${project.projectNo != firstProject.projectNo}">
+											    		<option value="${project.projectNo}">${project.projectName}</option>
+										    		</c:if>
+										    	</c:forEach>
+										        <!-- <option>프로젝트 선택</option>
+										        <option value="html">PMS 제작 프로젝트</option>
+										        <option value="css">프로젝트 2번째</option>
+										        <option value="javascript">본격 취업 프로젝트</option> -->
+										    </select>
+										</div>
+                                	</c:if> --%>
                                 	<c:if test="${employee.role ne 'ROLE_ADMIN'}">
                                 		<div class="col-lg-4" style="display:none;">
 										    <select class="form-control" id="projectSelect" name="projectSelect" onchange="selectProject()">
@@ -169,8 +188,8 @@
 										    </select>
 										</div>
                                 	</c:if>
-                                	
-									<div class="col-lg-2" style="display:inline-block;">
+                                	<!-- 팀 선택 -->
+									<%-- <div class="col-lg-2" style="display:inline-block;">
 		                                 <select class="form-control" id="teamSelect" name="teamSelect" onchange="selectTeam()">
 		                                     <option value="팀 선택">팀 선택</option>
 		                                     <c:if test="${employee.role ne 'ROLE_ADMIN'}">
@@ -182,15 +201,29 @@
 		                                     <option value="html">개발2팀</option>
 		                                     <option value="html">개발3팀</option> -->
 		                                 </select>
+		                            </div> --%>
+		                            <div class="col-lg-2" style="display:inline-block;">
+		                                 <select class="form-control" id="teamSelect" name="teamSelect" onchange="selectTeam()">
+		                                     <option value="팀 선택">팀 선택</option>
+	                                     		 <c:forEach var="team" items="${teamList}">
+									    		 	<option value="${team.teamNo}">${team.teamName}</option>
+									    	 	</c:forEach>		                                     
+		                                     <!-- <option value="html">개발1팀</option>
+		                                     <option value="html">개발2팀</option>
+		                                     <option value="html">개발3팀</option> -->
+		                                 </select>
 		                            </div>
-		                            
+		                            <!-- 프로젝트 기간 -->
 		                            <c:if test="${employee.role eq 'ROLE_ADMIN'}">
-                                		<div id="projectInfo" class="col-lg-6 d-none" style="text-align: right; line-height: 3;">
-			                            	<span id="projectName" class="mr-1"></span>
+                                		<div id="projectInfo" class="col-lg-6" style="text-align: right; line-height: 3;">
+			                            	<span id="projectName" class="mr-1">${firstProject.projectName} 기간: </span>
 			                            	<span>
-			                            		<span id="projectStartDate"></span>
+			                            		<!-- <span id="projectStartDate"></span>
 			                            		- 
-			                            		<span id="projectEndDate"></span>
+			                            		<span id="projectEndDate"></span> -->
+			                            		<span id="projectStartDate"><fmt:formatDate value="${firstProject.projectStartDate}" pattern="yyyy.MM.dd"/> </span>
+			                            		- 
+			                            		<span id="projectEndDate"><fmt:formatDate value="${firstProject.projectEndDate}" pattern="yyyy.MM.dd"/></span>
 			                            	</span>
 			                            </div>
                                 	</c:if>

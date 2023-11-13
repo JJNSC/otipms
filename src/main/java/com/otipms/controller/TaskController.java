@@ -139,10 +139,25 @@ public class TaskController {
 			List<Project> projectList = taskService.getProjectList();
 			model.addAttribute("projectList", projectList);
 			
-			Map<String, Object> map = new HashMap<>();
+			//속도 문제로 전체가 아닌 프로젝트 선택하여 가져옴
+			/*Map<String, Object> map = new HashMap<>();
 			map.put("scope", "all");
 			List<TaskEmployee> taskEmployeeList = taskService.getTaskEmployeeList(map);
-			model.addAttribute("taskEmployeeList", taskEmployeeList);
+			model.addAttribute("taskEmployeeList", taskEmployeeList);*/
+			if(projectList != null) {
+				int projectNo = projectList.get(0).getProjectNo();
+				
+				Map<String, Object> map = new HashMap<>();
+				map.put("scope", "project");
+				map.put("projectNo", projectNo);
+				List<TaskEmployee> taskEmployeeList = taskService.getTaskEmployeeList(map);
+				model.addAttribute("taskEmployeeList", taskEmployeeList);
+				
+				Project project = taskService.getProjectInfo(projectNo + "");
+				model.addAttribute("firstProject", project);
+				List<Team> teamList = taskService.getTeamList(projectNo + "");
+				model.addAttribute("teamList", teamList);
+			}
 		} else {
 			//else if(LoginController.loginEmployee.getRole().equals("ROLE_PM")) {
 			//위와 같았으나 사실 ADMIN을 제외하면 모든 사람이 이렇게 나와야 함
