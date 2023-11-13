@@ -350,19 +350,19 @@
 			                           			<c:set var="pager" value="${boardPagerMap.boardPager}" />
 						                        <!-- <ul class="pagination justify-content-center"> -->
 					                        	<c:if test="${pager.groupNo>1}">
-					                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
+					                        		<input type="button" class="page-link" tabindex="-1" value="이전" onclick="movePage(${pager.startPageNo-1})">
 					                            </c:if>
 					                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 													<c:if test="${pager.pageNo == i}">
-														<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
+														<input type="button" class="page-link selected" value="${i}" onclick="movePage(${i})">
 													</c:if>
 													<c:if test="${pager.pageNo != i}">
-														<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
+														<input type="button" class="page-link" value="${i}" onclick="movePage(${i})">
 													</c:if>
 												</c:forEach>
 												<c:if test="${pager.groupNo<pager.totalGroupNo}">
-													<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
-					                            </c:if>
+													<input type="button" class="page-link" value="다음" onclick="movePage(${pager.endPageNo+1})">
+					                            </c:if> 
 						                    </nav>
 						                </div>
 		                            </c:if>
@@ -575,8 +575,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">취소</button>
-                                <button id="addBtn" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="createSchedule()">저장</button>
-                                <button id="updateBtn" type="button" class="btn btn-danger waves-effect waves-light save-category d-none" data-dismiss="modal" onclick="updateSchedule()">수정</button>
+                                <button id="addBtn" type="button" class="btn btn-primary waves-effect waves-light save-category" data-dismiss="modal" onclick="createSchedule()">저장</button>
+                                <button id="updateBtn" type="button" class="btn btn-primary waves-effect waves-light save-category d-none" data-dismiss="modal" onclick="updateSchedule()">수정</button>
                             </div>
                         </div>
                     </div>

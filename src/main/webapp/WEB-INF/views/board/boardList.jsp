@@ -184,18 +184,18 @@
 				                        <!-- <ul class="pagination justify-content-center"> -->
 				                        
 			                        	<c:if test="${pager.groupNo>1}">
-			                            	<input type="button" class="page-link" tabindex="-1" value="${pager.startPageNo-1}" onclick="movePage(this)">이전</input>
+			                            	<input type="button" class="page-link page-prev" tabindex="-1" value="이전" onclick="movePage(${pager.startPageNo-1})">
 			                            </c:if>
 			                            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 											<c:if test="${pager.pageNo == i}">
-												<input type="button" class="page-link selected" value="${i}" onclick="movePage(this)">
+												<input type="button" class="page-link selected" value="${i}" onclick="movePage(${i})">
 											</c:if>
 											<c:if test="${pager.pageNo != i}">
-												<input type="button" class="page-link" value="${i}" onclick="movePage(this)">
+												<input type="button" class="page-link" value="${i}" onclick="movePage(${i})">
 											</c:if>
 										</c:forEach>
 										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<input type="button" class="page-link" value="${pager.endPageNo+1}" onclick="movePage(this)">다음</input>
+											<input type="button" class="page-link page-next" value="다음" onclick="movePage(${pager.endPageNo+1})">
 			                            </c:if>
 				                    </nav>
 		                    		<!-- <script type="text/javascript">

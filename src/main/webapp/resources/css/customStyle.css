@@ -289,3 +289,9 @@
     background-color: #2F588B;
     border-color: #2F588B;
 }
+.page-link.page-prev {
+	width: 54px;
+}
+.page-link.page-next {
+	width: 54px;
+}

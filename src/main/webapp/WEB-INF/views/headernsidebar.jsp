@@ -141,9 +141,9 @@ width:15.1875rem;
                                             </a>
                                         </li>
                                         <hr class="my-2">
-                                        <li>
+                                        <!-- <li>
                                             <a href="page-lock.html"><i class="icon-lock"></i> <span>화면 잠금</span></a>
-                                        </li>
+                                        </li> -->
                                         <li><a href="${pageContext.request.contextPath}/logout"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
