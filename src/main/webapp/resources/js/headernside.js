@@ -132,7 +132,7 @@ window.onload = function(){
 	    	alarmList.forEach((alarm) => {
 	    		var alarmItem = document.createElement("li");
 	    		if (alarm.alarmChk === 1) {
-	    			alarmItem.className = "pl-2 bg-secondary";
+	    			alarmItem.className = "pl-2 bg-read";
 	    		} else {
 	    			alarmItem.className = "pl-2";
 	    		}
@@ -140,7 +140,7 @@ window.onload = function(){
 	    		
 	    		var alarmContent = `
 	    			<a href="javascript:void(window.open('mail/detailMail?messageNo=${alarm.alarmMessageNo}','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedAlarm(${alarm.alarmNo})">
-	    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
+	    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-copy fa fa-bell-o" aria-hidden="true"></i></span>
 	    			<div class="notification-content">
 	    			<h6 class="notification-heading">${alarm.alarmContentCode}</h6>
 	    			<p class="notification-text">${alarm.alarmContent}</p>
@@ -166,15 +166,15 @@ window.onload = function(){
 	    	chatAlarmList.forEach((alarm) => {
 	    		var alarmItem = document.createElement("li");
 	    		if (alarm.maxAlarmChk === 1) {
-	    			alarmItem.className = "pl-2 bg-secondary";
+	    			alarmItem.className = "pl-2 bg-read";
 	    		} else {
 	    			alarmItem.className = "pl-2";
 	    		}
 	    		var alarmDateFormatted = formatAlarmDate(alarm.maxAlarmDate);
 	    		
 	    		var alarmContent = `
-	    			<a href="javascript:void(window.open('chat/chat','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedChatAlarm()">
-	    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
+	    			<a href="javascript:void(window.open('chat/chat','_blank','width=813, height=858, left=1000, top=30'))" onclick="updateCheckedChatAlarm()">
+	    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-copy fa fa-bell-o" aria-hidden="true"></i></span>
 	    			<div class="notification-content">
 	    			<h6 class="notification-heading">${alarm.alarmContentCode}</h6>
 	    			<p class="notification-text">${alarm.alarmContent}</p>

@@ -84,7 +84,9 @@ width:15.1875rem;
                         </li>
                         <li class="icons dropdown">
                         	<a href="javascript:void(0)" data-toggle="dropdown">
-                                <i class="mdi mdi-bell-outline"></i>
+                                <!-- <i class="mdi mdi-bell-outline"></i> -->
+                                <i class="icon-copy fa fa-comments-o" aria-hidden="true"></i>
+                                <!-- <i class="icon-copy fa fa-comment-o" aria-hidden="true"></i> -->
                                 <span id="alarmChatCnt" class="badge badge-pill badge-custom">0</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">

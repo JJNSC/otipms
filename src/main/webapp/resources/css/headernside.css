@@ -75,3 +75,7 @@
     top: 358px;
     right: -1px;
 }
+
+.bg-read {
+	background-color: #ddd !important;
+}
