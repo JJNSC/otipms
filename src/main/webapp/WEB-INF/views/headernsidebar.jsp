@@ -201,7 +201,7 @@ width:15.1875rem;
                             <li><a href="${pageContext.request.contextPath}/board?boardType=공지사항">공지사항</a></li>
                             <li><a href="${pageContext.request.contextPath}/board?boardType=질의 게시판">질의 게시판</a></li>
                             <%-- <li><a href="${pageContext.request.contextPath}/board?boardType=자유 게시판">자유 게시판</a></li> --%>
-                            <c:if test="${employee.role != 'ROLE_CLIENT' and employee.role != 'ROLE_PM'}">
+                            <c:if test="${employee.role == 'ROLE_PE'}">
 	                            <li><a href="${pageContext.request.contextPath}/board?boardType=팀 게시판">팀 게시판</a></li>
                             </c:if>
                         </ul>
