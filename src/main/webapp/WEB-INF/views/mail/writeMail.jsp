@@ -64,7 +64,7 @@
                                         </a>
                                         <a href="trashMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-trash font-18 align-middle mr-2"></i>
-                                        	쪽지 휴지통
+                                        	쪽지 휴지통 
                                         </a>
                                     </div>
                                 </div>
