@@ -31,24 +31,24 @@
 		<div class="main-container">
 			<div class="pd-ltr-20 xs-pd-20-10">
 				<div class="min-height-200px">
-					<div class="bg-white border-radius-4 box-shadow mb-30" style="max-height:980px;">
-						<div class="row no-gutters" style="max-height:980px;">
-							<div class="col-lg-3 col-md-4 col-sm-12" style="max-height:980px;">
+					<div class="bg-white border-radius-4 box-shadow mb-30" style="max-height:830px;">
+						<div class="row no-gutters" style="max-height:830px;">
+							<div class="col-lg-3 col-md-4 col-sm-12" style="max-height:830px;">
 								<div class="chat-list bg-light-gray">
 									<div class="chat-search">
 										<span class="icon-copy fa fa-search"></span>
 										<input id="searchRoom" type="text" placeholder="Search Contact" />
 										<img src="${pageContext.request.contextPath}/resources/images/chatplus.png" 
-											  style="width:28px;margin-left:26px;margin-top:16px;cursor:pointer"
+											  style="width:28px;margin-left:22px;margin-top:16px;cursor:pointer"
 											  type="button"
 											  onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))"
 										/>
 									</div>
-									<div id="chatRoomContainer" class="notification-list chat-notification-list customscroll" style="overflow-y: auto;">
+									<div id="chatRoomContainer" class="notification-list chat-notification-list customscroll">
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-9 col-md-8 col-sm-12" style="max-height:980px;">
+							<div class="col-lg-9 col-md-8 col-sm-12" style="max-height:830px;">
 								<div class="chat-detail">
 								</div>
 							</div>
