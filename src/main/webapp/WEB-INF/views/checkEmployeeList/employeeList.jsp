@@ -34,6 +34,28 @@
 		::-webkit-scrollbar {
 		    background: transparent;
 		}
+		
+		.taskEvent-gray::before {
+		    content: "";
+		    display: inline-block;
+		    width: 10px;
+		    height: 10px;
+		    border-radius: 50%;
+		    background: #808080;
+		    margin-right: 0.9rem;
+		    
+		}
+		
+		.taskEvent-green::before {
+		    content: "";
+		    display: inline-block;
+		    width: 10px;
+		    height: 10px;
+		    border-radius: 50%;
+		    background: #07ed07;
+		    margin-right: 0.9rem;
+		    
+		}
 	</style>	
 	<script>
 	    var contextPath = "${pageContext.request.contextPath}";
@@ -87,6 +109,7 @@
                                     <table id="employeeTable" class="table table-striped datatables-products table-bordered zero-configuration">
                                         <thead>
                                             <tr>
+                                                <th style="width:40px;">접속</th>
                                                 <th>사원번호</th>
                                                 <th>사원 명</th>
                                                 <th>직책</th>

@@ -110,6 +110,7 @@
 		     , e.empId
 		     , ei.empTel
 		     , e.role
+		     , e.empStatus
 		     , p.projectCompanyName
 		     , ei.empEmail
 		  FROM emp e

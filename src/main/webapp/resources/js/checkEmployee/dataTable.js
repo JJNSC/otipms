@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, // JSON file to add data
       columns: [
         // columns according to JSON
+          { data: "empStatus" },
           { data: "empId" },
           { data: 'empName' },
           { data: 'empRank' },
@@ -33,13 +34,27 @@ document.addEventListener("DOMContentLoaded", function () {
           { data: 'empId' }
       ],
       columnDefs: [
+		  {
+		      //notice title
+		  targets: 0,
+		  responsivePriority: 1,
+		  orderable: false,
+		  render: function (data, type, full, meta) {
+		 	 var $empStatus = full['empStatus']; //writer 필드에서 글쓴이 이름을 가져옴
+		 	 if($empStatus==1){
+		 		 return "<span class='text-truncate d-flex align-items-center taskEvent-green'></span>";
+		 	 }else{
+		 		 return "<span class='text-truncate d-flex align-items-center taskEvent-gray'></span>";
+		 	 }
+		  }
+		},
         {
           // For Responsive
           className: 'control',
           searchable: false,
           orderable: true,
           responsivePriority: 2,
-          targets: 0,
+          targets: 1,
           render: function (data, type, full, meta) {
         	  empNo = full['empId'];
             return "<span class='text-truncate d-flex align-items-center'>" + empNo + '</span>';
@@ -48,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         {
            //notice no
-           targets: 1,
+           targets: 2,
            render: function (data, type, full, meta) {
         	   var $empName = full['empName'];
 
@@ -66,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
              //notice title
-             targets: 2,
+             targets: 3,
              responsivePriority: 1,
              render: function (data, type, full, meta) {
             	 var $empRank = full['empRank']; //writer 필드에서 글쓴이 이름을 가져옴
@@ -76,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {
           // writer
 
-          targets: 3,
+          targets: 4,
           responsivePriority: 5,
           render: function (data, type, full, meta) {
         	  var $empTel = full['empTel']; //date 필드에서 날짜 정보를 가져옴
@@ -85,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
            //date
-           targets: 4,
+           targets: 5,
            render: function (data, type, full, meta) {
         	   var $projectName = full['projectName']; //date 필드에서 날짜 정보를 가져옴
        		return '<span class="text-truncate d-flex align-items-center">' + $projectName + '</span>';
@@ -93,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
         	//date
-        	targets: 5,
+        	targets: 6,
         	render: function (data, type, full, meta) {
         		var $teamName = full['teamName']; //date 필드에서 날짜 정보를 가져옴
         		return '<span class="text-truncate d-flex align-items-center">' + $teamName + '</span>';
@@ -101,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
         	//date
-        	targets: 6,
+        	targets: 7,
         	searchable: false,
             orderable: false,
         	render: function (data, type, full, meta) {
