@@ -502,10 +502,10 @@
 						                            			<i></i>
 						                            		</label>
 						                            		<c:if test="${schedule.scheduleChecked == true}">
-						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category" style="text-decoration: line-through;display:inline-block; width:300px; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;">${schedule.scheduleName}</span>
+						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category" style="text-decoration: line-through;display:inline-block; width:55%; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;">${schedule.scheduleName}</span>
 					                            			</c:if>
 					                            			<c:if test="${schedule.scheduleChecked == false}">
-						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category" style="display:inline-block; width:300px; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;">${schedule.scheduleName}</span>
+						                            			<span onclick="openScheduleDetail(this)" data-toggle="modal" data-target="#add-category" style="display:inline-block; width:55%; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;">${schedule.scheduleName}</span>
 					                            			</c:if>
 					                            			<c:set var="now" value="<%= new java.util.Date() %>" />
 					                            			<c:choose>
