@@ -29,7 +29,7 @@
 <body>
     <div id="main-wrapper">
         <!-- Content body start -->
-        <div class="content-body">
+        <div class="content-body" style="min-height:500px;">
             <!-- row -->
             <div class="container-fluid">
                 <div class="row">

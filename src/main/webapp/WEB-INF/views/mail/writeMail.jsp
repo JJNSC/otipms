@@ -40,7 +40,7 @@
 
 <body>
     <div id="main-wrapper">
-        <div class="content-body">
+        <div class="content-body" style="min-height:500px;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">

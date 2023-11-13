@@ -132,7 +132,7 @@ width:15.1875rem;
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/chat/chat', '_blank', 'width=724, height=950, left=1000, top=30'))">
+                                            <a href="javascript:void(window.open('${pageContext.request.contextPath}/chat/chat', '_blank', 'width=774, height=950, left=1000, top=30'))">
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>채팅</span>
                                                 <div class="badge gradient-3 badge-pill gradient-1">
