@@ -50,7 +50,7 @@
 							</div>
 							<div class="col-lg-9 col-md-8 col-sm-12" style="max-height:830px;">
 								<div class="chat-detail">
-								</div>
+								</div> 
 							</div>
 						</div>
 					</div>
