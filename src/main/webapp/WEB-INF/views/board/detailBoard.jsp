@@ -74,7 +74,7 @@
        .popover {
            position: relative;
            top: 10%;
-           left: 94.38%;
+           left: 96%;
            transform: translateX(-150%);
        }
    </style>
