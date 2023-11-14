@@ -7,16 +7,23 @@
 	<ul id="chatRoomList">
 		<c:forEach var="ChatRoom" items="${chatRoom}">
 			<li id="chatRoom${ChatRoom.mrNo}">
-				<a id="findRoom" href="#" data-mrno="${ChatRoom.mrNo}">
-					<c:if test="${ChatRoom.empStatus == 1}">
+				<a id="findRoom" href="#" data-mrno="${ChatRoom.mrNo}" style="padding-left: 52px;">
+<%-- 					<c:if test="${ChatRoom.empStatus == 1}">
 						<span class="activity logined"></span>
 					</c:if>
 					<c:if test="${ChatRoom.empStatus != 1}">
 						<span class="activity logout"></span>
-					</c:if>
+					</c:if> --%>
 					<img src="data:${ChatRoom.mediaFile.mediaFileType};base64, ${ChatRoom.mediaFileData}" height="40" width="40" alt="">
+						<c:if test="${ChatRoom.empStatus == 1}">
+							<span class="activity logined"></span>
+						</c:if>
+						<c:if test="${ChatRoom.empStatus != 1}">
+							<span class="activity logout"></span>
+						</c:if>
+					</img>
 					<span 
-						  style="display:block;
+						  style="display:inline-block;
 								 clear: both;
 							     font-size: 16px;
 							     color: #202342;
@@ -37,7 +44,7 @@
 				        	</c:otherwise>
 				        </c:choose>
 					</span>
-					<span class="chatMessage" style="white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;max-width: 160px;">
+					<span class="chatMessage" style="white-space: nowrap;display: block;overflow: hidden;text-overflow: ellipsis;max-width: 160px;margin-left: 18px; ">
 					${ChatRoom.mrLastChat}
 					</span>
 				</a>

@@ -45,7 +45,7 @@
 										<span class="icon-copy fa fa-search"></span>
 										<input id="searchRoom" type="text" placeholder="Search Contact" />
 										<img src="${pageContext.request.contextPath}/resources/images/chatplus.png" 
-											  style="width:28px;margin-left:22px;margin-top:16px;cursor:pointer"
+											  style="width:28px;margin-right:8px;margin-top:16px;cursor:pointer;float:right;"
 											  type="button"
 											  onclick="javascript:void(window.open('findEmployee','_blank','width=600, height=600, left=600, top=30'))"
 										/>
