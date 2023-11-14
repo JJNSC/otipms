@@ -80,17 +80,17 @@
 					</div>
 					<div class="col">
 						<div class="row" style="height:130px; align-items: center; justify-content: center; ">
-							<button style="background-color: transparent;border:none;" id="addSendBtn">
+							<button style="background-color: transparent;border:none;outline: none;cursor: pointer;" id="addSendBtn">
 								<i class="icon-copy ion-android-arrow-forward"></i>
 							</button>
 						</div>
 						<div class="row" style="height:100px; align-items: center; justify-content: center; " >
-							<button style="background-color: transparent;border:none;" id="addCCBtn">
+							<button style="background-color: transparent;border:none;outline: none;cursor: pointer;" id="addCCBtn">
 								<i class="icon-copy ion-android-arrow-forward"></i>
 							</button>
 						</div>
 						<div class="row" style="height:100px; align-items: center; justify-content: center; ">
-							<button style="background-color: transparent;border:none;" id="addSecretCCBtn">
+							<button style="background-color: transparent;border:none;outline: none;cursor: pointer;" id="addSecretCCBtn">
 								<i class="icon-copy ion-android-arrow-forward"></i>
 							</button>
 						</div>

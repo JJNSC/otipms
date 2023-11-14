@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				var messageData = data.messageData;
 				console.log(messageData);
 				messageData.forEach((message) => {
-					if(message.ccType != 4){
+					if(message.ccType != "비밀참조"){
 						const row = document.createElement("tr");
 						row.innerHTML = `
 							<td class="text-center"></td>

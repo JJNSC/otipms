@@ -164,6 +164,7 @@ public class MailController {
 	        message.setCcNo(ccNo);
 	        message.setEmpId(empId);
 	        
+	        messageService.updateMessageChecked(message);
         return "success";
         } catch (Exception e) {
         	e.printStackTrace();

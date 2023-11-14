@@ -16,25 +16,46 @@ document.addEventListener("DOMContentLoaded", function () {
     	const directSendRole = document.querySelector('#directSendRole').value;
     	const checkAdded = document.querySelector('#checkAdded').value;
     	
-    	 if (directSendEmpId && directSendEmpName && directSendRole && checkAdded=="0") {
-	    	//인력 조회에서 클릭한 사원의 사원아이디 수신함에 넣기
-	    	selectedsendEmployees.push(directSendEmpId);
-	    	
-	    	const checkAddedInput = document.querySelector('#checkAdded');
+    	
+    	console.log(sendEmployees);
+    	console.log(CCEmployees);
+    	console.log(secretCCEmployees);
+    	
+    	if (directSendEmpId && directSendEmpName && directSendRole && checkAdded=="0") {
+    		
+    		selectedsendEmployees.push({
+    			rank:directSendRole,
+    			empId:directSendEmpId,
+    			name:directSendEmpName
+    			});
+
+	        const checkAddedInput = document.querySelector('#checkAdded');
 	        checkAddedInput.value = '1';
     	 }
     	
     	//수신 인원 넣기 
     	sendEmployees.forEach(function(empId){
-    		selectedsendEmployees.push(empId);
+    		selectedsendEmployees.push({
+    			rank:empId.rank,
+    			empId:empId.empId,
+    			name:empId.name
+    			});
     	});
     	//참조 인원 넣기
     	CCEmployees.forEach(function(empId){
-    		selectedCCEmployees.push(empId);
-    	});
+    		selectedCCEmployees.push({
+    			rank:empId.rank,
+    			empId:empId.empId,
+    			name:empId.name
+    			});
+    	});	
     	//참조 인원 넣기
     	secretCCEmployees.forEach(function(empId){
-    		selectedsecretCCEmployees.push(empId);
+    		selectedsecretCCEmployees.push({
+    			rank:empId.rank,
+    			empId:empId.empId,
+    			name:empId.name
+    			});
     	});
     	
     	if(selectedsendEmployees.length!=0){
@@ -54,60 +75,37 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedEmployeesContainer = document.querySelector(`#selected${recipientType}Employees`); 
         
         if (selectedTextbox && selectedEmployeesContainer) {
-        	
-        	$.ajax({
-        		url:'/otipms/api/sendList',
-        		type:'GET',
-        		data:{selectedEmployees:selectedEmployee},
-        		dataType: 'json',
-    			success: function(data){
-    				
-    				
-    				
-    				// 선택된 사원 정보를 텍스트 상자에 채우기
-    				var selectedEmployeeNames = [];
-    				selectedTextbox.value = selectedEmployeeNames.join(', ');
-    				selectedEmployeesContainer.innerHTML = '';
-    				console.log(selectedTextbox.value);
-    				
-    				data.forEach(function(employee,index){
-    					
-    					console.log("수신자 데이터 : "+ employee.empId);
-    					var empId = employee.empId;
-    					console.log("수신자 데이터 : "+ employee.empRank);
-    					var empRank = employee.empRank;
-    					console.log("수신자 데이터 : "+ employee.empName);
-    					var empName = employee.empName;
-    					
-    					// 선택된 사원들을 화면에 추가
-						const div = document.createElement("div");
-						div.classList.add("selected-employee");
-						div.style.display = "inline-block";
-						div.innerHTML = 
-							`<span>`+empRank+ ` `+ empName+`</span> 
-							<span class="d-none">` + empId + `</span>
-							<button class="remove-employee" style="border: 0px;background: transparent;margin-left:5px;margin-right:8px;outline:none;">x</button>`;
-						selectedEmployeesContainer.appendChild(div);
-
-						// 이벤트 리스너를 추가하여 "x" 버튼 클릭 시 선택된 사원을 제거
-						const removeButtons = selectedEmployeesContainer.querySelectorAll('.remove-employee');
-						removeButtons.forEach((button, index) => {
-							button.addEventListener('click', function () {
-								selectedEmployee.splice(index, 1);
-								settingSendEmployees(selectedEmployee, recipientType);
-							});
-						});
-    				});
-    				
-    				
-    				
-    			},
-    			error: function (error) {
-    		        console.log(error);
-    		    }
-        	})
-        	
-        	
+			// 선택된 사원 정보를 텍스트 상자에 채우기
+			var selectedEmployeeNames = [];
+			for (var employee of selectedEmployee) {
+                selectedEmployeeNames.push(`${employee.rank} ${employee.name}`);
+            }
+			selectedTextbox.value = selectedEmployeeNames.join(', ');
+			selectedEmployeesContainer.innerHTML = '';
+			console.log(selectedTextbox.value);
+			
+			// 선택된 사원들을 화면에 추가
+            selectedEmployee.forEach(employee => {
+                const div = document.createElement("div");
+                div.classList.add("selected-employee");
+                div.style.display = "inline-block";
+                div.innerHTML = 
+                	`<span>${employee.rank} ${employee.name}</span> 
+                	<span class="d-none">${employee.empId}</span>
+                	<button class="remove-employee" style="border: 0px;background: transparent;margin-left:5px;margin-right:8px;outline:none;">x</button>`;
+                selectedEmployeesContainer.appendChild(div);
+            });
+				
+			// 이벤트 리스너를 추가하여 "x" 버튼 클릭 시 선택된 사원을 제거
+			const removeButtons = selectedEmployeesContainer.querySelectorAll('.remove-employee');
+			removeButtons.forEach((button, index) => {
+				button.addEventListener('click', function () {
+					selectedEmployee.splice(index, 1);
+					console.log("selectedEmployee :" + selectedEmployee);
+					console.log("recipientType : " + recipientType);
+					settingSendEmployees(selectedEmployee, recipientType);
+				});
+			});
         }
     }
     
@@ -196,6 +194,10 @@ function sendMail() {
 	var recipients = getSelectedEmployees("selectedRecipientEmployees", ccTypeToNumber["Recipient"]);
 	var references = getSelectedEmployees("selectedReferenceEmployees", ccTypeToNumber["Reference"]);
 	var blindCopies = getSelectedEmployees("selectedBlindCopyEmployees", ccTypeToNumber["BlindCopy"]);
+	
+	console.log(recipients);
+	console.log(references);
+	console.log(blindCopies);
 	
 	if (recipients.length === 0) {
         alert("수신자를 선택해주세요.");

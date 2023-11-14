@@ -105,16 +105,24 @@ document.addEventListener("DOMContentLoaded", function () {
 				console.log("data : "+ data);
 				data.forEach(function(employee,index){
 					const div = document.createElement("div");
-				    div.textContent = employee.empRank + ' ' + employee.empName;
+					div.className = "Recipient";
+					const rank = document.createElement("span");
+					rank.textContent = employee.empRank;
+					rank.className = "empRank"
+					const name = document.createElement("span");
+					name.textContent = employee.empName;
+					name.className = "empName"
 				    div.style.height = '20px';
 
 				    const input = document.createElement("input");
 				    input.value = employee.empId;
 				    input.type = 'hidden';
-				    input.classList.add("Recipient");
-
+				    input.classList.add("empId");
+				    
 				    sendListContainer.appendChild(div); 
-				    sendListContainer.appendChild(input);
+				    div.appendChild(rank);
+				    div.appendChild(name);
+				    div.appendChild(input);
 				});
 			}
 		})
@@ -141,16 +149,24 @@ document.addEventListener("DOMContentLoaded", function () {
 				console.log("data : "+ data);
 				data.forEach(function(employee,index){
 					const div = document.createElement("div");
-					div.textContent = employee.empRank + ' ' + employee.empName;
-					div.style.height = '20px';
+					div.className = "Reference";
+					const rank = document.createElement("span");
+					rank.textContent = employee.empRank;
+					rank.className = "empRank"
+					const name = document.createElement("span");
+					name.textContent = employee.empName;
+					name.className = "empName"
+				    div.style.height = '20px';
 					
 					const input = document.createElement("input");
 					input.value = employee.empId;
 					input.type = 'hidden';
-					input.classList.add("Reference");
+					input.classList.add("empId");
 					
-					sendListContainer.appendChild(div); 
-					sendListContainer.appendChild(input);
+					sendListContainer.appendChild(div);
+					div.appendChild(rank);
+				    div.appendChild(name);
+					div.appendChild(input);
 				});
 			}
 		})
@@ -177,16 +193,24 @@ document.addEventListener("DOMContentLoaded", function () {
 				console.log("data : "+ data);
 				data.forEach(function(employee,index){
 					const div = document.createElement("div");
-					div.textContent = employee.empRank + ' ' + employee.empName;
+					div.className = "BlindCopy";
+					const rank = document.createElement("span");
+					rank.textContent = employee.empRank;
+					rank.className = "empRank"
+					const name = document.createElement("span");
+					name.textContent = employee.empName;
+					name.className = "empName"
 					div.style.height = '20px';
 					
 					const input = document.createElement("input");
 					input.value = employee.empId;
 					input.type = 'hidden';
-					input.classList.add("BlindCopy");
+					input.classList.add("empId");
 					
-					sendListContainer.appendChild(div); 
-					sendListContainer.appendChild(input);
+					sendListContainer.appendChild(div);
+					div.appendChild(rank);
+				    div.appendChild(name);
+					div.appendChild(input);
 				});
 			}
 		})
@@ -199,28 +223,34 @@ function sendSelectedEmployees() {
     var CCEmployees = []; 
     var secretCCEmployees = []; 
 
-    // 수신 사원 정보를 수집
+    // 수신 사원 정보를 수집	
     var sendList = document.querySelectorAll(".Recipient");
-    sendList.forEach(function (input) {
-        var empId = input.value;
+    sendList.forEach(function (div) {
+    	var empId = div.querySelector(".empId").value;
+        var rank = div.querySelector(".empRank").textContent;
+        var name = div.querySelector(".empName").textContent;
         var recipientType = "Recipient";
-        sendEmployees.push(empId);
+        sendEmployees.push({rank, name, empId});
         console.log("선택한 수신 인원들의 아이디 : "+empId);
     });
     // 참조 사원 정보를 수집
     var CCList = document.querySelectorAll(".Reference");
-    CCList.forEach(function (input) {
-    	var empId = input.value;
+    CCList.forEach(function (div) {
+    	var empId = div.querySelector(".empId").value;
+        var rank = div.querySelector(".empRank").textContent;
+        var name = div.querySelector(".empName").textContent;
     	var recipientType = "Reference";
-    	CCEmployees.push(empId);
+    	CCEmployees.push({rank, name, empId});
     	console.log("선택한 참조 인원들의 아이디 : "+empId);
     });
     // 비밀참조 사원 정보를 수집
     var secretCCList = document.querySelectorAll(".BlindCopy");
-    secretCCList.forEach(function (input) {
-    	var empId = input.value;
+    secretCCList.forEach(function (div) {
+    	var empId = div.querySelector(".empId").value;
+        var rank = div.querySelector(".empRank").textContent;
+        var name = div.querySelector(".empName").textContent;
     	var recipientType = "BlindCopy";
-    	secretCCEmployees.push(empId);
+    	secretCCEmployees.push({rank, name, empId});
     	console.log("선택한 비밀참조 인원들의 아이디 : "+empId);
     });
 
