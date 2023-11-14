@@ -72,11 +72,9 @@
 	</script>
 	<style>
        .popover {
-           position: relative;
-           top: 10%;
-           left: 96%;
-           transform: translateX(-150%);
-       }
+		    top: 100%; /* 팝오버의 하단을 이미지 위로 이동합니다. */
+		    margin-bottom: 110px; /* 선택적으로 여백을 조절할 수 있습니다. */
+		}
    </style>
 </head>
 
@@ -138,7 +136,7 @@
 											            data-toggle="popover"
 											            data-placement="top"
 											            data-html="true"
-											            data-content="이메일: ${writer.empEmail }<br>전화번호: ${writer.empTel }<br><span id='openWriterMail' onclick='openMailWindow(${board.empId })'>쪽지보내기 : <i class='icon-copy ion-paper-airplane'></i></span>"
+											            data-content="<span style='display:inline-block;width:165px;'><i class='icon-copy fa fa-envelope' aria-hidden='true'></i>&nbsp; ${writer.empEmail }</span><br><span style='width:100px;'><i class='icon-copy fa fa-phone-square' aria-hidden='true'></i> &nbsp; ${writer.empTel }<span><br><span id='openWriterMail' onclick='openMailWindow(${board.empId })'>쪽지보내기 : <i class='icon-copy ion-paper-airplane'></i></span>"
 											            src="data:${board.mediaFileData};base64, ${board.base64Img}"
 											            class="rounded-circle"
 											            width="40"
@@ -202,7 +200,7 @@
 														        data-toggle="popover"
 														        data-html="true"
 														        data-placement="top"
-														        data-content="이메일: ${comment.empEmail }<br>전화번호: ${comment.empTel }<br><span id='openWriterMail' onclick='openMailWindow(${comment.empId })'>쪽지보내기 : <i class='icon-copy ion-paper-airplane'></i></span>"
+														        data-content="<span style='display:inline-block;width:165px;'><i class='icon-copy fa fa-envelope' aria-hidden='true'></i>&nbsp; ${comment.empEmail }</span><br><span style='width:100px;'><i class='icon-copy fa fa-phone-square' aria-hidden='true'></i> &nbsp; ${comment.empTel }<span><br><span id='openWriterMail' onclick='openMailWindow(${comment.empId })'>쪽지보내기 : <i class='icon-copy ion-paper-airplane'></i></span>"
 														        src="data:${comment.mediaFileData};base64, ${comment.base64Img}"
 														        class="rounded-circle"
 														        width="40"
