@@ -109,6 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					const rank = document.createElement("span");
 					rank.textContent = employee.empRank;
 					rank.className = "empRank"
+					const space = document.createElement("span");
+					space.textContent = " ";
 					const name = document.createElement("span");
 					name.textContent = employee.empName;
 					name.className = "empName"
@@ -121,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				    
 				    sendListContainer.appendChild(div); 
 				    div.appendChild(rank);
+				    div.appendChild(space);
 				    div.appendChild(name);
 				    div.appendChild(input);
 				});
@@ -153,6 +156,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					const rank = document.createElement("span");
 					rank.textContent = employee.empRank;
 					rank.className = "empRank"
+					const space = document.createElement("span");
+					space.textContent = " ";
 					const name = document.createElement("span");
 					name.textContent = employee.empName;
 					name.className = "empName"
@@ -165,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					
 					sendListContainer.appendChild(div);
 					div.appendChild(rank);
+					div.appendChild(space);
 				    div.appendChild(name);
 					div.appendChild(input);
 				});
@@ -197,6 +203,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					const rank = document.createElement("span");
 					rank.textContent = employee.empRank;
 					rank.className = "empRank"
+					const space = document.createElement("span");
+					space.textContent = " ";
 					const name = document.createElement("span");
 					name.textContent = employee.empName;
 					name.className = "empName"
@@ -209,6 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					
 					sendListContainer.appendChild(div);
 					div.appendChild(rank);
+					div.appendChild(space);
 				    div.appendChild(name);
 					div.appendChild(input);
 				});
