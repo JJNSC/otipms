@@ -45,7 +45,7 @@
                                     	</a>
                                         <a href="sentMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>
-                                        	보낸 쪽지함
+                                        	발신 쪽지함
                                         </a>
                                         <a href="importantMail" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-star-o font-18 align-middle mr-2"></i>
