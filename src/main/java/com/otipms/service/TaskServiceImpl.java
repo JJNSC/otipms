@@ -85,7 +85,6 @@ public class TaskServiceImpl implements TaskService {
 		Task task = new Task();
 		task.setTaskNo(Integer.parseInt(taskNo));
 		taskDao.updateDeleteTask(task);
-		log.info("empId가 잘 왔을까..? ㅎㅎ" + task.getEmpId());
 		return taskDao.selectTaskList(task.getEmpId());
 	}
 
@@ -104,9 +103,6 @@ public class TaskServiceImpl implements TaskService {
 		
 		if(totalTaskCount != 0 && doneTaskCount != 0) {
 			progressRate = Math.round( ((double) doneTaskCount / (double) totalTaskCount) * 100 );
-			log.info("done? " + (double) doneTaskCount);
-			log.info("total? " + (double) totalTaskCount);
-			log.info("계산? " + progressRate);
 		}
 		
 		return progressRate;

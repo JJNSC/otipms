@@ -122,10 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
             
-           console.log("keyup아 키가 업되고 싶지 않은거지?" + $("#hzInput").val())
             $("#hzInput").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
-                console.log("keyup아 키가 업되고 싶지 않은거지?" + value)
                 $("#employee-list tr").filter(function() {
                   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
@@ -133,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
             
 	    },
 	    error: function (error) {
-	        console.log(error);
 	    }
 	});
 	
@@ -150,12 +147,6 @@ function sendSelectedEmployees() {
     var name = row.cells[4].textContent;
     var id = row.cells[5].textContent;
     selectedEmployees.push({name, employeeId: id});
-    /*var position = row.cells[3].textContent;
-    var name = row.cells[4].textContent;
-    var id = row.cells[5].textContent;
-    selectedEmployees.push({ position, name, id});*/
-    // 쪽지 쓰기에 선택한 사원 정보 전달
-    console.log("잘 전달할건지" + selectedEmployees.toString());
     var opener = window.opener;
     if (opener) {
         opener.receiveSelectedTaskEmployee(selectedEmployees);

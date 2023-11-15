@@ -34,8 +34,6 @@ public class ProfileController {
 	@RuntimeCheck
 	@RequestMapping("/profile")
 	public String profile(Model model) {
-		log.info("프로필");
-		//model.addAttribute("employee", LoginController.loginEmployee);
 		
 		Employee employee = employeeService.selectProfileEmp(LoginController.loginEmployee.getEmpId());
 		model.addAttribute("employee", LoginController.loginEmployee);
@@ -88,7 +86,6 @@ public class ProfileController {
 	
 	@RequestMapping("/indexTest")
 	public String indextTest(Model model) {
-		log.info("메인 테스트 페이지");
 		model.addAttribute("employee", LoginController.loginEmployee);
 	    model.addAttribute("base64Img", LoginController.profileImg);
 	    model.addAttribute("mf", LoginController.multipartFile);

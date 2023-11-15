@@ -12,29 +12,6 @@ function createSchedule() {
 		+ "&scheduleEndDate=" + encodeURIComponent(scheduleEndDate)
 		+ "&scheduleColor=" + encodeURIComponent(scheduleColor);
 	
-	/*location.href = "detailView/buyDirect?"
-		+ "pnos=" + encodeURIComponent(pnos.join(','))
-		+ "&pnames=" + encodeURIComponent(pnames.join(','))
-		+ "&options=" + encodeURIComponent(options.join(','))
-		+ "&stocks=" + encodeURIComponent(stocks.join(','))
-		+ "&prices=" + encodeURIComponent(prices.join(','))
-		+ "&totalPrice=" + encodeURIComponent(totalPrice)
-		+ "&shippingPrice=" + encodeURIComponent(shippingPrice)
-		+ "&orderPrice=" + encodeURIComponent(orderPrice);*/
-	
-	/*$.ajax({
-		url: "/otipms/getProjectDetail",
-		method: "post",
-		data: {
-			projectNo:projectNo
-		},
-		success: function(data) {
-		
-		},
-		error: function(error) {
-			console.log(error);
-		}
-	});*/
 }
 
 //일정 수정
@@ -59,7 +36,6 @@ function updateSchedule() {
 
 function deleteSchedule(a) {
 	var scheduleNo = $(a).parent().find("input").val();
-	console.log("삭제 클릭 " + scheduleNo);
 	
 	location.href = "deleteSchedule?"
 		+ "scheduleNo=" + encodeURIComponent(scheduleNo);
@@ -68,7 +44,6 @@ function deleteSchedule(a) {
 //체크박스 클릭 시
 function checkSchedule(isChecked, scheduleNo) {
 	var scheduleChecked = isChecked;
-	console.log("체크? " + scheduleChecked);
 	
 	$.ajax({
 		url: "/otipms/changeScheduleChecked",
@@ -81,14 +56,12 @@ function checkSchedule(isChecked, scheduleNo) {
 		
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 }
 
 //상세 모달
 function openDetailModal(scheduleNo) {
-	console.log(scheduleNo);
 	$.ajax({
 		url: "/otipms/getSchedule",
 		method: "post",
@@ -107,7 +80,6 @@ function openDetailModal(scheduleNo) {
 			$("#updateBtn").removeClass("d-none");
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 }

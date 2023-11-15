@@ -35,7 +35,6 @@ public class TaskController {
 	@RuntimeCheck
 	@RequestMapping("/myTask")
 	public String myTask(Model model) {
-		log.info("개인업무일정");
 		model.addAttribute("employee", LoginController.loginEmployee);
 	    model.addAttribute("base64Img", LoginController.profileImg);
 	    model.addAttribute("mf", LoginController.multipartFile);
@@ -129,7 +128,6 @@ public class TaskController {
 	@RuntimeCheck
 	@RequestMapping("/projectTask")
 	public String projectTask(Model model) {
-		log.info("프로젝트업무일정");
 		model.addAttribute("employee", LoginController.loginEmployee);
 	    model.addAttribute("base64Img", LoginController.profileImg);
 	    model.addAttribute("mf", LoginController.multipartFile);
@@ -301,7 +299,6 @@ public class TaskController {
 	@RequestMapping("/getTask")
 	@ResponseBody
 	public Task getTask(String taskNo) {
-		log.info("taskNo: " + taskNo);
 		return taskService.getTask(taskNo);
 	}
 	
@@ -377,10 +374,4 @@ public class TaskController {
 		return "task/findEmployee";
 	}
 	
-	@RequestMapping("/projectTaskDT")
-	public String projectTaskDT(Model model) {
-		log.info("프로젝트업무일정");
-		model.addAttribute("employee", LoginController.loginEmployee);
-		return "task/projectTaskDataTable";
-	}
 }

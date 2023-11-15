@@ -59,7 +59,6 @@ public class BoardController {
 	public String board(@RequestParam(value="boardType", required=false, defaultValue="") String boardType
 						, Model model
 						, HttpSession session) {
-		log.info("게시판 컨트롤러 통합");
 		
 		//처음 들어올 때와 상세를 눌렀다가 뒤로 왔을 때 실행이 된단 말이지?
 		//근데 이게 상세를 눌렀다가 뒤로 왔을 때 알고 있어야 하는 게 뭐냐면? 1. 질의게시판이라면 카테고리 2. pageNo 3. 검색어 타입과 검색어  => 싹다 세션에 넣어버려??????
@@ -114,7 +113,6 @@ public class BoardController {
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
 		Map<String, Object> boardPagerMap = pageBoard(pageNo, boardType, inquiryType, team.getTeamNo(), null, null);
-		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		if(boardType.equals("질의 게시판")) {
@@ -161,7 +159,6 @@ public class BoardController {
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoardpageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
 		Map<String, Object> map = pageBoard(pageNo, "질의 게시판", inquiryType, team.getTeamNo(), searchType, searchKeyword);
-		log.info("map이당 " + map);
 		return map;
 	}
 	
@@ -185,7 +182,6 @@ public class BoardController {
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoardpageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
 		Map<String, Object> map = pageBoard(pageNo, boardType, inquiryType, team.getTeamNo(), searchType, searchKeyword);
-		log.info("map이당 " + map);
 		return map;
 	}
 	
@@ -218,7 +214,6 @@ public class BoardController {
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
 		Map<String, Object> boardPagerMap = pageBoard(pageNo, boardType, inquiryType, team.getTeamNo(), searchType, searchKeyword);
-		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		if(boardType.equals("질의 게시판")) {
@@ -273,7 +268,6 @@ public class BoardController {
 	@RequestMapping("/writeBoard")
 	public String writeBoard(@RequestParam(value="boardNo", required=false) String boardNo
 							, Model model, HttpSession session) {
-		log.info("글쓰기");
 		
 		if(boardNo == null || boardNo.equals("")) {
 			String boardType = (String) session.getAttribute("boardType");
@@ -307,10 +301,6 @@ public class BoardController {
 							 , @RequestParam(value="files", required=false) List<MultipartFile> files
 							 , Model model
 							 , HttpSession session) throws IOException {
-		log.info("boardNo: " + boardNo);
-		log.info("에디터 제목: " + boardTitle);
-		log.info("에디터 내용: " + myEditor);
-		log.info("파일 내용: " + files);
 		
 		if(boardNo == null || boardNo.equals("")) {
 			//board 삽입
@@ -372,45 +362,14 @@ public class BoardController {
 	
 	@RequestMapping("/insertBoardFileData")
 	@ResponseBody
-	/*public ResponseEntity<Map<String, Object>> insertBoardFileData(@RequestBody Map<String, Object> request) {
-		List<Map<String, Object>> uploadedFiles =  (List<Map<String, Object>>) request.get("uploadedFiles");
-		
-		log.info("혹시 두번 출력되나..?" + request.get("uploadedFiled"));
-		
-		List<MediaFile> mediaFiles = new ArrayList<>();
-        for (Map<String, Object> fileData : uploadedFiles) {
-            MediaFile mediaFile = new MediaFile();
-            mediaFile.setMediaFileName((String) fileData.get("name"));
-            log.info("name..? " + (String) fileData.get("name"));
-            mediaFile.setMediaFileType((String) fileData.get("type"));
-            
-            // Base64로 인코딩된 데이터를 디코딩하여 바이트 배열로 변환
-            String base64Data = (String) fileData.get("data");
-            byte[] mediaFileData = Base64.getDecoder().decode(base64Data);
-            mediaFile.setMediaFileData(mediaFileData);
-            
-            log.info("mediaFile: " + mediaFile);
-            mediaFiles.add(mediaFile);
-        }
-        
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("messageId", "메롱");
-           
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-	}*/
 	public ResponseEntity<Map<String, Object>> insertBoardFileData(@RequestBody Map<String, Object> jsonData) {
 		// JSON 데이터를 직접 처리
         List<Map<String, Object>> uploadedFiles = (List<Map<String, Object>>) jsonData.get("uploadedFiles");
 		
-		log.info("혹시 두번 출력되나..?" + jsonData.get("uploadedFiled"));
-		
 		List<MediaFile> mediaFiles = new ArrayList<>();
         for (Map<String, Object> fileData : uploadedFiles) {
             MediaFile mediaFile = new MediaFile();
             mediaFile.setMediaFileName((String) fileData.get("name"));
-            log.info("name..? " + (String) fileData.get("name"));
             mediaFile.setMediaFileType((String) fileData.get("type"));
             
             // Base64로 인코딩된 데이터를 디코딩하여 바이트 배열로 변환
@@ -418,7 +377,6 @@ public class BoardController {
             byte[] mediaFileData = Base64.getDecoder().decode(base64Data);
             mediaFile.setMediaFileData(mediaFileData);
             
-            log.info("mediaFile: " + mediaFile);
             mediaFiles.add(mediaFile);
         }
         
@@ -465,7 +423,6 @@ public class BoardController {
 			if(comment.getMediaFileData() != null) {
 				comment.setBase64Img(Base64.getEncoder().encodeToString(comment.getMediaFileData()));
 			}
-			log.info(comment.getTeamName());
 		}
 		model.addAttribute("commentList", boardCommentList);
 		model.addAttribute("teamName", team.getTeamName());
@@ -483,8 +440,6 @@ public class BoardController {
 	@RequestMapping("/writeComment")
 	//@ResponseBody
 	public String writeComment(String boardNo, String comment, String newComment) {
-		log.info(comment);
-		log.info(newComment);
 		
 		BoardComment boardComment = new BoardComment();
 		boardComment.setBoardNo(Integer.parseInt(boardNo));
@@ -524,7 +479,6 @@ public class BoardController {
 	
 	@RequestMapping("/blank")
 	public String blank() {
-		log.info("빈페이지");
 		return "blank";
 	}
 	

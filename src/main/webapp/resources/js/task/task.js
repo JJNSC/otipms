@@ -1,13 +1,3 @@
-/*window.onload = function() {
-			today = new Date();
-			console.log("today.toISOString() >>>" + today.toISOString());
-			today = today.toISOString().slice(0, 10);
-			console.log("today >>>> " + today);
-			bir = document.getElementById("startDate");
-			bir.value = today;
-		}*/
-
-
 //=============개인 업무 관리==================
 
 //프로젝트 상세버튼
@@ -41,7 +31,6 @@ function openProjectDetail() {
 			$("#taskStatusSelect option[value='진행중']").prop("selected", true);
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 	
@@ -103,7 +92,6 @@ function openTaskDetail(detailBtn) {
 			$("#taskColorSelect option[value='" + data.taskColor + "']").prop("selected", true);
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 	
@@ -180,7 +168,6 @@ function updateTaskDetail() {
 			location.href = "myTask";
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 }
@@ -191,7 +178,6 @@ function updateTaskDetail() {
 function selectProject() {
 	var project = $("#projectSelect").val();
 	
-	console.log(typeof project);
 	$.ajax({
 		url: "/otipms/selectProject",
 		method: "post",
@@ -212,7 +198,6 @@ function selectProject() {
 			
 			let teamhtml = "<option>팀 선택</option>";
 			
-			console.log(data);
 			
 			if(data.teamList != null && data.teamList.length != 0) {
 				$.each(data.teamList, function(index, team) {
@@ -309,7 +294,6 @@ function selectProject() {
 			$("#detailTaskList").html(taskehtml);
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 }
@@ -328,7 +312,6 @@ var team = $("#teamSelect").val()
 				teamNo:team
 			},
 			success: function(data) {
-				//console.log(data);
 				
 				let taskehtml = '';
 				
@@ -417,7 +400,6 @@ var team = $("#teamSelect").val()
 				$("#detailTaskList").html(taskehtml);
 			},
 			error: function(error) {
-				console.log(error);
 			}
 		});
 	}
@@ -432,16 +414,6 @@ function registerTask() {
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	var status = $("#status").val();
-	
-	console.log("taskName: " + taskName);
-	console.log("taskComment: " + taskComment);
-	console.log("empId: " + empId);
-	console.log("employeeName: " + employeeName);
-	console.log("startDate: " + startDate);
-	console.log("endDate: " + endDate);
-	console.log("status: " + status);
-	
-	console.log($("#employeeId" + empId).attr("aria-expanded"));
 	
 	//유효성
 	var result = checkInvalidation();
@@ -460,12 +432,10 @@ function registerTask() {
 				status:status
 			},
 			success: function(data) {
-				console.log(data);
 				
 				if(data.taskList != null && data.taskList.length != 0) {
 					var taskEmployeeTr = $("#employeeId" + empId);
 					if(taskEmployeeTr.attr("aria-expanded") == "true") {
-						console.log("왜 안될까 ㅠ");
 						taskhtml = '';
 						
 						$.each(data.taskList, function(index, task) {
@@ -504,7 +474,6 @@ function registerTask() {
 					$("#defaultStatus").prop("selected", "selected");
 				}
 				
-				console.log(data.progressRate);
 				taskehtml = "";
 				if(data.progressRate < 20) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
@@ -522,14 +491,12 @@ function registerTask() {
 					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				}
-				console.log(taskehtml);
 				
 				var taskEmployeeTr = $("#employeeId" + empId);
 				taskEmployeeTr.find(".progressTd").html(taskehtml);
 				
 			},
 			error: function(error) {
-				//console.log(error);
 			}
 		});
 	}
@@ -538,7 +505,6 @@ function registerTask() {
 //태스크 리스트 가져오기
 function getTaskList(empId) {
 	var empId = empId;
-	console.log(empId);
 	
 	$.ajax({
 		url: "/otipms/getTaskList",
@@ -547,7 +513,6 @@ function getTaskList(empId) {
 			empId:empId
 		},
 		success: function(data) {
-			console.log(data);
 			
 			if(data != null && data.length != 0) {
 				var taskEmployeeTr = $("#employeeId" + empId);
@@ -584,14 +549,12 @@ function getTaskList(empId) {
 			}
 		},
 		error: function(error) {
-			//console.log(error);
 		}
 	});
 }
 
 //태스크 상세 조회
 function getTaskDetail(taskNo) {
-	console.log(taskNo);
 	var taskNo = taskNo.substring(4, taskNo.length);
 	
 	$.ajax({
@@ -601,7 +564,6 @@ function getTaskDetail(taskNo) {
 			taskNo:taskNo
 		},
 		success: function(data) {
-			console.log(data);
 			$("#taskNoInput").val(data.taskNo)
 			$("#taskName").val(data.taskName)
 			$("#taskComment").val(data.taskComment)
@@ -654,7 +616,6 @@ function getTaskDetail(taskNo) {
 
 		},
 		error: function(error) {
-			//console.log(error);
 		}
 	});
 }
@@ -669,14 +630,6 @@ function updateTask() {
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	var status = $("#status").val();
-	
-	console.log("taskName: " + taskName);
-	console.log("taskComment: " + taskComment);
-	console.log("empId: " + empId);
-	console.log("employeeName: " + employeeName);
-	console.log("startDate: " + startDate);
-	console.log("endDate: " + endDate);
-	console.log("status: " + status);
 	
 	//유효성
 	var result = checkInvalidation();
@@ -696,7 +649,6 @@ function updateTask() {
 				status:status
 			},
 			success: function(data) {
-				console.log(data);
 				if(data.taskList != null && data.taskList.length != 0) {
 					var taskEmployeeTr = $("#employeeId" + empId);
 					taskhtml = '';
@@ -736,7 +688,6 @@ function updateTask() {
 					$("#defaultStatus").prop("selected", "selected");
 				}
 				
-				console.log(data.progressRate);
 				taskehtml = "";
 				if(data.progressRate < 20) {
 					taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
@@ -754,14 +705,12 @@ function updateTask() {
 					taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 					taskehtml += '</div>';
 				}
-				console.log(taskehtml);
 				
 				var taskEmployeeTr = $("#employeeId" + empId);
 				taskEmployeeTr.find(".progressTd").html(taskehtml);
 	
 			},
 			error: function(error) {
-				//console.log(error);
 			}
 		});
 	}
@@ -769,7 +718,6 @@ function updateTask() {
 
 //태스크 삭제
 function deleteTask() {
-	console.log("삭제할 taskNo " + $("#deleteCheckBtn").attr("name"));
 	var taskNo = $("#deleteCheckBtn").attr("name");
 	var empId = $("#empIdInput").val();
 	
@@ -781,7 +729,6 @@ function deleteTask() {
 			empId:empId
 		},
 		success: function(data) {
-			console.log(data);
 			var taskhtml = '';
 			if(data.taskList != null && data.taskList.length != 0) {
 				var taskEmployeeTr = $("#employeeId" + empId);
@@ -823,7 +770,6 @@ function deleteTask() {
 			$("#defaultStatus").prop("selected", "selected");
 			
 
-			console.log(data.progressRate);
 			taskehtml = "";
 			if(data.progressRate < 20) {
 				taskehtml += '<h5 class="mt-3"> <i class="icon-copy fa fa-frown-o" aria-hidden="true"></i><span class="float-right">' + data.progressRate + '%</span></h5>';
@@ -841,21 +787,18 @@ function deleteTask() {
 				taskehtml += '<div class="progress-bar wow  progress-" style="width: ' + data.progressRate + '%; background-color:#00aba9;" role="progressbar"><span class="sr-only">60% Complete</span></div>';
 				taskehtml += '</div>';
 			}
-			console.log(taskehtml);
 			
 			var taskEmployeeTr = $("#employeeId" + empId);
 			taskEmployeeTr.find(".progressTd").html(taskehtml);
 
 		},
 		error: function(error) {
-			//console.log(error);
 		}
 	});
 }
 
 //새로 추가
 function addTask(addBtn) {
-	console.log("추가 클릭")
 	var empId = $(addBtn).val().split(",")[0];
 	var empName = $(addBtn).val().split(",")[1];
 	

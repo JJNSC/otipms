@@ -11,8 +11,6 @@ function init() {
 }*/
 
 function chooseInquiryType(option) {
-	console.log("option이 잘 오는지");
-	console.log("option: " + option);
 	if(option == '전체  ') {
 		option = "전체";
 	} else if(option == '시스템 관리 문의  ') {
@@ -30,9 +28,6 @@ function chooseInquiryType(option) {
 			inquiryType:option
 		},
 		success: function(data) {
-			console.log(data);
-			console.log(data.boardPager);
-			console.log(data.boardList);
 			
 			//게시글 출력
 			var htmlBoard = '';
@@ -126,7 +121,6 @@ function chooseInquiryType(option) {
 			}
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 	
@@ -142,9 +136,6 @@ function movePage(pageNo) {
 			pageNo:pageNo
 		},
 		success: function(data) {
-			console.log(data);
-			console.log(data.boardPager);
-			console.log(data.boardList);
 			
 			//게시글 출력
 			var htmlBoard = '';
@@ -219,7 +210,6 @@ function movePage(pageNo) {
 			}
 		},
 		error: function(error) {
-			console.log(error);
 		}
 	});
 	
@@ -255,7 +245,6 @@ function registerComment() {
 	
 	var newComment = comment.replaceAll("\n", "<br/>");
 	
-	console.log(comment);
 	$.ajax({
 		url: "/otipms/writeComment",
 		method: "POST",
@@ -264,14 +253,10 @@ function registerComment() {
 			comment:newComment
 		},
 		success: function(data) {
-			console.log("받아야 할 data는 댓글 내용!이랑 글 내용...? 이럴거면 redirect를 하는 게...." + data);
-			//일단 알림창이 떠 있는 채로 있어서 끄긴 이동하도록은 했는데......흠냐뤼...
-			//$("body").html(data);
 			location.href = "detailBoard?boardNo=" + encodeURIComponent(boardNo);
 			$("#commentText").val('');
 		},
 		error: function(error) {
-			//console.log(error);
 		}
 	});
 }
@@ -287,23 +272,13 @@ function setCommentInboaxStyle(text) {
     // textarea 에 현재 입력된 데이터 확인 
     var nowText = totalText.substring(inputLength-1, inputLength);
     
-    console.log("");
-    console.log("[checkTextAreaByte] : [inputLength] : " + inputLength);
-    console.log("[checkTextAreaByte] : [totalText] : " + totalText);
-    console.log("[checkTextAreaByte] : [nowText] : " + nowText);
-
-    console.log($("#commentText").css("height"));
-
     var newHeight = 1.4;
     for(let i=1; i < totalText.split("\n").length; i++) {
     	newHeight += 1.4;
     }
     
-    console.log(newHeight);
-    
     $("#commentText").height(newHeight + "em");
     $("#commentText").attr("style", "height: " + newHeight + "em !important");
-    console.log($("#commentText").css("height"));
     
     if(inputLength >= 1) {
     	$(".CommentWriter .register_box .button").css("color", "#3574c3");

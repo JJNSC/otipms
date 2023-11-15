@@ -27,7 +27,6 @@ public class MyScheduleController {
 	@RuntimeCheck
 	@RequestMapping("/mySchedule")
 	public String mySchedule(Model model) {
-		log.info("개인일정");
 		model.addAttribute("employee", LoginController.loginEmployee);
 	    model.addAttribute("base64Img", LoginController.profileImg);
 	    model.addAttribute("mf", LoginController.multipartFile);
@@ -138,7 +137,6 @@ public class MyScheduleController {
 	@RequestMapping("/changeScheduleChecked")
 	@ResponseBody
 	public String changeScheduleChecked(String scheduleChecked, String scheduleNo) {
-		log.info(scheduleChecked);
 		Schedule schedule = new Schedule();
 		schedule.setScheduleNo(Integer.parseInt(scheduleNo));
 		if(scheduleChecked.equals("true")) {

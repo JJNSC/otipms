@@ -5,14 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
     window.receiveSelectedTaskEmployee = function (selectedEmployee) {
     	selectedTaskEmployee.push(selectedEmployee);
     	
-    	console.log(selectedTaskEmployee);
-    	
         updateSelectedEmployeesUI(selectedEmployee);
     };
     
     function updateSelectedEmployeesUI(selectedEmployee) {
-    	/*const selectedTextbox = document.querySelector(`#selectedTextbox`);
-        const selectedEmployeesContainer = document.querySelector(`#selectedEmployees`);*/
     	const empIdInput = document.querySelector(`#empIdInput`);
         const employeeName = document.querySelector(`#employeeName`);
         
