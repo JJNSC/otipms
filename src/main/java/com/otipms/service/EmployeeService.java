@@ -57,4 +57,7 @@ public interface EmployeeService {
 	public void updateEmployeeStatusLogin(int empId);
 	public void updateEmployeeStatusLogout(int empId);
 	
+	
+	//관리자만 찾아오기
+	public List<Employee> findAdmin();
 }

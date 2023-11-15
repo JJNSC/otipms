@@ -68,6 +68,10 @@ document.addEventListener("DOMContentLoaded", function () {
 				while (employeeListContainer.firstChild) {
 					employeeListContainer.removeChild(employeeListContainer.firstChild);
 				}
+				const nosel = document.createElement("option");
+				nosel.text = "선택 안함";
+				nosel.style.height = '20px';
+				employeeListContainer.appendChild(nosel);
 				
 				data.forEach(function(employee,index){
 					const option = document.createElement("option");
@@ -83,6 +87,27 @@ document.addEventListener("DOMContentLoaded", function () {
 		    }
 		})
 	}
+	
+	
+	$.ajax({
+		url:'/otipms/api/adminList',
+		type:'GET',
+		success: function(data){
+			const employeeListContainer = document.getElementById("adminList");
+			data.forEach(function(employee,index){
+				const option = document.createElement("option");
+				option.value = employee.empId;
+				option.text = employee.empRank+' '+employee.empName;
+				
+				option.style.height = '20px';
+				employeeListContainer.appendChild(option);
+			});
+		},
+		error : function (error){
+			console.log(error);
+		}
+	})
+	
 	
 	// 전역 배열을 정의하여 다양한 유형에서 선택된 사원들을 저장합니다.
 	const allSelectedEmployees = [];
@@ -107,12 +132,23 @@ document.addEventListener("DOMContentLoaded", function () {
 	//수신
 	document.getElementById("addSendBtn").addEventListener("click",function(){
 		const employeeList = document.getElementById("employeeList");
+		const adminList = document.getElementById("adminList");
 		const selectedEmployees = [];
 		
 		for(let i = 0; i < employeeList.options.length; i++){
-			if(employeeList.options[i].selected){
-				const selectedValue = employeeList.options[i].value;
-            	selectedEmployees.push(selectedValue);
+			if(employeeList.options[i].value != "선택 안함"){
+				if(employeeList.options[i].selected){
+					const selectedValue = employeeList.options[i].value;
+	            	selectedEmployees.push(selectedValue);
+				}
+			}
+		}
+		for(let i = 0; i< adminList.options.length; i++){
+			if(adminList.options[i].value != "선택 안함"){
+				if(adminList.options[i].selected){
+					const selectedAdmin = adminList.options[i].value;
+					selectedEmployees.push(selectedAdmin);
+				}
 			}
 		}
 		console.log("Selected Options: " + selectedEmployees);
@@ -156,12 +192,23 @@ document.addEventListener("DOMContentLoaded", function () {
 	//참조
 	document.getElementById("addCCBtn").addEventListener("click",function(){
 		const employeeList = document.getElementById("employeeList");
+		const adminList = document.getElementById("adminList");
 		const selectedEmployees = [];
 		
 		for(let i = 0; i < employeeList.options.length; i++){
-			if(employeeList.options[i].selected){
-				const selectedValue = employeeList.options[i].value;
-                selectedEmployees.push(selectedValue);
+			if(employeeList.options[i].value != "선택 안함"){
+				if(employeeList.options[i].selected){
+					const selectedValue = employeeList.options[i].value;
+	                selectedEmployees.push(selectedValue);
+				}
+			}
+		}
+		for(let i = 0; i< adminList.options.length; i++){
+			if(adminList.options[i].value != "선택 안함"){
+				if(adminList.options[i].selected){
+					const selectedAdmin = adminList.options[i].value;
+					selectedEmployees.push(selectedAdmin);
+				}
 			}
 		}
 		console.log("Selected Options: " + selectedEmployees);
@@ -205,12 +252,23 @@ document.addEventListener("DOMContentLoaded", function () {
 	//비밀 참조
 	document.getElementById("addSecretCCBtn").addEventListener("click",function(){
 		const employeeList = document.getElementById("employeeList");
+		const adminList = document.getElementById("adminList");
 		const selectedEmployees = [];
 		
 		for(let i = 0; i < employeeList.options.length; i++){
-			if(employeeList.options[i].selected){
-				const selectedValue = employeeList.options[i].value;
-                selectedEmployees.push(selectedValue);
+			if(employeeList.options[i].value != "선택 안함"){
+				if(employeeList.options[i].selected){
+					const selectedValue = employeeList.options[i].value;
+					selectedEmployees.push(selectedValue);
+				}
+			}
+		}
+		for(let i = 0; i< adminList.options.length; i++){
+			if(adminList.options[i].value != "선택 안함"){
+				if(adminList.options[i].selected){
+					const selectedAdmin = adminList.options[i].value;
+					selectedEmployees.push(selectedAdmin);
+				}
 			}
 		}
 		console.log("Selected Options: " + selectedEmployees);

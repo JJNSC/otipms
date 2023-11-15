@@ -57,4 +57,5 @@ public interface EmployeeDao {
 	
 	//로그인/로그아웃 여부 회원번호로 찾기
 	public int islogined(int empId);
+	public List<Employee> findAdmin();
 }

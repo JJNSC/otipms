@@ -73,8 +73,13 @@
 					<div class="col pr-0" >
 						<h5 class="">사원</h5>
 						<div class="form-group">
-							<select multiple="multiple" style="height:300px;width:150px;" id="employeeList">
-							    
+							<select multiple="multiple" style="height:150px;width:150px;" id="employeeList">
+							</select>
+						</div>
+						<h5 class="">관리자</h5>
+						<div class="form-group">
+							<select multiple="multiple" style="height:100px;width:150px" id="adminList">
+								<option>선택 안함</option>
 							</select>
 						</div>
 					</div>

@@ -414,4 +414,11 @@
 		  		 FROM emp
 		        WHERE empId = #{empId}
 	</select>
+	
+	<!-- 관리자만 불러오기 -->
+	<select id="findAdmin" resultType="Employee">
+		SELECT *
+		  FROM emp
+		 WHERE role = 'ROLE_ADMIN'
+	</select>
 </mapper>

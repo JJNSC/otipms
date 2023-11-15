@@ -305,11 +305,19 @@ public class FindEmployeeRestController {
     	List<Employee> employeeList = employeeService.selectEmployeeByTeamNo(teamNo);
     	return employeeList;
     }
+    @RequestMapping("/api/adminList")
+    public List<Employee> adminList(){
+    	List<Employee> adminList = employeeService.findAdmin();
+    	log.info("관리자 : " + adminList);
+    	return adminList;
+    }
+    
     @RequestMapping("/api/sendList")
     public List<Employee> getSendList(@RequestParam("selectedEmployees[]") List<Integer> selectedEmployees) {
         List<Employee> sendList = new ArrayList<>();
         for(Integer empId : selectedEmployees) {
-        	Employee emp = employeeService.getEmployeeAllInfo(empId);
+        	Employee emp = employeeDao.selectByEmployeeId(empId);
+        	//Employee emp = employeeService.getEmployeeAllInfo(empId);
         	sendList.add(emp);
         }
         return sendList;
