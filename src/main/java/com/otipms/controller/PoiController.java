@@ -33,8 +33,6 @@ public class PoiController {
 	@RuntimeCheck
 	@PostMapping("/multiRegister")
 	public String multiRegister(@RequestParam("file") MultipartFile excelFile, @RequestParam("excelSheetName") String excelSheetName) throws IOException { //파일 경로, 파일 명, 시트명 받아와야함.
-		log.info("엑셀 파일 : "+excelFile.getOriginalFilename());
-		log.info("시트 명 : "+excelSheetName);
 		System.out.println(excelFile.getOriginalFilename());
 		
 		String filePath = "C:\\FileStore";
@@ -55,14 +53,6 @@ public class PoiController {
 	    	 //만약 특정 이름의 시트를 찾는다면 
 	    	sheet = workbook.getSheet(excelSheetName);
 	    }
-	    
-	    
-	    System.out.println(excelFile.getOriginalFilename());
-	    
-	    //XSSFSheet 
-	
-	    
-	    
 	    // 만약 모든 시트를 순회하고 싶으면
 	    // for(Integer sheetNum : workbook.getNumberOfSheets()) {
 	    //      XSSFSheet sheet = workbook.getSheetAt(i);
@@ -91,7 +81,6 @@ public class PoiController {
 	            // cell의 타입을 하고, 값을 가져온다.
 	            switch (cell.getCellType()) {
 	                case NUMERIC:
-	                    System.out.print((int) cell.getNumericCellValue() + "\t"); //getNumericCellValue 메서드는 기본으로 double형 반환
 	                    break;
 	                case STRING:
 	                    System.out.print(cell.getStringCellValue() + "\t");
@@ -117,9 +106,7 @@ public class PoiController {
 	            }
 	           
 	        }
-	        log.info("employee: "+employee);
 	        employeeService.addMultiEmployee(employee);
-	        System.out.println();
 	    }
 	    file.close();
 		      

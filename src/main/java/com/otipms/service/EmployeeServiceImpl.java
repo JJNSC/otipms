@@ -46,7 +46,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		PasswordEncoder pwEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		employee.setEmpPw(pwEncoder.encode("0000"));
 		employeeDao.insertEmployee(employee);
-		System.out.println("employeeId : "+employee.getEmpId());
 		//2300XX 형식으로 만들어줍니다.
 		LocalDate currentDate = LocalDate.now();
         DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yy");
@@ -95,13 +94,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			Employee employee = null;
 			return employee;
 		}
-		System.out.println("empId : "+ empId);
 		Employee employee = employeeDao.selectByEmployeeId(empId);
 		Employee empInfo = employeeDao.selectInfoByEmployeeId(empId);
-		System.out.println("employee : "+ employee);
-		System.out.println("empInfo : "+ empInfo);
 		int teamNo = empInfo.getTeamNo();
-		log.info("팀번호는? : "+ teamNo);
 		String teamName = teamDao.getTeamNameByTeamNo(teamNo);
 		employee.setTeamNo(teamNo);
 		employee.setTeamName(teamName);
@@ -187,7 +182,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 			Project project = projectDao.selectProjectByProjectNo(projectDao.selectProjectNoByProjectName(employee.getProjectName()));
 			project.setEmpId(empId);
 			project.setProjectCompanyName(employee.getProjectCompanyName());
-			log.info(" 들어가는 프로젝트 내용 : "+ project);
 			projectDao.updateProject(project);
 		}
 	}

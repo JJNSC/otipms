@@ -50,8 +50,6 @@ function sendSelectedEmployees() {
     var position = row.cells[3].textContent;
     var empTel = row.cells[5].textContent;
     var empEmail = row.cells[6].textContent;
-    console.log("empTel : "+empTel);
-    console.log("empEmail : "+empEmail);
     selectedEmployees.push({ position, name, empId, empTel, empEmail, empRank });
 
     // 선택한 라디오 버튼의 값을 가져오기

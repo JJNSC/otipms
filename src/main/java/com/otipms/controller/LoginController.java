@@ -140,7 +140,6 @@ public class LoginController {
 		}
 		
 		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
-		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		//내 개인 일정 
@@ -225,7 +224,6 @@ public class LoginController {
 		}
 		
 		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
-		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		//내 개인 일정 
@@ -271,7 +269,6 @@ public class LoginController {
 		}
 		
 		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
-		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		//내 개인 일정 
@@ -328,7 +325,6 @@ public class LoginController {
 		}
 		
 		Map<String, Object> boardPagerMap = pageBoardMainPage(pageNo, "공지사항");
-		log.info("map이당 " + boardPagerMap);
 		model.addAttribute("boardPagerMap", boardPagerMap);
 		
 		//내 개인 일정 
@@ -367,7 +363,6 @@ public class LoginController {
 		//게시글 목록 페이징
 		//HashMap<String, Object> pageBoardpageBoard(String pageNo, String boardType, String inquiryType, String searchType, String searchKeyword)
 		Map<String, Object> map = pageBoardMainPage(pageNo, "공지사항");
-		log.info("map이당 " + map);
 		return map;
 	}
 	

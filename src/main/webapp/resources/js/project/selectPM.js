@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.receiveSelectedEmployees = function (selectedEmployee) {
     	selectedPM.push(selectedEmployee);
         
-        console.log(selectedPM);
-        
         updateSelectedEmployeesUI(selectedEmployee);
     };
 
@@ -16,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedEmployeesContainer = document.querySelector(`#PMid`);
         
         
-        console.log(selectedEmployee);
-        
         if (selectedTextbox && selectedEmployeesContainer) {
             // 선택된 사원 정보를 텍스트 상자에 채우기
         	const selectedPMInfo = []; 
@@ -26,8 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
             	selectedPMInfo.push(`${employee.position} ${employee.name}`);
             	selectedPMempId.push(`${employee.empId}`)
             }
-            console.log(selectedEmployee);
-            console.log(selectedPMInfo);
             
             // 선택된 사원들을 화면에 추가
             selectedTextbox.innerHTML = ""; // 기존 내용을 지우고 새로 업데이트

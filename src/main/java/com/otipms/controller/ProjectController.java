@@ -84,7 +84,6 @@ public class ProjectController {
 			System.out.println("project : "+ project);
 			System.out.println("project.getEmpId() : "+ project.getEmpId());
 			Employee customerInfo = projectService.getEmployeeInfoByProjectNoAndTeamName(employee);
-			log.info("고객사 정보 : "+customerInfo);
 			if( customerInfo==null ||customerInfo.equals(null)) {
 				Employee noInfo =new Employee();
 				noInfo.setEmpName("고객 명이 없습니다.");
@@ -95,10 +94,7 @@ public class ProjectController {
 				customerInfoList.add(customerInfo);
 			}
 			
-			log.info("DB에 들어가는 정보 : " +customerInfoList);
-			
 		}
-		log.info("PMNameList: "+PMList);
 		//해당 프로젝트당 PM 이름
 		model.addAttribute("PMList", PMList);
 		
@@ -108,7 +104,6 @@ public class ProjectController {
 		
 		//프로젝트 리스트
 		model.addAttribute("projectList", projectList);
-		
 		
 		return "projectManagement/projectList";
 	}
@@ -147,12 +142,8 @@ public class ProjectController {
 			    model.addAttribute("startDate", formattedStartDate);
 			    model.addAttribute("endDate", formattedEndDate);
 			} catch (ParseException e) {
-			    log.error("날짜 변환 중 에러 발생: " + e.getMessage());
 			}
 			
-			log.info(" project :"+project);
-			log.info(" pm :"+pm);
-			log.info(" customer :"+customer);
 			
 			model.addAttribute("projectInfo", project);
 			model.addAttribute("pmInfo", pm);
@@ -184,12 +175,6 @@ public class ProjectController {
 		model.addAttribute("employee", LoginController.loginEmployee);
 		model.addAttribute("base64Img", LoginController.profileImg);
 		model.addAttribute("mf", LoginController.multipartFile);
-		System.out.println("projectName :" + projectName );
-		System.out.println("projectDate :" + projectDate );
-		System.out.println("PMId :" + PMId );
-		System.out.println("projectContent :" + projectContent );
-		System.out.println("projectCompanyName :" + projectCompanyName );
-		System.out.println("empId :" + empId );
 		
 		//프로젝트 등록
 		Project project = new Project();
@@ -231,8 +216,6 @@ public class ProjectController {
         
 		projectService.addProject(project,pmId,clientId);
 		//해당 PM에게 프로젝트 번호 등록!
-		System.out.println(" 후보 1번 : "+project.getProjectNo()); //둘다 잘됨 후보 1번 사용하자.
-		//System.out.println(" 후보 2번 : "+projectNo);
 		
 		return "redirect:/projectManagement/projectList";
 	}
@@ -253,13 +236,6 @@ public class ProjectController {
 		model.addAttribute("employee", LoginController.loginEmployee);
 		model.addAttribute("base64Img", LoginController.profileImg);
 		model.addAttribute("mf", LoginController.multipartFile);
-		System.out.println("projectNo :" + projectNo );
-		System.out.println("projectName :" + projectName );
-		System.out.println("projectDate :" + projectDate );
-		System.out.println("PMId :" + PMId );
-		System.out.println("projectContent :" + projectContent );
-		System.out.println("projectCompanyName :" + projectCompanyName );
-		System.out.println("empId :" + empId );
 		
 		//프로젝트 등록
 		Project project = new Project();
@@ -293,8 +269,6 @@ public class ProjectController {
         
 		projectService.modifyProject(project,pmId,Integer.parseInt(empId),Integer.parseInt(beforePMId),Integer.parseInt(beforeEmpId));
 		//해당 PM에게 프로젝트 번호 등록!
-		System.out.println(" 후보 1번 : "+project.getProjectNo()); //둘다 잘됨 후보 1번 사용하자.
-		//System.out.println(" 후보 2번 : "+projectNo);
 		
 		return "redirect:/projectManagement/projectList";
 	}
@@ -315,7 +289,6 @@ public class ProjectController {
 	@RuntimeCheck
 	@RequestMapping("/disableProject")
 	public String disableProject(@RequestParam(name="disableProjectNo") String projectNo) {
-		System.out.println("disableProject projectNo: "+ projectNo);
 		Project project = new Project();
 		project.setProjectNo(Integer.parseInt(projectNo));
 		project.setProjectDeleted(true);

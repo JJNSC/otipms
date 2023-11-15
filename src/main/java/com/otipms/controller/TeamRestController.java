@@ -28,8 +28,6 @@ public class TeamRestController {
 	@PostMapping("updateTL")
 	public void updateTL(@RequestParam String teamNo,
 	        		     @RequestParam String empId) {
-		log.info("teamNo : "+ teamNo);
-		log.info("empId : "+ empId);
 		Team team = new Team();
 		team.setTeamNo(Integer.parseInt(teamNo));
 		team.setEmpId(Integer.parseInt(empId));

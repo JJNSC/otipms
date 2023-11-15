@@ -50,7 +50,6 @@ public class TeamController {
 			TeamList teamList = teamService.getTeamListByProjectNo(project.getProjectNo());
 			allTeam.add(teamList);
 		}
-		System.out.println("allTeam : "+ allTeam);
 		
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("allTeam", allTeam);
@@ -113,7 +112,6 @@ public class TeamController {
 	@RuntimeCheck
 	@RequestMapping("/findPL")
 	public String findPL(@RequestParam("teamNo") int teamNo,Model model) {
-		log.info("팀장 찾기위해서 팀 번호:"+teamNo);
 		model.addAttribute("teamNo", teamNo);
 		return "teamManagement/findPL";
 	}

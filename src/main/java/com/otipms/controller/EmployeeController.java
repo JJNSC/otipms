@@ -107,8 +107,6 @@ public class EmployeeController {
 								  @RequestParam("registerTeam") String teamName,
 								  @RequestParam("registerAuthority") String authorityName,
 								  Model model) {
-		log.info("teamName : "+ teamName);
-		
 		//중복 인력 제외(전화번호로 확인)
 		if(employeeService.checkEmployeeByTel(empTel)==1) {
 			model.addAttribute("errMsg", "이미 등록 된 인력입니다.");
@@ -132,9 +130,7 @@ public class EmployeeController {
 	@ResponseBody
 	@RequestMapping("/employeeInfoJson")
 	public Employee employeeInfoJson(@RequestParam("empId") String empId) {
-		log.info("empId : " + empId);
 		Employee modifyEmpInfo = employeeService.getEmployeeAllInfo(Integer.parseInt(empId));
-		log.info("모달 열때 들어있는 사용자 정보들 : "+modifyEmpInfo);
 		return modifyEmpInfo;
 	}
 	
@@ -142,7 +138,6 @@ public class EmployeeController {
 	@ResponseBody
 	@RequestMapping("/resetEmpPassword")
 	public void resetEmpPassword(@RequestParam("empId") String empId) {
-		log.info("비밀번호 초기화할 empId : " + empId);
 		employeeService.resetEmployeePassword(Integer.parseInt(empId));
 	}
 	
@@ -174,7 +169,6 @@ public class EmployeeController {
 	@RequestMapping("/disableEmployee")
 	public String disableEmployee(@RequestParam("empId") int empId) {
 		employeeService.disableEmployee(empId);
-		
 		return "/otipms/employeeManagement/employeeList";
 	}
 	
@@ -188,10 +182,6 @@ public class EmployeeController {
 	    
 		String filePath = "C:\\FileStore";	
 		Date currentDate = new Date();
-		log.info("projectName : " +projectName );
-		log.info("teamName : " +teamName );
-		log.info("excelFileName : " +excelFileName );
-		log.info("excelSheetName : " +excelSheetName );
 		    
 		// 날짜와 시간을 원하는 형식으로 포맷합니다.
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd_HHmm");
@@ -233,11 +223,9 @@ public class EmployeeController {
         	}
         }
         
-        // data에서 keySet를 가져온다. 이 Set 값들을 조회하면서 데이터들을 sheet에 입력한다.
         Set<String> keyset = data.keySet();
         int rownum = 0;
 
-        // 알아야할 점, TreeMap을 통해 생성된 keySet는 for를 조회시, 키값이 오름차순으로 조회된다.
         for (String key : keyset) {
             Row row = sheet.createRow(rownum++);
             Object[] objArr = data.get(key);
@@ -272,11 +260,6 @@ public class EmployeeController {
 							  @RequestParam("adminTel") String empTel,
 							  @RequestParam("adminEmail") String empEmail,
 							  @RequestParam("defaultProfileImage") MultipartFile defaultProfileImage) {
-		log.info("empId : "+empId);
-		log.info("empPw : "+empPw);
-		log.info("empName : "+empName);
-		log.info("empRank : "+empRank);
-		log.info("defaultProfileImage : "+defaultProfileImage);
 		Employee admin = new Employee();
 		admin.setEmpId(Integer.parseInt(empId));
 		admin.setEmpPw(empPw);

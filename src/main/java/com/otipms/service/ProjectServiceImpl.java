@@ -43,12 +43,9 @@ public class ProjectServiceImpl implements ProjectService {
 		//PM 전용 팀 만들기
 		Team PMTeam = new Team();
 		PMTeam.setTeamName("PM");
-		log.info(" 프로젝트 번호 : "+project.getProjectNo());
 		PMTeam.setProjectNo(project.getProjectNo());
-		log.info(" 프로젝트  : "+PMTeam);
 		int PMTeamNo = this.teamDao.addTeam(PMTeam);
-		System.out.println("PMTeamNo : "+ PMTeamNo);
-		
+
 		if(pmId==0) {
 			
 		}else {
@@ -207,9 +204,6 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		if(totalTaskCount != 0 && doneTaskCount != 0) {
 			progressRate = Math.round( ((double) doneTaskCount / (double) totalTaskCount) * 100 );
-			log.info("done? " + (double) doneTaskCount);
-			log.info("total? " + (double) totalTaskCount);
-			log.info("계산? " + progressRate);
 		}
 		return progressRate;
 	}

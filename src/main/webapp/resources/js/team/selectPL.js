@@ -10,9 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
         	projectNumber = emp.projectNo;
         	teamNumber = emp.teamNo;
         }
-        console.log(selectedPL);
-        console.log(projectNumber);
-        console.log(teamNumber);
         
         updateSelectedEmployeesUI(selectedEmployee, projectNumber, teamNumber);
     };

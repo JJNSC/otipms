@@ -53,8 +53,6 @@ public class FindEmployeeRestController {
     @RuntimeCheck
     @PostMapping("/api/createChatRoom")
     public Messenger createChatRoom(@RequestBody List<Employee> selectedEmployees) {
-        // selectedEmployees를 사용하여 채팅 방 생성 또는 추가 로직을 수행
-    	
     	Messenger messenger = new Messenger();
     	Employee employee = selectedEmployees.get(0);
     	int mrNo = messengerService.insertChatRoom(employee.getEmpId());
@@ -170,8 +168,6 @@ public class FindEmployeeRestController {
     @GetMapping("/api/RolePMData")
     public ResponseEntity<Map<String, List<Map<String, String>>>> RolePMData() {
     	
-    	log.info("이게 실행되면 안된다.");
-    	
     	List<Employee> employees = employeeService.selectNoTeamEmployeeByRole("ROLE_PM");
     	
     	// JSON 데이터 생성
@@ -226,8 +222,6 @@ public class FindEmployeeRestController {
     public ResponseEntity<Map<String, List<Map<String, String>>>> projectPeData(
 												@RequestParam("teamNo")int teamNo) {
     	
-    	log.info("PE 데이터 팀 번호 : "+teamNo);
-    	
     	List<Employee> employees = employeeService.selectEmployeeByTeamNoAndRole(teamNo,"ROLE_PE");
     	
     	// JSON 데이터 생성
@@ -254,16 +248,10 @@ public class FindEmployeeRestController {
     public ResponseEntity<Map<String, List<Map<String, String>>>> getEmployeeData2(
     											@RequestParam("projectNo") int projectNo, 
     											@RequestParam("teamNo")int teamNo ) {
-    	log.info("projectNo : "+projectNo);
-    	log.info("teamNo : "+teamNo);
-    	
         List<Employee> employees = employeeService.selectEmployeeByTeamNo(teamNo);
         Project project = projectService.selectProjectByProjectNo(projectNo);
         Team team = teamService.getTeamByTeamNo(teamNo);
         
-        log.info("project : "+project);
-        log.info("team : "+team);
-
         // JSON 데이터 생성
         Map<String, List<Map<String, String>>> jsonData = new HashMap<>();
         List<Map<String, String>> employeeData = new ArrayList<>();
@@ -319,7 +307,6 @@ public class FindEmployeeRestController {
     }
     @RequestMapping("/api/sendList")
     public List<Employee> getSendList(@RequestParam("selectedEmployees[]") List<Integer> selectedEmployees) {
-        log.info("선택한 사원들 : "+selectedEmployees);
         List<Employee> sendList = new ArrayList<>();
         for(Integer empId : selectedEmployees) {
         	Employee emp = employeeService.getEmployeeAllInfo(empId);
