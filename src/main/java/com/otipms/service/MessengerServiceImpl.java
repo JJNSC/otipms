@@ -48,7 +48,6 @@ public class MessengerServiceImpl implements MessengerService {
 		messengerDao.insertChatRoom(messenger);
 	    int mrNo = messenger.getMrNo();
 		
-	    log.info("mrNo : " + mrNo);
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("mrNo", mrNo);
 		paramMap.put("empId", empId);

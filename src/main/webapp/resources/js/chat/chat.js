@@ -3,24 +3,17 @@ window.onload = function(){
 	var socket = new WebSocket("ws://localhost:8080/otipms/chat/ws-chat");
 	chatWebSocket = socket;
 	chatWebSocket.onopen = () => {
-		console.log("소켓 연결");
 	}
 	
 	chatWebSocket.onmessage = (e) => {
 		var empId = $('#empId').val();
 		var crmrNo = $('#mrNo').val();
 		const message = JSON.parse(e.data);
-		console.log("나 파싱 받앗숴~ : " + message);
 		const mrNo = message.mrNo;
 	    const nmempId = message.empId;
 	    const messageContent = message.messageContent;
 	    const messageDate = message.messageDate;
 	    
-	    console.log("messageContent : " + messageContent);
-	    console.log("messageDate : " + messageDate);
-	    console.log("mrNo : " + mrNo);
-	    console.log("empId : " + empId);
-	    console.log("nmempId : " + nmempId);
 	    if(nmempId != empId && mrNo == crmrNo){
 	    	addChatYourMessage(messageContent, messageDate);
 	    }
@@ -28,7 +21,6 @@ window.onload = function(){
 	} 
 	
 	chatWebSocket.onclose = () => {
-		console.log("소켓 종료");
 	}
 	
 	//채팅방 목록 보이기
@@ -39,7 +31,6 @@ window.onload = function(){
 	//채팅방 목록중 하나 클릭 시 그에 맞는 채팅 내용 제공
 	$(document).on('click', '.chat-notification-list li a', function(event) {
         event.preventDefault();
-        console.log('Notification clicked');
 		var mrNo = $(this).data('mrno'); 
 
         $.ajax({
@@ -59,14 +50,12 @@ window.onload = function(){
 	//사원 정보를 findEmployee.jsp에서 받아와서 채팅방 생성
 	window.receiveSelectedTaskEmployee = function (selectedEmployee) {
 		 var selectedEmployeeJSON = JSON.stringify(selectedEmployee);
-		 console.log("selectedEmployeeJSON : " + selectedEmployeeJSON);
 		 $.ajax({
 		        url: '/otipms/api/createChatRoom', 
 		        type: 'POST',
 		        data: selectedEmployeeJSON, 
 		        contentType: 'application/json',
 		        success: function (response) {
-		        	console.log("성공적으로 채팅이 만들어졌습니다.");
 		        	createChatRoomElement(response);
 		        },
 		        error: function (error) {
@@ -279,7 +268,6 @@ function deleteChat(mrNo,event) {
         url: '/otipms/chat/deleteChat', // 채팅방 삭제 서비스 엔드포인트
         data: { mrNo: mrNo }, // 전달할 데이터
         success: function(response) {
-        	console.log("성공");
         	window.location.href = '/otipms/chat/chat'; // 리다이렉트할 페이지의 URL로 대체
         },
         error: function(error) {

@@ -6,7 +6,6 @@ window.onload = function(){
 	    dataType: "json",
 	    success: function (data) {
 	        var messageList = data;
-	        console.log(messageList);
 	        updateMessageList(messageList)
 			updatePaging(messageList)
 	    }
@@ -59,15 +58,12 @@ window.onload = function(){
 	function updatePaging(messageList) {
 		var itemsPerPage = 10; // 페이지당 보여질 쪽지 수
 		var totalPages = Math.ceil(filteredEmailsCount / itemsPerPage);
-		console.log("메일 수 : " + filteredEmailsCount)
-		console.log("쪽 수 : " + totalPages)
 		var pagingContainer = document.getElementById("pagingContainer");
 		pagingContainer.innerHTML = ""; // 기존 페이지 버튼 초기화
 		var navElement = document.createElement("nav");
 		var ulElement = document.createElement("ul");
 		ulElement.className = "pagination";
 		$.get("/otipms/mail/sentMails?empId="+empId, function (data) {
-			console.log(messageList);
 			for (var i = 1; i <= totalPages; i++) {
 				var pageli = document.createElement("li");
 				pageli.className = "page-item";
@@ -79,8 +75,6 @@ window.onload = function(){
 				pageButton.addEventListener("click", function (event) {
 					// 페이지 버튼을 클릭했을 때 해당 페이지의 쪽지를 보여줌
 					var pageNumber = event.target.dataset.page;
-					console.log(pageNumber);
-					console.log(itemsPerPage);
 					showEmailsForPage(pageNumber, itemsPerPage, messageList);
 				});
 				pageli.appendChild(pageButton);
@@ -96,12 +90,8 @@ window.onload = function(){
 		// 시작 및 종료 인덱스 계산
 		var startIndex = (pageNumber - 1) * itemsPerPage;
 		var endIndex = startIndex + itemsPerPage;
-		console.log(messageList);
 		var messagesToDisplay  = messageList.slice(startIndex, endIndex);
 		
-		console.log(startIndex);
-		console.log(endIndex);
-		console.log(messagesToDisplay);
 		
 		updateMessageList(messagesToDisplay);
 	}

@@ -343,7 +343,6 @@ public class MailController {
 	@PostMapping("/upload")
     public ResponseEntity<String> handleUploadAndSave(@RequestParam("files") List<MultipartFile> files) {
 		try {
-			log.info("업로드 : " + files.toString());
             return new ResponseEntity<>("File upload successful", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -354,8 +353,6 @@ public class MailController {
 	@PostMapping("/deleteCC")
 	@ResponseBody
 	public String deleteCC(@RequestParam("messageNo") int messageNo, @RequestParam("empId") int empId) {
-		log.info("messageNo : " + messageNo);
-		log.info("empId : " + empId);
 		messageService.deleteMessage(messageNo, empId);
 		alarmService.deleteAlarm(messageNo, empId);
 		return "success";
@@ -387,7 +384,6 @@ public class MailController {
             
             int messageId = message.getMessageNo();
             
-            log.info("messageId: " + messageId);
             
             List<Map<String, Object>> attachments = (List<Map<String, Object>>) request.get("attachments");
             if (attachments != null) {
@@ -410,7 +406,6 @@ public class MailController {
             newCC.setCcCheckedDate(null);
             ccList.add(newCC);
             
-            log.info("ccList : " + ccList);
             
             messageService.writeCC(ccList);
             
@@ -493,7 +488,6 @@ public class MailController {
 		int empId = empDetails.getEmployee().getEmpId();
 		int msempId = messageService.detailMessageContent(messageNo).getEmpId();
 		
-		log.info("messageNo : " + mesMessageNo);
 		model.addAttribute("employee", empDetails.getEmployee());
 		model.addAttribute("mesMessageNo", mesMessageNo);
 		model.addAttribute("msempId", msempId);

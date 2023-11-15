@@ -140,7 +140,6 @@ function checkimportant(messageNo ,index, event) {
 }
 
 function updateMessageChecked(ccNo) {
-    console.log("ccNo: ", ccNo);
 	$.ajax({
         type: "POST",  // 또는 다른 HTTP 메서드
         url: "/otipms/mail/updateCheckedDate", // 서버 URL로 대체

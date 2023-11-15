@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	var msempId = document.getElementById("msempId").value;
 	var webSocket = new WebSocket("ws://localhost:8080/otipms/ws-alarm");
 	
-	console.log(empId);
-	console.log(msempId);
 	
 	if(empId == msempId){
 		$.ajax({
@@ -16,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				const employeeList = document.getElementById("employee-list");
 				
 				var messageData = data.messageData;
-				console.log(messageData);
 				messageData.forEach((message, index) => {
 					const row = document.createElement("tr");
 					row.innerHTML = `
@@ -89,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				const employeeList = document.getElementById("employee-list");
 				
 				var messageData = data.messageData;
-				console.log(messageData);
 				messageData.forEach((message) => {
 					if(message.ccType != "비밀참조"){
 						const row = document.createElement("tr");
