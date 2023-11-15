@@ -83,6 +83,27 @@ document.addEventListener("DOMContentLoaded", function () {
 		    }
 		})
 	}
+	
+	// 전역 배열을 정의하여 다양한 유형에서 선택된 사원들을 저장합니다.
+	const allSelectedEmployees = [];
+
+	// 중복을 확인하기 위한 함수
+	function checkForDuplicates(selectedEmployees) {
+	    for (let i = 0; i < selectedEmployees.length; i++) {
+	    	 const selectedEmployee = selectedEmployees[i];
+	         console.log(selectedEmployee);
+	        // 다른 유형에서 이미 선택된 사원인지 확인합니다.
+	         if (allSelectedEmployees.includes(selectedEmployee)) {
+	             alert("이미 선택된 사원입니다.");
+	             return true;
+	         }
+	    }
+
+	    // 중복이 없으면 선택된 사원을 전역 배열에 추가합니다.
+	    allSelectedEmployees.push(...selectedEmployees);
+	    return false;
+	}
+	
 	//수신
 	document.getElementById("addSendBtn").addEventListener("click",function(){
 		const employeeList = document.getElementById("employeeList");
@@ -90,45 +111,47 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 		for(let i = 0; i < employeeList.options.length; i++){
 			if(employeeList.options[i].selected){
-				selectedEmployees.push(employeeList.options[i].value);
+				const selectedValue = employeeList.options[i].value;
+            	selectedEmployees.push(selectedValue);
 			}
 		}
 		console.log("Selected Options: " + selectedEmployees);
-		
-		$.ajax({
-			url:'/otipms/api/sendList',
-			type:'GET',
-			data:{selectedEmployees:selectedEmployees},
-			dataType: 'json',
-			success: function(data){
-				const sendListContainer = document.getElementById("send");
-				console.log("data : "+ data);
-				data.forEach(function(employee,index){
-					const div = document.createElement("div");
-					div.className = "Recipient";
-					const rank = document.createElement("span");
-					rank.textContent = employee.empRank;
-					rank.className = "empRank"
-					const space = document.createElement("span");
-					space.textContent = " ";
-					const name = document.createElement("span");
-					name.textContent = employee.empName;
-					name.className = "empName"
-				    div.style.height = '20px';
-
-				    const input = document.createElement("input");
-				    input.value = employee.empId;
-				    input.type = 'hidden';
-				    input.classList.add("empId");
-				    
-				    sendListContainer.appendChild(div); 
-				    div.appendChild(rank);
-				    div.appendChild(space);
-				    div.appendChild(name);
-				    div.appendChild(input);
-				});
-			}
-		})
+		if(!checkForDuplicates(selectedEmployees)){
+			$.ajax({
+				url:'/otipms/api/sendList',
+				type:'GET',
+				data:{selectedEmployees:selectedEmployees},
+				dataType: 'json',
+				success: function(data){
+					const sendListContainer = document.getElementById("send");
+					console.log("data : "+ data);
+					data.forEach(function(employee,index){
+						const div = document.createElement("div");
+						div.className = "Recipient";
+						const rank = document.createElement("span");
+						rank.textContent = employee.empRank;
+						rank.className = "empRank"
+							const space = document.createElement("span");
+						space.textContent = " ";
+						const name = document.createElement("span");
+						name.textContent = employee.empName;
+						name.className = "empName"
+							div.style.height = '20px';
+						
+						const input = document.createElement("input");
+						input.value = employee.empId;
+						input.type = 'hidden';
+						input.classList.add("empId");
+						
+						sendListContainer.appendChild(div); 
+						div.appendChild(rank);
+						div.appendChild(space);
+						div.appendChild(name);
+						div.appendChild(input);
+					});
+				}
+			})
+		}
 	})
 	//참조
 	document.getElementById("addCCBtn").addEventListener("click",function(){
@@ -137,45 +160,47 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 		for(let i = 0; i < employeeList.options.length; i++){
 			if(employeeList.options[i].selected){
-				selectedEmployees.push(employeeList.options[i].value);
+				const selectedValue = employeeList.options[i].value;
+                selectedEmployees.push(selectedValue);
 			}
 		}
 		console.log("Selected Options: " + selectedEmployees);
-		
-		$.ajax({
-			url:'/otipms/api/sendList',
-			type:'GET',
-			data:{selectedEmployees:selectedEmployees},
-			dataType: 'json',
-			success: function(data){
-				const sendListContainer = document.getElementById("CC");
-				console.log("data : "+ data);
-				data.forEach(function(employee,index){
-					const div = document.createElement("div");
-					div.className = "Reference";
-					const rank = document.createElement("span");
-					rank.textContent = employee.empRank;
-					rank.className = "empRank"
-					const space = document.createElement("span");
-					space.textContent = " ";
-					const name = document.createElement("span");
-					name.textContent = employee.empName;
-					name.className = "empName"
-				    div.style.height = '20px';
-					
-					const input = document.createElement("input");
-					input.value = employee.empId;
-					input.type = 'hidden';
-					input.classList.add("empId");
-					
-					sendListContainer.appendChild(div);
-					div.appendChild(rank);
-					div.appendChild(space);
-				    div.appendChild(name);
-					div.appendChild(input);
-				});
-			}
-		})
+		if(!checkForDuplicates(selectedEmployees)){
+			$.ajax({
+				url:'/otipms/api/sendList',
+				type:'GET',
+				data:{selectedEmployees:selectedEmployees},
+				dataType: 'json',
+				success: function(data){
+					const sendListContainer = document.getElementById("CC");
+					console.log("data : "+ data);
+					data.forEach(function(employee,index){
+						const div = document.createElement("div");
+						div.className = "Reference";
+						const rank = document.createElement("span");
+						rank.textContent = employee.empRank;
+						rank.className = "empRank"
+						const space = document.createElement("span");
+						space.textContent = " ";
+						const name = document.createElement("span");
+						name.textContent = employee.empName;
+						name.className = "empName"
+					    div.style.height = '20px';
+						
+						const input = document.createElement("input");
+						input.value = employee.empId;
+						input.type = 'hidden';
+						input.classList.add("empId");
+						
+						sendListContainer.appendChild(div);
+						div.appendChild(rank);
+						div.appendChild(space);
+					    div.appendChild(name);
+						div.appendChild(input);
+					});
+				}
+			})
+		}
 	})
 	//비밀 참조
 	document.getElementById("addSecretCCBtn").addEventListener("click",function(){
@@ -184,45 +209,47 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 		for(let i = 0; i < employeeList.options.length; i++){
 			if(employeeList.options[i].selected){
-				selectedEmployees.push(employeeList.options[i].value);
+				const selectedValue = employeeList.options[i].value;
+                selectedEmployees.push(selectedValue);
 			}
 		}
 		console.log("Selected Options: " + selectedEmployees);
-		
-		$.ajax({
-			url:'/otipms/api/sendList',
-			type:'GET',
-			data:{selectedEmployees:selectedEmployees},
-			dataType: 'json',
-			success: function(data){
-				const sendListContainer = document.getElementById("secretCC");
-				console.log("data : "+ data);
-				data.forEach(function(employee,index){
-					const div = document.createElement("div");
-					div.className = "BlindCopy";
-					const rank = document.createElement("span");
-					rank.textContent = employee.empRank;
-					rank.className = "empRank"
-					const space = document.createElement("span");
-					space.textContent = " ";
-					const name = document.createElement("span");
-					name.textContent = employee.empName;
-					name.className = "empName"
-					div.style.height = '20px';
-					
-					const input = document.createElement("input");
-					input.value = employee.empId;
-					input.type = 'hidden';
-					input.classList.add("empId");
-					
-					sendListContainer.appendChild(div);
-					div.appendChild(rank);
-					div.appendChild(space);
-				    div.appendChild(name);
-					div.appendChild(input);
-				});
-			}
-		})
+		if(!checkForDuplicates(selectedEmployees)){
+			$.ajax({
+				url:'/otipms/api/sendList',
+				type:'GET',
+				data:{selectedEmployees:selectedEmployees},
+				dataType: 'json',
+				success: function(data){
+					const sendListContainer = document.getElementById("secretCC");
+					console.log("data : "+ data);
+					data.forEach(function(employee,index){
+						const div = document.createElement("div");
+						div.className = "BlindCopy";
+						const rank = document.createElement("span");
+						rank.textContent = employee.empRank;
+						rank.className = "empRank"
+						const space = document.createElement("span");
+						space.textContent = " ";
+						const name = document.createElement("span");
+						name.textContent = employee.empName;
+						name.className = "empName"
+						div.style.height = '20px';
+						
+						const input = document.createElement("input");
+						input.value = employee.empId;
+						input.type = 'hidden';
+						input.classList.add("empId");
+						
+						sendListContainer.appendChild(div);
+						div.appendChild(rank);
+						div.appendChild(space);
+					    div.appendChild(name);
+						div.appendChild(input);
+					});
+				}
+			})
+		}
 	})
 });
 
