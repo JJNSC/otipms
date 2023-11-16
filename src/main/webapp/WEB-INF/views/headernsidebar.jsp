@@ -174,16 +174,18 @@ width:15.1875rem;
                             <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i><span class="nav-text">업무 관리</span>
-                        </a>
-                        <ul aria-expanded="false" class="collapse" >
-                            <li><a href="${pageContext.request.contextPath}/projectTask">프로젝트 업무 관리</a></li>
-                            <!-- <li><a href="./page-register.html">팀 업무 관리</a></li> -->
-                            <li><a href="${pageContext.request.contextPath}/myTask">개인 업무 관리</a></li>
-                        </ul>
-                    </li>
+                   	<sec:authorize access="hasRole('ROLE_PE')">
+	                    <li class="">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+	                            <i class="icon-notebook menu-icon"></i><span class="nav-text">업무 관리</span>
+	                        </a>
+	                        <ul aria-expanded="false" class="collapse" >
+	                            <li><a href="${pageContext.request.contextPath}/projectTask">프로젝트 업무 관리</a></li>
+	                            <!-- <li><a href="./page-register.html">팀 업무 관리</a></li> -->
+	                            <li><a href="${pageContext.request.contextPath}/myTask">개인 업무 관리</a></li>
+	                        </ul>
+	                    </li>
+                    </sec:authorize>
                     <li class="mega-menu mega-menu-sm">
                         <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
