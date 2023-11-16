@@ -1,6 +1,6 @@
 window.onload = function(){
 	var chatWebSocket = null;
-	var socket = new WebSocket("ws://localhost:8080/otipms/chat/ws-chat");
+	var socket = new WebSocket("ws://192.168.0.169:8080/otipms/chat/ws-chat");
 	chatWebSocket = socket;
 	chatWebSocket.onopen = () => {
 	}
@@ -102,7 +102,7 @@ window.onload = function(){
             	chatWebSocket.send(JSON.stringify(message));
             },
             error: function () {
-                alert('에러가 발생했습니다.');
+                alert('삭제된 채팅방입니다.');
             }
         });
     });
@@ -122,6 +122,8 @@ function createChatRoomElement(chatRoomInfo) {
     var link = document.createElement('a'); // a 요소 생성
     link.href = '#';
     link.setAttribute('data-mrno', chatRoomInfo.mrNo);
+    link.id = 'findRoom';
+    link.style = 'padding-left:52px;'
     
     var status = document.createElement('span');
     if (`${chatRoomInfo.empStatus}` == 1){
@@ -135,7 +137,7 @@ function createChatRoomElement(chatRoomInfo) {
     image.alt = '';
 
     var spanName = document.createElement('span');
-    spanName.style = 'display:block; clear: both; font-size: 16px; color: #202342; font-weight: 700; text-transform: capitalize; font-family: "Inter", sans-serif; padding-bottom: 5px;';
+    spanName.style = 'display:inline-block;clear: both;font-size: 16px;color: #202342;font-weight: 700;text-transform: capitalize;font-family: "Inter",sans-serif;padding-bottom: 5px;padding-left:3px;';
     spanName.textContent = chatRoomInfo.empRank + ' ' + chatRoomInfo.empName;
 
     var spanTime = document.createElement('span');
@@ -151,7 +153,7 @@ function createChatRoomElement(chatRoomInfo) {
     
     var spanMessage = document.createElement('span');
     spanMessage.className = 'chatMessage';
-    spanMessage.style = 'white-space: nowrap; display: inline-block; overflow: hidden; text-overflow: ellipsis; max-width: 160px;';
+    spanMessage.style = 'white-space: nowrap; display: block; overflow: hidden; text-overflow: ellipsis; max-width: 160px;margin-left: 18px;';
     spanMessage.textContent = chatRoomInfo.mrLastChat;
     
     link.appendChild(status);
@@ -269,6 +271,7 @@ function deleteChat(mrNo,event) {
         data: { mrNo: mrNo }, // 전달할 데이터
         success: function(response) {
         	window.location.href = '/otipms/chat/chat'; // 리다이렉트할 페이지의 URL로 대체
+        	chatWebSocket.send()
         },
         error: function(error) {
             console.error('채팅방 지우기 에러 :', error);

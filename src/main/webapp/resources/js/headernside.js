@@ -100,7 +100,7 @@ window.onload = function(){
 	var wsSend=()=>{
 		setInterval(function() {
 			webSocket.send(empId);
-		}, 1500);
+		}, 3000);
 	}
 	
 	//안읽은 알람 수
@@ -139,7 +139,7 @@ window.onload = function(){
 	    		var alarmDateFormatted = formatAlarmDate(alarm.alarmDate);
 	    		
 	    		var alarmContent = `
-	    			<a href="javascript:void(window.open('${pageContext.request.contextPath}/mail/detailMail?messageNo=${alarm.alarmMessageNo}','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedAlarm(${alarm.alarmNo})">
+	    			<a href="javascript:void(window.open('http://localhost:8080/otipms/mail/detailMail?messageNo=${alarm.alarmMessageNo}','_blank','width=920, height=680, left=800, top=30'))" onclick="updateCheckedAlarm(${alarm.alarmNo})">
 	    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-copy fa fa-bell-o" aria-hidden="true"></i></span>
 	    			<div class="notification-content">
 	    			<h6 class="notification-heading">${alarm.alarmContentCode}</h6>
