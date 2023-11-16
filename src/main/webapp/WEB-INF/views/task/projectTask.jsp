@@ -20,28 +20,6 @@
     <script src="${pageContext.request.contextPath}/resources/js/task/task.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/task/selectTaskEmployee.js"></script>
     
-    <script>
-	    	/* window.onload = function() {
-			today = new Date();
-			console.log("today.toISOString() >>>" + today.toISOString());
-			today = today.toISOString().slice(0, 10);
-			console.log("today >>>> " + today);
-			bir = document.getElementById("startDate");
-			bir.value = today;
-		} */
-		/* $(document).ready(function() {
-			conosole.log("되니?");
-			
-			$('.projectNo').on('click', function() {
-		    	const close = $('.show');
-		    	if(close != null) {
-		    		close.collapse('toggle');
-		    	}
-		        const target = $(this).data('target');
-		        $(target).collapse('toggle');
-		    });
-		}); */
-	</script>
 	
 	<style>
 		body {

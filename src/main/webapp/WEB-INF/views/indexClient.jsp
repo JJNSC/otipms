@@ -63,7 +63,7 @@
         </script> -->
             <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;margin-top:1rem;height:810px;">
             	<div class="row">
-            		<div class="col-lg-8" style="padding-right: 0px;">
+            		<div class="col-lg-7" style="padding-right: 0px;">
            				<!-- 달력 -->
             			<div class="row" style="height: 54%">
             				<div class="col-12">
@@ -364,7 +364,7 @@
             				</div>
            				</div>
             		</div>
-            		<div class="col-lg-4">
+            		<div class="col-lg-5">
             			<!-- 진척도 -->
             			<div class="row" style="height:49%;">
             				<div class="col-12">
@@ -415,33 +415,32 @@
             			<div class="row">
             				<div class="col-12">
             					<div class="card" style="height:100%;">
-				                    <div class="card-body" style="">
-				                    	 <h4 class="card-title" style="font-weight: bolder;">프로젝트 정보</h4>
+				                    <div class="card-body" style="padding-bottom: 4px;">
+				                    	 <h4 class="card-title" style="font-weight: bolder;">
+				                    	 	프로젝트 정보 <span data-toggle="modal" data-target="#projectInfoModal" style="font-weight: normal; color: #162336; font-size: 14px; cursor: pointer;"> 상세보기</span>
+				                    	 </h4>
 				                    	 <table>
 				                    	 	<thead>
 				                    	 		<tr >
-				                    	 			<th >프로젝트 명</th>
-				                    	 			<td style="width:32px;"></td>
+				                    	 			<th style="width: 30%; padding: 3px;">프로젝트 명</th>
 				                    	 			<td>${project.projectName}</td>
 				                    	 		</tr>
 				                    	 		<tr>
-				                    	 			<th>프로젝트 시작 날짜</th>
-				                    	 			<td ></td>
+				                    	 			<th style="padding: 3px;">프로젝트 시작일</th>
 				                    	 			<td>
 				                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectStartDate}"></fmt:formatDate>
 				                    	 			</td>
 				                    	 		</tr>
 				                    	 		<tr>
-				                    	 			<th>프로젝트 종료 날짜</th>
-				                    	 			<td ></td>
+				                    	 			<th style="padding: 3px;">프로젝트 종료일</th>
 				                    	 			<td>
 				                    	 				<fmt:formatDate pattern="yyyy년  MM월 dd일" value="${project.projectEndDate}"></fmt:formatDate>
 				                    	 			</td>
 				                    	 		</tr>
 				                    	 		<tr>
-				                    	 			<th>프로젝트 개요</th>
-				                    	 			<td ></td>
+				                    	 			<th style="padding: 3px;">프로젝트 개요</th>
 				                    	 			<td>${project.projectContent}</td>
+				                    	 			<%-- <td style="width: 10%; display:inline-block; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;">${project.projectContent}</td> --%>
 				                    	 		</tr>
 				                    	 	</thead>
 				                    	 </table>
