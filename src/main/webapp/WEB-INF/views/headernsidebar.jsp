@@ -77,7 +77,7 @@ width:15.1875rem;
                                     <ul id="alarmList" style="padding:0px;height:310px;">
                                     </ul>
                                     <div id="totalAlarm"style="text-align:center;">
-									  	<a href="#" class="btn btn-primary btn-block" onclick="deleteAlarm(${employee.empId},event)">알림 전체 삭제</a>
+									  	<a href="#" class="btn btn-primary btn-block" onclick="deleteAlarm(${employee.empId},event)">알람 전체 삭제</a>
 									</div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@ width:15.1875rem;
                                     <ul id="chatAlarmList" style="padding:0px;height:310px;">
                                     </ul>
                                     <div id="totalAlarm"style="text-align:center;">
-									  	<a href="#" class="btn btn-primary btn-block" onclick="deleteChatAlarm(${employee.empId},event)">알림 전체 삭제</a>
+									  	<a href="#" class="btn btn-primary btn-block" onclick="deleteChatAlarm(${employee.empId},event)">알람 전체 삭제</a>
 									</div>
                                 </div>
                             </div>
