@@ -6,7 +6,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 	<ul id="chatRoomList">
 		<c:forEach var="ChatRoom" items="${chatRoom}">
-			<li id="chatRoom${ChatRoom.mrNo}">
+			<li id="chatRoom${ChatRoom.mrNo}" class="chatRooms">
 				<a id="findRoom" href="#" data-mrno="${ChatRoom.mrNo}" style="padding-left: 52px;">
 <%-- 					<c:if test="${ChatRoom.empStatus == 1}">
 						<span class="activity logined"></span>
@@ -23,6 +23,7 @@
 						</c:if>
 					</img>
 					<span 
+						  class="chatEmp"
 						  style="display:inline-block;
 								 clear: both;
 							     font-size: 16px;

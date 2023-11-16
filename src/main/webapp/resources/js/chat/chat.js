@@ -106,10 +106,12 @@ window.onload = function(){
             }
         });
     });
+	
 	$("#searchRoom").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $("#findRoom").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        $(".chatRooms").each(function() {
+        	var currentText = $(this).find(".chatEmp").text().toLowerCase();
+        	$(this).toggle(currentText.indexOf(value) > -1);
         });
       });
 }
@@ -118,6 +120,7 @@ function createChatRoomElement(chatRoomInfo) {
     var chatRoomList = document.getElementById('chatRoomList'); // 채팅방 목록을 표시할 요소 (ul 등)
     var chatRoomItem = document.createElement('li'); // li 요소 생성
     chatRoomItem.id = 'chatRoom' + chatRoomInfo.mrNo;
+    chatRoomItem.className = 'chatRooms';
     
     var link = document.createElement('a'); // a 요소 생성
     link.href = '#';
@@ -137,6 +140,7 @@ function createChatRoomElement(chatRoomInfo) {
     image.alt = '';
 
     var spanName = document.createElement('span');
+    spanName.className = 'chatEmp';
     spanName.style = 'display:inline-block;clear: both;font-size: 16px;color: #202342;font-weight: 700;text-transform: capitalize;font-family: "Inter",sans-serif;padding-bottom: 5px;padding-left:3px;';
     spanName.textContent = chatRoomInfo.empRank + ' ' + chatRoomInfo.empName;
 
