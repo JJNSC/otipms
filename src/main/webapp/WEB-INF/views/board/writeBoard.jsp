@@ -18,7 +18,7 @@
 
 	<%-- <script src="${pageContext.request.contextPath}/resources/js/board/writeBoard.js"></script> --%>
     
-	<!-- Editer -->-
+	<!-- Editer -->
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	<!-- Dropzone -->
 	<link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
@@ -303,11 +303,11 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
-            <!-- <div class="copyright">
+        <!-- <div class="footer">
+            <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div> -->
-        </div>
+            </div>
+        </div> -->
         <!--**********************************
             Footer end
         ***********************************-->

@@ -270,6 +270,12 @@
                                         <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block" onclick="addScheduleBtn()"><i class="ti-plus f-s-12 m-r-5"></i> 일정 추가</a>
                                         <script type="text/javascript">
                                         	function addScheduleBtn() {
+                                        		$("#scheduleNameInput").val('');
+                                        		$("#scheduleCommentInput").val('');
+                                        		$("#scheduleStartDateInput").val('');
+                                        		$("#scheduleEndDateInput").val('');
+                                        		$("#scheduleColorSelect").val('red');
+                                        		
                                         		$("#addBtn").removeClass("d-none");
                                         		$("#updateBtn").addClass("d-none");
                                         	}
