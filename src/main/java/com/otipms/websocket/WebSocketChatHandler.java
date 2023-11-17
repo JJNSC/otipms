@@ -31,25 +31,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler{
 	//클라이언트가 서버에 접속 성공시 호출
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		log.info("채팅 소켓 연결 완료 : " + session);
 		sessions.add(session);
-		log.info("접속한 채팅 소켓 인원 : " + sessions.size());
-		
-		
-		/*// 사용자의 ID를 추출하는 코드 (사용자 세션 유지)
-        int empId = extractEmpId(session);
-        if (empId != -1) {
-            if (userSessions.containsKey(empId)) {
-                // 중복 연결 시 기존 연결 종료
-                WebSocketSession existingSession = userSessions.get(empId);
-                existingSession.close();
-            }
-            userSessions.put(empId, session);
-            sessions.add(session);
-        } else {
-            // 유효한 사용자가 아니라면 연결 종료
-            session.close();
-        }*/
 	}
 	
 	@Override
@@ -92,8 +74,6 @@ public class WebSocketChatHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		log.info("채팅 소켓 연결 종료");
-		
 		// 연결 종료 시 userSessions에서 제거
         int empId = extractEmpId(session);
         if (empId != -1) {
@@ -101,7 +81,6 @@ public class WebSocketChatHandler extends TextWebSocketHandler{
         }
         
 		sessions.remove(session);
-		log.info("접속한 채팅 소켓 인원 : " + sessions.size());
 	}
 	
 	

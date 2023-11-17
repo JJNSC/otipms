@@ -64,21 +64,8 @@
                                 </div>
                                 <div class="email-right-box">
                                     <div role="toolbar" class="toolbar">
-                                        <div class="btn-group">
-	                                        <div class="header-left" style="margin-left:20px;">
-							                    <div class="input-group icons" style="margin-top:0px;">
-							                    	<input type="hidden" value="${employee.empId}" id="memIdSpan">
-							                    	<input type="hidden" value="${cnt1}" id="cntSpan">
-							                        <input id="search" type="search" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search Dashboard">
-							                        <div class="input-group-prepend">
-							                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1">
-							                            	<i class="mdi mdi-magnify"></i>
-							                            </span>
-							                        </div>
-							                    </div>
-							                </div>
-                                        </div>
-                                        <hr/>
+                                        <input type="hidden" value="${employee.empId}" id="memIdSpan">
+				                    	<input type="hidden" value="${cnt1}" id="cntSpan">
                                         <div class="d-flex justify-content-between align-items-center" style="margin-bottom:5px;">
 				                            <div class="d-flex align-items-center">
 				                            	<div class="form-check me-2">
@@ -89,6 +76,7 @@
 			                              		<i class="icon-copy ion-android-drafts mail" style="margin-left:15px;cursor:pointer;" onclick="readAll()"></i>
 				                            </div>
 		                          		</div>
+	                          		    <hr/>
                                     </div>
                                     <div id="email-list-container" class="email-list m-t-15">
 									</div>

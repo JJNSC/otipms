@@ -38,9 +38,7 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	//클라이언트가 서버에 접속 성공시 호출
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		log.info("알람 소켓 연결 완료 : " + session);
 		sessions.add(session); //리스트에 접속한 session들을 담음
-		log.info("접속한 알람 소켓 인원 : " + sessions.size());
 	}
 	
 	@Override
@@ -72,9 +70,7 @@ public class WebSocketMailHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		log.info("알람 소켓 연결 종료");
 		sessions.remove(session);
-		log.info("접속한 알람 소켓 인원 : " + sessions.size());
 	}
 	
 }
