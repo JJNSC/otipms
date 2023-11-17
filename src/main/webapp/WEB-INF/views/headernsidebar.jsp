@@ -146,7 +146,7 @@ width:15.1875rem;
                                         <!-- <li>
                                             <a href="page-lock.html"><i class="icon-lock"></i> <span>화면 잠금</span></a>
                                         </li> -->
-                                        <li><a href="${pageContext.request.contextPath}/logout"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                                        <li><a href="${pageContext.request.contextPath}/logout"><i class="icon-copy fa fa-power-off" aria-hidden="true"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -171,13 +171,14 @@ width:15.1875rem;
                             <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
                         </a> -->
                         <a class="" href="${pageContext.request.contextPath}/mySchedule" aria-expanded="false">
-                            <i class="icon-menu menu-icon"></i><span class="nav-text">개인 일정</span>
+                            <i class="icon-copy fa fa-calendar" aria-hidden="true"></i><span class="nav-text">개인 일정</span>
                         </a>
                     </li>
                    	<sec:authorize access="hasRole('ROLE_PE')">
 	                    <li class="">
 	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-	                            <i class="icon-notebook menu-icon"></i><span class="nav-text">업무 관리</span>
+	                            <i class="icon-copy fa fa-file-o" aria-hidden="true"></i><span class="nav-text">업무 관리</span>
+	                            <!-- <i class="icon-copy ion-clipboard"></i> -->
 	                        </a>
 	                        <ul aria-expanded="false" class="collapse" >
 	                            <li><a href="${pageContext.request.contextPath}/projectTask">프로젝트 업무 관리</a></li>
@@ -192,7 +193,7 @@ width:15.1875rem;
                         </a> -->
                         <!-- has-arrow 지우긴 했는데 클릭한 이후 선택된 상태로 남는지는 확인해야 함 -->
                         <a class="" href="${pageContext.request.contextPath}/checkEmployeeList/employeeList" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">인력 조회</span>
+                            <i class="icon-user"></i><span class="nav-text">인력 조회</span>
                         </a>
                     </li>
                     
@@ -215,7 +216,7 @@ width:15.1875rem;
                    	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	                    <li class="">
 	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-	                            <i class="icon-grid menu-icon"></i><span class="nav-text">시스템 관리</span>
+	                            <i class="icon-copy fa fa-television" aria-hidden="true"></i><span class="nav-text">시스템 관리</span>
 	                        </a>
 	                        <ul aria-expanded="false" class="collapse">
 	                            <li><a href="${pageContext.request.contextPath}/projectManagement/projectList">프로젝트 관리</a></li>

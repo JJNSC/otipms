@@ -535,13 +535,11 @@ function getTaskList(empId) {
 					} else if(task.taskStatus == "진행완료") {
 						taskhtml += '<td class="text-center" style="color: #00aba9; font-weight: 600;">' + task.taskStatus + '</td>';
 					}
-					taskhtml += '<td class="text-center">';
-					if(($("#loginEmployeeRole").val() == "ROLE_PE" || $("#loginEmployeeRole").val() == "ROLE_CLIENT") && empId != $("#loginEmployeeId").val()) {
-						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger d-none" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
-					} else {
+					if($("#loginEmployeeRole").val() != "ROLE_PE") {
+						taskhtml += '<td class="text-center">';
 						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+						taskhtml += '</td>';
 					}
-					taskhtml += '</td>';
 					taskhtml += '</tr>';
 				});
 				
@@ -670,9 +668,11 @@ function updateTask() {
 						} else if(task.taskStatus == "진행완료") {
 							taskhtml += '<td class="text-center" style="color: #00aba9; font-weight: 600;">' + task.taskStatus + '</td>';
 						}
-						taskhtml += '<td class="text-center">';
-						taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
-						taskhtml += '</td>';
+						if($("#loginEmployeeRole").val() != "ROLE_PE") {
+							taskhtml += '<td class="text-center">';
+							taskhtml += '<button type="button" id="deleteTaskBtn" name="' + task.taskNo + '" class="btn fa fa-trash-o color-danger" data-toggle="modal" data-target="#modalGrid" onclick="deleteTaskBtn(this)"></button>';
+							taskhtml += '</td>';
+						}
 						taskhtml += '</tr>';
 					});
 					

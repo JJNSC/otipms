@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html id="htmlTest" lang="en">
 
@@ -292,7 +293,9 @@
 							                                                <th scope="col" style="width: 15%;">업무 시작일</th>
 							                                                <th scope="col" style="width: 15%; text-align: center;">업무 종료일</th>
 							                                                <th scope="col" style="width: 15%; text-align: center;">진행 상태</th>
-							                                                <th class="text-center" style="width: 10%;">삭제</th>
+							                                                <sec:authorize access="hasRole('ROLE_PM')">
+							                                                	<th class="text-center" style="width: 10%;">삭제</th>
+							                                                </sec:authorize>
 							                                            </tr>
 							                                        </thead>
 							                                        <tbody class="detailTaskBody">
