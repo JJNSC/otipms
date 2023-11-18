@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>사원 찾기</title>
+    <title>고객 찾기</title>
     <!-- Favicon icon -->
     <%-- <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png"> --%>
     <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipmsFavicon.png">
@@ -39,14 +39,18 @@
 
 <body>
     <div id="main-wrapper">
-        <div class="content-body">
-            <div class="container-fluid">
+        <!-- <div class="content-body"> -->
+        <div style="height:400px;margin-top:10px;">
+            <!-- div class="container-fluid"> -->
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;height:400px;">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="compose-content mt-5">
-                                    <hr>
+                        	<div style="background-color: #11407a;height:60px;">
+                        		<h4 class="mt-3 ml-2" style="color:#fff;"><img src="${pageContext.request.contextPath}/resources/images/otipmsCube.jpg" style="height: 30px;" alt="">고객 찾기</h4>
+                        	</div>
+                            <div class="card-body" style="padding-top:0px;">
+                                <div class="compose-content">
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="project1" role="tabpanel">
                                             <div class="p-t-15">

@@ -51,12 +51,12 @@
                                 <div class="basic-form">
                                     <form action="${pageContext.request.contextPath}/projectManagement/addProject" method="post">
                                         <div class="form-row">
-	                                        <div class="form-group col-md-6">
+	                                        <div class="form-group col-md-3">
 	                                            <label>프로젝트 명</label>
                                 	 			<input type="text" class="form-control" name="projectName" placeholder="프로젝트 명 입력">
 	                                        </div>
                                             <div class="form-group col-md-6">
-                                                 <div class="col-md-6">
+                                                 <div class="col-md-4">
 			                                        <div class="example">
 			                                            <label>프로젝트 기간</label>
 					                                	  <%
@@ -89,7 +89,8 @@
                                                    	<input type="text" class="form-control" style="background-color:transparent; border:0px;" id="PMINFO" readonly="readonly">
                                                 </div>
                                             </div> -->
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3"></div>
+                                            <div class="form-group col-md-3">
                                                 <label>담당자 (PM)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
                                                 <label class="sr-only">담당자 검색</label>
                                                 <div class="d-flex">
@@ -105,35 +106,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group col-md-5" style="padding-left:0px;">
                                             <label>프로젝트 개요</label>
                                 			<textarea class="form-control" id="projectOutLines" name="projectOutLines" rows="5" placeholder="프로젝트 개요를 입력해 주세요."></textarea>
                                         </div>
                                         <div class="form-row">
-	                                        <div class="form-group col-md-4">
+	                                        <div class="form-group col-md-3">
 	                                            <label>고객사 명 (company)</label>
 	                                            <input type="text" class="form-control" name="customerCompany" placeholder="고객사 명 입력">
 	                                        </div>
                                         </div>
-                                        <!-- <div class="form-group col-md-4" style="padding-left:0px;">
-                                            <label>고객 명 (Customer)</label> 추후 과장 이상만 나오게끔 필터링해보자
-                                            <label class="sr-only">고객사 검색</label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group mb-2">
-                                                    <div class="text-left m-t-15">
-				                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
-				                                        		type="button" 
-				                                        		onclick="javascript:void(window.open('findClient','_blank','width=600, height=600, left=600, top=30'))">
-				                                        	<i class="fa fa-paper-plane m-r-5"></i>
-				                                        	 고객 검색
-				                                        </button>
-			                                    	</div>
-				                                	<input type="text" class="form-control d-none" id="ClientId" name="customerId" readonly="readonly">
-                                                   	<input type="text" class="form-control" style="background-color:transparent; border:0px;" id="ClientINFO" readonly="readonly">
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <div class="form-group col-md-4" style="padding-left:0px;">
+                                        <div class="form-group col-md-3" style="padding-left:0px;">
                                             <label>고객 명 (Customer)</label> <!-- 추후 과장 이상만 나오게끔 필터링해보자 -->
                                             <label class="sr-only">고객사 검색</label>
                                             <div class="d-flex">
@@ -150,19 +133,19 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
-                                                <label>고객 연락처</label>
-                                                <input type="text" class="form-control" id="ClientTel">
-                                            </div>
-                                            <div class="form-group col-md-3">
                                                 <label>고객 이메일</label>
                                                 <input type="text" class="form-control" id="ClientEmail">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label>고객 연락처</label>
+                                                <input type="text" class="form-control" id="ClientTel">
                                             </div>
                                            
                                         </div>
                                         <div class="form-group">
                                             
                                         </div>
-                                        <button type="submit" class="btn btn-dark">등록하기</button>
+                                        <button type="submit" class="btn btn-primary">등록하기</button>
                                     </form>
                                 </div>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

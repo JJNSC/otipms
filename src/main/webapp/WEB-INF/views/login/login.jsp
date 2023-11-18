@@ -84,9 +84,7 @@
 								<div class="col-9 d-none">
 									<div class="forgot-password ml-0 pl-0"></div>
 								</div>
-								<div class="col-9 mt-2">
-									<i class="icon-copy ion-ios-telephone mr-3 ml-1 "></i>인사과 번호 : 02-1111-1111
-								</div>
+								
 							</div>
 							<div class="row">
 								<div class="col-sm-12">

@@ -90,11 +90,12 @@
 		        type: 'POST', // 또는 GET, 컨트롤러의 요청 메서드에 맞게 선택
 		        url: '/otipms/teamManagement/disableTeam', // 컨트롤러의 URL로 대체해야 함
 		        data: { disableTeamNo: teamNo },
-		        success: function() {
+		        success: function(data) {
 		            // 성공 시 수행할 작업
 		            console.log('팀 삭제 성공');
 		            // 모달을 닫음
 		            $('#modalGrid').modal('hide');
+		            window.location.href = data;
 		        },
 		        error: function(error) {
 		            // 실패 시 수행할 작업

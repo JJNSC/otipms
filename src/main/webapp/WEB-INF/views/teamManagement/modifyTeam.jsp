@@ -131,7 +131,7 @@
                                         <div class="form-group">
                                             
                                         </div>
-                                        <button type="submit" class="btn btn-dark">수정하기</button>
+                                        <button type="submit" class="btn btn-primary">수정하기</button>
                                     </form>
                                 </div>
                             </div>

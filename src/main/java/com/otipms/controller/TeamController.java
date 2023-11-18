@@ -128,10 +128,11 @@ public class TeamController {
 		return "redirect:/teamManagement/teamList";
 	}
 	@RuntimeCheck
+	@ResponseBody
 	@RequestMapping("/disableTeam")
 	public String disableTeam(@RequestParam("disableTeamNo") int teamNo) {
 		teamService.removeTeam(teamNo);
-		return "redirect:/teamManagement/teamList";
+		return "/otipms/teamManagement/teamList";
 	}
 	
 	

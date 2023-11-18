@@ -391,6 +391,13 @@
 	                                </div>
 	                            </div>
 	                            <div class="form-group row">
+	                                <label class="col-lg-3 col-form-label" for="registerPhoneNumber">이메일 
+	                                </label>
+	                                <div class="col-lg-7">
+	                                    <input type="text" class="form-control" id="registerPhoneNumber" name="registerEmail" placeholder="otipms@otipms.com">
+	                                </div>
+	                            </div>
+	                            <div class="form-group row">
 	                             <label class="col-lg-3 col-form-label" for="registerProject">프로젝트 </label>
 	                             <div class="col-lg-7">
 	                                 <select class="form-control" id="project-dropdown-modal-register" name="registerProject">

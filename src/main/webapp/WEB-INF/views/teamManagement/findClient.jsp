@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>사원 찾기</title>
+    <title>고객 찾기</title>
     <!-- Favicon icon -->
     <%-- <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/favicon.png"> --%>
     <link rel="icon" type="image/jpeg" sizes="16x16" href="${pageContext.request.contextPath}/resources/images/otipmsFavicon.png">
@@ -39,13 +39,16 @@
 
 <body>
     <div id="main-wrapper">
-        <div class="content-body">
-            <div class="container-fluid">
+        <div style="height:400px;margin-top:10px;">
+            <div style="width:100%;padding-right:15px;padding-left:15px;margin-left:auto;margin-right:auto;height:400px;">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
+                        	<div style="background-color: #11407a;height:60px;">
+                        		<h4 class="mt-3 ml-2" style="color:#fff;"><img src="${pageContext.request.contextPath}/resources/images/otipmsCube.jpg" style="height: 30px;" alt="">고객 찾기</h4>
+                        	</div>
                             <div class="card-body">
-                                <div class="compose-content mt-5">
+                                <div class="compose-content">
                                    	<!-- <div>
 								        <select id="project-dropdown">
 								            <option value="">프로젝트 선택</option>
@@ -62,7 +65,6 @@
 									    <label><input type="radio" name="recipient" value="Reference">참조</label>
 									    <label><input type="radio" name="recipient" value="BlindCopy">비밀참조</label>
 									</div> -->
-                                    <hr>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="project1" role="tabpanel">
                                             <div class="p-t-15">
