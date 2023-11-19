@@ -148,8 +148,8 @@ public class EmployeeController {
 										 @RequestParam("nowEmpRank") String empRank,
 										 @RequestParam("nowEmpTel") String empTel,
 										 @RequestParam("nowEmpEmail") String empEmail,
-										 @RequestParam("nowProject") String projectName,
-										 @RequestParam("nowTeam") String teamName,
+										 @RequestParam("nowProject") int projectNo,
+										 @RequestParam("nowTeam") int teamNo,
 										 @RequestParam("nowRole") String role) {
 		Employee employee = new Employee();
 		employee.setEmpId(empId);
@@ -157,8 +157,8 @@ public class EmployeeController {
 		employee.setEmpRank(empRank);
 		employee.setEmpTel(empTel);
 		employee.setEmpEmail(empEmail);
-		employee.setTeamName(teamName);
-		employee.setProjectName(projectName);
+		employee.setTeamNo(teamNo);
+		employee.setProjectNo(projectNo);
 		employee.setRole(role);
 		employeeService.updateEmployeeInfo(employee);
 		return "redirect: employeeList";

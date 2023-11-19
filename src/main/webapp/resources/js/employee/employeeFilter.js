@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             projectData.forEach((project) => {
             	const option2 = document.createElement("option");
-            	option2.value = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
+            	option2.value = project.projectNo; // 변경된 JSON 데이터 구조에 맞게 수정
             	option2.text = project.projectName; // 변경된 JSON 데이터 구조에 맞게 수정
             	projectDropdownModal.appendChild(option2);
             });
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             projectDropdownModal.addEventListener("change", function () {
             	const selectedProjectModal = projectDropdownModal.value;
-            	const selectedProjectDataModal = projectData.find((project) => project.projectName === selectedProjectModal);
+            	const selectedProjectDataModal = projectData.find((project) => project.projectNo === selectedProjectModal);
             	
             	// 이전 하위 드롭다운 제거
             	while (teamDropdownModal.options.length > 1) {
@@ -125,10 +125,10 @@ document.addEventListener("DOMContentLoaded", function () {
             		// 프로젝트 선택에 따라 팀 데이터 필터링
             		const filteredTeamsModal = teamData.filter((team) => team.projectNo === selectedProjectDataModal.projectNo);
             		filteredTeamsModal.forEach((team) => {
-            			const option = document.createElement("option");
-            			option.value = team.teamName;
-            			option.text = team.teamName;
-            			teamDropdownModal.appendChild(option);
+            			const option2 = document.createElement("option");
+            			option2.value = team.teamNo;
+            			option2.text = team.teamName;
+            			teamDropdownModal.appendChild(option2);
             		});
             	}
             	const selectedTeamModal = teamDropdownModal.value;
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
             teamDropdownModal.addEventListener("change", function () {
             	// 다음 드롭다운 값 갱신
             	const selectedProjectModal = projectDropdownModal.value;
-            	const selectedProjectIdModal = projectData.find((project) => project.projectName === selectedProjectModal).projectNo;
+            	const selectedProjectIdModal = projectData.find((project) => project.projectNo === selectedProjectModal).projectNo;
             	
             	// 프로젝트 선택 후 직급 드롭다운도 갱신
             	const selectedTeamModal = teamDropdownModal.value;

@@ -213,13 +213,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public void updateEmployeeInfo(Employee employee) {
-		int projectNo = projectDao.selectProjectNoByProjectName(employee.getProjectName());
+		/*int projectNo = projectDao.selectProjectNoByProjectName(employee.getProjectName());
 		Team t = new Team();
 		t.setProjectNo(projectNo);
 		t.setTeamName(employee.getTeamName());
 		int teamNo = teamDao.getTeamNoByProjectNoAndTeamName(t);
 		employee.setProjectNo(projectNo);
-		employee.setTeamNo(teamNo);
+		employee.setTeamNo(teamNo);*/
 		employeeDao.updateEmployee(employee);
 		employeeDao.updateEmployeeInfo(employee);
 		

@@ -108,8 +108,10 @@ public class FindEmployeeRestController {
             Map<String, String> teamMap = new HashMap<>();
             int projectNo = team.getProjectNo();
             String teamName = team.getTeamName();
+            int teamNo = team.getTeamNo();
             teamMap.put("projectNo", String.valueOf(projectNo));
             teamMap.put("teamName", teamName);
+            teamMap.put("teamNo", String.valueOf(teamNo));
             teamData.add(teamMap);
         }
 

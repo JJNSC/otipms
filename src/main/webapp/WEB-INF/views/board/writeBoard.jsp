@@ -20,6 +20,12 @@
     
 	<!-- Editer -->
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/config.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/build-config.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/plugins/image/dialogs/image.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/plugins/easyimage/dialogs/easyimagealt.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/plugins/easyimage/dialogs/easyimage.css"></script>
+	<script src="${pageContext.request.contextPath}/resources/ckeditor/plugins/dialog/dialogDefinition.js"></script>
 	<!-- Dropzone -->
 	<link href="${pageContext.request.contextPath}/resources/css/mail/dropzone.css" rel="stylesheet" type="text/css">
 	
