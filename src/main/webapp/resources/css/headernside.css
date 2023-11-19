@@ -42,7 +42,7 @@
 .logined{
     	background-image: linear-gradient(230deg, #07ed07, #07ed07);
 	}
-	.logout{
+.logout{
 		background-image: linear-gradient(230deg, #a0a0a0, #a0a0a0);
 	}
 .alertMail .content {
