@@ -69,6 +69,8 @@ function openDetailModal(scheduleNo) {
 			scheduleNo:scheduleNo
 		},
 		success: function(data) {
+			$("#modalTitle").html("일정 상세")
+			
 			$("#scheduleNoInput").val(data.scheduleNo);
 			$("#scheduleNameInput").val(data.scheduleName);
 			$("#scheduleCommentInput").val(data.scheduleComment);

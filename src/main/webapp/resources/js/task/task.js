@@ -34,6 +34,8 @@ function openProjectDetail() {
 		}
 	});
 	
+	//프로젝트 상세
+	$("#taskModalTitle").html("프로젝트 상세");
 	//작업개요 readonly 추가
 	$("#taskCommentInput").attr("readonly", true);
 	//기간 d-none 추가
@@ -95,6 +97,8 @@ function openTaskDetail(detailBtn) {
 		}
 	});
 	
+	//업무 상세
+	$("#taskModalTitle").html("업무 상세");
 	//작업개요 readonly 제거
 	$("#taskCommentInput").attr("readonly", false);
 	//기간 d-none 제거

@@ -168,7 +168,7 @@
 	        <div class="modal-dialog">
 	            <div class="modal-content">
 	                <div class="modal-header">
-	                    <h4 class="modal-title"><strong>업무 상세</strong></h4>
+	                    <h4 class="modal-title"><strong id="taskModalTitle">업무 상세</strong></h4>
 	                </div>
 	                <div class="modal-body">
 	                    <form>

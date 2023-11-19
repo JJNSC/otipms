@@ -170,7 +170,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title"><strong>일정 추가</strong></h4>
+                                                    <h4 class="modal-title"><strong id="modalTitle">일정 추가</strong></h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form>
@@ -270,6 +270,8 @@
                                         <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block" onclick="addScheduleBtn()"><i class="ti-plus f-s-12 m-r-5"></i> 일정 추가</a>
                                         <script type="text/javascript">
                                         	function addScheduleBtn() {
+                                        		$("#modalTitle").html("일정 추가")
+                                        		
                                         		$("#scheduleNameInput").val('');
                                         		$("#scheduleCommentInput").val('');
                                         		$("#scheduleStartDateInput").val('');

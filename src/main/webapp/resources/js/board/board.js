@@ -105,12 +105,12 @@ function chooseInquiryType(option) {
 					if(data.boardPager.pageNo == i) {
 						htmlPager += '<input type="button" class="page-link selected" value="' + i + '" onclick="movePage(' + i + ')">';
 					} else {
-						htmlPager += '<input type="button" class="page-link page-next" value="' + i + '" onclick="movePage(' + i + ')">';
+						htmlPager += '<input type="button" class="page-link" value="' + i + '" onclick="movePage(' + i + ')">';
 					}
 				}
 				
 				if(data.boardPager.groupNo < data.boardPager.totalGroupNo) {
-					htmlPager += '<input type="button" class="page-link" value="다음" onclick="movePage(' + (data.boardPager.endPageNo+1) + ')">';
+					htmlPager += '<input type="button" class="page-link page-next" value="다음" onclick="movePage(' + (data.boardPager.endPageNo+1) + ')">';
 				}
 				
 				$("nav").html(htmlPager);

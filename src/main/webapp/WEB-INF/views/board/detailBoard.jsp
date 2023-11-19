@@ -172,7 +172,7 @@
 		                                <!-- <button type="button" class="btn mb-1 btn-light-custom">수정</button> -->
 		                                <c:if test="${board.empId == employee.empId or employee.role == 'ROLE_ADMIN'}">
 		                                    <a href="writeBoard?boardNo=${board.boardNo}" type="button" class="text-secondary" style=" margin-right: 7px;">수정</a>                                                                	
-		                                    <a href="#" type="button" class="text-danger" data-toggle="modal" data-target="#deleteBoard">샥제</a>
+		                                    <a href="#" type="button" class="text-danger" data-toggle="modal" data-target="#deleteBoard">삭제</a>
 		                                </c:if>
                                 	</div>
                                 </div>
