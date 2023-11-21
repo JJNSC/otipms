@@ -14,7 +14,7 @@ public interface MessengerService {
 	public Messenger getEmpNotMe(int mrNo, int empId);
 	
 	//채팅방 만들기
-	public int insertChatRoom(int empId);
+	public int insertChatRoom(int empId, int empId2);
 	
 	//채팅 입력
 	public int insertChat(int mrNo, int empId, String messengerContent);

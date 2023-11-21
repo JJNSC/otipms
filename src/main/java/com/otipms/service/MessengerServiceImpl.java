@@ -41,20 +41,21 @@ public class MessengerServiceImpl implements MessengerService {
 	}
 
 	@Override
-	public int insertChatRoom(int empId) {
+	public int insertChatRoom(int empId, int empId2) {
 		
 		Messenger messenger = new Messenger();
 	    messenger.setMrNo(0);
 		messengerDao.insertChatRoom(messenger);
 	    int mrNo = messenger.getMrNo();
 		
+	    
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("mrNo", mrNo);
 		paramMap.put("empId", empId);
 		
 		Map<String, Object> paramMap2 = new HashMap<>();
 		paramMap2.put("mrNo", mrNo);
-		paramMap2.put("empId", LoginController.loginEmployee.getEmpId());
+		paramMap2.put("empId", empId2);
 		
 		messengerDao.insertChatRoomContent(paramMap);
 		messengerDao.insertChatRoomContent(paramMap2);

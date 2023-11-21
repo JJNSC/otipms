@@ -321,11 +321,9 @@
 	
 	<!-- 쪽지의 첨부 파일 여부 -->
 	<select id="MessageMediaFile" parameterType="int" resultType="MediaFile">
-		SELECT mf.*
-		  FROM message m
-		  	 , mediaFile mf
-		 WHERE m.messageNo = mf.messageNo
-		   AND mf.messageNo = #{messageNo}
+		SELECT *
+		  FROM mediaFile mf
+		 WHERE messageNo = #{messageNo}
 	</select>
 	
 	<!-- 미디어 파일 다운로드를 위한 select문 -->

@@ -13,12 +13,15 @@ window.onload = function(){
 	    const nmempId = message.empId;
 	    const messageContent = message.messageContent;
 	    const messageDate = message.messageDate;
-	    
 	    if(nmempId != empId && mrNo == crmrNo){
 	    	addChatYourMessage(messageContent, messageDate);
 	    }
 	    updateLastChat(mrNo, messageContent, messageDate);
-	} 
+	    
+	    $.get("/otipms/chat/chatRoom", function(data) {
+	        $("#chatRoomContainer").html(data);
+	    });
+	}  
 	
 	chatWebSocket.onclose = () => {
 	}
@@ -275,7 +278,7 @@ function deleteChat(mrNo,event) {
         data: { mrNo: mrNo }, // 전달할 데이터
         success: function(response) {
         	window.location.href = '/otipms/chat/chat'; // 리다이렉트할 페이지의 URL로 대체
-        	chatWebSocket.send()
+        	chatWebSocket.send();
         },
         error: function(error) {
             console.error('채팅방 지우기 에러 :', error);

@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import com.otipms.dto.Message;
 import com.otipms.dto.Messenger;
 import com.otipms.dto.Project;
 import com.otipms.dto.Team;
+import com.otipms.security.EmpDetails;
 import com.otipms.service.EmployeeService;
 import com.otipms.service.MessageService;
 import com.otipms.service.MessengerService;
@@ -52,10 +54,14 @@ public class FindEmployeeRestController {
     
     @RuntimeCheck
     @PostMapping("/api/createChatRoom")
-    public Messenger createChatRoom(@RequestBody List<Employee> selectedEmployees) {
+    public Messenger createChatRoom(@RequestBody List<Employee> selectedEmployees, Authentication authentication) {
+    	EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		Employee me = empDetails.getEmployee();
+		int empMe = me.getEmpId();
+		
     	Messenger messenger = new Messenger();
     	Employee employee = selectedEmployees.get(0);
-    	int mrNo = messengerService.insertChatRoom(employee.getEmpId());
+    	int mrNo = messengerService.insertChatRoom(employee.getEmpId(),empMe);
     	Employee empInfo = employeeService.getEmployeeInfo(employee.getEmpId());
     	MediaFile media = employeeService.getProfileImgByEmpId(employee.getEmpId());
     	messenger.setMediaFile(media);
