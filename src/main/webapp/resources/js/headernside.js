@@ -173,7 +173,7 @@ window.onload = function(){
 	    		var alarmDateFormatted = formatAlarmDate(alarm.maxAlarmDate);
 	    		
 	    		var alarmContent = `
-	    			<a href="javascript:void(window.open('http://192.168.0.169:8080/otipms/chat/chat','_blank','width=813, height=858, left=1000, top=30'))" onclick="updateCheckedChatAlarm()">
+	    			<a href="javascript:void(window.open('http://localhost:8080/otipms/chat/chat','_blank','width=813, height=858, left=1000, top=30'))" onclick="updateCheckedChatAlarm()">
 	    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-copy fa fa-bell-o" aria-hidden="true"></i></span>
 	    			<div class="notification-content">
 	    			<h6 class="notification-heading">${alarm.alarmContentCode}</h6>

@@ -129,7 +129,7 @@ width:15.1875rem;
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(window.open('http://192.168.0.169:8080/otipms/chat/chat', '_blank', 'width=813, height=858, left=1000, top=30'))">
+                                            <a href="javascript:void(window.open('http://localhost:8080/otipms/chat/chat', '_blank', 'width=813, height=858, left=1000, top=30'))">
                                                 <i class="icon-copy fa fa-comments-o"></i>
                                                 <span>채팅</span>
                                                 <div class="badge badge-pill badge-custom">
