@@ -278,7 +278,7 @@
 				                                        	<a class="dropdown-item" href="#">삭제</a>
 				                                        </div>
 				                                    </div> -->
-				                                    <button type="button" class="btn fa fa-trash-o text-danger" data-toggle="modal" data-target="#deleteComment" onclick="transferCommentNo(${comment.commentNo})"></button>
+				                                    <button type="button" class="btn fa fa-trash-o text-danger" data-toggle="modal" data-target="#deleteComment" onclick="transferCommentNo(${comment.commentNo})" style="font-size: larger;"></button>
 				                                    <script type="text/javascript">
 				                                    	function transferCommentNo(commentNo) {
 				                                    		$("#commentNoInput").val(commentNo);

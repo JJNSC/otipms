@@ -272,7 +272,9 @@ function selectProject() {
 					taskehtml += '<th scope="col" style="width: 20%;">업무 시작일</th>';
 					taskehtml += '<th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>';
 					taskehtml += '<th scope="col" style="width: 20%; text-align: center;">진행 상태</th>';
-					taskehtml += '<th class="text-center" style="width: 10%;">삭제</th>';
+					if($("#loginEmployeeRole").val() != "ROLE_PE") {
+						taskehtml += '<th class="text-center" style="width: 10%;">삭제</th>';						
+					}
 					taskehtml += '</tr>';
 					taskehtml += '</thead>';
 					taskehtml += '<tbody class="detailTaskBody">';
@@ -378,7 +380,9 @@ var team = $("#teamSelect").val()
 						taskehtml += '<th scope="col" style="width: 20%;">업무 시작일</th>';
 						taskehtml += '<th scope="col" style="width: 20%; text-align: center;">업무 종료일</th>';
 						taskehtml += '<th scope="col" style="width: 20%; text-align: center;">진행 상태</th>';
-						taskehtml += '<th class="text-center" style="width: 10%;">삭제</th>';
+						if($("#loginEmployeeRole").val() != "ROLE_PE") {
+							taskehtml += '<th class="text-center" style="width: 10%;">삭제</th>';						
+						}
 						taskehtml += '</tr>';
 						taskehtml += '</thead>';
 						taskehtml += '<tbody class="detailTaskBody">';
