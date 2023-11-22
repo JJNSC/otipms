@@ -280,6 +280,7 @@
                      				  					SELECT projectNo 
                      				  					  FROM project
                      				  					 WHERE projectName = #{projectName}
+                     				  					   AND projectDeleted = 0
                      				  					)
                      				 )
                      ) eif ON E.empId = eif.empId

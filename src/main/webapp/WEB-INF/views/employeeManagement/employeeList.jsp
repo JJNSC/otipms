@@ -434,9 +434,9 @@
 			        </div>
 			    </div> 	
 			</div>
-			<div class="modal fade" id="multiRegister" tabindex="-1" role="dialog" aria-labelledby="multiRegisterLabel" aria-hidden="true">
-			    <div class="modal-dialog" role="document">
-			        <div class="modal-content" style="width:1000px;">
+			<div class="modal fade" id="multiRegister" tabindex="-1" role="dialog" aria-labelledby="multiRegisterLabel" aria-hidden="true" style="position: absolute; left: 25%; transform: translateX(-50%)translateY(-10%); width: 2500px;">
+			    <div class="modal-dialog" role="document" >
+			        <div class="modal-content" style="width: 1400px;">
 			            <div class="modal-header">
 			                <h5 class="modal-title" id="multiRegisterLabel">일괄 등록</h5>
 			            </div>
